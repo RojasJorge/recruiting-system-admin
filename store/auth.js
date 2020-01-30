@@ -30,7 +30,7 @@ const auth = {
     .catch(error => {
       localStorage.removeItem('eToken');
       localStorage.removeItem('eUser');
-      this.state.USER.auth.token = '';
+      this.state ? this.state.USER.auth.token = '' : null;
     })
     .then(response => actions.updateToken(response.data))),
   grantAccess: action((state, payload) => {

@@ -1,3 +1,7 @@
+#Mac OS files/directories
+.DS_Store
+package-lock.json
+
 # Logs
 logs
 *.log
