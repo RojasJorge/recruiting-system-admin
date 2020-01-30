@@ -24,7 +24,8 @@ const users = {
         actions.switchLoading(false);
       })
       .then(response => {
-        actions.fill(response);
+
+        typeof response !== "undefined" ? actions.fill(response) : null;
         actions.switchLoading(false);
       })
   }),
