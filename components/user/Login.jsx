@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Form, Input, Button } from "antd";
+import { delay } from "lodash";
 import "animate.css";
 
 const Login = () => {
@@ -13,6 +14,9 @@ const Login = () => {
     e.preventDefault();
     switchLoading(true);
     login(e.target);
+
+    /** Switch loader delay */
+    delay(() => switchLoading(false), 1000);
   };
 
   useEffect(() => {
