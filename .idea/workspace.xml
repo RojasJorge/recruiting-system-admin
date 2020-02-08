@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c158993-ba19-4d6b-afa4-0346de6e5a91" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/_menus.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/antd-custom.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Misc/UmanaLogo.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Misc/ViewToolsMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/global.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/structure/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/structure/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/structure/MainMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/structure/MainMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/user/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/user/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/user/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/user/Signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/users/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/users/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/Layout.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +45,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -47,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580414824324</updated>
-      <workItem from="1580414826487" duration="7839000" />
+      <workItem from="1580414826487" duration="25326000" />
     </task>
     <servers />
   </component>
@@ -55,6 +74,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2480" y="301" key="#JavaScript" timestamp="1580491436967">
+      <screen x="1920" y="143" width="1920" height="1057" />
+    </state>
+    <state x="2480" y="301" key="#JavaScript/0.23.1920.1177/1920.143.1920.1057/-1920.143.1920.1057@1920.143.1920.1057" timestamp="1580491436967" />
     <state x="2480" y="37" key="#Other_File_Types" timestamp="1580419970040">
       <screen x="1920" y="-157" width="1920" height="1057" />
     </state>
@@ -87,5 +110,9 @@
       <screen x="1920" y="-157" width="1920" height="1057" />
     </state>
     <state x="2683" y="290" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1920.1177/1920.-157.1920.1057/-1920.-596.1920.1057@1920.-157.1920.1057" timestamp="1580422956778" />
+    <state x="2545" y="378" width="670" height="676" key="search.everywhere.popup" timestamp="1580489066378">
+      <screen x="1920" y="143" width="1920" height="1057" />
+    </state>
+    <state x="2545" y="378" width="670" height="676" key="search.everywhere.popup/0.23.1920.1177/1920.143.1920.1057/-1920.143.1920.1057@1920.143.1920.1057" timestamp="1580489066378" />
   </component>
 </project>

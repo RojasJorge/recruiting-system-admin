@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import Router from "next/router";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Form, Input, Button } from "antd";
@@ -25,6 +26,9 @@ const Login = () => {
 
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
       <div className="app animated fadeIn login container-fluid">
         <div className="row align-items-center justify-content-center app--login">
           <div className="col-md-5">

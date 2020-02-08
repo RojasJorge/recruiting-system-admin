@@ -4,18 +4,18 @@ import store from "../../../store/store";
 import Layout from "../../../views/Layout";
 import PageLoader from "../../../components/Misc/PageLoader";
 
-const UsersList = lazy(() => import("../../../components/user/List"));
+const List = lazy(() => import("../../../components/catalogs/List"));
 
-const Bills = () => {
+const AcademicLevels = () => {
   return (
     <StoreProvider store={store}>
-      <Layout title="Usuarios">
+      <Layout title="Niveles académicos">
         <Suspense fallback={<PageLoader />}>
-          <UsersList />
+          <List />
         </Suspense>
       </Layout>
     </StoreProvider>
   );
 };
 
-export default Bills;
+export default AcademicLevels;
