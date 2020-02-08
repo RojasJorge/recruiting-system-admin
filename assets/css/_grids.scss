@@ -1,0 +1,27 @@
+.box {
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+
+  &--standard {
+    min-height: 340px;
+    vertical-align: middle;
+    border: 1px solid #006e8f;
+    padding: 40px;
+  }
+
+  &--centered {
+    justify-content: center;
+    text-align: center;
+
+    a {
+      display: block;
+
+      &>span {
+        font-size: 30px;
+        display: block;
+        margin-bottom: 24px;
+      }
+    }
+  }
+}

@@ -1,16 +1,20 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState } from "react";
+import Head from "next/head";
+import config from "../config";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { Icon } from "antd";
-import MainMenu from "../components/structure/MainMenu";
+import MainHeader from "../components/structure/Header";
+import ViewTools from "../components/Misc/ViewToolsMenu";
 import Login from "../components/user/Login";
 import PageLoader from "../components/Misc/PageLoader";
 import "bootstrap/dist/css/bootstrap-grid.min.css";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import "../assets/css/global.scss";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, title }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
+  const [fullScreen, switchFullScreen] = useState(false);
 
   const mloading = useStoreState(state => state.users.loading);
 
@@ -46,11 +50,17 @@ const Layout = ({ children }) => {
 
   return auth.token && auth.user ? (
     <div className="app">
-      <PageLoader active={mloading} />
-      <MainMenu />
+      <Head>
+        <title>{title + config.app.title}</title>
+      </Head>
+      <MainHeader />
       <div className="app--contents">
-        <div className="container-fluid">{children}</div>
+        <ViewTools
+          fullScreen={fullScreen}
+          switchFullScreen={switchFullScreen} />
+        <div className={fullScreen ? 'container-fluid' : 'container'}>{children}</div>
       </div>
+      <PageLoader active={mloading} />
     </div>
   ) : loading ? (
     <div className="app--spinner animated fadeIn">

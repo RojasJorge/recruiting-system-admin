@@ -1,11 +1,14 @@
+import Head from "next/head";
 import { Form, Input, Button, DatePicker } from "antd";
 import Router from "next/router";
 import "animate.css";
 
 const SignupForm = () => {
-  // const
   return (
     <>
+      <Head>
+        <title>Signup</title>
+      </Head>
       <div className="app signup container-fluid animated fadeIn">
         <div className="row align-items-center justify-content-center app--signup">
           <div className="col-md-8">
