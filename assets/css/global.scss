@@ -1,11 +1,13 @@
 @import "forms";
+@import "menus";
+@import "grids";
 html,
 body,
 #__next {
   margin: 0px;
   padding: 0px;
-  height: 100%;
   background: #f5f5f5;
+  height: 100%;
 }
 
 h1 {
@@ -14,9 +16,12 @@ h1 {
 
 .app {
   position: relative;
-  display: flex;
-  height: 100%;
   background: #ffffff;
+  min-height: 100%;
+
+  &--tools {
+    margin-top: 24px;
+  }
 
   &--sidebar {
     width: 280px;
@@ -31,9 +36,9 @@ h1 {
   }
 
   &--contents {
-    width: calc(100% - 280px);
+    padding-top: 30px;
     padding-bottom: 30px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
   }
 }
 
@@ -43,7 +48,7 @@ h1 {
     z-index: 99;
     bottom: 20px;
     left: 20px;
-    color: #ffffff;
+    color: #000;
   }
 
   &--spinner {

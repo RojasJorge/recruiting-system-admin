@@ -9,7 +9,7 @@ const Dashboard = lazy(() => import("../components/user/Dashboard"));
 const Index = () => {
   return (
     <StoreProvider store={store}>
-      <Layout>
+      <Layout title="Tablero">
         <Suspense fallback={<PageLoader />}>
           <Dashboard />
         </Suspense>

@@ -9,7 +9,7 @@ const UsersList = lazy(() => import("../../../components/user/List"));
 const Bills = () => {
   return (
     <StoreProvider store={store}>
-      <Layout>
+      <Layout title="Usuarios">
         <Suspense fallback={<PageLoader />}>
           <UsersList />
         </Suspense>
