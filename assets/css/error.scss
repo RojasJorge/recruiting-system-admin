@@ -1,0 +1,13 @@
+#__next {
+  height: 100%;
+}
+
+.page {
+  &--error {
+    height: 100%;
+
+    &>.row {
+      min-height: 100%;
+    }
+  }
+}
