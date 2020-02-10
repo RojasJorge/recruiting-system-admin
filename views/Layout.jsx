@@ -8,7 +8,7 @@ import ViewTools from "../components/Misc/ViewToolsMenu";
 import Login from "../components/user/Login";
 import PageLoader from "../components/Misc/PageLoader";
 import "bootstrap/dist/css/bootstrap-grid.min.css";
-// import "antd/dist/antd.css";
+import "antd/dist/antd.css";
 import "../assets/css/global.scss";
 
 const Layout = ({ children, title }) => {
