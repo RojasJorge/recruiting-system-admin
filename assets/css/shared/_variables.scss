@@ -1,0 +1,95 @@
+//#Theme
+@import url("https://fonts.googleapis.com/css?family=Muli:200,400,700&display=swap");
+
+//Color
+$color-black: #000000;
+$color-grey: #444444;
+$color-text: rgba(108, 109, 96, 0.65);
+$color-white: #ffffff;
+
+$color-blue: #006e8f;
+$color-green: #019688;
+$color-orange: #e88213;
+
+$hover-orange: #ff8a0d;
+
+$bg-blue: #f5fcfe;
+$bg-orange: #fffaf6;
+$bg-grey: rgba(205, 205, 210, 0.2);
+$bg-medium: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
+
+$color-primary: #006e8f;
+$color-primary-hover: #3696b5;
+$color-primary--20: rgba(0, 110, 143, 0.2);
+$color-secondary: #019688;
+//boxShadow
+$shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+
+$color-error: #ff3743;
+$color-warning: #f5a623;
+$color-success: rgb(0, 168, 84);
+
+//Border
+$border: 1px solid rgba(0, 110, 143, 0.2);
+$border-blue: 1px solid $color-blue;
+$border-orange: 1px solid $color-orange;
+$border-green: 1px solid $color-green;
+$border-red: 1px solid $color-error;
+$border-white: 1px solid $color-white;
+
+$font-primary: "Muli", Helvetica, Arial, sans-serif;
+
+//#Media Queries
+$breakpoints: (
+	"default": (min-width: 0px),
+	"tiny": (max-width: 320px),
+	"small": (min-width: 360px),
+	"medium": (min-width: 480px),
+	"xmedium": (min-width: 720px),
+	"large": (min-width: 960px),
+	"laptop": (min-width: 1024px),
+	"xlarge": (min-width: 1200px),
+	"xxlarge": (min-width: 1400px),
+	"xxxlarge": (min-width: 1900px)
+);
+
+$gk-layout-padding: (default: 24px, phone-landscape: 32px, tablet-portrait: 48px, tablet-landscape: 72px);
+
+@mixin padding-y() {
+	padding-bottom: 20px;
+	padding-top: 20px;
+	@include bp(medium) {
+		padding-bottom: 30px;
+		padding-top: 30px;
+	}
+	@include bp(large) {
+		padding-bottom: 40px;
+		padding-top: 40px;
+	}
+}
+
+@mixin padding-x() {
+	padding-left: 10px;
+	padding-right: 10px;
+	@include bp(small) {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	@include bp(medium) {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+	@include bp(xmedium) {
+		padding-left: 60px;
+		padding-right: 60px;
+	}
+	@include bp(large) {
+		padding-left: 80px;
+		padding-right: 80px;
+	}
+}
+
+@mixin max-width() {
+	max-width: 1200px;
+	margin: 0 auto;
+}

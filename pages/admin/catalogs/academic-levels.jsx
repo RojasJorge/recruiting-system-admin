@@ -11,7 +11,7 @@ const AcademicLevels = () => {
     <StoreProvider store={store}>
       <Layout title="Niveles académicos">
         <Suspense fallback={<PageLoader />}>
-          <List />
+          <List type="academic-levels" />
         </Suspense>
       </Layout>
     </StoreProvider>
