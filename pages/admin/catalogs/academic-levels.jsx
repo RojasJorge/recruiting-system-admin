@@ -1,8 +1,10 @@
 import { lazy, Suspense } from "react";
 import { StoreProvider } from "easy-peasy";
+import { Icon } from "antd";
 import store from "../../../store/store";
 import Layout from "../../../views/Layout";
 import PageLoader from "../../../components/Misc/PageLoader";
+import Link from "next/link";
 
 const List = lazy(() => import("../../../components/catalogs/List"));
 
@@ -11,7 +13,12 @@ const AcademicLevels = () => {
     <StoreProvider store={store}>
       <Layout title="Niveles académicos">
         <Suspense fallback={<PageLoader />}>
-          <List type="academic-levels" />
+          <div className="container">
+            <Link href="/admin/catalogs" passHref>
+              <a><Icon type="rollback" /> Catálogos</a>
+            </Link>
+          </div>
+          <List type="career" title="Niveles Académicos" />
         </Suspense>
       </Layout>
     </StoreProvider>

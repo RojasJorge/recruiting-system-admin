@@ -1,5 +1,13 @@
 @import "../../assets/css/shared/mixins";
 
+.rstcustom__nodeContent {
+  width: 100%;
+}
+
+.rstcustom__row {
+  // padding-left: 0px !important;
+}
+
 section {
   margin: 0 !important;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
