@@ -7,7 +7,7 @@ const Catalogs = () => (
       <ul className="no-bullets row">
         <li className="col">
           <div className="box box--standard box--centered">
-            <Link href="/admin/catalogs/academic-levels">
+            <Link href="/admin/catalogs/academic-levels" passHref>
               <a>
                 <span>Niveles académicos</span>
                 <Icon type="right-circle" style={{ fontSize: 60 }} />
@@ -17,7 +17,7 @@ const Catalogs = () => (
         </li>
         <li className="col">
           <div className="box box--standard box--centered">
-            <Link href="/admin/catalogs/professions">
+            <Link href="/admin/catalogs/professions" passHref>
               <a>
                 <span>Profesiones</span>
                 <Icon type="right-circle" style={{ fontSize: 60 }} />

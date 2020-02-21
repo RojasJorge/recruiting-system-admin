@@ -1,6 +1,7 @@
 import { Card } from "antd";
 import { useStoreState } from "easy-peasy";
-import Phones from "./Phones";
+// import Phones from "./Phones";
+import Form from "./Form";
 
 const Personal = ({ update }) => {
   /** Global state */
@@ -16,19 +17,16 @@ const Personal = ({ update }) => {
           {user.name} {user.lastname}
         </p>
         <h4>Dirección:</h4>
-        <p>
-          {user.address}
-        </p>
+        <p>{user.address}</p>
         <h4>Email:</h4>
-        <p>
-          {user.email}
-        </p>
-        <Phones update={update} />
+        <p>{user.email}</p>
         {personal.phones.map(phone => (
           <li key={phone.id}>
             {`+${phone.area}`} {phone.number} {phone.type}
           </li>
         ))}
+        <Form {...update} />
+        {/* <Phones update={update} /> */}
       </Card>
     </>
   );

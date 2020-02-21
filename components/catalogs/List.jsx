@@ -1,151 +1,86 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import { orderBy, map, isEmpty, debounce } from "lodash";
-import { Button, Icon, Empty, Spin } from "antd";
-import Nestable from "react-nestable";
-import styled from "styled-components";
+import { Empty, Spin, Icon, Button } from "antd";
+import { isEmpty } from "lodash";
+import SortableTree from "react-sortable-tree";
+import PageTitle from "../Misc/PageTitle";
+import EditModal from "./EditModal";
+import "react-sortable-tree/style.css";
 import "./index.scss";
 
-const Item = styled.div`
-  position: relative;
-  padding: 10px 20px;
+const List = ({ type, title }) => {
+  useEffect(() => {
+    get({ token, type });
+  }, []);
 
-  p {
-    margin-bottom: 0px;
-    line-height: normal;
-  }
-
-  &:hover {
-    cursor: grab;
-    &:before {
-      opacity: 0.6;
-    }
-  }
-`;
-
-const List = ({ type }) => {
-  const data = useStoreState(state => state.collections);
   const get = useStoreActions(action => action.collections.get);
   const update = useStoreActions(action => action.collections.update);
   const token = useStoreState(state => state.auth.token);
+  const data = useStoreState(state => state.collections);
 
-  /** Prepare the single item render */
-  const renderItem = ({ item, index }) => (
-    <Item
-      className={
-        item.parent === null || item.parent === "" ? "item-parent" : ""
-      }
-    >
-      <p>{item.name}</p>
-      <div className={`umana-catalogos--buttons`}>
-        <Button type="link" size="small" className="item-hover">
-          <Icon type="drag" />
-        </Button>
-        <Button
-          type="link"
-          size="small"
-          // onClick={() => props.buttonEdit(item.id)}
-        >
-          <Icon type="edit" theme="filled" />
-        </Button>
-      </div>
-    </Item>
-  );
+  const [list, setList] = useState([]);
+  const [add, switchEdit] = useState(false);
 
-  const onChange = (items, item) => {
-    items.map(cat =>
-      cat.children.length > 0
-        ? cat.children.map(child => {
-            child.parent = cat.id;
-            if (
-              typeof child.children !== "undefined" &&
-              child.children.length > 0
-            )
-              thirdLevel(child);
-            return child;
-          })
-        : null
-    );
-  };
+  useEffect(() => {
+    setList(data.list);
+  }, [data.list]);
 
-  const thirdLevel = o => {
-    return o.children.map(item => {
-      item.parent = o.id;
-      return item;
+  const onChange = treeData => setList(treeData);
+
+  const onMoveNode = ({
+    treeData,
+    node,
+    nextParentNode,
+    prevPath,
+    prevTreeIndex,
+    nextPath,
+    nextTreeIndex
+  }) => {
+    update({
+      id: node.id,
+      parent: nextParentNode ? nextParentNode.id : null,
+      token,
+      type
     });
   };
 
-  /** Listen the new position && parent destination */
-  const confirmChange = async (dragItem, destinationParent) => {
-    console.log("confirmChange:", dragItem, destinationParent);
-
-    if (!destinationParent) {
-      delete data.list.find(o => o.id === dragItem.id);
-      dragItem.parent = null;
-
-      setTimeout(async () => {
-        return await update({
-          id: dragItem.id,
-          parent: dragItem.parent,
-          name: dragItem.name,
-          token
-        }, () => get(token));
-      }, 2000);
-    }
-
-    /** Always return true is required by plugin */
-    return false;
-  };
-
-  useEffect(() => {
-    get(token);
-    // console.log("items....", data.list);
-  }, []);
-
-  const items = [
-    { id: 0, text: "Andy" },
-    {
-      id: 1,
-      text: "Harry",
-      children: [{ id: 2, text: "David" }]
-    },
-    { id: 3, text: "Lisa" }
-  ];
-
-  // const renderItem = ({ item }) => item.name;
-
-  return data.loading ? (
-    <div
-      className="row align-items-center justify-content-center"
-      style={{ marginTop: 24 }}
-    >
-      <Spin size="large" />
-    </div>
-  ) : !isEmpty(data.list) ? (
+  return (
     <div className="umana-layout">
-      {/* <Nestable items={data.list} renderItem={renderItem} threshold={60} /> */}
-      <Nestable
-        items={orderBy(
-          map(data.list, o => {
-            if (!isEmpty(o.children)) {
-              o.children = orderBy(o.children, ["name"], ["asc"]);
-            }
-            return o;
-          }),
-          ["name"],
-          ["asc"]
-        )}
-        renderItem={renderItem}
-        // onChange={onChange}
-        // maxDepth={2}
-        confirmChange={debounce(confirmChange, 100)}
-        // confirmChange={throttle(confirmChange, 200)}
-        // renderCollapseIcon={<Icon type="user" />}
-        // collapsed
-      />
+      <div className="row align-items-center">
+        <div className="col">
+          <PageTitle tag="h1" className="title--main title--page">
+            {title}{" "}
+            {data.loading ? (
+              <Spin indicator={<Icon type="sync" spin />} />
+            ) : null}
+          </PageTitle>
+        </div>
+        <div className="col col--contents-right">
+          <Button
+            icon="plus"
+            shape="circle"
+            type="primary"
+            size="large"
+            onClick={() => switchEdit(!add)}
+            ghost
+          />
+        </div>
+      </div>
+      {!data.loading ? (
+        !isEmpty(list) ? (
+          <SortableTree
+            style={{ height: "100vh", overflow: "hidden" }}
+            treeData={list}
+            onChange={onChange}
+            onMoveNode={onMoveNode}
+            switchEdit={switchEdit}
+          />
+        ) : (
+          <Empty description="No hay datos" />
+        )
+      ) : null}
+      <EditModal add={add} switchEdit={switchEdit} />
     </div>
-  ) : (
-    <Empty description="No hay registros" />
   );
 };
 

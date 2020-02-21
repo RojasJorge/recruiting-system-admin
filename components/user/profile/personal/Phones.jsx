@@ -52,11 +52,7 @@ const Phones = ({ update }) => {
     <>
       <h4>
         Teléfonos:{" "}
-        <Button
-          size="small"
-          type="link"
-          onClick={() => switchModal(true)}
-        >
+        <Button size="small" type="link" onClick={() => switchModal(true)}>
           Agregar
         </Button>
       </h4>

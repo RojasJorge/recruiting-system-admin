@@ -50,6 +50,7 @@ const MainMenu = () => {
 						</div>
 						<div className="col">
 							<Menu
+							trigger="click"
 								mode="horizontal"
 								onClick={handleClick}
 								selectedKeys={[current]}
