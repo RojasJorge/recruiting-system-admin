@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const UmanaLogo = () => (
+const UmanaLogo = _ => (
   <Link href="/">
     <a href="#">
       <img
