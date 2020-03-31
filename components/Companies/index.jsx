@@ -1,9 +1,5 @@
-const Companies = () => (
-  <div className="row">
-    <div className="col-md-12">
-      data
-    </div>
-  </div>
-);
+import List from "./List";
+
+const Companies = _ => <List />;
 
 export default Companies;
