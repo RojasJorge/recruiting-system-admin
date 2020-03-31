@@ -46,18 +46,20 @@ const auth = {
     state.user = payload;
     state.token = token;
   }),
+
+  /** 
+   * The login action
+   */
   login: thunk(async (actions, payload) =>
-    await axios.post(config.app.api_url + '/login', JSON.stringify({
-      email: payload.email.value,
-      password: payload.password.value
-    }), {
+    await axios.post(config.app.api_url + '/login', JSON.stringify(payload), {
       headers: {
         "Content-Type": "application/json"
       }
     })
     .then(response => {
-      actions.grantAccess(response.data)
-      Router.push("/");
+      actions.grantAccess(response.data);
+      if (Router.pathname === '/login')
+        Router.push('/')
     })
     .catch(error => {
       console.log(error);
