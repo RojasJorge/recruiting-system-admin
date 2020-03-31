@@ -1,0 +1,47 @@
+.app {
+  &.login {
+    display: block;
+    background: #ffffff;
+    // background: #001529;
+  }
+
+  &.signup {
+    display: block;
+    // background: #001529;
+    background: #ffffff;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  &--login,
+  &--signup {
+    height: 100%;
+
+    label,
+    p,
+    h1,
+    h3 {
+      // color: #ffffff;
+    }
+
+    .avatar {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .info {
+      margin-top: 24px;
+    }
+  }
+}
+
+.login,
+.signup {
+  &--form {
+    // background-color: #000000;
+    background-color: #ffffff;
+    padding: 24px;
+    border: 1px solid #000000;
+    // border: 1px solid #ffffff;
+  }
+}
