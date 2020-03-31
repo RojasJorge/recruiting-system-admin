@@ -9,9 +9,9 @@ module.exports =
 				env: {
 					APP_TITLE: ' | Umana admin',
 					APP_CLOUDINARY: 'https://api.cloudinary.com/v1_1/umana-storage',
-					APP_ENV: 'development',
-					API_URL: 'http://localhost:3026/api/v1',
-					// API_URL: 'https://staging.umana.co:3026/api/v1'
+					APP_ENV: 'production',
+					// API_URL: 'http://localhost:3026/api/v1',
+					API_URL: 'https://staging.umana.co:3026/api/v1'
 				},
 				webpack(config, options) {
 					config.module.rules.push({
