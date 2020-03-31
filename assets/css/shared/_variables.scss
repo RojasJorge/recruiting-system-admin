@@ -68,6 +68,18 @@ $gk-layout-padding: (default: 24px, phone-landscape: 32px, tablet-portrait: 48px
 	}
 }
 
+@mixin after () {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	margin-left: -8px;
+	width: 16px;
+	height: 16px;
+	background-color: $primary;
+	border-radius: 50px;
+}
+
 @mixin padding-x() {
 	padding-left: 10px;
 	padding-right: 10px;

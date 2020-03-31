@@ -7,6 +7,7 @@ import users from "./users";
 import profile from "./profile";
 import tools from "./tools";
 import collections from "./collections";
+import companies from "./companies";
 
 const store = createStore({
   auth,
@@ -14,6 +15,7 @@ const store = createStore({
   profile,
   tools,
   collections,
+  companies,
 });
 
 export default store;

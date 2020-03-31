@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Menu, Icon } from "antd";
+// import { useState } from "react";
+import { Menu } from "antd";
+import { fullScreen } from "@ant-design/icons";
 
 const ViewTools = ({ fullScreen, switchFullScreen }) => {
 	
@@ -16,7 +17,7 @@ const ViewTools = ({ fullScreen, switchFullScreen }) => {
 						<Menu onClick={handleClick}>
 							<Menu.SubMenu title={<Icon type="setting" />}>
 								<Menu.Item key="sf">
-									<Icon type={!fullScreen ? 'fullscreen' : 'fullscreen-exit'} />
+									<fullScreen />
 									Pantalla completa
 								</Menu.Item>
 							</Menu.SubMenu>
