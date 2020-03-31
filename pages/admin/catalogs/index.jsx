@@ -6,7 +6,7 @@ import PageLoader from "../../../components/Misc/PageLoader";
 
 const Catalogs = lazy(() => import("../../../components/catalogs"));
 
-const Index = () => {
+const Index = _ => {
   return (
     <StoreProvider store={store}>
       <Layout title="Catalogos">
