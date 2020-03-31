@@ -5,7 +5,7 @@ import Layout from "../../../views/Layout";
 import UserProfile from "../../../components/user/profile";
 import "antd/lib/select/style/index.css";
 
-const Index = () => (
+const Index = _ => (
   <StoreProvider store={store}>
     <Layout title="Mi perfil">
       <UserProfile />
