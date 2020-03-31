@@ -1,0 +1,41 @@
+html,
+body,
+#__next {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  background: #ffffff;
+  height: 100%;
+}
+
+h1 {
+  margin-top: 24px;
+}
+
+.app {
+  position: relative;
+  background: #ffffff;
+  height: 100%;
+
+  &--tools {
+    margin-top: 24px;
+  }
+
+  &--sidebar {
+    width: 280px;
+    min-height: 100%;
+    overflow: auto;
+    background-color: #001529;
+    color: #ffffff;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &--contents {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #ffffff;
+  }
+}
