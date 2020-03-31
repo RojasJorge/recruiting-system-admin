@@ -1,0 +1,175 @@
+@import "../../assets/css/shared/mixins";
+
+.rstcustom__nodeContent {
+  width: 100%;
+}
+
+.rstcustom__row {
+  // padding-left: 0px !important;
+}
+
+section {
+  margin: 0 !important;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+section.sc-bdVaJa {
+  margin: 0 !important;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nestable {
+  background: $color-white;
+  padding: 30px;
+  .nestable-list {
+    width: 100%;
+    margin: 0;
+    &.nestable-group {
+      overflow: hidden;
+    }
+    .nestable-item {
+      margin: 0;
+      height: auto;
+      &:first-child {
+        border-top: $border;
+      }
+      &:last-child {
+        border-bottom: $border;
+      }
+      .nestable-item-name {
+        background: $color-white;
+        height: 50px;
+        border-bottom: $border;
+        color: $color-blue;
+        border-top: $border;
+        display: flex;
+        // justify-content: space-between;
+        &:before {
+          content: "";
+          position: absolute;
+          left: -100px;
+          top: 0px;
+          width: 100px;
+          height: 50px;
+          border-bottom: 1px solid rgba(0, 110, 143, 0.2);
+        }
+        &:hover {
+          &:before {
+            background: $bg-blue;
+          }
+        }
+        div .umana-catalogos--buttons {
+          .item-hover {
+            opacity: 0;
+          }
+        }
+        div.item-parent {
+          background-color: $bg-blue;
+        }
+        &:hover {
+          background: $bg-blue;
+          div {
+            .umana-catalogos--buttons {
+              .item-hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+      & > .nestable-list {
+        width: 100%;
+        padding-left: 20px;
+        .nestable-item {
+          .nestable-item-name {
+            border-top: transparent;
+          }
+          & > .nestable-list {
+            width: 100%;
+            .nestable-item {
+              .nestable-item-name {
+                border-top: transparent;
+              }
+            }
+            .nestable-item:last-child {
+              border-bottom: transparent;
+              .nestable-item-name {
+                border-bottom: transparent;
+              }
+            }
+            .nestable-item:first-child {
+              border-top: transparent;
+            }
+          }
+        }
+        .nestable-item:last-child {
+          border-bottom: transparent;
+          .nestable-item-name {
+            border-bottom: transparent;
+          }
+        }
+        .nestable-item:first-child {
+          border-top: transparent;
+        }
+      }
+    }
+  }
+}
+
+.nestable-item-name {
+  div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    .umana-catalogos--buttons {
+      width: 50px !important;
+    }
+  }
+}
+
+.nestable {
+  .nestable-list {
+    & > .nestable-item {
+      & > .nestable-list {
+        & > .nestable-item {
+          & > .nestable-item-name {
+            border-bottom: $border !important;
+            &:before {
+              content: "";
+              position: absolute;
+              left: -100px;
+              top: 0px;
+              width: 100px;
+              height: 50px;
+              border-bottom: 1px solid rgba(0, 110, 143, 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* is dragging */
+.nestable.is-drag-active .nestable-list {
+  .nestable-item {
+    &.is-dragging {
+      &:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $bg-grey;
+        border: 1px dashed $color-blue;
+        border-radius: 0 !important;
+      }
+      & > .nestable-item-name div {
+        &:before {
+          opacity: 0 !important;
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,9 @@ const profile = {
     lookingFor: {},
     others: {},
     personal: {
-      phones: []
+      name: "",
+      lastname: "",
+      phones: [],
     },
     working: {}
   },

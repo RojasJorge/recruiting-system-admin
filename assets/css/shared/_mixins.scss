@@ -1,0 +1,65 @@
+@import './variables';
+
+//#Media Queries
+@mixin bp($name) {
+  @if map-has-key($breakpoints, $name) {
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+  @else {
+    @warn "Couldn't find a breakpoint named `#{$name}`.";
+  }
+}
+
+//#BEMy
+@mixin element($name) {
+  @at-root #{&}__#{$name} {
+    @content;
+  }
+}
+
+@mixin modifier($name) {
+  @at-root #{&}--#{$name} {
+    @content;
+  }
+}
+
+//#Transitions
+
+@mixin transition($property, $time) {
+  transition: $property $time cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: $property;
+}
+
+@mixin transitionEnter($property, $time) {
+  transition: $property $time cubic-bezier(0.0, 0.0, 0.2, 1);
+  will-change: $property;
+}
+
+@mixin transitionExit($property, $time) {
+  transition: $property $time cubic-bezier(0.4, 0.0, 1, 1);
+  will-change: $property;
+}
+
+//#Layout
+
+@mixin side-padding {
+  @each $bp, $padding in $gk-layout-padding {
+    @include bp($bp) {
+      padding-left: $padding;
+      padding-right: $padding;
+    }
+  }
+}
+
+@mixin keep-aspect-ratio($x, $y) {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: "";
+    display: block;
+    margin-top: percentage($y / $x);
+  }
+}
