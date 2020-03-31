@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const config = {
   app: {
     title: process.env.APP_TITLE || ' | Umana Admin',
