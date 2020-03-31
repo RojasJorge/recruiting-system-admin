@@ -1,10 +1,8 @@
-import React from "react";
-import config from "../config";
-import axios from "axios";
 import {
   action,
   thunk
 } from "easy-peasy";
+
 import {
   mapKeys,
   groupBy,
@@ -14,9 +12,16 @@ import {
   orderBy,
   isEmpty,
 } from "lodash";
+
 import {
   Button
-} from "lodash";
+} from "antd";
+
+import {EditOutlined} from "@ant-design/icons";
+
+import React from "react";
+import config from "../config";
+import axios from "axios";
 import "antd/lib/message/style/index.css";
 
 const collections = {
@@ -70,22 +75,17 @@ const collections = {
   }),
 
   /**
-   * Filter the colection
+   * Filter the collection
    */
 
   fill: action((state, payload) => {
     let items = map(payload.items, o => {
-
       o.title = React.createElement('div', {
         className: 'item--name',
         children: [
           React.createElement('span', {
             key: 'name'
-          }, o.name),
-          React.createElement('button', {
-            key: 'action',
-            onClick: () => alert(`Edit ${o.name}`)
-          }, 'Edit')
+          }, o.name), <Button key="edit" icon={<EditOutlined />} type="link" />
         ]
       });
 
