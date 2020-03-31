@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { StoreProvider } from "easy-peasy";
 import store from "../../../store/store";
 import Layout from "../../../views/Layout";
+import { RollbackOutlined } from "@ant-design/icons";
 import PageLoader from "../../../components/Misc/PageLoader";
 import Link from "next/link";
 
@@ -16,7 +17,9 @@ const Professions = () => {
             <div className="row">
               <div className="col-md-12">
                 <Link href="/admin/catalogs" passHref>
-                  <a>Catálogos</a>
+                  <a>
+                    <RollbackOutlined /> Catálogos
+                  </a>
                 </Link>
               </div>
             </div>
