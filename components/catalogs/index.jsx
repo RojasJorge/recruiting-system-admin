@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Icon } from "antd";
+import { RightCircleOutlined } from "@ant-design/icons";
 
-const Catalogs = () => (
+const Catalogs = _ => (
   <div className="row no-gutters">
     <div className="col-md-12">
       <ul className="no-bullets row">
@@ -10,7 +10,7 @@ const Catalogs = () => (
             <Link href="/admin/catalogs/academic-levels" passHref>
               <a>
                 <span>Niveles académicos</span>
-                <Icon type="right-circle" style={{ fontSize: 60 }} />
+                <RightCircleOutlined style={{ fontSize: 60 }} />
               </a>
             </Link>
           </div>
@@ -20,7 +20,7 @@ const Catalogs = () => (
             <Link href="/admin/catalogs/professions" passHref>
               <a>
                 <span>Profesiones</span>
-                <Icon type="right-circle" style={{ fontSize: 60 }} />
+                <RightCircleOutlined style={{ fontSize: 60 }} />
               </a>
             </Link>
           </div>
