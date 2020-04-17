@@ -1,44 +1,48 @@
-import { useState, useEffect } from "react";
-import { useStoreActions, useStoreState } from "easy-peasy";
-import Link from "next/link";
-import { Menu, Modal } from "antd";
-import { LogoutOutlined, UsergroupAddOutlined, HomeOutlined, DownOutlined, UserOutlined, OrderedListOutlined, DashOutlined } from "@ant-design/icons";
-import Router from "next/router";
-import UmanaLogo from "../Misc/UmanaLogo";
+import { useState, useEffect } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import Link from 'next/link';
+import { Menu, Modal } from 'antd';
+import {
+  LogoutOutlined,
+  UsergroupAddOutlined,
+  HomeOutlined,
+  DownOutlined,
+  UserOutlined,
+  OrderedListOutlined,
+  DashOutlined,
+} from '@ant-design/icons';
+import Router from 'next/router';
+import UmanaLogo from '../Misc/UmanaLogo';
 
 const MainMenu = _ => {
   const isMain = /\/[a-z]/i;
-  const [current, setCurrent] = useState("/");
+  const [current, setCurrent] = useState('/');
 
   const user = useStoreState(state => state.auth.user);
   const signOut = useStoreActions(actions => actions.auth.logout);
 
   const handleClick = e => {
-    if (e.key === "logout") {
+    if (e.key === 'logout') {
       return;
     }
 
     /** Switch changes. */
     setCurrent(e.key);
-    Router.push(`/${e.key === "dashboard" ? "" : e.key}`);
+    Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
   };
 
   const handleLogout = () =>
     Modal.confirm({
-      content: "Confirm logout?",
-      okText: "Logout",
+      content: 'Confirm logout?',
+      okText: 'Logout',
       onOk: () => {
-        Router.push("/");
+        Router.push('/');
         signOut();
-      }
+      },
     });
 
   useEffect(() => {
-    setCurrent(
-      !Router.pathname.match(isMain)
-        ? "dashboard"
-        : Router.pathname.replace("/", "")
-    );
+    setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''));
   }, []);
 
   return user ? (
@@ -55,7 +59,7 @@ const MainMenu = _ => {
                 mode="horizontal"
                 onClick={handleClick}
                 selectedKeys={[current]}
-                className="menu--main"
+                className="menu--main umana-menu"
               >
                 <Menu.Item key="admin/companies">Empresas</Menu.Item>
                 <Menu.SubMenu
@@ -97,8 +101,8 @@ const MainMenu = _ => {
                 mode="horizontal"
                 theme="dark"
                 style={{
-                  backgroundColor: "transparent",
-                  textAlign: "right"
+                  backgroundColor: 'transparent',
+                  textAlign: 'right',
                 }}
               >
                 <Menu.Item key="admin/catalogs">
@@ -120,18 +124,16 @@ const MainMenu = _ => {
       </div>
     </>
   ) : (
-    <div className="menu--user menu--user__login">
+    <div className="menu--user menu--user__login umana__header--noLogin">
       <div className="container">
         <div className="row align-items-center">
           <div className="col">
             <UmanaLogo />
           </div>
-          <div className="col access-links">
-            {current === "login" ? (
+          <div className="col access-links  umana-menu">
+            {current === 'login' ? (
               <Link href="/" passHref>
-                <a>
-                  <HomeOutlined />
-                </a>
+                <a>Inicio</a>
               </Link>
             ) : (
               <Link href="/login" passHref>

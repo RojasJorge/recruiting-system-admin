@@ -1,3 +1,6 @@
+@import './shared/mixins';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 html,
 body,
 #__next {
@@ -7,8 +10,27 @@ body,
   background: #ffffff;
   height: 100%;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid rgba($color-blue, 0.5);
+  -webkit-text-fill-color: $color-blue;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
+}
 
-h1 {
+h1,
+h2,
+h3,
+h4 {
+  color: $color-blue;
   margin-top: 24px;
 }
 
@@ -37,5 +59,92 @@ h1 {
     padding-top: 30px;
     padding-bottom: 30px;
     background-color: #ffffff;
+  }
+}
+
+.umana {
+  width: 100%;
+  padding-top: 60px;
+  @include element(header) {
+    @include padding-x;
+    @include max-width;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 50;
+    padding: 15px 0;
+    width: 100%;
+
+    &--noLogin {
+      .umana-menu {
+        a {
+          color: $color-text;
+        }
+      }
+    }
+    .umana-menu {
+      display: flex;
+      justify-content: flex-end;
+      a {
+        text-transform: uppercase;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 15px;
+        &:after {
+          content: '';
+          width: 0px;
+          height: 10px;
+          border-radius: 50%;
+          background: transparent;
+          margin-bottom: -5px;
+          transition: 0.5s ease-in-out;
+        }
+        &:hover {
+          &:after {
+            background: $color-primary;
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+    .menu--admin {
+      width: 100%;
+      @include padding-x;
+      background: $color-blue;
+      position: fixed;
+      top: 75px;
+      left: 0;
+    }
+  }
+}
+
+.umana-layout {
+  @include max-width;
+  @include padding-x;
+  @include padding-y;
+  min-height: calc(100vh - 100px);
+}
+
+.umana-login {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(
+    to right,
+    $bg-blue 0,
+    $bg-blue 70%,
+    $color-white 70%,
+    $color-white 100%
+  );
+  @include element(form) {
+    // background: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // padding: 20px 20px 40px 40px;
+    // box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.05);
   }
 }

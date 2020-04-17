@@ -1,6 +1,9 @@
+@import './shared/mixins';
+
 form {
   label {
     display: block;
+    color: $color-text;
   }
 }
 

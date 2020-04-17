@@ -1,8 +1,8 @@
-@import "variables";
-@import "structure";
-@import "grids";
-@import "menus";
-@import "forms";
-@import "contents";
-@import "login";
-@import "misc";
+@import './shared/variables';
+@import 'structure';
+@import 'grids';
+@import 'menus';
+// @import "forms";
+@import 'contents';
+// @import 'login';
+@import 'misc';

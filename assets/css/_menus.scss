@@ -1,3 +1,4 @@
+@import './shared/mixins';
 .no-bullets {
   list-style-type: none;
   padding: 0px;
@@ -63,7 +64,8 @@
 
 .menu {
   &--user {
-    li, .ant-menu-item {
+    li,
+    .ant-menu-item {
       position: relative;
       border: 0 !important;
 
@@ -90,7 +92,7 @@
 
       a {
         text-transform: uppercase;
-        color: rgba(108,109,96,.65);
+        color: rgba(108, 109, 96, 0.65);
 
         &:hover {
           color: $primary;
@@ -102,8 +104,9 @@
 
 .menu {
   &--admin {
+    background: $color-primary;
     .ant-menu-item-selected {
-      background-color: fade-out($black, .9) !important;
+      background-color: fade-out($black, 0.9) !important;
     }
   }
 }

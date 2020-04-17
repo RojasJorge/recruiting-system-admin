@@ -1,8 +1,8 @@
-import MainMenu from "./MainMenu";
+import MainMenu from './MainMenu';
 
 const MainHeader = _ => {
   return (
-    <header className="app--header">
+    <header className="app--header umana__header">
       <MainMenu />
     </header>
   );

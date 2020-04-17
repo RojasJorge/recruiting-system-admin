@@ -1,8 +1,8 @@
-import MainHeader from "../structure/Header";
-import Head from "next/head";
-import config from "../../config";
-import { useStoreState } from "easy-peasy";
-import "bootstrap/dist/css/bootstrap-grid.min.css";
+import MainHeader from '../structure/Header';
+import Head from 'next/head';
+import config from '../../config';
+import { useStoreState } from 'easy-peasy';
+import 'bootstrap/dist/css/bootstrap-grid.min.css';
 
 const Home = _ => {
   const user = useStoreState(state => state.auth.user);
@@ -14,10 +14,11 @@ const Home = _ => {
         <title>{`Home ${config.app.title}`}</title>
       </Head>
       <MainHeader />
-      <div className="container">
-        <div className="row">
+
+      <div className="umana">
+        <div className="row umana-layout">
           <div className="col">
-            <h1>{`Home directory ${user && token ? "Logged in" : ""}`}</h1>
+            <h1>{`Home directory ${user && token ? 'Logged in' : ''}`}</h1>
             <h3>{config.api}</h3>
           </div>
         </div>
