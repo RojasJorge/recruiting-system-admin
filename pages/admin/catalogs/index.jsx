@@ -1,10 +1,11 @@
-import { lazy, Suspense } from "react";
-import { StoreProvider } from "easy-peasy";
-import store from "../../../store/store";
-import Layout from "../../../views/Layout";
-import PageLoader from "../../../components/Misc/PageLoader";
+import { lazy, Suspense } from 'react';
+import { StoreProvider } from 'easy-peasy';
 
-const Catalogs = lazy(() => import("../../../components/catalogs"));
+import store from '../../../store/store';
+import Layout from '../../../views/Layout';
+import PageLoader from '../../../components/Misc/PageLoader';
+
+const Catalogs = lazy(() => import('../../../components/catalogs'));
 
 const Index = _ => {
   return (

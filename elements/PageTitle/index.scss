@@ -1,0 +1,32 @@
+@import '../../assets/css/shared/mixins';
+
+.umana-page-title {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  & > a {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-right: 1px solid rgba($color-text, 0.3);
+    color: rgba($color-text, 0.3);
+    &.edit {
+      border-right: 0;
+      i {
+        font-size: 28px;
+      }
+    }
+    i {
+      font-size: 32px;
+    }
+    &:hover {
+      color: $color-text;
+    }
+  }
+  h1 {
+    margin: 0 10px 0 10px;
+  }
+}

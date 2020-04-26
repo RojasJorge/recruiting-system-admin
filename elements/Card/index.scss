@@ -1,0 +1,86 @@
+@import '../../assets/css/shared/mixins';
+
+.umana-list {
+  width: 100%;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background: $bg-medium;
+}
+
+.umana-card {
+  border: 1px solid rgba($color-blue, 0.5);
+  width: calc(33.33% - 20px);
+  min-height: 400px;
+  padding: 30px 15px 20px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  background: $color-white;
+  &:hover {
+    box-shadow: $shadow;
+  }
+  @include element(options) {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    .umana-card--button {
+      color: $color-text;
+      padding: 10px;
+      min-width: 40px;
+      min-height: 40px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s ease-in-out;
+      &:hover {
+        color: $color-blue;
+      }
+    }
+  }
+  @include element(title) {
+    font-size: 24px;
+    line-height: 1.2;
+    text-align: center;
+    margin: 10px auto 15px;
+    font-weight: 300;
+  }
+  @include element(description) {
+    width: 100%;
+    color: $color-text;
+    text-align: center;
+    line-height: 1.2;
+    max-height: 48px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  @include element(link) {
+    border: 1px solid rgba($color-blue, 0.5);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-blue;
+    transition: 0.5s ease-in-out;
+    i {
+      font-size: 28px;
+    }
+    &:hover {
+      background: $color-blue;
+      color: $color-white;
+      box-shadow: $shadow-input;
+    }
+  }
+}

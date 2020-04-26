@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import config from "../config";
-import { useStoreState, useStoreActions } from "easy-peasy";
-import MainHeader from "../components/structure/Header";
+import { useEffect, useState } from 'react';
+import Head from 'next/head';
+import config from '../config';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import MainHeader from '../components/structure/Header';
 // import ViewTools from "../components/Misc/ViewToolsMenu";
-import Login from "../components/user/Login";
-import PageLoader from "../components/Misc/PageLoader";
-import PropTypes from "prop-types";
-import esEs from "antd/lib/locale-provider/es_ES";
-import { SyncOutlined } from "@ant-design/icons";
-import { ConfigProvider } from "antd";
-import "bootstrap/dist/css/bootstrap-grid.min.css";
-import "../assets/css/global.scss";
+import Login from '../components/user/Login';
+import PageLoader from '../components/Misc/PageLoader';
+import PropTypes from 'prop-types';
+import esEs from 'antd/lib/locale-provider/es_ES';
+import { SyncOutlined } from '@ant-design/icons';
+import { ConfigProvider } from 'antd';
+import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import '../assets/css/global.scss';
 
 const Layout = ({ children, title, className }) => {
   /** Page loaders */
@@ -28,8 +28,8 @@ const Layout = ({ children, title, className }) => {
 
   useEffect(() => {
     /** Parse user & token from localStorage */
-    let user = JSON.parse(localStorage.getItem("eUser"));
-    const token = localStorage.getItem("eToken");
+    let user = JSON.parse(localStorage.getItem('eUser'));
+    const token = localStorage.getItem('eToken');
 
     /** Check if valid */
     if (token && user) {
@@ -48,12 +48,12 @@ const Layout = ({ children, title, className }) => {
           <title>{title + config.app.title}</title>
         </Head>
         <MainHeader />
-        <div className="app--contents">
+        <div className="app--contents umana">
           {/* <ViewTools
           fullScreen={fullScreen}
           switchFullScreen={switchFullScreen}
         /> */}
-          <div className={fullScreen ? "container-fluid" : "container"}>
+          <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>
             {children}
           </div>
         </div>
@@ -72,13 +72,13 @@ const Layout = ({ children, title, className }) => {
 Layout.propTypes = {
   children: PropTypes.element.isRequired,
   title: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 Layout.defaultProps = {
   children: <></>,
-  title: "",
-  className: "app"
+  title: '',
+  className: 'app',
 };
 
 export default Layout;

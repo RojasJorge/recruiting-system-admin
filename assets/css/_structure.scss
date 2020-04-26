@@ -64,15 +64,24 @@ h4 {
 
 .umana {
   width: 100%;
-  padding-top: 60px;
+  padding-top: 100px;
+  &.login {
+    padding-top: 60px;
+    .umana__header {
+      padding: 10px 0;
+      @include padding-x;
+    }
+  }
   @include element(header) {
     @include padding-x;
-    @include max-width;
+    background: $color-white;
+    // @include max-width;
     position: fixed;
     z-index: 100;
     top: 0;
-    left: 50;
-    padding: 15px 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 0;
     width: 100%;
 
     &--noLogin {
@@ -85,6 +94,8 @@ h4 {
     .umana-menu {
       display: flex;
       justify-content: flex-end;
+      padding: 0;
+      border-bottom: 1px solid transparent;
       a {
         text-transform: uppercase;
         position: relative;
@@ -116,7 +127,7 @@ h4 {
       @include padding-x;
       background: $color-blue;
       position: fixed;
-      top: 75px;
+      top: 65px;
       left: 0;
     }
   }
@@ -126,7 +137,7 @@ h4 {
   @include max-width;
   @include padding-x;
   @include padding-y;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 140px);
 }
 
 .umana-login {
