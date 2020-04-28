@@ -3,6 +3,7 @@ import UmanaLogo from '../Misc/UmanaLogo';
 import { Form, Input, Button, DatePicker } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import MainHeader from '../structure/Header';
 import Router from 'next/router';
 import 'cleave.js/dist/addons/cleave-phone.gt';
 import Cleave from 'cleave.js/react';
@@ -24,11 +25,11 @@ const SignupForm = _ => {
   };
 
   const onFinish = values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
 
   return (
@@ -37,22 +38,7 @@ const SignupForm = _ => {
         <title>Crear cuenta</title>
       </Head>
       <div className="app container-fluid animated fadeIn umana signup">
-        <header className="app--header umana__header">
-          <div className="menu--user menu--user__login umana__header--noLogin">
-            <div className="container">
-              <div className="row align-items-center">
-                <div className="col">
-                  <UmanaLogo />
-                </div>
-                {/* <div className="col access-links  umana-menu">
-                  <Link href="/" passHref>
-                    <a>Inicio</a>
-                  </Link>
-                </div> */}
-              </div>
-            </div>
-          </div>
-        </header>
+      <MainHeader />
         {/* Content  */}
         <div className="umana-login">
           <div className="umana-layout row">

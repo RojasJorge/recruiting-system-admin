@@ -30,7 +30,6 @@ const Layout = ({ children, title, className }) => {
     /** Parse user & token from localStorage */
     let user = JSON.parse(localStorage.getItem('eUser'));
     const token = localStorage.getItem('eToken');
-
     /** Check if valid */
     if (token && user) {
       user.token = token;
