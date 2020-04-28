@@ -32,6 +32,13 @@ input.ant-input {
     background-color: $color-white !important;
     padding: 0 10px;
     border: 0 !important;
+    height: 35px;
+    &:hover,
+    &:focus,
+    &:active {
+      
+      box-shadow: none !important;
+    }
   }
   &:hover,
   &:focus,
