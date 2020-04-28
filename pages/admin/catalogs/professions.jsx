@@ -15,19 +15,9 @@ const Professions = () => {
       <Layout title="Profesiones">
         <Suspense fallback={<PageLoader />}>
           <>
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <Link href="/admin/catalogs" passHref>
-                    <a>
-                      <RollbackOutlined /> Catálogos
-                    </a>
-                  </Link>
-                </div>
-              </div>
-            </div>
+        
             <PageTitle title="Profesiones" back="/admin/catalogs" />
-            <List type="academic-level" title="Profesiones" />
+            <List type="academic-level"  />
           </>
         </Suspense>
       </Layout>

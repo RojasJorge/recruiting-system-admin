@@ -28,7 +28,6 @@ const collections = {
   list: [],
   total: 0,
   loading: false,
-
   /**
    * Get all collections.
    */

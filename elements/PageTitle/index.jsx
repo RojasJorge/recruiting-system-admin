@@ -13,8 +13,8 @@ const PageTitle = props => {
         </Link>
       ) : null}
       <h1>{props.title}</h1>
-      {props.back ? (
-        <Link href={props.back} passHref>
+      {props.edit ? (
+        <Link href={props.edit} passHref>
           <a className="edit">
             <i className="material-icons">edit</i>
           </a>

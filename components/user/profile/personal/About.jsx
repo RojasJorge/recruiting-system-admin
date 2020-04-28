@@ -7,7 +7,7 @@ const {TextArea} = Input;
 const About = _ => {
 	
 	const onFinish = data => {
-		console.log("data......", data);
+		// console.log("data......", data);
 	};
 	
 	return (

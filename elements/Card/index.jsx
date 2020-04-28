@@ -8,21 +8,21 @@ const Card = props => {
         {props.edit ? (
           <Link href={props.edit} passHref>
             <a className="umana-card--button edit">
-              <i class="material-icons">mode_edit</i>
+              <i className="material-icons">mode_edit</i>
             </a>
           </Link>
         ) : null}
         {props.favorite ? (
           <Link href={props.edit} passHref>
             <a className="umana-card--button favorite">
-              <i class="material-icons">star_border</i>
+              <i className="material-icons">star_border</i>
             </a>
           </Link>
         ) : null}
         {props.save ? (
           <Link href={props.edit} passHref>
             <a className="umana-card--button save">
-              <i class="material-icons">turned_in_not</i>
+              <i className="material-icons">turned_in_not</i>
             </a>
           </Link>
         ) : null}
@@ -31,7 +31,7 @@ const Card = props => {
       {props.description ? <p className="umana-card__description">{props.description}</p> : null}
       <Link href={props.link} passHref>
         <a className="umana-card__link">
-          <i class="material-icons">arrow_forward</i>
+          <i className="material-icons">arrow_forward</i>
         </a>
       </Link>
     </div>

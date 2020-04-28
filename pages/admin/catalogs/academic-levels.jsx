@@ -4,7 +4,7 @@ import { RollbackOutlined } from "@ant-design/icons";
 import store from "../../../store/store";
 import Layout from "../../../views/Layout";
 import PageLoader from "../../../components/Misc/PageLoader";
-import Link from "next/link";
+import { PageTitle } from '../../../elements';
 
 const List = lazy(() => import("../../../components/catalogs/List"));
 
@@ -13,14 +13,10 @@ const AcademicLevels = () => {
     <StoreProvider store={store}>
       <Layout title="Niveles académicos">
         <Suspense fallback={<PageLoader />}>
-          <div className="container">
-            <Link href="/admin/catalogs" passHref>
-              <a>
-                <RollbackOutlined /> Catálogos
-              </a>
-            </Link>
-          </div>
-          <List type="career" title="Niveles Académicos" />
+          <>
+          <PageTitle title="Niveles Académicos" back="/admin/catalogs" />
+          <List type="career"  />
+          </>
         </Suspense>
       </Layout>
     </StoreProvider>

@@ -18,8 +18,13 @@ const List = ({ type, title }) => {
   const data = useStoreState(state => state.collections);
   const fill = useStoreActions(actions => actions.collections.fill);
 
+
   const [list, setList] = useState([]);
-  const [add, switchEdit] = useState(false);
+  const [add, switchEdit] = useState(true);
+
+
+
+  // console.log(getI(type))
 
   /** Get collection */
   const get = p =>
@@ -68,16 +73,16 @@ const List = ({ type, title }) => {
   }, []);
 
   return (
-    <div className="umana-layout">
+    <>
       <div className="row align-items-center">
         <div className="col">
           <PageTitle tag="h1" className="title--main title--page">
-            {title} {data.loading ? <Spin indicator={<SyncOutlined spin />} /> : null}
+             {data.loading ? <Spin indicator={<SyncOutlined spin />} /> : null}
           </PageTitle>
         </div>
-        <div className="col col--contents-right">
+        <div className="umana-element__add">
           <Button
-            icon={<PlusCircleOutlined />}
+            icon={ <i className="material-icons">add</i>}
             shape="circle"
             type="primary"
             size="large"
@@ -86,6 +91,8 @@ const List = ({ type, title }) => {
           />
         </div>
       </div>
+      <div className="umana-container">
+
       {!data.loading ? (
         !isEmpty(list) ? (
           <SortableTree
@@ -100,19 +107,20 @@ const List = ({ type, title }) => {
           <Empty />
         )
       ) : null}
+      </div>
       <EditModal add={add} switchEdit={switchEdit} />
-    </div>
+    </>
   );
 };
 
 List.propTypes = {
   type: PropTypes.string,
-  title: PropTypes.string,
+
 };
 
 List.defaultProps = {
   type: 'career',
-  title: 'New page',
+
 };
 
 export default List;

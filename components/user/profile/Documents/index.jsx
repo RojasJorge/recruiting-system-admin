@@ -8,7 +8,7 @@ const {Dragger} = Upload;
 const Documents = _ => {
 	
 	const onFinish = values => {
-		console.log(values)
+		// console.log(values)
 	};
 	
 	const props = {
@@ -22,7 +22,6 @@ const Documents = _ => {
 				// console.log(info.file, info.fileList);
 			}
 			if (status === 'done') {
-				console.log(info)
 				message.success(`${info.file.name} file uploaded successfully.`);
 			} else if (status === 'error') {
 				message.error(`${info.file.name} file upload failed.`);

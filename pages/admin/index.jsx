@@ -7,7 +7,7 @@ import Layout from '../../views/Layout';
 
 const Admin = _ => {
   useEffect(() => {
-    console.log('Router on admin:', Router);
+    // console.log('Router on admin:', Router);
     if (localStorage.getItem('eToken')) {
       // Router.push("/login");
     }
