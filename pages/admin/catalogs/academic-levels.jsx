@@ -15,7 +15,7 @@ const AcademicLevels = () => {
         <Suspense fallback={<PageLoader />}>
           <>
           <PageTitle title="Niveles Académicos" back="/admin/catalogs" />
-          <List type="career"  />
+          <List type="career" title="Niveles Académicos" />
           </>
         </Suspense>
       </Layout>

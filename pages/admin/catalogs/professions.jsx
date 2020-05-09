@@ -17,7 +17,7 @@ const Professions = () => {
           <>
         
             <PageTitle title="Profesiones" back="/admin/catalogs" />
-            <List type="academic-level"  />
+            <List type="academic-level" title="Profesiones"  />
           </>
         </Suspense>
       </Layout>

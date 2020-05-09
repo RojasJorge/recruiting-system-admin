@@ -20,7 +20,7 @@ const List = ({ type, title }) => {
 
 
   const [list, setList] = useState([]);
-  const [add, switchEdit] = useState(true);
+  const [add, switchEdit] = useState(false);
 
 
 
@@ -108,7 +108,7 @@ const List = ({ type, title }) => {
         )
       ) : null}
       </div>
-      <EditModal add={add} switchEdit={switchEdit} />
+      <EditModal add={add} switchEdit={switchEdit} title={title} />
     </>
   );
 };
