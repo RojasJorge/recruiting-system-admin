@@ -1,5 +1,5 @@
-import List from "./List";
+import List from './List'
 
-const Companies = _ => <List />;
+const Companies = _ => (<List />)
 
-export default Companies;
+export default Companies

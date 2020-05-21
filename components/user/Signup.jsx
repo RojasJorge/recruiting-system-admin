@@ -1,18 +1,17 @@
-import Head from 'next/head';
-import UmanaLogo from '../Misc/UmanaLogo';
-import { Form, Input, Button, DatePicker } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import Link from 'next/link';
-import MainHeader from '../structure/Header';
-import Router from 'next/router';
-import 'cleave.js/dist/addons/cleave-phone.gt';
-import Cleave from 'cleave.js/react';
-import 'animate.css';
+import Head from 'next/head'
+import UmanaLogo from '../Misc/UmanaLogo'
+import { Form, Input, Button, DatePicker } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import Link from 'next/link'
+import MainHeader from '../structure/Header'
+import Router from 'next/router'
+import 'cleave.js/dist/addons/cleave-phone.gt'
+import Cleave from 'cleave.js/react'
 
 const SignupForm = _ => {
   /** Submit handler */
   const onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     console.log(
       e.target.name.value,
       e.target.lastname.value,
@@ -21,16 +20,16 @@ const SignupForm = _ => {
       e.target.birthday.value,
       'password',
       e.target.password.value,
-    );
-  };
+    )
+  }
 
   const onFinish = values => {
-    // console.log('Success:', values);
-  };
+    // console.log('Success:', values)
+  }
 
   const onFinishFailed = errorInfo => {
-    // console.log('Failed:', errorInfo);
-  };
+    // console.log('Failed:', errorInfo)
+  }
 
   return (
     <>
@@ -38,7 +37,7 @@ const SignupForm = _ => {
         <title>Crear cuenta</title>
       </Head>
       <div className="app container-fluid animated fadeIn umana signup">
-      <MainHeader />
+        <MainHeader />
         {/* Content  */}
         <div className="umana-login">
           <div className="umana-layout row">
@@ -160,8 +159,8 @@ const SignupForm = _ => {
                     <Button
                       type="link"
                       onClick={e => {
-                        e.preventDefault();
-                        Router.push('/login');
+                        e.preventDefault()
+                        Router.push('/login')
                       }}
                     >
                       Iniciar sesión
@@ -175,7 +174,7 @@ const SignupForm = _ => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SignupForm;
+export default SignupForm

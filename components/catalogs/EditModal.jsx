@@ -1,19 +1,18 @@
-import { TreeSelect } from 'antd';
-import { Form, Input, Button, Drawer } from '../../elements';
-const { Item } = Form;
+import { Form, Input, Button, Drawer, TreeSelect } from 'antd'
+const { Item } = Form
 
-const { TreeNode } = TreeSelect;
+const { TreeNode } = TreeSelect
 
 const EditModal = ({ add, switchEdit, title }) => {
 	const onFinish = (field) => {
-		console.log(field);
-	};
+		console.log(field)
+	}
 
 	const treeData = [
 		{ id: 1, pId: 0, value: '1', title: 'Expand to load' },
 		{ id: 2, pId: 0, value: '2', title: 'Expand to load' },
 		{ id: 3, pId: 0, value: '3', title: 'Tree Node', isLeaf: true }
-	];
+	]
 
 	return (
 		<Drawer
@@ -41,14 +40,14 @@ const EditModal = ({ add, switchEdit, title }) => {
 						<Input />
 					</Item>
 					<Item label="Padre" name="parent">
-						<TreeSelect
+						{/* <TreeSelect
 							treeDataSimpleMode
 							style={{ width: '100%' }}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 							placeholder="Seleccione un padre"
 							// onChange={onChange}
 							treeData={treeData}
-						/>
+						/> */}
 					</Item>
 					<Button type="primary" size="large">
 						Agregar
@@ -56,7 +55,7 @@ const EditModal = ({ add, switchEdit, title }) => {
 				</Form>
 			</div>
 		</Drawer>
-	);
-};
+	)
+}
 
-export default EditModal;
+export default EditModal

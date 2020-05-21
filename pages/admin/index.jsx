@@ -1,9 +1,5 @@
-import { useEffect } from 'react';
-import { StoreProvider } from 'easy-peasy';
-import Router from 'next/router';
-import store from '../../store/store';
-import Layout from '../../views/Layout';
-// import "antd/lib/select/style/index.css";
+import { useEffect } from 'react'
+import Layout from '../../views/Layout'
 
 const Admin = _ => {
   useEffect(() => {
@@ -11,13 +7,11 @@ const Admin = _ => {
     if (localStorage.getItem('eToken')) {
       // Router.push("/login");
     }
-  }, []);
+  }, [])
 
   return (
-    <StoreProvider store={store}>
-      <Layout title="Tablero"></Layout>
-    </StoreProvider>
-  );
-};
+    <Layout title="Tablero"></Layout>
+  )
+}
 
-export default Admin;
+export default Admin

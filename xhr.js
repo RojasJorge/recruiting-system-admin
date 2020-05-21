@@ -10,7 +10,7 @@ export default () => {
     timeout: 500000,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": localStorage.getItem('eToken')
+      "Authorization": localStorage.getItem('uToken')
     }
   });
 

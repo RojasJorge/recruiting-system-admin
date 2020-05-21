@@ -3,7 +3,6 @@ import {useStoreActions} from "easy-peasy";
 import {delay} from "lodash";
 import {Form, Button} from "antd";
 import {DoubleRightOutlined} from "@ant-design/icons";
-import "animate.css";
 
 /** Import form sections */
 import Salary from "./Salary";

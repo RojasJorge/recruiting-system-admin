@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useStoreActions, useStoreState } from 'easy-peasy';
-import Link from 'next/link';
-import { Menu, Modal } from 'antd';
+import { useState, useEffect } from 'react'
+import { useStoreActions, useStoreState } from 'easy-peasy'
+import Link from 'next/link'
+import { Menu, Modal } from 'antd'
 import {
   LogoutOutlined,
   UsergroupAddOutlined,
@@ -10,41 +10,41 @@ import {
   UserOutlined,
   OrderedListOutlined,
   DashOutlined,
-} from '@ant-design/icons';
-import Router from 'next/router';
-import UmanaLogo from '../Misc/UmanaLogo';
+} from '@ant-design/icons'
+import Router from 'next/router'
+import UmanaLogo from '../Misc/UmanaLogo'
 
 const MainMenu = _ => {
-  const isMain = /\/[a-z]/i;
-  const [current, setCurrent] = useState('/');
+  const isMain = /\/[a-z]/i
+  const [current, setCurrent] = useState('/')
 
-  const user = useStoreState(state => state.auth.user);
-  const token = useStoreState(state => state.auth.token);
-  const signOut = useStoreActions(actions => actions.auth.logout);
+  const user = useStoreState(state => state.auth.user)
+  const token = useStoreState(state => state.auth.token)
+  const signOut = useStoreActions(actions => actions.auth.logout)
 
   const handleClick = e => {
     if (e.key === 'logout') {
-      return;
+      return
     }
 
     /** Switch changes. */
-    setCurrent(e.key);
-    Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
-  };
+    setCurrent(e.key)
+    Router.push(`/${e.key === 'dashboard' ? '' : e.key}`)
+  }
 
   const handleLogout = () =>
     Modal.confirm({
       content: 'Confirm logout?',
       okText: 'Logout',
       onOk: () => {
-        Router.push('/');
-        signOut();
+        Router.push('/')
+        signOut()
       },
-    });
+    })
 
   useEffect(() => {
-    setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''));
-  }, []);
+    setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''))
+  }, [])
 
 
   return user ? (
@@ -79,8 +79,8 @@ const MainMenu = _ => {
                     <a
                       href="#"
                       onClick={e => {
-                        e.preventDefault();
-                        handleLogout();
+                        e.preventDefault()
+                        handleLogout()
                       }}
                     >
                       <LogoutOutlined /> Cerrar sesión
@@ -126,27 +126,27 @@ const MainMenu = _ => {
       </div>
     </>
   ) : (
-    <div className="menu--user menu--user__login umana__header--noLogin">
-      <div className="container">
-        <div className="row align-items-center">
-          <div className="col">
-            <UmanaLogo />
-          </div>
-          <div className="col access-links  umana-menu">
-            {current === 'login' ? (
-              <Link href="/" passHref>
-                <a>Inicio</a>
-              </Link>
-            ) : (
-              <Link href="/login" passHref>
-                <a>Entrar</a>
-              </Link>
-            )}
+      <div className="menu--user menu--user__login umana__header--noLogin">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col">
+              <UmanaLogo />
+            </div>
+            <div className="col access-links  umana-menu">
+              {current === 'login' ? (
+                <Link href="/" passHref>
+                  <a>Inicio</a>
+                </Link>
+              ) : (
+                  <Link href="/login" passHref>
+                    <a>Entrar</a>
+                  </Link>
+                )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    )
+}
 
-export default MainMenu;
+export default MainMenu

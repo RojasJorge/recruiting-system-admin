@@ -1,10 +1,7 @@
-import { StoreProvider } from "easy-peasy";
-import store from "../store/store";
-import SignupForm from "../components/user/Signup";
+import SignupForm from '../components/user/Signup'
 
-const Register = () => 
-<StoreProvider store={store}>
-<SignupForm />
-</StoreProvider>
+const Register = _ => (
+  <SignupForm />
+)
 
-export default Register;
+export default Register

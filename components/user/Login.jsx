@@ -1,42 +1,37 @@
-import { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Router from 'next/router';
-import { useStoreActions, useStoreState } from 'easy-peasy';
-import { Form, Input, Button } from '../../elements';
-import { EnterOutlined } from '@ant-design/icons';
-import { delay } from 'lodash';
-import MainHeader from '../structure/Header';
-import imgLogin from '../../public/login.png';
-import 'bootstrap/dist/css/bootstrap-grid.min.css';
-import 'antd/dist/antd.css';
-import '../../assets/css/_structure.scss';
-import 'animate.css';
+import { useState, useEffect } from 'react'
+import Head from 'next/head'
+import Router from 'next/router'
+import { useStoreActions } from 'easy-peasy'
+import { Form, Input, Button } from 'antd'
+import { EnterOutlined } from '@ant-design/icons'
+import { delay } from 'lodash'
+import MainHeader from '../structure/Header'
+import { Can } from '../Can'
 
 const Login = _ => {
-  const [loading, switchLoading] = useState(true);
-  const [form] = Form.useForm();
-  // const token = useStoreState(state => state.auth.token);
-  const login = useStoreActions(actions => actions.auth.login);
-  const [token, settoken] = useState(false);
+  const [loading, switchLoading] = useState(true)
+  const [form] = Form.useForm()
+  const login = useStoreActions(actions => actions.auth.login)
+  const [token, settoken] = useState(false)
 
   const onFinish = data => {
-    switchLoading(true);
-    login(data);
+    switchLoading(true)
+    login(data)
 
     /** Switch loader delay */
-    delay(() => switchLoading(false), 1000);
-  };
+    delay(() => switchLoading(false), 1000)
+  }
 
   useEffect(() => {
-  
+
     if (localStorage.getItem('eToken')) {
-      settoken(true);
+      settoken(true)
     }
-    delay(() => switchLoading(false), 1000);
-  }, []);
+    delay(() => switchLoading(false), 1000)
+  }, [])
 
 
-   if(!token) {
+  if (!token) {
     return (
       <>
         {!token ? (
@@ -53,7 +48,10 @@ const Login = _ => {
                     <div className="row">
                       <div className="col-md-12">
                         <h1>Iniciar Sesión</h1>
-                        <img src={imgLogin} alt="" />
+                          <Can I="view" a="LOGIN">
+                            <p>Mensaje para los administradores.</p>
+                          </Can>
+                        {/* <img src={imgLogin} alt="" /> */}
                       </div>
                     </div>
                     <Form
@@ -84,7 +82,7 @@ const Login = _ => {
                         <Input.Password size="large" />
                       </Form.Item>
                       <Button
-                        icon={<i className="material-icons">chevron_right</i>}
+                        icon={<EnterOutlined />}
                         size="large"
                         htmlType="submit"
                         type="primary"
@@ -97,8 +95,8 @@ const Login = _ => {
                         <Button
                           type="link"
                           onClick={e => {
-                            e.preventDefault();
-                            Router.push('/signup');
+                            e.preventDefault()
+                            Router.push('/signup')
                           }}
                         >
                           Crear cuenta
@@ -111,29 +109,29 @@ const Login = _ => {
             </div>
           </>
         ) : (
-         
-           'loading...'
-        )
+
+            'loading...'
+          )
         }
       </>
-    );
+    )
   }
-  
+
   return (
     <>
-    <h1>ir al inicio</h1>
-    <Button
+      <h1>ir al inicio</h1>
+      <Button
         type="link"
         onClick={e => {
-          e.preventDefault();
-          Router.push('/admin/catalogs');
+          e.preventDefault()
+          Router.push('/admin/catalogs')
         }}
       >
         catalogos
       </Button>
     </>
   )
-  
-};
 
-export default Login;
+}
+
+export default Login

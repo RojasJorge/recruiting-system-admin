@@ -5,7 +5,6 @@ import {
 
 import config from "../config";
 import axios from "axios";
-import "antd/lib/message/style/index.css";
 
 const users = {
   list: [],

@@ -1,13 +1,13 @@
-import { Drawer } from "antd";
+import { Drawer } from 'antd'
 
 const Edit = ({ visible }) => {
 
-  return(
+  return (
     <Drawer {...visible}>
       <h1>Editar</h1>
 
     </Drawer>
-  );
-};
+  )
+}
 
-export default Edit;
+export default Edit

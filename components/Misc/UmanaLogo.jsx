@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 const UmanaLogo = _ => (
   <Link href="/">
@@ -9,6 +9,6 @@ const UmanaLogo = _ => (
       />
     </a>
   </Link>
-);
+)
 
-export default UmanaLogo;
+export default UmanaLogo

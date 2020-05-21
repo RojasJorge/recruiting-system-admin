@@ -1,16 +1,10 @@
-import Head from "next/head";
-import { StoreProvider } from "easy-peasy";
-import store from "../../../store/store";
-import Layout from "../../../views/Layout";
-import UserProfile from "../../../components/user/profile";
-import "antd/lib/select/style/index.css";
+import Layout from '../../../views/Layout'
+import UserProfile from '../../../components/user/profile'
 
 const Index = _ => (
-  <StoreProvider store={store}>
-    <Layout title="Mi perfil">
-      <UserProfile />
-    </Layout>
-  </StoreProvider>
-);
+  <Layout title="Mi perfil">
+    <UserProfile />
+  </Layout>
+)
 
-export default Index;
+export default Index

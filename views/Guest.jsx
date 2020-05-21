@@ -1,19 +1,13 @@
-import Proptypes  from 'prop-types';
-import esEs from 'antd/lib/locale-provider/es_ES';
-import { ConfigProvider } from 'antd';
-import 'bootstrap/dist/css/bootstrap-grid.min.css';
-import '../assets/css/global.scss';
+import Proptypes from 'prop-types'
 
-const Guest = ({children, pageTitle, containerClass }) => {
-  return(
-    <ConfigProvider locale={esEs}>
-  <div className={containerClass}>
-    <div className="row">
-    <h1>{pageTitle}</h1>
+const Guest = ({ children, pageTitle, containerClass }) => {
+  return (
+    <div className={containerClass}>
+      <div className="row">
+        <h1>{pageTitle}</h1>
+      </div>
+      {children}
     </div>
-    {children}
-  </div>
-  </ConfigProvider>
   )
 }
 
@@ -29,4 +23,5 @@ Guest.defaultProps = {
   pageTitle: "container",
   containerClass: "portada"
 }
-export default Guest;
+
+export default Guest

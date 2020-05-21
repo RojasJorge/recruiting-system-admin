@@ -1,12 +1,11 @@
-import MainHeader from '../structure/Header';
-import Head from 'next/head';
-import config from '../../config';
-import { useStoreState } from 'easy-peasy';
-import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import MainHeader from '../structure/Header'
+import Head from 'next/head'
+import config from '../../config'
+import { useStoreState } from 'easy-peasy'
 
 const Home = _ => {
-  const user = useStoreState(state => state.auth.user);
-  const token = useStoreState(state => state.auth.token);
+  const user = useStoreState(state => state.auth.user)
+  const token = useStoreState(state => state.auth.token)
 
   return (
     <div className="app app--home">
@@ -24,7 +23,7 @@ const Home = _ => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

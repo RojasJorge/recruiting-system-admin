@@ -12,12 +12,12 @@
     height: 100%;
     position: fixed;
     overflow: hidden;
-    background-color: #001529;
+    background-color: fase-out(#f5fcfe, .6);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 88;
-    color: #ffffff;
+    color: #000;
   }
 }
 

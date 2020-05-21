@@ -1,11 +1,7 @@
-import { StoreProvider } from "easy-peasy";
-import store from "../store/store";
-import Home from "../components/Misc/Home";
+import Home from '../components/Misc/Home'
 
 const Index = _ => (
-  <StoreProvider store={store}>
-    <Home />
-  </StoreProvider>
-);
+  <Home />
+)
 
-export default Index;
+export default Index
