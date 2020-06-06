@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useStoreActions, useStoreState } from 'easy-peasy'
-import Link from 'next/link'
-import { Menu, Modal } from 'antd'
+import { useState, useEffect } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import Link from 'next/link';
+import { Menu, Modal } from 'antd';
 import {
   LogoutOutlined,
   UsergroupAddOutlined,
@@ -10,42 +10,42 @@ import {
   UserOutlined,
   OrderedListOutlined,
   DashOutlined,
-} from '@ant-design/icons'
-import Router from 'next/router'
-import UmanaLogo from '../Misc/UmanaLogo'
+} from '@ant-design/icons';
+import Router from 'next/router';
+import UmanaLogo from '../Misc/UmanaLogo';
+import UmanaMenu from './rootMenu';
 
 const MainMenu = _ => {
-  const isMain = /\/[a-z]/i
-  const [current, setCurrent] = useState('/')
+  const isMain = /\/[a-z]/i;
+  const [current, setCurrent] = useState('/');
 
-  const user = useStoreState(state => state.auth.user)
-  const token = useStoreState(state => state.auth.token)
-  const signOut = useStoreActions(actions => actions.auth.logout)
+  const user = useStoreState(state => state.auth.user);
+  const token = useStoreState(state => state.auth.token);
+  const signOut = useStoreActions(actions => actions.auth.logout);
 
   const handleClick = e => {
     if (e.key === 'logout') {
-      return
+      return;
     }
 
     /** Switch changes. */
-    setCurrent(e.key)
-    Router.push(`/${e.key === 'dashboard' ? '' : e.key}`)
-  }
+    setCurrent(e.key);
+    Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
+  };
 
   const handleLogout = () =>
     Modal.confirm({
       content: 'Confirm logout?',
       okText: 'Logout',
       onOk: () => {
-        Router.push('/')
-        signOut()
+        Router.push('/');
+        signOut();
       },
-    })
+    });
 
   useEffect(() => {
-    setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''))
-  }, [])
-
+    setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''));
+  }, []);
 
   return user ? (
     <>
@@ -55,98 +55,34 @@ const MainMenu = _ => {
             <div className="col">
               <UmanaLogo />
             </div>
-            <div className="col">
-              <Menu
-                trigger="click"
-                mode="horizontal"
-                onClick={handleClick}
-                selectedKeys={[current]}
-                className="menu--main umana-menu"
-              >
-                <Menu.Item key="admin/companies">Empresas</Menu.Item>
-                <Menu.SubMenu
-                  title={
-                    <span className="submenu-title-wrapper">
-                      {user.name} <DownOutlined />
-                    </span>
-                  }
-                >
-                  <Menu.Item key="admin/profile">
-                    <UserOutlined />
-                    Mi perfil
-                  </Menu.Item>
-                  <Menu.Item key="logout">
-                    <a
-                      href="#"
-                      onClick={e => {
-                        e.preventDefault()
-                        handleLogout()
-                      }}
-                    >
-                      <LogoutOutlined /> Cerrar sesión
-                    </a>
-                  </Menu.Item>
-                </Menu.SubMenu>
-              </Menu>
-            </div>
+            {user.scopes[0] === 'umana' ? <UmanaMenu user={user} /> : null}
           </div>
         </div>
       </div>
       {/*App menu*/}
-      <div className="menu--admin">
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <Menu
-                onClick={handleClick}
-                selectedKeys={[current]}
-                mode="horizontal"
-                theme="dark"
-                style={{
-                  backgroundColor: 'transparent',
-                  textAlign: 'right',
-                }}
-              >
-                <Menu.Item key="admin/catalogs">
-                  <OrderedListOutlined />
-                  Catalogos
-                </Menu.Item>
-                <Menu.Item key="dashboard">
-                  <DashOutlined />
-                  Tablero
-                </Menu.Item>
-                <Menu.Item key="admin/users">
-                  <UsergroupAddOutlined />
-                  Usuarios
-                </Menu.Item>
-              </Menu>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   ) : (
-      <div className="menu--user menu--user__login umana__header--noLogin">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col">
-              <UmanaLogo />
-            </div>
-            <div className="col access-links  umana-menu">
-              {current === 'login' ? (
-                <Link href="/" passHref>
-                  <a>Inicio</a>
-                </Link>
-              ) : (
-                  <Link href="/login" passHref>
-                    <a>Entrar</a>
-                  </Link>
-                )}
-            </div>
+    <div className="menu--user menu--user__login umana__header--noLogin">
+      <div className="container">
+        <div className="row align-items-center">
+          <div className="col">
+            <UmanaLogo />
+          </div>
+          <div className="col access-links  umana-menu">
+            {current === 'login' ? (
+              <Link href="/" passHref>
+                <a>Inicio</a>
+              </Link>
+            ) : (
+              <Link href="/login" passHref>
+                <a>Entrar</a>
+              </Link>
+            )}
           </div>
         </div>
       </div>
-    )
-}
+    </div>
+  );
+};
 
-export default MainMenu
+export default MainMenu;

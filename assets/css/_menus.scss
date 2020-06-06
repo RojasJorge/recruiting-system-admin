@@ -73,6 +73,25 @@
         border: 0 !important;
         color: $primary;
       }
+      &.menu-role {
+        color: $color-primary;
+        font-weight: 600;
+        position: relative;
+        &:after {
+          content: '';
+          width: 20px;
+          height: 20px;
+          display: block;
+          color: $color-primary;
+          background: $color-primary;
+          border-radius: 0;
+          transform: rotate(45deg);
+          top: 100%;
+          left: 40%;
+          bottom: auto;
+          position: absolute;
+        }
+      }
     }
     .ant-menu-item-selected {
       color: $black;

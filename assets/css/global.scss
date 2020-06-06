@@ -7,5 +7,13 @@
 @import 'menus';
 // @import "forms";
 @import 'contents';
-@import "~react-progress-2/main.css";
+@import '~react-progress-2/main.css';
 @import 'misc';
+
+// import components
+@import './element/card';
+@import './element/page-title';
+@import './element/form';
+@import './element/input';
+@import './element/drawer';
+@import './element/buttons';
