@@ -1,0 +1,68 @@
+@import '../shared/mixins';
+
+input.ant-input {
+  background: $color-white;
+  font-family: $font-primary !important;
+  font-size: 14px !important;
+  color: $color-text;
+  height: 45px;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $color-white !important;
+    background: $color-white !important;
+    border-color: $color-blue !important;
+    border-radius: 0 !important;
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    color: $color-blue !important;
+  }
+}
+
+// Input Password
+.ant-input-password {
+  padding: 0 10px 0 0 !important;
+  box-shadow: none !important;
+  background: $color-white;
+  .ant-input-suffix {
+    display: flex;
+    align-items: center;
+  }
+  & > .ant-input.ant-input-lg {
+    background: $color-white !important;
+    background-color: $color-white !important;
+    padding: 0 10px;
+    border: 0 !important;
+    height: 35px;
+    &:hover,
+    &:focus,
+    &:active {
+      box-shadow: none !important;
+    }
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-blue !important;
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+// Input date
+.ant-picker.ant-picker-large {
+  height: 45px;
+  border-radius: 0;
+  color: $color-blue;
+  .ant-picker-input {
+    color: $color-blue;
+    input {
+      color: $color-blue;
+    }
+  }
+  &:hover,
+  &:active,
+  &:focus,
+  &.ant-picker-focused {
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    border-color: $color-blue !important;
+  }
+}

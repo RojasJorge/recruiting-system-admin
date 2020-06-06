@@ -1,0 +1,32 @@
+@import '../shared/mixins';
+
+form.ant-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-family: $font-primary;
+  .ant-form-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column !important;
+    flex-wrap: nowrap;
+    flex: 1 1 100%;
+    margin-bottom: 10px;
+    &.ant-form-item-has-error {
+      margin-bottom: 10px;
+    }
+    .ant-form-item-label {
+      text-align: left;
+      max-height: 30px;
+      font-family: $font-primary;
+      label {
+        color: $color-text;
+        font-family: $font-primary;
+      }
+    }
+    .ant-form-item-control {
+      min-height: 50px;
+      flex: 1;
+    }
+  }
+}

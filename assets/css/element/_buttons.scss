@@ -1,0 +1,61 @@
+@import '../shared/mixins';
+
+.ant-btn {
+  padding: 20px 30px;
+  font-family: $font-primary;
+  i {
+    margin-right: 10px;
+  }
+  &.ant-btn-primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-blue;
+    border-color: $color-blue;
+    border: 0;
+    height: 50px;
+    &:hover {
+      background-color: rgba($color-blue, 0.7);
+    }
+    &.ant-btn-lg {
+      padding: 10px 30px;
+      width: 100%;
+      margin: 20px auto;
+    }
+  }
+  &.ant-btn-link {
+    padding: 0 10px;
+    color: $color-text;
+    span {
+      text-decoration: underline;
+    }
+    &:hover {
+      color: $color-blue;
+    }
+  }
+  &.ant-btn-circle {
+    &.ant-btn-lg {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding: 0;
+      transition: 0.5 ease-in-out;
+      i {
+        margin: 0 !important;
+        line-height: 80px;
+        font-size: 40px;
+        color: $color-primary;
+      }
+      &:hover {
+        border: 1px solid rgba($color-blue, 1);
+        background: $color-primary;
+        color: $color-white;
+        i {
+          color: $color-white;
+        }
+      }
+    }
+  }
+}
