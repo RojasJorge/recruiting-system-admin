@@ -1,16 +1,19 @@
 @import '../shared/mixins';
 
-input.ant-input {
-  background: $color-white;
+input.ant-input,
+textarea.ant-input {
+  background: $bg-blue;
   font-family: $font-primary !important;
   font-size: 14px !important;
   color: $color-text;
   height: 45px;
+  margin-bottom: 0;
+  color: $color-primary;
   &:hover,
   &:focus,
   &:active {
-    background-color: $color-white !important;
-    background: $color-white !important;
+    background-color: $bg-blue !important;
+    background: $bg-blue !important;
     border-color: $color-blue !important;
     border-radius: 0 !important;
     box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
@@ -22,14 +25,15 @@ input.ant-input {
 .ant-input-password {
   padding: 0 10px 0 0 !important;
   box-shadow: none !important;
-  background: $color-white;
+  background: $bg-blue;
+  color: $color-primary;
   .ant-input-suffix {
     display: flex;
     align-items: center;
   }
   & > .ant-input.ant-input-lg {
-    background: $color-white !important;
-    background-color: $color-white !important;
+    background: $bg-blue !important;
+    background-color: $bg-blue !important;
     padding: 0 10px;
     border: 0 !important;
     height: 35px;
@@ -64,5 +68,59 @@ input.ant-input {
   &.ant-picker-focused {
     box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
     border-color: $color-blue !important;
+  }
+}
+
+//Select
+.ant-select.ant-select-single {
+  width: 100%;
+  box-shadow: none;
+  background: $bg-blue !important;
+  color: $color-primary;
+  &.ant-select-focused,
+  &.ant-select-open {
+    .ant-select-selector {
+      border-color: $color-blue !important;
+      background: $bg-blue;
+      color: $color-primary;
+      box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+  }
+  .ant-select-selector {
+    background: $bg-blue !important;
+    height: 45px;
+    box-shadow: none;
+    border-radius: 0;
+    color: $color-primary;
+    .ant-select-selection-search,
+    .ant-select-selection-item {
+      border-color: $color-blue !important;
+      background: $bg-blue;
+      line-height: 45px;
+      color: $color-primary;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $color-blue !important;
+      background: $bg-blue;
+      box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+  }
+}
+
+// number
+.ant-input-number {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background: $bg-blue;
+  color: $color-primary;
+  &.ant-input-number-focused,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-blue !important;
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
   }
 }

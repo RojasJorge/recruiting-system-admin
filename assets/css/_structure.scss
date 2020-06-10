@@ -4,11 +4,11 @@
 html,
 body,
 #__next {
-	position: relative;
-	margin: 0px;
-	padding: 0px;
-	background: #ffffff;
-	height: 100%;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  background: #ffffff;
+  height: 100%;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -19,201 +19,245 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-	border: 1px solid rgba($color-blue, 0.5);
-	-webkit-text-fill-color: $color-blue;
-	-webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
-	transition: background-color 5000s ease-in-out 0s;
-	box-shadow: none;
+  border: 1px solid rgba($color-blue, 0.5);
+  -webkit-text-fill-color: $color-blue;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
 }
 
 h1,
 h2,
 h3,
 h4 {
-	color: $color-blue;
-	margin-top: 24px;
+  color: $color-blue;
+  margin-top: 24px;
 }
 
 .app {
-	position: relative;
-	background: #ffffff;
-	height: 100%;
+  position: relative;
+  background: #ffffff;
+  height: 100%;
 
-	&--tools {
-		margin-top: 24px;
-	}
+  &--tools {
+    margin-top: 24px;
+  }
 
-	&--sidebar {
-		width: 280px;
-		min-height: 100%;
-		overflow: auto;
-		background-color: #001529;
-		color: #ffffff;
+  &--sidebar {
+    width: 280px;
+    min-height: 100%;
+    overflow: auto;
+    background-color: #001529;
+    color: #ffffff;
 
-		a {
-			text-decoration: none;
-		}
-	}
+    a {
+      text-decoration: none;
+    }
+  }
 
-	&--contents {
-		padding-top: 30px;
-		padding-bottom: 30px;
-		background-color: #ffffff;
-	}
+  &--contents {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #ffffff;
+  }
 }
 
 .umana {
-	width: 100%;
-	padding-top: 100px;
-	&.login,
-	&.signup {
-		padding-top: 60px;
-		.umana__header {
-			padding: 10px 0;
-			@include padding-x;
-		}
-	}
-	@include element(header) {
-		@include padding-x;
-		background: $color-white;
-		// @include max-width;
-		position: fixed;
-		z-index: 100;
-		top: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		padding: 10px 0;
-		width: 100%;
+  width: 100%;
+  padding-top: 100px;
+  &.login,
+  &.signup {
+    padding-top: 60px;
+    .umana__header {
+      padding: 10px 0;
+      @include padding-x;
+    }
+  }
+  @include element(header) {
+    @include padding-x;
+    background: $color-white;
+    // @include max-width;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 0;
+    width: 100%;
 
-		&--noLogin {
-			.umana-menu {
-				a {
-					color: $color-text;
-				}
-			}
-		}
-		img {
-			width: 120px;
-			@include bp(medium) {
-				width: 150px;
-			}
-		}
-		.umana-menu {
-			display: flex;
-			justify-content: flex-end;
-			padding: 0;
-			border-bottom: 1px solid transparent;
-			a {
-				text-transform: uppercase;
-				position: relative;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-direction: column;
-				padding: 0 15px;
-				&:after {
-					content: '';
-					width: 0px;
-					height: 10px;
-					border-radius: 50%;
-					background: transparent;
-					margin-bottom: -5px;
-					transition: 0.5s ease-in-out;
-				}
-				&:hover {
-					&:after {
-						background: $color-primary;
-						width: 10px;
-						height: 10px;
-					}
-				}
-			}
-		}
-		.menu--admin {
-			width: 100%;
-			@include padding-x;
-			background: $color-blue;
-			position: fixed;
-			top: 65px;
-			left: 0;
-		}
-	}
+    &--noLogin {
+      .umana-menu {
+        a {
+          color: $color-text;
+        }
+      }
+    }
+    img {
+      width: 120px;
+      @include bp(medium) {
+        width: 150px;
+      }
+    }
+    .umana-menu {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0;
+      border-bottom: 1px solid transparent;
+      a {
+        text-transform: uppercase;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 15px;
+        &:after {
+          content: '';
+          width: 0px;
+          height: 10px;
+          border-radius: 50%;
+          background: transparent;
+          margin-bottom: -5px;
+          transition: 0.5s ease-in-out;
+        }
+        &:hover {
+          &:after {
+            background: $color-primary;
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+    .menu--admin {
+      width: 100%;
+      @include padding-x;
+      background: $color-blue;
+      position: fixed;
+      top: 65px;
+      left: 0;
+    }
+  }
 }
 
 .umana-container {
-	width: 100%;
-	padding: 30px 20px;
-	background: $bg-medium;
+  width: 100%;
+  padding: 30px 20px;
+  background: $bg-medium;
 }
 
 .umana-layout {
-	@include max-width;
-	@include padding-x;
-	@include padding-y;
-	min-height: calc(100vh - 140px);
+  @include max-width;
+  @include padding-x;
+  @include padding-y;
+  min-height: calc(100vh - 140px);
 }
 
 .umana-login {
-	width: 100%;
-	min-height: calc(100vh - 80px);
-	background: linear-gradient(to right, $bg-blue 0, $bg-blue 70%, $color-white 70%, $color-white 100%);
-	@include element(form) {
-		// background: $color-white;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		// padding: 20px 20px 40px 40px;
-		// box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.05);
-	}
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(
+    to right,
+    $bg-blue 0,
+    $bg-blue 70%,
+    $color-white 70%,
+    $color-white 100%
+  );
+  @include element(form) {
+    // background: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // padding: 20px 20px 40px 40px;
+    // box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.05);
+  }
 }
 
 .umana-element__add {
-	position: fixed;
-	bottom: 15px;
-	right: 15px;
-	z-index: 100;
-	@include bp(xmedium) {
-		position: initial;
-		width: 100%;
-		padding: 0 20px;
-		height: 50px;
-		margin-top: -20px;
-		margin-bottom: 20px;
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-	}
-	& > button.ant-btn.ant-btn-primary.ant-btn-circle.ant-btn-lg.ant-btn-icon-only.ant-btn-background-ghost {
-		width: 50px;
-		margin: 0;
-		margin-left: auto;
-		display: flex;
-		max-width: 50px;
-		min-width: 50px;
-		padding: 0;
-		height: 50px;
-		min-height: 50px;
-		max-height: 50px;
-		justify-content: center;
-		align-items: center;
-		align-self: flex-end;
-		background: $color-white;
-		border: 2px solid rgba($color-blue, 0.5);
-		@include bp(xmedium) {
-			border: $border;
-		}
-		i {
-			font-size: 32px;
-			color: $color-primary;
-			margin-right: 0 !important;
-		}
-		&:hover,
-		&:focus,
-		&:active {
-			background: $color-primary !important;
-			i {
-				color: $color-white;
-			}
-		}
-	}
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 100;
+  @include bp(xmedium) {
+    position: initial;
+    width: 100%;
+    padding: 0 20px;
+    height: 50px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  &
+    > button.ant-btn.ant-btn-primary.ant-btn-circle.ant-btn-lg.ant-btn-icon-only.ant-btn-background-ghost {
+    width: 50px;
+    margin: 0;
+    margin-left: auto;
+    display: flex;
+    max-width: 50px;
+    min-width: 50px;
+    padding: 0;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    background: $color-white;
+    border: 2px solid rgba($color-blue, 0.5);
+    @include bp(xmedium) {
+      border: $border;
+    }
+    i {
+      font-size: 32px;
+      color: $color-primary;
+      margin-right: 0 !important;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      background: $color-primary !important;
+      i {
+        color: $color-white;
+      }
+    }
+  }
+}
+
+// layout col
+
+.umana-layout-cl {
+  display: flex;
+  flex-direction: wrap;
+  padding: 30px;
+  &.bg-color {
+    background: linear-gradient(
+      to bottom,
+      $bg-blue 0,
+      $bg-blue 400px,
+      $color-white 400px,
+      $color-white 100%
+    );
+  }
+  @include element(flex) {
+    width: 66%;
+    padding: 30px 20px;
+    box-shadow: $shadow;
+    &.bg-white {
+      background: $color-white;
+    }
+  }
+  @include element(small) {
+    width: 33%;
+    &.bg-white {
+      background: $color-white;
+    }
+  }
+  @include element(medium) {
+    width: 50%;
+    &.bg-white {
+      background: $color-white;
+    }
+  }
 }

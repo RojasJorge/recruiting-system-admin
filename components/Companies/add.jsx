@@ -1,10 +1,14 @@
-import { Form, Input, InputNumber } from 'antd';
+import { Form, Input, InputNumber, Button } from 'antd';
+import Locations from '../Location';
 const { TextArea } = Input;
 
 const FormCompany = () => {
+  const onFinish = e => {
+    console.log(e);
+  };
   return (
     <div className="col">
-      <Form>
+      <Form scrollToFirstError={true} onFinish={onFinish}>
         <Form.Item
           rules={[
             {
@@ -29,18 +33,47 @@ const FormCompany = () => {
         >
           <TextArea rows={4} />
         </Form.Item>
-        <Form.Item name="typeBusness" label="Tipo de negocio de la empresa">
+        <Form.Item
+          name="typeBusness"
+          label="Tipo de negocio de la empresa"
+          className="form-item--md"
+        >
           <Input size="large" />
         </Form.Item>
-        <Form.Item name="socialReazon" label="Razón Social">
+        <Form.Item name="socialreason" label="Razón Social" className="form-item--md">
           <Input size="large" />
         </Form.Item>
-        <Form.Item name="nit" label="NIT">
+        <Form.Item name="nit" label="NIT" className="form-item--sm">
           <Input size="large" />
         </Form.Item>
-        <Form.Item name="employees" label="Números de empleos">
+        <Form.Item name="employees" label="Números de empleos" className="form-item--sm">
           <InputNumber size="large" />
         </Form.Item>
+        <Form.Item name="experience" label="Año de fundación" className="form-item--sm">
+          <InputNumber size="large" />
+        </Form.Item>
+        <Form.Item name="website" label="Sitio Web">
+          <Input size="large" />
+        </Form.Item>
+        <Locations />
+        <div className="umana-form--group">
+          <h2 style={{ width: '100%' }}>Información de contacto</h2>
+          <br />
+          <Form.Item name="name-contact" label="Nombre de contacto" className="form-item--lg">
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item name="email-contact" label="Correo Electrónico" className="form-item--md">
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item name="phone-contact" label="Teléfono" className="form-item--md">
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item className="form-item--lg">
+            <Button htmlType="submit" type="primary">
+              Guardar
+            </Button>
+          </Form.Item>
+        </div>
       </Form>
     </div>
   );
