@@ -1,7 +1,9 @@
-import Home from '../components/Misc/Home'
+import Home from '../components/Misc/Home';
 
 const Index = _ => (
-  <Home />
-)
+  <div>
+    <Home />
+  </div>
+);
 
-export default Index
+export default Index;

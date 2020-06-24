@@ -56,7 +56,7 @@ const auth = {
         })
         .then(response => {
           actions.grantAccess(response.data);
-          if (Router.pathname === '/login') Router.push('/');
+          if (Router.pathname === '/login') Router.push('/admin');
         })
         .catch(error => {
           console.log(error);

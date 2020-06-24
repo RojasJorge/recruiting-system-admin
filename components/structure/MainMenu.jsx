@@ -21,7 +21,6 @@ const MainMenu = _ => {
 
   const user = useStoreState(state => state.auth.user);
   const token = useStoreState(state => state.auth.token);
-  const signOut = useStoreActions(actions => actions.auth.logout);
 
   const handleClick = e => {
     if (e.key === 'logout') {
@@ -32,16 +31,6 @@ const MainMenu = _ => {
     setCurrent(e.key);
     Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
   };
-
-  const handleLogout = () =>
-    Modal.confirm({
-      content: 'Confirm logout?',
-      okText: 'Logout',
-      onOk: () => {
-        Router.push('/');
-        signOut();
-      },
-    });
 
   useEffect(() => {
     setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''));

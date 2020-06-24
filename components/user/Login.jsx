@@ -1,35 +1,33 @@
-import { useState, useEffect } from 'react'
-import Head from 'next/head'
-import Router from 'next/router'
-import { useStoreActions } from 'easy-peasy'
-import { Form, Input, Button } from 'antd'
-import { EnterOutlined } from '@ant-design/icons'
-import { delay } from 'lodash'
-import MainHeader from '../structure/Header'
-import { Can } from '../Can'
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Router from 'next/router';
+import { useStoreActions } from 'easy-peasy';
+import { Form, Input, Button } from 'antd';
+import { EnterOutlined } from '@ant-design/icons';
+import { delay } from 'lodash';
+import MainHeader from '../structure/Header';
+import { Can } from '../Can';
 
 const Login = _ => {
-  const [loading, switchLoading] = useState(true)
-  const [form] = Form.useForm()
-  const login = useStoreActions(actions => actions.auth.login)
-  const [token, settoken] = useState(false)
+  const [loading, switchLoading] = useState(true);
+  const [form] = Form.useForm();
+  const login = useStoreActions(actions => actions.auth.login);
+  const [token, settoken] = useState(false);
 
   const onFinish = data => {
-    switchLoading(true)
-    login(data)
+    switchLoading(true);
+    login(data);
 
     /** Switch loader delay */
-    delay(() => switchLoading(false), 1000)
-  }
+    delay(() => switchLoading(false), 1000);
+  };
 
   useEffect(() => {
-
     if (localStorage.getItem('eToken')) {
-      settoken(true)
+      settoken(true);
     }
-    delay(() => switchLoading(false), 1000)
-  }, [])
-
+    delay(() => switchLoading(false), 1000);
+  }, []);
 
   if (!token) {
     return (
@@ -48,9 +46,9 @@ const Login = _ => {
                     <div className="row">
                       <div className="col-md-12">
                         <h1>Iniciar Sesión</h1>
-                          <Can I="view" a="LOGIN">
-                            <p>Mensaje para los administradores.</p>
-                          </Can>
+                        <Can I="view" a="LOGIN">
+                          <p>Mensaje para los administradores.</p>
+                        </Can>
                         {/* <img src={imgLogin} alt="" /> */}
                       </div>
                     </div>
@@ -95,8 +93,8 @@ const Login = _ => {
                         <Button
                           type="link"
                           onClick={e => {
-                            e.preventDefault()
-                            Router.push('/signup')
+                            e.preventDefault();
+                            Router.push('/signup');
                           }}
                         >
                           Crear cuenta
@@ -109,12 +107,10 @@ const Login = _ => {
             </div>
           </>
         ) : (
-
-            'loading...'
-          )
-        }
+          'loading...'
+        )}
       </>
-    )
+    );
   }
 
   return (
@@ -123,15 +119,14 @@ const Login = _ => {
       <Button
         type="link"
         onClick={e => {
-          e.preventDefault()
-          Router.push('/admin/catalogs')
+          e.preventDefault();
+          Router.push('/admin/catalogs');
         }}
       >
         catalogos
       </Button>
     </>
-  )
+  );
+};
 
-}
-
-export default Login
+export default Login;

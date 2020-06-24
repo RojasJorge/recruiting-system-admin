@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Menu } from 'antd';
+import { Menu, Modal } from 'antd';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import Link from 'next/link';
 import Router from 'next/router';
 
 const UmanaMenu = props => {
   const [current, setCurrent] = useState('/');
+  const signOut = useStoreActions(actions => actions.auth.logout);
   const handleClick = e => {
     if (e.key === 'logout') {
       return;
@@ -14,6 +16,16 @@ const UmanaMenu = props => {
     setCurrent(e.key);
     Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
   };
+
+  const handleLogout = () =>
+    Modal.confirm({
+      content: 'Confirm logout?',
+      okText: 'Logout',
+      onOk: () => {
+        Router.push('/');
+        signOut();
+      },
+    });
 
   return (
     <>
