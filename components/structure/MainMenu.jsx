@@ -14,6 +14,7 @@ import {
 import Router from 'next/router';
 import UmanaLogo from '../Misc/UmanaLogo';
 import UmanaMenu from './rootMenu';
+import UserMenu from './talentoMenu';
 
 const MainMenu = _ => {
   const isMain = /\/[a-z]/i;
@@ -38,13 +39,14 @@ const MainMenu = _ => {
 
   return user ? (
     <>
-      <div className="menu--user">
+      <div className={`menu--user ${user.scopes[1] === 'talento' ? 'menu-orange' : null}`}>
         <div className="container">
           <div className="row align-items-center">
             <div className="col">
               <UmanaLogo />
             </div>
             {user.scopes[0] === 'umana' ? <UmanaMenu user={user} /> : null}
+            {user.scopes[1] === 'talento' ? <UserMenu user={user} /> : null}
           </div>
         </div>
       </div>
@@ -58,10 +60,18 @@ const MainMenu = _ => {
             <UmanaLogo />
           </div>
           <div className="col access-links  umana-menu">
+            <Link href="/" passHref>
+              <a>Talentos</a>
+            </Link>
+            <Link href="/" passHref>
+              <a>Empresas</a>
+            </Link>
             {current === 'login' ? (
-              <Link href="/" passHref>
-                <a>Inicio</a>
-              </Link>
+              <>
+                <Link href="/" passHref>
+                  <a>Inicio</a>
+                </Link>
+              </>
             ) : (
               <Link href="/login" passHref>
                 <a>Entrar</a>

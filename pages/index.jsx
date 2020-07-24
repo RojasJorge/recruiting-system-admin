@@ -1,4 +1,4 @@
-import Home from '../components/Misc/Home';
+import Home from '../components/Home';
 
 const Index = _ => (
   <div>

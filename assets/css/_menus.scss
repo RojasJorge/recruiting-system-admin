@@ -64,6 +64,38 @@
 
 .menu {
   &--user {
+    &.menu-orange {
+      li,
+      .ant-menu-item {
+        &:hover {
+          color: $color-orange;
+        }
+        &.menu-item-selected {
+          &:after {
+            background: $color-orange;
+          }
+        }
+        &.menu-role {
+          color: $color-orange;
+          font-weight: 600;
+          position: relative;
+          &:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            display: block;
+            color: $color-orange;
+            background: $color-orange;
+            border-radius: 0;
+            transform: rotate(45deg);
+            top: 100%;
+            left: 40%;
+            bottom: auto;
+            position: absolute;
+          }
+        }
+      }
+    }
     li,
     .ant-menu-item {
       position: relative;
@@ -126,6 +158,14 @@
     background: $color-primary;
     .ant-menu-item-selected {
       background-color: fade-out($black, 0.9) !important;
+    }
+  }
+}
+
+.ant-menu.theme-orange {
+  .ant-menu-item.ant-menu-item-selected {
+    &::after {
+      background: $color-orange;
     }
   }
 }

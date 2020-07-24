@@ -1,0 +1,143 @@
+.umana-welcome {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  padding: 50px 0;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  @include element(content) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 30px;
+    @include bp(xmedium) {
+      width: 30%;
+    }
+    h1,
+    h2 {
+      font-weight: 300 !important;
+      color: $color-blue;
+    }
+  }
+  @include element(cards) {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    @include bp(xmedium) {
+      width: 60%;
+    }
+  }
+}
+
+.umana-welcome-card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+  @include bp(medium) {
+    width: 50%;
+    flex-direction: column;
+  }
+  cursor: pointer;
+  &:hover {
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.07);
+    z-index: 20;
+    .umana-welcome-card--content::before {
+      opacity: 1;
+    }
+  }
+  &--img {
+    width: 100%;
+    height: 250px;
+    @include bp(medium) {
+      height: 300px;
+    }
+    @include bp(large) {
+      height: 380px;
+    }
+    &.overflow {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 1) 60%, rgba(253, 184, 31, 1) 60%);
+      background-position-x: right;
+      img {
+        margin-left: -10px;
+      }
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &--content {
+    width: 100%;
+    height: 100%;
+    padding: 30px 20px;
+    position: relative;
+    &:before {
+      content: '';
+      width: 3px;
+      height: 60px;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      bottom: 50%;
+      transition: 0.5s ease-in-out;
+      opacity: 0;
+    }
+    a {
+      margin-top: auto;
+    }
+    p {
+      color: $color-text;
+    }
+    span {
+      margin-top: auto;
+      display: block;
+    }
+    &.card-company {
+      order: -1;
+      @include bp(medium) {
+        order: 1;
+      }
+      h4,
+      a {
+        color: $color-green;
+      }
+      background: #eefffc;
+      &:before {
+        background: $color-green;
+      }
+      span {
+        color: $color-green;
+      }
+    }
+    &.card-candidate {
+      h4,
+      a {
+        color: $color-orange;
+      }
+      span {
+        color: $color-orange;
+      }
+      background: #fffaf6;
+      &:before {
+        background: $color-orange;
+      }
+    }
+  }
+}
+
+// fold 2
+.umana-hm-jobs {
+  width: 100%;
+  padding: 50px 0;
+  position: relative;
+  background-image: linear-gradient($bg-orange, $bg-orange);
+  background-size: 75vw 300px;
+  background-repeat: no-repeat;
+  background-position: 0px 115px;
+  @include element(content) {
+    z-index: 3;
+  }
+}

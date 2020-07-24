@@ -1,0 +1,426 @@
+@import './welcome';
+
+.umana-home {
+  width: 100%;
+  display: flex;
+  min-height: calc(100vh - 200px);
+  align-items: center;
+  justify-content: space-between;
+  @include element(content) {
+    width: 100%;
+    font-weight: 200;
+    h1 {
+      font-weight: 200 !important;
+    }
+    @include bp(large) {
+      width: 30%;
+    }
+  }
+  @include element(options) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    @include bp(large) {
+      width: 65%;
+    }
+  }
+}
+
+.umana-section-orange {
+  @include padding-x;
+  width: 100%;
+  background: $color-orange;
+}
+
+.umana-section--img {
+  width: 100%;
+}
+
+.umana-section-bg-bottom {
+  background-image: linear-gradient($bg-blue, $bg-blue);
+  background-size: 75vw 85%;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.umana-home-corporative {
+  width: 100%;
+}
+// #Planes corporativos
+.umana-home-corp {
+  width: 100%;
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $color-green;
+  }
+  @include element(info) {
+    width: 100%;
+    max-width: 400px;
+  }
+  @include element(list) {
+    width: 100%;
+    padding: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -20px;
+    justify-content: center;
+    @include bp(xxmedium) {
+      justify-content: space-between;
+    }
+    &--card {
+      padding: 10px 20px;
+      width: 100%;
+      max-width: 316px;
+      @include bp(xxmedium) {
+        width: 50%;
+      }
+      @include bp(large) {
+        width: 33.33%;
+      }
+      img {
+        width: 100%;
+      }
+      .content {
+        width: 100%;
+        display: block;
+        padding: 0 10px 0 30px;
+      }
+    }
+  }
+}
+
+//#Servicios
+
+.layout-green {
+  background-color: $color-green;
+  background-image: linear-gradient(rgba(#eefffc, 0.2), rgba(#eefffc, 0.2));
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 90vw calc(100% - 180px);
+  @include bp(medium) {
+    background-size: 90vw calc(100% - 230px);
+  }
+  @include bp(xxmedium) {
+    background-size: 60vw calc(100% - 100px);
+  }
+  @include bp(xmedium) {
+    background-size: 55vw calc(100% - 100px);
+  }
+}
+.umana-services {
+  @include max-width;
+  @include padding-x;
+  @include padding-y-l;
+  * {
+    color: $color-white;
+  }
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  @include element(info) {
+    width: 100%;
+    @include bp(xxmedium) {
+      width: 30%;
+    }
+    .category {
+      margin-bottom: 30px;
+    }
+  }
+  @include element(list) {
+    padding: 50px 30px 0;
+    width: 100%;
+    @include bp(xxmedium) {
+      width: 60%;
+    }
+    @include bp(xmedium) {
+      width: 50%;
+    }
+    &--card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 400px;
+      margin: 0 auto;
+      @include bp(xmedium) {
+        margin: 5px 0;
+        justify-content: flex-start;
+        max-width: none;
+      }
+      & > h3 {
+        font-size: 18px;
+        @include bp(xxmedium) {
+          font-size: 20px;
+        }
+        @include bp(large) {
+          font-size: 23px;
+        }
+      }
+    }
+  }
+}
+
+//Planes
+.umana-plans {
+  display: flex;
+  flex-wrap: wrap;
+  @include padding-y-l;
+
+  @include element(info) {
+    width: 100%;
+    @include bp(xmedium) {
+      width: 40%;
+    }
+    &.umana-title-hero {
+      color: $color-green !important;
+    }
+  }
+  @include element(list) {
+    width: 100%;
+    @include bp(xmedium) {
+      width: 60%;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    &--item {
+      width: 100%;
+      max-width: 340px;
+      img {
+        width: 100%;
+      }
+      @include bp(xmedium) {
+        max-width: none;
+        width: 50%;
+      }
+      &:first-child {
+        background: $bg-green;
+        * {
+          color: rgba($color-black, 0.5);
+        }
+      }
+      &:nth-child(2) {
+        background: $color-white;
+        box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.07);
+        * {
+          color: rgba($color-black, 0.5);
+        }
+      }
+      &.large {
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        background: $bg-green;
+        align-items: flex-start;
+        max-width: none;
+        margin-top: 60px;
+        @include bp(xmedium) {
+          margin-top: 130px;
+        }
+        h2 {
+          color: $color-green;
+        }
+        .item-contet {
+          padding: 30px 20px 30px 40px;
+          width: 100%;
+          @include bp(xmedium) {
+            width: calc(100% - 350px);
+          }
+        }
+        img {
+          width: 100%;
+          order: -1;
+          margin-top: -40px;
+          @include bp(xmedium) {
+            order: 0;
+            margin-top: -100px;
+            transform: translate(60px);
+            width: 350px;
+          }
+        }
+      }
+      .type-item {
+        padding: 10px 10px 0;
+        text-align: center;
+      }
+      .item-contet {
+        padding: 40px 15%;
+      }
+    }
+  }
+}
+
+//#home jobs
+
+.umana-loopjobs {
+  @include padding-y-l;
+  width: 100%;
+  display: flex;
+  background-image: linear-gradient($bg-orange, $bg-orange);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 40vw 80%;
+  flex-wrap: wrap;
+  @include element(filters) {
+    width: 100%;
+    padding: 50px 10% 20px;
+    @include bp(large) {
+      padding: 230px 10px 30px 30px;
+      width: 25%;
+    }
+  }
+  @include element(results) {
+    padding: 50px;
+    width: 100%;
+    @include bp(large) {
+      width: 75%;
+    }
+  }
+}
+
+h4 {
+  color: $color-green;
+  hr {
+    width: 60px;
+    border-bottom: 1px solid $color-green;
+    color: $color-white;
+    background: $color-white;
+    display: inline-block;
+    margin: 10px 20px 7px 0;
+  }
+}
+
+.umana-company-experience {
+  @include max-width;
+  @include padding-x;
+  @include padding-y;
+  hr {
+    border-bottom: 1px solid $color-white;
+  }
+  @include element(column) {
+    width: 100%;
+    display: flex;
+    @include padding-y;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    .umana-columna {
+      padding-left: 40px;
+      width: 100%;
+      @include bp(xmedium) {
+        width: 50%;
+      }
+      @include bp(large) {
+        width: 33.33%;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin-bottom: 10px;
+        line-height: 38px;
+        color: $color-white;
+      }
+      h3 {
+        font-size: 23px;
+      }
+    }
+  }
+}
+
+.umana-company-client {
+  @include max-width;
+  @include padding-x;
+  @include padding-y;
+  &--content {
+    display: flex;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    p,
+    h4 {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding-right: 30px;
+      width: 100%;
+      @include bp(xmedium) {
+        width: 50%;
+      }
+    }
+    h4 {
+      padding-left: 80px;
+      hr {
+        margin-left: -85px;
+      }
+    }
+  }
+}
+
+.ant-carousel {
+  .slick-slide {
+    .slider-content {
+      text-align: center;
+      line-height: 160px;
+      overflow: hidden;
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      height: auto;
+      @include bp(xmedium) {
+        height: 160px;
+      }
+    }
+  }
+}
+
+.position-select {
+  padding-left: 36px;
+  // position: relative;
+  //background-image: url("../../assets/01-icon-puesto.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: 10px 8px !important;
+  & > .ant-select-selection--single {
+    padding-left: 0;
+  }
+}
+.city-select {
+  padding-left: 36px;
+  // position: relative;
+  //background-image: url("../../assets/01-icon-location.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: 13px 8px !important;
+  & > .ant-select-selection--single {
+    padding-left: 0;
+  }
+}
+
+.ant-form-item-children {
+  .position-select {
+    padding-left: 36px;
+    //background-image: url("../../assets/01-icon-puesto.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: 10px 8px !important;
+    border: 1px solid $color-orange;
+    & > .ant-select-selection.ant-select-selection--single {
+      padding-left: 0;
+      border: $border-transparent;
+      box-shadow: none !important;
+    }
+  }
+  .city-select {
+    padding-left: 36px;
+
+    //background-image: url("../../assets/01-icon-location.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: 13px 8px !important;
+    border: 1px solid $color-orange;
+    & > .ant-select-selection.ant-select-selection--single {
+      padding-left: 0;
+      border: $border-transparent;
+      box-shadow: none !important;
+    }
+  }
+}

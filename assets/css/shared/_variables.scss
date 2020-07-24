@@ -27,6 +27,7 @@ $bg-medium: linear-gradient(
   $color-white 400px,
   $color-white 100%
 );
+$bg-green: #eefffc;
 
 $color-primary: #006e8f;
 $color-primary-hover: #3696b5;
@@ -47,6 +48,7 @@ $border-orange: 1px solid $color-orange;
 $border-green: 1px solid $color-green;
 $border-red: 1px solid $color-error;
 $border-white: 1px solid $color-white;
+$border-transparent: 1px solid transparent;
 
 $font-primary: 'Muli', Helvetica, Arial, sans-serif;
 
@@ -62,7 +64,10 @@ $breakpoints: (
     min-width: 360px,
   ),
   'medium': (
-    min-width: 480px,
+    min-width: 500px,
+  ),
+  'xxmedium': (
+    min-width: 600px,
   ),
   'xmedium': (
     min-width: 720px,
@@ -95,14 +100,26 @@ $gk-layout-padding: (
   position: absolute;
   left: 50%;
   top: auto;
-  bottom: 0;
+  bottom: 0px;
   margin-left: -8px;
   width: 10px;
   height: 10px;
-  background-color: $primary;
+  background-color: $color-primary;
   border-radius: 50px;
 }
 
+@mixin padding-y-l() {
+  padding-bottom: 40px;
+  padding-top: 40px;
+  @include bp(medium) {
+    padding-bottom: 70px;
+    padding-top: 70px;
+  }
+  @include bp(large) {
+    padding-bottom: 100px;
+    padding-top: 100px;
+  }
+}
 @mixin padding-y() {
   padding-bottom: 20px;
   padding-top: 20px;
@@ -116,29 +133,16 @@ $gk-layout-padding: (
   }
 }
 
-@mixin after() {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: auto;
-  bottom: 0px;
-  margin-left: -8px;
-  width: 10px;
-  height: 10px;
-  background-color: $color-primary;
-  border-radius: 50px;
-}
-
 @mixin padding-x() {
   padding-left: 10px;
   padding-right: 10px;
   @include bp(small) {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   @include bp(medium) {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   @include bp(xmedium) {
     padding-left: 60px;
@@ -151,6 +155,6 @@ $gk-layout-padding: (
 }
 
 @mixin max-width() {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }

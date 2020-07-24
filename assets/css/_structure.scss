@@ -70,6 +70,7 @@ h4 {
     padding-top: 60px;
     .umana__header {
       padding: 10px 0;
+      z-index: 100;
       @include padding-x;
     }
   }
@@ -136,6 +137,23 @@ h4 {
       position: fixed;
       top: 65px;
       left: 0;
+      .container {
+        ul {
+          .ant-menu-item {
+            letter-spacing: 2px;
+            &.ant-menu-item-selected {
+              color: $color-white;
+              font-weight: 500;
+            }
+            &:hover {
+              color: $color-white;
+            }
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
 }

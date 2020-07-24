@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Menu, Modal } from 'antd';
+import { Menu, Modal, Button } from 'antd';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import Link from 'next/link';
 import Router from 'next/router';
 
-const UmanaMenu = props => {
+const UserMenu = props => {
   const [current, setCurrent] = useState('/');
   const signOut = useStoreActions(actions => actions.auth.logout);
   const handleClick = e => {
@@ -19,9 +19,10 @@ const UmanaMenu = props => {
 
   const handleLogout = () =>
     Modal.confirm({
+      className: 'theme-orange',
       title: 'Cerrar Sesión',
-      centered: true,
       content: '¿Está seguro que desea cerrar sesión?',
+      centered: true,
       okText: 'Salir',
       onOk: () => {
         Router.push('/');
@@ -37,12 +38,11 @@ const UmanaMenu = props => {
           mode="horizontal"
           onClick={handleClick}
           selectedKeys={[current]}
-          className="menu--main umana-menu"
+          className="menu--main umana-menu theme-orange"
         >
-          <Menu.Item key="dashboard" className="menu-role">
-            Umana
+          <Menu.Item key="admin/users" className="menu-role">
+            Talentos
           </Menu.Item>
-          <Menu.Item key="admin/users">Talentos</Menu.Item>
           <Menu.Item key="admin/companies">Empresas</Menu.Item>
           <Menu.SubMenu
             title={
@@ -51,7 +51,21 @@ const UmanaMenu = props => {
               </span>
             }
           >
-            <Menu.Item key="admin/profile">Mi perfil</Menu.Item>
+            <Menu.Item key="admin/profile">
+              <div className="content">
+                <div className="user-icon">
+                  <i className="material-icons">person_pin</i>
+                </div>
+                <div>
+                  <p>{props.user.name + ' ' + props.user.lastname}</p>
+                  <p>{props.user.email}</p>
+                </div>
+                <Button type="orange" size="small">
+                  Mi perfil
+                </Button>
+              </div>
+            </Menu.Item>
+            <Menu.Item key="admin/privacidad">Configuración</Menu.Item>
             <Menu.Item key="logout">
               <a
                 href="#"
@@ -66,7 +80,7 @@ const UmanaMenu = props => {
           </Menu.SubMenu>
         </Menu>
       </div>
-      <div className="menu--admin">
+      <div className="menu--talento">
         <div className="container">
           <div className="row">
             <div className="col">
@@ -80,8 +94,10 @@ const UmanaMenu = props => {
                   textAlign: 'right',
                 }}
               >
-                <Menu.Item key="dashboard">Inicio</Menu.Item>
-                <Menu.Item key="admin/catalogs">Catalogos</Menu.Item>
+                <Menu.Item key="admin">Inicio</Menu.Item>
+                <Menu.Item key="admin/profile">Mi perfil</Menu.Item>
+                <Menu.Item>Plazas Disponibles</Menu.Item>
+                <Menu.Item>Mis Plazas</Menu.Item>
                 <Menu.Item>Notificaciones</Menu.Item>
               </Menu>
             </div>
@@ -92,4 +108,4 @@ const UmanaMenu = props => {
   );
 };
 
-export default UmanaMenu;
+export default UserMenu;

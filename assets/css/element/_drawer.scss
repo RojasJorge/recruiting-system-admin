@@ -4,6 +4,7 @@
   .ant-drawer-content-wrapper {
     width: 100% !important;
     @include bp(xmedium) {
+      max-width: 600px;
       width: 50% !important;
     }
     .ant-drawer-content .ant-drawer-wrapper-body {

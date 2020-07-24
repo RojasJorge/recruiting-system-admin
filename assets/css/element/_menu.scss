@@ -1,0 +1,146 @@
+.umana-menu {
+  &.theme-orange {
+    .ant-menu-submenu.ant-menu-submenu-horizontal {
+      &.ant-menu-submenu-selected,
+      &:hover {
+        color: $color-orange;
+      }
+    }
+  }
+}
+
+.menu--talento {
+  background: $color-orange;
+}
+
+.umana-menu {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+  a {
+    text-transform: uppercase;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 15px;
+    &:after {
+      content: '';
+      width: 0px;
+      height: 10px;
+      border-radius: 50%;
+      background: transparent;
+      margin-bottom: -5px;
+      transition: 0.5s ease-in-out;
+    }
+    &:hover {
+      &:after {
+        background: $color-primary;
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}
+.menu--admin {
+  width: 100%;
+  @include padding-x;
+  background: $color-blue;
+  position: fixed;
+  top: 65px;
+  left: 0;
+  .container {
+    ul {
+      .ant-menu-item {
+        letter-spacing: 2px;
+        &.ant-menu-item-selected {
+          color: $color-white;
+          font-weight: 500;
+        }
+        &:hover {
+          color: $color-white;
+        }
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+.menu--talento {
+  width: 100%;
+  @include padding-x;
+  background: $color-orange;
+  position: fixed;
+  top: 65px;
+  left: 0;
+  .container {
+    ul {
+      .ant-menu-item {
+        letter-spacing: 2px;
+        &.ant-menu-item-selected {
+          color: $color-white;
+          font-weight: 500;
+          background: rgba($color-black, 0.1);
+        }
+        &:hover {
+          color: $color-white;
+        }
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.menu-orange {
+}
+
+.ant-menu.ant-menu-sub.ant-menu-vertical {
+  width: 250px;
+  .ant-menu-item {
+    padding: 5px 10px;
+    height: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+    &:first-child {
+      height: auto;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    text-transform: capitalize;
+    &:hover,
+    &.ant-menu-item-selected {
+      color: black;
+    }
+    .content {
+      width: 100%;
+      border-bottom: 1px solid $color-text;
+      padding-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      div.user-icon {
+        margin-right: 10px;
+        width: 20%;
+        padding-bottom: 0;
+        i {
+          font-size: 50px;
+          color: $color-text;
+        }
+      }
+      div {
+        width: 75%;
+        padding-bottom: 10px;
+      }
+      p {
+        margin-bottom: 0;
+        line-height: 1.3;
+      }
+    }
+  }
+}
