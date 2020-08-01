@@ -34,6 +34,7 @@ const MainMenu = _ => {
   };
 
   useEffect(() => {
+    // console.log('MainMenu.jsx|user', user, token)
     setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''));
   }, []);
 
@@ -46,7 +47,7 @@ const MainMenu = _ => {
               <UmanaLogo />
             </div>
             {user.scopes[0] === 'umana' ? <UmanaMenu user={user} /> : null}
-            {user.scopes[1] === 'talento' ? <UserMenu user={user} /> : null}
+            {user.scopes[1] === 'candidate' ? <UserMenu user={user} /> : null}
           </div>
         </div>
       </div>

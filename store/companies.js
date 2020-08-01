@@ -1,16 +1,8 @@
-import {
-  action,
-  thunk
-} from "easy-peasy";
+import {action, thunk} from 'easy-peasy'
+import {orderBy} from 'lodash'
+import axios from 'axios'
 
-import {
-  orderBy,
-} from "lodash";
-
-import config from "../config";
-import axios from "axios";
-
-const companies = {
+export default {
   company: null,
   list: [],
   total: 0,
@@ -21,22 +13,19 @@ const companies = {
    */
   get: thunk(async (actions, payload) => {
 
-    actions.switchLoading(true);
+    actions.switchLoading(true)
 
     /** Extract token and id */
-    const {
-      token,
-      id,
-    } = payload;
+    const {token, id,} = payload
 
     /** Delete special fiels from payload to use as query */
-    delete payload.token;
-    delete payload.id;
+    delete payload.token
+    delete payload.id
 
     /** Prepare query params */
-    const params = id ? `/${id}` : '';
+    const params = id ? `/${id}` : ''
 
-    await axios.get(`${config.app.api_url}/company${params}`, {
+    await axios.get(`${process.env.API_URL}/company${params}`, {
         params: payload,
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +41,7 @@ const companies = {
           data: response.data,
           type: id ? false : true
         }) : null;
-        actions.switchLoading(false);
+        actions.switchLoading(false)
       })
   }),
 
@@ -60,27 +49,27 @@ const companies = {
    * Update sigle or batch
    */
   update: thunk(async (actions, payload) => {
-    actions.switchLoading(true);
+    actions.switchLoading(true)
 
-    const token = payload.token;
-    const type = payload.type;
-    delete payload.token;
-    delete payload.type;
+    const token = payload.token
+    const type = payload.type
+    delete payload.token
+    delete payload.type
 
     /** Send request */
-    await axios.put(`${config.app.api_url}/${type}`, JSON.stringify(payload), {
+    await axios.put(`${process.env.API_URL}/${type}`, JSON.stringify(payload), {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': token
         },
       })
       .catch(error => {
-        console.log(error);
-        actions.switchLoading(false);
+        console.log(error)
+        actions.switchLoading(false)
       })
       .then(response => {
-        actions.switchLoading(false);
-        return;
+        actions.switchLoading(false)
+        return
       })
   }),
 
@@ -90,8 +79,8 @@ const companies = {
 
   fill: action((state, payload) => {
     if (payload.type) {
-      state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc']);
-      state.total = payload.data.total;
+      state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc'])
+      state.total = payload.data.total
     } else {
       state.company = payload.data
     }
@@ -101,8 +90,6 @@ const companies = {
    * Switch loading on pages
    */
   switchLoading: action((state, payload) => {
-    state.loading = payload;
+    state.loading = payload
   })
 };
-
-export default companies;

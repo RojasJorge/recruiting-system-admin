@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
-import config from '../config'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 import MainHeader from '../components/structure/Header'
 import Login from '../components/user/Login'
@@ -26,6 +26,10 @@ const Layout = ({ children, title, className }) => {
     /** Parse user & token from localStorage */
     let user = JSON.parse(localStorage.getItem('uUser'))
     const token = localStorage.getItem('uToken')
+  
+    if(!token) Router.replace('/')
+    // console.log('Layout.jsx|user,token', user, token)
+    
     /** Check if valid */
     if (token && user) {
       user.token = token
@@ -39,7 +43,7 @@ const Layout = ({ children, title, className }) => {
   return auth.token && auth.user ? (
     <div className={className}>
       <Head>
-        <title>{title + config.app.title}</title>
+        <title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
       </Head>
       <MainHeader />
       <div className="app--contents umana">
