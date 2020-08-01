@@ -2,7 +2,7 @@ import {
 	action
 } from "easy-peasy";
 
-const profile = {
+export default {
 	steps: {
 		academic: {},
 		documents: {},
@@ -24,5 +24,3 @@ const profile = {
 		}
 	)
 };
-
-export default profile;
