@@ -10,7 +10,9 @@ const Admin = _ => {
   }, [])
 
   return (
-    <Layout title="Tablero"></Layout>
+    <Layout title="Tablero">
+      <h1>Dashboard</h1>
+    </Layout>
   )
 }
 
