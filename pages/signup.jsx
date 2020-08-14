@@ -1,7 +1,5 @@
-import SignupForm from '../components/user/Signup'
+import SignupSteps from '../components/user/Signup';
 
-const Register = _ => (
-  <SignupForm />
-)
+const Register = _ => <SignupSteps />;
 
-export default Register
+export default Register;

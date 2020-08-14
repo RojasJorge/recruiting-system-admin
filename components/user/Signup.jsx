@@ -1,17 +1,18 @@
-import Head from 'next/head'
-import UmanaLogo from '../Misc/UmanaLogo'
-import { Form, Input, Button, DatePicker } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
-import Link from 'next/link'
-import MainHeader from '../structure/Header'
-import Router from 'next/router'
-import 'cleave.js/dist/addons/cleave-phone.gt'
-import Cleave from 'cleave.js/react'
+import Head from 'next/head';
+import { useState } from 'react';
+import SignupForm from './signup/form';
+import { Form, Input, Button, DatePicker, Steps } from 'antd';
+import MainHeader from '../structure/Header';
+import Router from 'next/router';
+import 'cleave.js/dist/addons/cleave-phone.gt';
+import Cleave from 'cleave.js/react';
 
-const SignupForm = _ => {
+const { Step } = Steps;
+
+const SignupSteps = _ => {
   /** Submit handler */
   const onSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     console.log(
       e.target.name.value,
       e.target.lastname.value,
@@ -20,16 +21,43 @@ const SignupForm = _ => {
       e.target.birthday.value,
       'password',
       e.target.password.value,
-    )
-  }
+    );
+  };
 
-  const onFinish = values => {
-    // console.log('Success:', values)
-  }
+  const [current, switchCurrent] = useState(0);
+  const onChange = o => switchCurrent(o);
 
-  const onFinishFailed = errorInfo => {
-    // console.log('Failed:', errorInfo)
-  }
+  const checkList = [
+    {
+      title: '¿Qué estás buscando?',
+    },
+    {
+      title: 'Crear cuenta',
+    },
+  ];
+
+  const switchStep = _ => {
+    switch (current) {
+      case 0:
+        return <div>Busco trabajo</div>;
+        break;
+
+      default:
+        return <SignupForm />;
+        break;
+    }
+  };
+  const status = o => {
+    let s = 'wait';
+
+    if (o === current) {
+      s = 'process';
+    } else if (o !== current && o < current) {
+      s = 'finish';
+    }
+
+    return s;
+  };
 
   return (
     <>
@@ -39,142 +67,23 @@ const SignupForm = _ => {
       <div className="app container-fluid animated fadeIn umana signup">
         <MainHeader />
         {/* Content  */}
-        <div className="umana-login">
-          <div className="umana-layout row">
-            <div className="col-md-6 umana-login__form">
-              <div className="row">
-                <div className="col-md-12">
-                  <h1>Crear Cuenta</h1>
-                </div>
-                <Form
-                  name="basic"
-                  className="login--form signup--form"
-                  onSubmit={onSubmit}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                >
-                  <div className="row">
-                    <div className="col-md-6">
-                      <Form.Item
-                        label="Correo Electrónico"
-                        name="email"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Correo electrónico es requerido.',
-                          },
-                        ]}
-                      >
-                        <Input
-                          name="email"
-                          size="large"
-                          value="jorge@royalestudios.com"
-                          rules={[{ required: true, message: 'Please input your email!' }]}
-                        />
-                      </Form.Item>
-                    </div>
-                    <div className="col-md-6">
-                      <Form.Item
-                        label="Contraseña"
-                        name="Password"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'La contraseña es requerida.',
-                          },
-                        ]}
-                      >
-                        <Input.Password
-                          name="password"
-                          size="large"
-                          value="royale123"
-                          rules={[{ required: true, message: 'Please input your password!' }]}
-                        />
-                      </Form.Item>
-                    </div>
-                    <div className="col-md-6">
-                      <Form.Item
-                        label="Nombres"
-                        name="Name"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'El nombre es requerido.',
-                          },
-                        ]}
-                      >
-                        <Input
-                          name="name"
-                          size="large"
-                          rules={[{ required: true, message: 'Please input your username!' }]}
-                        />
-                      </Form.Item>
-                    </div>
-                    <div className="col-md-6">
-                      <Form.Item
-                        label="Apellidos"
-                        name="lastname"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Apellidos es requerida.',
-                          },
-                        ]}
-                      >
-                        <Input name="lastname" size="large" />
-                      </Form.Item>
-                    </div>
-                    <div className="col-md-12">
-                      <h3>Optional:</h3>
-                    </div>
-                    <div className="col">
-                      <Form.Item label="Teléfono">
-                        <Cleave
-                          className="ant-input ant-input-lg"
-                          options={{
-                            phone: true,
-                            phoneRegionCode: 'GT',
-                          }}
-                          name="phone"
-                          onChange={e => console.log(e.target.value)}
-                        />
-                      </Form.Item>
-                    </div>
-                    <div className="col">
-                      <Form.Item label="Fecha de nacimiento">
-                        <DatePicker
-                          style={{ width: '100%' }}
-                          format="DD/MM/YYYY"
-                          size="large"
-                          name="birthday"
-                        />
-                      </Form.Item>
-                    </div>
-                  </div>
-                  <Button htmlType="submit" icon={<PlusOutlined />} size="large" type="primary">
-                    Crear cuenta
-                  </Button>
-                  <p>
-                    ¿Ya tienes cuenta?
-                    <Button
-                      type="link"
-                      onClick={e => {
-                        e.preventDefault()
-                        Router.push('/login')
-                      }}
-                    >
-                      Iniciar sesión
-                    </Button>
-                  </p>
-                  {/* <p className="info">Envia Logistics internal metrics system.</p> */}
-                </Form>
-              </div>
-            </div>
-          </div>
+        <div className="umana-signup">
+          <Steps
+            direction="vertical"
+            size="large"
+            current={current}
+            onChange={onChange}
+            progressDot
+          >
+            {checkList.map((o, i) => (
+              <Step key={i} title={o.title} status={status(i)} />
+            ))}
+          </Steps>
+          <div>{switchStep()}</div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignupForm
+export default SignupSteps;

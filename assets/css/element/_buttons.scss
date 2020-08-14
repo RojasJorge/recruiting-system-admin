@@ -193,10 +193,8 @@
     height: 30px;
     color: $color-blue;
     margin-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    font-size: 14px;
+    display: inline-block;
     i {
       font-size: 22px;
     }
@@ -213,14 +211,18 @@
     }
   }
   &.ant-btn-lg {
-    font-size: 24px;
+    font-size: 15px;
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     width: auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     text-align: center;
     height: auto;
+    font-family: $font-primary;
+    font-weight: bold;
     margin: 0 auto 30px;
     i {
       font-size: 50px;
@@ -307,7 +309,7 @@
     &.ant-btn-lg {
       background: $color-orange;
       color: $color-white;
-      height: 90px;
+      height: 50px;
       border-radius: 50%;
       i {
         margin-left: 0;
