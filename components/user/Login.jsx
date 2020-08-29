@@ -45,11 +45,8 @@ const Login = _ => {
             </div>
             <div className="col-md-6 umana-login__form">
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-12 umana-signup-login-title">
                   <h1>Iniciar Sesión</h1>
-                  {/* <Can I="view" a="LOGIN">
-                    <p>Mensaje para los administradores.</p>
-                  </Can> */}
                 </div>
               </div>
               <Form

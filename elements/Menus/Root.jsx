@@ -29,12 +29,12 @@ const RootNav = props => {
         </Link>
       </Menu.Item>
       <Menu.Item key="candidatos" onClick={e => props.close(e, 'close')}>
-        <Link href="/candidatos" passHref>
+        <Link href="/admin/users" passHref>
           <a>Candidatos</a>
         </Link>
       </Menu.Item>
       <Menu.Item key="empresas" onClick={e => props.close(e, 'close')}>
-        <Link href="/empresas" passHref>
+        <Link href="/admin/companies" passHref>
           <a>Empresas</a>
         </Link>
       </Menu.Item>
@@ -44,7 +44,7 @@ const RootNav = props => {
         </Link>
       </Menu.Item>
       <Menu.Item key="catalogos" onClick={e => props.close(e, 'close')}>
-        <Link href="/catalogos" passHref>
+        <Link href="/admin/catalogs" passHref>
           <a>Catalogos</a>
         </Link>
       </Menu.Item>

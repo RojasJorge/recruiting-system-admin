@@ -5,8 +5,10 @@ import List from '../../../components/catalogs/List';
 const AcademicLevels = () => {
   return (
     <Layout title="Niveles académicos">
-      <PageTitle title="Niveles Académicos" back="/admin/catalogs" />
-      <List type="career" title="Niveles Académicos" />
+      <>
+        <PageTitle title="Niveles Académicos" back="/admin/catalogs" />
+        <List type="career" title="Niveles Académicos" />
+      </>
     </Layout>
   );
 };

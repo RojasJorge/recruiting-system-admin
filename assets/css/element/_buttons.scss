@@ -70,6 +70,15 @@
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 20px;
+  &:disabled {
+    background: #bababa;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+      background: #bababa;
+      color: $color-white;
+    }
+  }
   &.ant-btn-green {
     background: $color-green;
   }
@@ -78,6 +87,9 @@
     width: 200px;
     padding: 10px;
     margin-bottom: 10px;
+    color: $color-white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
   &.ant-btn-line-white {
     background: transparent;
@@ -195,6 +207,7 @@
     margin-bottom: 0;
     font-size: 14px;
     display: inline-block;
+    text-transform: capitalize;
     i {
       font-size: 22px;
     }

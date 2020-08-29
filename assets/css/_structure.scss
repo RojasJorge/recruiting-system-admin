@@ -67,9 +67,8 @@ h4 {
   padding-top: 100px;
   &.login,
   &.signup {
-    padding-top: 60px;
+    padding-top: 80px;
     background: $bg-blue;
-    //
   }
   @include element(header) {
     position: fixed;
@@ -89,10 +88,31 @@ h4 {
   @include max-width;
   @include padding-x;
   @include padding-y;
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 80px);
 }
 
 .umana-login {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  @include element(form) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    // background: $color-white;
+    padding: 40px;
+    min-height: 600px;
+    // box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  @include element(img) {
+    img {
+      width: 90%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center right;
+    }
+  }
+}
+.umana-signup {
   width: 100%;
   min-height: calc(100vh - 80px);
   // background: linear-gradient(
@@ -105,10 +125,12 @@ h4 {
   @include element(form) {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background: $color-white;
+    justify-content: flex-start;
+    min-height: 600px;
+
+    // background: $color-white;
     padding: 40px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08);
+    // box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08);
   }
   @include element(img) {
     img {

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { Empty, Spin } from 'antd';
+import { Empty, Spin, Table } from 'antd';
 import { Button } from 'antd';
 import { PlusCircleOutlined, SyncOutlined } from '@ant-design/icons';
 import { isEmpty } from 'lodash';
-import SortableTree from 'react-sortable-tree';
 // import FileExplorerTheme from 'react-sortable-tree-theme-minimal'
 import PageTitle from '../Misc/PageTitle';
 import EditModal from './EditModal';
@@ -41,21 +40,9 @@ const List = ({ type, title }) => {
       .catch(err => console.log(err));
   };
 
-  const onChange = treeData => setList(treeData);
-
-  const onMoveNode = ({
-    treeData,
-    node,
-    nextParentNode,
-    prevPath,
-    prevTreeIndex,
-    nextPath,
-    nextTreeIndex,
-  }) => {
-    update({
-      id: node.id,
-      parent: nextParentNode ? nextParentNode.id : null,
-    });
+  const show = id => {
+    console.log('=========', id);
+    return <a id={id.id}>hola</a>;
   };
 
   useEffect(() => {
@@ -86,18 +73,28 @@ const List = ({ type, title }) => {
         </div>
       </div>
       <div className="umana-container">
-        {/* {!data.loading ? (
-          !isEmpty(list) ? (
-            <SortableTree
-              style={{ height: '100vh', overflow: 'hidden' }}
-              treeData={list}
-              onChange={onChange}
-              onMoveNode={onMoveNode}
-              switchEdit={switchEdit}
-              // theme={FileExplorerTheme}
-            />
-          ) : (<Empty />)
-        ) : null} */}
+        <Table
+          bordered
+          size="middle"
+          dataSource={data.list}
+          rowKey={record => record.id}
+          pagination={false}
+          columns={[
+            {
+              title: 'Titulo',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              title: 'Action',
+              key: 'operation',
+              fixed: 'right',
+              width: 100,
+
+              render: e => <a id={e.id}>edit</a>,
+            },
+          ]}
+        ></Table>
       </div>
       <EditModal add={add} switchEdit={switchEdit} title={title} />
     </>
