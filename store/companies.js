@@ -1,6 +1,6 @@
-import {action, thunk} from 'easy-peasy'
-import {orderBy} from 'lodash'
-import axios from 'axios'
+import { action, thunk } from 'easy-peasy';
+import { orderBy } from 'lodash';
+import axios from 'axios';
 
 export default {
   company: null,
@@ -12,24 +12,24 @@ export default {
    * Get all collections.
    */
   get: thunk(async (actions, payload) => {
-
-    actions.switchLoading(true)
+    actions.switchLoading(true);
 
     /** Extract token and id */
-    const {token, id,} = payload
+    const { token, id } = payload;
 
     /** Delete special fiels from payload to use as query */
-    delete payload.token
-    delete payload.id
+    delete payload.token;
+    delete payload.id;
 
     /** Prepare query params */
-    const params = id ? `/${id}` : ''
+    const params = id ? `/${id}` : '';
 
-    await axios.get(`${process.env.API_URL}/company${params}`, {
+    await axios
+      .get(`${process.env.API_URL}/company${params}`, {
         params: payload,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token
+          Authorization: token,
         },
       })
       .catch(error => {
@@ -37,41 +37,71 @@ export default {
         actions.switchLoading(false);
       })
       .then(response => {
-        typeof response !== "undefined" ? actions.fill({
-          data: response.data,
-          type: id ? false : true
-        }) : null;
-        actions.switchLoading(false)
-      })
+        typeof response !== 'undefined'
+          ? actions.fill({
+              data: response.data,
+              type: id ? false : true,
+            })
+          : null;
+        actions.switchLoading(false);
+      });
   }),
 
   /**
    * Update sigle or batch
    */
   update: thunk(async (actions, payload) => {
-    actions.switchLoading(true)
+    actions.switchLoading(true);
 
-    const token = payload.token
-    const type = payload.type
-    delete payload.token
-    delete payload.type
+    const token = payload.token;
+    const type = payload.type;
+    delete payload.token;
+    delete payload.type;
 
     /** Send request */
-    await axios.put(`${process.env.API_URL}/${type}`, JSON.stringify(payload), {
+    await axios
+      .put(`${process.env.API_URL}/${type}`, JSON.stringify(payload), {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token
+          Authorization: token,
         },
       })
       .catch(error => {
-        console.log(error)
-        actions.switchLoading(false)
+        console.log(error);
+        actions.switchLoading(false);
       })
       .then(response => {
-        actions.switchLoading(false)
-        return
-      })
+        actions.switchLoading(false);
+        return;
+      });
   }),
+  // /**
+  //  * Update sigle or batch
+  //  */
+  // add: thunk(async (actions, payload) => {
+  //   actions.switchLoading(true)
+
+  //   const token = payload.token
+  //   const type = payload.type
+  //   delete payload.token
+  //   delete payload.type
+
+  //   /** Send request */
+  //   await axios.push(`${process.env.API_URL}/${type}`, JSON.stringify(payload), {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': token
+  //       },
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //       actions.switchLoading(false)
+  //     })
+  //     .then(response => {
+  //       actions.switchLoading(false)
+  //       return
+  //     })
+  // }),
 
   /**
    * Filter the colection
@@ -79,10 +109,10 @@ export default {
 
   fill: action((state, payload) => {
     if (payload.type) {
-      state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc'])
-      state.total = payload.data.total
+      state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc']);
+      state.total = payload.data.total;
     } else {
-      state.company = payload.data
+      state.company = payload.data;
     }
   }),
 
@@ -90,6 +120,6 @@ export default {
    * Switch loading on pages
    */
   switchLoading: action((state, payload) => {
-    state.loading = payload
-  })
+    state.loading = payload;
+  }),
 };

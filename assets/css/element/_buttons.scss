@@ -70,6 +70,19 @@
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 20px;
+  position: relative;
+  & > input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+
   &:disabled {
     background: #bababa;
     opacity: 0.5;
@@ -90,6 +103,7 @@
     color: $color-white;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 12px;
   }
   &.ant-btn-line-white {
     background: transparent;
@@ -353,5 +367,23 @@
     &:hover {
       color: $color-error;
     }
+  }
+  &.ant-btn-circle-green,
+  &.ant-btn-cicle-orange {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
+    i {
+      width: 100%;
+      line-height: 30px;
+      font-size: 22px;
+    }
+  }
+  &.ant-btn-circle-green {
+    background: $color-green;
+  }
+  &.ant-btn-cicle-orange {
+    background: $color-orange;
   }
 }

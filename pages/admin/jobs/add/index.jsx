@@ -1,18 +1,18 @@
 import Layout from '../../../../views/Layout';
-import FormCompany from '../../../../components/Companies/add';
+import FormJob from '../../../../components/jobs/add';
 import { PageTitle, Sitebar } from '../../../../elements';
 
-const AddCompany = _ => {
+const AddJob = _ => {
   return (
-    <Layout title="Agregar Empresa">
+    <Layout title="Agregar Plaza">
       <>
-        <PageTitle title="Agregar Empresa" back="/admin/companies" />
+        <PageTitle title="Agregar Plaza" back="/admin/jobs" />
         <div className="umana-layout-cl">
           <div className="umana-layout-cl__small ">
             <Sitebar />
           </div>
           <div className="umana-layout-cl__flex bg-white">
-            <FormCompany />
+            <FormJob />
           </div>
         </div>
       </>
@@ -20,4 +20,4 @@ const AddCompany = _ => {
   );
 };
 
-export default AddCompany;
+export default AddJob;

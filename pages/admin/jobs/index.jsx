@@ -1,13 +1,13 @@
 import Layout from '../../../views/Layout';
-import Companies from '../../../components/Companies';
+import Jobs from '../../../components/jobs';
 import { PageTitle } from '../../../elements';
 
 const Index = _ => {
   return (
-    <Layout title="Catalogos">
+    <Layout title="Plazas">
       <>
-        <PageTitle title="Empresas" />
-        <Companies />
+        <PageTitle title="Plazas" />
+        <Jobs />
       </>
     </Layout>
   );

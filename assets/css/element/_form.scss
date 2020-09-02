@@ -62,6 +62,7 @@ form.ant-form.ant-form-horizontal {
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 10px 0 30px;
     & > .ant-form-item.ant-row {
       width: calc(33.33% - 20px);
       margin: 0 10px;
@@ -73,5 +74,9 @@ form.ant-form.ant-form-horizontal {
         width: calc(66% - 20px);
       }
     }
+  }
+  .umana-form--footer {
+    padding: 10px 0 0;
+    width: 100%;
   }
 }

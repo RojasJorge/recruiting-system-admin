@@ -26,12 +26,22 @@ select:-webkit-autofill:focus {
   box-shadow: none;
 }
 
+* {
+  font-family: $font-primary;
+}
+
 h1,
 h2,
 h3,
 h4 {
-  color: $color-blue;
-  margin-top: 24px;
+  color: #585858;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 300;
 }
 
 .app {
@@ -62,9 +72,13 @@ h4 {
   }
 }
 
+* {
+  font-family: $font-primary;
+}
+
 .umana {
   width: 100%;
-  padding-top: 100px;
+  padding-top: 80px;
   &.login,
   &.signup {
     padding-top: 80px;
@@ -75,6 +89,16 @@ h4 {
     top: 0;
     left: 0;
     right: 0;
+    z-index: 100;
+    &.is-login {
+      background: linear-gradient(
+        to bottom,
+        rgba(245, 252, 254, 1) 0%,
+        rgba(245, 252, 254, 1) 60%,
+        rgba(245, 252, 254, 0.5) 80%,
+        rgba(245, 252, 254, 0) 100%
+      );
+    }
   }
 }
 
@@ -199,7 +223,7 @@ h4 {
 .umana-layout-cl {
   display: flex;
   flex-direction: wrap;
-  padding: 30px;
+  padding: 30px 0;
   &.bg-color {
     background: linear-gradient(
       to bottom,
@@ -229,4 +253,8 @@ h4 {
       background: $color-white;
     }
   }
+}
+
+.is-login {
+  background: $bg-blue;
 }

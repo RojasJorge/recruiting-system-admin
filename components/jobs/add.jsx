@@ -1,27 +1,48 @@
 import { Form, Input, InputNumber, Button } from 'antd';
+import { useEffect, useState } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import Locations from '../Location';
+import xhr from '../../xhr';
 
-import { UploadAvatar } from '../../elements';
 const { TextArea } = Input;
 
-const FormCompany = props => {
+const FormJob = props => {
+  const data = useStoreState(state => state.collections);
+  const fill = useStoreActions(actions => actions.collections.fill);
+  const [career, setCareer] = useState([]);
+  /** Get collection */
+  const get = () =>
+    xhr()
+      // .get(`/${type}?pager=${JSON.stringify({ page: 1, limit: 1000 })}`)
+      .get(`/career`)
+      .then(resp => fill(resp.data))
+      .catch(err => console.log(err));
+
+  useEffect(() => {
+    setCareer(data.list);
+  }, [data.list]);
+
+  useEffect(() => {
+    get();
+  }, []);
+  console.log(career);
+
   const onFinish = e => {
     console.log(e);
   };
   return (
     <div className="col">
       <h2 style={{ width: '100%' }}>Información general</h2>
-      <UploadAvatar type="company" />
       <Form scrollToFirstError={true} onFinish={onFinish}>
         <Form.Item
           rules={[
             {
               required: true,
-              message: 'El nombre de la empresa es requerido.',
+              message: 'Titulo de la plaza es requerido',
             },
           ]}
-          name="name"
-          label="Nombre de la empresa"
+          name="title"
+          label="Titulo"
         >
           <Input size="large" />
         </Form.Item>
@@ -83,4 +104,4 @@ const FormCompany = props => {
   );
 };
 
-export default FormCompany;
+export default FormJob;

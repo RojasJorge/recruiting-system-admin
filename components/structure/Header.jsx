@@ -1,11 +1,11 @@
-import MainMenu from './MainMenu'
+import MainMenu from './MainMenu';
 
-const MainHeader = _ => {
+const MainHeader = props => {
   return (
-    <header className="app--header umana__header">
+    <header className={`app--header umana__header ${props.layout}`}>
       <MainMenu />
     </header>
-  )
-}
+  );
+};
 
-export default MainHeader
+export default MainHeader;

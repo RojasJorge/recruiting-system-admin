@@ -39,7 +39,7 @@ const RootNav = props => {
         </Link>
       </Menu.Item>
       <Menu.Item key="plazas" onClick={e => props.close(e, 'close')}>
-        <Link href="/plazas" passHref>
+        <Link href="/admin/jobs" passHref>
           <a>Plazas</a>
         </Link>
       </Menu.Item>

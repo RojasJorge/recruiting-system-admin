@@ -1,8 +1,8 @@
-import List from './List';
+// import List from './List';
 import Link from 'next/link';
 import { Button } from 'antd';
 
-const Companies = () => {
+const Jobs = () => {
   const style = {
     display: 'flex',
     flexDirection: 'column',
@@ -14,16 +14,16 @@ const Companies = () => {
   };
   return (
     <div className="umana-list list-empty">
-      <Link href="/admin/companies/add">
+      <Link href="/admin/jobs/add">
         <a>
           <Button type="circle" size="large">
             <i className="material-icons">add</i>
           </Button>
         </a>
       </Link>
-      <h2>Agregar Empresa</h2>
+      <h2>Agregar Plaza</h2>
     </div>
   );
 };
 
-export default Companies;
+export default Jobs;
