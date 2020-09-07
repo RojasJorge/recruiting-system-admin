@@ -4,7 +4,7 @@ import countries from '../../data/countries.json';
 
 const { Option } = Select;
 
-const Locations = () => {
+const Locations = props => {
   const initialState = {
     country: '',
     department: '',
@@ -33,11 +33,15 @@ const Locations = () => {
       setLocation({ ...location, [type]: e });
     }
   };
-  console.log('values', data, location);
 
   return (
     <div className="umana-form--group">
-      <h2 style={{ width: '100%' }}>Ubicación</h2>
+      {props.title ? <h2 style={{ width: '100%' }}>{props.title}</h2> : null}
+      {props.subtitle ? (
+        <h4 style={{ width: '100%', paddingLeft: 10, color: '#666', marginBottom: 10 }}>
+          {props.subtitle}
+        </h4>
+      ) : null}
       <br />
       <Form.Item
         label="País"

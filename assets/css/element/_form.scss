@@ -15,7 +15,25 @@ form.ant-form.ant-form-horizontal {
     flex-wrap: nowrap;
     flex: 1 1 auto;
     margin-bottom: 10px;
-    margin: 0 5px;
+    margin: 0 10px 10px;
+    position: relative;
+    .ant-form-item-explain {
+      font-size: 11px;
+    }
+    .help {
+      position: absolute;
+      top: -26px;
+      right: 0;
+      font-size: 20px;
+      opacity: 0.3;
+      i {
+        color: $color-text;
+        font-size: 20px;
+      }
+      &:hover {
+        opacity: 0.8;
+      }
+    }
     &.ant-form-item-has-error {
       margin-bottom: 10px;
     }
@@ -29,32 +47,65 @@ form.ant-form.ant-form-horizontal {
       }
     }
     .ant-form-item-control {
-      min-height: 50px;
+      min-height: 30px;
       flex: 1;
+    }
+    &.item-row {
+      flex-wrap: wrap;
+      flex-direction: row !important;
+      .ant-form-item-label {
+        width: 50%;
+      }
+      .ant-form-item-control {
+        width: 50%;
+        padding-left: 10px;
+      }
     }
     &.form-item--sm {
       width: 100%;
       @include bp(xmedium) {
-        width: calc(50% - 10px);
+        width: calc(50% - 20px);
       }
       @include bp(large) {
-        width: calc(33.33% - 10px);
+        width: calc(33.33% - 20px);
       }
     }
     &.form-item--md {
       width: 100%;
       @include bp(xmedium) {
-        width: calc(50% - 10px);
+        width: calc(50% - 20px);
       }
     }
     &.form-item--xf {
       width: 100%;
       @include bp(xmedium) {
-        width: calc(66% - 10px);
+        width: calc(66% - 20px);
       }
     }
     &.form-item--lg {
       width: 100% !important;
+    }
+  }
+  .umana-form--section {
+    width: 100%;
+    padding: 30px;
+    background: $color-white;
+    box-shadow: $shadow;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: $font-primary;
+    margin-bottom: 30px;
+    & > .umana-form--group {
+      &:first-child {
+        padding-top: 0;
+        border-top: 0;
+        margin-top: 0;
+      }
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba($color-text, 0.2);
     }
   }
   .umana-form--group {
@@ -63,6 +114,7 @@ form.ant-form.ant-form-horizontal {
     flex-direction: row;
     flex-wrap: wrap;
     padding: 10px 0 30px;
+    position: relative;
     & > .ant-form-item.ant-row {
       width: calc(33.33% - 20px);
       margin: 0 10px;
@@ -72,11 +124,46 @@ form.ant-form.ant-form-horizontal {
       }
       &.form-item--fx {
         width: calc(66% - 20px);
+        margin-right: 10px;
       }
+    }
+    .form-item--delete {
+      position: absolute;
+      right: 0;
+      top: 10px;
+      color: rgba($color-text, 0.5);
+      z-index: 10;
+      &:hover {
+        color: $color-text;
+      }
+    }
+    &.group-row {
+      margin: 0;
+      padding: 0;
+      border-top: 0;
+      margin-bottom: 10px;
     }
   }
   .umana-form--footer {
     padding: 10px 0 0;
     width: 100%;
+  }
+}
+
+// space
+.ant-space.umana-form--group {
+  border-top: 1px solid rgba($color-text, 0.2);
+  &:first-child {
+    border-top: 0;
+  }
+  .ant-space-item {
+    width: calc(33.33% - 20px);
+    margin: 0 10px 10px;
+    .ant-row.ant-form-item {
+      margin: 0;
+    }
+    &:nth-child(1) {
+      width: 100%;
+    }
   }
 }

@@ -240,6 +240,11 @@ h2 {
     &.bg-white {
       background: $color-white;
     }
+    &.width-section {
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
   }
   @include element(small) {
     width: 33%;

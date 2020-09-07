@@ -386,4 +386,25 @@
   &.ant-btn-cicle-orange {
     background: $color-orange;
   }
+  &.ant-btn-dashed {
+    border: 1px dashed $color-text;
+    text-align: center;
+    padding: 10px 20px;
+    justify-content: center;
+    font-size: 14px;
+    color: $color-text;
+    flex-direction: row;
+    margin: 10px 0;
+    i {
+      font-size: 20px;
+      margin-left: 0;
+    }
+    &:hover {
+      background: $color-white;
+      color: $color-black;
+    }
+    &.ant-btn-lg {
+      width: 96%;
+    }
+  }
 }

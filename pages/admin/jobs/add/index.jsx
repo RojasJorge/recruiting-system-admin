@@ -11,7 +11,7 @@ const AddJob = _ => {
           <div className="umana-layout-cl__small ">
             <Sitebar />
           </div>
-          <div className="umana-layout-cl__flex bg-white">
+          <div className="umana-layout-cl__flex width-section bg-white">
             <FormJob />
           </div>
         </div>

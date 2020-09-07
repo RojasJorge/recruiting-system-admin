@@ -72,7 +72,8 @@ textarea.ant-input {
 }
 
 //Select
-.ant-select.ant-select-single {
+.ant-select.ant-select-single,
+.ant-select.ant-select-multiple {
   width: 100%;
   box-shadow: none;
   background: $color-white !important;
@@ -86,18 +87,28 @@ textarea.ant-input {
       box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
     }
   }
+  .ant-select-selection-search {
+    width: 90% !important;
+    min-height: 20px;
+  }
   .ant-select-selector {
     background: $color-white !important;
-    height: 45px;
+    min-height: 45px;
     box-shadow: none;
     border-radius: 0;
     color: $color-primary;
+    align-items: center;
     .ant-select-selection-search,
     .ant-select-selection-item {
       border-color: $color-blue !important;
       background: $color-white;
-      line-height: 45px;
+      line-height: 24px;
       color: $color-primary;
+      display: flex;
+      align-items: center;
+    }
+    .ant-select-selection-search {
+      min-height: 30px;
     }
     &:hover,
     &:focus,
@@ -123,4 +134,42 @@ textarea.ant-input {
     border-color: $color-blue !important;
     box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
   }
+}
+
+// radio button
+.ant-radio-group {
+  width: 100%;
+  display: flex;
+  .ant-radio-button-wrapper {
+    flex: 0 1 50%;
+    text-align: center;
+    color: $color-text;
+    background: $color-white;
+    &:hover {
+      background: $color-white;
+      color: $color-blue;
+      box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+    &.ant-radio-button-wrapper-checked {
+      background: $color-white;
+      border-color: $color-blue;
+      border-right-color: $color-blue;
+      color: $color-blue;
+      &:hover {
+        border-color: $color-blue;
+        box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+        background: $color-white;
+        color: $color-blue;
+      }
+    }
+  }
+}
+.ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+  border-right-color: $color-blue;
+}
+
+// slide
+.ant-slider-mark {
+  font-size: 11px;
+  color: $color-text;
 }
