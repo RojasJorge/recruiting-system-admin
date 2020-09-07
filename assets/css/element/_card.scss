@@ -5,7 +5,6 @@
   padding: 30px 20px;
   display: flex;
   flex-wrap: wrap;
-  background: $bg-medium;
   justify-content: center;
   @include bp(medium) {
     justify-content: flex-start;

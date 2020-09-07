@@ -52,11 +52,13 @@ const Card = props => {
           <Moment format="D MMM YYYY">{props.date.date}</Moment>
         </div>
       ) : null}
-      <Link href={props.link} passHref>
-        <a className="umana-card__link">
-          <i className="material-icons">arrow_forward</i>
-        </a>
-      </Link>
+      {props.link ? (
+        <Link href={props.link} passHref>
+          <a className="umana-card__link">
+            <i className="material-icons">arrow_forward</i>
+          </a>
+        </Link>
+      ) : null}
     </div>
   );
 };
