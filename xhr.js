@@ -20,6 +20,7 @@ export default () => {
     if (error && error.response && error.response.status === 401) {
       message.error("La sesión ha expirado");
       localStorage.removeItem("eToken");
+      localStorage.removeItem("uScopes");
       localStorage.removeItem("eUser");
 
       setTimeout(() => {
