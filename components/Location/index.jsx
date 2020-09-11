@@ -4,11 +4,13 @@ import countries from '../../data/countries.json';
 
 const { Option } = Select;
 
-const Locations = props => {
+const Locations = ({ value = {}, onChange }) => {
   const initialState = {
     country: '',
     department: '',
     city: '',
+    zone: '',
+    address: '',
   };
   const [location, setLocation] = useState(initialState);
 
@@ -17,6 +19,32 @@ const Locations = props => {
     municipalities: [],
   };
   const [data, setData] = useState(initialData);
+
+  const triggerChange = changedValue => {
+    if (onChange) {
+      onChange({
+        ...location,
+        ...value,
+        ...changedValue,
+      });
+    }
+  };
+  const change = Locations => {
+    return (value = Locations);
+  };
+
+  const LocationValue = {
+    country: location.country,
+    department: location.department,
+    city: location.city,
+    zone: location.zone,
+    address: location.address,
+  };
+
+  const LocationsProps = {
+    value: LocationValue,
+    onChange: change(Locations),
+  };
 
   const handlenChange = (e, type) => {
     if (type === 'country') {
@@ -32,46 +60,33 @@ const Locations = props => {
     if (type === 'city') {
       setLocation({ ...location, [type]: e });
     }
+    if (type === 'zone') {
+      setLocation({ ...location, [type]: e });
+    }
+    if (type === 'address') {
+      setLocation({ ...location, [type]: e });
+    }
+    triggerChange({ [type]: e });
   };
 
   return (
-    <div className="umana-form--group">
-      {props.title ? <h2 style={{ width: '100%' }}>{props.title}</h2> : null}
-      {props.subtitle ? (
-        <h4 style={{ width: '100%', paddingLeft: 10, color: '#666', marginBottom: 10 }}>
-          {props.subtitle}
-        </h4>
-      ) : null}
-      <br />
-      <Form.Item
-        label="País"
-        name="country"
-        rules={[
-          {
-            required: true,
-            message: 'El país es requerido.',
-          },
-        ]}
-      >
+    <div className="umana-form--group" style={{ paddingBottom: 0 }}>
+      <span className="form-item--sm ant-form-item">
+        <label>
+          <span className="required">*</span>País:
+        </label>
         <Select showSearch onChange={e => handlenChange(e, 'country')} value={location.country}>
           {countries.map((c, idx) => (
-            <Option key={c.id} value={c.id}>
+            <Select.Option key={c.id} value={c.id}>
               {c.country}
-            </Option>
+            </Select.Option>
           ))}
         </Select>
-      </Form.Item>
-
-      <Form.Item
-        label="Departamento"
-        name="department"
-        rules={[
-          {
-            required: true,
-            message: 'El departamento es requerido.',
-          },
-        ]}
-      >
+      </span>
+      <span className="form-item--sm ant-form-item">
+        <label>
+          <span className="required">*</span>Departamento:
+        </label>
         <Select
           showSearch
           onChange={e => handlenChange(e, 'department')}
@@ -80,23 +95,18 @@ const Locations = props => {
         >
           {data.departments
             ? data.departments.map((d, idx) => (
-                <Option key={d.department} value={d.department}>
+                <Select.Option key={d.department} value={d.department}>
                   {d.department}
-                </Option>
+                </Select.Option>
               ))
             : null}
         </Select>
-      </Form.Item>
-      <Form.Item
-        label="Municipio"
-        name="city"
-        rules={[
-          {
-            required: true,
-            message: 'El municipio es requerido.',
-          },
-        ]}
-      >
+      </span>
+      <span className="form-item--sm ant-form-item">
+        <label>
+          <span className="required">*</span>
+          Ciudad:
+        </label>
         <Select
           showSearch
           onChange={e => handlenChange(e, 'city')}
@@ -106,39 +116,25 @@ const Locations = props => {
         >
           {data.municipalities
             ? data.municipalities.map((c, idx) => (
-                <Option key={idx} value={c}>
+                <Select.Option key={idx} value={c}>
                   {c}
-                </Option>
+                </Select.Option>
               ))
             : null}
         </Select>
-      </Form.Item>
-      <Form.Item
-        className="form-item--sm"
-        label="Zona"
-        name="zone"
-        rules={[
-          {
-            required: true,
-            message: 'La zona es requerida.',
-          },
-        ]}
-      >
-        <InputNumber max={25} min={1} />
-      </Form.Item>
-      <Form.Item
-        className="form-item--fx"
-        label="Dirección"
-        name="address"
-        rules={[
-          {
-            required: true,
-            message: 'La dirección es requerida.',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+      </span>
+      <span className="form-item--sm ant-form-item">
+        <label>
+          <span className="required">*</span>Zona:
+        </label>
+        <InputNumber max={25} min={1} onChange={e => handlenChange(e, 'zone')} />
+      </span>
+      <span className="form-item--fx ant-form-item">
+        <label>
+          <span className="required">*</span>Address:
+        </label>
+        <Input onChange={e => handlenChange(e.target.value, 'address')} />
+      </span>
     </div>
   );
 };

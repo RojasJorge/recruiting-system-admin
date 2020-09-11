@@ -19,6 +19,15 @@ textarea.ant-input {
     box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
     color: $color-blue !important;
   }
+  &:disabled {
+    background: rgba($color-text, 0.1);
+    box-shadow: none;
+    &:hover {
+      background: rgba($color-text, 0.1) !important;
+      box-shadow: none !important;
+      border-color: rgba(108, 109, 96, 0.1) !important;
+    }
+  }
 }
 
 // Input Password
@@ -150,6 +159,11 @@ textarea.ant-input {
       color: $color-blue;
       box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
     }
+    &.ant-radio-button-wrapper-disabled {
+      &:hover {
+        box-shadow: none !important;
+      }
+    }
     &.ant-radio-button-wrapper-checked {
       background: $color-white;
       border-color: $color-blue;
@@ -161,9 +175,16 @@ textarea.ant-input {
         background: $color-white;
         color: $color-blue;
       }
+      &.ant-radio-button-wrapper-disabled {
+        border: 1px solid $color-blue !important;
+        &:hover {
+          box-shadow: none !important;
+        }
+      }
     }
   }
 }
+
 .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
   border-right-color: $color-blue;
 }
@@ -172,4 +193,49 @@ textarea.ant-input {
 .ant-slider-mark {
   font-size: 11px;
   color: $color-text;
+}
+
+// Checkbox
+.ant-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  label.ant-checkbox-wrapper {
+    width: calc(50% - 10px);
+    margin-left: 8px !important;
+  }
+  .ant-checkbox {
+    border-radius: 0;
+    .ant-checkbox-inner {
+      border-radius: 0;
+      &:hover {
+        border-color: $color-primary !important;
+      }
+    }
+    &.ant-checkbox-checked {
+      .ant-checkbox-inner {
+        background: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+  }
+}
+
+//slider
+.ant-slider.ant-slider-with-marks {
+  .ant-slider-step {
+    .ant-slider-dot-active {
+      border-color: $color-primary;
+      background: $color-primary;
+    }
+  }
+  .ant-slider-handle {
+    border-color: $color-primary !important;
+    &:hover {
+      border-color: $color-primary;
+    }
+  }
+  .ant-slider-track {
+    background-color: $color-primary;
+  }
 }

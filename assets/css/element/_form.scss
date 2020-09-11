@@ -124,8 +124,37 @@ form.ant-form.ant-form-horizontal {
       }
       &.form-item--fx {
         width: calc(66% - 20px);
-        margin-right: 10px;
       }
+      &.form-item--md {
+        width: 100%;
+        @include bp(xmedium) {
+          width: calc(50% - 20px);
+        }
+      }
+    }
+    .form-item--sm {
+      width: 100%;
+      @include bp(xmedium) {
+        width: calc(50% - 20px);
+      }
+      @include bp(large) {
+        width: calc(33.33% - 20px);
+      }
+    }
+    .form-item--md {
+      width: 100%;
+      @include bp(xmedium) {
+        width: calc(50% - 20px);
+      }
+    }
+    .form-item--xf {
+      width: 100%;
+      @include bp(xmedium) {
+        width: calc(66% - 20px);
+      }
+    }
+    .form-item--lg {
+      width: 100% !important;
     }
     .form-item--delete {
       position: absolute;
@@ -150,11 +179,40 @@ form.ant-form.ant-form-horizontal {
   }
 }
 
+label {
+  color: $color-text;
+  font-family: $font-primary;
+  span.required {
+    color: $color-error;
+    padding-right: 5px;
+  }
+}
+
 // space
 .ant-space.umana-form--group {
   border-top: 1px solid rgba($color-text, 0.2);
   &:first-child {
     border-top: 0;
+  }
+  &.no-wrap {
+    .ant-space-item {
+      &:nth-child(1) {
+        width: calc(33.33% - 20px);
+      }
+    }
+  }
+  &.academicLevel {
+    justify-content: center;
+    align-items: center;
+    .ant-space-item {
+      width: calc(50% - 20px);
+      &:nth-child(1) {
+        width: calc(50% - 20px);
+      }
+      &:nth-child(3) {
+        width: 50%;
+      }
+    }
   }
   .ant-space-item {
     width: calc(33.33% - 20px);

@@ -6,8 +6,8 @@ const AcademicLevels = () => {
   return (
     <Layout title="Niveles académicos">
       <>
-        <PageTitle title="Niveles Académicos" back="/admin/catalogs" />
-        <List type="career" title="Niveles Académicos" />
+        <PageTitle title="Profesiones" back="/admin/catalogs" />
+        <List type="career" title="Profesiones" />
       </>
     </Layout>
   );

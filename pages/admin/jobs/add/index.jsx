@@ -1,5 +1,5 @@
 import Layout from '../../../../views/Layout';
-import FormJob from '../../../../components/jobs/add';
+import FormJob from '../../../../components/jobs/Add';
 import { PageTitle, Sitebar } from '../../../../elements';
 
 const AddJob = _ => {
