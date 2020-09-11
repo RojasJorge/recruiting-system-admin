@@ -33,6 +33,9 @@ const UsersList = () => {
 	return (
 		<div className="row">
 			<div className="col-md-12">
+				{/*<pre>{JSON.stringify(users, false, 2)}</pre>*/}
+			</div>
+			<div className="col-md-12">
 				<h1>Users list</h1>
 			</div>
 			{/*<div>*/}

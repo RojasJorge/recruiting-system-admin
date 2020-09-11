@@ -8,6 +8,7 @@ export default defineAbility(can => {
       can('read', ['USERS', 'CATALOGS', 'SPECIAL_ALERTS'])
       can('view', ['LOGIN'])
       can('edit', ['USERS'])
+      can('view', ['ALL_MENUS'])
       break
 
     case 'candidate':

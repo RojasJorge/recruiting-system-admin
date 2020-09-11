@@ -28,11 +28,13 @@ export default {
         .then(response => actions.updateToken(response.data)),
   ),
   grantAccess: action((state, payload) => {
+    
     const token = payload.token
     delete payload.token
 
     /** Set localStorage */
     localStorage.setItem('uUser', JSON.stringify(payload))
+    localStorage.setItem('uScopes', JSON.stringify(payload.scopes))
     localStorage.setItem('uToken', token)
 
     /** Set global user info */
@@ -64,6 +66,7 @@ export default {
     state.user = null
     state.token = null
     localStorage.removeItem('uToken')
+    localStorage.removeItem('uScopes')
     localStorage.removeItem('uUser')
     Router.push('/')
   }),
