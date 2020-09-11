@@ -1,10 +1,14 @@
-import Layout from '../../../views/Layout'
-import Single from '../../../components/Companies/Single'
+import Layout from '../../../views/Layout';
+import Single from '../../../components/Companies/Single';
+import { PageTitle } from '../../../elements';
 
 const SingleCompany = _ => (
-  <Layout title="Single company">
-    <Single />
+  <Layout title="Perfil de la empresa">
+    <>
+      <PageTitle title="Perfil de la empresa" />
+      <Single />
+    </>
   </Layout>
-)
+);
 
-export default SingleCompany
+export default SingleCompany;

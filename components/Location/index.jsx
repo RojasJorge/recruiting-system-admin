@@ -7,7 +7,7 @@ const { Option } = Select;
 const Locations = ({ value = {}, onChange }) => {
   const initialState = {
     country: '',
-    department: '',
+    province: '',
     city: '',
     zone: '',
     address: '',
@@ -35,7 +35,7 @@ const Locations = ({ value = {}, onChange }) => {
 
   const LocationValue = {
     country: location.country,
-    department: location.department,
+    province: location.province,
     city: location.city,
     zone: location.zone,
     address: location.address,
@@ -49,11 +49,11 @@ const Locations = ({ value = {}, onChange }) => {
   const handlenChange = (e, type) => {
     if (type === 'country') {
       const dp = countries.find(c => c.id === e);
-      setData({ ...data, departments: dp.departments, municipalities: [] });
-      setLocation({ ...location, [type]: e, department: '', city: '' });
+      setData({ ...data, province: dp.departments, municipalities: [] });
+      setLocation({ ...location, [type]: e, province: '', city: '' });
     }
-    if (type === 'department') {
-      const mn = data.departments.find(d => d.department === e);
+    if (type === 'province') {
+      const mn = data.province.find(d => d.department === e);
       setData({ ...data, municipalities: mn ? mn.municipalities : [] });
       setLocation({ ...location, [type]: e, city: '' });
     }
@@ -89,12 +89,12 @@ const Locations = ({ value = {}, onChange }) => {
         </label>
         <Select
           showSearch
-          onChange={e => handlenChange(e, 'department')}
-          value={location.department}
+          onChange={e => handlenChange(e, 'province')}
+          value={location.province}
           disabled={!location.country ? true : false}
         >
-          {data.departments
-            ? data.departments.map((d, idx) => (
+          {data.province
+            ? data.province.map((d, idx) => (
                 <Select.Option key={d.department} value={d.department}>
                   {d.department}
                 </Select.Option>
@@ -112,7 +112,7 @@ const Locations = ({ value = {}, onChange }) => {
           onChange={e => handlenChange(e, 'city')}
           value={location.city}
           allowClear={true}
-          disabled={!location.country ? true : !location.department ? true : false}
+          disabled={!location.country ? true : !location.province ? true : false}
         >
           {data.municipalities
             ? data.municipalities.map((c, idx) => (

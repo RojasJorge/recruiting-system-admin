@@ -45,6 +45,13 @@ const FormJob = () => {
     getAcademic();
   }, []);
 
+  const add = async e => {
+    xhr()
+      .post(`/job`)
+      .then(resp => fill(resp.data))
+      .catch(err => console.log(err));
+  };
+
   function confirm(e) {
     console.log(e);
     message.success('Click on Yes');
@@ -57,6 +64,7 @@ const FormJob = () => {
 
   const onFinish = e => {
     console.log(e);
+    add(e);
   };
 
   return (

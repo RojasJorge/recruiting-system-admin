@@ -55,6 +55,17 @@ const AcademicLeves = ({ acLevel }) => {
                 </Form.Item>
                 <Form.Item
                   {...field}
+                  name={[field.name, 'studyNow']}
+                  fieldKey={[field.fieldKey, 'studyNow']}
+                  label="Se permiten estudiantes"
+                >
+                  <Radio.Group>
+                    <Radio.Button value={true}>Si</Radio.Button>
+                    <Radio.Button value={false}>No</Radio.Button>
+                  </Radio.Group>
+                </Form.Item>
+                <Form.Item
+                  {...field}
                   name={[field.name, 'logic']}
                   fieldKey={['logic' + field.fieldKey, 'logic']}
                   label="Condición Logica"
@@ -66,8 +77,8 @@ const AcademicLeves = ({ acLevel }) => {
                     }}
                     disabled={disabled >= field.fieldKey ? true : false}
                   >
-                    <Radio.Button value="true">O</Radio.Button>
-                    <Radio.Button value="false">Y</Radio.Button>
+                    <Radio.Button value={true}>O</Radio.Button>
+                    <Radio.Button value={false}>Y</Radio.Button>
                   </Radio.Group>
                 </Form.Item>
 
@@ -88,9 +99,8 @@ const AcademicLeves = ({ acLevel }) => {
                 type="dashed"
                 size="large"
                 onClick={() => {
-                  add();
+                  add({ studyNow: true });
                 }}
-                block
               >
                 <i className="material-icons">add</i> Agregar nivel académico
               </Button>

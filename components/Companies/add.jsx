@@ -1,12 +1,22 @@
 import { Form, Input, InputNumber, Button } from 'antd';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import Locations from '../Location';
-
+import xhr from '../../xhr';
+import ContactInfo from './add/contact';
 import { UploadAvatar } from '../../elements';
+
 const { TextArea } = Input;
 
 const FormCompany = props => {
+  const add = async e => {
+    xhr()
+      .post(`/company`, e)
+      .then(resp => fill(resp.data))
+      .catch(err => console.log(err));
+  };
   const onFinish = e => {
     console.log(e);
+    add(e);
   };
   return (
     <div className="col">
@@ -51,26 +61,22 @@ const FormCompany = props => {
           <Input size="large" />
         </Form.Item>
         <Form.Item name="employees" label="Números de empleos" className="form-item--sm">
-          <InputNumber size="large" />
+          <Input size="large" />
         </Form.Item>
         <Form.Item name="experience" label="Año de fundación" className="form-item--sm">
-          <InputNumber size="large" />
+          <Input size="large" />
         </Form.Item>
         <Form.Item name="website" label="Sitio Web">
           <Input size="large" />
         </Form.Item>
-        <Locations />
+        <Form.Item name="location" label="Ubicación">
+          <Locations />
+        </Form.Item>
         <div className="umana-form--group">
           <h2 style={{ width: '100%' }}>Información de contacto</h2>
           <br />
-          <Form.Item name="name-contact" label="Nombre de contacto" className="form-item--lg">
-            <Input size="large" />
-          </Form.Item>
-          <Form.Item name="email-contact" label="Correo Electrónico" className="form-item--md">
-            <Input size="large" />
-          </Form.Item>
-          <Form.Item name="phone-contact" label="Teléfono" className="form-item--md">
-            <Input size="large" />
+          <Form.Item name="contact" className="form-item--lg">
+            <ContactInfo />
           </Form.Item>
         </div>
         <Form.Item className="umana-form--footer">
