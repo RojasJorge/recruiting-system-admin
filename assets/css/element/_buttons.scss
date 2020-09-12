@@ -370,11 +370,12 @@
     }
   }
   &.ant-btn-circle-green,
-  &.ant-btn-cicle-orange {
+  &.ant-btn-circle-orange {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     padding: 0;
+    background: $color-orange;
     i {
       width: 100%;
       line-height: 30px;

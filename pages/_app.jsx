@@ -1,10 +1,11 @@
-import { StoreProvider } from 'easy-peasy'
-import { ConfigProvider } from 'antd'
-import { AbilityContext } from '../components/Can'
-import store from '../store'
-import ability from '../ability'
-import esEs from 'antd/lib/locale-provider/es_ES'
-import '../assets/css/global.scss'
+import { StoreProvider } from 'easy-peasy';
+import { ConfigProvider } from 'antd';
+import { AbilityContext } from '../components/Can';
+import store from '../store';
+import ability from '../ability';
+import esEs from 'antd/lib/locale-provider/es_ES';
+
+import '../assets/css/global.scss';
 
 const WebApp = ({ Component, pageProps }) => (
   <StoreProvider store={store}>
@@ -14,6 +15,6 @@ const WebApp = ({ Component, pageProps }) => (
       </ConfigProvider>
     </AbilityContext.Provider>
   </StoreProvider>
-)
+);
 
-export default WebApp
+export default WebApp;

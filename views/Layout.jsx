@@ -45,7 +45,7 @@ const Layout = ({ children, title, className }) => {
         <title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
       </Head>
       <MainHeader layout="is-login" />
-      <div className="app--contents umana is-login">
+      <div className={`app--contents umana is-login ${className}`}>
         <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>{children}</div>
       </div>
       <PageLoader active={mloading} />

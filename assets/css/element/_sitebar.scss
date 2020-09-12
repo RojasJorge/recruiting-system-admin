@@ -2,6 +2,7 @@
   padding-right: 20px;
   position: relative;
   max-width: 350px;
+  margin-bottom: 20px;
   @include element(header) {
     width: 100%;
     display: flex;

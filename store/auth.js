@@ -1,15 +1,15 @@
-import { action, thunk } from 'easy-peasy'
-import { message } from 'antd'
-import Router from 'next/router'
-import axios from 'axios'
+import { action, thunk } from 'easy-peasy';
+import { message } from 'antd';
+import Router from 'next/router';
+import axios from 'axios';
 
 export default {
   user: null,
   token: null,
   loading: false,
   updateToken: action((state, payload) => {
-    state.token = payload
-    localStorage.setItem('uToken', payload)
+    state.token = payload;
+    localStorage.setItem('uToken', payload);
   }),
   refreshToken: thunk(
     async (actions, payload) =>
@@ -21,25 +21,24 @@ export default {
           },
         })
         .catch(error => {
-          localStorage.removeItem('uToken')
-          localStorage.removeItem('uUser')
-          this.state ? (this.state.USER.auth.token = '') : null
+          localStorage.removeItem('uToken');
+          localStorage.removeItem('uUser');
+          this.state ? (this.state.USER.auth.token = '') : null;
         })
         .then(response => actions.updateToken(response.data)),
   ),
   grantAccess: action((state, payload) => {
-    
-    const token = payload.token
-    delete payload.token
+    const token = payload.token;
+    delete payload.token;
 
     /** Set localStorage */
-    localStorage.setItem('uUser', JSON.stringify(payload))
-    localStorage.setItem('uScopes', JSON.stringify(payload.scopes))
-    localStorage.setItem('uToken', token)
+    localStorage.setItem('uUser', JSON.stringify(payload));
+    localStorage.setItem('uScopes', JSON.stringify(payload.scope));
+    localStorage.setItem('uToken', token);
 
     /** Set global user info */
-    state.user = payload
-    state.token = token
+    state.user = payload;
+    state.token = token;
   }),
 
   /**
@@ -54,20 +53,20 @@ export default {
           },
         })
         .then(response => {
-          actions.grantAccess(response.data)
-          if (Router.pathname === '/login') Router.push('/admin')
+          actions.grantAccess(response.data);
+          if (Router.pathname === '/login') Router.push('/admin');
         })
         .catch(error => {
-          console.log(error)
-          message.error('Ah ocurrido un error, intente de nuevo.')
+          console.log(error);
+          message.error('Ah ocurrido un error, intente de nuevo.');
         }),
   ),
   logout: action(state => {
-    state.user = null
-    state.token = null
-    localStorage.removeItem('uToken')
-    localStorage.removeItem('uScopes')
-    localStorage.removeItem('uUser')
-    Router.push('/')
+    state.user = null;
+    state.token = null;
+    localStorage.removeItem('uToken');
+    localStorage.removeItem('uScopes');
+    localStorage.removeItem('uUser');
+    Router.push('/');
   }),
-}
+};

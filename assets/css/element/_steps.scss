@@ -1,0 +1,16 @@
+.ant-steps {
+  width: 100%;
+  max-width: 350px;
+  padding-right: 30px;
+  .ant-steps-item {
+    &.ant-steps-item-process,
+    &.ant-steps-item-active {
+      background: $color-white;
+      box-shadow: $shadow;
+    }
+    .ant-steps-item-content {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

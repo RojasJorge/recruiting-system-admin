@@ -1,6 +1,7 @@
 @import '~antd/dist/antd.css';
 @import '~bootstrap/dist/css/bootstrap-grid.min.css';
 @import './shared/variables';
+
 @import 'structure';
 @import 'grids';
 @import 'menus';
@@ -20,6 +21,7 @@
 @import './element/modale';
 @import './element/avatar';
 @import './element/sitebar';
+@import './element/steps';
 
 // #Pages
 @import './pages/home/home';
