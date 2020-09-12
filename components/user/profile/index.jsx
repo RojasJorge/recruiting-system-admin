@@ -34,10 +34,9 @@ const UserProfile = _ => {
 	const steps = useStoreState(state => state.profile.steps);
 	const update = useStoreActions(actions => actions.profile.update);
 	
+	/** Local state */
 	const [current, switchCurrent] = useState(5);
-	
 	const [avatarSrc, setAvatarSrc] = useState('');
-	
 	const onChange = o => switchCurrent(o);
 	
 	const status = o => {

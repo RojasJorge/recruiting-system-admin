@@ -1,4 +1,5 @@
 import {Form, DatePicker, InputNumber, Select, Divider} from "antd";
+import dayjs from "dayjs";
 
 const {Item} = Form;
 const {Option} = Select;
@@ -36,7 +37,7 @@ const religion = [{
 	slug: "catholic"
 }];
 
-const General = _ => {
+const General = ({birthday}) => {
 	
 	return (
 		<>

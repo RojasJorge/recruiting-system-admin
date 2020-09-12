@@ -36,19 +36,19 @@ const MainMenu = _ => {
       <div className="umana-header">
         <UmanaLogo />
         <div className="umana-main-nav">
-          {user.scopes[0] === 'umana' ? (
+          {user.scope[0] === 'umana' ? (
             <>
               <RootNav user={user} direction="horizontal" theme="root" />
               <UserDropdown user={user} scope="root" logout={signOut} />
             </>
           ) : null}
-          {user.scopes[0] === 'company' ? (
+          {user.scope[0] === 'company' ? (
             <>
               <CompanyNav user={user} direction="horizontal" theme="company" />
               <UserDropdown user={user} scope="company" logout={signOut} />
             </>
           ) : null}
-          {user.scopes[1] === 'candidate' ? (
+          {user.scope[1] === 'candidate' ? (
             <>
               <TalentNav user={user} direction="horizontal" theme="talento" />
               <UserDropdown user={user} scope="talento" logout={signOut} />

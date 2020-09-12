@@ -1,6 +1,6 @@
-import {Form, Input} from "antd";
+import {Form, Input} from "antd"
 
-const {Item} = Form;
+const {Item} = Form
 
 const Names = _ => {
 	

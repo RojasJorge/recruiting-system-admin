@@ -22,7 +22,7 @@ const Contact = ({phones, setPhones}) => {
 					name="email"
 					rules={[{message: "Es requerido que ingrese un email/válido.", type: "email"}]}
 				>
-					<Input defaultValue={user.email} size="large"/>
+					<Input size="large"/>
 				</Item>
 			</div>
 			<Divider orientation="right">Números telefónicos</Divider>

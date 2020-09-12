@@ -1,11 +1,11 @@
 import {useState} from "react";
 import {useStoreActions} from "easy-peasy";
 import PropTypes from "prop-types";
-import {EnterOutlined, PlusCircleOutlined, DeleteOutlined} from "@ant-design/icons";
-import {Form, Input, Select, Switch, DatePicker, InputNumber, Button, Divider, Alert} from "antd";
+import {DeleteOutlined, EnterOutlined, PlusCircleOutlined, PlusOutlined, MinusCircleOutlined} from "@ant-design/icons";
+import {Alert, Button, DatePicker, Divider, Form, Input, InputNumber, Select, Switch} from "antd";
 import "cleave.js/dist/addons/cleave-phone.gt";
 import Cleave from "cleave.js/react";
-import {isEmpty, filter, pull} from "lodash";
+import {filter, isEmpty} from "lodash";
 import Boss from "./Boss";
 
 const {Item} = Form;
@@ -24,7 +24,7 @@ const Experience = ({count, experience, experiences, addExperiences}) => {
 	
 	/** On form success*/
 	const onFinish = fields => {
-	
+		console.log('onFinish Experiences:', fields)
 	};
 	
 	return (
@@ -37,7 +37,7 @@ const Experience = ({count, experience, experiences, addExperiences}) => {
 						<div className="col-md-12" style={{textAlign: "right"}}>
 							<Button
 								type="link"
-								icon={<DeleteOutlined />}
+								icon={<DeleteOutlined/>}
 								onClick={() => {
 									// console.log(`id: ${_experience.id} - _id: ${_experience._id} - count: ${count}`)
 									addExperiences(filter(experiences, o => {

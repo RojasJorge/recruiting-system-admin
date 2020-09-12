@@ -6,7 +6,8 @@ import React from 'react'
 import axios from 'axios'
 
 export default {
-  list: [],
+  career: [],
+  academis_level: [],
   total: 0,
   loading: false,
   /**
@@ -14,7 +15,8 @@ export default {
    */
   get: thunk(async (actions, payload) => {
     actions.switchLoading(true)
-    await axios.get(`${process.env.API_URL}/${payload.type}`, {
+    // console.log('Get Collections action:', payload)
+    await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${payload.type}?page=1&offset=1000`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': payload.token
@@ -25,7 +27,7 @@ export default {
         actions.switchLoading(false)
       })
       .then(response => {
-        typeof response !== "undefined" ? actions.fill(response.data) : null
+        typeof response !== "undefined" ? actions.fill({data: response.data, type: payload.type.replace('-', '_')}) : null
         actions.switchLoading(false)
       })
   }),
@@ -58,19 +60,24 @@ export default {
    * Filter the collection
    */
 
-  fill: action((state, payload) => {
-    let items = map(payload.items, o => {
-      o.title = React.createElement('div', {
-        className: 'item--name',
-        children: [
-          React.createElement('span', {
-            key: 'name'
-          }, o.name), <Button key="edit" icon={<EditOutlined />} type="link" />
-        ]
-      });
-
-      return o;
-    });
+  fill: action((state, {data, type}) => {
+    // let items = map(data.items, o => {
+    //   o.title = React.createElement('div', {
+    //     className: 'item--name',
+    //     children: [
+    //       React.createElement('span', {
+    //         key: 'name'
+    //       }, o.name), <Button key="edit" icon={<EditOutlined />} type="link" />
+    //     ]
+    //   });
+    //
+    //   return o;
+    // });
+    
+    let items = map(data.items, o => {
+      delete o.owner
+      return o
+    })
 
     let _data = []
     let _childs = []
@@ -101,7 +108,7 @@ export default {
       })
     }, [])
 
-    state.list = orderBy(
+    state[type] = orderBy(
       map(items, o => {
         if (!isEmpty(o.children)) {
           o.children = orderBy(o.children, ["name"], ["asc"])
@@ -112,7 +119,7 @@ export default {
       ["asc"]
     )
     
-    state.total = payload.total
+    state.total = data.total
   }),
   switchLoading: action((state, payload) => {
     state.loading = payload
