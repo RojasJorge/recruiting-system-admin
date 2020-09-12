@@ -1,0 +1,44 @@
+[
+  {
+    "company_single": [
+      {
+        "title": "Editar perfil",
+        "icon": "edit",
+        "url": "/admin/companies/edit/",
+        "class": "main-item"
+      }
+    ]
+  },
+  {
+    "company_add": [
+      {
+        "title": "Volver",
+        "icon": "replay",
+        "url": "/companies",
+        "class": "main-item"
+      },
+      {
+        "title": "Información de contacto",
+        "icon": "contacts",
+        "url": "#contact-info",
+        "class": "general-item"
+      }
+    ]
+  },
+  {
+    "company_edit": [
+      {
+        "title": "Ver Pelfil",
+        "icon": "replay",
+        "url": "/companies",
+        "class": "main-item"
+      },
+      {
+        "title": "Información de contacto",
+        "icon": "contacts",
+        "url": "#contact-info",
+        "class": "general-item"
+      }
+    ]
+  }
+]

@@ -43,6 +43,12 @@ h2 {
   font-size: 32px;
   font-weight: 300;
 }
+h5 {
+  font-size: 18px;
+  color: $color-text;
+  font-weight: 300;
+  margin-bottom: 7px;
+}
 
 .app {
   position: relative;
@@ -262,4 +268,19 @@ h2 {
 
 .is-login {
   background: $bg-blue;
+}
+
+.umana-section-contenct {
+  padding: 20px 20px 0;
+  width: 100%;
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  h5 {
+    margin-bottom: 0;
+  }
+  p {
+    margin-bottom: 20px;
+  }
 }

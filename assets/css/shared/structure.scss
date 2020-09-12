@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 /* Container */
 .umana-container {
@@ -182,7 +182,7 @@
       top: 10px;
       right: 5px;
       border-radius: 20px;
-      background-image: url("../assets/plus.png");
+      background-image: url('../assets/plus.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: 15px;
@@ -257,14 +257,14 @@
       }
       #fileUp {
         background-color: rgba($bg-blue, 0.3);
-        background-image: url("../assets/upload-blue.png");
+        background-image: url('../assets/upload-blue.png');
         background-size: 40px;
         background-position: center center;
         background-repeat: no-repeat;
         transition: 0.3 ease-in-out;
         &:hover {
           background-color: $color-blue;
-          background-image: url("../assets/upload-white.png");
+          background-image: url('../assets/upload-white.png');
         }
       }
     }
@@ -412,4 +412,10 @@
   .ant-pagination.ant-table-pagination {
     padding: 10px 30px;
   }
+}
+
+.umana-section-contenct {
+  padding: 20px;
+  display: block;
+  width: 100%;
 }

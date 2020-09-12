@@ -6,26 +6,21 @@ import xhr from '../../xhr';
 import { Card } from '../../elements';
 
 const Companies = () => {
-  const data = useStoreState(state => state.collections);
-  const fill = useStoreActions(actions => actions.collections.fill);
+  const [missing, isMissing] = useState(false);
   const [company, setCompany] = useState([]);
-  /** Get collection */
-  const get = () =>
+  const data = useStoreState(state => state.companies);
+  const fill = useStoreActions(actions => actions.companies.fill);
+
+  useEffect(() => {
     xhr()
-      // .get(`/${type}?pager=${JSON.stringify({ page: 1, limit: 1000 })}`)
       .get(`/company`)
-      .then(resp => fill(resp.data))
-      .catch(err => console.log(err));
-
-  useEffect(() => {
-    setCompany(data.list);
-  }, [data.list]);
-
-  useEffect(() => {
-    get();
+      .then(res => {
+        res.type = false; /** This param (if true) loads a collection, false => single object */
+        fill(res);
+      })
+      .catch(err => isMissing(true));
   }, []);
 
-  console.log(company);
   const style = {
     display: 'flex',
     flexDirection: 'column',
@@ -35,10 +30,10 @@ const Companies = () => {
     fontSize: 24,
     textDecoration: 'none',
   };
-  if (company && company.length > 0) {
+  if (data.company && data.company.items && data.company.items.length > 0) {
     return (
       <div className="umana-list">
-        {company.map((e, idx) => (
+        {data.company.items.map((e, idx) => (
           <Card
             key={idx}
             title={e.name}

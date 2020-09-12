@@ -9,7 +9,7 @@ const AddCompany = _ => {
         <PageTitle title="Agregar Empresa" back="/admin/companies" />
         <div className="umana-layout-cl">
           <div className="umana-layout-cl__small ">
-            <Sitebar />
+            <Sitebar data={[{ icon: 'edit', url: '/admin/companies/editar' }]} />
           </div>
           <div className="umana-layout-cl__flex bg-white">
             <FormCompany />

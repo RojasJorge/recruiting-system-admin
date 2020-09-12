@@ -28,24 +28,9 @@ const FormJob = () => {
   }, [data.list]);
 
   useEffect(() => {
-    collectionsActions.get({type: 'career', token: localStorage.getItem('uToken')})
-    collectionsActions.get({type: 'academic-level', token: localStorage.getItem('uToken')})
-    
+    collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
+    collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
   }, []);
-  /** Get collection */
-  const getAcademic = () =>
-    xhr()
-      .get(`/academic-level`)
-      .then(resp => fill(resp.data))
-      .catch(err => console.log(err));
-
-  // useEffect(() => {
-  //   setAcademic(data.list);
-  // }, [data.list]);
-
-  // useEffect(() => {
-  //   getAcademic();
-  // }, []);
 
   const add = async e => {
     xhr()
@@ -71,7 +56,6 @@ const FormJob = () => {
 
   return (
     <div>
-      <pre>{JSON.stringify({career: data.career, academic_levels: data.academic_level}, false, 2)}</pre>
       <Form
         scrollToFirstError={true}
         onFinish={onFinish}

@@ -75,33 +75,6 @@ export default {
         return;
       });
   }),
-  // /**
-  //  * Update sigle or batch
-  //  */
-  // add: thunk(async (actions, payload) => {
-  //   actions.switchLoading(true)
-
-  //   const token = payload.token
-  //   const type = payload.type
-  //   delete payload.token
-  //   delete payload.type
-
-  //   /** Send request */
-  //   await axios.push(`${process.env.API_URL}/${type}`, JSON.stringify(payload), {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': token
-  //       },
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //       actions.switchLoading(false)
-  //     })
-  //     .then(response => {
-  //       actions.switchLoading(false)
-  //       return
-  //     })
-  // }),
 
   /**
    * Filter the colection

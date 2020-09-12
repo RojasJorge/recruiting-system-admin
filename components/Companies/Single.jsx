@@ -3,7 +3,6 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useRouter } from 'next/router';
 import { Sitebar } from '../../elements';
 import xhr from '../../xhr';
-import { Alert } from 'antd';
 
 const Single = _ => {
   const [missing, isMissing] = useState(false);
@@ -20,30 +19,55 @@ const Single = _ => {
       })
       .catch(err => isMissing(true));
   }, []);
+
+  const header = {
+    title: data.company && data.company.name ? data.company.name : 'Empresa',
+    icon: 'location_city',
+    action: 'edit',
+    titleAction: 'Editar perfil',
+    urlAction:
+      '/admin/companies/edit/' + data && data.company && data.company.id ? data.company.id : 'null',
+  };
+
+  // console.log(data.company.id);
+
   return (
-    // <>
-    //   {
-    //     missing
-    //       ? <Alert type="warning" message="No encontrado." description="La entidad solicitada no existe en la base de datos." showIcon />
-    //       : null
-    //   }
-    //   <pre>{JSON.stringify(data.company, false, 2)}</pre>
-    // </>
     <div className="umana-layout-cl">
       <div className="umana-layout-cl__small ">
-        <Sitebar />
+        <Sitebar header={header} icon="type" />
       </div>
       <div className="umana-layout-cl__flex bg-white">
-        <div className="section-title">
-          <h1>{data.company && data.company.name ? data.company.name : 'nombre de la empresa'}</h1>
-        </div>
-        <h5>Acerca de la empresa</h5>
-        <p>
-          {data.company && data.company.description
-            ? data.company.description
-            : 'Descripción de la empresa'}
-        </p>
-        <pre>{JSON.stringify(data.company, false, 2)}</pre>
+        {data && data.company ? (
+          <div className="umana-section-contenct">
+            <div className="section-title">
+              <h1>
+                {data.company && data.company.name ? data.company.name : 'nombre de la empresa'}
+              </h1>
+            </div>
+            <h5>Acerca de la empresa</h5>
+            <p>
+              {data.company && data.company.description
+                ? data.company.description
+                : 'Descripción de la empresa'}
+            </p>
+            {data.company.location ? (
+              <>
+                <h5>Ubicación</h5>
+                <p>
+                  {`${data.company.location.address}, zona ${data.company.location.zone},`}
+                  <br></br> {`${data.company.location.city}, ${data.company.location.country}`}
+                </p>
+              </>
+            ) : null}
+            <h5>Sitio web</h5>
+            <p>{data.company.website}</p>
+            <h5>Fundación</h5>
+            <p>{data.company.experience}</p>
+            <h5>Números de empleados</h5>
+            <p>{data.company.employees}</p>
+            {/* <pre>{JSON.stringify(data.company, false, 2)}</pre> */}
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -77,7 +77,7 @@ const Locations = ({ value = {}, onChange }) => {
         </label>
         <Select showSearch onChange={e => handlenChange(e, 'country')} value={location.country}>
           {countries.map((c, idx) => (
-            <Select.Option key={c.id} value={c.id}>
+            <Select.Option key={c.id} value={c.country}>
               {c.country}
             </Select.Option>
           ))}
@@ -129,9 +129,9 @@ const Locations = ({ value = {}, onChange }) => {
         </label>
         <InputNumber max={25} min={1} onChange={e => handlenChange(e, 'zone')} />
       </span>
-      <span className="form-item--fx ant-form-item">
+      <span className="form-item--md ant-form-item">
         <label>
-          <span className="required">*</span>Address:
+          <span className="required">*</span>Dirección:
         </label>
         <Input onChange={e => handlenChange(e.target.value, 'address')} />
       </span>
