@@ -20,7 +20,11 @@ const FormCompany = props => {
   const allSet = data => {
     openNotification('bottomRight');
     setTimeout(() => {
-      Router.replace(`/admin/companies/${data}`);
+      // Router.replace(`/admin/companies/${data}`);
+      Router.replace({
+        pathname: '/admin/companies/',
+        query: { id: data },
+      });
     }, 500);
   };
   const add = async e => {
@@ -31,15 +35,30 @@ const FormCompany = props => {
       })
       .catch(err => console.log(err));
   };
+  const update = async e => {
+    xhr()
+      .put(`/company`, JSON.stringify(e))
+      .then(resp => {
+        allSet(resp.data);
+      })
+      .catch(err => console.log(err));
+  };
   const onFinish = e => {
-    add(e);
+    if (props.action === 'edit') {
+      const id = { id: props.id };
+      const newObj = Object.assign(e, id);
+      console.log(newObj);
+      update(newObj);
+    } else {
+      add(e);
+    }
   };
 
   return (
-    <div className="col">
+    <>
       <h2 style={{ width: '100%' }}>Información general</h2>
       <UploadAvatar type="company" />
-      <Form scrollToFirstError={true} onFinish={onFinish}>
+      <Form scrollToFirstError={true} onFinish={onFinish} initialValues={props.data}>
         <Form.Item
           rules={[
             {
@@ -102,16 +121,20 @@ const FormCompany = props => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </>
   );
 };
 
 FormCompany.propTypes = {
   data: PropTypes.object,
+  action: PropTypes.string,
+  id: PropTypes.string,
 };
 
 FormCompany.defaultProps = {
   data: {},
+  action: 'add',
+  id: '',
 };
 
 export default FormCompany;

@@ -53,6 +53,8 @@ const List = ({ type, title }) => {
     get();
   }, []);
 
+  console.log(data);
+
   return (
     <>
       <div className="row align-items-center">

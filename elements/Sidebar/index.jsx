@@ -14,6 +14,7 @@ const Sitebar = props => {
       setCollapsed(true);
     }
   };
+
   return (
     <div className="umana-sitebar">
       {/* <Button type="link" size="large" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
@@ -26,23 +27,30 @@ const Sitebar = props => {
           </div>
           <div className="header-content">
             <h4>{props.header.title}</h4>
-            <Link href={props.header.urlAction} passHref>
-              <a>
-                {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
-              </a>
-            </Link>
+            {props.header.urlDinamic ? (
+              <Link
+                href={`${props.header.urlAction}${
+                  props.header.urlParam ? props.header.urlParam : '[id]'
+                }`}
+                as={`${props.header.urlAction}${props.header.urlDinamic}`}
+              >
+                <a>
+                  {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
+                </a>
+              </Link>
+            ) : (
+              <Link href={props.header.urlAction} passHref>
+                <a>
+                  {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
+                </a>
+              </Link>
+            )}
           </div>
         </div>
       ) : null}
 
-      <Menu
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        mode="inline"
-        theme="light"
-        inlineCollapsed={collapsed}
-      >
-        {props.data
+      <Menu mode="inline" theme="light" inlineCollapsed={collapsed}>
+        {!isEmpty(props.data)
           ? props.data.map((e, idx) => (
               <Menu.Item key={idx} icon={<i className="material-icons">{e.icon}</i>}>
                 <Link href={e.url} passHref>

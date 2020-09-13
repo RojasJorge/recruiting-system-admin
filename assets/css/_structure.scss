@@ -53,7 +53,7 @@ h5 {
 .app {
   position: relative;
   background: #ffffff;
-  height: 100%;
+  height: auto;
 
   &--tools {
     margin-top: 24px;
@@ -84,7 +84,10 @@ h5 {
 
 .umana {
   width: 100%;
-  padding-top: 80px;
+  padding-top: 60px;
+  @include bp(xmedium) {
+    padding-top: 80px;
+  }
   &.login,
   &.signup {
     padding-top: 80px;
@@ -96,14 +99,18 @@ h5 {
     left: 0;
     right: 0;
     z-index: 100;
+    height: 60px;
     &.is-login {
-      background: linear-gradient(
-        to bottom,
-        rgba(245, 252, 254, 1) 0%,
-        rgba(245, 252, 254, 1) 60%,
-        rgba(245, 252, 254, 0.5) 80%,
-        rgba(245, 252, 254, 0) 100%
-      );
+      background: $color-white;
+      @include bp(xmedium) {
+        background: linear-gradient(
+          to bottom,
+          rgba(245, 252, 254, 1) 0%,
+          rgba(245, 252, 254, 1) 60%,
+          rgba(245, 252, 254, 0.5) 80%,
+          rgba(245, 252, 254, 0) 100%
+        );
+      }
     }
   }
 }
@@ -228,7 +235,7 @@ h5 {
 
 .umana-layout-cl {
   display: flex;
-  flex-direction: wrap;
+  flex-wrap: wrap;
   padding: 30px 0;
   &.bg-color {
     background: linear-gradient(
@@ -240,10 +247,13 @@ h5 {
     );
   }
   @include element(flex) {
-    width: 66%;
     padding: 30px 20px;
-    box-shadow: $shadow;
+    width: 100%;
+    @include bp(xmedium) {
+      width: 66%;
+    }
     &.bg-white {
+      box-shadow: $shadow;
       background: $color-white;
     }
     &.width-section {
@@ -253,7 +263,10 @@ h5 {
     }
   }
   @include element(small) {
-    width: 33%;
+    width: 100%;
+    @include bp(xmedium) {
+      width: 33%;
+    }
     &.bg-white {
       background: $color-white;
     }
@@ -262,6 +275,29 @@ h5 {
     width: 50%;
     &.bg-white {
       background: $color-white;
+    }
+  }
+  .umana-layout--content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    padding-right: 20px;
+    h2 {
+      color: $color-green;
+    }
+    p {
+      max-width: 300px;
+    }
+  }
+  .umana-layout--img {
+    width: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
   }
 }
@@ -287,5 +323,19 @@ h5 {
   }
   p {
     margin-bottom: 20px;
+  }
+  .section-avatar {
+    width: 100%;
+    margin-top: -100px;
+    margin-bottom: 20px;
+    text-align: center;
+    .ant-avatar.ant-avatar-circle.ant-avatar-icon {
+      margin: 0 auto;
+      background: $color-green;
+      i {
+        font-size: 40px;
+        line-height: 120px;
+      }
+    }
   }
 }

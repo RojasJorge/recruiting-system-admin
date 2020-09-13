@@ -37,7 +37,8 @@ const Companies = () => {
           <Card
             key={idx}
             title={e.name}
-            link={`/admin/companies/${e.id}`}
+            link={`/admin/companies/`}
+            dinamicLink={e.id}
             description={e.description}
           />
         ))}

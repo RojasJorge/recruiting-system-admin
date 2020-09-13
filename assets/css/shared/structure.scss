@@ -418,4 +418,8 @@
   padding: 20px;
   display: block;
   width: 100%;
+  .section-avatar {
+    width: 100%;
+    transform: translateY(-100px);
+  }
 }

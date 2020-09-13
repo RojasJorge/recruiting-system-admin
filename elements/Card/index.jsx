@@ -53,11 +53,19 @@ const Card = props => {
         </div>
       ) : null}
       {props.link ? (
-        <Link href={props.link} passHref>
-          <a className="umana-card__link">
-            <i className="material-icons">arrow_forward</i>
-          </a>
-        </Link>
+        props.dinamicLink ? (
+          <Link href={`${props.link}[id]`} as={`${props.link}${props.dinamicLink}`}>
+            <a className="umana-card__link">
+              <i className="material-icons">arrow_forward</i>
+            </a>
+          </Link>
+        ) : (
+          <Link href={props.link} passHref>
+            <a className="umana-card__link">
+              <i className="material-icons">arrow_forward</i>
+            </a>
+          </Link>
+        )
       ) : null}
     </div>
   );

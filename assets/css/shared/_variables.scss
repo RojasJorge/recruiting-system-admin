@@ -140,8 +140,8 @@ $gk-layout-padding: (
   padding-left: 10px;
   padding-right: 10px;
   @include bp(small) {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   @include bp(medium) {
     padding-left: 20px;

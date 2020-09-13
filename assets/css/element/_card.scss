@@ -13,7 +13,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 60px 20px;
+    padding: 0;
+    .umana-layout-cl {
+      padding: 0;
+      margin-top: -150px;
+    }
   }
 }
 

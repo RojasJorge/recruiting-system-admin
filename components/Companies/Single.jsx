@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useRouter } from 'next/router';
+import { Avatar } from 'antd';
 import { Sitebar } from '../../elements';
 import xhr from '../../xhr';
 
@@ -21,21 +22,42 @@ const Single = _ => {
   }, []);
 
   const header = {
-    title: data.company && data.company.name ? data.company.name : 'Empresa',
+    title: data && data.company && data.company.name ? data.company.name : 'Empresa',
     icon: 'location_city',
     action: 'edit',
     titleAction: 'Editar perfil',
-    urlAction: '/admin/companies/edit/' + router.query.id,
+    urlAction: '/admin/companies/edit/',
+    urlDinamic: router.query.id,
   };
+
+  const menuList = [
+    {
+      icon: 'add_circle_outline',
+      title: 'Agregar plaza',
+      url: '/admin/jobs/add',
+    },
+    {
+      icon: 'remove_red_eye',
+      title: 'Ver plazas',
+      url: '/admin/jobs',
+    },
+  ];
 
   return (
     <div className="umana-layout-cl">
       <div className="umana-layout-cl__small ">
-        <Sitebar header={header} icon="type" />
+        <Sitebar header={header} data={menuList} />
       </div>
       <div className="umana-layout-cl__flex bg-white">
         {data && data.company ? (
           <div className="umana-section-contenct">
+            <div className="section-avatar">
+              <Avatar
+                icon={<i className="material-icons">location_city</i>}
+                src={data.company.avatar}
+                size={120}
+              />
+            </div>
             <div className="section-title">
               <h1>
                 {data.company && data.company.name ? data.company.name : 'nombre de la empresa'}
