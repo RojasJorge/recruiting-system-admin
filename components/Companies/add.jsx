@@ -1,23 +1,41 @@
-import { Form, Input, InputNumber, Button } from 'antd';
-import { useStoreState, useStoreActions } from 'easy-peasy';
+import { Form, Input, notification, Button } from 'antd';
+import PropTypes from 'prop-types';
 import Locations from '../Location';
 import xhr from '../../xhr';
 import ContactInfo from './add/contact';
+import Router from 'next/router';
 import { UploadAvatar } from '../../elements';
 
 const { TextArea } = Input;
 
 const FormCompany = props => {
+  const openNotification = placement => {
+    notification.info({
+      message: `Confirmación`,
+      description: 'La empresa ha sido creada con éxito',
+      placement,
+    });
+  };
+
+  const allSet = data => {
+    openNotification('bottomRight');
+    setTimeout(() => {
+      Router.replace(`/admin/companies/${data}`);
+    }, 500);
+  };
   const add = async e => {
     xhr()
       .post(`/company`, e)
-      .then(resp => fill(resp.data))
+      .then(resp => {
+        allSet(resp.data);
+      })
       .catch(err => console.log(err));
   };
   const onFinish = e => {
-    console.log(e);
     add(e);
   };
+
+  console.log('new data', props.data);
   return (
     <div className="col">
       <h2 style={{ width: '100%' }}>Información general</h2>
@@ -87,6 +105,14 @@ const FormCompany = props => {
       </Form>
     </div>
   );
+};
+
+FormCompany.propTypes = {
+  data: PropTypes.object,
+};
+
+FormCompany.defaultProps = {
+  data: {},
 };
 
 export default FormCompany;

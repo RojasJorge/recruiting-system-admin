@@ -25,11 +25,10 @@ const Single = _ => {
     icon: 'location_city',
     action: 'edit',
     titleAction: 'Editar perfil',
-    urlAction:
-      '/admin/companies/edit/' + data && data.company && data.company.id ? data.company.id : 'null',
+    urlAction: '/admin/companies/edit/' + router.query.id,
   };
 
-  // console.log(data.company.id);
+  console.log(data);
 
   return (
     <div className="umana-layout-cl">

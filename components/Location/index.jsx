@@ -48,7 +48,7 @@ const Locations = ({ value = {}, onChange }) => {
 
   const handlenChange = (e, type) => {
     if (type === 'country') {
-      const dp = countries.find(c => c.id === e);
+      const dp = countries.find(c => c.country === e);
       setData({ ...data, province: dp.departments, municipalities: [] });
       setLocation({ ...location, [type]: e, province: '', city: '' });
     }
