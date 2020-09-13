@@ -11,7 +11,6 @@ const AddCompany = _ => {
   const data = useStoreState(state => state.companies);
   const fill = useStoreActions(actions => actions.companies.fill);
   const [missing, isMissing] = useState(false);
-  const [company, setCompany] = useState({});
 
   useEffect(() => {
     xhr()
@@ -21,7 +20,8 @@ const AddCompany = _ => {
         fill(res);
       })
       .catch(err => isMissing(true));
-  }, [data]);
+  }, []);
+
   const header = {
     title: data && data.name ? data.name : 'Empresa',
     icon: 'location_city',
@@ -30,7 +30,6 @@ const AddCompany = _ => {
     urlAction: '/admin/companies/' + router.query.id,
   };
 
-  console.log('data..', data);
   return (
     <Layout title="Editar Empresa">
       <>

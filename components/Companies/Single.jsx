@@ -28,8 +28,6 @@ const Single = _ => {
     urlAction: '/admin/companies/edit/' + router.query.id,
   };
 
-  console.log(data);
-
   return (
     <div className="umana-layout-cl">
       <div className="umana-layout-cl__small ">

@@ -35,7 +35,6 @@ const FormCompany = props => {
     add(e);
   };
 
-  console.log('new data', props.data);
   return (
     <div className="col">
       <h2 style={{ width: '100%' }}>Información general</h2>
