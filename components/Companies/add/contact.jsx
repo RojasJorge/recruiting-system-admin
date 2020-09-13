@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { Input, InputNumber, Select } from 'antd';
+import { Input } from 'antd';
+import { isEmpty } from 'lodash';
 
 const ContactInfo = ({ value = {}, onChange }) => {
-  const initialState = {
+  let initialState = {
     name: '',
     email: '',
     phone: '',
   };
+  if (!_.isEmpty(value)) {
+    initialState = value;
+  }
+
   const [info, setinfo] = useState(initialState);
 
   const initialData = {
@@ -48,15 +53,15 @@ const ContactInfo = ({ value = {}, onChange }) => {
     <div className="umana-form--group" style={{ paddingBottom: 0 }}>
       <span className="form-item--md ant-form-item">
         <label>Nombre:</label>
-        <Input onChange={e => handlenChange(e.target.value, 'name')} />
+        <Input onChange={e => handlenChange(e.target.value, 'name')} value={info.name} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>Teléfono:</label>
-        <Input onChange={e => handlenChange(e.target.value, 'phone')} />
+        <Input onChange={e => handlenChange(e.target.value, 'phone')} value={info.phone} />
       </span>
       <span className="form-item--lg ant-form-item">
         <label>Correo Electrónico:</label>
-        <Input onChange={e => handlenChange(e.target.value, 'email')} />
+        <Input onChange={e => handlenChange(e.target.value, 'email')} value={info.email} />
       </span>
     </div>
   );

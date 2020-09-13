@@ -1,17 +1,22 @@
 import { useState } from 'react';
-import { Form, Input, InputNumber, Select } from 'antd';
+import { Input, InputNumber, Select } from 'antd';
 import countries from '../../data/countries.json';
+import { isEmpty } from 'lodash';
 
 const { Option } = Select;
 
 const Locations = ({ value = {}, onChange }) => {
-  const initialState = {
+  let initialState = {
     country: '',
     province: '',
     city: '',
     zone: '',
     address: '',
   };
+  console.log('location value', value);
+  if (!_.isEmpty(value)) {
+    initialState = value;
+  }
   const [location, setLocation] = useState(initialState);
 
   const initialData = {
@@ -87,12 +92,7 @@ const Locations = ({ value = {}, onChange }) => {
         <label>
           <span className="required">*</span>Departamento:
         </label>
-        <Select
-          showSearch
-          onChange={e => handlenChange(e, 'province')}
-          value={location.province}
-          disabled={!location.country ? true : false}
-        >
+        <Select showSearch onChange={e => handlenChange(e, 'province')} value={location.province} disabled={!location.country ? true : false}>
           {data.province
             ? data.province.map((d, idx) => (
                 <Select.Option key={d.department} value={d.department}>
@@ -107,13 +107,7 @@ const Locations = ({ value = {}, onChange }) => {
           <span className="required">*</span>
           Ciudad:
         </label>
-        <Select
-          showSearch
-          onChange={e => handlenChange(e, 'city')}
-          value={location.city}
-          allowClear={true}
-          disabled={!location.country ? true : !location.province ? true : false}
-        >
+        <Select showSearch onChange={e => handlenChange(e, 'city')} value={location.city} allowClear={true} disabled={!location.country ? true : !location.province ? true : false}>
           {data.municipalities
             ? data.municipalities.map((c, idx) => (
                 <Select.Option key={idx} value={c}>
@@ -127,13 +121,13 @@ const Locations = ({ value = {}, onChange }) => {
         <label>
           <span className="required">*</span>Zona:
         </label>
-        <InputNumber max={25} min={1} onChange={e => handlenChange(e, 'zone')} />
+        <InputNumber max={25} min={1} onChange={e => handlenChange(e, 'zone')} value={location.zone} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>
           <span className="required">*</span>Dirección:
         </label>
-        <Input onChange={e => handlenChange(e.target.value, 'address')} />
+        <Input onChange={e => handlenChange(e.target.value, 'address')} value={location.address} />
       </span>
     </div>
   );
