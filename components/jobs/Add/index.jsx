@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Button, Select, Tooltip, Radio, Slider, Checkbox } from 'antd';
+import { Form, Button } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 
@@ -9,8 +9,10 @@ import GeneralJob from './general';
 import Requirements from './requirements';
 import LocationJob from './locations';
 import xhr from '../../../xhr';
+import { useRouter } from 'next/router';
 
 const FormJob = () => {
+  const router = useRouter();
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
   const [career, setCareer] = useState([]);
@@ -34,24 +36,18 @@ const FormJob = () => {
 
   const add = async e => {
     xhr()
-      .post(`/job`)
+      .post(`/job`, e)
       .then(resp => fill(resp.data))
       .catch(err => console.log(err));
   };
 
-  function confirm(e) {
-    console.log(e);
-    message.success('Click on Yes');
-  }
-
-  function cancel(e) {
-    console.log(e);
-    message.error('Click on No');
-  }
-
   const onFinish = e => {
-    console.log(e);
-    add(e);
+    const id = { company_id: router.query.id };
+    const fixObj = null;
+    const newObj = Object.assign(e, id);
+
+    console.log(newObj);
+    add(newObj);
   };
 
   return (
@@ -73,7 +69,7 @@ const FormJob = () => {
       >
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
-          <GeneralJob career={data.careers} />
+          <GeneralJob career={data.career} />
         </div>
         <div className="umana-form--section" id="location">
           <h2 style={{ width: '100%', margin: 0 }}>Ubicación</h2>
@@ -90,7 +86,7 @@ const FormJob = () => {
         </div>
         <div className="umana-form--section" id="academic-level">
           <h2 style={{ width: '100%', margin: 0 }}>Niveles Académicos</h2>
-          <AcademicLevels acLevel={data.academic_levels} />
+          <AcademicLevels acLevel={data.academic_level} />
         </div>
         <div className="umana-form--section" id="compensation">
           <h2 style={{ width: '100%', margin: 0 }}>Compensaciones</h2>
