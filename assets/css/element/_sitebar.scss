@@ -3,6 +3,8 @@
   position: relative;
   max-width: 350px;
   margin-bottom: 20px;
+  position: sticky;
+  top: 100px;
   @include element(header) {
     margin-bottom: 20px;
     width: 100%;

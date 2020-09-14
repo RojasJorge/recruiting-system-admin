@@ -37,7 +37,8 @@ const AddCompany = _ => {
     {
       icon: 'add_circle_outline',
       title: 'Agregar plaza',
-      url: '/admin/jobs/add',
+      url: '/admin/jobs/add/',
+      id: router.query.id,
     },
     {
       icon: 'arrow_back',
@@ -55,11 +56,7 @@ const AddCompany = _ => {
             <Sitebar header={header} data={menuList} />
           </div>
           <div className="umana-layout-cl__flex bg-white">
-            <FormCompany
-              data={data && data.company ? data.company : {}}
-              action="edit"
-              id={router.query.id}
-            />
+            <FormCompany data={data && data.company ? data.company : {}} action="edit" id={router.query.id} />
           </div>
         </div>
       </>

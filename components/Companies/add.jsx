@@ -16,9 +16,19 @@ const FormCompany = props => {
       placement,
     });
   };
+  const user = JSON.parse(localStorage.getItem('uUser'));
+  // console.log(user.id);
 
-  const allSet = data => {
-    openNotification('bottomRight');
+  const allSet = (data, type) => {
+    if (type && type === 'edit') {
+      notification.info({
+        message: `Confirmación`,
+        description: 'La empresa ha sido actualizada con éxito',
+        placement: 'bottomRight',
+      });
+    } else {
+      openNotification('bottomRight');
+    }
     setTimeout(() => {
       // Router.replace(`/admin/companies/${data}`);
       Router.replace({
@@ -33,19 +43,31 @@ const FormCompany = props => {
       .then(resp => {
         allSet(resp.data);
       })
-      .catch(err => console.log(err));
+      .catch(err =>
+        notification.info({
+          message: `Error`,
+          description: 'Ha ocurrido un error, por favor intentelo más tarde',
+          placement: 'bottomRight',
+        }),
+      );
   };
   const update = async e => {
     xhr()
       .put(`/company`, JSON.stringify(e))
       .then(resp => {
-        allSet(resp.data);
+        allSet(resp.data, 'edit');
       })
-      .catch(err => console.log(err));
+      .catch(err =>
+        notification.info({
+          message: `Error`,
+          description: 'Ha ocurrido un error, por favor intentelo más tarde',
+          placement: 'bottomRight',
+        }),
+      );
   };
   const onFinish = e => {
     if (props.action === 'edit') {
-      const id = { id: props.id };
+      const id = { id: props.id, uid: user.id };
       const newObj = Object.assign(e, id);
       console.log(newObj);
       update(newObj);
@@ -83,11 +105,7 @@ const FormCompany = props => {
         >
           <TextArea rows={4} />
         </Form.Item>
-        <Form.Item
-          name="typeBusness"
-          label="Tipo de negocio de la empresa"
-          className="form-item--md"
-        >
+        <Form.Item name="typeBusiness" label="Tipo de negocio de la empresa" className="form-item--md">
           <Input size="large" />
         </Form.Item>
         <Form.Item name="socialreason" label="Razón Social" className="form-item--md">
