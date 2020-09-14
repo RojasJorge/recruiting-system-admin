@@ -28,6 +28,21 @@
         font-size: 18px;
         color: $color-text;
       }
+      .ant-btn.ant-btn-link {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        padding: 0;
+        span {
+          text-decoration: none;
+        }
+        i {
+          margin-left: 5px;
+        }
+      }
       a {
         color: $color-primary;
         text-transform: uppercase;

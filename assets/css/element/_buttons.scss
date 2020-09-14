@@ -94,6 +94,10 @@
   }
   &.ant-btn-green {
     background: $color-green;
+    color: $color-white;
+    a {
+      color: $color-white;
+    }
   }
   &.ant-btn-sm {
     height: auto;
@@ -387,6 +391,11 @@
   }
   &.ant-btn-cicle-orange {
     background: $color-orange;
+  }
+  &.ant-btn-green.ant-btn-sm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   &.ant-btn-dashed {
     border: 1px dashed $color-text;

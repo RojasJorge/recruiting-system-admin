@@ -8,7 +8,7 @@ const AddJob = _ => {
     icon: 'location_city',
     action: 'replay',
     titleAction: 'Volver',
-    urlAction: '/admin/companies',
+    urlAction: 'back',
   };
   return (
     <Layout title="Agregar Plaza">
