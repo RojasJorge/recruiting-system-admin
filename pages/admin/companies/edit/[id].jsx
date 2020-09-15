@@ -4,7 +4,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useRouter } from 'next/router';
 import FormCompany from '../../../../components/Companies/add';
 import { PageTitle, Sitebar } from '../../../../elements';
-import xhr from '../../../../xhr';
+// import xhr from '../../../../xhr';
 
 const AddCompany = _ => {
   const [missing, isMissing] = useState(false);

@@ -26,16 +26,20 @@ const FormCompany = props => {
         description: 'La empresa ha sido actualizada con éxito',
         placement: 'bottomRight',
       });
+      setTimeout(() => {
+        // Router.replace(`/admin/companies/${data}`);
+        Router.push(`/admin/companies/[id]`, `/admin/companies/${props.id}`);
+      }, 500);
     } else {
       openNotification('bottomRight');
+      setTimeout(() => {
+        // Router.replace(`/admin/companies/${data}`);
+        Router.replace({
+          pathname: '/admin/companies/',
+          query: { id: data },
+        });
+      }, 500);
     }
-    setTimeout(() => {
-      // Router.replace(`/admin/companies/${data}`);
-      Router.replace({
-        pathname: '/admin/companies/',
-        query: { id: data },
-      });
-    }, 500);
   };
   const add = async e => {
     xhr()
@@ -53,24 +57,23 @@ const FormCompany = props => {
   };
   const update = async e => {
     xhr()
-      .put(`/company`, JSON.stringify(e))
+      .put(`/company/${props.id}`, JSON.stringify(e))
       .then(resp => {
+        console.log('respo......', resp);
         allSet(resp.data, 'edit');
       })
-      .catch(err =>
+      .catch(err => {
+        console.log(err);
         notification.info({
           message: `Error`,
           description: 'Ha ocurrido un error, por favor intentelo más tarde',
           placement: 'bottomRight',
-        }),
-      );
+        });
+      });
   };
   const onFinish = e => {
     if (props.action === 'edit') {
-      const id = { id: props.id, uid: user.id };
-      const newObj = Object.assign(e, id);
-      console.log(newObj);
-      update(newObj);
+      update(e);
     } else {
       add(e);
     }
