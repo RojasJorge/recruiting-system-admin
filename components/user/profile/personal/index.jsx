@@ -18,7 +18,9 @@ const Personal = ({update}) => {
 	/** Global state */
 	const {
 		profile: {
-			personal
+			fields: {
+				personal
+			}
 		},
 		
 	} = useStoreState(state => state.auth.user)
@@ -36,6 +38,11 @@ const Personal = ({update}) => {
 	
 	const updateGlobal = useStoreActions(actions => actions.profile.update)
 	
+	/**
+	 * Update user on store
+	 */
+	const updateStoreUser = useStoreActions(actions => actions.auth.updateStoreUser)
+	
 	/** Location handler */
 	const [country, selectCountry] = useState({
 		data: []
@@ -51,33 +58,34 @@ const Personal = ({update}) => {
 		},
 	})
 	
-	const onFinish = values => {
-		/** Set module locale values */
+	const onFinish = fields => {
+		
+		updateStoreUser(fields)
 		
 		/** Update global */
-		delay(() => updateGlobal({
-			field: "personal",
-			value: {
-				...values,
-				...{
-					phones,
-					country: location.country,
-					city: location.city,
-					province: {
-						name: location.province.department,
-						slug: slugify(location.province.department)
-					},
-				}
-			}
-		}), 1000)
+		// delay(() => updateGlobal({
+		// 	field: "personal",
+		// 	value: {
+		// 		...values,
+		// 		...{
+		// 			phones,
+		// 			country: location.country,
+		// 			city: location.city,
+		// 			province: {
+		// 				name: location.province.department,
+		// 				slug: slugify(location.province.department)
+		// 			},
+		// 		}
+		// 	}
+		// }), 1000)
 	}
 	
-	const onFinishFailed = _ => {
-		isDanger(true);
-		setTimeout(() => {
-			isDanger(false);
-		}, 3000)
-	}
+	// const onFinishFailed = _ => {
+	// 	isDanger(true);
+	// 	setTimeout(() => {
+	// 		isDanger(false);
+	// 	}, 3000)
+	// }
 	
 	return (
 		<>
@@ -89,7 +97,8 @@ const Personal = ({update}) => {
 			</div>
 			<Form
 				name="basic"
-				className="animated fadeInUp row"
+				className="row"
+				onFinish={onFinish}
 				initialValues={{
 					name: personal.name,
 					lastname: personal.lastname,
@@ -107,8 +116,7 @@ const Personal = ({update}) => {
 					marital_status: personal.marital_status,
 					children: personal.children
 				}}
-				onFinish={onFinish}
-				onFinishFailed={onFinishFailed}
+				// onFinishFailed={onFinishFailed}
 			>
 				<Names/>
 				<Location

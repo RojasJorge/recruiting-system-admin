@@ -10,7 +10,9 @@ const UserDropdown = props => {
           {props.scope === 'talento' ? <Avatar icon="user" size={50} /> : null}
           <div>
             {props.user.name ? (
-              <strong> {`${props.user.name}  ${props.user.lastname}`}</strong>
+              <Link href="/admin/profile">
+                <strong> {`${props.user.name}  ${props.user.lastname}`}</strong>
+              </Link>
             ) : (
               'Perfil'
             )}

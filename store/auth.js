@@ -69,4 +69,13 @@ export default {
     localStorage.removeItem('uUser');
     Router.push('/');
   }),
+  
+  
+  /**
+   * Update user state
+   */
+  updateStoreUser: action((state, payload) => {
+    console.log('updateStoreUser | Payload:', payload)
+    return
+  })
 };

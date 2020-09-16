@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import router from 'next/router'
 import { Steps, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+// import { UserOutlined } from '@ant-design/icons';
 import Personal from './personal';
 import Documents from './Documents';
 import About from './personal/About';
@@ -45,9 +46,14 @@ const UserProfile = _ => {
   const update = useStoreActions(actions => actions.profile.update);
 
   /** Local state */
-  const [current, switchCurrent] = useState(5);
+  console.log('Current path step:', router)
+  const [current, switchCurrent] = useState(parseInt(router.query.current, 10) || 0);
   const [avatarSrc, setAvatarSrc] = useState('');
-  const onChange = o => switchCurrent(o);
+  const onChange = o => {
+  
+    switchCurrent(o)
+    router.push(`${router.router.pathname}?current=${o}`)
+  }
 
   const status = o => {
     let s = 'wait';
