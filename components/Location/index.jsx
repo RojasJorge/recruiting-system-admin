@@ -13,7 +13,7 @@ const Locations = ({ value = {}, onChange }) => {
     zone: '',
     address: '',
   };
-  console.log('location value', value);
+
   if (!_.isEmpty(value)) {
     initialState = value;
   }

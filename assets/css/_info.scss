@@ -1,0 +1,55 @@
+/*
+info
+*/
+
+.umana-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: $color-white;
+  box-shadow: $shadow;
+  padding: 20px 10px;
+  @include bp(large) {
+    padding: 30px 20px;
+  }
+  @include element(item) {
+    width: 100%;
+    // padding: 10px;
+    // padding-top: 0;
+    margin: 10px;
+    margin-top: 0px;
+    label {
+      font-size: 16px;
+      line-height: 18px;
+      color: rgba(52, 52, 52, 0.5);
+    }
+    p {
+      font-size: 16px;
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+    &.item-sm {
+      width: 100%;
+      @include bp(medium) {
+        width: calc(50% - 20px);
+      }
+      @include bp(xmedium) {
+        width: calc(33.33% - 20px);
+      }
+    }
+    &.item-fx {
+      width: auto;
+    }
+    &.item-md {
+      width: 100%;
+      @include bp(medium) {
+        width: calc(50% - 20px);
+      }
+    }
+    &.item-lg {
+      width: 100%;
+    }
+  }
+}

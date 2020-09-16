@@ -1,7 +1,7 @@
 import { Form, Button, notification } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
-
+import PropTypes from 'prop-types';
 import Languages from '../../Languages';
 import Compensation from './compensation';
 import AcademicLevels from '../../Academic';
@@ -10,10 +10,24 @@ import Requirements from './requirements';
 import LocationJob from './locations';
 import xhr from '../../../xhr';
 import router from 'next/router';
+import { isEmpty } from 'lodash';
 
-const FormJob = () => {
+const FormJob = props => {
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
+  let initialState = {
+    locationState: 'public',
+    interviewPlace: 'office',
+    gender: 'indifferent',
+    vehicle: 'indifferent',
+    type_license: 'indifferent',
+    age: [18, 60],
+    isBranch: false,
+    company_state: 'public',
+  };
+  if (!isEmpty(props.data)) {
+    initialState = props.data;
+  }
 
   useEffect(() => {
     collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
@@ -59,21 +73,7 @@ const FormJob = () => {
 
   return (
     <div>
-      <Form
-        scrollToFirstError={true}
-        onFinish={onFinish}
-        className="umana-form umana-max-witdh"
-        initialValues={{
-          locationState: 'public',
-          interviewPlace: 'office',
-          gender: 'indifferent',
-          vehicle: 'indifferent',
-          type_license: 'indifferent',
-          age: [18, 60],
-          isBranch: false,
-          company_state: 'public',
-        }}
-      >
+      <Form scrollToFirstError={true} onFinish={onFinish} className="umana-form umana-max-witdh" initialValues={initialState}>
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
           <GeneralJob career={data.career} />
@@ -109,6 +109,14 @@ const FormJob = () => {
       </Form>
     </div>
   );
+};
+
+FormJob.propTypes = {
+  data: PropTypes.object,
+};
+
+FormJob.defaultProps = {
+  data: {},
 };
 
 export default FormJob;

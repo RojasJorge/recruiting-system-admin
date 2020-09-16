@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useRouter } from 'next/router';
+import xhr from '../../xhr';
 import { Avatar } from 'antd';
 import { Sitebar } from '../../elements';
-import xhr from '../../xhr';
 
 const Single = _ => {
   const [missing, isMissing] = useState(false);
