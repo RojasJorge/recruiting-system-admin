@@ -1,13 +1,12 @@
-import {
-  createStore
-} from "easy-peasy";
+import { createStore } from 'easy-peasy';
 
-import auth from "./auth";
-import users from "./users";
-import profile from "./profile";
-import tools from "./tools";
-import collections from "./collections";
-import companies from "./companies";
+import auth from './auth';
+import users from './users';
+import profile from './profile';
+import tools from './tools';
+import collections from './collections';
+import companies from './companies';
+import jobs from './jobs';
 
 const store = createStore({
   auth,
@@ -16,6 +15,7 @@ const store = createStore({
   tools,
   collections,
   companies,
+  jobs,
 });
 
 export default store;

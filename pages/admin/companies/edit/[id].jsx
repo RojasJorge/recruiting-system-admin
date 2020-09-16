@@ -43,7 +43,8 @@ const AddCompany = _ => {
     {
       icon: 'arrow_back',
       title: 'Ver plazas',
-      url: '/admin/jobs',
+      url: '/admin/jobs/',
+      id: router.query.id,
     },
   ];
 

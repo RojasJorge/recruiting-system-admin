@@ -11,26 +11,26 @@ import UserMenu from './talentoMenu';
 const MainMenu = _ => {
   const isMain = /\/[a-z]/i;
   const [current, setCurrent] = useState('/');
-  
+
   const user = useStoreState(state => state.auth.user);
   const token = useStoreState(state => state.auth.token);
   const signOut = useStoreActions(actions => actions.auth.logout);
-  
+
   const handleClick = e => {
     if (e.key === 'logout') {
       return;
     }
-    
+
     /** Switch changes. */
     setCurrent(e.key);
     Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
   };
-  
+
   useEffect(() => {
     // console.log('MainMenu.jsx|user', user, token)
     setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''));
   }, []);
-  
+
   return user ? (
     <>
       <div className="umana-header">
@@ -48,7 +48,7 @@ const MainMenu = _ => {
               <UserDropdown user={user} scope="company" logout={signOut} />
             </>
           ) : null}
-          {user.scope[1] === 'candidate' ? (
+          {user.scope[0] === 'candidate' ? (
             <>
               <TalentNav user={user} direction="horizontal" theme="talento" />
               <UserDropdown user={user} scope="talento" logout={signOut} />

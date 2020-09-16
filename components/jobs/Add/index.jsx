@@ -43,7 +43,8 @@ const FormJob = () => {
 
   const onFinish = e => {
     const id = { company_id: router.query.id };
-    const fixObj = null;
+    const age = { min: e.age[0], max: e.age[1] };
+    e.age = age;
     const newObj = Object.assign(e, id);
 
     console.log(newObj);

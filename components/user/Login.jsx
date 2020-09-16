@@ -69,11 +69,7 @@ const Login = _ => {
                 >
                   <Input size="large" />
                 </Form.Item>
-                <Form.Item
-                  rules={[{ required: true, message: 'Contraseña es requerida.' }]}
-                  name="password"
-                  label="Contraseña"
-                >
+                <Form.Item rules={[{ required: true, message: 'Contraseña es requerida.' }]} name="password" label="Contraseña">
                   <Input.Password size="large" />
                 </Form.Item>
                 <Button size="large" htmlType="submit" type="primary" loading={loading}>

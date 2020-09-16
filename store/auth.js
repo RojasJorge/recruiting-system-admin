@@ -54,7 +54,7 @@ export default {
         })
         .then(response => {
           actions.grantAccess(response.data);
-          if (Router.pathname === '/login') Router.push('/admin');
+          if (Router.pathname === '/login' || Router.pathname === '/signup') Router.push('/admin');
         })
         .catch(error => {
           console.log(error);

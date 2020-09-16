@@ -12,18 +12,6 @@ const { Step } = Steps;
 
 const SignupSteps = _ => {
   /** Submit handler */
-  const onSubmit = e => {
-    e.preventDefault();
-    console.log(
-      e.target.name.value,
-      e.target.lastname.value,
-      e.target.email.value,
-      e.target.phone.value,
-      e.target.birthday.value,
-      'password',
-      e.target.password.value,
-    );
-  };
 
   const [current, switchCurrent] = useState(0);
   const [role, setRole] = useState('');
@@ -55,7 +43,7 @@ const SignupSteps = _ => {
         break;
 
       default:
-        return <SignupForm />;
+        return <SignupForm scope={role} />;
         break;
     }
   };
@@ -85,12 +73,7 @@ const SignupSteps = _ => {
                   <h1>Registrase</h1>
                 </div>
                 <div className="umana-signup-login-subtitle">
-                  <Steps
-                    className="col-md-12"
-                    direction="horizontal"
-                    size="large"
-                    current={current}
-                  >
+                  <Steps className="col-md-12" direction="horizontal" size="large" current={current}>
                     <Step key={0} title="¿Qué estás buscando?" status={status.stepOne} />
                     <Step key={1} title="Crear cuenta" status={status.stepTwo} />
                   </Steps>

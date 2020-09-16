@@ -40,7 +40,8 @@ const Single = _ => {
     {
       icon: 'remove_red_eye',
       title: 'Ver plazas',
-      url: '/admin/jobs',
+      url: '/admin/jobs/',
+      id: router.query.id,
     },
   ];
 
