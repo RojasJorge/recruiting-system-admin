@@ -1,4 +1,4 @@
-import { Form, Button } from 'antd';
+import { Form, Button, notification } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 
@@ -9,36 +9,43 @@ import GeneralJob from './general';
 import Requirements from './requirements';
 import LocationJob from './locations';
 import xhr from '../../../xhr';
-import { useRouter } from 'next/router';
+import router from 'next/router';
 
 const FormJob = () => {
-  const router = useRouter();
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
-  const [career, setCareer] = useState([]);
-  const [academic, setAcademic] = useState(true);
-  /** Get collection */
-  const get = () =>
-    xhr()
-      // .get(`/${type}?pager=${JSON.stringify({ page: 1, limit: 1000 })}`)
-      .get(`/career`)
-      .then(resp => fill(resp.data))
-      .catch(err => console.log(err));
-
-  useEffect(() => {
-    setCareer(data.list);
-  }, [data.list]);
 
   useEffect(() => {
     collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
     collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
   }, []);
 
+  const allSet = e => {
+    console.log(e);
+    notification.info({
+      message: `Confirmación`,
+      description: 'La plaza ha sido publicada con éxito',
+      placement: 'bottomRight',
+    });
+    setTimeout(() => {
+      router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+    }, 500);
+  };
+
   const add = async e => {
     xhr()
-      .post(`/job`, e)
-      .then(resp => fill(resp.data))
-      .catch(err => console.log(err));
+      .post(`/job`, JSON.stringify(e))
+      .then(resp => {
+        allSet(resp.data);
+        // fill(resp.data);
+      })
+      .catch(err => {
+        notification.info({
+          message: `Error`,
+          description: 'Ha ocurrido un error, por favor inténtalo más tarde',
+          placement: 'bottomRight',
+        });
+      });
   };
 
   const onFinish = e => {
@@ -47,7 +54,6 @@ const FormJob = () => {
     e.age = age;
     const newObj = Object.assign(e, id);
 
-    console.log(newObj);
     add(newObj);
   };
 

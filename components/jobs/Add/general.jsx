@@ -208,7 +208,7 @@ const GeneralJob = ({ career }) => {
           },
         ]}
         name="description"
-        label="Descripción de la empresa"
+        label="Descripción de la plaza"
       >
         <TextArea rows={4} />
       </Form.Item>
