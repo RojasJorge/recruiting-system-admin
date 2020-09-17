@@ -10,13 +10,45 @@ const AddJob = _ => {
     titleAction: 'Volver',
     urlAction: 'back',
   };
+  const menuItem = [
+    {
+      icon: 'turned_in',
+      title: 'Información General',
+      url: '#maininfo',
+    },
+    {
+      icon: 'edit_location',
+      title: 'Ubicación',
+      url: '#location',
+    },
+    {
+      icon: 'grade',
+      title: 'Requerimientos',
+      url: '#requirements',
+    },
+    {
+      icon: 'language',
+      title: 'Idiomas',
+      url: '#languages',
+    },
+    {
+      icon: 'school',
+      title: 'Nivel Académicos',
+      url: '#academic-level',
+    },
+    {
+      icon: 'account_balance_wallet',
+      title: 'Compensación y beneficios',
+      url: '#compensation',
+    },
+  ];
   return (
     <Layout title="Agregar Plaza">
       <>
         <PageTitle title="Agregar Plaza" back="/admin/jobs" />
         <div className="umana-layout-cl">
           <div className="umana-layout-cl__small ">
-            <Sitebar header={header} />
+            <Sitebar header={header} data={menuItem} />
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
             <FormJob />

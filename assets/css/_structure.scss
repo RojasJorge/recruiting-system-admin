@@ -102,7 +102,10 @@ h5 {
     height: 60px;
     &.is-login {
       background: $color-white;
-      height: 80px;
+      height: 60px;
+      @include bp(xmedium) {
+        height: 80px;
+      }
       @include bp(xmedium) {
         background: linear-gradient(to bottom, rgba(245, 252, 254, 1) 0%, rgba(245, 252, 254, 1) 80%, rgba(245, 252, 254, 0.5) 95%, rgba(245, 252, 254, 0) 100%);
       }
@@ -325,5 +328,15 @@ h5 {
         line-height: 120px;
       }
     }
+  }
+}
+
+.umana-subtitle {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  button.ant-btn {
+    margin: 0 0 0 auto;
+    margin-left: auto;
   }
 }

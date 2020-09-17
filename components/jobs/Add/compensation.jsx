@@ -36,18 +36,6 @@ const Compensation = props => {
       <Form.Item label="Salario" className="form-item--md" name="salary">
         <Salary />
       </Form.Item>
-
-      <Form.Item
-        label="Confidencialidad de la empresa"
-        className="form-item--lg"
-        name="company_state"
-        help="Seleccionar si desea que la información de la empresa sea pública"
-      >
-        <Radio.Group>
-          <Radio.Button value="public">Pública</Radio.Button>
-          <Radio.Button value="confidential">Privada</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
     </>
   );
 };

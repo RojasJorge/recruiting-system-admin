@@ -1,4 +1,4 @@
-import { Form, Button, notification } from 'antd';
+import { Form, Button, notification, Radio, Select } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -15,6 +15,19 @@ import { isEmpty } from 'lodash';
 const FormJob = props => {
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
+  const companies = useStoreState(state => state.companies);
+  const fill = useStoreActions(actions => actions.companies.fill);
+
+  useEffect(() => {
+    xhr()
+      .get(`/company`)
+      .then(res => {
+        res.type = false; /** This param (if true) loads a collection, false => single object */
+        fill(res);
+      })
+      .catch(err => isMissing(true));
+  }, []);
+
   let initialState = {
     locationState: 'public',
     interviewPlace: 'office',
@@ -98,6 +111,38 @@ const FormJob = props => {
         <div className="umana-form--section" id="compensation">
           <h2 style={{ width: '100%', margin: 0 }}>Compensaciones</h2>
           <Compensation />
+        </div>
+        <div className="umana-form--section" id="company">
+          <h2 style={{ width: '100%', margin: 0 }}>Información de Empresa</h2>
+          {props.company && props.company === true ? (
+            <Form.Item
+              label="¿De qué empresa es esta plaza?"
+              className="form-item--lg"
+              name="company_id"
+              rules={[
+                {
+                  required: true,
+                  message: 'La empresa es requerida',
+                },
+              ]}
+            >
+              <Select>
+                {companies.company && companies.company.items
+                  ? companies.company.items.map((e, idx) => (
+                      <Select.Option key={idx} value={e.id}>
+                        {e.name}
+                      </Select.Option>
+                    ))
+                  : null}
+              </Select>
+            </Form.Item>
+          ) : null}
+          <Form.Item label="Confidencialidad de la empresa" className="form-item--lg" name="company_state" help="Seleccionar si desea que la información de la empresa sea pública">
+            <Radio.Group>
+              <Radio.Button value="public">Pública</Radio.Button>
+              <Radio.Button value="confidential">Privada</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
         </div>
 
         {/* end group */}

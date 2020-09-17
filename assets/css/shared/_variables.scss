@@ -20,13 +20,7 @@ $hover-orange: #ff8a0d;
 $bg-blue: #f5fcfe;
 $bg-orange: #fffaf6;
 $bg-grey: rgba(205, 205, 210, 0.2);
-$bg-medium: linear-gradient(
-  to bottom,
-  $bg-blue 0,
-  $bg-blue 400px,
-  $color-white 400px,
-  $color-white 100%
-);
+$bg-medium: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
 $bg-green: #eefffc;
 
 $color-primary: #006e8f;
@@ -148,8 +142,8 @@ $gk-layout-padding: (
     padding-right: 20px;
   }
   @include bp(xmedium) {
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   @include bp(large) {
     padding-left: 80px;
