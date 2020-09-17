@@ -67,6 +67,7 @@
     &.menu-orange {
       li,
       .ant-menu-item {
+        margin: 0 !important;
         &:hover {
           color: $color-orange;
         }
@@ -100,7 +101,7 @@
     .ant-menu-item {
       position: relative;
       border: 0 !important;
-
+      margin: 0 !important;
       &:hover {
         border: 0 !important;
         color: $primary;

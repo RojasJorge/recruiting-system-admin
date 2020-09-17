@@ -1,18 +1,26 @@
 // import List from './List';
 import Link from 'next/link';
 import { Button } from 'antd';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useEffect } from 'react';
 import { EmptyElemet } from '../../elements';
+import xhr from '../../xhr';
 
 const Jobs = () => {
-  const style = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '0 auto',
-    fontSize: 24,
-    textDecoration: 'none',
-  };
+  const data = useStoreState(state => state.jobs);
+  const fill = useStoreActions(actions => actions.jobs.fill);
+
+  useEffect(() => {
+    xhr()
+      .get(`/company`)
+      .then(res => {
+        res.type = false; /** This param (if true) loads a collection, false => single object */
+        fill(res);
+      })
+      .catch(err => isMissing(true));
+  }, []);
+
+  console.log('jobs', data);
 
   const dataEmpty = {
     title: 'No tienes ninguna plaza publicada',
