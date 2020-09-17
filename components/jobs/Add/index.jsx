@@ -39,7 +39,7 @@ const FormJob = props => {
     company_state: 'public',
   };
   if (!isEmpty(props.data)) {
-    initialState = props.data;
+    initialState = props.data[0];
   }
 
   useEffect(() => {
@@ -84,9 +84,11 @@ const FormJob = props => {
     add(newObj);
   };
 
+  console.log('data', props.data);
+
   return (
     <div>
-      <Form scrollToFirstError={true} onFinish={onFinish} className="umana-form umana-max-witdh" initialValues={initialState}>
+      <Form scrollToFirstError={true} onFinish={onFinish} className="umana-form umana-max-witdh" initialValues={!isEmpty(props.data) ? props.data[0] : initialState}>
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
           <GeneralJob career={data.career} />
@@ -157,11 +159,11 @@ const FormJob = props => {
 };
 
 FormJob.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
 };
 
 FormJob.defaultProps = {
-  data: {},
+  data: [],
 };
 
 export default FormJob;

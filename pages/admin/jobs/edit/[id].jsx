@@ -15,10 +15,15 @@ const EditJob = _ => {
     urlAction: '/admin/jobs/single/',
     urlDinamic: router.query.id,
   };
+  let age = [];
+  if (data && data.job && data.job[0] && data.job.age) {
+    age = [data.job[0].age.min, data.job[0].age.max];
+  }
+  if (data.job) {
+    data.job[0].age = age;
+  }
 
-  const age = [data.job.age.min, data.job.age.max];
-  data.job.age = age;
-  console.log('edit', data);
+  console.log('edit', data.job);
   const menuItem = [
     {
       icon: 'turned_in',
