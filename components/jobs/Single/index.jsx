@@ -1,7 +1,7 @@
 import { Sitebar } from '../../../elements';
 import { useEffect, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { Skeleton } from 'antd';
+import { Skeleton, Tag, Progress } from 'antd';
 import { useRouter } from 'next/router';
 import xhr from '../../../xhr';
 
@@ -16,13 +16,13 @@ const SingleJob = () => {
       .then(res => {
         res.type = false;
         fill(res);
-        setJob(res.data);
+        setJob(res.data[0]);
       })
       .catch(err => isMissing(true));
   }, []);
 
   const header = {
-    title: job && job.title ? job.title : 'Plaza',
+    title: job && job.company ? job.company.name : 'Plaza',
     icon: 'location_city',
     action: 'edit',
     titleAction: 'Editar Plaza',
@@ -30,7 +30,7 @@ const SingleJob = () => {
     urlDinamic: router.query.id,
   };
 
-  console.log('single', data);
+  console.log('single', job);
   if (job) {
     return (
       <div className="umana-layout-cl">
@@ -71,6 +71,56 @@ const SingleJob = () => {
                 </p>
               </div>
             ) : null}
+          </div>
+          {/* requerimets */}
+          <div className="umana-content">
+            <div className="umana-content__item item-lg">
+              <h2>Requerimientos</h2>
+            </div>
+            <div className="umana-content__item item-sm">
+              <label>Sexo</label>
+              <p>{job.gender}</p>
+            </div>
+            <div className="umana-content__item item-sm">
+              <label>Edad</label>
+              {job.age ? <p>{`${job.age.min} - ${job.age.max} años`}</p> : null}
+            </div>
+            <div className="umana-content__item item-sm">
+              <label>Religión</label>
+              <p>{job.religion}</p>
+            </div>
+            <div className="umana-content__item item-lg">
+              <label>Habilidades</label>
+              {job.skills ? (
+                <div>
+                  {job.skills.map((e, idx) => (
+                    <Tag key={idx}>{e}</Tag>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+            <div className="umana-content__item item-lg">
+              <label>Softwares</label>
+              {job.softwares ? (
+                <div>
+                  {job.softwares.map((e, idx) => (
+                    <Tag key={idx}>{e}</Tag>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+            <div className="umana-content__item item-lg">
+              <h4>Idiomas</h4>
+              {job.languages
+                ? job.languages.map((e, idx) => (
+                    <div key={idx}>
+                      <Progress type="circle" percent={e.comprehension} format={percent => `Comprensión ${percent}`} />
+                      <Progress type="circle" percent={e.write} format={percent => `Escritura ${percent}`} />
+                      <Progress type="circle" percent={e.speak} format={percent => `Hablado ${percent}`} />
+                    </div>
+                  ))
+                : null}
+            </div>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ info
   background: $color-white;
   box-shadow: $shadow;
   padding: 20px 10px;
+  margin-bottom: 20px;
   @include bp(large) {
     padding: 30px 20px;
   }

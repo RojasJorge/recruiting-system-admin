@@ -4,9 +4,7 @@ import Moment from 'react-moment';
 
 const Card = props => {
   return (
-    <div
-      className={`umana-card card-theme-${props.theme} card-content-align-${props.align} card-${props.size} card-type-${props.type}`}
-    >
+    <div className={`umana-card card-theme-${props.theme} card-content-align-${props.align} card-${props.size} card-type-${props.type}`}>
       <div className="umana-card__options">
         {props.edit ? (
           <Link href={props.edit} passHref>
@@ -32,12 +30,18 @@ const Card = props => {
       </div>
       {props.parentInfo ? (
         <div className="umana-card__parent-info">
-          {props.parentInfo.avatar ? <Avatar size={80} src={props.parentInfo.avatar} /> : null}
+          {props.parentInfo.avatar ? <Avatar size={80} src={props.parentInfo.avatar} /> : <Avatar className="avatar-icon" size={80} icon={<i className="material-icons">location_city</i>} />}
           {props.parentInfo.title ? (
-            <div className="title-hidden">
-              <h5 className="hidden-text">{props.parentInfo.title}</h5>
+            <div className="title">
+              <h5>{props.parentInfo.title}</h5>
             </div>
           ) : null}
+          {props.parentInfo.name ? (
+            <div className="title">
+              <h5>{props.parentInfo.name}</h5>
+            </div>
+          ) : null}
+          {props.parentInfo.location ? <p>{`${props.parentInfo.location.city}, ${props.parentInfo.location.country}`}</p> : null}
           {props.parentInfo.description ? <p>{props.parentInfo.description}</p> : null}
         </div>
       ) : null}
