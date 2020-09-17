@@ -110,16 +110,72 @@ const SingleJob = () => {
               ) : null}
             </div>
             <div className="umana-content__item item-lg">
-              <h4>Idiomas</h4>
+              <br />
+              <h3>Idiomas</h3>
               {job.languages
                 ? job.languages.map((e, idx) => (
-                    <div key={idx}>
-                      <Progress type="circle" percent={e.comprehension} format={percent => `Comprensión ${percent}`} />
-                      <Progress type="circle" percent={e.write} format={percent => `Escritura ${percent}`} />
-                      <Progress type="circle" percent={e.speak} format={percent => `Hablado ${percent}`} />
+                    <div key={idx} style={{ padding: '0 20px 10px', display: 'flex', justifyContent: 'space-between' }}>
+                      <p>{e.language}</p>
+                      <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.comprehension} format={percent => `Comprensión ${percent}%`} />
+                      <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.write} format={percent => `Escritura ${percent}%`} />
+                      <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.speak} format={percent => `Hablado ${percent}%`} />
                     </div>
                   ))
                 : null}
+            </div>
+            <div className="umana-content__item item-lg">
+              <label>Atribuciones</label>
+              <p>{job.responsibilities}</p>
+            </div>
+            <div className="umana-content__item item-lg">
+              <label>Requerimientos adicionales</label>
+              <p>{job.requirements}</p>
+            </div>
+            <div className="umana-content__item item-md">
+              <label>Vehículos</label>
+              <p>{job.vehicle}</p>
+            </div>
+            <div className="umana-content__item item-md">
+              <label>Tipo de licencia</label>
+              <p>{job.type_license}</p>
+            </div>
+          </div>
+          {/* compensaciones y beneficios */}
+          <div className="umana-content">
+            <div className="umana-content__item item-lg">
+              <h2>Compensaciones y beneficios</h2>
+            </div>
+            <div className="umana-content__item item-lg">
+              <h3>Saldo promedio</h3>
+            </div>
+
+            <div className="umana-content__item item-md">
+              <label>Mínimo</label>
+              <h2>
+                {job.salary && job.salary.currency && job.salary.currency.symbol ? job.salary.currency.symbol + ' ' : 'Q. '}{' '}
+                {job.salary && job.salary.base_min && job.salary.commission_min ? parseInt(job.salary.base_min + job.salary.commission_min).toLocaleString('en') + '.00' : 0}
+              </h2>
+            </div>
+            <div className="umana-content__item item-md">
+              <label>Máximo</label>
+              <h2>
+                {job.salary && job.salary.currency && job.salary.currency.symbol ? job.salary.currency.symbol + ' ' : 'Q. '}{' '}
+                {job.salary && job.salary.base_max && job.salary.commission_max ? parseInt(job.salary.base_max + job.salary.commission_max).toLocaleString('en') + '.00' : 0}
+              </h2>
+            </div>
+            <div className="umana-content__item item-lg">
+              <label>Beneficios</label>
+              {job.benefits ? (
+                <div>
+                  {job.benefits.map((e, idx) => (
+                    <Tag key={idx}>{e}</Tag>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+            <div className="umana-content__item item-lg">
+              <label>Otros beneficios</label>
+              <p>{job.benefits_other}</p>
             </div>
           </div>
         </div>
