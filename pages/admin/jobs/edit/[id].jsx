@@ -2,11 +2,16 @@ import Layout from '../../../../views/Layout';
 import FormJob from '../../../../components/jobs/Add';
 import { useRouter } from 'next/router';
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useEffect } from 'react';
 import { PageTitle, Sitebar } from '../../../../elements';
+import { isEmpty } from 'lodash';
+import xhr from '../../../../xhr';
 
 const EditJob = _ => {
   const router = useRouter();
   const data = useStoreState(state => state.jobs);
+  const fill = useStoreActions(actions => actions.jobs.fill);
+
   const header = {
     title: 'Empresa',
     icon: 'location_city',
@@ -15,6 +20,7 @@ const EditJob = _ => {
     urlAction: '/admin/jobs/single/',
     urlDinamic: router.query.id,
   };
+
   let age = [];
   if (data && data.job && data.job[0] && data.job.age) {
     age = [data.job[0].age.min, data.job[0].age.max];
@@ -22,6 +28,17 @@ const EditJob = _ => {
   if (data.job) {
     data.job[0].age = age;
   }
+
+  useEffect(() => {
+    xhr()
+      .get(`/job/${router.query.id}`)
+      .then(res => {
+        res.type = false;
+        fill(res);
+        // setJob(res.data[0]);
+      })
+      .catch(err => console.log(err));
+  }, []);
   
   const menuItem = [
     {
@@ -55,6 +72,7 @@ const EditJob = _ => {
       url: '#compensation',
     },
   ];
+  console.log('edit', data.job);
   return (
     <Layout title="Editar Plaza">
       <>
@@ -63,9 +81,7 @@ const EditJob = _ => {
           <div className="umana-layout-cl__small ">
             <Sitebar header={header} data={menuItem} />
           </div>
-          <div className="umana-layout-cl__flex width-section bg-white">
-            <FormJob data={data.job} type="edit" />
-          </div>
+          <div className="umana-layout-cl__flex width-section bg-white">{data.job ? <FormJob data={data.job} type="edit" id={router.query.id} /> : null}</div>
         </div>
       </>
     </Layout>

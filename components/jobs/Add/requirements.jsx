@@ -18,12 +18,7 @@ const Requirements = () => {
         </Radio.Group>
       </Form.Item>
       <div className="umana-form--group group-row">
-        <Form.Item
-          name="age"
-          label="Edad"
-          className="form-item--fx"
-          help="Seleccione rango de edad"
-        >
+        <Form.Item name="age" label="Edad" className="form-item--fx" help="Seleccione rango de edad">
           <Slider
             min={1}
             max={80}
@@ -31,9 +26,6 @@ const Requirements = () => {
             range
             // value={[customer.age.min, customer.age.max]}
           />
-        </Form.Item>
-        <Form.Item className="form-item--md" label=" ">
-          <Checkbox>Edad es indiferente</Checkbox>
         </Form.Item>
       </div>
       <div className="umana-form--group group-row">
@@ -51,9 +43,6 @@ const Requirements = () => {
                 ))
               : null}
           </Select>
-        </Form.Item>
-        <Form.Item className="form-item--md" label=" ">
-          <Checkbox>Religión es indiferente</Checkbox>
         </Form.Item>
       </div>
       <Form.Item label="Años de experiencia" className="form-item--lg" name="experience">
@@ -78,12 +67,7 @@ const Requirements = () => {
       <br />
       <h3 style={{ width: '100%' }}>Otros Requerimientos</h3>
       <br />
-      <Form.Item
-        label="Softwares requeridos"
-        className="form-item--lg"
-        name="softwares"
-        help="Agrega aquí uno o varios softwares requeridos."
-      >
+      <Form.Item label="Softwares requeridos" className="form-item--lg" name="softwares" help="Agrega aquí uno o varios softwares requeridos.">
         <Select placeholder="Agrega elementos al dar enter" mode="tags" />
       </Form.Item>
 
