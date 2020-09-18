@@ -30,7 +30,7 @@ const SingleJob = () => {
     urlDinamic: router.query.id,
   };
 
-  console.log('single', job);
+  console.log('single', data);
   if (job) {
     return (
       <div className="umana-layout-cl">

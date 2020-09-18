@@ -18,6 +18,8 @@ const FormJob = props => {
   const companies = useStoreState(state => state.companies);
   const fill = useStoreActions(actions => actions.companies.fill);
 
+  const [company, setCompany] = useState('');
+
   useEffect(() => {
     xhr()
       .get(`/company`)
@@ -37,9 +39,17 @@ const FormJob = props => {
     age: [18, 60],
     isBranch: false,
     company_state: 'public',
+    religion: ['indifferent'],
   };
+
+  let isBranch = false;
+  let positionAlt = true;
   if (!isEmpty(props.data)) {
+    const age = [props.data[0].age.min, props.data[0].age.max];
+    props.data[0].age = age;
     initialState = props.data[0];
+    isBranch = props.data[0].isBranch;
+    positionAlt = props.data[0].jobposition === 'otros' ? false : true;
   }
 
   useEffect(() => {
@@ -48,12 +58,19 @@ const FormJob = props => {
   }, []);
 
   const allSet = e => {
-    console.log(e);
-    notification.info({
-      message: `Confirmación`,
-      description: 'La plaza ha sido publicada con éxito',
-      placement: 'bottomRight',
-    });
+    if (props.type && props.type === 'edit') {
+      notification.info({
+        message: `Confirmación`,
+        description: 'La plaza ha sido actualizado con éxito',
+        placement: 'bottomRight',
+      });
+    } else {
+      notification.info({
+        message: `Confirmación`,
+        description: 'La plaza ha sido publicada con éxito',
+        placement: 'bottomRight',
+      });
+    }
     setTimeout(() => {
       router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
     }, 500);
@@ -74,28 +91,48 @@ const FormJob = props => {
         });
       });
   };
+  const edit = async e => {
+    xhr()
+      .put(`/job/${props.id}`, JSON.stringify(e))
+      .then(resp => {
+        console.log(resp.data);
+        fill(resp.data);
+        // allSet(props.id);
+      })
+      .catch(err => {
+        notification.info({
+          message: `Error`,
+          description: 'Ha ocurrido un error, por favor inténtalo más tarde',
+          placement: 'bottomRight',
+        });
+      });
+  };
 
   const onFinish = e => {
-    const id = { company_id: router.query.id };
+    let id = { company_id: router.query.id };
+    if (props.company && props.company) {
+      id = { company_id: company };
+    }
     const age = { min: e.age[0], max: e.age[1] };
     e.age = age;
     const newObj = Object.assign(e, id);
-
-    add(newObj);
+    if (props.type && props.type === 'edit') {
+      edit(newObj);
+    } else {
+      add(newObj);
+    }
   };
-
-  console.log('data', props.data);
 
   return (
     <div>
       <Form scrollToFirstError={true} onFinish={onFinish} className="umana-form umana-max-witdh" initialValues={!isEmpty(props.data) ? props.data[0] : initialState}>
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
-          <GeneralJob career={data.career} />
+          <GeneralJob career={data.career} position={positionAlt} />
         </div>
         <div className="umana-form--section" id="location">
           <h2 style={{ width: '100%', margin: 0 }}>Ubicación</h2>
-          <LocationJob />
+          <LocationJob isBranch={isBranch} />
         </div>
         <div className="umana-form--section" id="requirements">
           <h2 style={{ width: '100%' }}>Requerimientos</h2>
@@ -128,7 +165,7 @@ const FormJob = props => {
                 },
               ]}
             >
-              <Select>
+              <Select name="company_id" onChange={e => setCompany(e)}>
                 {companies.company && companies.company.items
                   ? companies.company.items.map((e, idx) => (
                       <Select.Option key={idx} value={e.id}>

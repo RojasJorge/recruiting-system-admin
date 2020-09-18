@@ -5,8 +5,8 @@ import xhr from '../../../xhr';
 
 const { TextArea } = Input;
 
-const GeneralJob = ({ career }) => {
-  const [disabled, setDisabled] = useState(true);
+const GeneralJob = ({ career, position }) => {
+  const [disabled, setDisabled] = useState(position);
 
   const strForSearch = str => {
     return str
@@ -91,7 +91,7 @@ const GeneralJob = ({ career }) => {
                 <i className="material-icons">info_outline</i>
               </a>
             </Tooltip>
-            <Input disabled={disabled} />
+            <Input />
           </>
         </Form.Item>
       ) : null}
@@ -122,7 +122,6 @@ const GeneralJob = ({ career }) => {
               return false;
             }
           }}
-          onChange={e => (e === 'otros' ? setDisabled(false) : setDisabled(true))}
         >
           <Select.OptGroup key="otros" label="Otros">
             <Select.Option key="otro" value="otros">

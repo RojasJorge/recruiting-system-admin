@@ -2,8 +2,8 @@ import { Form, Radio } from 'antd';
 import { useState } from 'react';
 import Locations from '../../Location';
 
-const LocationJob = () => {
-  const [isBranch, setBranch] = useState(false);
+const LocationJob = props => {
+  const [isBranch, setBranch] = useState(props.isBranch);
   const checkLocation = (rule, value) => {
     if (value.country && value.province && value.city && value.address && value.zone > 0) {
       return Promise.resolve();

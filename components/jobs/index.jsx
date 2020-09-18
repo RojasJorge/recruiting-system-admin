@@ -28,6 +28,8 @@ const Jobs = () => {
     url: '/admin/companies',
   };
 
+  console.log('loop', data);
+
   if (data.job && !isEmpty(data.job)) {
     return (
       <div className="umana-list">
