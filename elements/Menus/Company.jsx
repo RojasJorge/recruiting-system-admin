@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu } from 'antd';
 import Proptypes from 'prop-types';
+import router from 'next/router'
 
 const CompanyNav = props => {
   const [current, setCurrent] = useState('/');
@@ -12,14 +13,14 @@ const CompanyNav = props => {
     }
     /** Switch changes. */
     setCurrent(e.key);
-    // Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
+    router.push(`/admin/${e.key === 'dashboard' ? '' : e.key}`);
   };
 
   return (
     <Menu
       mode={`${props.direction}`}
       id="header-nav"
-      onClick={handleClick}
+      // onClick={handleClick}
       selectedKeys={[current]}
       className={`header-nav umana-menu nav-desktop theme-${props.theme}`}
     >
@@ -28,28 +29,28 @@ const CompanyNav = props => {
           <a>Dashboard</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="candidatos" onClick={e => props.close(e, 'close')}>
-        <Link href="/admin/users" passHref>
-          <a>Candidatos</a>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="empresas" onClick={e => props.close(e, 'close')}>
+      {/*<Menu.Item key="users" onClick={e => props.close(e, 'close')}>*/}
+      {/*  <Link href="/admin/users" passHref>*/}
+      {/*    <a>Candidatos</a>*/}
+      {/*  </Link>*/}
+      {/*</Menu.Item>*/}
+      <Menu.Item key="companies" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/companies" passHref>
           <a>Empresas</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="plazas" onClick={e => props.close(e, 'close')}>
+      <Menu.Item key="jobs" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/jobs" passHref>
           <a>Plazas</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="aplicantes" onClick={e => props.close(e, 'close')}>
-        <Link href="/aplicantes" passHref>
-          <a>Aplicantes</a>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="candidatos" onClick={e => props.close(e, 'close')}>
-        <Link href="/candidatos" passHref>
+      {/*<Menu.Item key="aplicantes" onClick={e => props.close(e, 'close')}>*/}
+      {/*  <Link href="/" passHref>*/}
+      {/*    <a>Aplicantes</a>*/}
+      {/*  </Link>*/}
+      {/*</Menu.Item>*/}
+      <Menu.Item key="applicants" onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/applicants" passHref>
           <a>Talentos</a>
         </Link>
       </Menu.Item>

@@ -22,8 +22,7 @@ const EditJob = _ => {
   if (data.job) {
     data.job[0].age = age;
   }
-
-  console.log('edit', data.job);
+  
   const menuItem = [
     {
       icon: 'turned_in',

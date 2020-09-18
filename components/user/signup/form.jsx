@@ -128,11 +128,11 @@ const SignupForm = props => {
               />
             </Form.Item>
           </div>
-          <div className="col">
-            <Form.Item label="Fecha de nacimiento" name="birthday">
-              <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" size="large" name="birthday" />
-            </Form.Item>
-          </div>
+          {/*<div className="col">*/}
+          {/*  <Form.Item label="Fecha de nacimiento" name="birthday">*/}
+          {/*    <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" size="large" name="birthday" />*/}
+          {/*  </Form.Item>*/}
+          {/*</div>*/}
         </div>
         <Button htmlType="submit" size="large" type="primary">
           Crear cuenta

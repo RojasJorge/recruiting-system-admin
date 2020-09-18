@@ -54,7 +54,7 @@ const UsersList = () => {
 			<div className="col-md-12">
 				<Table
 					bordered
-					size="middle"
+					size="small"
 					dataSource={users.list}
 					rowKey={record => record.id}
 					pagination={false}
