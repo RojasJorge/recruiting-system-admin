@@ -81,7 +81,8 @@ export default {
    */
 
   fill: action((state, payload) => {
-    if (payload.type) {
+    
+    if (!payload.type) {
       state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc']);
       state.total = payload.data.total;
     } else {
