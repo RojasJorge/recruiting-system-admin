@@ -21,6 +21,14 @@ const EditJob = _ => {
     urlDinamic: router.query.id,
   };
 
+  let age = [];
+  if (data && data.job && data.job[0] && data.job.age) {
+    age = [data.job[0].age.min, data.job[0].age.max];
+  }
+  if (data.job) {
+    data.job[0].age = age;
+  }
+
   useEffect(() => {
     xhr()
       .get(`/job/${router.query.id}`)
@@ -31,7 +39,7 @@ const EditJob = _ => {
       })
       .catch(err => console.log(err));
   }, []);
-
+  
   const menuItem = [
     {
       icon: 'turned_in',

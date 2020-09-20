@@ -2,24 +2,15 @@ import { useState } from 'react';
 import { Menu } from 'antd';
 import Link from 'next/link';
 import Proptypes from 'prop-types';
+import router from 'next/router'
 
 const TalentNav = props => {
   const [current, setCurrent] = useState('/');
-
-  const handleClick = e => {
-    if (e.key === 'logout') {
-      return;
-    }
-    /** Switch changes. */
-    setCurrent(e.key);
-    Router.push(`/${e.key === 'dashboard' ? '' : e.key}`);
-  };
 
   return (
     <Menu
       mode={`${props.direction}`}
       id="header-nav"
-      onClick={handleClick}
       selectedKeys={[current]}
       className={`header-nav umana-menu nav-desktop theme-${props.theme}`}
     >
@@ -28,18 +19,18 @@ const TalentNav = props => {
           <a>Dashboard</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key={`user/${props.user}`} onClick={e => props.close(e, 'close')}>
-        <Link href="/user" passHref>
+      <Menu.Item key={`profile`} onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/profile" passHref>
           <a>Mi perfil</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="plazas" onClick={e => props.close(e, 'close')}>
-        <Link href="/plazas" passHref>
+      <Menu.Item key="jobs" onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/jobs" passHref>
           <a>Plazas disponibles</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="misaplicaciones" onClick={e => props.close(e, 'close')}>
-        <Link href="misaplicaciones" passHref>
+      <Menu.Item key="requests" onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/requests" passHref>
           <a>Mis Aplicaciones</a>
         </Link>
       </Menu.Item>
