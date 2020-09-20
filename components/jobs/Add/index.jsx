@@ -17,6 +17,7 @@ const FormJob = props => {
   const collectionsActions = useStoreActions(actions => actions.collections);
   const companies = useStoreState(state => state.companies);
   const fill = useStoreActions(actions => actions.companies.fill);
+  const [missing, isMissing] = useState(false);
 
   const [company, setCompany] = useState('');
 

@@ -59,7 +59,6 @@ const FormCompany = props => {
     xhr()
       .put(`/company/${props.id}`, JSON.stringify(e))
       .then(resp => {
-        console.log('respo......', resp);
         allSet(resp.data, 'edit');
       })
       .catch(err => {

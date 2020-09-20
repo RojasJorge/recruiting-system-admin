@@ -56,20 +56,11 @@ const ObjectInput = ({ value = {}, onChange, type, label, required, isChild }) =
   };
 
   const handlenChange = (e, type) => {
-    console.log(e);
     if (e !== 'otros') {
       if (isChild) {
         const parentS = info.map(i =>
-          i.children
-            ? i.children.filter(f => f.id === e)
-              ? i.children.filter(f => f.id === e).length > 0
-                ? setParent(i.children.filter(f => f.id === e))
-                : null
-              : null
-            : null,
+          i.children ? (i.children.filter(f => f.id === e) ? (i.children.filter(f => f.id === e).length > 0 ? setParent(i.children.filter(f => f.id === e)) : null) : null) : null,
         );
-
-        console.log(parent);
       }
       // setObjVal({ ...objectState, id: e, name: name['name'] });
     }
@@ -77,8 +68,6 @@ const ObjectInput = ({ value = {}, onChange, type, label, required, isChild }) =
       setObjVal({ ...objectState, id: e, name: e });
     }
   };
-
-  console.log(objectState);
 
   return (
     <div className="umana-form--group" style={{ paddingBottom: 0 }}>

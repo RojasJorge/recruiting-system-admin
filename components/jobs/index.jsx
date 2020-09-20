@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Button } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { EmptyElemet, Card } from '../../elements';
 import xhr from '../../xhr';
 import { isEmpty } from 'lodash';
@@ -10,12 +10,13 @@ import { isEmpty } from 'lodash';
 const Jobs = () => {
   const data = useStoreState(state => state.jobs);
   const fill = useStoreActions(actions => actions.jobs.fill);
+  const [missing, isMissing] = useState(false);
 
   useEffect(() => {
     xhr()
       .get(`/job`)
       .then(res => {
-        res.type = false; /** This param (if true) loads a collection, false => single object */
+        res.type = false;
         fill(res);
       })
       .catch(err => isMissing(true));
@@ -27,8 +28,6 @@ const Jobs = () => {
     buttonTitle: 'Agregar plaza',
     url: '/admin/companies',
   };
-
-  console.log('loop', data);
 
   if (data.job && !isEmpty(data.job)) {
     return (
