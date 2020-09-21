@@ -82,12 +82,22 @@ export default {
 
   fill: action((state, payload) => {
     
-    if (!payload.type) {
+    // if (!payload.type) {
       state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc']);
       state.total = payload.data.total;
-    } else {
-      state.job = payload.data;
-    }
+  
+    console.log('State.List', state.list)
+      
+      localStorage.setItem('Jobs', JSON.stringify({
+        list: state.list,
+        total: state.total
+      }))
+    
+    return
+      
+    // } else {
+    //   state.job = payload.data;
+    // }
   }),
 
   /**
