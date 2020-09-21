@@ -1,12 +1,16 @@
-import Layout from '../../../views/Layout'
-import Catalogs from '../../../components/catalogs'
+import Layout from '../../../views/Layout';
+import Catalogs from '../../../components/catalogs';
+import { PageTitle } from '../../../elements';
 
 const Index = _ => {
   return (
     <Layout title="Catalogos">
-      <Catalogs />
+      <>
+        <PageTitle title="Catálogos" />
+        <Catalogs />
+      </>
     </Layout>
   );
 };
 
-export default Index
+export default Index;

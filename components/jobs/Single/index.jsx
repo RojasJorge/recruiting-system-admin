@@ -19,9 +19,9 @@ const SingleJob = () => {
       .get(`/job/${router.query.id}`)
       .then(res => {
         res.type = false;
-        console.log(res);
+        console.log('res job', res);
         fill(res);
-        setJob(res.data[0]);
+        setJob(res.data);
       })
       .catch(err => isMissing(true));
   }, []);

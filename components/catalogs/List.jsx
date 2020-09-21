@@ -13,47 +13,53 @@ import xhr from '../../xhr';
 const List = ({ type, title }) => {
   const token = useStoreState(state => state.auth.token);
   const data = useStoreState(state => state.collections);
+  const collectionsActions = useStoreActions(actions => actions.collections);
   const fill = useStoreActions(actions => actions.collections.fill);
 
   const [list, setList] = useState([]);
   const [add, switchEdit] = useState(false);
 
   /** Get collection */
-  const get = p =>
+  const get = p => {
+    // collectionsActions.get({ type: 'academic_level', token: localStorage.getItem('uToken') });
     xhr()
-      // .get(`/${type}?pager=${JSON.stringify({ page: 1, limit: 1000 })}`)
       .get(`/${type}`)
-      .then(resp => fill(resp.data))
-      .catch(err => console.log(err));
-
-  /** Update single */
-  const update = async o => {
-    /** Extract id */
-    const id = o.id;
-    delete o.id; /** Delete for api call */
-
-    const url = `/${type}/${id}`;
-
-    await xhr()
-      .put(url, JSON.stringify(o))
-      .then(resp => get())
+      // .get(`/${type}`)
+      .then(resp => {
+        fill(resp.data);
+        console.log('response', resp);
+      })
       .catch(err => console.log(err));
   };
+
+  // /** Update single */
+  // const update = async o => {
+  //   /** Extract id */
+  //   const id = o.id;
+  //   delete o.id; /** Delete for api call */
+
+  //   const url = `/${type}/${id}`;
+
+  //   await xhr()
+  //     .put(url, JSON.stringify(o))
+  //     .then(resp => get())
+  //     .catch(err => console.log(err));
+  // };
 
   const show = id => {
     console.log('=========', id);
     return <a id={id.id}>hola</a>;
   };
 
-  useEffect(() => {
-    setList(data.list);
-  }, [data.list]);
+  // useEffect(() => {
+  //   setList(data.list);
+  // }, [data.list]);
 
   useEffect(() => {
     get();
   }, []);
 
-  console.log(data);
+  console.log('cat list', data);
 
   return (
     <>
@@ -64,14 +70,7 @@ const List = ({ type, title }) => {
           </PageTitle>
         </div>
         <div className="umana-element__add">
-          <Button
-            icon={<i className="material-icons">add</i>}
-            shape="circle"
-            type="primary"
-            size="large"
-            onClick={() => switchEdit(!add)}
-            ghost
-          />
+          <Button icon={<i className="material-icons">add</i>} shape="circle" type="primary" size="large" onClick={() => switchEdit(!add)} ghost />
         </div>
       </div>
       <div className="umana-container">

@@ -34,12 +34,13 @@ const EditJob = _ => {
       .get(`/job/${router.query.id}`)
       .then(res => {
         res.type = false;
-        fill(res);
+        console.log('rest', res);
+
         // setJob(res.data[0]);
       })
       .catch(err => console.log(err));
   }, []);
-  
+
   const menuItem = [
     {
       icon: 'turned_in',
@@ -72,7 +73,7 @@ const EditJob = _ => {
       url: '#compensation',
     },
   ];
-  console.log('edit', data.job);
+  console.log('edit', data);
   return (
     <Layout title="Editar Plaza">
       <>
