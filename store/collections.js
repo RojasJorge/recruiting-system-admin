@@ -15,12 +15,12 @@ export default {
    */
   get: thunk(async (actions, payload) => {
     actions.switchLoading(true);
-    // console.log('Get Collections action:', payload)
+    console.log('Get Collections action:', payload)
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/${payload.type}?page=1&offset=1000`, {
+      .get(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/${payload.type.replace('_', '-')}?page=1&offset=1000`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: payload.token,
+          Authorization: localStorage.getItem('uToken'),
         },
       })
       .catch(error => {
@@ -28,6 +28,7 @@ export default {
         actions.switchLoading(false);
       })
       .then(response => {
+        console.log('Data from catalogs:', response)
         typeof response !== 'undefined' ? localStorage.setItem(payload.type.replace('-', '_'), JSON.stringify(response.data.items)) : null;
         typeof response !== 'undefined' ? actions.fill({ data: response.data, type: payload.type.replace('-', '_') }) : null;
         actions.switchLoading(false);
@@ -122,7 +123,7 @@ export default {
       ['asc'],
     );
 
-    state.total = data.total;
+    // state.total = data.total;
   }),
   switchLoading: action((state, payload) => {
     state.loading = payload;

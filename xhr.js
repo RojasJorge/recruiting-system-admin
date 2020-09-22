@@ -18,8 +18,9 @@ const xhr = () => {
 	
 	axiosinstance.interceptors.response.use(function (response) {
 		return response;
-	}, function (error) {
-		if (error && error.response && error.response.status === 401) {
+	}, error => {
+		
+		if (error || error.name === 'Error' || error.response.status === 401) {
 			
 			message.error("La sesión ha expirado")
 			localStorage.removeItem("uToken")

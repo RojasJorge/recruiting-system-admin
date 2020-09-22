@@ -9,6 +9,7 @@ import { isEmpty } from 'lodash';
 import PageTitle from '../Misc/PageTitle';
 import EditModal from './EditModal';
 import xhr from '../../xhr';
+import router from 'next/router'
 
 const List = ({ type, title }) => {
   const token = useStoreState(state => state.auth.token);
@@ -27,7 +28,7 @@ const List = ({ type, title }) => {
       // .get(`/${type}`)
       .then(resp => {
         fill(resp.data);
-        console.log('response', resp);
+        // console.log('response', resp);
       })
       .catch(err => console.log(err));
   };
@@ -47,7 +48,7 @@ const List = ({ type, title }) => {
   // };
 
   const show = id => {
-    console.log('=========', id);
+    // console.log('=========', id);
     return <a id={id.id}>hola</a>;
   };
 
@@ -56,13 +57,14 @@ const List = ({ type, title }) => {
   // }, [data.list]);
 
   useEffect(() => {
-    get();
+    collectionsActions.get({type})
   }, []);
 
-  console.log('cat list', data);
+  // console.log('cat list', data);
 
   return (
     <>
+      {/*<pre>{JSON.stringify(data, false, 2)}</pre>*/}
       <div className="row align-items-center">
         <div className="col">
           <PageTitle tag="h1" className="title--main title--page">
@@ -77,7 +79,7 @@ const List = ({ type, title }) => {
         <Table
           bordered
           size="middle"
-          dataSource={data.list}
+          dataSource={data[type]}
           rowKey={record => record.id}
           pagination={false}
           columns={[
@@ -95,7 +97,7 @@ const List = ({ type, title }) => {
               render: e => <a id={e.id}>edit</a>,
             },
           ]}
-        ></Table>
+        />
       </div>
       <EditModal add={add} switchEdit={switchEdit} title={title} />
     </>
