@@ -35,8 +35,12 @@ const SignupSteps = _ => {
         return (
           <div>
             <Radio.Group onChange={e => setRole(e.target.value)} value={role} size="large">
-              <Radio value="candidate">Busco Trabajo</Radio>
-              <Radio value="company">Busco Talentos</Radio>
+              <Radio.Button value="candidate">
+                <i className="material-icons">person</i> Estoy buscando Trabajo
+              </Radio.Button>
+              <Radio.Button value="company">
+                <i className="material-icons">location_city</i> Estoy buscando Talentos
+              </Radio.Button>
             </Radio.Group>
           </div>
         );

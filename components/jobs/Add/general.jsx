@@ -29,7 +29,7 @@ const GeneralJob = ({ career, position }) => {
         name="title"
         label="Titulo"
       >
-        <Input size="large" />
+        <Input size="large" name="title" />
       </Form.Item>
 
       <Form.Item

@@ -1,8 +1,5 @@
 import { action, thunk } from 'easy-peasy';
 import { mapKeys, groupBy, remove, find, map, orderBy, isEmpty } from 'lodash';
-import { Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
-import React from 'react';
 import axios from 'axios';
 
 export default {
@@ -15,7 +12,6 @@ export default {
    */
   get: thunk(async (actions, payload) => {
     actions.switchLoading(true);
-    // console.log('Get Collections action:', payload)
     await axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/${payload.type}?page=1&offset=1000`, {
         headers: {

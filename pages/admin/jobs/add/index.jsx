@@ -42,6 +42,17 @@ const AddJob = _ => {
       url: '#compensation',
     },
   ];
+  let initialState = {
+    locationState: 'public',
+    interviewPlace: 'office',
+    gender: 'indifferent',
+    vehicle: 'indifferent',
+    type_license: 'indifferent',
+    age: [18, 60],
+    isBranch: false,
+    company_state: 'public',
+    religion: ['indifferent'],
+  };
   return (
     <Layout title="Agregar Plaza">
       <>
@@ -51,7 +62,7 @@ const AddJob = _ => {
             <Sitebar header={header} data={menuItem} />
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
-            <FormJob company={true} />
+            <FormJob company={true} data={initialState} />
           </div>
         </div>
       </>

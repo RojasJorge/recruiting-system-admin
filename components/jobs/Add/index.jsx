@@ -31,32 +31,13 @@ const FormJob = props => {
       .catch(err => isMissing(true));
   }, []);
 
-  let initialState = {
-    locationState: 'public',
-    interviewPlace: 'office',
-    gender: 'indifferent',
-    vehicle: 'indifferent',
-    type_license: 'indifferent',
-    age: [18, 60],
-    isBranch: false,
-    company_state: 'public',
-    religion: ['indifferent'],
-  };
-
   let isBranch = false;
   let positionAlt = true;
-  if (!isEmpty(props.data)) {
-    const age = [props.data[0].age.min, props.data[0].age.max];
-    props.data[0].age = age;
-    initialState = props.data[0];
-    isBranch = props.data[0].isBranch;
-    positionAlt = props.data[0].jobposition === 'otros' ? false : true;
-  }
 
-  useEffect(() => {
-    collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
-    collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
-  }, []);
+  // useEffect(() => {
+  //   collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
+  //   collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
+  // }, []);
 
   const allSet = e => {
     if (props.type && props.type === 'edit') {
@@ -114,7 +95,7 @@ const FormJob = props => {
     if (props.company && props.company) {
       id = { company_id: company };
     }
-    const age = { min: e.age[0], max: e.age[1] };
+    const age = { min: e.age, max: e.age[1] };
     e.age = age;
     const newObj = Object.assign(e, id);
     if (props.type && props.type === 'edit') {
@@ -124,9 +105,11 @@ const FormJob = props => {
     }
   };
 
+  const initialData = props.data;
+
   return (
     <div>
-      <Form scrollToFirstError={true} onFinish={onFinish} className="umana-form umana-max-witdh" initialValues={!isEmpty(props.data) ? props.data[0] : initialState}>
+      <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={onFinish} scrollToFirstError={true}>
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
           <GeneralJob career={data.career} position={positionAlt} />
@@ -197,11 +180,11 @@ const FormJob = props => {
 };
 
 FormJob.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
 };
 
 FormJob.defaultProps = {
-  data: [],
+  data: {},
 };
 
 export default FormJob;
