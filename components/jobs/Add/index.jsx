@@ -79,7 +79,7 @@ const FormJob = props => {
       .then(resp => {
         console.log(resp.data);
         fill(resp.data);
-        // allSet(props.id);
+        allSet(props.id);
       })
       .catch(err => {
         notification.info({
@@ -95,10 +95,11 @@ const FormJob = props => {
     if (props.company && props.company) {
       id = { company_id: company };
     }
-    const age = { min: e.age, max: e.age[1] };
+    const age = { min: e.age[0], max: e.age[1] };
     e.age = age;
     const newObj = Object.assign(e, id);
     if (props.type && props.type === 'edit') {
+      delete newObj.company_id;
       edit(newObj);
     } else {
       add(newObj);
