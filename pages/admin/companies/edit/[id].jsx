@@ -10,20 +10,6 @@ const AddCompany = _ => {
   const [missing, isMissing] = useState(false);
   const router = useRouter();
   const data = useStoreState(state => state.companies);
-  const fill = useStoreActions(actions => actions.companies.fill);
-
-  // useEffect(() => {
-  //   xhr()
-  //     .get(`/company/${router.query.id}`)
-  //     .then(res => {
-  //       res.type = false; /** This param (if true) loads a collection, false => single object */
-  //       console.log('data res', res);
-  //       fill(res.data);
-  //     })
-  //     .catch(err => isMissing(true));
-  // }, []);
-
-  // console.log('data', data);
 
   const header = {
     title: data && data.company && data.company.name ? data.company.name : 'Empresa',

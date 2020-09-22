@@ -31,11 +31,15 @@
   .ant-steps.ant-steps-horizontal {
     padding-right: 0;
     padding-left: 0;
+    background: transparent;
+    box-shadow: none;
     .ant-steps-item-tail,
     .ant-steps-item-icon {
       display: none;
     }
     .ant-steps-item {
+      background: transparent;
+      box-shadow: none;
       transition: 0.5s ease-in-out;
       &.ant-steps-item-wait,
       &.ant-steps-item-do {
@@ -60,6 +64,19 @@
         font-family: $font-primary;
         text-align: left;
         color: $color-blue;
+      }
+    }
+  }
+  .ant-radio-group.ant-radio-group-outline.ant-radio-group-large {
+    .ant-radio-button-wrapper {
+      padding: 30px 20px;
+      i {
+        font-size: 30px;
+        margin-right: 10px;
+        transform: translateY(10px);
+      }
+      &.ant-radio-button-wrapper-checked {
+        border-left-color: $color-blue;
       }
     }
   }
