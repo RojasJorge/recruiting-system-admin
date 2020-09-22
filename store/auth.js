@@ -3,9 +3,9 @@ import {message} from 'antd';
 import Router from 'next/router';
 import axios from 'axios';
 
-const base_url = process.env.NEXT_PUBLIC_APP_ENV === 'develop'
-	? process.env.NEXT_PUBLIC_API_URL_DEVELOP
-	: process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+// const base_url = process.env.NEXT_PUBLIC_APP_ENV === 'develop'
+// 	? process.env.NEXT_PUBLIC_API_URL_DEVELOP
+// 	: process.env.NEXT_PUBLIC_API_URL_PRODUCTION
 
 export default {
 	user: null,
@@ -18,7 +18,7 @@ export default {
 	refreshToken: thunk(
 		async (actions, payload) =>
 			await axios
-				.post(`${base_url}/refresh`, JSON.stringify({}), {
+				.post(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/refresh`, JSON.stringify({}), {
 					headers: {
 						'Content-Type': 'application/json',
 						Authorization: payload,
@@ -51,7 +51,7 @@ export default {
 	login: thunk(
 		async (actions, payload) =>
 			await axios
-				.post(base_url + '/login', JSON.stringify(payload), {
+				.post(process.env.NEXT_PUBLIC_API_URL_PRODUCTION + '/login', JSON.stringify(payload), {
 					headers: {
 						'Content-Type': 'application/json',
 					},

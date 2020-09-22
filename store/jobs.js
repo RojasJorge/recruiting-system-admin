@@ -86,7 +86,7 @@ export default {
       state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc']);
       state.total = payload.data.total;
   
-    console.log('State.List', state.list)
+    // console.log('State.List', state.list)
       
       localStorage.setItem('Jobs', JSON.stringify({
         list: state.list,
@@ -94,10 +94,7 @@ export default {
       }))
     
     return
-      
-    // } else {
-    //   state.job = payload.data;
-    // }
+
   }),
 
   /**

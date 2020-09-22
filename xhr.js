@@ -3,12 +3,12 @@ import {message} from "antd"
 
 const xhr = () => {
 	
-	const baseURL = process.env.NEXT_PUBLIC_APP_ENV === 'develop'
-		? process.env.NEXT_PUBLIC_API_URL_DEVELOP
-		: process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+	// const baseURL = process.env.NEXT_PUBLIC_APP_ENV === 'develop'
+	// 	? process.env.NEXT_PUBLIC_API_URL_DEVELOP
+	// 	: process.env.NEXT_PUBLIC_API_URL_PRODUCTION
 	
 	const axiosinstance = axios.create({
-		baseURL,
+		baseURL: process.env.NEXT_PUBLIC_API_URL_PRODUCTION,
 		timeout: 500000,
 		headers: {
 			"Content-Type": "application/json",
@@ -19,14 +19,14 @@ const xhr = () => {
 	axiosinstance.interceptors.response.use(function (response) {
 		return response;
 	}, error => {
-		
-		if (error || error.name === 'Error' || error.response.status === 401) {
-			
+		console.log('Error::::::::', JSON.stringify(error, false, 2))
+		if (error || error.response.status === 401) {
+
 			message.error("La sesión ha expirado")
 			localStorage.removeItem("uToken")
 			localStorage.removeItem("uScopes")
 			localStorage.removeItem("uUser")
-			
+
 			setTimeout(() => {
 				window.location.reload()
 			}, 1000);

@@ -10,7 +10,8 @@ import Requirements from './requirements';
 import LocationJob from './locations';
 import xhr from '../../../xhr';
 import router from 'next/router';
-import { isEmpty } from 'lodash';
+import { isEmpty, find } from 'lodash';
+import Jobs from "../index";
 
 const FormJob = props => {
   const data = useStoreState(state => state.collections);
@@ -18,8 +19,9 @@ const FormJob = props => {
   const companies = useStoreState(state => state.companies);
   const fill = useStoreActions(actions => actions.companies.fill);
   const [missing, isMissing] = useState(false);
-
   const [company, setCompany] = useState('');
+  const JobsList = useStoreState(state => state.jobs.list)
+  const fillJobs = useStoreActions(actions => actions.jobs.fill)
 
   useEffect(() => {
     xhr()
@@ -34,10 +36,10 @@ const FormJob = props => {
   let isBranch = false;
   let positionAlt = true;
 
-  // useEffect(() => {
-  //   collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
-  //   collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
-  // }, []);
+  useEffect(() => {
+    collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
+    collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
+  }, []);
 
   const allSet = e => {
     if (props.type && props.type === 'edit') {
@@ -54,7 +56,7 @@ const FormJob = props => {
       });
     }
     setTimeout(() => {
-      router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+      // router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
     }, 500);
   };
 
@@ -77,11 +79,29 @@ const FormJob = props => {
     xhr()
       .put(`/job/${props.id}`, JSON.stringify(e))
       .then(resp => {
-        console.log(resp.data);
-        fill(resp.data);
+        // console.log(resp.data);
+        
+        // fill(resp.data);
+        // console.log('E::::::::', e)
+        let old = find(JobsList, {'id': props.id})
+        let updated = e
+        updated = {...updated, id: props.id, company_id: old.company_id}
+        
+        let jobs = [...JobsList, updated]
+        
+        fillJobs({
+          data: {
+            items: jobs,
+            total: jobs.length
+          }
+        })
+        
+        console.log('Updated List:', JobsList)
+        
         allSet(props.id);
       })
       .catch(err => {
+        console.log('Error:', err)
         notification.info({
           message: `Error`,
           description: 'Ha ocurrido un error, por favor inténtalo más tarde',
@@ -110,7 +130,13 @@ const FormJob = props => {
 
   return (
     <div>
-      <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={onFinish} scrollToFirstError={true}>
+      {/*<pre>{JSON.stringify(JobsList, false, 2)}</pre>*/}
+      <Form
+        className="umana-form umana-max-witdh"
+        initialValues={props.data}
+        onFinish={onFinish}
+        scrollToFirstError={true}
+      >
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
           <GeneralJob career={data.career} position={positionAlt} />
