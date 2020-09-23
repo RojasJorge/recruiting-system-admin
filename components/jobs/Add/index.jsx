@@ -130,7 +130,6 @@ const FormJob = props => {
     }
   };
 
-  console.log(isBranch);
   return (
     <div>
       <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={onFinish} scrollToFirstError={true}>

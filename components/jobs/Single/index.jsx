@@ -5,7 +5,7 @@ import { Progress, Skeleton, Tag } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
-// import label from '../../../data/labels';
+import label from '../../../data/labels';
 import xhr from '../../../xhr';
 
 const SingleJob = () => {
@@ -81,7 +81,7 @@ const SingleJob = () => {
             {job.jobposition ? (
               <div className="umana-content__item item-md">
                 <label>Puesto</label>
-                {/*<p>{label(job.jobposition)}</p>*/}
+                <p>{label(job.jobposition)}</p>
               </div>
             ) : null}
             {job.experience ? (
@@ -146,7 +146,7 @@ const SingleJob = () => {
                   <div key={idx} style={{ display: 'flex', flexWrap: 'wrap', margin: 10 }}>
                     <div style={{ width: '50%' }}>
                       <label>Nivel</label>
-                      {/*<p>{label(e.id)}</p>*/}
+                      <p>{label(e.id)}</p>
                     </div>
                     <div style={{ width: '40%' }}>
                       <label>Especialidad</label>

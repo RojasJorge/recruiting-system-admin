@@ -19,7 +19,7 @@ const EditJob = () => {
       .get(`/job/${router.query.id}`)
       .then(res => {
         res.type = false;
-        console.log('res job', res);
+
         setJob(res.data);
       })
       .catch(err => isMissing(true));
@@ -84,8 +84,6 @@ const EditJob = () => {
       url: '#compensation',
     },
   ];
-
-  // console.log('Single job:', job)
 
   if (job && job.title) {
     if (job.age) {

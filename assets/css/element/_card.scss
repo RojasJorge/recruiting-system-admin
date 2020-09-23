@@ -23,7 +23,7 @@
 
 .umana-card {
   border: 1px solid rgba($color-blue, 0.5);
-  padding: 30px 15px 20px;
+  padding: 40px 20px;
   margin: 10px;
   display: flex;
   justify-content: center;
@@ -296,6 +296,15 @@
     .card-subtitle {
       height: auto;
       margin-bottom: 10px;
+    }
+  }
+  div.date {
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+    margin-bottom: 20px;
+    * {
+      margin-right: 5px;
     }
   }
 }
