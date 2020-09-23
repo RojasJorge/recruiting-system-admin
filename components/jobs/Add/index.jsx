@@ -14,6 +14,7 @@ import { isEmpty, find } from 'lodash';
 import Jobs from "../index";
 
 const FormJob = props => {
+  
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
   const companies = useStoreState(state => state.companies);
@@ -36,6 +37,18 @@ const FormJob = props => {
   let isBranch = false;
   let positionAlt = true;
 
+  /** Fill jobs from localStorage */
+  useEffect(() => {
+    if(isEmpty(JobsList)) {
+      fillJobs({
+        data: {
+          items: JSON.parse(localStorage.getItem('Jobs')),
+          total: JSON.parse(localStorage.getItem('Jobs')).length
+        }
+      })
+    }
+  }, [])
+  
   useEffect(() => {
     collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
     collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
@@ -65,7 +78,6 @@ const FormJob = props => {
       .post(`/job`, JSON.stringify(e))
       .then(resp => {
         allSet(resp.data);
-        // fill(resp.data);
       })
       .catch(err => {
         notification.info({
@@ -79,12 +91,11 @@ const FormJob = props => {
     xhr()
       .put(`/job/${props.id}`, JSON.stringify(e))
       .then(resp => {
-        // console.log(resp.data);
         
-        // fill(resp.data);
-        // console.log('E::::::::', e)
         let old = find(JobsList, {'id': props.id})
+        
         let updated = e
+  
         updated = {...updated, id: props.id, company_id: old.company_id}
         
         let jobs = [...JobsList, updated]
@@ -95,8 +106,6 @@ const FormJob = props => {
             total: jobs.length
           }
         })
-        
-        console.log('Updated List:', JobsList)
         
         allSet(props.id);
       })
@@ -130,7 +139,6 @@ const FormJob = props => {
 
   return (
     <div>
-      {/*<pre>{JSON.stringify(JobsList, false, 2)}</pre>*/}
       <Form
         className="umana-form umana-max-witdh"
         initialValues={props.data}
