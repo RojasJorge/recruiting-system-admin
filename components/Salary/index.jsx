@@ -102,54 +102,33 @@ const Salary = ({ value = {}, onChange }) => {
     <div className="umana-form--group" style={{ paddingBottom: 0 }}>
       <span className="form-item--lg ant-form-item">
         <label>Moneda:</label>
-        <Select
-          showSearch
-          onChange={e => hajndleCurrency(e, 'currency')}
-          value={values.currency.code}
-        >
-          {monedas
-            ? monedas.map(b => (
-                <Select.Option
-                  key={b.code}
-                  value={b.code}
-                >{`${b.symbol_native} - ${b.name} (${b.code})`}</Select.Option>
-              ))
-            : null}
+        <Select showSearch onChange={e => hajndleCurrency(e, 'currency')} value={values.currency.code}>
+          {monedas ? monedas.map(b => <Select.Option key={b.code} value={b.code}>{`${b.symbol_native} - ${b.name} (${b.code})`}</Select.Option>) : null}
         </Select>
       </span>
       <span className="form-item--md ant-form-item">
         <label>Salario mínimo:</label>
-        <InputNumber
-          name="base_min"
-          onChange={e => handlenChange(e, 'base_min')}
-          value={values.base_min}
-        />
+        <InputNumber name="base_min" onChange={e => handlenChange(e, 'base_min')} value={values.base_min} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>Salario máximo:</label>
-        <InputNumber onChange={e => handlenChange(e, 'base_max')} value={values.base_max} />
+        <InputNumber onChange={e => handlenChange(e, 'base_max')} value={values.base_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>Comisión mínimo:</label>
-        <InputNumber
-          onChange={e => handlenChange(e, 'commission_min')}
-          value={values.commission_min}
-        />
+        <InputNumber onChange={e => handlenChange(e, 'commission_min')} value={values.commission_min} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>Comisión máximo:</label>
-        <InputNumber
-          onChange={e => handlenChange(e, 'commission_max')}
-          value={values.commission_max}
-        />
+        <InputNumber onChange={e => handlenChange(e, 'commission_max')} value={values.commission_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>Salario mínimo:</label>
-        <InputNumber value={values.base_min + values.commission_min} />
+        <InputNumber value={values.base_min + values.commission_min} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>Salario máximo:</label>
-        <InputNumber value={values.base_max + values.commission_max} />
+        <InputNumber value={values.base_max + values.commission_max} min={0} />
       </span>
     </div>
   );

@@ -46,7 +46,7 @@ const Requirements = () => {
         </Form.Item>
       </div>
       <Form.Item label="Años de experiencia" className="form-item--lg" name="experience">
-        <InputNumber />
+        <InputNumber max={100} min={0} />
       </Form.Item>
       <Form.Item
         label="Habilidades*"

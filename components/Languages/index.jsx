@@ -8,47 +8,18 @@ const Languages = props => {
         return (
           <div style={{ width: '100%', marginTop: 20 }}>
             {fields.map(field => (
-              <Space
-                key={field.key}
-                style={{ display: 'flex', paddingBottom: 5 }}
-                align="start"
-                className="umana-form--group"
-              >
-                <Form.Item
-                  {...field}
-                  name={[field.name, 'language']}
-                  fieldKey={['language' + field.fieldKey, 'language']}
-                  label="Idioma"
-                >
-                  <Select showSearch>
-                    {languages
-                      ? languages.map(l => <Select.Option key={l}>{l}</Select.Option>)
-                      : null}
-                  </Select>
+              <Space key={field.key} style={{ display: 'flex', paddingBottom: 5 }} align="start" className="umana-form--group">
+                <Form.Item {...field} name={[field.name, 'language']} fieldKey={['language' + field.fieldKey, 'language']} label="Idioma">
+                  <Select showSearch>{languages ? languages.map(l => <Select.Option key={l}>{l}</Select.Option>) : null}</Select>
                 </Form.Item>
-                <Form.Item
-                  {...field}
-                  name={[field.name, 'comprehension']}
-                  fieldKey={['comprehension' + field.fieldKey, 'comprehension']}
-                  label="Comprensión"
-                >
-                  <InputNumber formatter={value => `${value}%`} />
+                <Form.Item {...field} name={[field.name, 'comprehension']} fieldKey={['comprehension' + field.fieldKey, 'comprehension']} label="Comprensión">
+                  <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
-                <Form.Item
-                  {...field}
-                  name={[field.name, 'speak']}
-                  fieldKey={['speak' + field.fieldKey, 'speak']}
-                  label="Hablado"
-                >
-                  <InputNumber formatter={value => `${value}%`} />
+                <Form.Item {...field} name={[field.name, 'speak']} fieldKey={['speak' + field.fieldKey, 'speak']} label="Hablado">
+                  <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
-                <Form.Item
-                  {...field}
-                  name={[field.name, 'write']}
-                  fieldKey={['write' + field.fieldKey, 'write']}
-                  label="Escrito"
-                >
-                  <InputNumber formatter={value => `${value}%`} />
+                <Form.Item {...field} name={[field.name, 'write']} fieldKey={['write' + field.fieldKey, 'write']} label="Escrito">
+                  <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
                 <a
                   key={field.key + 'add'}

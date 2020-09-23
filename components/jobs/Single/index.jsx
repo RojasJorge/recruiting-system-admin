@@ -104,7 +104,7 @@ const SingleJob = () => {
                 {job.isBranch ? <p>{`La plaza es en una sucursal.`}</p> : null}
               </div>
             ) : null}
-            {job.isBranch ? (
+            {job.isBranch && job.branch ? (
               <div className="umana-content__item item-lg">
                 <label>Dirección de la sucursal</label>
                 <p>

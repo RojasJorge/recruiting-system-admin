@@ -17,12 +17,7 @@ const AcademicLeves = ({ acLevel }) => {
         return (
           <div style={{ width: '100%', marginTop: 20 }}>
             {fields.map(field => (
-              <Space
-                key={field.key}
-                style={{ display: 'flex', paddingBottom: 5 }}
-                align="start"
-                className="umana-form--group no-wrap academicLevel"
-              >
+              <Space key={field.key} style={{ display: 'flex', paddingBottom: 5 }} align="start" className="umana-form--group no-wrap academicLevel">
                 <Form.Item
                   {...field}
                   name={[field.name, 'id']}
@@ -45,31 +40,16 @@ const AcademicLeves = ({ acLevel }) => {
                       : null}
                   </Select>
                 </Form.Item>
-                <Form.Item
-                  {...field}
-                  name={[field.name, 'children']}
-                  fieldKey={['name' + field.fieldKey, 'children']}
-                  label="Especialización"
-                >
+                <Form.Item {...field} name={[field.name, 'children']} fieldKey={['name' + field.fieldKey, 'children']} label="Especialización">
                   <Speciality level={level} />
                 </Form.Item>
-                <Form.Item
-                  {...field}
-                  name={[field.name, 'studyNow']}
-                  fieldKey={[field.fieldKey, 'studyNow']}
-                  label="Se permiten estudiantes"
-                >
+                <Form.Item {...field} name={[field.name, 'studyNow']} fieldKey={[field.fieldKey, 'studyNow']} label="Se permiten estudiantes">
                   <Radio.Group>
                     <Radio.Button value={true}>Si</Radio.Button>
                     <Radio.Button value={false}>No</Radio.Button>
                   </Radio.Group>
                 </Form.Item>
-                <Form.Item
-                  {...field}
-                  name={[field.name, 'logic']}
-                  fieldKey={['logic' + field.fieldKey, 'logic']}
-                  label="Condición Logica"
-                >
+                <Form.Item {...field} name={[field.name, 'logic']} fieldKey={['logic' + field.fieldKey, 'logic']} label="Condición Logica">
                   <Radio.Group
                     onChange={() => {
                       add();

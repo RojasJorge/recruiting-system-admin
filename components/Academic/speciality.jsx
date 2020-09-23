@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { Select } from 'antd';
-
+import { isEmpty } from 'lodash';
 const Speciality = ({ value = {}, onChange, level }) => {
-  const initialState = {
+  let initialState = {
     id: 0,
     name: '',
   };
+  if (!_.isEmpty(value)) {
+    initialState = value;
+  }
   const [values, setValues] = useState(initialState);
-
+  // console.log(value);
   const triggerChange = changedValue => {
     if (onChange) {
       onChange({
@@ -17,6 +20,7 @@ const Speciality = ({ value = {}, onChange, level }) => {
       });
     }
   };
+
   const change = Speciality => {
     return (value = Speciality);
   };
@@ -43,7 +47,7 @@ const Speciality = ({ value = {}, onChange, level }) => {
   };
 
   return (
-    <Select showSearch onChange={e => handlenChange(e, 'id')}>
+    <Select showSearch onChange={e => handlenChange(e, 'id')} value={values.name}>
       {level && level.children
         ? level.children.map((e, idx) => (
             <Select.Option key={idx} value={e.id}>
