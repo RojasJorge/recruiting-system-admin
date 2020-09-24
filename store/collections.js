@@ -24,7 +24,7 @@ export default {
         actions.switchLoading(false);
       })
       .then(response => {
-        console.log('Data from catalogs:', response);
+        // console.log('Data from catalogs:', response);
         typeof response !== 'undefined' ? localStorage.setItem(payload.type.replace('-', '_'), JSON.stringify(response.data.items)) : null;
         typeof response !== 'undefined' ? actions.fill({ data: response.data, type: payload.type.replace('-', '_') }) : null;
         actions.switchLoading(false);

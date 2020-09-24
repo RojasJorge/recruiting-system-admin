@@ -1,7 +1,16 @@
 .ant-table {
   box-shadow: $shadow;
   .ant-table-thead {
-    background: #f2f2f2;
+    background: rgba($color-text, 0.05) !important;
+    th {
+      background: transparent !important;
+      color: $color-blue;
+      border-bottom: 3px solid;
+      border-bottom-color: rgba($color-blue, 0.1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
   }
   th:first-child {
     padding-left: 40px !important;
@@ -17,17 +26,35 @@
       background: transparent !important;
     }
   }
+  .ant-table-row {
+    &:hover {
+      background: rgba(#f2f2f2, 0.5) !important;
+      td {
+        background: rgba(#f2f2f2, 0.5) !important;
+      }
+    }
+  }
   .ant-table-row.ant-table-row-level-1 {
     .ant-table-row-indent.indent-level-1 {
-      width: 40px;
+      width: 10px;
     }
     td:first-child {
       i.material-icons {
-        display: none;
+        transform: translateY(5px);
+        margin-right: 10px;
+        cursor: pointer;
       }
     }
   }
   .ant-table-row.ant-table-row-level-0 {
+    &:first-child {
+      td {
+        border-top: 1px solid rgba($color-blue, 0);
+      }
+    }
+    td {
+      border-top: 1px solid rgba($color-blue, 0.3);
+    }
     td:first-child {
       i.material-icons {
         transform: translateY(5px);
@@ -39,9 +66,5 @@
   .ant-btn.ant-btn-link {
     text-align: center;
     font-size: 18px;
-    i {
-      font-size: 18px;
-      margin-right: 0;
-    }
   }
 }

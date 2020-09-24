@@ -81,13 +81,20 @@ const List = ({ type, title }) => {
           expandable={{
             expandIcon: ({ expanded, onExpand, record }) =>
               expanded ? (
-                <i className="material-icons" onClick={e => onExpand(record, e)}>
-                  expand_less
-                </i>
-              ) : (
+                // console.log(record)
+                record.children ? (
+                  <i className="material-icons" onClick={e => onExpand(record, e)}>
+                    expand_less
+                  </i>
+                ) : (
+                  <span style={{ marginRight: 35 }}></span>
+                )
+              ) : record.children ? (
                 <i className="material-icons" onClick={e => onExpand(record, e)}>
                   expand_more
                 </i>
+              ) : (
+                <span style={{ marginRight: 35 }}></span>
               ),
           }}
           bordered
