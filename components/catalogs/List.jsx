@@ -1,82 +1,95 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { Empty, Spin, Table } from 'antd';
-import { Button } from 'antd';
+import { Table, Button, Spin } from 'antd';
 import { PlusCircleOutlined, SyncOutlined } from '@ant-design/icons';
-import { isEmpty } from 'lodash';
-// import FileExplorerTheme from 'react-sortable-tree-theme-minimal'
-import PageTitle from '../Misc/PageTitle';
-import EditModal from './EditModal';
 import xhr from '../../xhr';
-import router from 'next/router'
+
+import EditModal from './EditModal';
 
 const List = ({ type, title }) => {
-  const token = useStoreState(state => state.auth.token);
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
-  const fill = useStoreActions(actions => actions.collections.fill);
-
-  const [list, setList] = useState([]);
-  const [add, switchEdit] = useState(false);
-
-  /** Get collection */
-  const get = p => {
-    // collectionsActions.get({ type: 'academic_level', token: localStorage.getItem('uToken') });
-    xhr()
-      .get(`/${type}`)
-      // .get(`/${type}`)
-      .then(resp => {
-        fill(resp.data);
-        // console.log('response', resp);
-      })
-      .catch(err => console.log(err));
-  };
+  const [visible, switchEdit] = useState(false);
+  const [item, setItem] = useState({});
+  const [edit, setEdit] = useState(false);
 
   // /** Update single */
-  // const update = async o => {
-  //   /** Extract id */
-  //   const id = o.id;
-  //   delete o.id; /** Delete for api call */
-
-  //   const url = `/${type}/${id}`;
-
-  //   await xhr()
-  //     .put(url, JSON.stringify(o))
-  //     .then(resp => get())
-  //     .catch(err => console.log(err));
-  // };
-
-  const show = id => {
-    // console.log('=========', id);
-    return <a id={id.id}>hola</a>;
+  const update = async (o, id) => {
+    /** Extract id */
+    const url = type.replace('_', '-') + '/' + id;
+    const token = localStorage.getItem('uToken');
+    collectionsActions.update({ url, o, token });
+    get();
+    setTimeout(() => {
+      switchEdit(false);
+      setEdit(false);
+      setItem({});
+    }, 500);
   };
 
-  // useEffect(() => {
-  //   setList(data.list);
-  // }, [data.list]);
+  const get = () => {
+    collectionsActions.get({ type });
+  };
+
+  const addItem = o => {
+    const url = type.replace('_', '-');
+    const token = localStorage.getItem('uToken');
+    collectionsActions.add({ url, o, token });
+    setTimeout(() => {
+      switchEdit(false);
+      setEdit(false);
+      setItem({});
+    }, 500);
+    get();
+  };
+
+  // onSubmit
+  const onSubmit = (e, edit, id) => {
+    if (edit) {
+      update(e, id);
+    } else {
+      addItem(e);
+    }
+  };
+
+  const openModale = (id, name, parent, type) => {
+    setEdit(type);
+    const item = {
+      id: id,
+      name: name,
+      parent: parent,
+    };
+    setItem(item);
+    switchEdit(true);
+  };
 
   useEffect(() => {
-    collectionsActions.get({type})
+    get();
   }, []);
-
-  // console.log('cat list', data);
 
   return (
     <>
-      {/*<pre>{JSON.stringify(data, false, 2)}</pre>*/}
       <div className="row align-items-center">
-        <div className="col">
-          <PageTitle tag="h1" className="title--main title--page">
-            {data.loading ? <Spin indicator={<SyncOutlined spin />} /> : null}
-          </PageTitle>
-        </div>
+        <div className="col">{data.loading ? <Spin indicator={<SyncOutlined spin />} /> : null}</div>
         <div className="umana-element__add">
-          <Button icon={<i className="material-icons">add</i>} shape="circle" type="primary" size="large" onClick={() => switchEdit(!add)} ghost />
+          <Button icon={<i className="material-icons">add</i>} shape="circle" type="primary" className="circle-fixed" size="large" onClick={() => switchEdit(!visible)} ghost />
         </div>
       </div>
       <div className="umana-container">
         <Table
+          expandable={{
+            expandIcon: ({ expanded, onExpand, record }) =>
+              expanded ? (
+                <i className="material-icons" onClick={e => onExpand(record, e)}>
+                  expand_less
+                </i>
+              ) : (
+                <i className="material-icons" onClick={e => onExpand(record, e)}>
+                  expand_more
+                </i>
+              ),
+          }}
           bordered
           size="middle"
           dataSource={data[type]}
@@ -89,17 +102,20 @@ const List = ({ type, title }) => {
               key: 'name',
             },
             {
-              title: 'Action',
               key: 'operation',
               fixed: 'right',
-              width: 100,
+              width: 50,
 
-              render: e => <a id={e.id}>edit</a>,
+              render: e => (
+                <Button id={e.id} onClick={o => openModale(e.id, e.name, e.parent, true)} type="link">
+                  <i className="material-icons">edit</i>
+                </Button>
+              ),
             },
           ]}
         />
       </div>
-      <EditModal add={add} switchEdit={switchEdit} title={title} />
+      <EditModal visible={visible} switchEdit={switchEdit} title={title} data={item} clear={setItem} treeData={data[type]} edit={edit} onSubmit={onSubmit} setEdit={setEdit} />
     </>
   );
 };

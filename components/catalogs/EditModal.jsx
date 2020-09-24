@@ -1,58 +1,94 @@
-import { Form, Input, Button, Drawer, TreeSelect } from 'antd';
-const { Item } = Form;
+import { Form, Input, Button, Drawer, Select } from 'antd';
+// const { TreeNode } = TreeSelect;
 
-const { TreeNode } = TreeSelect;
-
-const EditModal = ({ add, switchEdit, title }) => {
+const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, setEdit, onSubmit }) => {
   const onFinish = field => {
-    console.log(field);
+    if (edit) {
+      onSubmit(field, edit, data.id);
+    } else {
+      onSubmit(field, false);
+    }
   };
 
-  const treeData = [
-    { id: 1, pId: 0, value: '1', title: 'Expand to load' },
-    { id: 2, pId: 0, value: '2', title: 'Expand to load' },
-    { id: 3, pId: 0, value: '3', title: 'Tree Node', isLeaf: true },
-  ];
+  const onReset = () => {
+    clear({});
+    switchEdit(false);
+    setEdit(false);
+  };
 
   return (
-    <Drawer
-      placement="right"
-      closable={true}
-      onClose={() => switchEdit(!add)}
-      visible={add}
-      width={600}
-      title={title}
-      destroyOnClose={true}
-    >
+    <Drawer placement="right" closable={true} onClose={() => onReset()} visible={visible} width={600} title={title} destroyOnClose={true}>
       <div className="umana-drawer">
-        <h3>Agregar</h3>
-        <Form onFinish={onFinish}>
-          <Item
-            label="Título"
-            name="title"
-            rules={[
-              {
-                required: true,
-                message: 'Campo requerido',
-              },
-            ]}
-          >
-            <Input />
-          </Item>
-          <Item label="Padre" name="parent">
-            {/* <TreeSelect
-							treeDataSimpleMode
-							style={{ width: '100%' }}
-							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-							placeholder="Seleccione un padre"
-							// onChange={onChange}
-							treeData={treeData}
-						/> */}
-          </Item>
-          <Button type="primary" size="large">
-            Agregar
-          </Button>
-        </Form>
+        <h3>{edit ? 'Editar' : 'Agregar'}</h3>
+        {data && data.name ? (
+          <Form onFinish={onFinish} initialValues={data}>
+            <Form.Item
+              label="Título"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Campo requerido',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label="Padre" name="parent">
+              <Select style={{ width: '100%' }} dropdownStyle={{ maxHeight: 400, overflow: 'auto' }} placeholder="Seleccione un padre">
+                {treeData
+                  ? treeData.map(e => (
+                      <Select.Option key={e.id} value={e.id}>
+                        {e.name}
+                      </Select.Option>
+                    ))
+                  : null}
+              </Select>
+            </Form.Item>
+            <div className="umana-form--footer columns">
+              <Button type="cancel" size="large" htmlType="button" onClick={onReset}>
+                Cancelar
+              </Button>
+              <Button type="primary" size="large" htmlType="submit">
+                {edit ? 'Editar' : 'Agregar'}
+              </Button>
+            </div>
+          </Form>
+        ) : (
+          <Form onFinish={onFinish}>
+            <Form.Item
+              label="Título"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Campo requerido',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label="Padre" name="parent">
+              <Select style={{ width: '100%' }} dropdownStyle={{ maxHeight: 400, overflow: 'auto' }} placeholder="Seleccione un padre">
+                {treeData
+                  ? treeData.map(e => (
+                      <Select.Option key={e.id} value={e.id}>
+                        {e.name}
+                      </Select.Option>
+                    ))
+                  : null}
+              </Select>
+            </Form.Item>
+            <div className="umana-form--footer columns">
+              <Button type="cancel" size="large" onClick={onReset}>
+                Cancelar
+              </Button>
+              <Button type="primary" size="large" htmlType="submit">
+                {edit ? 'Editar' : 'Agregar'}
+              </Button>
+            </div>
+          </Form>
+        )}
       </div>
     </Drawer>
   );

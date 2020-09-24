@@ -176,6 +176,12 @@ form.ant-form.ant-form-horizontal {
   .umana-form--footer {
     padding: 10px 0 0;
     width: 100%;
+    &.columns {
+      display: flex;
+      .ant-btn {
+        margin: 10px;
+      }
+    }
   }
 }
 

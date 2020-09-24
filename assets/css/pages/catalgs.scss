@@ -1,0 +1,47 @@
+.ant-table {
+  box-shadow: $shadow;
+  .ant-table-thead {
+    background: #f2f2f2;
+  }
+  th:first-child {
+    padding-left: 40px !important;
+  }
+  th,
+  td {
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    &:after,
+    &:before {
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      background: transparent !important;
+    }
+  }
+  .ant-table-row.ant-table-row-level-1 {
+    .ant-table-row-indent.indent-level-1 {
+      width: 40px;
+    }
+    td:first-child {
+      i.material-icons {
+        display: none;
+      }
+    }
+  }
+  .ant-table-row.ant-table-row-level-0 {
+    td:first-child {
+      i.material-icons {
+        transform: translateY(5px);
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  .ant-btn.ant-btn-link {
+    text-align: center;
+    font-size: 18px;
+    i {
+      font-size: 18px;
+      margin-right: 0;
+    }
+  }
+}

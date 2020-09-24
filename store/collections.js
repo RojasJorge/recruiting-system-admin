@@ -24,23 +24,56 @@ export default {
         actions.switchLoading(false);
       })
       .then(response => {
-        console.log('Data from catalogs:', response)
+        console.log('Data from catalogs:', response);
         typeof response !== 'undefined' ? localStorage.setItem(payload.type.replace('-', '_'), JSON.stringify(response.data.items)) : null;
         typeof response !== 'undefined' ? actions.fill({ data: response.data, type: payload.type.replace('-', '_') }) : null;
         actions.switchLoading(false);
       });
   }),
-  update: thunk(async (actions, payload) => {
+  // add
+  add: thunk(async (actions, payload) => {
+    // console.log('payload type', payload.type);
+    console.log('payload', payload);
+
     actions.switchLoading(true);
 
     const token = payload.token;
-    const type = payload.type;
+    const type = payload.url;
     delete payload.token;
-    delete payload.type;
+    delete payload.url;
 
     /** Send request */
     await axios
-      .put(`${config.app.api_url}/${type}`, JSON.stringify(payload), {
+      .post(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/${type}`, JSON.stringify(payload.o), {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      })
+      .catch(error => {
+        console.log(error);
+        actions.switchLoading(false);
+      })
+      .then(response => {
+        actions.switchLoading(false);
+        return;
+      });
+  }),
+  // update
+  update: thunk(async (actions, payload) => {
+    // console.log('payload type', payload.type);
+    console.log('payload', payload);
+
+    actions.switchLoading(true);
+
+    const token = payload.token;
+    const type = payload.url;
+    delete payload.token;
+    delete payload.url;
+
+    /** Send request */
+    await axios
+      .put(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/${type}`, JSON.stringify(payload.o), {
         headers: {
           'Content-Type': 'application/json',
           Authorization: token,

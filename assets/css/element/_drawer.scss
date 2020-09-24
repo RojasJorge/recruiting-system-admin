@@ -8,6 +8,7 @@
       width: 50% !important;
     }
     .ant-drawer-content .ant-drawer-wrapper-body {
+      padding-top: 15%;
       .ant-drawer-header {
         padding-left: 56px;
         display: block;
@@ -25,15 +26,16 @@
       }
       .umana-drawer {
         & > h3 {
-          font-size: 32px;
-          &:after {
-            content: '';
-            display: block;
-            width: 30px;
-            height: 5px;
-            margin-top: 10px;
-            background-color: $color-blue;
-            opacity: 0.3;
+          font-weight: 300;
+          margin-bottom: 40px;
+          font-size: 34px;
+          @include bp(xmedium) {
+            font-size: 45px;
+          }
+        }
+        .ant-form {
+          @include bp(xmedium) {
+            padding: 10px 20px;
           }
         }
       }
