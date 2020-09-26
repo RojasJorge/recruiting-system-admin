@@ -116,7 +116,7 @@ h5 {
 .umana-container {
   width: 100%;
   padding: 30px 20px;
-  background: $bg-medium;
+  // background: $bg-medium;
 }
 
 .umana-layout {
@@ -236,6 +236,60 @@ h5 {
   padding: 30px 0;
   &.bg-color {
     background: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
+  }
+  &.theme-orange {
+    .umana-layout--content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: $color-orange;
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: $color-orange;
+    }
+  }
+  &.theme-green {
+    .umana-layout--content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: $color-green;
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: $color-green;
+    }
+  }
+  &.theme-blue {
+    .umana-layout--content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: $color-blue;
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: $color-blue;
+    }
   }
   @include element(flex) {
     padding: 30px 20px;

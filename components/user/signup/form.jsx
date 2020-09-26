@@ -7,6 +7,7 @@ import Router from 'next/router';
 
 const SignupForm = props => {
   const login = useStoreActions(actions => actions.auth.login);
+
   const openNotification = placement => {
     notification.info({
       message: `Error`,

@@ -7,7 +7,7 @@ const UserDropdown = props => {
     <Menu className={` ${props.scope}`}>
       <Menu.Item className={`umana-dropdown--item-user ${props.scope}`}>
         <div className="umana-dpdw-card">
-          {props.scope === 'talento' ? <Avatar icon="user" size={50} /> : null}
+          {props.scope === 'talento' ? <Avatar icon={<i className="material-icons">person</i>} size={50} /> : null}
           <div>
             {props.user.name ? (
               <Link href="/admin/profile">

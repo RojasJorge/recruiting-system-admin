@@ -101,7 +101,7 @@ const List = ({ type, title }) => {
           size="middle"
           dataSource={data[type]}
           rowKey={record => record.id}
-          pagination={false}
+          pagination={true}
           columns={[
             {
               title: 'Titulo',
