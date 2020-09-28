@@ -70,22 +70,22 @@ const UserProfile = _ => {
 	const switchStep = _ => {
 		switch (current) {
 			case 0:
-				return <Personal/>;
+				return <Personal switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 1:
-				return <Documents/>;
+				return <Documents switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 2:
-				return <About/>;
+				return <About switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 3:
-				return <LookingFor/>;
+				return <LookingFor switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 4:
-				return <AcademicLevels/>;
+				return <AcademicLevels switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 5:
-				return <Experiences/>;
+				return <Experiences switchCurrent={switchCurrent} current={current}/>;
 				break;
 			default:
 				return <Personal update={update}/>;

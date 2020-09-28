@@ -72,6 +72,7 @@ const Course = ({course, counter, addCourses, courses}) => {
 									picker="year"
 									value={_course.year.toString()}
 									style={{width: '100%'}}
+									size="large"
 									onChange={onDatePickerChange}
 								/>
 							</Item>

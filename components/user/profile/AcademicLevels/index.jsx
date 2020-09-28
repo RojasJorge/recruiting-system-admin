@@ -1,18 +1,30 @@
 import {useEffect, useState} from "react";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import {PlusCircleOutlined, EnterOutlined} from "@ant-design/icons";
-import {Button, Alert, Affix} from "antd";
+import {Button, Alert, Affix, notification} from "antd";
 import {isEmpty} from "lodash";
 import Level from "./Level";
 import Courses from "../Courses";
 import xhr from "../../../../xhr";
+import router from "next/router";
 
 const AcademicLevels = _ => {
 	
-	const auth = useStoreState(state => state.auth);
+	/** Global state */
+	const {
+		profile: {
+			id: ID,
+			fields: {
+				academic
+			}
+		},
+	} = useStoreState(state => state.auth.user)
+	
+	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
+	
 	const makeRandomId = useStoreActions(actions => actions.tools.makeRandomId);
 	
-	const [levels, addLevels] = useState([]);
+	const [levels, addLevels] = useState(academic.studies);
 	const [careers, addCareers] = useState([]);
 	const [academicLevels, addAcademicLevels] = useState([]);
 	
@@ -21,18 +33,49 @@ const AcademicLevels = _ => {
 	
 	/** Get collection */
 	const getCareers = p => xhr()
-		.get(`/career?pager=${JSON.stringify({page: 1, limit: 1000})}`)
+		.get(`/career?page=1&offset=1000`)
 		.then(resp => addCareers(resp.data.items))
 		.catch(err => console.log(err));
 	
 	const getAcademicLevels = p => xhr()
-		.get(`/academic-level?pager=${JSON.stringify({page: 1, limit: 1000})}`)
+		.get(`/academic-level?page=1&offset=1000`)
 		.then(resp => addAcademicLevels(resp.data.items))
 		.catch(err => console.log(err));
 	
+	/** Notifications */
+	const notify = (type, message, description) => {
+		notification[type]({
+			message,
+			description
+		})
+	}
+	
+	const onSave = _ => {
+		let merged = Object.assign(academic.studies, levels)
+		
+		// console.log('Merged academic levels:', merged)
+		// return false
+		
+		xhr()
+			.put(`/profile/${ID}`, JSON.stringify({
+				fields: {
+					academic
+				}
+			}))
+			.then(resp => {
+				updateProfile({type: 'academic', academic})
+				
+				/** Send notification success */
+				notify('success', 'Ficha Niveles academicos (Estudios) actualizada.', 'Vamos al siguiente paso...')
+				// switchCurrent((current + 1))
+				// router.push(`${router.router.pathname}?current=${(current + 1)}`)
+			})
+			.catch(err => console.log('Error:', err))
+	}
+	
 	useEffect(() => {
-		auth.token ? getCareers() : null;
-		auth.token ? getAcademicLevels() : null;
+		getCareers()
+		getAcademicLevels()
 	}, []);
 	
 	
@@ -90,7 +133,16 @@ const AcademicLevels = _ => {
 					}
 				</div>
 				<div className="col-md-12">
-					{/*<pre>{JSON.stringify(levels, false, 2)}</pre>*/}
+					<Button
+						type="dashed"
+						size="large"
+						onClick={() => onSave()}
+						block>Guardar los niveles académicos
+					</Button>
+				</div>
+				<div className="col-md-12">
+					
+					<pre>{JSON.stringify(levels, false, 2)}</pre>
 					<Courses />
 				</div>
 			</div>

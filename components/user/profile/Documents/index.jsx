@@ -1,15 +1,55 @@
-import {Form, Input, InputNumber, Button, Select, Divider, Upload, message} from "antd";
+import {Form, Input, InputNumber, Button, Select, Divider, Upload, message, notification} from "antd";
 import {InboxOutlined} from "@ant-design/icons";
+import xhr from "../../../../xhr";
+import router from "next/router";
+import {useStoreActions, useStoreState} from "easy-peasy";
 
 const {Item} = Form;
 const {Option} = Select;
 const {Dragger} = Upload;
 
-const Documents = _ => {
+const Documents = ({switchCurrent, current}) => {
 	
-	const onFinish = values => {
-		// console.log(values)
-	};
+	/** Global state */
+	const {
+		profile: {
+			id,
+			fields: {
+				personal
+			}
+		},
+	} = useStoreState(state => state.auth.user)
+	
+	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
+	
+	const onFinish = fields => {
+		
+		let merged = Object.assign(personal, fields)
+		
+		xhr()
+			.put(`/profile/${id}`, JSON.stringify({
+				fields: {
+					personal: fields
+				}
+			}))
+			.then(resp => {
+				updateProfile({type: 'personal', fields: merged})
+				
+				/** Send notification success */
+				notify('success', 'Ficha documentos actualizada.', 'Vamos al siguiente paso...')
+				switchCurrent((current + 1))
+				router.push(`${router.router.pathname}?current=${(current + 1)}`)
+			})
+			.catch(err => console.log('Error:', err))
+	}
+	
+	/** Notifications */
+	const notify = (type, message, description) => {
+		notification[type]({
+			message,
+			description
+		})
+	}
 	
 	const props = {
 		name: 'file',
@@ -34,12 +74,13 @@ const Documents = _ => {
 		<Form
 			className="animated fadeInUp"
 			onFinish={onFinish}
+			initialValues={personal}
 		>
 			<div className="row">
 				<div className="col-md-12">
 					<label htmlFor="dpi">DPI:</label>
 					<Item name="dpi">
-						<InputNumber style={{width: '100%'}} min={0} size="large"/>
+						<Input style={{width: '100%'}} min={0} size="large"/>
 					</Item>
 				</div>
 				<div className="col-md-6">
@@ -55,14 +96,14 @@ const Documents = _ => {
 					</Item>
 				</div>
 				<div className="col-md-6">
-					<label htmlFor="drivers_license">Licencia:</label>
-					<Item name="drivers_license">
+					<label htmlFor="driversLicence">Licencia:</label>
+					<Item name="driversLicence">
 						<InputNumber style={{width: '100%'}} min={0} size="large"/>
 					</Item>
 				</div>
 				<div className="col-md-6">
-					<label htmlFor="license_type">Tipo de licencia:</label>
-					<Item name="license_type">
+					<label htmlFor="driversLicenceType">Tipo de licencia:</label>
+					<Item name="driversLicenceType">
 						<Select size="large" mode="multiple">
 							<Option value="a">A</Option>
 							<Option value="b">B</Option>

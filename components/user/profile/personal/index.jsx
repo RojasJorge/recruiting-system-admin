@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import {Button, Form, notification} from "antd";
 import Names from "./Names";
-// import Location from "./Location";
+import router from 'next/router'
 import Locations from "../../../Location";
 import General from "./General";
 import Contact from "./Contact";
@@ -12,7 +12,7 @@ import xhr from "../../../../xhr";
 /** Import form sections */
 const FormItem = Form.Item;
 
-const Personal = _ => {
+const Personal = ({switchCurrent, current}) => {
 	/** Global state */
 	const {
 		profile: {
@@ -49,22 +49,24 @@ const Personal = _ => {
 				updateProfile({type: 'personal', fields})
 				
 				/** Send notification success */
-				notify('success', 'Genial!', 'Ficha personal actualizada.')
+				notify('success', 'Ficha personal actualizada.', 'Vamos al siguiente paso...')
+				switchCurrent((current + 1))
+				router.push(`${router.router.pathname}?current=${(current + 1)}`)
 			})
 			.catch(err => console.log('Error:', err))
 	}
 	
 	/** Notifications */
-	const notify = (type, description) => {
+	const notify = (type, message, description) => {
 		notification[type]({
-			message: null,
+			message,
 			description
 		})
 	}
 	
 	return (
 		<>
-			<pre>{JSON.stringify(personal, false, 2)}</pre>
+			{/*<pre>{JSON.stringify(personal, false, 2)}</pre>*/}
 			<div className="row">
 				<div className="col-md-12">
 					<h2>Información personal:</h2>

@@ -53,7 +53,7 @@ const Courses = _ => {
 					}
 				</div>
 				<div className="col-md-12">
-					{/*<pre>{JSON.stringify(courses, false, 2)}</pre>*/}
+					<pre>{JSON.stringify(courses, false, 2)}</pre>
 				</div>
 			</div>
 		</>

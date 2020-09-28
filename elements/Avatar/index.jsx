@@ -79,10 +79,10 @@ const UploadAvatar = props => {
 				</Button>
 				<input type="file" className="inputUploadfield" accept="image/jpeg" onChange={onChange}/>
 			</div>
-			<div style={{width: '100%'}}>
-				<h3 style={{color: 'red'}}>Image object:</h3>
-				<pre>{JSON.stringify(image, false, 2)}</pre>
-			</div>
+			{/*<div style={{width: '100%'}}>*/}
+			{/*	<h3 style={{color: 'red'}}>Image object:</h3>*/}
+			{/*	<pre>{JSON.stringify(image, false, 2)}</pre>*/}
+			{/*</div>*/}
 		</div>
 	);
 };

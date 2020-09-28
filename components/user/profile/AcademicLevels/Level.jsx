@@ -1,8 +1,8 @@
 import {useState} from "react";
 import PropTypes from "prop-types";
-import {DeleteOutlined, EnterOutlined} from "@ant-design/icons";
-import {Form, Input, Select, DatePicker, Switch, Button} from "antd";
-import {isEmpty, filter, remove} from "lodash";
+import {CheckOutlined, DeleteOutlined} from "@ant-design/icons";
+import {Button, DatePicker, Form, Input, Select, Switch} from "antd";
+import {filter, isEmpty, remove} from "lodash";
 
 const {Item} = Form;
 const {Option} = Select;
@@ -119,6 +119,7 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 									format="DD-MM-YYYY"
 									value={_level.start_date.toString()}
 									style={{width: '100%'}}
+									size="large"
 									onChange={(date, dateString) => onDatePickerChange(date, dateString, "start_date")}
 								/>
 							</Item>
@@ -131,6 +132,7 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 								<DatePicker
 									value={_level.end_date.toString()}
 									style={{width: '100%'}}
+									size="large"
 									onChange={(date, dateString) => onDatePickerChange(date, dateString, "end_date")}
 								/>
 							</Item>
@@ -150,8 +152,17 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 								<Switch checked={_level.currently} onChange={switchCurrently}/>
 							</Item>
 						</div>
+						<div className="col">
+							<Button
+								type="link"
+								size="small"
+								htmlType="submit"
+								// disabled
+								icon={<CheckOutlined/>}>
+								Confirmar agregar</Button>
+						</div>
 					</div>
-					<Button htmlType="submit" icon={<EnterOutlined/>}>Confirmar agregar</Button>
+				
 				</fieldset>
 			</Form>
 		</>
