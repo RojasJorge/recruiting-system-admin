@@ -1,4 +1,5 @@
 @import './variables';
+@import './resets';
 
 //#Media Queries
 @mixin bp($name) {
@@ -6,8 +7,7 @@
     @media #{inspect(map-get($breakpoints, $name))} {
       @content;
     }
-  }
-  @else {
+  } @else {
     @warn "Couldn't find a breakpoint named `#{$name}`.";
   }
 }
@@ -28,17 +28,17 @@
 //#Transitions
 
 @mixin transition($property, $time) {
-  transition: $property $time cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: $property $time cubic-bezier(0.4, 0, 0.2, 1);
   will-change: $property;
 }
 
 @mixin transitionEnter($property, $time) {
-  transition: $property $time cubic-bezier(0.0, 0.0, 0.2, 1);
+  transition: $property $time cubic-bezier(0, 0, 0.2, 1);
   will-change: $property;
 }
 
 @mixin transitionExit($property, $time) {
-  transition: $property $time cubic-bezier(0.4, 0.0, 1, 1);
+  transition: $property $time cubic-bezier(0.4, 0, 1, 1);
   will-change: $property;
 }
 
@@ -56,9 +56,9 @@
 @mixin keep-aspect-ratio($x, $y) {
   position: relative;
   overflow: hidden;
-  
+
   &::before {
-    content: "";
+    content: '';
     display: block;
     margin-top: percentage($y / $x);
   }

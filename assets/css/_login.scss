@@ -1,0 +1,115 @@
+//all signup and login
+
+.umana-signup-login-title {
+  margin-bottom: 50px;
+  &.have-subtitle {
+    margin-bottom: 20px;
+  }
+  * {
+    font-size: 34px;
+    font-family: 'Muli', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+  }
+  h1 {
+    margin: 0;
+  }
+}
+.umana-signup-login-subtitle {
+  margin-bottom: 50px;
+  width: 100%;
+  * {
+    font-size: 20px;
+  }
+}
+
+//singup
+
+.umana-signup {
+  @include max-width();
+  min-height: calc(100vh - 80px);
+  .ant-steps.ant-steps-horizontal {
+    padding-right: 0;
+    padding-left: 0;
+    background: transparent;
+    box-shadow: none;
+    .ant-steps-item-tail,
+    .ant-steps-item-icon {
+      display: none;
+    }
+    .ant-steps-item {
+      background: transparent;
+      box-shadow: none;
+      transition: 0.5s ease-in-out;
+      &.ant-steps-item-wait,
+      &.ant-steps-item-do {
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0;
+        margin-right: 0;
+      }
+
+      &.ant-steps-item-active,
+      &.ant-steps-item-process {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+    .ant-steps-item-content {
+      width: 100%;
+      text-align: left;
+      .ant-steps-item-title {
+        font-size: 20px;
+        font-family: $font-primary;
+        text-align: left;
+        color: $color-blue;
+      }
+    }
+  }
+  .ant-radio-group.ant-radio-group-outline.ant-radio-group-large {
+    .ant-radio-button-wrapper {
+      padding: 30px 20px;
+      i {
+        font-size: 30px;
+        margin-right: 10px;
+        transform: translateY(10px);
+      }
+      &.ant-radio-button-wrapper-checked {
+        border-left-color: $color-blue;
+      }
+    }
+  }
+  .ant-radio-group.ant-radio-group-large {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 50px;
+    .ant-radio-wrapper {
+      font-size: 22px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      .ant-radio {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        .ant-radio-input,
+        .ant-radio-inner {
+          width: 30px;
+          height: 30px;
+          border: 2px solid;
+          border-color: $color-blue;
+          &:after {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: $color-blue;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
+  }
+}

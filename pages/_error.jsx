@@ -1,5 +1,3 @@
-import "../assets/css/error.scss";
-
 const Error = () => (
   <div className="container page--error">
     <div className="row align-items-center justify-content-center">
@@ -11,6 +9,6 @@ const Error = () => (
       </div>
     </div>
   </div>
-);
+)
 
-export default Error;
+export default Error

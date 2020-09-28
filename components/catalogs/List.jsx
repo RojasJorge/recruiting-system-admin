@@ -1,87 +1,138 @@
-import { useEffect, useState } from "react";
-import { useStoreState, useStoreActions } from "easy-peasy";
-import { Empty, Spin, Icon, Button } from "antd";
-import { isEmpty } from "lodash";
-import SortableTree from "react-sortable-tree";
-import PageTitle from "../Misc/PageTitle";
-import EditModal from "./EditModal";
-import "react-sortable-tree/style.css";
-import "./index.scss";
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { Table, Button, Spin } from 'antd';
+import { PlusCircleOutlined, SyncOutlined } from '@ant-design/icons';
+import xhr from '../../xhr';
+
+import EditModal from './EditModal';
 
 const List = ({ type, title }) => {
-  useEffect(() => {
-    get({ token, type });
-  }, []);
-
-  const get = useStoreActions(action => action.collections.get);
-  const update = useStoreActions(action => action.collections.update);
-  const token = useStoreState(state => state.auth.token);
   const data = useStoreState(state => state.collections);
+  const collectionsActions = useStoreActions(actions => actions.collections);
+  const [visible, switchEdit] = useState(false);
+  const [item, setItem] = useState({});
+  const [edit, setEdit] = useState(false);
 
-  const [list, setList] = useState([]);
-  const [add, switchEdit] = useState(false);
-
-  useEffect(() => {
-    setList(data.list);
-  }, [data.list]);
-
-  const onChange = treeData => setList(treeData);
-
-  const onMoveNode = ({
-    treeData,
-    node,
-    nextParentNode,
-    prevPath,
-    prevTreeIndex,
-    nextPath,
-    nextTreeIndex
-  }) => {
-    update({
-      id: node.id,
-      parent: nextParentNode ? nextParentNode.id : null,
-      token,
-      type
-    });
+  // /** Update single */
+  const update = async (o, id) => {
+    /** Extract id */
+    const url = type.replace('_', '-') + '/' + id;
+    const token = localStorage.getItem('uToken');
+    collectionsActions.update({ url, o, token });
+    get();
+    setTimeout(() => {
+      switchEdit(false);
+      setEdit(false);
+      setItem({});
+    }, 500);
   };
 
+  const get = () => {
+    collectionsActions.get({ type });
+  };
+
+  const addItem = o => {
+    const url = type.replace('_', '-');
+    const token = localStorage.getItem('uToken');
+    collectionsActions.add({ url, o, token });
+    setTimeout(() => {
+      switchEdit(false);
+      setEdit(false);
+      setItem({});
+    }, 500);
+    get();
+  };
+
+  // onSubmit
+  const onSubmit = (e, edit, id) => {
+    if (edit) {
+      update(e, id);
+    } else {
+      addItem(e);
+    }
+  };
+
+  const openModale = (id, name, parent, type) => {
+    setEdit(type);
+    const item = {
+      id: id,
+      name: name,
+      parent: parent,
+    };
+    setItem(item);
+    switchEdit(true);
+  };
+
+  useEffect(() => {
+    get();
+  }, []);
+
   return (
-    <div className="umana-layout">
+    <>
       <div className="row align-items-center">
-        <div className="col">
-          <PageTitle tag="h1" className="title--main title--page">
-            {title}{" "}
-            {data.loading ? (
-              <Spin indicator={<Icon type="sync" spin />} />
-            ) : null}
-          </PageTitle>
-        </div>
-        <div className="col col--contents-right">
-          <Button
-            icon="plus"
-            shape="circle"
-            type="primary"
-            size="large"
-            onClick={() => switchEdit(!add)}
-            ghost
-          />
+        <div className="col">{data.loading ? <Spin indicator={<SyncOutlined spin />} /> : null}</div>
+        <div className="umana-element__add">
+          <Button icon={<i className="material-icons">add</i>} shape="circle" type="primary" className="circle-fixed" size="large" onClick={() => switchEdit(!visible)} ghost />
         </div>
       </div>
-      {!data.loading ? (
-        !isEmpty(list) ? (
-          <SortableTree
-            style={{ height: "100vh", overflow: "hidden" }}
-            treeData={list}
-            onChange={onChange}
-            onMoveNode={onMoveNode}
-            switchEdit={switchEdit}
-          />
-        ) : (
-          <Empty description="No hay datos" />
-        )
-      ) : null}
-      <EditModal add={add} switchEdit={switchEdit} />
-    </div>
+      <div className="umana-container">
+        <Table
+          expandable={{
+            expandIcon: ({ expanded, onExpand, record }) =>
+              expanded ? (
+                // console.log(record)
+                record.children ? (
+                  <i className="material-icons" onClick={e => onExpand(record, e)}>
+                    expand_less
+                  </i>
+                ) : (
+                  <span style={{ marginRight: 35 }}></span>
+                )
+              ) : record.children ? (
+                <i className="material-icons" onClick={e => onExpand(record, e)}>
+                  expand_more
+                </i>
+              ) : (
+                <span style={{ marginRight: 35 }}></span>
+              ),
+          }}
+          bordered
+          size="middle"
+          dataSource={data[type]}
+          rowKey={record => record.id}
+          pagination={true}
+          columns={[
+            {
+              title: 'Titulo',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              key: 'operation',
+              fixed: 'right',
+              width: 50,
+
+              render: e => (
+                <Button id={e.id} onClick={o => openModale(e.id, e.name, e.parent, true)} type="link">
+                  <i className="material-icons">edit</i>
+                </Button>
+              ),
+            },
+          ]}
+        />
+      </div>
+      <EditModal visible={visible} switchEdit={switchEdit} title={title} data={item} clear={setItem} treeData={data[type]} edit={edit} onSubmit={onSubmit} setEdit={setEdit} />
+    </>
   );
+};
+
+List.propTypes = {
+  type: PropTypes.string,
+};
+
+List.defaultProps = {
+  type: 'career',
 };
 
 export default List;

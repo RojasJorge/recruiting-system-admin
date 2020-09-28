@@ -1,0 +1,111 @@
+.ant-table {
+  box-shadow: $shadow;
+  .ant-table-thead {
+    background: rgba($color-text, 0.05) !important;
+    th {
+      background: transparent !important;
+      color: $color-blue;
+      border-bottom: 3px solid;
+      border-bottom-color: rgba($color-blue, 0.1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+  }
+  th:first-child {
+    padding-left: 40px !important;
+  }
+  th,
+  td {
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    &:after,
+    &:before {
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      background: transparent !important;
+    }
+  }
+  .ant-table-row {
+    &:hover {
+      background: rgba(#f2f2f2, 0.5) !important;
+      td {
+        background: rgba(#f2f2f2, 0.5) !important;
+      }
+    }
+  }
+  .ant-table-row.ant-table-row-level-1 {
+    .ant-table-row-indent.indent-level-1 {
+      width: 10px;
+    }
+    td:first-child {
+      i.material-icons {
+        transform: translateY(5px);
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  .ant-table-row.ant-table-row-level-0 {
+    &:first-child {
+      td {
+        border-top: 1px solid rgba($color-blue, 0);
+      }
+    }
+    td {
+      border-top: 1px solid rgba($color-blue, 0.3);
+    }
+    td:first-child {
+      i.material-icons {
+        transform: translateY(5px);
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  .ant-btn.ant-btn-link {
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+.ant-pagination.mini.ant-table-pagination {
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    &.ant-pagination-disabled {
+      color: $color-text;
+      border: 1px solid rgba($color-text, 0.1);
+      .ant-pagination-item-link {
+        color: rgba($color-text, 0.3);
+      }
+    }
+    color: $color-blue;
+    border: 1px solid $color-blue;
+    background: $color-white;
+    height: auto;
+    margin: 0 5px;
+    .ant-pagination-item-link {
+      font-size: 18px;
+      padding: 5px 10px;
+      color: $color-blue;
+    }
+  }
+  .ant-pagination-item {
+    height: auto;
+    padding: 5px 10px;
+    margin: 0 5px;
+    font-size: 18px;
+    border: 1px solid rgba($color-text, 0.1);
+    color: $color-text;
+    a {
+      color: $color-text;
+    }
+    &.ant-pagination-item-active {
+      color: $color-blue;
+      border: 1px solid $color-blue;
+      a {
+        color: $color-blue;
+      }
+    }
+  }
+}

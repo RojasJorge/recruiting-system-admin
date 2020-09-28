@@ -1,10 +1,8 @@
-import { useStoreState } from "easy-peasy";
-import MainMenu from "./MainMenu";
+import MainMenu from './MainMenu';
 
-const MainHeader = () => {
-  const user = useStoreState(state => state.auth.user);
+const MainHeader = props => {
   return (
-    <header className="app--header">
+    <header className={`app--header umana__header ${props.layout}`}>
       <MainMenu />
     </header>
   );

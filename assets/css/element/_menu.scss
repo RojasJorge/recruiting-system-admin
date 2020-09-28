@@ -1,0 +1,422 @@
+// Header
+.umana-header {
+  @include max-width();
+  width: 100%;
+
+  box-shadow: $shadow;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  right: 0;
+  padding: 15px 20px;
+  position: fixed;
+  z-index: 999;
+  height: 60px;
+  @include bp(xmedium) {
+    height: 80px;
+    position: initial;
+    box-shadow: none;
+    justify-content: space-between;
+  }
+  @include bp(xlarge) {
+    @include padding-x();
+  }
+  @include element(trigger) {
+    display: flex !important;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+    @include bp(xmedium) {
+      display: none !important;
+    }
+  }
+}
+// Menu
+.umana-main-nav {
+  display: none;
+  @include bp(xmedium) {
+    display: flex;
+  }
+  .ant-menu.header-nav {
+    border-bottom: 0;
+    background: transparent;
+    * {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .ant-menu-item {
+      padding: 0 10px;
+      margin: 0 !important;
+      padding-bottom: 7px;
+      border-bottom: 0;
+      &:hover a,
+      &.ant-menu-item-selected a {
+        color: $color-blue;
+      }
+      &.type-btn {
+        padding: 0 0 7px;
+        margin-left: 10px;
+        a {
+          color: $color-white;
+          line-height: 36px;
+          background: $color-blue;
+          margin-bottom: 5px;
+          padding: 10px 20px;
+          height: 36px;
+        }
+      }
+    }
+    &.theme-root {
+      .ant-menu-item {
+        &:hover a,
+        &.ant-menu-item-selected a {
+          color: $color-blue;
+        }
+      }
+    }
+    &.theme-company {
+      .ant-menu-item {
+        &:hover a,
+        &.ant-menu-item-selected a {
+          color: $color-green;
+        }
+      }
+    }
+    &.theme-talento {
+      .ant-menu-item {
+        &:hover a,
+        &.ant-menu-item-selected a {
+          color: $color-orange;
+        }
+      }
+    }
+  }
+}
+
+.ant-menu.header-nav.ant-menu-vertical {
+  width: 100%;
+  padding: 0 15px;
+  background: transparent;
+  border: 0;
+  * {
+    color: $color-white;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .ant-menu-item {
+    border-bottom: 1px solid rgba($color-white, 0.2);
+    margin: 0;
+    padding: 10px;
+    height: auto;
+    &.ant-menu-item-selected {
+      background: rgba($color-white, 0.2);
+    }
+  }
+}
+
+//Mobile
+
+.ant-btn-simple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.umana-overlay {
+  display: block;
+  width: 100%;
+  height: calc(100vh + 30px);
+  background: rgba($color-grey, 0.4);
+  position: fixed;
+  top: -30px;
+  left: 0;
+  z-index: 9990;
+  &.menu-open-false {
+    display: none;
+  }
+  &.menu-open-true {
+    display: block;
+  }
+}
+
+.umana-mbNav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  height: 100vh;
+  background: $color-blue;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  box-shadow: -4px 0px 14px rgba(0, 0, 0, 0.25);
+  transition: ease-in-out 0.5s;
+  &.menu-open-false {
+    right: -100%;
+  }
+  &.talento {
+    background: $color-orange;
+    .ant-btn {
+      background: $color-orange;
+    }
+  }
+  &.menu-open-true {
+    right: 0;
+  }
+  @include bp(medium) {
+    width: 80%;
+  }
+  @include element(close) {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    margin: 0 0 20px auto;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    &:hover {
+      border: $border-white;
+    }
+  }
+  @include element(profile) {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    margin: 20px 0;
+    &--content {
+      margin-left: 30px;
+      width: calc(100% - 40px);
+      color: $color-white;
+      h4,
+      p {
+        color: $color-white;
+        margin-bottom: 0;
+      }
+      .ant-btn.ant-btn-simple {
+        padding: 10px;
+        margin-top: 10px;
+        height: 40px;
+        margin-bottom: 0;
+        text-align: left;
+        justify-content: flex-start;
+        &:visited,
+        &:active,
+        &:focus,
+        &:hover {
+          background: transparent;
+          color: $color-white;
+          opacity: 0.5;
+          text-decoration: underline;
+        }
+      }
+    }
+    &--link {
+      display: flex;
+      width: calc(100% - 40px);
+      .ant-avatar {
+        margin: 0 20px 0 0;
+      }
+      .umana-mbNav__profile--content {
+        color: $color-white;
+        margin-left: 0;
+        h4,
+        p {
+          color: $color-white;
+          margin-bottom: 0;
+        }
+        .ant-btn.ant-btn-simple {
+          padding: 10px;
+          margin-top: 10px;
+          height: 40px;
+          margin-bottom: 0;
+          text-align: left;
+          justify-content: flex-start;
+          &:visited,
+          &:active,
+          &:focus,
+          &:hover {
+            background: transparent;
+            color: $color-white;
+            opacity: 0.5;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    &--settings {
+      width: 30px;
+      max-width: 30px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: $color-white;
+      &:visited,
+      &:active,
+      &:focus,
+      &:hover {
+        color: $color-white;
+        opacity: 0.5;
+      }
+    }
+  }
+  @include element(menu) {
+    width: 100%;
+    padding: 20px 10px;
+    li {
+      padding: 0;
+      border-bottom: 1px solid rgba($color-white, 0.3);
+      &:last-child {
+        border-bottom: 0;
+      }
+      a {
+        &:hover {
+          opacity: 0.5;
+        }
+        i {
+          margin-right: 10px;
+        }
+        display: flex;
+        align-items: center;
+        padding: 15px 10px;
+        color: $color-white;
+      }
+    }
+  }
+  @include element(settings) {
+    width: 100%;
+    padding: 5px 10px;
+    margin-top: auto;
+    li {
+      &:hover {
+        opacity: 0.5;
+      }
+      a {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 5px 10px;
+        color: $color-white;
+        i {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+// dropdown
+
+.ant-dropdown-link.ant-dropdown-trigger {
+  color: $color-text;
+  margin-bottom: 6px;
+  font-family: $font-primary;
+  text-transform: uppercase;
+  max-width: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding-left: 10px;
+  cursor: pointer;
+  .text-max {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100px;
+    display: none;
+    text-align: center;
+    @include bp(mediumxx) {
+      display: inline-block;
+    }
+  }
+  i {
+    margin: 0 10px 0 5px;
+  }
+  &.root {
+    &.ant-dropdown-open,
+    &:hover,
+    &:active {
+      color: $color-blue;
+    }
+    i {
+      color: $color-blue;
+    }
+  }
+  &.company {
+    &.ant-dropdown-open,
+    &:hover,
+    &:active {
+      color: $color-green;
+    }
+    i {
+      color: $color-green;
+    }
+  }
+  &.talento {
+    &.ant-dropdown-open,
+    &:hover,
+    &:active {
+      color: $color-orange;
+    }
+    i {
+      color: $color-orange;
+    }
+  }
+}
+
+.ant-dropdown-menu {
+  min-width: 300px !important;
+  &.talento {
+    .ant-dropdown-menu-item {
+      &.ant-dropdown-menu-item-active {
+        background: rgba($color-orange, 0.3);
+      }
+    }
+    .umana-dropdown--item-user {
+      border-bottom: $border;
+      &.ant-dropdown-menu-item-active {
+        background: $color-white;
+      }
+      &:hover {
+        background: $color-white;
+      }
+    }
+  }
+}
+
+.umana-dropdown--item-user {
+  border-bottom: $border;
+  &:hover {
+    background: $color-white;
+  }
+  &.talento {
+    .ant-btn {
+      width: 100% !important;
+    }
+    .ant-dropdown-menu-item {
+      &.ant-dropdown-menu-item-active {
+        background: $bg-orange;
+        &:hover {
+          background: $bg-orange !important;
+        }
+      }
+    }
+  }
+  .umana-dpdw-card {
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .ant-avatar {
+      margin: 0 20px 0 0;
+      i {
+        font-size: 25px;
+        color: $color-orange;
+      }
+    }
+  }
+}

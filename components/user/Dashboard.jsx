@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { useStoreState, useStoreActions } from "easy-peasy";
-import { Card, Statistic } from "antd";
+import { useState, useEffect } from 'react'
+import { useStoreState, useStoreActions } from 'easy-peasy'
+import { Card, Statistic } from 'antd'
 
 const Dashboard = () => {
-  const auth = useStoreState(state => state.auth);
-  const totalUsers = useStoreState(state => state.users.total);
-  const getUsers = useStoreActions(actions => actions.users.get);
+  const auth = useStoreState(state => state.auth)
+  const totalUsers = useStoreState(state => state.users.total)
+  const getUsers = useStoreActions(actions => actions.users.get)
   useEffect(() => {
-    getUsers(auth.token);
-  }, []);
+    getUsers(auth.token)
+  }, [])
   return (
     <>
       <h1>Tablero</h1>
@@ -30,7 +30,7 @@ const Dashboard = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

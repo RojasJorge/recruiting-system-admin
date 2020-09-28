@@ -1,0 +1,409 @@
+@import './shared/mixins';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+html,
+body,
+#__next {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  background: #ffffff;
+  height: 100%;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid rgba($color-blue, 0.5);
+  -webkit-text-fill-color: $color-blue;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
+}
+
+* {
+  font-family: $font-primary;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #585858;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 300;
+}
+h5 {
+  font-size: 18px;
+  color: $color-text;
+  font-weight: 300;
+  margin-bottom: 7px;
+}
+
+.app {
+  position: relative;
+  background: #ffffff;
+  height: auto;
+
+  &--tools {
+    margin-top: 24px;
+  }
+
+  &--sidebar {
+    width: 280px;
+    min-height: 100%;
+    overflow: auto;
+    background-color: #001529;
+    color: #ffffff;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &--contents {
+    padding-top: 30px;
+    padding-bottom: 0px;
+    background-color: #ffffff;
+  }
+}
+
+* {
+  font-family: $font-primary;
+}
+
+.umana {
+  width: 100%;
+  padding-top: 60px;
+  @include bp(xmedium) {
+    padding-top: 80px;
+  }
+  &.login,
+  &.signup {
+    padding-top: 80px;
+    background: $bg-blue;
+  }
+  @include element(header) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+    &.is-login {
+      background: $color-white;
+      height: 60px;
+      @include bp(xmedium) {
+        height: 80px;
+      }
+      @include bp(xmedium) {
+        background: linear-gradient(to bottom, rgba(245, 252, 254, 1) 0%, rgba(245, 252, 254, 1) 80%, rgba(245, 252, 254, 0.5) 95%, rgba(245, 252, 254, 0) 100%);
+      }
+    }
+  }
+}
+
+.umana-container {
+  width: 100%;
+  padding: 30px 20px;
+  // background: $bg-medium;
+}
+
+.umana-layout {
+  @include max-width;
+  @include padding-x;
+  @include padding-y;
+  min-height: calc(100vh - 80px);
+}
+
+.umana-login {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  @include element(form) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    // background: $color-white;
+    padding: 40px;
+    min-height: 600px;
+    // box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  @include element(img) {
+    img {
+      width: 90%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center right;
+    }
+  }
+}
+.umana-signup {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  // background: linear-gradient(
+  //   to right,
+  //   $bg-blue 0,
+  //   $bg-blue 70%,
+  //   $color-white 70%,
+  //   $color-white 100%
+  // );
+  @include element(form) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 600px;
+
+    // background: $color-white;
+    padding: 40px;
+    // box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  @include element(img) {
+    img {
+      width: 90%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center right;
+    }
+  }
+}
+
+.umana-element__add {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 100;
+  @include bp(xmedium) {
+    position: initial;
+    width: 100%;
+    padding: 0 20px;
+    height: 50px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  & > button.ant-btn.ant-btn-primary.ant-btn-circle.ant-btn-lg.ant-btn-icon-only.ant-btn-background-ghost {
+    width: 50px;
+    margin: 0;
+    margin-left: auto;
+    display: flex;
+    max-width: 50px;
+    min-width: 50px;
+    padding: 0;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    background: $color-white;
+    border: 2px solid rgba($color-blue, 0.5);
+    @include bp(xmedium) {
+      border: $border;
+    }
+    i {
+      font-size: 32px;
+      color: $color-primary;
+      margin-right: 0 !important;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      background: $color-primary !important;
+      i {
+        color: $color-white;
+      }
+    }
+  }
+}
+
+// layout col
+
+.umana-layout-cl {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 0;
+  &.bg-color {
+    background: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
+  }
+  &.theme-orange {
+    .umana-layout--content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: $color-orange;
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: $color-orange;
+    }
+  }
+  &.theme-green {
+    .umana-layout--content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: $color-green;
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: $color-green;
+    }
+  }
+  &.theme-blue {
+    .umana-layout--content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: $color-blue;
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: $color-blue;
+    }
+  }
+  @include element(flex) {
+    padding: 30px 20px;
+    width: 100%;
+    @include bp(xmedium) {
+      width: 66%;
+    }
+    &.bg-white {
+      box-shadow: $shadow;
+      background: $color-white;
+    }
+    &.width-section {
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+  @include element(small) {
+    width: 100%;
+    @include bp(xmedium) {
+      width: 33%;
+    }
+    &.bg-white {
+      background: $color-white;
+    }
+    & > .ant-steps.ant-steps-vertical {
+      position: sticky;
+      top: 200px;
+    }
+  }
+  @include element(medium) {
+    width: 50%;
+    &.bg-white {
+      background: $color-white;
+    }
+  }
+  .umana-layout--content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    padding-right: 20px;
+    h2 {
+      color: $color-green;
+    }
+    p {
+      max-width: 300px;
+    }
+  }
+  .umana-layout--img {
+    width: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.is-login {
+  background: $bg-blue;
+  &.profile {
+    background: #fafafa;
+    // $color-primary: red;
+    // color: $color-primary;
+  }
+}
+
+.umana-section-contenct {
+  padding: 20px 20px 0;
+  width: 100%;
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  h5 {
+    margin-bottom: 0;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+  .section-avatar {
+    width: 100%;
+    margin-top: -100px;
+    margin-bottom: 20px;
+    text-align: center;
+    .ant-avatar.ant-avatar-circle.ant-avatar-icon {
+      margin: 0 auto;
+      background: $color-green;
+      i {
+        font-size: 40px;
+        line-height: 120px;
+      }
+    }
+  }
+}
+
+.umana-subtitle {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  button.ant-btn {
+    margin: 0 0 0 auto;
+    margin-left: auto;
+  }
+}
+
+.umana-filter {
+  .visible-true {
+    display: block;
+  }
+  .visible-false {
+    display: none;
+  }
+}

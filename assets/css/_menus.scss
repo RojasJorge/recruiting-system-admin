@@ -1,3 +1,4 @@
+@import './shared/mixins';
 .no-bullets {
   list-style-type: none;
   padding: 0px;
@@ -6,7 +7,14 @@
 
 .menu {
   &--admin {
-    background-color: #006e8f;
+    background-color: $primary;
+  }
+
+  &--main {
+    padding-bottom: 24px;
+    padding-top: 24px;
+    background-color: transparent;
+    text-align: right;
   }
 }
 
@@ -50,6 +58,115 @@
 
     &__actions {
       text-align: right;
+    }
+  }
+}
+
+.menu {
+  &--user {
+    &.menu-orange {
+      li,
+      .ant-menu-item {
+        margin: 0 !important;
+        &:hover {
+          color: $color-orange;
+        }
+        &.menu-item-selected {
+          &:after {
+            background: $color-orange;
+          }
+        }
+        &.menu-role {
+          color: $color-orange;
+          font-weight: 600;
+          position: relative;
+          &:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            display: block;
+            color: $color-orange;
+            background: $color-orange;
+            border-radius: 0;
+            transform: rotate(45deg);
+            top: 100%;
+            left: 40%;
+            bottom: auto;
+            position: absolute;
+          }
+        }
+      }
+    }
+    li,
+    .ant-menu-item {
+      position: relative;
+      border: 0 !important;
+      margin: 0 !important;
+      &:hover {
+        border: 0 !important;
+        color: $primary;
+      }
+      &.menu-role {
+        color: $color-primary;
+        font-weight: 600;
+        position: relative;
+        &:after {
+          content: '';
+          width: 20px;
+          height: 20px;
+          display: block;
+          color: $color-primary;
+          background: $color-primary;
+          border-radius: 0;
+          transform: rotate(45deg);
+          top: 100%;
+          left: 40%;
+          bottom: auto;
+          position: absolute;
+        }
+      }
+    }
+    .ant-menu-item-selected {
+      color: $black;
+      border-bottom: 0;
+
+      &:after {
+        @include after;
+      }
+    }
+    &__login {
+      position: relative;
+      padding: 12px 0;
+
+      .access-links {
+        text-align: right;
+      }
+
+      a {
+        text-transform: uppercase;
+        color: rgba(108, 109, 96, 0.65);
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+.menu {
+  &--admin {
+    background: $color-primary;
+    .ant-menu-item-selected {
+      background-color: fade-out($black, 0.9) !important;
+    }
+  }
+}
+
+.ant-menu.theme-orange {
+  .ant-menu-item.ant-menu-item-selected {
+    &::after {
+      background: $color-orange;
     }
   }
 }

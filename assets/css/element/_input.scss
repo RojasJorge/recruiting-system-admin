@@ -1,0 +1,257 @@
+@import '../shared/mixins';
+
+input.ant-input,
+textarea.ant-input {
+  background: $color-white;
+  font-family: $font-primary !important;
+  font-size: 14px !important;
+  color: $color-text;
+  height: 45px;
+  margin-bottom: 0;
+  color: $color-primary;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $color-white !important;
+    background: $color-white !important;
+    border-color: $color-blue !important;
+    border-radius: 0 !important;
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    color: $color-blue !important;
+  }
+  &:disabled {
+    background: rgba($color-text, 0.1);
+    box-shadow: none;
+    &:hover {
+      background: rgba($color-text, 0.1) !important;
+      box-shadow: none !important;
+      border-color: rgba(108, 109, 96, 0.1) !important;
+    }
+  }
+}
+
+// Input Password
+.ant-input-password {
+  padding: 0 10px 0 0 !important;
+  box-shadow: none !important;
+  background: $color-white;
+  color: $color-primary;
+  .ant-input-suffix {
+    display: flex;
+    align-items: center;
+  }
+  & > .ant-input.ant-input-lg {
+    background: $color-white !important;
+    background-color: $color-white !important;
+    padding: 0 10px;
+    border: 0 !important;
+    height: 35px;
+    &:hover,
+    &:focus,
+    &:active {
+      box-shadow: none !important;
+    }
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-blue !important;
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+// Input date
+.ant-picker.ant-picker-large {
+  height: 45px;
+  border-radius: 0;
+  color: $color-blue;
+  .ant-picker-input {
+    color: $color-blue;
+    input {
+      color: $color-blue;
+    }
+  }
+  &:hover,
+  &:active,
+  &:focus,
+  &.ant-picker-focused {
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    border-color: $color-blue !important;
+  }
+}
+
+//Select
+.ant-select.ant-select-single,
+.ant-select.ant-select-multiple {
+  width: 100%;
+  box-shadow: none;
+  background: $color-white !important;
+  color: $color-primary;
+  &.ant-select-focused,
+  &.ant-select-open {
+    .ant-select-selector {
+      border-color: $color-blue !important;
+      background: $color-white;
+      color: $color-primary;
+      box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+  }
+  .ant-select-selection-search {
+    width: 90% !important;
+    min-height: 20px;
+  }
+  .ant-select-selector {
+    background: $color-white !important;
+    min-height: 45px;
+    box-shadow: none;
+    border-radius: 0;
+    color: $color-primary;
+    align-items: center;
+    .ant-select-selection-search,
+    .ant-select-selection-item {
+      border-color: $color-blue !important;
+      background: $color-white;
+      line-height: 24px;
+      color: $color-primary;
+      display: flex;
+      align-items: center;
+    }
+    .ant-select-selection-search {
+      min-height: 30px;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $color-blue !important;
+      background: $color-white;
+      box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+  }
+}
+
+// number
+.ant-input-number {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background: $color-white;
+  color: $color-primary;
+  &.ant-input-number-focused,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-blue !important;
+    box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+// radio button
+.ant-radio-group {
+  width: 100%;
+  display: flex;
+  .ant-radio-button-wrapper {
+    flex: 0 1 50%;
+    text-align: center;
+    color: $color-text;
+    background: $color-white;
+    &:hover {
+      background: $color-white;
+      color: $color-blue;
+      box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+    &.ant-radio-button-wrapper-disabled {
+      &:hover {
+        box-shadow: none !important;
+      }
+    }
+    &.ant-radio-button-wrapper-checked {
+      background: $color-white;
+      border-color: $color-blue;
+      border-right-color: $color-blue;
+      color: $color-blue;
+      &:hover {
+        border-color: $color-blue;
+        box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+        background: $color-white;
+        color: $color-blue;
+      }
+      &.ant-radio-button-wrapper-disabled {
+        border: 1px solid $color-blue !important;
+        &:hover {
+          box-shadow: none !important;
+        }
+      }
+    }
+  }
+}
+
+.ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+  border-right-color: $color-blue;
+}
+
+// slide
+.ant-slider-mark {
+  font-size: 11px;
+  color: $color-text;
+}
+
+// Checkbox
+.ant-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  label.ant-checkbox-wrapper {
+    width: calc(50% - 10px);
+    margin-left: 8px !important;
+  }
+  .ant-checkbox {
+    border-radius: 0;
+    .ant-checkbox-inner {
+      border-radius: 0;
+      &:hover {
+        border-color: $color-primary !important;
+      }
+    }
+    &.ant-checkbox-checked {
+      .ant-checkbox-inner {
+        background: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+  }
+}
+
+//slider
+.ant-slider.ant-slider-with-marks {
+  .ant-slider-step {
+    .ant-slider-dot-active {
+      border-color: $color-primary;
+      background: $color-primary;
+    }
+  }
+  .ant-slider-handle {
+    border-color: $color-primary !important;
+    &:hover {
+      border-color: $color-primary;
+    }
+  }
+  .ant-slider-track {
+    background-color: $color-primary;
+  }
+}
+
+// progress
+.ant-progress.ant-progress-circle {
+  .ant-progress-text {
+    font-size: 18px;
+    color: $color-text;
+    line-height: 1.3;
+    max-width: 100px;
+  }
+}
+
+.ant-tag {
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: 5px;
+}

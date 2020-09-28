@@ -1,38 +1,22 @@
-import React from "react";
-import config from "../config";
-import axios from "axios";
-import {
-  action,
-  thunk
-} from "easy-peasy";
-import {
-  mapKeys,
-  groupBy,
-  remove,
-  find,
-  map,
-  orderBy,
-  isEmpty,
-} from "lodash";
-import {
-  Button
-} from "lodash";
-import "antd/lib/message/style/index.css";
+import { action, thunk } from 'easy-peasy';
+import { mapKeys, groupBy, remove, find, map, orderBy, isEmpty } from 'lodash';
+import axios from 'axios';
 
-const collections = {
-  list: [],
+export default {
+  career: [],
+  academic_level: [],
   total: 0,
   loading: false,
-
   /**
    * Get all collections.
    */
   get: thunk(async (actions, payload) => {
     actions.switchLoading(true);
-    await axios.get(`${config.app.api_url}/${payload.type}`, {
+    await axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/${payload.type.replace('_', '-')}?page=1&offset=1000`, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': payload.token
+          Authorization: localStorage.getItem('uToken'),
         },
       })
       .catch(error => {
@@ -40,23 +24,30 @@ const collections = {
         actions.switchLoading(false);
       })
       .then(response => {
-        typeof response !== "undefined" ? actions.fill(response.data) : null;
+        // console.log('Data from catalogs:', response);
+        typeof response !== 'undefined' ? localStorage.setItem(payload.type.replace('-', '_'), JSON.stringify(response.data.items)) : null;
+        typeof response !== 'undefined' ? actions.fill({ data: response.data, type: payload.type.replace('-', '_') }) : null;
         actions.switchLoading(false);
-      })
+      });
   }),
-  update: thunk(async (actions, payload) => {
+  // add
+  add: thunk(async (actions, payload) => {
+    // console.log('payload type', payload.type);
+    console.log('payload', payload);
+
     actions.switchLoading(true);
 
     const token = payload.token;
-    const type = payload.type;
+    const type = payload.url;
     delete payload.token;
-    delete payload.type;
+    delete payload.url;
 
     /** Send request */
-    await axios.put(`${config.app.api_url}/${type}`, JSON.stringify(payload), {
+    await axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/${type}`, JSON.stringify(payload.o), {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token
+          Authorization: token,
         },
       })
       .catch(error => {
@@ -66,29 +57,58 @@ const collections = {
       .then(response => {
         actions.switchLoading(false);
         return;
+      });
+  }),
+  // update
+  update: thunk(async (actions, payload) => {
+    // console.log('payload type', payload.type);
+    console.log('payload', payload);
+
+    actions.switchLoading(true);
+
+    const token = payload.token;
+    const type = payload.url;
+    delete payload.token;
+    delete payload.url;
+
+    /** Send request */
+    await axios
+      .put(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/${type}`, JSON.stringify(payload.o), {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
       })
+      .catch(error => {
+        console.log(error);
+        actions.switchLoading(false);
+      })
+      .then(response => {
+        actions.switchLoading(false);
+        return;
+      });
   }),
 
   /**
-   * Filter the colection
+   * Filter the collection
    */
 
-  fill: action((state, payload) => {
-    let items = map(payload.items, o => {
+  fill: action((state, { data, type }) => {
+    // let items = map(data.items, o => {
+    //   o.title = React.createElement('div', {
+    //     className: 'item--name',
+    //     children: [
+    //       React.createElement('span', {
+    //         key: 'name'
+    //       }, o.name), <Button key="edit" icon={<EditOutlined />} type="link" />
+    //     ]
+    //   });
+    //
+    //   return o;
+    // });
 
-      o.title = React.createElement('div', {
-        className: 'item--name',
-        children: [
-          React.createElement('span', {
-            key: 'name'
-          }, o.name),
-          React.createElement('button', {
-            key: 'action',
-            onClick: () => alert(`Edit ${o.name}`)
-          }, 'Edit')
-        ]
-      });
-
+    let items = map(data.items, o => {
+      delete o.owner;
       return o;
     });
 
@@ -97,7 +117,7 @@ const collections = {
 
     mapKeys(groupBy(items, 'parent'), (value, key) => {
       /** Find each parent */
-      const findParent = find(items, (o) => o.id === key);
+      const findParent = find(items, o => o.id === key);
 
       if (findParent) {
         /** To compare */
@@ -111,31 +131,30 @@ const collections = {
       }
     });
 
-    remove(items, (o) => {
-      return find(_data, (c) => c.id === o.id) ? o : null;
+    remove(items, o => {
+      return find(_data, c => c.id === o.id) ? o : null;
     });
 
     _childs.reduce((accumulator, current, index, arr) => {
-      remove(items, (o) => {
-        return find(current.children, (c) => c.id === o.id) ? o : null;
+      remove(items, o => {
+        return find(current.children, c => c.id === o.id) ? o : null;
       });
     }, []);
 
-    state.list = orderBy(
+    state[type] = orderBy(
       map(items, o => {
         if (!isEmpty(o.children)) {
-          o.children = orderBy(o.children, ["name"], ["asc"]);
+          o.children = orderBy(o.children, ['name'], ['asc']);
         }
         return o;
       }),
-      ["name"],
-      ["asc"]
+      ['name'],
+      ['asc'],
     );
-    state.total = payload.total;
+
+    // state.total = data.total;
   }),
   switchLoading: action((state, payload) => {
     state.loading = payload;
-  })
+  }),
 };
-
-export default collections;

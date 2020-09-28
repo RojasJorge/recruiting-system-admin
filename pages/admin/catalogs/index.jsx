@@ -1,20 +1,15 @@
-import { lazy, Suspense } from "react";
-import { StoreProvider } from "easy-peasy";
-import store from "../../../store/store";
-import Layout from "../../../views/Layout";
-import PageLoader from "../../../components/Misc/PageLoader";
+import Layout from '../../../views/Layout';
+import Catalogs from '../../../components/catalogs';
+import { PageTitle } from '../../../elements';
 
-const Catalogs = lazy(() => import("../../../components/catalogs"));
-
-const Index = () => {
+const Index = _ => {
   return (
-    <StoreProvider store={store}>
-      <Layout title="Catalogos">
-        <Suspense fallback={<PageLoader />}>
-          <Catalogs />
-        </Suspense>
-      </Layout>
-    </StoreProvider>
+    <Layout title="Catalogos">
+      <>
+        <PageTitle title="Catálogos" />
+        <Catalogs />
+      </>
+    </Layout>
   );
 };
 

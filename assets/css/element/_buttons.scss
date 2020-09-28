@@ -1,0 +1,447 @@
+@import '../shared/mixins';
+
+.ant-btn {
+  padding: 20px 30px;
+  font-family: $font-primary;
+  i {
+    margin-right: 10px;
+  }
+  &.ant-btn-primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-blue;
+    border-color: $color-blue;
+    border: 0;
+    height: 50px;
+    &:hover {
+      background-color: rgba($color-blue, 0.7);
+    }
+    &.ant-btn-lg {
+      padding: 10px 30px;
+      width: 100%;
+      margin: 20px auto;
+    }
+  }
+  &.ant-btn-link {
+    padding: 0 10px;
+    color: $color-text;
+    span {
+      text-decoration: underline;
+    }
+    &:hover {
+      color: $color-blue;
+    }
+  }
+  &.ant-btn-circle {
+    &.ant-btn-lg {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding: 0;
+      transition: 0.5 ease-in-out;
+      i {
+        margin: 0 !important;
+        line-height: 80px;
+        font-size: 40px;
+        color: $color-primary;
+      }
+      &:hover {
+        border: 1px solid rgba($color-blue, 1);
+        background: $color-primary;
+        color: $color-white;
+        i {
+          color: $color-white;
+        }
+      }
+    }
+  }
+}
+
+.ant-btn {
+  width: 100%;
+  background: $color-blue;
+  color: $color-white;
+  height: 60px;
+  border: 0;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  position: relative;
+  & > input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background: #bababa;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+      background: #bababa;
+      color: $color-white;
+    }
+  }
+  &.ant-btn-green {
+    background: $color-green;
+    color: $color-white;
+    a {
+      color: $color-white;
+    }
+  }
+  &.ant-btn-sm {
+    height: auto;
+    width: 200px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: $color-white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+  }
+  &.ant-btn-line-white {
+    background: transparent;
+    color: $color-white;
+    border: 1px solid $color-white;
+    &:hover {
+      background: rgba($color-white, 0.3);
+    }
+  }
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &.ant-btn-circle {
+    cursor: pointer;
+    background: transparent;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    border: $border-blue;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: $color-blue;
+    @include bp(xmedium) {
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
+      min-height: 80px;
+    }
+    .anticon {
+      color: $color-blue;
+      font-size: 30px;
+      @include bp(xmedium) {
+        font-size: 40px;
+      }
+    }
+    &.ant-btn-sm {
+      width: 35px;
+      height: 35px;
+      min-width: 35px;
+      min-height: 35px;
+      border-radius: 50%;
+      @include bp(xmedium) {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        min-height: 50px;
+      }
+      .anticon {
+        color: $color-blue;
+        font-size: 15px;
+        @include bp(xmedium) {
+          font-size: 20px;
+        }
+      }
+    }
+    &.ant-btn-white {
+      border: $border-white;
+      & > .anticon {
+        color: $color-white;
+      }
+      &:hover {
+        background: $bg-grey;
+        border: $border-white;
+      }
+    }
+    &.ant-btn-orange {
+      border: $border-orange;
+      background: transparent;
+      & > .anticon {
+        color: $color-orange;
+      }
+      &:hover {
+        & > .anticon {
+          color: $color-orange;
+        }
+        background: rgba($color-orange, 0.2);
+        border: $border-orange;
+      }
+    }
+    &.ant-btn-secundary.ant-btn-sm.ant-btn-icon-only {
+      border: 0 !important;
+      &:hover,
+      &:active,
+      &:focus {
+        background: $bg-orange;
+        color: $color-orange !important;
+        .anticon {
+          color: $color-orange !important;
+        }
+      }
+    }
+    &:hover {
+      background: $color-primary;
+      color: $color-white;
+      border: 1px solid rgba($color-blue, 0.5);
+      .anticon {
+        color: $color-white;
+      }
+    }
+    &:focus,
+    &:active {
+      background: $color-white;
+    }
+    &.circle-fixed {
+      background: $color-white !important;
+    }
+  }
+  &.ant-btn-link {
+    background: transparent;
+    padding: 0 15px;
+    height: 30px;
+    color: $color-blue;
+    margin-bottom: 0;
+    font-size: 14px;
+    display: inline-block;
+    text-transform: capitalize;
+    i {
+      font-size: 22px;
+    }
+    &.ant-btn-sm {
+      width: 30px;
+      i {
+        font-size: 16px;
+      }
+    }
+    &:hover {
+      color: $color-blue;
+      opacity: 0.7;
+      background: transparent;
+    }
+  }
+  &.ant-btn-lg {
+    font-size: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    height: auto;
+    font-family: $font-primary;
+    font-weight: bold;
+    margin: 0 auto 30px;
+    i {
+      font-size: 50px;
+      margin-left: 30px;
+    }
+    &.ant-btn-icon-only {
+      padding: 5px;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      i {
+        margin-left: 0;
+        font-size: 24px;
+      }
+    }
+  }
+  &.ant-btn-dashed {
+    width: auto;
+    background: $color-white;
+    color: $color-primary;
+  }
+  &.ant-btn-orange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $color-orange;
+    color: $color-white !important;
+    a {
+      color: $color-white;
+    }
+    &:hover {
+      background: $hover-orange;
+    }
+    &.ant-btn-sm {
+      width: 200px;
+    }
+  }
+  &:hover {
+    background: #3696b5;
+    color: $color-white;
+  }
+  &.ant-btn-link-orange {
+    background: transparent;
+    color: $color-orange !important;
+    &:hover {
+      color: $hover-orange;
+    }
+  }
+  &.ant-btn-secundary-orange {
+    color: $color-orange !important;
+    background: $color-white;
+    font-weight: bold;
+    &:hover,
+    &:focus {
+      background: rgba($color-orange, 0.2);
+    }
+  }
+  &.ant-btn-cancel {
+    &.orange {
+      background: $color-orange;
+    }
+    &:hover,
+    &:focus {
+      background: $color-error;
+    }
+  }
+  &.disabled {
+    opacity: 0.5;
+  }
+  &.ant-btn-icon-name-orange {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    color: $color-orange;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    padding: 5px;
+    margin-bottom: 0;
+    width: 90px;
+    height: 50px;
+    a {
+      display: flex;
+      flex-direction: column;
+      background: transparent;
+      color: $color-orange;
+      align-items: center;
+      justify-content: center;
+    }
+    &.ant-btn-lg {
+      background: $color-orange;
+      color: $color-white;
+      height: 50px;
+      border-radius: 50%;
+      i {
+        margin-left: 0;
+        font-size: 30px;
+      }
+      &:disabled {
+        opacity: 1;
+        color: $color-text;
+        background: $bg-orange;
+        border: $border-orange;
+      }
+    }
+    &:disabled {
+      opacity: 0.5;
+      color: $color-grey;
+    }
+  }
+  &.ant-btn-simple-cancel {
+    background: transparent;
+    color: $color-text;
+    text-align: left;
+    box-shadow: none;
+    padding: 10px 10px 10px 0;
+    text-decoration: underline !important;
+    height: auto;
+    width: auto;
+    margin-bottom: 0;
+    &:hover {
+      color: $color-error;
+    }
+  }
+  &.ant-btn-circle-green,
+  &.ant-btn-circle-orange {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
+    background: $color-orange;
+    i {
+      width: 100%;
+      line-height: 30px;
+      font-size: 22px;
+    }
+  }
+  &.ant-btn-circle-green {
+    background: $color-green;
+  }
+  &.ant-btn-cicle-orange {
+    background: $color-orange;
+  }
+  &.ant-btn-green.ant-btn-sm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &.ant-btn-dashed {
+    border: 1px dashed $color-text;
+    text-align: center;
+    padding: 10px 20px;
+    justify-content: center;
+    font-size: 14px;
+    color: $color-text;
+    flex-direction: row;
+    margin: 10px 0;
+    i {
+      font-size: 20px;
+      margin-left: 0;
+    }
+    &:hover {
+      background: $color-white;
+      color: $color-black;
+    }
+    &.ant-btn-lg {
+      width: 96%;
+    }
+  }
+  &.ant-btn-link.ant-btn-lg {
+    i {
+      font-size: 30px;
+    }
+  }
+  &.ant-btn-cancel {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    background: $color-white;
+    color: $color-text;
+    border: 1px solid rgba($color-text, 0.3);
+    &:hover {
+      color: $color-white;
+      border: 1px solid transparent !important;
+    }
+  }
+}

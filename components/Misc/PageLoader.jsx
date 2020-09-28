@@ -1,10 +1,19 @@
-import { Icon } from "antd";
+import { SyncOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 const PageLoader = ({ active }) =>
   active ? (
     <div className="app--page-loader">
-      <Icon type="sync" spin />
+      <SyncOutlined spin />
     </div>
-  ) : null;
+  ) : null
 
-export default PageLoader;
+PageLoader.propTypes = {
+  active: PropTypes.bool
+}
+
+PageLoader.defaultProps = {
+  active: false
+}
+
+export default PageLoader

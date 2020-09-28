@@ -1,0 +1,89 @@
+{
+  "profile": {
+    "academic": {
+      "courses": [],
+      "professions": [],
+      "studies": []
+    },
+    "document": {
+      "documentFile": []
+    },
+    "economic": {
+      "allowed": false,
+      "currentSalary": 0,
+      "currentSalaryCurrency": "",
+      "debts": {
+        "amout": "",
+        "haveDebts": "",
+        "monthlyFee": "",
+        "whatCompany": ""
+      },
+      "dependents": 0,
+      "desiredSalary": {
+        "base_max": 0,
+        "base_min": 0,
+        "currency": ""
+      },
+      "health": {
+        "disease": "",
+        "haveDisease": false,
+        "tattoOrPiercing": false
+      },
+      "legal": {
+        "infonetOrOther": false,
+        "legalProblem": false,
+        "whatProblem": ""
+      },
+      "nit": 0,
+      "otherIncome": false,
+      "otherIncomeValue": 0,
+      "sourceIncome": "",
+      "typeHousing": "",
+      "vehicles": []
+    },
+    "lookingFor": {
+      "availability": "",
+      "relocate": false,
+      "travel": false,
+      "workplace": ""
+    },
+    "others": {
+      "languages": [],
+      "skills": [],
+      "softwares": []
+    },
+    "personal": {
+      "about": "",
+      "age": 0,
+      "avatar": null,
+      "birthday": "",
+      "children": 0,
+      "currentJobTitle": "Backend developer",
+      "dpi": "",
+      "driversLicence": "",
+      "driversLicenceType": "",
+      "email": jorge@royalestudios.com,
+
+      "gender": "",
+      "lastname": "Rojas Solórzano",
+      "location": {
+        "address": "Vía 4 1-00 Zona 4",
+        "city": "Ciudad de Guatemala",
+        "country": "Guatemala",
+        "province": "Guatemala",
+        "zone": 4
+      },
+      "maritalStatus": "",
+      "name": "Jorge Alberto",
+      "nationality": "",
+      "passport": "",
+      "phones": [],
+      "religion": ""
+    },
+    "working": {
+      "experiences": [],
+      "sindicate": false,
+      "whatSindicate": ""
+    }
+  }
+}
