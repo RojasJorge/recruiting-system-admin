@@ -1,23 +1,23 @@
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 import xhr from '../../xhr';
-import { Card, EmptyElemet } from '../../elements';
+import { Card, EmptyElemet, Filter } from '../../elements';
 import { isEmpty } from 'lodash';
 
 const Jobs = () => {
   const list = useStoreState(state => state.jobs.list);
   const fill = useStoreActions(actions => actions.jobs.fill);
   const [expiration, setExpiration] = useState([]);
-  
+
   const getJobs = async (page = 1, offset = 5) =>
     await xhr()
       .get(`/job?page=${page}&offset=${offset}`)
       .then(res => fill(res))
       .catch(err => console.log(err));
-      // .catch(err => isMissing(true));
+  // .catch(err => isMissing(true));
 
   useEffect(() => {
-    // getJobs()
+    getJobs();
   }, []);
 
   const dataEmpty = {
@@ -31,7 +31,8 @@ const Jobs = () => {
   if (!isEmpty(list)) {
     return (
       <>
-        <pre>{JSON.stringify(list, false, 2)}</pre>
+        {/* <pre>{JSON.stringify(list, false, 2)}</pre> */}
+        <Filter />
         <div className="umana-list">
           {list.map((e, idx) => {
             const today = new Date();
