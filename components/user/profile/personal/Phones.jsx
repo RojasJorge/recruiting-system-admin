@@ -1,10 +1,12 @@
 import {filter, map} from "lodash";
 import {useStoreActions} from "easy-peasy";
-import {Form, Button, Select, Input} from "antd";
-import {PlusOutlined, CloseOutlined} from "@ant-design/icons";
+import {Button, Form, Select} from "antd";
+import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import PropTypes from "prop-types";
+import Cleave from 'cleave.js/react';
+import 'cleave.js/dist/addons/cleave-phone.gt';
 
-const {Item} = Form;
+const {Item, List} = Form;
 const {Option} = Select;
 
 const Phones = ({phones, setPhones}) => {
@@ -47,72 +49,95 @@ const Phones = ({phones, setPhones}) => {
 	
 	return (
 		<>
-			{phones.map((phone, index) => (
-				<fieldset className="row no-gutters align-items-center" key={index}>
-					<legend>{`Teléfono #${index + 1}`}</legend>
-					<div className="row">
-						<div className="col">
-							<label htmlFor={`phone-${index}`}>Área</label>
-							<Item>
-								<Select
-									placeholder="Seleccione"
-									style={{width: "100%"}}
-									value={phone.area}
-									onSelect={e => updatePhone(e, "area", phone)}
+			<List name="phones">
+				{(fields, {add, remove}) => {
+					return (
+						<div className="test">
+							{fields.map((field, index) => (
+								<Item
+									required={false}
+									key={field.key}
 								>
-									<Option value={502}>(502) Guatemala</Option>
-								</Select>
-							</Item>
-						</div>
-						<div className="col">
-							<label htmlFor="number">Número</label>
+									<div className="row align-items-center">
+										<div className="col">
+											<label>Área</label>
+											<Item
+												{...field}
+												name={[field.name, 'area']}
+											>
+												<Select
+													placeholder="Seleccione"
+													style={{width: "100%"}}
+												>
+													<Option value={502}>(502) Guatemala</Option>
+												</Select>
+											</Item>
+										</div>
+										<div className="col">
+											<label htmlFor="number">Número</label>
+											<Item
+												{...field}
+												name={[field.name, 'number']}
+											>
+												<Cleave
+													options={{
+														phone: true,
+														phoneRegionCode: 'GT'
+													}}
+												/>
+												{/*<Input*/}
+												{/*	placeholder="0000-0000"*/}
+												{/*/>*/}
+											</Item>
+										</div>
+										<div className="col">
+											<label htmlFor="type">Tipo:</label>
+											<Item
+												{...field}
+												name={[field.name, 'type']}
+											>
+												<Select
+													placeholder="Seleccione"
+													style={{width: "100%"}}
+													// onSelect={e => updatePhone(e, "type", phone)}
+												>
+													<Option value="personal">Personal</Option>
+													<Option value="work">Trabajo</Option>
+													<Option value="home">Casa</Option>
+												</Select>
+											</Item>
+										</div>
+										<div className="col-md-1">
+											{fields.length > 0 ? (
+												<MinusCircleOutlined
+													className="dynamic-delete-button"
+													style={{margin: '0 8px'}}
+													onClick={() => {
+														remove(field.name);
+													}}
+												/>
+											) : null}
+										</div>
+									</div>
+								</Item>
+							))}
 							<Item>
-								<Input
-									placeholder="0000-0000"
-									value={phone.number}
-									onChange={e => updatePhone(e, "number", phone)}
-								/>
-							</Item>
-						</div>
-						<div className="col">
-							<label htmlFor="type">Tipo:</label>
-							<Item>
-								<Select
-									placeholder="Seleccione"
-									style={{width: "100%"}}
-									value={phone.type}
-									onSelect={e => updatePhone(e, "type", phone)}
+								<Button
+									type="dashed"
+									size="small"
+									onClick={() => {
+										add();
+									}}
 								>
-									<Option value="personal">Personal</Option>
-									<Option value="work">Trabajo</Option>
-									<Option value="home">Casa</Option>
-								</Select>
+									<PlusOutlined/> Agregar número
+								</Button>
 							</Item>
 						</div>
-						<div className="close-action">
-							<Button
-								size="small"
-								className="close-square"
-								icon={<CloseOutlined/>}
-								onClick={() => removePhone(phone.id)}
-								danger={true}
-							/>
-						</div>
-					</div>
-				</fieldset>
-			))}
-			<div style={{marginTop: 24}}>
-				<Button
-					className="button--margin-24"
-					size="large"
-					icon={<PlusOutlined/>}
-					onClick={addPhone}
-				>
-					Agregar
-				</Button>
-			</div>
+					);
+				}}
+			</List>
 		</>
-	);
+	)
 };
 
 Phones.propTypes = {

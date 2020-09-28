@@ -5,18 +5,19 @@ import { Card, EmptyElemet } from '../../elements';
 import { isEmpty } from 'lodash';
 
 const Jobs = () => {
-  const data = useStoreState(state => state.jobs);
+  const list = useStoreState(state => state.jobs.list);
   const fill = useStoreActions(actions => actions.jobs.fill);
   const [expiration, setExpiration] = useState([]);
-  const getJobs = (page = 1, offset = 5) => {
-    return xhr()
+  
+  const getJobs = async (page = 1, offset = 5) =>
+    await xhr()
       .get(`/job?page=${page}&offset=${offset}`)
       .then(res => fill(res))
-      .catch(err => isMissing(true));
-  };
+      .catch(err => console.log(err));
+      // .catch(err => isMissing(true));
 
   useEffect(() => {
-    getJobs();
+    // getJobs()
   }, []);
 
   const dataEmpty = {
@@ -26,12 +27,13 @@ const Jobs = () => {
     url: '/admin/companies',
   };
 
-  console.log('plazas', expiration);
-  if (!isEmpty(data.list)) {
+  // console.log('plazas', expiration);
+  if (!isEmpty(list)) {
     return (
       <>
+        <pre>{JSON.stringify(list, false, 2)}</pre>
         <div className="umana-list">
-          {data.list.map((e, idx) => {
+          {list.map((e, idx) => {
             const today = new Date();
             const jobDate = new Date(e.expiration_date);
             if (today < jobDate) {

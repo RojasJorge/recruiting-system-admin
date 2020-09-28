@@ -8,79 +8,93 @@ import axios from 'axios';
 // 	: process.env.NEXT_PUBLIC_API_URL_PRODUCTION
 
 export default {
-  user: null,
-  token: null,
-  loading: false,
-  updateToken: action((state, payload) => {
-    state.token = payload;
-    localStorage.setItem('uToken', payload);
-  }),
-  refreshToken: thunk(
-    async (actions, payload) =>
-      await axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/refresh`, JSON.stringify({}), {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: payload,
-          },
-        })
-        .catch(error => {
-          localStorage.removeItem('uToken');
-          localStorage.removeItem('uUser');
-          this.state ? (this.state.USER.auth.token = '') : null;
-        })
-        .then(response => actions.updateToken(response.data)),
-  ),
-  grantAccess: action((state, payload) => {
-    const token = payload.token;
-    delete payload.token;
-
-    /** Set localStorage */
-    localStorage.setItem('uUser', JSON.stringify(payload));
-    localStorage.setItem('uScopes', JSON.stringify(payload.scope[0]));
-    localStorage.setItem('uToken', token);
-
-    /** Set global user info */
-    state.user = payload;
-    state.token = token;
-  }),
-
-  /**
-   * The login action
-   */
-  login: thunk(
-    async (actions, payload) =>
-      await axios
-        .post(process.env.NEXT_PUBLIC_API_URL_PRODUCTION + '/login', JSON.stringify(payload), {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(response => {
-          actions.grantAccess(response.data);
-          if (Router.pathname === '/login') Router.push('/admin');
-          if (Router.pathname === '/signup') Router.push('/admin/welcome');
-        })
-        .catch(error => {
-          console.log(error);
-          message.error('Ah ocurrido un error, intente de nuevo.');
-        }),
-  ),
-  logout: action(state => {
-    state.user = null;
-    state.token = null;
-    state.scopes = null;
-    localStorage.removeItem('uToken');
-    localStorage.removeItem('uScopes');
-    localStorage.removeItem('uUser');
-    Router.push('/');
-  }),
-
-  /**
-   * Update user state
-   */
-  updateStoreUser: action((state, payload) => {
-    console.log('updateStoreUser | Payload:', payload);
-    return;
-  }),
+	user: null,
+	token: null,
+	loading: false,
+	updateToken: action((state, payload) => {
+		state.token = payload;
+		localStorage.setItem('uToken', payload);
+	}),
+	refreshToken: thunk(
+		async (actions, payload) =>
+			await axios
+				.post(`${process.env.NEXT_PUBLIC_API_URL_PRODUCTION}/refresh`, JSON.stringify({}), {
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: payload,
+					},
+				})
+				.catch(error => {
+					localStorage.removeItem('uToken');
+					localStorage.removeItem('uUser');
+					this.state ? (this.state.USER.auth.token = '') : null;
+				})
+				.then(response => actions.updateToken(response.data)),
+	),
+	grantAccess: action((state, payload) => {
+		const token = payload.token;
+		delete payload.token;
+		
+		/** Set localStorage */
+		localStorage.setItem('uUser', JSON.stringify(payload));
+		localStorage.setItem('uScopes', JSON.stringify(payload.scope));
+		localStorage.setItem('uToken', token);
+		
+		/** Set global user info */
+		state.user = payload;
+		state.token = token;
+	}),
+	
+	/**
+	 * The login action
+	 */
+	login: thunk(
+		async (actions, payload) =>
+			await axios
+				.post(process.env.NEXT_PUBLIC_API_URL_PRODUCTION + '/login', JSON.stringify(payload), {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				})
+				.then(response => {
+					actions.grantAccess(response.data);
+					if (Router.pathname === '/login' || Router.pathname === '/signup') Router.push('/admin');
+				})
+				.catch(error => {
+					console.log(error);
+					message.error('Ah ocurrido un error, intente de nuevo.');
+				}),
+	),
+	logout: action(state => {
+		state.user = null;
+		state.token = null;
+		state.scopes = null;
+		localStorage.removeItem('uToken');
+		localStorage.removeItem('uScopes');
+		localStorage.removeItem('uUser');
+		Router.push('/');
+	}),
+	
+	
+	/**
+	 * Update user state
+	 */
+	updateProfile: action((state, payload) => {
+		
+		/** Update global state */
+		state.user.profile.fields[payload.type] = payload.fields
+		
+		/** Get uUser from localStorage */
+		let user = JSON.parse(localStorage.getItem('uUser'))
+		
+		/** Attach updated object */
+		if (user) {
+			user.profile.fields[payload.type] = payload.fields
+			
+			/** Update uUser from localStorage */
+			localStorage.removeItem('uUser')
+			localStorage.setItem('uUser', JSON.stringify(user))
+			
+		}
+	})
 };

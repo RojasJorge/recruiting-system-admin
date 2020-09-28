@@ -1,29 +1,31 @@
 import {useState} from "react";
 import {useStoreActions, useStoreState} from "easy-peasy";
-import {delay} from "lodash";
-import {Button, Form} from "antd";
+import {Button, Form, notification} from "antd";
 import Names from "./Names";
-import Location from "./Location";
-import Salary from "./Salary";
+// import Location from "./Location";
+import Locations from "../../../Location";
 import General from "./General";
 import Contact from "./Contact";
 import {DoubleRightOutlined} from "@ant-design/icons";
-import dayjs from "dayjs";
+import xhr from "../../../../xhr";
 
 /** Import form sections */
-
 const FormItem = Form.Item;
 
-const Personal = ({update}) => {
+const Personal = _ => {
 	/** Global state */
 	const {
 		profile: {
+			id,
 			fields: {
 				personal
 			}
 		},
 		
 	} = useStoreState(state => state.auth.user)
+	
+	/** Birthday handler */
+	const [birthday, setBirthday] = useState(personal.birthday)
 	
 	/** Danger status */
 	const [danger, isDanger] = useState(false)
@@ -32,64 +34,37 @@ const Personal = ({update}) => {
 	const [phones, setPhones] = useState([])
 	
 	/** Personal info */
-	
-	/** Slugify string */
-	const slugify = useStoreActions(actions => actions.tools.slugify)
-	
-	const updateGlobal = useStoreActions(actions => actions.profile.update)
-	
-	/**
-	 * Update user on store
-	 */
-	const updateStoreUser = useStoreActions(actions => actions.auth.updateStoreUser)
-	
-	/** Location handler */
-	const [country, selectCountry] = useState({
-		data: []
-	});
-	
-	/** The location handler */
-	const [location, addLocation] = useState({
-		country: {},
-		province: {},
-		city: {
-			name: "",
-			slug: ""
-		},
-	})
+	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
 	
 	const onFinish = fields => {
+		fields = {...fields, birthday}
 		
-		updateStoreUser(fields)
-		
-		/** Update global */
-		// delay(() => updateGlobal({
-		// 	field: "personal",
-		// 	value: {
-		// 		...values,
-		// 		...{
-		// 			phones,
-		// 			country: location.country,
-		// 			city: location.city,
-		// 			province: {
-		// 				name: location.province.department,
-		// 				slug: slugify(location.province.department)
-		// 			},
-		// 		}
-		// 	}
-		// }), 1000)
+		xhr()
+			.put(`/profile/${id}`, JSON.stringify({
+				fields: {
+					personal: fields
+				}
+			}))
+			.then(resp => {
+				updateProfile({type: 'personal', fields})
+				
+				/** Send notification success */
+				notify('success', 'Genial!', 'Ficha personal actualizada.')
+			})
+			.catch(err => console.log('Error:', err))
 	}
 	
-	// const onFinishFailed = _ => {
-	// 	isDanger(true);
-	// 	setTimeout(() => {
-	// 		isDanger(false);
-	// 	}, 3000)
-	// }
+	/** Notifications */
+	const notify = (type, description) => {
+		notification[type]({
+			message: null,
+			description
+		})
+	}
 	
 	return (
 		<>
-			{/*<pre>{JSON.stringify(user.profile.personal, false, 2)}</pre>*/}
+			<pre>{JSON.stringify(personal, false, 2)}</pre>
 			<div className="row">
 				<div className="col-md-12">
 					<h2>Información personal:</h2>
@@ -99,34 +74,19 @@ const Personal = ({update}) => {
 				name="basic"
 				className="row"
 				onFinish={onFinish}
-				initialValues={{
-					name: personal.name,
-					lastname: personal.lastname,
-					job_title: personal.currentJobTitle,
-					zone: personal.location.zone,
-					address: personal.location.address,
-					currency: "GTQ",
-					min: 3000,
-					max: 6000,
-					nationality: personal.nationality,
-					// birthday: dayjs(dayjs(personal.birthday, 'YYYY-MM-DD'), 'DD/MM/YYYY'),
-					age: personal.age,
-					gender: personal.gender,
-					religion: personal.religion,
-					marital_status: personal.marital_status,
-					children: personal.children
-				}}
-				// onFinishFailed={onFinishFailed}
+				initialValues={personal}
 			>
 				<Names/>
-				<Location
-					country={country}
-					selectCountry={selectCountry}
-					location={location}
-					addLocation={addLocation}
+				<Form.Item
+					name="location"
+				>
+					<Locations/>
+				</Form.Item>
+				{/*<Salary/>*/}
+				<General
+					birthday={birthday}
+					setBirthday={setBirthday}
 				/>
-				<Salary/>
-				<General birthday={personal.birthday}/>
 				<Contact
 					phones={phones}
 					setPhones={setPhones}

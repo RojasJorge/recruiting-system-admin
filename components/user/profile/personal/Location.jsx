@@ -51,7 +51,14 @@ const Location = ({ country, selectCountry, location, addLocation }) => {
       <div className="col">
         <label htmlFor="name">País:</label>
         <FormItem name="country" rules={[{ required: true, message: 'El campo País es requerido.' }]}>
-          <Select name="country" placeholder="Seleccione" style={{ width: '100%' }} onChange={e => selectHandler(e, 'country')} size="large" showSearch>
+          <Select
+            name="country"
+            placeholder="Seleccione"
+            autoComplete="off"
+            style={{ width: '100%' }}
+            onChange={e => selectHandler(e, 'country')}
+            size="large"
+            showSearch>
             {countries.length > 0
               ? countries.map(o => (
                   <Select.Option key={o.code} value={o.code}>
@@ -64,7 +71,11 @@ const Location = ({ country, selectCountry, location, addLocation }) => {
       </div>
       <div className="col">
         <label htmlFor="name">Departamento:</label>
-        <FormItem name="province" rules={[{ required: true, message: 'El campo Departamento es requerido.' }]}>
+        <FormItem
+          name="province"
+          autoComplete="nope"
+          rules={[{ required: true, message: 'El campo Departamento es requerido.' }]}
+        >
           <Select name="province" placeholder="Seleccione" onChange={e => selectHandler(e, 'province')} style={{ width: '100%' }} size="large" showSearch>
             {country.data.length > 0
               ? country.data.map(o => (

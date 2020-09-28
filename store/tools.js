@@ -34,5 +34,33 @@ export default {
 			.replace(/-+$/, "")
 		
 		return payload
+	}),
+	calculate_age(birthday) { // birthday is a date
+		var ageDifMs = Date.now() - birthday.getTime();
+		var ageDate = new Date(ageDifMs); // miliseconds from epoch
+		return Math.abs(ageDate.getUTCFullYear() - 1970);
+	},
+	
+	/**
+	 * To binary
+	 */
+	toBinary: thunk((actions, {file}) => {
+		console.log('File:', file)
+		// convert base64 to raw binary data held in a string
+		var byteString = atob(file.split(',')[1]);
+		
+		// separate out the mime component
+		var mimeString = file.split(',')[0].split(':')[1].split(';')[0];
+		
+		// write the bytes of the string to an ArrayBuffer
+		var arrayBuffer = new ArrayBuffer(byteString.length);
+		var _ia = new Uint8Array(arrayBuffer);
+		for (var i = 0; i < byteString.length; i++) {
+			_ia[i] = byteString.charCodeAt(i);
+		}
+		
+		var dataView = new DataView(arrayBuffer);
+		var blob = new Blob([dataView], {type: mimeString});
+		return blob;
 	})
 }
