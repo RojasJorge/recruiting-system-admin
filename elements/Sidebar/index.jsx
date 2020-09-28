@@ -22,10 +22,7 @@ const Sitebar = props => {
   };
 
   return (
-    <div className="umana-sitebar">
-      {/* <Button type="link" size="large" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
-        <i classNae="material-icons">chevron_left</i>
-      </Button> */}
+    <div className={`umana-sitebar theme-${props.theme ? props.theme : 'blue'}`}>
       {!isEmpty(props.header) ? (
         <div className="umana-sitebar__header">
           <div className="header-icon">

@@ -16,10 +16,19 @@ info
   }
   @include element(item) {
     width: 100%;
-    // padding: 10px;
-    // padding-top: 0;
     margin: 10px;
     margin-top: 0px;
+    h3 {
+      font-size: 28px;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    h4 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 300;
+      color: $color-black;
+    }
     label {
       font-size: 16px;
       line-height: 18px;
@@ -49,8 +58,108 @@ info
         width: calc(50% - 20px);
       }
     }
+    &.item-xmd {
+      width: 100%;
+      @include bp(medium) {
+        width: calc(66.66% - 20px);
+      }
+    }
     &.item-lg {
       width: 100%;
     }
+    &.item-loop {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
+  .umana-content-title-over {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: -85px;
+    .ant-avatar.ant-avatar-circle.ant-avatar-icon {
+      background: $color-orange;
+      margin-bottom: 10px;
+      i {
+        font-size: 50px;
+      }
+    }
+    h2 {
+      color: $color-orange;
+    }
+  }
+}
+// si el item es un grupo
+.item-group {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 20px;
+  justify-content: space-between;
+  &--i {
+    margin: 0 5px 10px;
+    .ant-progress {
+      margin: 0 auto;
+    }
+  }
+  label {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+// item - de un map
+.item-map {
+  border-bottom: 1px solid rgba($color-text, 0.3);
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  h3 {
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+  h4 {
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 300;
+    color: $color-black;
+  }
+  &:last-child {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    border-bottom: 1px solid transparent;
+  }
+}
+
+// ============ tamaños =============
+
+.item-sm {
+  width: 100%;
+  @include bp(medium) {
+    width: calc(50% - 20px);
+  }
+  @include bp(xmedium) {
+    width: calc(33.33% - 20px);
+  }
+}
+.item-fx {
+  width: auto;
+}
+.item-md {
+  width: 100%;
+  @include bp(medium) {
+    width: calc(50% - 20px);
+  }
+}
+.item-lg {
+  width: 100%;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+  margin: 30px auto 20px;
 }

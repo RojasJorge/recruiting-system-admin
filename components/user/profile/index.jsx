@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import router from 'next/router'
+import router from 'next/router';
 import { Steps, Avatar } from 'antd';
 // import { UserOutlined } from '@ant-design/icons';
 import Personal from './personal';
@@ -46,14 +46,13 @@ const UserProfile = _ => {
   const update = useStoreActions(actions => actions.profile.update);
 
   /** Local state */
-  console.log('Current path step:', router)
+  console.log('Current path step:', router);
   const [current, switchCurrent] = useState(parseInt(router.query.current, 10) || 0);
   const [avatarSrc, setAvatarSrc] = useState('');
   const onChange = o => {
-  
-    switchCurrent(o)
-    router.push(`${router.router.pathname}?current=${o}`)
-  }
+    switchCurrent(o);
+    router.push(`${router.router.pathname}?current=${o}`);
+  };
 
   const status = o => {
     let s = 'wait';
@@ -132,7 +131,7 @@ const UserProfile = _ => {
     icon: 'person',
     action: 'remove_red_eye',
     titleAction: 'Ver perfil',
-    urlAction: '/admin/companies',
+    urlAction: '/admin/profile',
   };
 
   return (
@@ -140,14 +139,8 @@ const UserProfile = _ => {
       <PageTitle title="Mi Perfil" back="/admin/companies" />
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small ">
-          <Sitebar header={header} />
-          <Steps
-            direction="vertical"
-            size="large"
-            current={current}
-            onChange={onChange}
-            progressDot
-          >
+          <Sitebar header={header} theme="orange" />
+          <Steps direction="vertical" size="large" current={current} onChange={onChange} progressDot>
             {checkList.map((o, i) => (
               <Step key={i} title={o.title} status={status(i)} />
             ))}

@@ -1,25 +1,32 @@
 import Layout from '../../../views/Layout';
-import UserProfile from '../../../components/user/profile';
-import {EditOutlined} from '@ant-design/icons'
-import {Empty} from 'antd'
-import Link from 'next/link'
-import router from 'next/router'
+import { useStoreState } from 'easy-peasy';
+import { PageTitle, Sitebar } from '../../../elements';
+import SingleProfile from '../../../components/user/single';
 
-const Index = _ => (
-  <Layout title="Mi perfil" className="profile">
-    <div className="row">
-      <div className="col">
-        <Link href="/admin/profile/edit?current=0" passHref>
-          <a>
-            <EditOutlined /> Editar
-          </a>
-        </Link>
-      </div>
-      <div className="col-md-12">
-        <Empty/>
-      </div>
-    </div>
-  </Layout>
-);
+const Index = _ => {
+  const user = useStoreState(state => state.auth.user);
+  const header = {
+    title: user.name + ' ' + user.lastname,
+    icon: 'person',
+    action: 'edit',
+    titleAction: 'Editar perfil',
+    urlAction: '/admin/profile/edit?current=0',
+  };
+  return (
+    <Layout title="Mi perfil" className="profile">
+      <>
+        <PageTitle title="Mi perfil" />
+        <div className="umana-layout-cl">
+          <div className="umana-layout-cl__small ">
+            <Sitebar header={header} theme="orange" />
+          </div>
+          <div className="umana-layout-cl__flex width-section bg-white">
+            <SingleProfile />
+          </div>
+        </div>
+      </>
+    </Layout>
+  );
+};
 
 export default Index;
