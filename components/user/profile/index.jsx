@@ -11,13 +11,13 @@ import AcademicLevels from './AcademicLevels';
 import Experiences from './Experiences';
 import xhr from '../../../xhr';
 import { PageTitle, Sitebar, UploadAvatar } from '../../../elements';
+import render from 'dom-serializer';
 
 const { Step } = Steps;
 
 const checkList = [
   {
     title: 'Personal',
-    // icon:
   },
   {
     title: 'Documentos',

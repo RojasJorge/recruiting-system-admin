@@ -1,6 +1,6 @@
 const Economic = props => {
   return (
-    <div className="umana-content">
+    <div className="umana-content" id="economic">
       <div className="umana-content__item item-lg">
         <h2>Información Económica / Legal</h2>
       </div>

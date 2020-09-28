@@ -1,6 +1,6 @@
 const Contact = props => {
   return (
-    <div className="umana-content">
+    <div className="umana-content" id="contact">
       <div className="umana-content__item item-lg">
         <h2>Información de contacto</h2>
       </div>

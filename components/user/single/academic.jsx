@@ -1,6 +1,6 @@
 const Academic = props => {
   return (
-    <div className="umana-content">
+    <div className="umana-content" id="academiclevel">
       <div className="umana-content__item item-lg">
         <h2>Nivel académico</h2>
       </div>

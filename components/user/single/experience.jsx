@@ -1,6 +1,6 @@
 const Experience = props => {
   return (
-    <div className="umana-content">
+    <div className="umana-content" id="experience">
       <div className="umana-content__item item-lg">
         <h2>Experiencia Laboral</h2>
       </div>

@@ -1,7 +1,7 @@
 const About = props => {
   return (
     <>
-      <div className="umana-content">
+      <div className="umana-content" id="aboutme">
         <div className="umana-content__item item-lg">
           <h2>Acerca de Andrea</h2>
         </div>
@@ -16,7 +16,7 @@ const About = props => {
           </p>
         </div>
       </div>
-      <div className="umana-content">
+      <div className="umana-content" id="whatsearch">
         <div className="umana-content__item item-lg">
           <h2>Qué estas buscando</h2>
         </div>

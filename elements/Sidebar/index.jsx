@@ -51,7 +51,7 @@ const Sitebar = props => {
         </div>
       ) : null}
 
-      <Menu mode="inline" theme="light" inlineCollapsed={collapsed}>
+      <Menu mode="inline" theme="light" inlineCollapsed={collapsed} className={`theme-${props.theme ? props.theme : 'blue'}`}>
         {!isEmpty(props.data)
           ? props.data.map((e, idx) => (
               <Menu.Item key={idx} icon={<i className="material-icons">{e.icon}</i>}>

@@ -1,7 +1,7 @@
 import { Avatar } from 'antd';
 const General = props => {
   return (
-    <div className="umana-content" style={{ marginTop: 50 }}>
+    <div className="umana-content" style={{ marginTop: 50 }} id="general">
       <div className="umana-content-title-over">
         <Avatar icon={<i className="material-icons">person</i>} src={null} size={130} />
         <h2>Andrea España Siliezar</h2>
