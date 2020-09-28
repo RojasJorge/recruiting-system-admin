@@ -81,13 +81,13 @@ export default {
    */
 
   fill: action((state, payload) => {
-    console.log('store.jobs | fill()', payload)
+    // console.log('store.jobs | fill()', payload)
 
     localStorage.removeItem('Jobs');
 
     state.list = orderBy(payload.data.items, ['name', 'created_at'], ['asc', 'desc']);
     state.total = payload.data.total;
-  
+
     // console.log('State jobs:', state)
     // return
 

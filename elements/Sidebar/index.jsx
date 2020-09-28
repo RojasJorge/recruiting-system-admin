@@ -22,10 +22,7 @@ const Sitebar = props => {
   };
 
   return (
-    <div className="umana-sitebar">
-      {/* <Button type="link" size="large" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
-        <i classNae="material-icons">chevron_left</i>
-      </Button> */}
+    <div className={`umana-sitebar theme-${props.theme ? props.theme : 'blue'}`}>
       {!isEmpty(props.header) ? (
         <div className="umana-sitebar__header">
           <div className="header-icon">
@@ -54,7 +51,7 @@ const Sitebar = props => {
         </div>
       ) : null}
 
-      <Menu mode="inline" theme="light" inlineCollapsed={collapsed}>
+      <Menu mode="inline" theme="light" inlineCollapsed={collapsed} className={`theme-${props.theme ? props.theme : 'blue'}`}>
         {!isEmpty(props.data)
           ? props.data.map((e, idx) => (
               <Menu.Item key={idx} icon={<i className="material-icons">{e.icon}</i>}>

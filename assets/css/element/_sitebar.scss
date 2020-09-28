@@ -5,6 +5,36 @@
   margin-bottom: 20px;
   position: sticky;
   top: 100px;
+  &.theme-orange {
+    .header-icon {
+      background: $color-orange;
+    }
+    .header-content {
+      a {
+        color: $color-orange;
+      }
+    }
+  }
+  &.theme-green {
+    .header-icon {
+      background: $color-green;
+    }
+    .header-content {
+      a {
+        color: $color-green;
+      }
+    }
+  }
+  &.theme-blue {
+    .header-icon {
+      background: $color-blue;
+    }
+    .header-content {
+      a {
+        color: $color-blue;
+      }
+    }
+  }
   @include element(header) {
     margin-bottom: 20px;
     width: 100%;
@@ -63,12 +93,24 @@
       width: 50px;
       overflow: hidden;
     }
+    &.theme-orange {
+      li.ant-menu-item {
+        &.ant-menu-item-selected {
+          color: $color-orange;
+        }
+        &:hover {
+          * {
+            color: $color-orange;
+          }
+        }
+      }
+    }
     li.ant-menu-item {
       background: transparent;
       padding-left: 50px !important;
       position: relative;
       border-right: 0;
-
+      // color: $color-text;
       &.ant-menu-item-selected {
         box-shadow: $shadow;
         color: $color-primary;

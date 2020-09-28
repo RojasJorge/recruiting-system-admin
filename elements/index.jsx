@@ -12,3 +12,4 @@ export { default as UserDropdown } from './Menus/UserDropdown';
 export { default as UploadAvatar } from './Avatar';
 export { default as Sitebar } from './Sidebar';
 export { default as EmptyElemet } from './Empty';
+export { default as Filter } from './Filter';

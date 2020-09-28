@@ -1,7 +1,7 @@
-import {useState} from 'react';
-import {useStoreState} from 'easy-peasy';
-import router from 'next/router'
-import {Steps} from 'antd';
+import { useState } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import router from 'next/router';
+import { Steps, Avatar } from 'antd';
 // import { UserOutlined } from '@ant-design/icons';
 import Personal from './personal';
 import Documents from './Documents';
@@ -10,33 +10,33 @@ import LookingFor from './LookingFor';
 import AcademicLevels from './AcademicLevels';
 import Experiences from './Experiences';
 import xhr from '../../../xhr';
-import {PageTitle, Sitebar, UploadAvatar} from '../../../elements';
+import { PageTitle, Sitebar, UploadAvatar } from '../../../elements';
+import render from 'dom-serializer';
 
-const {Step} = Steps;
+const { Step } = Steps;
 
 const checkList = [
-	{
-		title: 'Personal',
-		// icon:
-	},
-	{
-		title: 'Documentos',
-	},
-	{
-		title: 'Acerca de',
-	},
-	{
-		title: '¿Qué buscas?',
-	},
-	{
-		title: 'Niveles Académicos',
-	},
-	{
-		title: 'Experiencia Laboral',
-	},
-	{
-		title: 'Economía',
-	},
+  {
+    title: 'Personal',
+  },
+  {
+    title: 'Documentos',
+  },
+  {
+    title: 'Acerca de',
+  },
+  {
+    title: '¿Qué buscas?',
+  },
+  {
+    title: 'Niveles Académicos',
+  },
+  {
+    title: 'Experiencia Laboral',
+  },
+  {
+    title: 'Economía',
+  },
 ];
 
 const UserProfile = _ => {

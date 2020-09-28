@@ -315,6 +315,10 @@ h5 {
     &.bg-white {
       background: $color-white;
     }
+    & > .ant-steps.ant-steps-vertical {
+      position: sticky;
+      top: 200px;
+    }
   }
   @include element(medium) {
     width: 50%;
