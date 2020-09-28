@@ -398,3 +398,12 @@ h5 {
     margin-left: auto;
   }
 }
+
+.umana-filter {
+  .visible-true {
+    display: block;
+  }
+  .visible-false {
+    display: none;
+  }
+}

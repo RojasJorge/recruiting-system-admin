@@ -23,7 +23,7 @@ const Filter = props => {
 
   return (
     <div className="umana-filter" style={{ marginTop: 20 }}>
-      <Select placeholder="Seleccione un puesto" defaultValue="all">
+      <Select placeholder="Seleccione un puesto" defaultValue="all" onChange={e => props.filterVal(e)}>
         <Select.Option key="all" value="all">
           Todos los puestos
         </Select.Option>
@@ -43,6 +43,7 @@ const Filter = props => {
             )
           : null}
       </Select>
+      <p className={`visible-${props.visible}`}>No hay plazas con ese puesto</p>
     </div>
   );
 };

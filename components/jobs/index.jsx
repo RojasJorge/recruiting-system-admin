@@ -4,21 +4,37 @@ import xhr from '../../xhr';
 import { Card, EmptyElemet, Filter } from '../../elements';
 import { isEmpty } from 'lodash';
 
+let visible = false;
 const Jobs = () => {
   const list = useStoreState(state => state.jobs.list);
   const fill = useStoreActions(actions => actions.jobs.fill);
   const [expiration, setExpiration] = useState([]);
+  const [result, setResult] = useState(list);
 
-  const getJobs = async (page = 1, offset = 5) =>
+  const getJobs = async (page = 1, offset = 5) => {
     await xhr()
       .get(`/job?page=${page}&offset=${offset}`)
-      .then(res => fill(res))
+      .then(res => {
+        fill(res);
+        console.log(res);
+      })
       .catch(err => console.log(err));
-  // .catch(err => isMissing(true));
-
+  };
   useEffect(() => {
     getJobs();
   }, []);
+
+  const addFilter = e => {
+    const _jobs = list.filter(o => o.jobposition === e);
+    const data = { data: { items: _jobs } };
+    if (_jobs.length > 0) {
+      visible = false;
+      setResult(_jobs);
+    } else {
+      visible = true;
+      setResult(list);
+    }
+  };
 
   const dataEmpty = {
     title: 'No tienes ninguna plaza publicada',
@@ -27,14 +43,13 @@ const Jobs = () => {
     url: '/admin/companies',
   };
 
-  // console.log('plazas', expiration);
   if (!isEmpty(list)) {
     return (
       <>
         {/* <pre>{JSON.stringify(list, false, 2)}</pre> */}
-        <Filter />
+        <Filter filterVal={addFilter} visible={visible} />
         <div className="umana-list">
-          {list.map((e, idx) => {
+          {result.map((e, idx) => {
             const today = new Date();
             const jobDate = new Date(e.expiration_date);
             if (today < jobDate) {
