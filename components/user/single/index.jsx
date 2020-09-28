@@ -7,6 +7,7 @@ import Knowledge from './knowledge';
 import Economic from './economic';
 
 const SingleProfile = () => {
+  const getLocal = () => {};
   return (
     <>
       <General />
