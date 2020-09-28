@@ -27,9 +27,9 @@ const Names = _ => {
 				</Item>
 			</div>
 			<div className="col-md-12">
-				<label htmlFor="jobTitle">Puesto Actual:</label>
+				<label htmlFor="currentJobTitle">Puesto Actual:</label>
 				<Item
-					name="job_title"
+					name="currentJobTitle"
 					type="text"
 					rules={[{required: true, message: "El campo 'Puesto Actual' es requerido."}]}
 				>

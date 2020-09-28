@@ -79,8 +79,22 @@ export default {
 	/**
 	 * Update user state
 	 */
-	updateStoreUser: action((state, payload) => {
-		console.log('updateStoreUser | Payload:', payload)
-		return
+	updateProfile: action((state, payload) => {
+		
+		/** Update global state */
+		state.user.profile.fields[payload.type] = payload.fields
+		
+		/** Get uUser from localStorage */
+		let user = JSON.parse(localStorage.getItem('uUser'))
+		
+		/** Attach updated object */
+		if (user) {
+			user.profile.fields[payload.type] = payload.fields
+			
+			/** Update uUser from localStorage */
+			localStorage.removeItem('uUser')
+			localStorage.setItem('uUser', JSON.stringify(user))
+			
+		}
 	})
 };
