@@ -13,7 +13,8 @@ const General = props => {
       {!isEmpty(props.data.currentJobTitle) ? (
         <div className="umana-content__item item-lg" style={{ textAlign: 'center' }}>
           <label>Puestos a los que aplica</label>
-          <p>{props.data.currentJobTitle.map((e, idx) => (idx !== 0 ? `, ${e}` : e))}</p>
+          {/* <p>{props.data.currentJobTitle.map((e, idx) => (idx !== 0 ? `, ${e}` : e))}</p> */}
+          <p>{props.data.currentJobTitle}</p>
         </div>
       ) : null}
       {props.data.location.city && props.data.location.country ? (

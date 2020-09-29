@@ -21,14 +21,27 @@ const Single = _ => {
       .catch(err => isMissing(true));
   }, []);
 
-  const header = {
-    title: data && data.company && data.company.name ? data.company.name : 'Empresa',
-    icon: 'location_city',
-    action: 'edit',
-    titleAction: 'Editar perfil',
-    urlAction: '/admin/companies/edit/',
-    urlDinamic: router.query.id,
+  const getScope = () => {
+    const _scope = JSON.parse(localStorage.getItem('uScopes'));
+    if (_scope[0] === 'candidate') {
+      return {
+        title: data && data.company && data.company.name ? data.company.name : 'Empresa',
+        icon: 'location_city',
+        action: 'back',
+      };
+    } else {
+      return {
+        title: data && data.company && data.company.name ? data.company.name : 'Empresa',
+        icon: 'location_city',
+        action: 'edit',
+        titleAction: 'Editar perfil',
+        urlAction: '/admin/companies/edit/',
+        urlDinamic: router.query.id,
+      };
+    }
   };
+
+  const header = getScope();
 
   const menuList = [
     {
