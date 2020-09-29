@@ -140,7 +140,7 @@ const UserProfile = _ => {
       <PageTitle title="Mi Perfil" back="/admin/companies" />
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small ">
-          <Sitebar header={header} />
+          <Sitebar header={header} theme="orange" />
           <Steps direction="vertical" size="large" current={current} onChange={onChange} progressDot>
             {checkList.map((o, i) => (
               <Step key={i} title={o.title} status={status(i)} />

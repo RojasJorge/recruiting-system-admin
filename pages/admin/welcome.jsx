@@ -23,7 +23,7 @@ const Welcome = () => {
       información que se te solicita y ver las mejores plazas para ti.`,
     beforeButton: 'Estas listo(a)',
     buttonTitle: 'Comenzar',
-    url: '/admin/profile',
+    url: '/admin/profile/edit?current=0',
     img: candidateImg,
   };
 
