@@ -7,6 +7,7 @@ import Login from '../components/user/Login';
 import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
 import { SyncOutlined } from '@ant-design/icons';
+import {Can} from '../components/Can'
 
 const Layout = ({ children, title, className }) => {
   /** Page loaders */
@@ -46,7 +47,9 @@ const Layout = ({ children, title, className }) => {
       </Head>
       <MainHeader layout="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
-        <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>{children}</div>
+        {/*<Can I="view" a="MAIN_LAYOUT">*/}
+          <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>{children}</div>
+        {/*</Can>*/}
       </div>
       <PageLoader active={mloading} />
     </div>

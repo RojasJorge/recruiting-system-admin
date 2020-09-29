@@ -11,13 +11,16 @@ const Index = _ => {
       <>
         <PageTitle title="Plazas" />
         <div className="umana-subtitle">
-          <Button type="link" size="large">
-            <Link href="/admin/jobs/add" passHref>
-              <a>
-                <i className="material-icons">add</i>Crear plaza
-              </a>
-            </Link>
-          </Button>
+          {/* {ability.can('read', 'SPECIAL_ALERTS') ? special_alert() : null} */}
+          <Can I="edit" a="JOBS">
+            <Button type="link" size="large">
+              <Link href="/admin/jobs/add" passHref>
+                <a>
+                  <i className="material-icons">add</i>Crear plaza
+                </a>
+              </Link>
+            </Button>
+          </Can>
         </div>
         <Jobs />
       </>
