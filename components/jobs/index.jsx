@@ -66,7 +66,7 @@ const Jobs = () => {
                   description={e.description}
                   theme="green"
                   parentInfo={e.company}
-                  date={{ date: e.expiration_date, type: 'Expira' }}
+                  // date={{ date: e.expiration_date, type: 'Expira' }}
                   align="left"
                 />
               );
