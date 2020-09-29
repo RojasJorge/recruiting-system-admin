@@ -11,7 +11,6 @@ const Index = _ => {
       <>
         <PageTitle title="Plazas" />
         <div className="umana-subtitle">
-          {/* {ability.can('read', 'SPECIAL_ALERTS') ? special_alert() : null} */}
           <Button type="link" size="large">
             <Link href="/admin/jobs/add" passHref>
               <a>

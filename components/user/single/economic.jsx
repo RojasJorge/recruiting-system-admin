@@ -1,7 +1,6 @@
 import { isEmpty } from 'lodash';
 import locale from '../../../data/translates/spanish';
 const Economic = props => {
-  console.log('economic', props.data);
   return (
     <div className="umana-content" id="economic">
       <div className="umana-content__item item-lg">

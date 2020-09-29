@@ -17,11 +17,15 @@ const Jobs = () => {
       .then(res => {
         fill(res);
         console.log(res);
+        setResult(res.data.items);
       })
       .catch(err => console.log(err));
   };
   useEffect(() => {
     getJobs();
+    if (!isEmpty(list)) {
+      setResult(list);
+    }
   }, []);
 
   const addFilter = e => {
