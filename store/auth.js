@@ -72,6 +72,7 @@ export default {
 		localStorage.removeItem('uToken');
 		localStorage.removeItem('uScopes');
 		localStorage.removeItem('uUser');
+		localStorage.setItem('uScopes', JSON.stringify(['guest']))
 		Router.push('/');
 	}),
 	

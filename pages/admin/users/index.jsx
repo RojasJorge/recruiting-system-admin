@@ -1,7 +1,7 @@
 import Layout from '../../../views/Layout';
 import UsersList from '../../../components/user/List';
 import { Can } from '../../../components/Can';
-import ability from '../../../ability';
+// import ability from '../../../ability';
 
 const Users = () => {
   const special_alert = _ => {

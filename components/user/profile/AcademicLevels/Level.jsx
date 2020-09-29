@@ -68,7 +68,7 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 						</div>
 						<div className="col-md-6">
 							<Item
-								name="academic_level"
+								name="academicLevel"
 								rules={[{required: true, message: "Debes escoger un nivel académico"}]}
 							>
 								<Select
@@ -116,7 +116,7 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 								rules={[{required: true, message: "Fecha de inicio es requerida"}]}
 							>
 								<DatePicker
-									format="DD-MM-YYYY"
+									format="DD/MM/YYYY"
 									value={_level.start_date.toString()}
 									style={{width: '100%'}}
 									size="large"
@@ -133,6 +133,7 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 									value={_level.end_date.toString()}
 									style={{width: '100%'}}
 									size="large"
+									format="DD/MM/YYYY"
 									onChange={(date, dateString) => onDatePickerChange(date, dateString, "end_date")}
 								/>
 							</Item>
