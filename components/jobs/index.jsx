@@ -5,7 +5,7 @@ import { Card, EmptyElemet, Filter } from '../../elements';
 import { isEmpty } from 'lodash';
 
 let visible = false;
-const Jobs = () => {
+const Jobs = props => {
   const list = useStoreState(state => state.jobs.list);
   const fill = useStoreActions(actions => actions.jobs.fill);
   const [expiration, setExpiration] = useState([]);
@@ -40,17 +40,9 @@ const Jobs = () => {
     }
   };
 
-  const dataEmpty = {
-    title: 'No tienes ninguna plaza publicada',
-    content: 'Selecciona una empresa y publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.',
-    buttonTitle: 'Agregar plaza',
-    url: '/admin/companies',
-  };
-
   if (!isEmpty(list)) {
     return (
       <>
-        {/* <pre>{JSON.stringify(list, false, 2)}</pre> */}
         <Filter filterVal={addFilter} visible={visible} />
         <div className="umana-list">
           {result.map((e, idx) => {
@@ -61,12 +53,12 @@ const Jobs = () => {
                 <Card
                   key={idx}
                   title={e.title}
-                  link={`/admin/jobs/single/`}
+                  link={`${localStorage.getItem('uToken') ? '/admin/jobs/single/' : '/jobs/'}`}
                   dinamicLink={e.id}
                   description={e.description}
                   theme="green"
                   parentInfo={e.company}
-                  // date={{ date: e.expiration_date, type: 'Expira' }}
+                  date={{ date: e.expiration_date, type: 'Expira' }}
                   align="left"
                 />
               );
@@ -85,7 +77,7 @@ const Jobs = () => {
   }
   return (
     <div className="umana-list list-empty">
-      <EmptyElemet data={dataEmpty} />
+      <EmptyElemet data={props.empty} />
     </div>
   );
 };

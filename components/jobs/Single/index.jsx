@@ -45,23 +45,33 @@ const SingleJob = () => {
 
   const getScope = () => {
     const _scope = JSON.parse(localStorage.getItem('uScopes'));
-    if (_scope[0] === 'candidate') {
-      return {
-        title: job && job.company ? job.company.name : 'Plaza',
-        icon: 'location_city',
-        action: 'check',
-        titleAction: 'Aplicar a plaza',
-        // urlAction: '/#',
-        // urlDinamic: router.query.id,
-      };
+    if (localStorage.getItem('uToken')) {
+      if (_scope[0] === 'candidate') {
+        return {
+          title: job && job.company ? job.company.name : 'Plaza',
+          icon: 'location_city',
+          action: 'check',
+          titleAction: 'Aplicar a plaza',
+          // urlAction: '/#',
+          // urlDinamic: router.query.id,
+        };
+      } else {
+        return {
+          title: job && job.company ? job.company.name : 'Plaza',
+          icon: 'location_city',
+          action: 'edit',
+          titleAction: 'Editar Plaza',
+          urlAction: '/admin/jobs/edit/',
+          urlDinamic: router.query.id,
+        };
+      }
     } else {
       return {
         title: job && job.company ? job.company.name : 'Plaza',
         icon: 'location_city',
-        action: 'edit',
-        titleAction: 'Editar Plaza',
-        urlAction: '/admin/jobs/edit/',
-        urlDinamic: router.query.id,
+        action: 'check',
+        titleAction: 'Iniciar sesión',
+        urlAction: '/',
       };
     }
   };
