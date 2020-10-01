@@ -96,7 +96,7 @@ const Jobs = props => {
                 <Card
                   key={idx}
                   title={e.title}
-                  link={`${localStorage.getItem('uToken') ? '/admin/jobs/single/' : '/jobs/'}`}
+                  link={`${localStorage.getItem('uToken') ? '/admin/jobs/single/' : '/jobs/single/'}`}
                   dinamicLink={e.id}
                   description={e.description}
                   theme="green"
