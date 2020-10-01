@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash';
 import locale from '../../../data/translates/spanish';
 const Economic = props => {
+  // console.log('economic', props.data);
   return (
     <div className="umana-content" id="economic">
       <div className="umana-content__item item-lg">
@@ -9,14 +10,14 @@ const Economic = props => {
       {props.data.currentSalary ? (
         <div className="umana-content__item item-sm">
           <label>Sueldo actual</label>
-          <h3>{`${props.data.currentSalaryCurrency}. ${props.data.currentSalary}.00`}</h3>
+          <h3>{`${props.data.currentSalaryCurrency ? props.data.currentSalaryCurrency : 'GTQ'}. ${props.data.currentSalary}.00`}</h3>
         </div>
       ) : null}
-      {props.data.desiredSalary.base_min || props.data.desiredSalary.base_max ? (
+      {props.data.desiredSalary.baseMin || props.data.desiredSalary.baseMax ? (
         <div className="umana-content__item item-xmd">
           <label>Pretención Salarial</label>
-          {props.data.desiredSalary.base_min || props.data.desiredSalary.base_max ? (
-            <h3>{`${props.data.desiredSalary.currency}. ${props.data.desiredSalary.base_min}.00 - ${props.data.desiredSalary.currency}. ${props.data.desiredSalary.base_max}.00`}</h3>
+          {props.data.desiredSalary.baseMin || props.data.desiredSalary.baseMax ? (
+            <h3>{`${props.data.desiredSalary.currency}. ${props.data.desiredSalary.baseMin}.00 - ${props.data.desiredSalary.currency}. ${props.data.desiredSalary.baseMax}.00`}</h3>
           ) : null}
         </div>
       ) : null}
@@ -49,21 +50,21 @@ const Economic = props => {
           <p>Si</p>
         </div>
       ) : null}
-      {!isEmpty(props.data.debtsRepeater) ? (
+      {!isEmpty(props.data.debts) ? (
         <div className="umana-content__item item-lg item-loop">
-          {props.data.debtsRepeater.map((e, idx) => (
-            <div className="item-lg item-map item-group" key={idx}>
+          {props.data.debts.map((e, idx) => (
+            <div className="item-lg item-map item-group" key={`${idx}debts`}>
               <div className="item-group--i item-sm">
                 <label>¿En dondé?</label>
-                <p>Banco Industrial</p>
+                <p>{e.whatCompany}</p>
               </div>
               <div className="item-group--i item-sm">
                 <label>Total de la deuda</label>
-                <p>Q.4,000.00</p>
+                <p>{`GTQ. ${e.amount}`}</p>
               </div>
               <div className="item-group--i item-sm">
                 <label>¿Cuánto paga al mes?</label>
-                <p>Q.400.00</p>
+                <p>{`GTQ. ${e.monthlyFee}`}</p>
               </div>
               <hr />
             </div>
@@ -112,26 +113,26 @@ const Economic = props => {
           </div>
           <div className="umana-content__item item-lg item-loop">
             {props.data.vehicles.map((e, idx) => (
-              <div className="item-lg item-map item-group" key={idx}>
+              <div className="item-lg item-map item-group" key={`${idx}vehicle`}>
                 <div className="item-group--i item-fx">
                   <label>Tipo</label>
-                  <p>Camioneta</p>
+                  <p>{locale(e.type)}</p>
                 </div>
                 <div className="item-group--i item-fx">
                   <label>Marca y Linea</label>
-                  <p>Mazda 3</p>
+                  <p>{e.brand}</p>
                 </div>
                 <div className="item-group--i item-fx">
                   <label>Modelo</label>
-                  <p>2007</p>
+                  <p>{e.year}</p>
                 </div>
                 <div className="item-group--i item-fx">
                   <label>Debe</label>
-                  <p>Si</p>
+                  <p>{locale(e.debts)}</p>
                 </div>
                 <div className="item-group--i item-fx">
                   <label>Monto</label>
-                  <p>Q. 10,000.00</p>
+                  <p>{`GTQ. ${e.amount}`}</p>
                 </div>
               </div>
             ))}
