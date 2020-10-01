@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import xhr from '../../xhr';
 import { Card, EmptyElemet, Filter } from '../../elements';
 import { isEmpty } from 'lodash';
+import { Can } from '../Can';
 
 let visible = false;
 const Jobs = props => {
@@ -11,19 +12,19 @@ const Jobs = props => {
   const [expiration, setExpiration] = useState([]);
   // const [result, setResult] = useState(list);
   const collectionsActions = useStoreActions(actions => actions.collections);
-  const collectionsState = useStoreState(state => state.collections)
+  const collectionsState = useStoreState(state => state.collections);
 
   const getJobs = async (page = 1, offset = 50) => {
     await xhr()
       .get(`/job?page=${page}&offset=${offset}`)
       .then(res => {
-        // fill(res);
+        fill(res);
         // console.log('getJobs()', res);
         // setResult(res.data.items);
       })
       .catch(err => console.log(err));
   };
-  
+
   const getOptions = async () => {
     await xhr()
       .get(`/career`)
@@ -33,7 +34,7 @@ const Jobs = props => {
       })
       .catch(err => console.log(err));
   };
-  
+
   const get = () => {
     collectionsActions.get({ type: 'career' });
     collectionsActions.get({ type: 'academic_level' });
@@ -41,7 +42,7 @@ const Jobs = props => {
 
   useEffect(() => {
     getJobs();
-    getOptions()
+    getOptions();
     if (!isEmpty(list)) {
       // setResult(list);
     }
@@ -60,10 +61,12 @@ const Jobs = props => {
     }
   };
 
+  console.log(list);
+
   if (!isEmpty(list)) {
     return (
       <>
-        <Filter filterVal={addFilter} collectionsState={collectionsState.career} visible={visible} />
+        {/* <Filter filterVal={addFilter} collectionsState={collectionsState.career} visible={visible} /> */}
         <div className="umana-list">
           {list.map((e, idx) => {
             const today = new Date();
@@ -88,9 +91,12 @@ const Jobs = props => {
             }
           })}
         </div>
-        <div className="umana-section">
-          <h2>Plazas expiradas</h2>
-        </div>
+        <Can I="edit" a="JOBS">
+          <div className="umana-section">
+            <h2>Plazas expiradas</h2>
+            <div>No hay plazas expiradas</div>
+          </div>
+        </Can>
       </>
     );
   }

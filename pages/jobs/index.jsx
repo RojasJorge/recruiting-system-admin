@@ -4,7 +4,7 @@ import { PageTitle } from '../../elements';
 
 const Index = _ => {
   const dataEmpty = {
-    title: 'No hay plazas plazas publicas.',
+    title: 'No hay plazas publicas.',
     content: 'En este momento no se han encotrado plazas publicas, visitanos más.',
   };
 

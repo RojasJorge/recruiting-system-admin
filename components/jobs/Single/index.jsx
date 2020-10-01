@@ -7,13 +7,14 @@ import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
+import { Can } from '../../../components/Can';
 
 const SingleJob = () => {
   const router = useRouter();
   // const data = useStoreState(state => state.jobs);
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
-  const [Jobs, setJobs] = useState([])
+  const [Jobs, setJobs] = useState([]);
 
   const getJob = () =>
     xhr()
@@ -26,7 +27,7 @@ const SingleJob = () => {
       .catch(err => isMissing(true));
 
   const getFromLocal = _ => {
-    // const Jobs = JSON.parse(localStorage.getItem('Jobs'));
+    const Jobs = JSON.parse(localStorage.getItem('Jobs'));
     const job = find(Jobs.list, o => router.query.id === o.id);
 
     if (Jobs) {
@@ -41,58 +42,52 @@ const SingleJob = () => {
   };
 
   useEffect(() => {
-    setJobs(localStorage.getItem('Jobs') || [])
+    setJobs(localStorage.getItem('Jobs') || []);
     getFromLocal();
   }, []);
 
-  // const getScope = () => {
-  //   if (localStorage.getItem('uToken')) {
-  //     const _scope = localStorage.getItem('uScopes') ? JSON.parse(localStorage.getItem('uScopes')) : ['candidate'];
-  //     if (_scope[0] === 'candidate') {
-  //       return {
-  //         title: job && job.company ? job.company.name : 'Plaza',
-  //         icon: 'location_city',
-  //         action: 'check',
-  //         titleAction: 'Aplicar a plaza',
-  //         // urlAction: '/#',
-  //         // urlDinamic: router.query.id,
-  //       };
-  //     } else {
-  //       return {
-  //         title: job && job.company ? job.company.name : 'Plaza',
-  //         icon: 'location_city',
-  //         action: 'edit',
-  //         titleAction: 'Editar Plaza',
-  //         urlAction: '/admin/jobs/edit/',
-  //         urlDinamic: router.query.id,
-  //       };
-  //     }
-  //   } else {
-  //     return {
-  //       title: job && job.company ? job.company.name : 'Plaza',
-  //       icon: 'location_city',
-  //       action: 'check',
-  //       titleAction: 'Iniciar sesión',
-  //       urlAction: '/',
-  //     };
-  //   }
-  // };
-
-  const header = {
-    title: job && job.company ? job.company.name : 'Plaza',
-    icon: 'location_city',
-    action: 'edit',
-    titleAction: 'Editar Plaza',
-    urlAction: '/admin/jobs/edit/',
-    urlDinamic: router.query.id,
+  const getScope = () => {
+    if (localStorage.getItem('uToken')) {
+      return {
+        title: job && job.company ? job.company.name : 'Plaza',
+        icon: 'location_city',
+        action: 'edit',
+        titleAction: 'Editar Plaza',
+        urlAction: '/admin/jobs/edit/',
+        urlDinamic: router.query.id,
+      };
+    } else {
+      return {
+        title: job && job.company ? job.company.name : 'Plaza',
+        icon: 'location_city',
+        action: 'check',
+        titleAction: 'Iniciar sesión',
+        urlAction: '/',
+      };
+    }
   };
+
+  const header = getScope();
 
   if (job) {
     return (
       <div className="umana-layout-cl">
         {/*<pre>{JSON.stringify(job, false, 2)}</pre>*/}
         <div className="umana-layout-cl__small ">
-          <Sitebar header={header} />
+          <Can I="edit" a="JOBS">
+            <Sitebar header={header} />
+          </Can>
+          <Can I="apply" a="JOBS">
+            <Sitebar
+              header={{
+                title: job && job.company ? job.company.name : 'Plaza',
+                icon: 'location_city',
+                action: 'check',
+                titleAction: 'Aplicar Plaza',
+                urlAction: '/#',
+              }}
+            />
+          </Can>
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
           <div className="umana-content">

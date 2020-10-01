@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { EmptyElemet } from '../../elements';
 import xhr from '../../xhr';
 import { Card } from '../../elements';
+import { Can } from '../Can';
 
 const Companies = () => {
   const [missing, isMissing] = useState(false);
@@ -38,6 +39,12 @@ const Companies = () => {
     buttonTitle: 'Agregar Empresa',
     url: '/admin/companies/add',
   };
+  const dataEmpty1 = {
+    title: 'No hay empresas disponibles',
+    content: 'Esta vista esta restingida para tu usuario',
+    buttonTitle: 'Volver a dashboard',
+    url: '/admin',
+  };
   if (data.company && data.company.items && data.company.items.length > 0) {
     return (
       <div className="umana-list">
@@ -49,7 +56,12 @@ const Companies = () => {
   }
   return (
     <div className="umana-list list-empty">
-      <EmptyElemet data={dataEmpty} />
+      <Can I="add" a="COMPANIES">
+        <EmptyElemet data={dataEmpty} />
+      </Can>
+      <Can I="apply" a="JOBS">
+        <EmptyElemet data={dataEmpty1} />
+      </Can>
     </div>
   );
 };
