@@ -6,11 +6,12 @@ import Health from "./Health";
 import Legal from './Legal'
 import {useStoreActions, useStoreState} from "easy-peasy";
 import xhr from "../../../../xhr";
+import router from "next/router";
 
 const {Item, List} = Form
 const {Option} = Select
 
-const Economic = _ => {
+const Economic = ({current, switchCurrent}) => {
 	
 	const [checks, updateChecks] = useState({
 		otherIncomes: false
@@ -40,6 +41,8 @@ const Economic = _ => {
 				
 				/** Send notification success */
 				notify('success', 'Experiencia laboral.', 'Actualizado correctamente..')
+				switchCurrent((current + 1))
+				router.push(`${router.router.pathname}?current=${(current + 1)}`)
 			})
 			.catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'))
 	}
@@ -54,9 +57,9 @@ const Economic = _ => {
 	
 	return (
 		<>
-			{/*<pre>{JSON.stringify(checks, false, 2)}</pre>*/}
 			<Form
 				onFinish={onFinish}
+				initialValues={economic}
 			>
 				<div className="row">
 					<div className="col-md-12">

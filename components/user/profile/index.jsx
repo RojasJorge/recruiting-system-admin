@@ -86,7 +86,7 @@ const UserProfile = _ => {
 				return <Others/>;
 				break;
 			default:
-				return <Personal switchCurrent={switchCurrent} current={current}/>;
+				return <><p>No data</p></>;
 				break;
 		}
 	};
