@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import xhr from '../../xhr';
 import { Avatar } from 'antd';
 import { Sitebar } from '../../elements';
+import ability from '../../ability';
+import { Can } from '../../components/Can';
 
 const Single = _ => {
   const [missing, isMissing] = useState(false);
@@ -29,6 +31,11 @@ const Single = _ => {
     urlAction: '/admin/companies/edit/',
     urlDinamic: router.query.id,
   };
+  const header1 = {
+    title: data && data.company && data.company.name ? data.company.name : 'Empresa',
+    icon: 'location_city',
+    action: 'back',
+  };
 
   const menuList = [
     {
@@ -48,7 +55,12 @@ const Single = _ => {
   return (
     <div className="umana-layout-cl">
       <div className="umana-layout-cl__small ">
-        <Sitebar header={header} data={menuList} />
+        <Can I="edit" a="COMPANIES">
+          <Sitebar header={header} data={menuList} />
+        </Can>
+        <Can I="apply" a="JOBS">
+          <Sitebar header={header1} data={menuList} />
+        </Can>
       </div>
       <div className="umana-layout-cl__flex bg-white">
         {data && data.company ? (

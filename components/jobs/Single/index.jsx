@@ -5,14 +5,17 @@ import { Progress, Skeleton, Tag } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
+import { Button } from 'antd';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
+import { Can } from '../../../components/Can';
 
 const SingleJob = () => {
   const router = useRouter();
   // const data = useStoreState(state => state.jobs);
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
+  const [Jobs, setJobs] = useState([]);
 
   const getJob = () =>
     xhr()
@@ -40,26 +43,51 @@ const SingleJob = () => {
   };
 
   useEffect(() => {
+    setJobs(localStorage.getItem('Jobs') || []);
     getFromLocal();
   }, []);
 
-  const header = {
-    title: job && job.company ? job.company.name : 'Plaza',
-    icon: 'location_city',
-    action: 'edit',
-    titleAction: 'Editar Plaza',
-    urlAction: '/admin/jobs/edit/',
-    urlDinamic: router.query.id,
+  const getScope = () => {
+    if (localStorage.getItem('uToken')) {
+      return {
+        title: job && job.company ? job.company.name : 'Plaza',
+        icon: 'location_city',
+        action: 'edit',
+        titleAction: 'Editar Plaza',
+        urlAction: '/admin/jobs/edit/',
+        urlDinamic: router.query.id,
+      };
+    } else {
+      return {
+        title: job && job.company ? job.company.name : 'Plaza',
+        icon: 'location_city',
+        action: 'check',
+        titleAction: 'Iniciar sesión',
+        urlAction: '/',
+      };
+    }
   };
 
-  // console.log('Single job:', job)
+  const header = getScope();
 
   if (job) {
     return (
       <div className="umana-layout-cl">
-        {/*<pre>{JSON.stringify(job, false, 2)}</pre>*/}
         <div className="umana-layout-cl__small ">
-          <Sitebar header={header} />
+          <Can I="edit" a="JOBS">
+            <Sitebar header={header} />
+          </Can>
+          <Can I="apply" a="JOBS">
+            <Sitebar
+              header={{
+                title: job && job.company ? job.company.name : 'Plaza',
+                icon: 'location_city',
+                action: 'check',
+                titleAction: 'Aplicar Plaza',
+                urlAction: '/#',
+              }}
+            />
+          </Can>
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
           <div className="umana-content">
@@ -261,6 +289,9 @@ const SingleJob = () => {
               </div>
             ) : null}
           </div>
+          <Can I="apply" a="JOBS">
+            <Button type="orange">Aplicar a la plaza</Button>
+          </Can>
         </div>
       </div>
     );

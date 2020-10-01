@@ -13,24 +13,25 @@ const EmptyElemet = props => {
             <h2>{props.data.title}</h2>
             <p>{props.data.content}</p>
             <br />
-            <Button size="small" type={props.type ? props.type : 'blue'}>
-              {props.data.id ? (
-                <Link href={`${props.data.url}[id]`} as={`${props.data.url}${props.data.id}`}>
-                  <a>{props.data.buttonTitle}</a>
-                </Link>
-              ) : (
-                <Link href={props.data.url}>
-                  <a>{props.data.buttonTitle}</a>
-                </Link>
-              )}
-            </Button>
+            {props.data.url ? (
+              <Button size="small" type={props.type ? props.type : 'blue'}>
+                {props.data.id ? (
+                  <Link href={`${props.data.url}[id]`} as={`${props.data.url}${props.data.id}`}>
+                    <a>{props.data.buttonTitle}</a>
+                  </Link>
+                ) : (
+                  <Link href={props.data.url}>
+                    <a>{props.data.buttonTitle}</a>
+                  </Link>
+                )}
+              </Button>
+            ) : null}
           </div>
         ) : (
           <div className="umana-layout--content">
             <h2>No tienes ninguna plaza publicada</h2>
             <p>Publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.</p>
             <br />
-
             <Button size="small" type="blue" icon={<i className="material-icons">add</i>}>
               <Link href={`jobs/add`}>
                 <a>Agregar Plaza</a>

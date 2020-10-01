@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 const Contact = props => {
   return (
     <div className="umana-content" id="contact">
@@ -6,13 +7,16 @@ const Contact = props => {
       </div>
       <div className="umana-content__item item-md">
         <label>Correo electrónico</label>
-        <p>andrea@royalestudios.com</p>
+        <p>{props.data.email ? props.data.email : props.defaultData.email}</p>
       </div>
-      <div className="umana-content__item item-md">
-        <label>Teléfono</label>
-        <p>Personal: +(502) 30109264</p>
-        <p>Oficina: +(502) 30109264</p>
-      </div>
+      {!isEmpty(props.data.phones) ? (
+        <div className="umana-content__item item-md">
+          <label>Teléfono</label>
+          {props.data.phones.map((e, idx) => (
+            <p>{`${e.type}: ${e.area} ${e.number}`}</p>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

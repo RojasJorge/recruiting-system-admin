@@ -24,7 +24,7 @@ const About = ({switchCurrent, current}) => {
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
 	
 	const onFinish = fields => {
-		console.log("About.jsx:", fields);
+		// console.log("About.jsx:", fields);
 		
 		const merged = Object.assign(personal, fields)
 		

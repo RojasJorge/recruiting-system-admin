@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
+import {useState} from 'react';
+import {useStoreState} from 'easy-peasy';
 import router from 'next/router';
-import { Steps, Avatar } from 'antd';
+import {Steps} from 'antd';
 // import { UserOutlined } from '@ant-design/icons';
 import Personal from './personal';
 import Documents from './Documents';
@@ -9,51 +9,43 @@ import About from './personal/About';
 import LookingFor from './LookingFor';
 import AcademicLevels from './AcademicLevels';
 import Experiences from './Experiences';
+import Economic from "./Economic";
+import Others from "./Others";
 import xhr from '../../../xhr';
-import { PageTitle, Sitebar, UploadAvatar } from '../../../elements';
-import render from 'dom-serializer';
+import {PageTitle, Sitebar, UploadAvatar} from '../../../elements';
 
-const { Step } = Steps;
+const {Step} = Steps;
 
-const checkList = [
-  {
-    title: 'Personal',
-  },
-  {
-    title: 'Documentos',
-  },
-  {
-    title: 'Acerca de',
-  },
-  {
-    title: '¿Qué buscas?',
-  },
-  {
-    title: 'Niveles Académicos',
-  },
-  {
-    title: 'Experiencia Laboral',
-  },
-  {
-    title: 'Economía',
-  },
-];
+const checkList = [{
+	title: 'Personal',
+}, {
+	title: 'Documentos',
+}, {
+	title: 'Acerca de',
+}, {
+	title: '¿Qué buscas?',
+}, {
+	title: 'Niveles Académicos',
+}, {
+	title: 'Experiencia Laboral',
+}, {
+	title: 'Economía'
+}, {
+	title: 'Otros',
+}];
 
 const UserProfile = _ => {
 	/** Global state */
 	const user = useStoreState(state => state.auth.user);
-	// const steps = useStoreState(state => state.profile.steps);
-	// const update = useStoreActions(actions => actions.profile.update);
 	
 	/** Local state */
-	console.log('Current path step:', router)
 	const [current, switchCurrent] = useState(parseInt(router.query.current, 10) || 0);
 	const [avatarSrc, setAvatarSrc] = useState('');
 	
 	const onChange = o => {
-		switchCurrent(o)
-		router.push(`${router.router.pathname}?current=${o}`)
-	}
+		switchCurrent(o);
+		router.push(`${router.router.pathname}?current=${o}`);
+	};
 	
 	const status = o => {
 		let s = 'wait';
@@ -87,8 +79,14 @@ const UserProfile = _ => {
 			case 5:
 				return <Experiences switchCurrent={switchCurrent} current={current}/>;
 				break;
+			case 6:
+				return <Economic switchCurrent={switchCurrent} current={current}/>;
+				break;
+			case 7:
+				return <Others/>;
+				break;
 			default:
-				return <Personal update={update}/>;
+				return <><p>No data</p></>;
 				break;
 		}
 	};
@@ -132,7 +130,7 @@ const UserProfile = _ => {
 		icon: 'person',
 		action: 'remove_red_eye',
 		titleAction: 'Ver perfil',
-		urlAction: '/admin/companies',
+		urlAction: '/admin/profile',
 	};
 	
 	return (
@@ -140,14 +138,8 @@ const UserProfile = _ => {
 			<PageTitle title="Mi Perfil" back="/admin/companies"/>
 			<div className="umana-layout-cl">
 				<div className="umana-layout-cl__small ">
-					<Sitebar header={header}/>
-					<Steps
-						direction="vertical"
-						size="large"
-						current={current}
-						onChange={onChange}
-						progressDot
-					>
+					<Sitebar header={header} theme="orange"/>
+					<Steps direction="vertical" size="large" current={current} onChange={onChange} progressDot>
 						{checkList.map((o, i) => (
 							<Step key={i} title={o.title} status={status(i)}/>
 						))}

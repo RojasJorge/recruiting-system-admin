@@ -30,22 +30,33 @@ const Sitebar = props => {
           </div>
           <div className="header-content">
             <h4>{props.header.title}</h4>
+
             {props.header.urlDinamic ? (
-              <Link href={`${props.header.urlAction}${props.header.urlParam ? props.header.urlParam : '[id]'}`} as={`${props.header.urlAction}${props.header.urlDinamic}`}>
+              props.header.urlAction ? (
+                <Link href={`${props.header.urlAction}${props.header.urlParam ? props.header.urlParam : '[id]'}`} as={`${props.header.urlAction}${props.header.urlDinamic}`}>
+                  <a>
+                    {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
+                  </a>
+                </Link>
+              ) : (
                 <a>
                   {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
                 </a>
-              </Link>
+              )
             ) : props.header.urlAction === 'back' ? (
               <Button onClick={() => onBack()} type="link">
                 {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
               </Button>
-            ) : (
+            ) : props.header.urlAction ? (
               <Link href={props.header.urlAction} passHref>
                 <a>
                   {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
                 </a>
               </Link>
+            ) : (
+              <a>
+                {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
+              </a>
             )}
           </div>
         </div>

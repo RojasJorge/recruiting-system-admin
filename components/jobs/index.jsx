@@ -3,25 +3,51 @@ import { useEffect, useState } from 'react';
 import xhr from '../../xhr';
 import { Card, EmptyElemet, Filter } from '../../elements';
 import { isEmpty } from 'lodash';
+import { Can } from '../Can';
+import { Table } from 'antd';
 
 let visible = false;
-const Jobs = () => {
+const Jobs = props => {
   const list = useStoreState(state => state.jobs.list);
   const fill = useStoreActions(actions => actions.jobs.fill);
   const [expiration, setExpiration] = useState([]);
-  const [result, setResult] = useState(list);
+  // const [result, setResult] = useState(list);
+  const collectionsActions = useStoreActions(actions => actions.collections);
+  const collectionsState = useStoreState(state => state.collections);
 
-  const getJobs = async (page = 1, offset = 5) => {
+  const getJobs = async (page = 1, offset = 50) => {
     await xhr()
       .get(`/job?page=${page}&offset=${offset}`)
       .then(res => {
         fill(res);
-        console.log(res);
+        // console.log('getJobs()', res);
+        // setResult(res.data.items);
       })
       .catch(err => console.log(err));
   };
+
+  const getOptions = async () => {
+    await xhr()
+      .get(`/career`)
+      .then(res => {
+        res.type = false;
+        collectionsActions.fill({ data: res.data, type: 'career' });
+      })
+      .catch(err => console.log(err));
+  };
+
+  const get = () => {
+    collectionsActions.get({ type: 'career' });
+    collectionsActions.get({ type: 'academic_level' });
+  };
+
   useEffect(() => {
     getJobs();
+    getOptions();
+    if (!isEmpty(list)) {
+      // setResult(list);
+    }
+    get();
   }, []);
 
   const addFilter = e => {
@@ -29,27 +55,40 @@ const Jobs = () => {
     const data = { data: { items: _jobs } };
     if (_jobs.length > 0) {
       visible = false;
-      setResult(_jobs);
+      // setResult(_jobs);
     } else {
       visible = true;
-      setResult(list);
+      // setResult(list);
     }
   };
 
-  const dataEmpty = {
-    title: 'No tienes ninguna plaza publicada',
-    content: 'Selecciona una empresa y publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.',
-    buttonTitle: 'Agregar plaza',
-    url: '/admin/companies',
-  };
+  console.log(list);
+
+  const columns = [
+    {
+      title: 'Empresa',
+      dataIndex: 'company',
+    },
+    {
+      title: 'Plaza',
+      dataIndex: 'Jobs',
+    },
+    {
+      title: 'Fecha de expiración',
+      dataIndex: 'expirationdate',
+    },
+    {
+      title: '',
+      dataIndex: 'buttons',
+    },
+  ];
 
   if (!isEmpty(list)) {
     return (
       <>
-        {/* <pre>{JSON.stringify(list, false, 2)}</pre> */}
-        <Filter filterVal={addFilter} visible={visible} />
+        {/* <Filter filterVal={addFilter} collectionsState={collectionsState.career} visible={visible} /> */}
         <div className="umana-list">
-          {result.map((e, idx) => {
+          {list.map((e, idx) => {
             const today = new Date();
             const jobDate = new Date(e.expiration_date);
             if (today < jobDate) {
@@ -57,7 +96,7 @@ const Jobs = () => {
                 <Card
                   key={idx}
                   title={e.title}
-                  link={`/admin/jobs/single/`}
+                  link={`${localStorage.getItem('uToken') ? '/admin/jobs/single/' : '/jobs/'}`}
                   dinamicLink={e.id}
                   description={e.description}
                   theme="green"
@@ -72,16 +111,18 @@ const Jobs = () => {
             }
           })}
         </div>
-        {/* <div className="umana-section">
-          <h2>Plazas expiradas</h2>
-
-        </div> */}
+        <Can I="edit" a="JOBS">
+          <div className="umana-section">
+            <h2>Plazas expiradas</h2>
+            <Table columns={columns}></Table>
+          </div>
+        </Can>
       </>
     );
   }
   return (
     <div className="umana-list list-empty">
-      <EmptyElemet data={dataEmpty} />
+      <EmptyElemet data={props.empty} />
     </div>
   );
 };

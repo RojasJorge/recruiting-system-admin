@@ -97,7 +97,7 @@ const SignupSteps = _ => {
                       size="small"
                       onClick={e => {
                         e.preventDefault();
-                        Router.push('/login');
+                        Router.push('/');
                       }}
                     >
                       Iniciar sesión

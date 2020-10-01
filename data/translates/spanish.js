@@ -12,6 +12,7 @@ const locale = term => {
     practice: 'Prácticas',
     temporary: 'Temporal',
     full: 'Tiempo completo',
+    Full_time: 'Tiempo completo',
     part: 'Medio tiempo',
     vacationer: 'Vacacionista',
     inLocation: 'En locación',

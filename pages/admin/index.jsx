@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Layout from '../../views/Layout';
-import { Form, DatePicker } from 'antd';
-import moment from 'moment';
+import { PageTitle } from '../../elements';
 
 const Admin = _ => {
   useEffect(() => {
@@ -19,7 +18,7 @@ const Admin = _ => {
   return (
     <Layout title="Tablero">
       <>
-        <h1>Dashboard</h1>
+        <PageTitle title="Dashboard" />
       </>
     </Layout>
   );
