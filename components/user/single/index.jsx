@@ -23,7 +23,7 @@ const SingleProfile = () => {
       <About data={getLocal('lookingFor')} defaultData={getLocal('personal')} />
       <Experience data={getLocal('working')} />
       <Academic data={getLocal('academic')} />
-      <Knowledge />
+      <Knowledge data={getLocal('others')} />
       <Economic data={getLocal('economic')} />
     </>
   );
