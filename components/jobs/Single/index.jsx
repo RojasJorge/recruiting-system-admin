@@ -43,40 +43,47 @@ const SingleJob = () => {
     getFromLocal();
   }, []);
 
-  const getScope = () => {
-    if (localStorage.getItem('uToken')) {
-      const _scope = localStorage.getItem('uScopes') ? JSON.parse(localStorage.getItem('uScopes')) : ['candidate'];
-      if (_scope[0] === 'candidate') {
-        return {
-          title: job && job.company ? job.company.name : 'Plaza',
-          icon: 'location_city',
-          action: 'check',
-          titleAction: 'Aplicar a plaza',
-          // urlAction: '/#',
-          // urlDinamic: router.query.id,
-        };
-      } else {
-        return {
-          title: job && job.company ? job.company.name : 'Plaza',
-          icon: 'location_city',
-          action: 'edit',
-          titleAction: 'Editar Plaza',
-          urlAction: '/admin/jobs/edit/',
-          urlDinamic: router.query.id,
-        };
-      }
-    } else {
-      return {
-        title: job && job.company ? job.company.name : 'Plaza',
-        icon: 'location_city',
-        action: 'check',
-        titleAction: 'Iniciar sesión',
-        urlAction: '/',
-      };
-    }
-  };
+  // const getScope = () => {
+  //   if (localStorage.getItem('uToken')) {
+  //     const _scope = localStorage.getItem('uScopes') ? JSON.parse(localStorage.getItem('uScopes')) : ['candidate'];
+  //     if (_scope[0] === 'candidate') {
+  //       return {
+  //         title: job && job.company ? job.company.name : 'Plaza',
+  //         icon: 'location_city',
+  //         action: 'check',
+  //         titleAction: 'Aplicar a plaza',
+  //         // urlAction: '/#',
+  //         // urlDinamic: router.query.id,
+  //       };
+  //     } else {
+  //       return {
+  //         title: job && job.company ? job.company.name : 'Plaza',
+  //         icon: 'location_city',
+  //         action: 'edit',
+  //         titleAction: 'Editar Plaza',
+  //         urlAction: '/admin/jobs/edit/',
+  //         urlDinamic: router.query.id,
+  //       };
+  //     }
+  //   } else {
+  //     return {
+  //       title: job && job.company ? job.company.name : 'Plaza',
+  //       icon: 'location_city',
+  //       action: 'check',
+  //       titleAction: 'Iniciar sesión',
+  //       urlAction: '/',
+  //     };
+  //   }
+  // };
 
-  const header = getScope();
+  const header = {
+    title: job && job.company ? job.company.name : 'Plaza',
+    icon: 'location_city',
+    action: 'edit',
+    titleAction: 'Editar Plaza',
+    urlAction: '/admin/jobs/edit/',
+    urlDinamic: router.query.id,
+  };
 
   if (job) {
     return (

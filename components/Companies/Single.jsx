@@ -21,27 +21,34 @@ const Single = _ => {
       .catch(err => isMissing(true));
   }, []);
 
-  const getScope = () => {
-    const _scope = localStorage.getItem('uScopes') ? JSON.parse(localStorage.getItem('uScopes')) : ['candidate'];
-    if (_scope[0] === 'candidate') {
-      return {
-        title: data && data.company && data.company.name ? data.company.name : 'Empresa',
-        icon: 'location_city',
-        action: 'back',
-      };
-    } else {
-      return {
-        title: data && data.company && data.company.name ? data.company.name : 'Empresa',
-        icon: 'location_city',
-        action: 'edit',
-        titleAction: 'Editar perfil',
-        urlAction: '/admin/companies/edit/',
-        urlDinamic: router.query.id,
-      };
-    }
-  };
+  // const getScope = () => {
+  //   const _scope = localStorage.getItem('uScopes') ? JSON.parse(localStorage.getItem('uScopes')) : ['candidate'];
+  //   if (_scope[0] === 'candidate') {
+  //     return {
+  //       title: data && data.company && data.company.name ? data.company.name : 'Empresa',
+  //       icon: 'location_city',
+  //       action: 'back',
+  //     };
+  //   } else {
+  //     return {
+  //       title: data && data.company && data.company.name ? data.company.name : 'Empresa',
+  //       icon: 'location_city',
+  //       action: 'edit',
+  //       titleAction: 'Editar perfil',
+  //       urlAction: '/admin/companies/edit/',
+  //       urlDinamic: router.query.id,
+  //     };
+  //   }
+  // };
 
-  const header = getScope();
+  const header = {
+    title: data && data.company && data.company.name ? data.company.name : 'Empresa',
+    icon: 'location_city',
+    action: 'edit',
+    titleAction: 'Editar perfil',
+    urlAction: '/admin/companies/edit/',
+    urlDinamic: router.query.id,
+  };
 
   const menuList = [
     {
