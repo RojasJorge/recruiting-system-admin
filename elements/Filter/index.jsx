@@ -5,31 +5,32 @@ import xhr from '../../xhr';
 import { isEmpty } from 'lodash';
 
 const Filter = props => {
-  const collections = useStoreState(state => state.collections);
-  const fill = useStoreActions(actions => actions.collections.fill);
+  // const collections = useStoreState(state => state.collections);
+  // const fill = useStoreActions(actions => actions.collections.fill);
 
-  const getOptions = async () => {
-    await xhr()
-      .get(`/career`, localStorage.getItem('uToken'))
-      .then(res => {
-        res.type = false;
-        fill({ data: res.data, type: 'career' });
-      })
-      .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    getOptions();
-  }, []);
-  if (collections && !isEmpty(collections.career)) {
+  // const getOptions = async () => {
+  //   await xhr()
+  //     .get(`/career`, localStorage.getItem('uToken'))
+  //     .then(res => {
+  //       res.type = false;
+  //       fill({ data: res.data, type: 'career' });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+  //
+  // useEffect(() => {
+  //   getOptions();
+  // }, []);
+  
+  if (!isEmpty(collectionsState)) {
     return (
       <div className="umana-filter" style={{ marginTop: 20 }}>
-        <Select placeholder="Seleccione un puesto" defaultValue="all" onChange={e => props.filterVal(e)}>
+        <Select placeholder="Seleccione un puesto" defaultValue="all">
           <Select.Option key="all" value="all">
             Todos los puestos
           </Select.Option>
-          {collections && collections.career
-            ? collections.career.map((e, idx) =>
+          {collectionsState
+            ? collectionsState.map((e, idx) =>
                 e.children ? (
                   <Select.OptGroup key={e.id} label={e.name}>
                     {e.children
