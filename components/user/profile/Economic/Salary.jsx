@@ -1,5 +1,7 @@
 import {useState} from "react";
-import {Input, InputNumber} from "antd";
+import {Input, InputNumber, Select} from "antd";
+
+const {Option} = Select
 
 const Salary = ({value = {}, onChange}) => {
 	
@@ -37,11 +39,14 @@ const Salary = ({value = {}, onChange}) => {
 		<>
 			<div className="col-md-6">
 				<label htmlFor="currency">Moneda</label>
-				<Input
-					onChange={e => handleChange(e.target.value, 'currency')}
+				<Select
+					onChange={e => handleChange(e, 'currency')}
 					value={values.currency}
 					size="large"
-				/>
+				>
+					<Option value="GTQ">Quetzal</Option>
+					<Option value="USD">Dólar</Option>
+				</Select>
 			</div>
 			<div className="col-md-6">
 				<label htmlFor="baseMin">Mínimo deseado</label>
