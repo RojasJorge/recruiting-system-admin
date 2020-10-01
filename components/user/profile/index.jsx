@@ -37,11 +37,8 @@ const checkList = [{
 const UserProfile = _ => {
 	/** Global state */
 	const user = useStoreState(state => state.auth.user);
-	// const steps = useStoreState(state => state.profile.steps);
-	// const update = useStoreActions(actions => actions.profile.update);
 	
 	/** Local state */
-	console.log('Current path step:', router);
 	const [current, switchCurrent] = useState(parseInt(router.query.current, 10) || 0);
 	const [avatarSrc, setAvatarSrc] = useState('');
 	
