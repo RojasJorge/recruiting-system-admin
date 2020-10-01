@@ -47,8 +47,6 @@ const SingleJob = () => {
     getFromLocal();
   }, []);
 
-  const header = getScope();
-
   if (job) {
     return (
       <div className="umana-layout-cl">
@@ -287,7 +285,29 @@ const SingleJob = () => {
   return (
     <div className="umana-layout-cl">
       <div className="umana-layout-cl__small ">
-        <Sitebar header={header} />
+        <Can I="edit" a="JOBS">
+          <Sitebar
+            header={{
+              title: job && job.company ? job.company.name : 'Plaza',
+              icon: 'location_city',
+              action: 'edit',
+              titleAction: 'Editar Plaza',
+              urlAction: '/admin/jobs/edit/',
+              urlDinamic: router.query.id,
+            }}
+          />
+        </Can>
+        <Can I="apply" a="JOBS">
+          <Sitebar
+            header={{
+              title: job && job.company ? job.company.name : 'Plaza',
+              icon: 'location_city',
+              action: 'check',
+              titleAction: 'Aplicar Plaza',
+              urlAction: '/#',
+            }}
+          />
+        </Can>
       </div>
       <div className="umana-layout-cl__flex bg-white">
         <Skeleton />
