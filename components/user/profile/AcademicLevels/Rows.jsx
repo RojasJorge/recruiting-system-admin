@@ -56,7 +56,7 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 	
 	const onChange = e =>
 		_setLevel({..._level, [e.target.name]: e.target.value});
-
+	
 	const switchCurrently = e =>
 		_setLevel({..._level, currently: e});
 	
@@ -73,13 +73,12 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 				}
 			}))
 			.then(resp => {
-				updateProfile({type: 'academic', fields: {studies: fields.studies}})
+				updateProfile({type: 'academic', fields: Object.assign(academic, {studies: fields.studies})})
 				
 				/** Send notification success */
 				notify('success', 'Niveles académicos.', 'Actualizado correctamente..')
 			})
 			.catch(err => console.log('Error:', err))
-	
 	
 	/** Notifications */
 	const notify = (type, message, description) => {

@@ -2,7 +2,9 @@ import { defineAbility } from '@casl/ability';
 
 const ability = scope => defineAbility(can => {
   
-  switch (scope[0]) {
+  const role = scope ? scope[0] : 'guest'
+  
+  switch (role) {
     case 'umana':
       can('read', ['USERS', 'CATALOGS', 'SPECIAL_ALERTS', 'PROFILE']);
       can('view', ['MAIN_LAYOUT', 'LOGIN', 'COMPANIES', 'JOBS']);

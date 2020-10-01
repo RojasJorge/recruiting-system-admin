@@ -4,6 +4,7 @@ import {PlusCircleOutlined} from "@ant-design/icons";
 import {Button, Affix} from "antd";
 import {isEmpty} from "lodash";
 import Experience from "./Experience";
+import Rows from './Rows'
 
 const Experiences = _ => {
 	
@@ -41,38 +42,42 @@ const Experiences = _ => {
 				<div className="col-md-12">
 					<h2>Experiencia laboral</h2>
 				</div>
-				<div className="col-md-12">
-					<Affix offsetTop={10}>
-						<Button
-							type="primary"
-							size="large"
-							icon={<PlusCircleOutlined/>}
-							onClick={() => {
-								setCounter((counter + 1));
-								addExperiences([...experiences, o]);
-							}}>Agregar experiencia</Button>
-					</Affix>
-				</div>
+				{/*<div className="col-md-12">*/}
+				{/*	<Affix offsetTop={10}>*/}
+				{/*		<Button*/}
+				{/*			type="primary"*/}
+				{/*			size="large"*/}
+				{/*			icon={<PlusCircleOutlined/>}*/}
+				{/*			onClick={() => {*/}
+				{/*				setCounter((counter + 1));*/}
+				{/*				addExperiences([...experiences, o]);*/}
+				{/*			}}>Agregar experiencia</Button>*/}
+				{/*	</Affix>*/}
+				{/*</div>*/}
 				
 				<div className="col-md-12">
-					{
-						!isEmpty(experiences)
-							? experiences.map((experience, i) => (
-								<Experience
-									key={(i + 1)}
-									experiences={experiences}
-									addExperiences={addExperiences}
-									experience={experience}
-									count={(i + 1)}
-								/>
-							))
-							: <p>No hay registros</p>
-					}
+					<Rows/>
 				</div>
 				
-				<div className="col-md-12">
-					<pre>{JSON.stringify(experiences, false, 2)}</pre>
-				</div>
+				{/*<div className="col-md-12">*/}
+				{/*	{*/}
+				{/*		!isEmpty(experiences)*/}
+				{/*			? experiences.map((experience, i) => (*/}
+				{/*				<Experience*/}
+				{/*					key={(i + 1)}*/}
+				{/*					experiences={experiences}*/}
+				{/*					addExperiences={addExperiences}*/}
+				{/*					experience={experience}*/}
+				{/*					count={(i + 1)}*/}
+				{/*				/>*/}
+				{/*			))*/}
+				{/*			: <p>No hay registros</p>*/}
+				{/*	}*/}
+				{/*</div>*/}
+				
+				{/*<div className="col-md-12">*/}
+				{/*	<pre>{JSON.stringify(experiences, false, 2)}</pre>*/}
+				{/*</div>*/}
 			</div>
 		</>
 	);

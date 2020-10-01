@@ -32,11 +32,6 @@ const Courses = _ => {
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
 	
 	const onFinish = fields => {
-		// fields.courses.map(field => {
-		// 	field.year = parseInt(moment(field.year).format('YYYY'), 10)
-		// 	return field
-		// })
-		// // console.log('Courses/index.jsx | onFinish()', fields)
 		
 		xhr()
 			.put(`/profile/${id}`, JSON.stringify({
@@ -47,7 +42,7 @@ const Courses = _ => {
 				}
 			}))
 			.then(resp => {
-				updateProfile({type: 'academic', fields: {courses: fields.courses}})
+				updateProfile({type: 'academic', fields: Object.assign(academic, {courses: fields.courses})})
 				
 				/** Send notification success */
 				notify('success', 'Niveles académicos.', 'Actualizado correctamente..')
