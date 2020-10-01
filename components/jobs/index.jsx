@@ -4,6 +4,7 @@ import xhr from '../../xhr';
 import { Card, EmptyElemet, Filter } from '../../elements';
 import { isEmpty } from 'lodash';
 import { Can } from '../Can';
+import { Table } from 'antd';
 
 let visible = false;
 const Jobs = props => {
@@ -63,6 +64,25 @@ const Jobs = props => {
 
   console.log(list);
 
+  const columns = [
+    {
+      title: 'Empresa',
+      dataIndex: 'company',
+    },
+    {
+      title: 'Plaza',
+      dataIndex: 'Jobs',
+    },
+    {
+      title: 'Fecha de expiración',
+      dataIndex: 'expirationdate',
+    },
+    {
+      title: '',
+      dataIndex: 'buttons',
+    },
+  ];
+
   if (!isEmpty(list)) {
     return (
       <>
@@ -94,7 +114,7 @@ const Jobs = props => {
         <Can I="edit" a="JOBS">
           <div className="umana-section">
             <h2>Plazas expiradas</h2>
-            <div>No hay plazas expiradas</div>
+            <Table columns={columns}></Table>
           </div>
         </Can>
       </>

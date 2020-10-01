@@ -5,6 +5,7 @@ import { Progress, Skeleton, Tag } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
+import { Button } from 'antd';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
 import { Can } from '../../../components/Can';
@@ -72,7 +73,6 @@ const SingleJob = () => {
   if (job) {
     return (
       <div className="umana-layout-cl">
-        {/*<pre>{JSON.stringify(job, false, 2)}</pre>*/}
         <div className="umana-layout-cl__small ">
           <Can I="edit" a="JOBS">
             <Sitebar header={header} />
@@ -289,6 +289,9 @@ const SingleJob = () => {
               </div>
             ) : null}
           </div>
+          <Can I="apply" a="JOBS">
+            <Button type="orange">Aplicar a la plaza</Button>
+          </Can>
         </div>
       </div>
     );
