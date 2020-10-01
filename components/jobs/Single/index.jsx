@@ -13,6 +13,7 @@ const SingleJob = () => {
   // const data = useStoreState(state => state.jobs);
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
+  const [Jobs, setJobs] = useState([])
 
   const getJob = () =>
     xhr()
@@ -25,7 +26,7 @@ const SingleJob = () => {
       .catch(err => isMissing(true));
 
   const getFromLocal = _ => {
-    const Jobs = JSON.parse(localStorage.getItem('Jobs'));
+    // const Jobs = JSON.parse(localStorage.getItem('Jobs'));
     const job = find(Jobs.list, o => router.query.id === o.id);
 
     if (Jobs) {
@@ -40,6 +41,7 @@ const SingleJob = () => {
   };
 
   useEffect(() => {
+    setJobs(localStorage.getItem('Jobs') || [])
     getFromLocal();
   }, []);
 

@@ -9,19 +9,31 @@ const Jobs = props => {
   const list = useStoreState(state => state.jobs.list);
   const fill = useStoreActions(actions => actions.jobs.fill);
   const [expiration, setExpiration] = useState([]);
-  const [result, setResult] = useState(list);
+  // const [result, setResult] = useState(list);
   const collectionsActions = useStoreActions(actions => actions.collections);
+  const collectionsState = useStoreState(state => state.collections)
 
-  const getJobs = async (page = 1, offset = 5) => {
+  const getJobs = async (page = 1, offset = 50) => {
     await xhr()
       .get(`/job?page=${page}&offset=${offset}`)
       .then(res => {
-        fill(res);
-        console.log(res);
-        setResult(res.data.items);
+        // fill(res);
+        // console.log('getJobs()', res);
+        // setResult(res.data.items);
       })
       .catch(err => console.log(err));
   };
+  
+  const getOptions = async () => {
+    await xhr()
+      .get(`/career`)
+      .then(res => {
+        res.type = false;
+        collectionsActions.fill({ data: res.data, type: 'career' });
+      })
+      .catch(err => console.log(err));
+  };
+  
   const get = () => {
     collectionsActions.get({ type: 'career' });
     collectionsActions.get({ type: 'academic_level' });
@@ -29,8 +41,9 @@ const Jobs = props => {
 
   useEffect(() => {
     getJobs();
+    getOptions()
     if (!isEmpty(list)) {
-      setResult(list);
+      // setResult(list);
     }
     get();
   }, []);
@@ -40,19 +53,19 @@ const Jobs = props => {
     const data = { data: { items: _jobs } };
     if (_jobs.length > 0) {
       visible = false;
-      setResult(_jobs);
+      // setResult(_jobs);
     } else {
       visible = true;
-      setResult(list);
+      // setResult(list);
     }
   };
 
   if (!isEmpty(list)) {
     return (
       <>
-        <Filter filterVal={addFilter} visible={visible} />
+        <Filter filterVal={addFilter} collectionsState={collectionsState.career} visible={visible} />
         <div className="umana-list">
-          {result.map((e, idx) => {
+          {list.map((e, idx) => {
             const today = new Date();
             const jobDate = new Date(e.expiration_date);
             if (today < jobDate) {
