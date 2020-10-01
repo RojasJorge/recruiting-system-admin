@@ -32,7 +32,6 @@ const EmptyElemet = props => {
             <h2>No tienes ninguna plaza publicada</h2>
             <p>Publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.</p>
             <br />
-
             <Button size="small" type="blue" icon={<i className="material-icons">add</i>}>
               <Link href={`jobs/add`}>
                 <a>Agregar Plaza</a>

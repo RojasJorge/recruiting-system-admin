@@ -10,6 +10,7 @@ const Jobs = props => {
   const fill = useStoreActions(actions => actions.jobs.fill);
   const [expiration, setExpiration] = useState([]);
   const [result, setResult] = useState(list);
+  const collectionsActions = useStoreActions(actions => actions.collections);
 
   const getJobs = async (page = 1, offset = 5) => {
     await xhr()
@@ -21,11 +22,17 @@ const Jobs = props => {
       })
       .catch(err => console.log(err));
   };
+  const get = () => {
+    collectionsActions.get({ type: 'career' });
+    collectionsActions.get({ type: 'academic_level' });
+  };
+
   useEffect(() => {
     getJobs();
     if (!isEmpty(list)) {
       setResult(list);
     }
+    get();
   }, []);
 
   const addFilter = e => {
@@ -68,10 +75,9 @@ const Jobs = props => {
             }
           })}
         </div>
-        {/* <div className="umana-section">
+        <div className="umana-section">
           <h2>Plazas expiradas</h2>
-
-        </div> */}
+        </div>
       </>
     );
   }

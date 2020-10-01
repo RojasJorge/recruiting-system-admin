@@ -22,7 +22,7 @@ const Single = _ => {
   }, []);
 
   const getScope = () => {
-    const _scope = JSON.parse(localStorage.getItem('uScopes'));
+    const _scope = localStorage.getItem('uScopes') ? JSON.parse(localStorage.getItem('uScopes')) : ['candidate'];
     if (_scope[0] === 'candidate') {
       return {
         title: data && data.company && data.company.name ? data.company.name : 'Empresa',

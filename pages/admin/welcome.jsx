@@ -7,7 +7,7 @@ import companyImg from '../../images/welcome-company.png';
 const Welcome = () => {
   const [scope, setScope] = useState('candidate');
   const getScope = () => {
-    const _scope = JSON.parse(localStorage.getItem('uScopes'));
+    const _scope = localStorage.getItem('uScopes') ? JSON.parse(localStorage.getItem('uScopes')) : null;
     if (_scope) {
       setScope(_scope);
     }
