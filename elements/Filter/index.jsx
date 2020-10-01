@@ -21,16 +21,16 @@ const Filter = props => {
   // useEffect(() => {
   //   getOptions();
   // }, []);
-  
-  if (!isEmpty(collectionsState)) {
+
+  if (!isEmpty(props.collectionsState)) {
     return (
       <div className="umana-filter" style={{ marginTop: 20 }}>
         <Select placeholder="Seleccione un puesto" defaultValue="all">
           <Select.Option key="all" value="all">
             Todos los puestos
           </Select.Option>
-          {collectionsState
-            ? collectionsState.map((e, idx) =>
+          {props.collectionsState
+            ? props.collectionsState.map((e, idx) =>
                 e.children ? (
                   <Select.OptGroup key={e.id} label={e.name}>
                     {e.children
