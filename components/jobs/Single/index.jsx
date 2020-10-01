@@ -47,27 +47,6 @@ const SingleJob = () => {
     getFromLocal();
   }, []);
 
-  const getScope = () => {
-    if (localStorage.getItem('uToken')) {
-      return {
-        title: job && job.company ? job.company.name : 'Plaza',
-        icon: 'location_city',
-        action: 'edit',
-        titleAction: 'Editar Plaza',
-        urlAction: '/admin/jobs/edit/',
-        urlDinamic: router.query.id,
-      };
-    } else {
-      return {
-        title: job && job.company ? job.company.name : 'Plaza',
-        icon: 'location_city',
-        action: 'check',
-        titleAction: 'Iniciar sesión',
-        urlAction: '/',
-      };
-    }
-  };
-
   const header = getScope();
 
   if (job) {
@@ -75,7 +54,16 @@ const SingleJob = () => {
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small ">
           <Can I="edit" a="JOBS">
-            <Sitebar header={header} />
+            <Sitebar
+              header={{
+                title: job && job.company ? job.company.name : 'Plaza',
+                icon: 'location_city',
+                action: 'edit',
+                titleAction: 'Editar Plaza',
+                urlAction: '/admin/jobs/edit/',
+                urlDinamic: router.query.id,
+              }}
+            />
           </Can>
           <Can I="apply" a="JOBS">
             <Sitebar
