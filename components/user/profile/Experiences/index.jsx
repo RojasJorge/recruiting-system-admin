@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash';
 import Experience from './Experience';
 import Rows from './Rows';
 
-const Experiences = _ => {
+const Experiences = ({ switchCurrent, current }) => {
   /** Local state */
   const [experiences, addExperiences] = useState([]);
   const [counter, setCounter] = useState(1);
@@ -35,7 +35,7 @@ const Experiences = _ => {
     working_now: false,
   };
 
-  return <Rows />;
+  return <Rows switchCurrent={switchCurrent} current={current} />;
 };
 
 export default Experiences;

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import xhr from '../../../../xhr';
 import moment from 'moment';
+import router from 'next/router';
 
 const { Item, List } = Form;
 
@@ -17,7 +18,7 @@ const AddRow = styled(Button)`
   margin: 0px;
 `;
 
-const Courses = _ => {
+const Courses = ({ switchCurrent, current }) => {
   /** Global state */
   let {
     profile: {
@@ -48,6 +49,8 @@ const Courses = _ => {
 
         /** Send notification success */
         notify('success', 'Niveles académicos.', 'Actualizado correctamente..');
+        switchCurrent(current + 1);
+        router.push(`${router.router.pathname}?current=${current + 1}`);
       })
       .catch(err => console.log('Error:', err));
   };

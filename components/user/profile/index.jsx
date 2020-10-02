@@ -89,10 +89,10 @@ const UserProfile = _ => {
         return <AcademicLevels switchCurrent={switchCurrent} current={current} />;
         break;
       case 5:
-        return <Courses />;
+        return <Courses switchCurrent={switchCurrent} current={current} />;
         break;
       case 6:
-        return <Others />;
+        return <Others switchCurrent={switchCurrent} current={current} />;
         break;
       case 7:
         return <Experiences switchCurrent={switchCurrent} current={current} />;

@@ -8,7 +8,7 @@ import Rows from './Rows';
 
 const { TabPane } = Tabs;
 
-const AcademicLevels = _ => {
+const AcademicLevels = ({ switchCurrent, current }) => {
   /** Global state */
   const {
     profile: {
@@ -41,7 +41,14 @@ const AcademicLevels = _ => {
     getAcademicLevels();
   }, []);
 
-  return <Rows academicLevels={academicLevels} careers={careers} />;
+  return (
+    <Rows
+      academicLevels={academicLevels}
+      careers={careers}
+      switchCurrent={switchCurrent}
+      current={current}
+    />
+  );
 };
 
 export default AcademicLevels;

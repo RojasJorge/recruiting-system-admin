@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import {MinusCircleOutlined, PlusOutlined, SaveOutlined, UserAddOutlined, DeleteOutlined} from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import {Button, DatePicker, Divider, Form, Input, InputNumber, notification, Select, Switch} from "antd";
 import "cleave.js/dist/addons/cleave-phone.gt";
 import {filter, isEmpty} from "lodash";
@@ -8,6 +8,7 @@ import xhr from "../../../../xhr";
 import styled from "styled-components";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import moment from "moment";
+import router from 'next/router';
 
 
 const {Item, List} = Form;
@@ -18,8 +19,7 @@ const Wrap = styled.fieldset`
 	margin-bottom: 30px;
 `
 
-const Experience = _ => {
-	
+const Experience = ({switchCurrent, current}) => {	
 	/** Global state */
 	let {
 		profile: {
@@ -52,6 +52,8 @@ const Experience = _ => {
 				
 				/** Send notification success */
 				notify('success', 'Experiencia laboral.', 'Actualizado correctamente..')
+				switchCurrent(current + 1);
+				router.push(`${router.router.pathname}?current=${current + 1}`);
 			})
 			.catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'))
 	};
@@ -70,7 +72,8 @@ const Experience = _ => {
 			.get(`/career?page=1&offset=1000`)
 			.then(resp => {
 				
-				addCareers(filter(resp.data.items, o => o.parent === null))
+				addCareers(filter(resp.data.items, o => o.parent === null));
+				router.push(`${router.router.pathname}?current=${current + 1}`);
 			})
 			.catch(err => console.log(err));
 	}

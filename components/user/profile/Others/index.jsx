@@ -6,7 +6,7 @@ import router from 'next/router';
 
 const { Item, List } = Form;
 
-const Others = _ => {
+const Others = ({ switchCurrent, current }) => {
   /** Global state */
   const {
     profile: {
@@ -33,6 +33,8 @@ const Others = _ => {
 
         /** Send notification success */
         notify('success', 'Ficha Otros actualizada.', '');
+        switchCurrent(current + 1);
+        router.push(`${router.router.pathname}?current=${current + 1}`);
       })
       .catch(err => console.log('Error:', err));
   };
