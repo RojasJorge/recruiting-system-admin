@@ -255,3 +255,75 @@ textarea.ant-input {
   padding: 5px 10px;
   margin: 5px;
 }
+
+// Switch
+.ant-switch {
+  &.switch-large {
+    width: 100%;
+    border-radius: 0;
+    height: 50px;
+    border: 1px solid rgba($color-text, 0.3) !important;
+    background: $bg-blue;
+    box-shadow: none !important;
+    .ant-switch-inner {
+      width: 50%;
+      margin-left: auto;
+      color: $color-text;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    &.ant-switch-checked {
+      border: 1px solid $color-primary !important;
+      background: $color-primary;
+      .ant-switch-handle {
+        left: calc(100% - 50% - 2px);
+        &:before {
+          background: $color-white;
+          border-radius: 0;
+        }
+      }
+      .ant-switch-inner {
+        width: 50%;
+        margin-left: 0;
+        color: $color-white;
+      }
+    }
+    .ant-switch-handle {
+      height: 45px;
+      width: 50%;
+      border-radius: 0;
+      &:before {
+        background: $color-white;
+        border-radius: 0;
+      }
+    }
+    &.theme-orange {
+      .ant-switch-inner {
+        color: $color-text;
+      }
+      &.ant-switch-checked {
+        border: 1px solid $color-orange !important;
+        background: rgba($color-orange, 0.3);
+        .ant-switch-inner {
+          color: $color-orange;
+        }
+      }
+      .ant-switch-handle {
+        height: 45px;
+        width: 50%;
+        border-radius: 0;
+        &:before {
+          background: $color-white;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+  .ant-switch-handle {
+    &:before {
+      border-radius: 50%;
+      background: $color-white;
+    }
+  }
+}

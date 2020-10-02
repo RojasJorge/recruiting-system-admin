@@ -54,42 +54,55 @@ const LookingFor = ({ switchCurrent, current }) => {
   return (
     <>
       <Form onFinish={onFinish} initialValues={lookingFor}>
-        <Item
-          label="Tipo de plaza"
-          className="form-item--lg"
-          name="availability"
-          rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}
-        >
-          <Select size="large" placeholder="Seleccione">
-            <Option value="freelance">Independiente</Option>
-            <Option value="practicing">Prácticas</Option>
-            <Option value="temporal">Temporal</Option>
-            <Option value="full_time">Tiempo completo</Option>
-            <Option value="part_time">Medio tiempo</Option>
-            <Option value="vacationer">Vacacionista</Option>
-          </Select>
-        </Item>
+        <div className="umana-form--section">
+          <h2>¿Qué estas buscando?</h2>
+          <Item
+            label="Tipo de plaza"
+            className="form-item--lg"
+            name="availability"
+            rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}
+          >
+            <Select size="large" placeholder="Seleccione">
+              <Option value="freelance">Independiente</Option>
+              <Option value="practicing">Prácticas</Option>
+              <Option value="temporal">Temporal</Option>
+              <Option value="full_time">Tiempo completo</Option>
+              <Option value="part_time">Medio tiempo</Option>
+              <Option value="vacationer">Vacacionista</Option>
+            </Select>
+          </Item>
 
-        <Item
-          className="form-item--md"
-          name="relocate"
-          valuePropName="checked"
-          label="¿Está dispuesto a reubicarse?"
-        >
-          <Switch checkedChildren="Si" unCheckedChildren="No" />
-        </Item>
+          <Item
+            className="form-item--md"
+            name="relocate"
+            valuePropName="checked"
+            label="¿Está dispuesto a reubicarse?"
+          >
+            <Switch
+              checkedChildren="Si"
+              unCheckedChildren="No"
+              size="large"
+              className="switch-large theme-orange"
+            />
+          </Item>
 
-        <Item
-          className="form-item--md"
-          name="travel"
-          valuePropName="checked"
-          label="¿Disponibilidad para viajar?"
-        >
-          <Switch checkedChildren="Si" unCheckedChildren="No" />
-        </Item>
+          <Item
+            className="form-item--md"
+            name="travel"
+            valuePropName="checked"
+            label="¿Disponibilidad para viajar?"
+          >
+            <Switch
+              checkedChildren="Si"
+              unCheckedChildren="No"
+              size="large"
+              className="switch-large theme-orange"
+            />
+          </Item>
+        </div>
 
-        <Item className="form-item--lg" style={{ marginTop: 30 }}>
-          <Button style={{ width: '100%' }} type="orange" htmlType="submit" size="large">
+        <Item className="form-item--lg">
+          <Button style={{ width: '100%' }} type="orange" htmlType="submit" size="small">
             Confirmar y continuar
           </Button>
         </Item>

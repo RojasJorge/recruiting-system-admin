@@ -6,6 +6,7 @@ import router from 'next/router';
 import Locations from '../../../Location';
 import General from './General';
 import Contact from './Contact';
+import { UploadAvatar } from '../../../../elements';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import xhr from '../../../../xhr';
 
@@ -67,11 +68,14 @@ const Personal = ({ switchCurrent, current }) => {
   return (
     <>
       <Form name="basic" onFinish={onFinish} initialValues={personal}>
-        <h2 style={{ width: '100%' }}>Información personal</h2>
-        <Names />
-        <Form.Item name="location" label="Ubicación actual">
-          <Locations />
-        </Form.Item>
+        <div className="umana-form--section">
+          <UploadAvatar type="user" src="" />
+          <h2 style={{ width: '100%', marginTop: 20 }}>Información personal</h2>
+          <Names />
+          <Form.Item name="location" label="Ubicación actual">
+            <Locations />
+          </Form.Item>
+        </div>
         {/*<Salary/>*/}
         <General birthday={birthday} setBirthday={setBirthday} />
         <Contact phones={phones} setPhones={setPhones} />
@@ -80,7 +84,7 @@ const Personal = ({ switchCurrent, current }) => {
           <Button
             type="orange"
             htmlType="submit"
-            size="large"
+            size="small"
             danger={danger}
             style={{ width: '100%' }}
           >

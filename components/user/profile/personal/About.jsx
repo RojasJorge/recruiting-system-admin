@@ -53,26 +53,23 @@ const About = ({ switchCurrent, current }) => {
   };
 
   return (
-    <>
-      <h2>Cuéntanos acerca de ti y tu experiencia:</h2>
-      <Form onFinish={onFinish} initialValues={personal}>
-        <Item name="about" className="form-item--lg">
+    <Form onFinish={onFinish} initialValues={personal}>
+      <div className="umana-form--section">
+        <h2>Acerca de ti</h2>
+        <Item
+          name="about"
+          className="form-item--lg"
+          label="Cuentanos acerca de ti y tu experiencia"
+        >
           <TextArea rows={4} autoSize={{ minRows: 4, maxRows: 50 }} />
         </Item>
-
-        <Item>
-          <Button
-            style={{ width: '100%' }}
-            type="orange"
-            size="large"
-            htmlType="submit"
-            icon={<DoubleRightOutlined />}
-          >
-            Confirmar y continuar
-          </Button>
-        </Item>
-      </Form>
-    </>
+      </div>
+      <Item>
+        <Button style={{ width: '100%' }} type="orange" size="small" htmlType="submit">
+          Confirmar y continuar
+        </Button>
+      </Item>
+    </Form>
   );
 };
 
