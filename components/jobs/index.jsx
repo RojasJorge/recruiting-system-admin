@@ -111,22 +111,17 @@ const Jobs = props => {
 		
 		let url = `/job?page=${filters.page}&offset=${filters.offset}`
 		
-		if(filters.jobposition) {
+		if (filters.jobposition) {
 			url += `&jobposition=${filters.jobposition}`
 		}
 		
-		if(filters.title) {
+		if (filters.title) {
 			url += `&title=${filters.title}`
 		}
 		
 		await xhr()
 			.get(url)
 			.then(res => {
-				
-				/** Do not fill if persistence*/
-				if(!isEmpty(res.data.items)) {
-					fill(res)
-				}
 				
 				if (isEmpty(res.data.items)) {
 					notification.warning({
@@ -136,6 +131,9 @@ const Jobs = props => {
 					
 					return false
 				}
+				
+				/** Store data from response */
+				fill(res)
 				
 				const available = res.data.items.reduce((acc, current) => {
 					if (renderDate(current.expiration_date)) {
@@ -186,15 +184,11 @@ const Jobs = props => {
 					}
 				</Select>
 				
-				<Search
-					onSearch={e => setFilters({...filters, title: e})}
-				/>
+				<Search onSearch={e => setFilters({...filters, title: e})}/>
 				
 				
 				<div className="umana-list">
 					{separatedJobs.available.length > 0 && separatedJobs.available.map((e, idx) => {
-						
-						// if (renderDate(e.expiration_date)) {
 						return (
 							<Card
 								key={idx}
@@ -207,11 +201,7 @@ const Jobs = props => {
 								date={{date: e.expiration_date, type: 'Expira'}}
 								align="left"
 							/>
-						);
-						// } else {
-						//   setExpiration({ ...expiration, e });
-						//   return null;
-						// }
+						)
 					})}
 				</div>
 				<Can I="edit" a="JOBS">
