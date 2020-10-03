@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import { DatePicker, Divider, Form, InputNumber, Select } from 'antd';
+import religion from '../../../../data/religion.json';
+
 import moment from 'moment';
 
 const { Item } = Form;
@@ -34,21 +35,6 @@ const gender = [
   },
 ];
 
-const religion = [
-  {
-    title: 'Sin religión',
-    slug: 'no',
-  },
-  {
-    title: 'Evangélico',
-    slug: 'evangelical',
-  },
-  {
-    title: 'Católico',
-    slug: 'catholic',
-  },
-];
-
 const dateFormat = 'DD/MM/YYYY';
 
 const General = ({ birthday, setBirthday }) => {
@@ -56,9 +42,8 @@ const General = ({ birthday, setBirthday }) => {
   const dateHandler = d => setBirthday(d);
 
   return (
-    <>
-      <h2 style={{ width: '100%', marginTop: 20 }}>Información general</h2>
-
+    <div className="umana-form--section">
+      <h2 style={{ width: '100%' }}>Información general</h2>
       <Item
         name="nationality"
         label="Nacionamidad"
@@ -119,8 +104,8 @@ const General = ({ birthday, setBirthday }) => {
       >
         <Select name="religion" size="large" placeholder="Seleccione" style={{ width: '100%' }}>
           {religion.map((o, i) => (
-            <Option key={i} value={o.slug}>
-              {o.title}
+            <Option key={i} value={o}>
+              {o}
             </Option>
           ))}
         </Select>
@@ -146,7 +131,7 @@ const General = ({ birthday, setBirthday }) => {
       >
         <InputNumber min={0} max={20} placeholder="0" style={{ width: '100%' }} size="large" />
       </Item>
-    </>
+    </div>
   );
 };
 

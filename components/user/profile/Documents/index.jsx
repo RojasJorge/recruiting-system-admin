@@ -79,34 +79,35 @@ const Documents = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <h2>Documentos de identificación:</h2>
       <Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal}>
-        <Item name="dpi" label="DPI" className="form-item--md">
-          <Input style={{ width: '100%' }} min={0} size="large" />
-        </Item>
+        <div className="umana-form--section">
+          <h2>Documentos de identificación</h2>
+          <Item name="dpi" label="DPI" className="form-item--md">
+            <Input style={{ width: '100%' }} min={0} size="large" />
+          </Item>
 
-        <Item name="passport" label="Pasaporte" className="form-item--md">
-          <InputNumber style={{ width: '100%' }} min={0} size="large" />
-        </Item>
+          <Item name="passport" label="Pasaporte" className="form-item--md">
+            <InputNumber style={{ width: '100%' }} min={0} size="large" />
+          </Item>
 
-        <Item name="nit" label="NIT" className="form-item--md">
-          <Input size="large" />
-        </Item>
+          <Item name="nit" label="NIT" className="form-item--md">
+            <Input size="large" />
+          </Item>
 
-        <Item name="driversLicence" label="Licencia" className="form-item--md">
-          <InputNumber style={{ width: '100%' }} min={0} size="large" />
-        </Item>
+          <Item name="driversLicence" label="Licencia" className="form-item--md">
+            <InputNumber style={{ width: '100%' }} min={0} size="large" />
+          </Item>
 
-        <Item name="driversLicenceType" label="Tipo de licencia" className="form-item--md">
-          <Select size="large" mode="multiple">
-            <Option value="a">A</Option>
-            <Option value="b">B</Option>
-            <Option value="c">C</Option>
-            <Option value="motorcicle">Motocicleta</Option>
-          </Select>
-        </Item>
+          <Item name="driversLicenceType" label="Tipo de licencia" className="form-item--md">
+            <Select size="large" mode="multiple">
+              <Option value="a">A</Option>
+              <Option value="b">B</Option>
+              <Option value="c">C</Option>
+              <Option value="motorcicle">Motocicleta</Option>
+            </Select>
+          </Item>
 
-        {/* <Divider orientation="left">Archivos adjuntos:</Divider>
+          {/* <Divider orientation="left">Archivos adjuntos:</Divider>
 				<div className="col-md-12">
 					<Item>
 						<Dragger {...props}>
@@ -116,11 +117,12 @@ const Documents = ({ switchCurrent, current }) => {
 							<p className="ant-upload-text">Arrastre o haga click aquí para subir un archivo.</p>
 						</Dragger>
 					</Item>
-				</div> */}
+        </div> */}
+        </div>
 
         {/*Ends row*/}
         <Item>
-          <Button size="large" htmlType="submit" type="orange" style={{ width: '100%' }}>
+          <Button size="small" htmlType="submit" type="orange" style={{ width: '100%' }}>
             Confirmar y continuar
           </Button>
         </Item>

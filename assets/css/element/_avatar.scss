@@ -3,6 +3,7 @@
   align-items: center;
   margin-bottom: 20px;
   flex-wrap: wrap;
+  width: 100%;
   flex-direction: column-reverse;
   @include bp(medium) {
     flex-direction: row;

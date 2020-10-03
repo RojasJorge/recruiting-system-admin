@@ -1,6 +1,6 @@
 import { filter, map } from 'lodash';
 import { useStoreActions } from 'easy-peasy';
-import { Button, Form, Select } from 'antd';
+import { Button, Form, Select, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import Cleave from 'cleave.js/react';
@@ -51,74 +51,70 @@ const Phones = ({ phones, setPhones }) => {
 
   return (
     <>
-      <List name="phones">
+      <List name="phones" className="form-item--lg">
         {(fields, { add, remove }) => {
           return (
-            <div className="test">
+            <>
               {fields.map((field, index) => (
-                <Item className="form-item--lg" required={false} key={field.key}>
-                  <div className="row align-items-center umana-form--group">
-                    <div className="col">
-                      <Item label="Área" {...field} name={[field.name, 'area']}>
-                        <Select placeholder="Seleccione" style={{ width: '100%' }}>
-                          <Option value={502}>(502) Guatemala</Option>
-                        </Select>
-                      </Item>
-                    </div>
-                    <div className="col">
-                      <Item label="Número" {...field} name={[field.name, 'number']}>
-                        <Cleave
-                          options={{
-                            phone: true,
-                            phoneRegionCode: 'GT',
-                          }}
-                          className="ant-input-number"
-                          style={{ padding: 10 }}
-                        />
-                        {/*<Input*/}
-                        {/*	placeholder="0000-0000"*/}
-                        {/*/>*/}
-                      </Item>
-                    </div>
-                    <div className="col">
-                      <Item label="Tipo" {...field} name={[field.name, 'type']}>
-                        <Select
-                          placeholder="Seleccione"
-                          style={{ width: '100%' }}
-                          // onSelect={e => updatePhone(e, "type", phone)}
-                        >
-                          <Option value="personal">Personal</Option>
-                          <Option value="work">Trabajo</Option>
-                          <Option value="home">Casa</Option>
-                        </Select>
-                      </Item>
-                    </div>
-                    <div className="col-md-1">
-                      {fields.length > 0 ? (
-                        <MinusCircleOutlined
-                          className="dynamic-delete-button"
-                          style={{ margin: '0 8px' }}
-                          onClick={() => {
-                            remove(field.name);
-                          }}
-                        />
-                      ) : null}
-                    </div>
-                  </div>
-                </Item>
+                <Space className="no-wrap umana-form--group" required={false} key={field.key}>
+                  <Item label="Área" {...field} name={[field.name, 'area']}>
+                    <Select placeholder="Seleccione" style={{ width: '100%' }}>
+                      <Option value={502}>(502) Guatemala</Option>
+                    </Select>
+                  </Item>
+
+                  <Item label="Número" {...field} name={[field.name, 'number']}>
+                    <Cleave
+                      options={{
+                        phone: true,
+                        phoneRegionCode: 'GT',
+                      }}
+                      className="ant-input-number"
+                      style={{ padding: 10 }}
+                    />
+                    {/*<Input*/}
+                    {/*	placeholder="0000-0000"*/}
+                    {/*/>*/}
+                  </Item>
+
+                  <Item label="Tipo" {...field} name={[field.name, 'type']}>
+                    <Select
+                      placeholder="Seleccione"
+                      style={{ width: '100%' }}
+                      // onSelect={e => updatePhone(e, "type", phone)}
+                    >
+                      <Option value="personal">Personal</Option>
+                      <Option value="work">Trabajo</Option>
+                      <Option value="home">Casa</Option>
+                    </Select>
+                  </Item>
+
+                  {fields.length > 0 ? (
+                    <a
+                      key={field.key + 'add'}
+                      className="form-item--delete"
+                      onClick={() => {
+                        remove(field.name);
+                      }}
+                    >
+                      <i className="material-icons">cancel</i>
+                    </a>
+                  ) : null}
+                </Space>
               ))}
               <Item style={{ width: '100%' }}>
                 <Button
+                  style={{ width: '100%' }}
                   type="dashed"
                   size="large"
                   onClick={() => {
                     add();
                   }}
                 >
-                  <PlusOutlined /> Agregar número
+                  <i className="material-icons">add</i> Agregar número teléfonico
                 </Button>
               </Item>
-            </div>
+            </>
           );
         }}
       </List>

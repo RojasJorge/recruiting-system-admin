@@ -9,8 +9,8 @@ const Contact = ({ phones, setPhones }) => {
   const user = useStoreState(state => state.auth.user);
 
   return (
-    <>
-      <h2 style={{ width: '100%', marginTop: 20 }}>Información de Contacto</h2>
+    <div className="umana-form--section">
+      <h2 style={{ width: '100%' }}>Información de Contacto</h2>
 
       <Item
         label="Correo electrónico"
@@ -24,7 +24,7 @@ const Contact = ({ phones, setPhones }) => {
       <h3 style={{ width: '100%', marginTop: 20 }}>Números telefónicos</h3>
 
       <Phones phones={phones} setPhones={setPhones} />
-    </>
+    </div>
   );
 };
 

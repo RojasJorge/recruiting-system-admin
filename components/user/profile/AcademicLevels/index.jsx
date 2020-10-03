@@ -8,7 +8,7 @@ import Rows from './Rows';
 
 const { TabPane } = Tabs;
 
-const AcademicLevels = _ => {
+const AcademicLevels = ({ switchCurrent, current }) => {
   /** Global state */
   const {
     profile: {
@@ -42,32 +42,12 @@ const AcademicLevels = _ => {
   }, []);
 
   return (
-    <>
-      <div className="row" id="levelsContainer">
-        <Tabs type="card" className="col-md-12">
-          <TabPane
-            tab={
-              <span>
-                <FileDoneOutlined /> Niveles Académicos
-              </span>
-            }
-            key={1}
-          >
-            <Rows academicLevels={academicLevels} careers={careers} />
-          </TabPane>
-          <TabPane
-            tab={
-              <span>
-                <FileSearchOutlined /> Otros cursos
-              </span>
-            }
-            key={2}
-          >
-            <Courses />
-          </TabPane>
-        </Tabs>
-      </div>
-    </>
+    <Rows
+      academicLevels={academicLevels}
+      careers={careers}
+      switchCurrent={switchCurrent}
+      current={current}
+    />
   );
 };
 
