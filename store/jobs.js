@@ -6,15 +6,12 @@ export default {
   job: null,
   list: [],
   total: 0,
-  loading: false,
 
   /**
    * Filter the colection
    */
 
   fill: action((state, payload) => {
-    
-    state.loading = true
     
     localStorage.removeItem('Jobs');
 
@@ -28,14 +25,5 @@ export default {
         total: state.total,
       }),
     );
-    
-    state.logading = false
-  }),
-
-  /**
-   * Switch loading on pages
-   */
-  switchLoading: action((state, payload) => {
-    state.loading = payload;
   }),
 };

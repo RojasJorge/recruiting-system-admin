@@ -2,7 +2,7 @@ import {useStoreActions, useStoreState} from 'easy-peasy';
 import {useEffect, useState} from 'react';
 import xhr from '../../xhr';
 import {Card, EmptyElemet} from '../../elements';
-import {isEmpty} from 'lodash';
+import {delay, isEmpty} from 'lodash';
 import {Can} from '../Can';
 import {SyncOutlined} from '@ant-design/icons'
 import {Button, Input, notification, Select, Table} from 'antd';
@@ -50,11 +50,14 @@ const Jobs = props => {
 		page: 1,
 		offset: 10,
 		jobposition: null,
-		title: null
+		title: null,
+		location: {
+			country: 'Guatemala',
+			city: ''
+		}
 	}
 	
 	const list = useStoreState(state => state.jobs.list);
-	// const loading = useStoreState(state => state.jobs.loading)
 	const fill = useStoreActions(actions => actions.jobs.fill);
 	
 	/**
@@ -66,7 +69,7 @@ const Jobs = props => {
 	});
 	
 	const [filters, setFilters] = useState(initFilters)
-	
+	const [loading, switchLoading] = useState(false)
 	const collectionsActions = useStoreActions(actions => actions.collections);
 	const collectionsState = useStoreState(state => state.collections);
 	
@@ -103,6 +106,8 @@ const Jobs = props => {
 	
 	const getJobs = async () => {
 		
+		switchLoading(true)
+		
 		let url = `/job?page=${filters.page}&offset=${filters.offset}`
 		
 		if (filters.jobposition) {
@@ -122,6 +127,8 @@ const Jobs = props => {
 						message: '404',
 						description: 'No hay resultados'
 					})
+					
+					delay(() => switchLoading(false), 1000, 'Filtered')
 					
 					return false
 				}
@@ -147,13 +154,25 @@ const Jobs = props => {
 				
 				setSeparatedJobs({...separatedJobs, available, expired})
 				
+				delay(() => switchLoading(false), 1000, 'Filtered')
+				
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				console.log(err)
+				delay(() => switchLoading(false), 1000, 'Filtered')
+			});
 	};
 	
 	if (!isEmpty(list)) {
 		return (
 			<>
+				<div className="row">
+					<div className="col">
+						{
+							loading && <h3>Cargando...</h3>
+						}
+					</div>
+				</div>
 				<div className="row align-items-end" style={{padding: 30}}>
 					<div className="col">
 						<label htmlFor="areatype">Seleccione área</label>
@@ -161,6 +180,7 @@ const Jobs = props => {
 							size="large"
 							onSelect={e => setFilters({...filters, jobposition: e})}
 							value={filters.jobposition}
+							disabled={loading}
 							showSearch>
 							{
 								!isEmpty(collectionsState.career)
@@ -186,16 +206,21 @@ const Jobs = props => {
 					<div className="col">
 						{/*SEARCH/FILTER COMPONENT*/}
 						<label htmlFor="search">Buscar por nombre (plaza)</label>
-						<Search size="small" onSearch={e => setFilters({...filters, title: e})}/>
+						<Search
+							size="small"
+							disabled={loading}
+							onSearch={e => setFilters({...filters, title: e})}
+						/>
 					</div>
 					<div className="col">
 						<Button
 							size="small"
 							type="dashed"
-							icon={<SyncOutlined />}
+							icon={<SyncOutlined/>}
 							style={{margin: 0}}
 							disabled={!filters.jobposition && !filters.title}
 							onClick={() => setFilters(initFilters)}
+							loading={loading}
 						>
 							Restablecer filtros</Button>
 					</div>
