@@ -2,9 +2,10 @@ import {useStoreActions, useStoreState} from 'easy-peasy';
 import {useEffect, useState} from 'react';
 import xhr from '../../xhr';
 import {Card, EmptyElemet} from '../../elements';
-import {isEmpty} from 'lodash';
+import {delay, isEmpty} from 'lodash';
 import {Can} from '../Can';
-import {Input, notification, Select, Table} from 'antd';
+import {SyncOutlined} from '@ant-design/icons'
+import {Button, Input, notification, Select, Table} from 'antd';
 
 const {Option} = Select
 const {Search} = Input
@@ -44,12 +45,20 @@ const columns = [
 
 let visible = false;
 const Jobs = props => {
+	
+	const initFilters = {
+		page: 1,
+		offset: 10,
+		jobposition: null,
+		title: null,
+		location: {
+			country: 'Guatemala',
+			city: ''
+		}
+	}
+	
 	const list = useStoreState(state => state.jobs.list);
-	const loading = useStoreState(state => state.jobs.loading)
 	const fill = useStoreActions(actions => actions.jobs.fill);
-	
-	
-	const [expiration, setExpiration] = useState([]);
 	
 	/**
 	 * Job positions
@@ -59,13 +68,8 @@ const Jobs = props => {
 		expired: []
 	});
 	
-	const [filters, setFilters] = useState({
-		page: 1,
-		offset: 10,
-		jobposition: null,
-		title: null
-	})
-	
+	const [filters, setFilters] = useState(initFilters)
+	const [loading, switchLoading] = useState(false)
 	const collectionsActions = useStoreActions(actions => actions.collections);
 	const collectionsState = useStoreState(state => state.collections);
 	
@@ -100,14 +104,9 @@ const Jobs = props => {
 		return (today < jobDate)
 	}
 	
-	const onSelect = _ =>
-		getJobs(true)
-	
-	const onSearch = _ => {
-		getJobs(true)
-	}
-	
 	const getJobs = async () => {
+		
+		switchLoading(true)
 		
 		let url = `/job?page=${filters.page}&offset=${filters.offset}`
 		
@@ -128,6 +127,8 @@ const Jobs = props => {
 						message: '404',
 						description: 'No hay resultados'
 					})
+					
+					delay(() => switchLoading(false), 1000, 'Filtered')
 					
 					return false
 				}
@@ -153,39 +154,77 @@ const Jobs = props => {
 				
 				setSeparatedJobs({...separatedJobs, available, expired})
 				
+				delay(() => switchLoading(false), 1000, 'Filtered')
+				
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				console.log(err)
+				delay(() => switchLoading(false), 1000, 'Filtered')
+			});
 	};
 	
 	if (!isEmpty(list)) {
 		return (
 			<>
-				<Select
-					onSelect={e => setFilters({...filters, jobposition: e})}
-					showSearch>
-					{
-						!isEmpty(collectionsState.career)
-							? collectionsState.career.map(e => (
-								
-								e.children ? (
-									<Select.OptGroup key={e.id} label={e.name}>
-										{e.children
-											? e.children.map((c, i) => (
-												<Select.Option key={c.id + '-' + i} value={c.id}>
-													{c.name}
-												</Select.Option>
-											))
-											: null}
-									</Select.OptGroup>
-								) : null
-							
-							))
-							: <Option>No data</Option>
-					}
-				</Select>
-				
-				<Search onSearch={e => setFilters({...filters, title: e})}/>
-				
+				<div className="row">
+					<div className="col">
+						{
+							loading && <h3>Cargando...</h3>
+						}
+					</div>
+				</div>
+				<div className="row align-items-end" style={{padding: 30}}>
+					<div className="col">
+						<label htmlFor="areatype">Seleccione área</label>
+						<Select
+							size="large"
+							onSelect={e => setFilters({...filters, jobposition: e})}
+							value={filters.jobposition}
+							disabled={loading}
+							showSearch>
+							{
+								!isEmpty(collectionsState.career)
+									? collectionsState.career.map(e => (
+										
+										e.children ? (
+											<Select.OptGroup key={e.id} label={e.name}>
+												{e.children
+													? e.children.map((c, i) => (
+														<Select.Option key={c.id + '-' + i} value={c.id}>
+															{c.name}
+														</Select.Option>
+													))
+													: null}
+											</Select.OptGroup>
+										) : null
+									
+									))
+									: <Option>No data</Option>
+							}
+						</Select>
+					</div>
+					<div className="col">
+						{/*SEARCH/FILTER COMPONENT*/}
+						<label htmlFor="search">Buscar por nombre (plaza)</label>
+						<Search
+							size="small"
+							disabled={loading}
+							onSearch={e => setFilters({...filters, title: e})}
+						/>
+					</div>
+					<div className="col">
+						<Button
+							size="small"
+							type="dashed"
+							icon={<SyncOutlined/>}
+							style={{margin: 0}}
+							disabled={!filters.jobposition && !filters.title}
+							onClick={() => setFilters(initFilters)}
+							loading={loading}
+						>
+							Restablecer filtros</Button>
+					</div>
+				</div>
 				
 				<div className="umana-list">
 					{separatedJobs.available.length > 0 && separatedJobs.available.map((e, idx) => {
