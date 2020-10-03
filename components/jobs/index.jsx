@@ -2,10 +2,10 @@ import {useStoreActions, useStoreState} from 'easy-peasy';
 import {useEffect, useState} from 'react';
 import xhr from '../../xhr';
 import {Card, EmptyElemet} from '../../elements';
-import {delay, isEmpty} from 'lodash';
+import {delay, find, isEmpty} from 'lodash';
 import {Can} from '../Can';
 import {SyncOutlined} from '@ant-design/icons'
-import {Button, Input, notification, Select, Table} from 'antd';
+import {Button, Input, notification, Pagination, Select, Table} from 'antd';
 
 const {Option} = Select
 const {Search} = Input
@@ -54,10 +54,16 @@ const Jobs = props => {
 		location: {
 			country: 'Guatemala',
 			city: ''
-		}
+		},
+		country: {},
+		city: null
 	}
 	
+	/** Get countries from store (tools) */
+	const countries = useStoreState(state => state.tools.countries)
+	
 	const list = useStoreState(state => state.jobs.list);
+	const total = useStoreState(state => state.jobs.total)
 	const fill = useStoreActions(actions => actions.jobs.fill);
 	
 	/**
@@ -118,6 +124,14 @@ const Jobs = props => {
 			url += `&title=${filters.title}`
 		}
 		
+		// if (!isEmpty(filters.country)) {
+		// 	url += `&country=${filters.country.id}`
+		// }
+		//
+		// if (filters.city) {
+		// 	url += `&city=${filters.city}`
+		// }
+		
 		await xhr()
 			.get(url)
 			.then(res => {
@@ -163,18 +177,18 @@ const Jobs = props => {
 			});
 	};
 	
+	/** Pagination handler */
+	const paginationChange = (page, offset) => setFilters({
+		...filters,
+		page,
+		offset
+	})
+	
 	if (!isEmpty(list)) {
 		return (
 			<>
-				<div className="row">
-					<div className="col">
-						{
-							loading && <h3>Cargando...</h3>
-						}
-					</div>
-				</div>
 				<div className="row align-items-end" style={{padding: 30}}>
-					<div className="col">
+					<div className="col-md-6" style={{marginBottom: 20}}>
 						<label htmlFor="areatype">Seleccione área</label>
 						<Select
 							size="large"
@@ -203,7 +217,7 @@ const Jobs = props => {
 							}
 						</Select>
 					</div>
-					<div className="col">
+					<div className="col-md-6" style={{marginBottom: 20}}>
 						{/*SEARCH/FILTER COMPONENT*/}
 						<label htmlFor="search">Buscar por nombre (plaza)</label>
 						<Search
@@ -212,7 +226,49 @@ const Jobs = props => {
 							onSearch={e => setFilters({...filters, title: e})}
 						/>
 					</div>
-					<div className="col">
+					<div className="col-md-6">
+						<label>Provincia</label>
+						<Select
+							size="large"
+							placeholder="Seleccione departamento"
+							onSelect={e => setFilters({
+								...filters,
+								country: find(countries[0].data, o => o.id === e),
+								city: ''
+							})
+							}
+							showSearch>
+							{
+								countries[0].data.map(country => (
+									<Option
+										key={country.id}
+										value={country.id}
+									>
+										{country.department}
+									</Option>
+								))
+							}
+						</Select>
+					</div>
+					<div className="col-md-6">
+						<label>Ciudad</label>
+						<Select
+							size="large"
+							placeholder="Seleccione ciudad"
+							disabled={isEmpty(filters.country)}
+							onSelect={e => setFilters({...filters, city: e})}
+							value={filters.city}
+							showSearch>
+							{
+								!isEmpty(filters.country)
+									? filters.country.municipalities.map((city, index) => (
+										<Option key={index} value={city}>{city}</Option>
+									))
+									: null
+							}
+						</Select>
+					</div>
+					<div className="col" style={{marginTop: 20}}>
 						<Button
 							size="small"
 							type="dashed"
@@ -226,6 +282,18 @@ const Jobs = props => {
 					</div>
 				</div>
 				
+				<div className="row" style={{padding: 30}}>
+					<div className="col-md-12">
+						<Pagination
+							current={filters.page}
+							total={total}
+							onChange={paginationChange}
+							showSizeChanger
+							onShowSizeChanger={paginationChange}
+							pageSizeOptions={['5', '10', '25', '50']}
+						/>
+					</div>
+				</div>
 				<div className="umana-list">
 					{separatedJobs.available.length > 0 && separatedJobs.available.map((e, idx) => {
 						return (
@@ -246,7 +314,12 @@ const Jobs = props => {
 				<Can I="edit" a="JOBS">
 					<div className="umana-section">
 						<h2>Plazas expiradas</h2>
-						<Table columns={columns} dataSource={separatedJobs.expired} rowKey={record => record.id}></Table>
+						<Table
+							columns={columns}
+							dataSource={separatedJobs.expired}
+							rowKey={record => record.id}
+							pagination={false}
+						/>
 					</div>
 				</Can>
 			</>
