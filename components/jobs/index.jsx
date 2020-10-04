@@ -183,6 +183,9 @@ const Jobs = props => {
 	if (!isEmpty(list)) {
 		return (
 			<>
+				{/*<div className="col-md-12">*/}
+				{/*	<pre>{JSON.stringify(filters, false, 2)}</pre>*/}
+				{/*</div>*/}
 				<div className="row align-items-end" style={{padding: 30}}>
 					<div className="col-md-6" style={{marginBottom: 20}}>
 						<label htmlFor="areatype">Seleccione área</label>
@@ -227,6 +230,7 @@ const Jobs = props => {
 						<Select
 							size="large"
 							placeholder="Seleccione departamento"
+							value={filters.country.id}
 							onSelect={e => setFilters({
 								...filters,
 								country: find(countries[0].data, o => o.id === e),
