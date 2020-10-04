@@ -4,7 +4,7 @@ import xhr from '../../xhr';
 import {Card, EmptyElemet} from '../../elements';
 import {delay, find, isEmpty} from 'lodash';
 import {Can} from '../Can';
-import {SyncOutlined} from '@ant-design/icons'
+import {StopOutlined} from '@ant-design/icons'
 import {Button, Input, notification, Pagination, Select, Table} from 'antd';
 
 const {Option} = Select
@@ -51,10 +51,6 @@ const Jobs = props => {
 		offset: 10,
 		jobposition: null,
 		title: null,
-		location: {
-			country: 'Guatemala',
-			city: ''
-		},
 		country: {},
 		city: null
 	}
@@ -124,13 +120,13 @@ const Jobs = props => {
 			url += `&title=${filters.title}`
 		}
 		
-		// if (!isEmpty(filters.country)) {
-		// 	url += `&country=${filters.country.id}`
-		// }
-		//
-		// if (filters.city) {
-		// 	url += `&city=${filters.city}`
-		// }
+		if (!isEmpty(filters.country)) {
+			url += `&province=${filters.country.department}`
+		}
+
+		if (filters.city) {
+			url += `&city=${filters.city}`
+		}
 		
 		await xhr()
 			.get(url)
@@ -272,9 +268,9 @@ const Jobs = props => {
 						<Button
 							size="small"
 							type="dashed"
-							icon={<SyncOutlined/>}
+							icon={<StopOutlined />}
 							style={{margin: 0}}
-							disabled={!filters.jobposition && !filters.title}
+							disabled={!filters.jobposition && !filters.title && isEmpty(filters.country)}
 							onClick={() => setFilters(initFilters)}
 							loading={loading}
 						>
