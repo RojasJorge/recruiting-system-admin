@@ -127,6 +127,7 @@ label {
   flex-wrap: wrap;
   padding: 10px 0 30px;
   position: relative;
+
   & > .ant-form-item.ant-row {
     width: calc(33.33% - 20px);
     margin: 0 10px;
@@ -146,6 +147,7 @@ label {
   }
   .form-item--sm {
     width: 100%;
+    margin: 0 10px 10px;
     @include bp(xmedium) {
       width: calc(50% - 20px);
     }
