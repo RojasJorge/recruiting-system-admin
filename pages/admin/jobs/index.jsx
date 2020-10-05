@@ -8,9 +8,10 @@ import Link from 'next/link';
 const Index = _ => {
   const dataEmpty = {
     title: 'No tienes ninguna plaza publicada',
-    content: 'Selecciona una empresa y publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.',
+    content:
+      'Selecciona una empresa y publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.',
     buttonTitle: 'Agregar plaza',
-    url: '/admin/companies',
+    url: '/admin/jobs/add',
   };
 
   return (

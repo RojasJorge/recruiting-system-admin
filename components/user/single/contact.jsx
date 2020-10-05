@@ -13,7 +13,7 @@ const Contact = props => {
         <div className="umana-content__item item-md">
           <label>Teléfono</label>
           {props.data.phones.map((e, idx) => (
-            <p>{`${e.type}: ${e.area} ${e.number}`}</p>
+            <p key={idx}>{`${e.type}: ${e.area} ${e.number}`}</p>
           ))}
         </div>
       ) : null}

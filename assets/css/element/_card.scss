@@ -23,20 +23,23 @@
 
 .umana-card {
   border: 1px solid rgba($color-blue, 0.5);
-  padding: 40px 20px;
-  margin: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
   background: $color-white;
-  width: 100%;
+  padding: 20px 10px;
+  // width: 100%;
   min-height: 200px;
+  width: calc(50% - 10px);
   max-width: 250px;
+  margin: 5px;
   @include bp(medium) {
-    min-height: 300px;
+    padding: 40px 20px;
     width: calc(50% - 20px);
+    margin: 10px;
+    min-height: 300px;
   }
   @include bp(large) {
     min-height: 400px;
@@ -78,8 +81,8 @@
     text-align: center;
     margin: 10px auto 15px;
     font-weight: 400;
-    font-size: 18px;
-    @include bp(small) {
+    font-size: 16px;
+    @include bp(medium) {
       font-size: 20px;
     }
     @include bp(xmedium) {
@@ -94,6 +97,10 @@
     max-height: 48px;
     overflow: hidden;
     margin-bottom: 20px;
+    font-size: 11px;
+    @include bp(medium) {
+      font-size: 14px;
+    }
   }
   @include element(link) {
     border: 1px solid rgba($color-blue, 0.5);
@@ -120,6 +127,36 @@
     .title {
       font-weight: 400;
     }
+    .ant-avatar {
+      width: 40px !important;
+      height: 40px !important;
+      @include bp(medium) {
+        width: 60px !important;
+        height: 60px !important;
+      }
+      @include bp(xmedium) {
+        width: 80px !important;
+        height: 80px !important;
+      }
+      i.material-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        font-size: 20px !important;
+        line-height: 40px;
+        @include bp(medium) {
+          width: 60px;
+          font-size: 25px !important;
+          line-height: 60px;
+        }
+        @include bp(xmedium) {
+          width: 80px;
+          font-size: 30px !important;
+          line-height: 80px;
+        }
+      }
+    }
     .hidden-text {
       width: 230px;
       white-space: nowrap;
@@ -139,6 +176,18 @@
         top: 28%;
         position: absolute;
         transform: rotate(-2.15deg);
+      }
+    }
+    h5 {
+      font-size: 14px;
+      @include bp(medium) {
+        font-size: 18px;
+      }
+    }
+    p {
+      font-size: 11px;
+      @include bp(medium) {
+        font-size: 14px;
       }
     }
   }
@@ -303,6 +352,16 @@
     flex-direction: row;
     align-items: center !important;
     margin-bottom: 20px;
+    font-size: 10px;
+    i.material-icons {
+      font-size: 12px;
+      @include bp(medium) {
+        font-size: 14px;
+      }
+    }
+    @include bp(medium) {
+      font-size: 12px;
+    }
     * {
       margin-right: 5px;
     }

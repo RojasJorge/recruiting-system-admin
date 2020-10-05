@@ -327,3 +327,12 @@ textarea.ant-input {
     }
   }
 }
+
+//search
+.ant-input-affix-wrapper.ant-input-search {
+  box-shadow: none;
+  border-radius: 0;
+  .ant-input {
+    box-shadow: none !important;
+  }
+}

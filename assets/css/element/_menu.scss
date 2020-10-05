@@ -1,8 +1,8 @@
 // Header
 .umana-header {
   @include max-width();
+  overflow-x: hidden;
   width: 100%;
-
   box-shadow: $shadow;
   display: flex;
   align-items: center;
@@ -34,16 +34,29 @@
 }
 // Menu
 .umana-main-nav {
-  display: none;
-  @include bp(xmedium) {
-    display: flex;
-  }
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
   .ant-menu.header-nav {
     border-bottom: 0;
     background: transparent;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: flex-end;
+    width: calc(100% - 40px);
+    @include bp(large) {
+      width: calc(100% - 150px);
+      flex-direction: row;
+    }
     * {
       text-transform: uppercase;
       font-weight: bold;
+    }
+    .ant-menu-submenu.ant-menu-submenu-horizontal.ant-menu-overflowed-submenu {
+      text-align: right;
+      border-bottom: 0;
     }
     .ant-menu-item {
       padding: 0 10px;
@@ -315,13 +328,16 @@
   font-family: $font-primary;
   text-transform: uppercase;
   max-width: 200px;
-  width: 100%;
+  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   padding-left: 10px;
   cursor: pointer;
+  @include bp(large) {
+    width: 150px;
+  }
   .text-max {
     white-space: nowrap;
     text-overflow: ellipsis;

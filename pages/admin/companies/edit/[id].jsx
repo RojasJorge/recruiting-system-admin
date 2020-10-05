@@ -29,8 +29,7 @@ const AddCompany = _ => {
     {
       icon: 'arrow_back',
       title: 'Ver plazas',
-      url: '/admin/jobs/',
-      id: router.query.id,
+      url: '/admin/jobs',
     },
   ];
 
@@ -43,7 +42,11 @@ const AddCompany = _ => {
             <Sitebar header={header} data={menuList} />
           </div>
           <div className="umana-layout-cl__flex bg-white">
-            <FormCompany data={data && data.company ? data.company : {}} action="edit" id={router.query.id} />
+            <FormCompany
+              data={data && data.company ? data.company : {}}
+              action="edit"
+              id={router.query.id}
+            />
           </div>
         </div>
       </>

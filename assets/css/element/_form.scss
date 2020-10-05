@@ -1,5 +1,38 @@
 @import '../shared/mixins';
 
+.umana-form--section {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-family: $font-primary;
+  margin-bottom: 30px;
+  background: $color-white;
+  box-shadow: $shadow;
+  &.simple-form {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 0;
+    padding: 0 20px;
+  }
+  .ant-form-item {
+    margin: 0 10px 10px;
+  }
+  & > .umana-form--group {
+    &:first-child {
+      padding-top: 0;
+      border-top: 0;
+      margin-top: 0;
+    }
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba($color-text, 0.2);
+  }
+}
+
 form.ant-form,
 form.ant-form.ant-form-horizontal {
   width: 100%;
@@ -127,6 +160,7 @@ label {
   flex-wrap: wrap;
   padding: 10px 0 30px;
   position: relative;
+
   & > .ant-form-item.ant-row {
     width: calc(33.33% - 20px);
     margin: 0 10px;
@@ -146,6 +180,7 @@ label {
   }
   .form-item--sm {
     width: 100%;
+    margin: 0 10px 10px;
     @include bp(xmedium) {
       width: calc(50% - 20px);
     }

@@ -1,0 +1,33 @@
+.umana-jobs {
+  width: 100%;
+  .umana-layout-cl {
+    flex-wrap: wrap;
+    @include bp(xmedium) {
+      flex-wrap: nowrap;
+    }
+    .umana-layout-cl__small {
+      width: 100%;
+      @include bp(xmedium) {
+        width: 200px;
+      }
+    }
+    .umana-layout-cl__flex {
+      width: 100%;
+      @include bp(xmedium) {
+        padding-left: 30px;
+      }
+      .umana-form--section.simple-form {
+        padding: 0 10px;
+        .item-lg {
+          margin: 0 0 10px;
+        }
+      }
+      .umana-list {
+        padding: 0;
+      }
+    }
+  }
+}
+.ant-pagination {
+  text-align: right;
+}

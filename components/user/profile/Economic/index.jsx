@@ -60,95 +60,75 @@ const Economic = ({ current, switchCurrent }) => {
   return (
     <>
       <Form onFinish={onFinish} initialValues={economic}>
-        <div className="row">
-          <div className="col-md-12">
-            <Item name="currentSalary" label="Salario actual">
-              <InputNumber size="large" />
-            </Item>
-          </div>
-          <div className="col-md-12">
-            <Item name="desiredSalary" label="Salario deseado">
-              <Salary />
-            </Item>
-          </div>
-          <div className="col-md-6">
-            <Item name="otherIncome" valuePropName="checked" label="¿Tiene otros ingresos?">
-              <Checkbox
-                onChange={e => updateChecks({ ...checks, otherIncomes: e.target.checked })}
-              />
-            </Item>
-            {checks.otherIncomes ? (
-              <>
-                <div>
-                  <Item name="otherIncomeValue" label="Escriba monto">
-                    <InputNumber size="large" />
-                  </Item>
-                </div>
-                <div>
-                  <Item name="sourceIncome" label="Escriba la fuente">
-                    <Input size="large" />
-                  </Item>
-                </div>
-              </>
-            ) : null}
-          </div>
+        <div className="umana-form--section">
+          <h2>Información Económica</h2>
+          <Item name="currentSalary" label="Salario actual" className="form-item--lg">
+            <InputNumber size="large" />
+          </Item>
+          <Item name="desiredSalary" label="Salario deseado" className="form-item--lg">
+            <Salary />
+          </Item>
+          <Item
+            name="otherIncome"
+            valuePropName="checked"
+            label="¿Tiene otros ingresos?"
+            className="form-item--sm"
+          >
+            <Checkbox onChange={e => updateChecks({ ...checks, otherIncomes: e.target.checked })} />
+          </Item>
+          {checks.otherIncomes ? (
+            <>
+              <Item name="otherIncomeValue" label="Escriba monto" className="form-item--sm">
+                <InputNumber size="large" />
+              </Item>
 
-          <div className="col-md-6">
-            <label htmlFor="typeHousing">Tipo de vivienda</label>
-            <Item name="typeHousing">
-              <Select>
-                {[
-                  {
-                    name: 'own',
-                    translation: 'Casa propia',
-                  },
-                  {
-                    name: 'family',
-                    translation: 'Familiar',
-                  },
-                  {
-                    name: 'rented',
-                    translation: 'Renta',
-                  },
-                ].map((op, index) => (
-                  <Option key={index} value={op.name}>
-                    {op.translation}
-                  </Option>
-                ))}
-              </Select>
-            </Item>
-          </div>
-          <div className="col-md-6">
-            <label htmlFor="dependents">Dependientes</label>
-            <Item name="dependents">
-              <InputNumber min={0} size="large" />
-            </Item>
-          </div>
-          <Debts />
-          <Vehicle />
-          <div className="col-md-12">
-            <Item name="health">
-              <Health />
-            </Item>
-          </div>
-          <div className="col-md-12">
-            <Item name="legal">
-              <Legal />
-            </Item>
-          </div>
-          <div className="col-md-12" style={{ marginTop: 60 }}>
-            <Item
-              name="allowed"
-              // rules={[{
-              // 	required: true,
-              // 	message: 'Es necesario '
-              // }]}
-              valuePropName="checked"
-            >
-              <Checkbox />
-            </Item>
-          </div>
-          <div className="col-md-12">
+              <Item name="sourceIncome" label="Escriba la fuente" className="form-item--sm">
+                <Input size="large" />
+              </Item>
+            </>
+          ) : null}
+          <Item name="typeHousing" label="Tipo de vivienda" className="form-item--md">
+            <Select>
+              {[
+                {
+                  name: 'own',
+                  translation: 'Casa propia',
+                },
+                {
+                  name: 'family',
+                  translation: 'Familiar',
+                },
+                {
+                  name: 'rented',
+                  translation: 'Renta',
+                },
+              ].map((op, index) => (
+                <Option key={index} value={op.name}>
+                  {op.translation}
+                </Option>
+              ))}
+            </Select>
+          </Item>
+
+          <Item name="dependents" label="Dependientes" className="form-item--md">
+            <InputNumber min={0} size="large" />
+          </Item>
+        </div>
+        <Debts />
+        <Vehicle />
+        <div className="umana-form--section">
+          <h2>Salud</h2>
+          <Item name="health">
+            <Health />
+          </Item>
+        </div>
+        <div className="umana-form--section">
+          <h2>Información Legal</h2>
+          <Item name="legal">
+            <Legal />
+          </Item>
+          <Item name="allowed" valuePropName="checked">
+            <Checkbox />
             <p>
               Autorizo expresamente a las empresas que distribuyen o comercializan con datos
               personales, para que distribuyan / comercialicen estudios que contengan datos
@@ -160,13 +140,14 @@ const Economic = ({ current, switchCurrent }) => {
               Grupos Financieros entre otros. Doy fe que la información proporcionada es verdadera y
               queda a disposición de ser verificada por UMANA RH.
             </p>
-          </div>
-          <div className="col-md-12">
-            <Button type="dahsed" htmlType="submit">
-              Guardar
-            </Button>
-          </div>
+          </Item>
         </div>
+
+        <Item className="form-item--lg">
+          <Button type="orange" htmlType="submit" size="small" style={{ marginLeft: 'auto' }}>
+            Guardar
+          </Button>
+        </Item>
       </Form>
     </>
   );
