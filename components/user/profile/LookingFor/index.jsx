@@ -16,6 +16,14 @@ const LookingFor = ({ switchCurrent, current }) => {
     },
   } = useStoreState(state => state.auth.user);
 
+  if (lookingFor.relocate === '') {
+    lookingFor.relocate = false;
+  }
+  if (lookingFor.travel === '') {
+    lookingFor.travel = false;
+  }
+
+  console.log(lookingFor);
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
