@@ -1,14 +1,29 @@
 import { Avatar } from 'antd';
 import { isEmpty } from 'lodash';
 import locale from '../../../data/translates/spanish';
+import Moment from 'react-moment';
+import { Can } from '../../Can';
+import Link from 'next/link';
 
 const General = props => {
+  // /edit?current=0
   return (
     <div className="umana-content" style={{ marginTop: 50 }} id="general">
+      <Can I="apply" a="JOBS">
+        <Link href={`/admin/profile/edit?current=0`} passHref>
+          <a className="umana-section-edit">
+            <i className="material-icons">edit</i>
+          </a>
+        </Link>
+      </Can>
       <div className="umana-content-title-over">
         <Avatar icon={<i className="material-icons">person</i>} src={null} size={130} />
 
-        <h2>{props.data.name ? `${props.data.name} ${props.data.lastname}` : `${props.defaultData.name} ${props.defaultData.lastname}`}</h2>
+        <h2>
+          {props.data.name
+            ? `${props.data.name} ${props.data.lastname}`
+            : `${props.defaultData.name} ${props.defaultData.lastname}`}
+        </h2>
       </div>
       {!isEmpty(props.data.currentJobTitle) ? (
         <div className="umana-content__item item-lg" style={{ textAlign: 'center' }}>
@@ -23,7 +38,13 @@ const General = props => {
           <p>{`${props.data.location.city}, ${props.data.location.country}`}</p>
         </div>
       ) : null}
-      {props.data.nationality || props.data.birthday || props.data.age || props.data.gender || props.data.religion || props.data.maritalStatus || props.data.children ? (
+      {props.data.nationality ||
+      props.data.birthday ||
+      props.data.age ||
+      props.data.gender ||
+      props.data.religion ||
+      props.data.maritalStatus ||
+      props.data.children ? (
         <div className="umana-content__item item-lg">
           <hr />
           <h3>Información General</h3>
@@ -32,13 +53,15 @@ const General = props => {
       {props.data.nationality ? (
         <div className="umana-content__item item-sm">
           <label>Nacionalidad</label>
-          <p>{props.data.nationality}</p>
+          <p>{locale(props.data.nationality)}</p>
         </div>
       ) : null}
       {props.data.birthday ? (
         <div className="umana-content__item item-sm">
           <label>Fecha de nacimiento</label>
-          <p>{props.data.birthday}</p>
+          <p>
+            <Moment format="D MMM YYYY">{props.data.birthday}</Moment>
+          </p>
         </div>
       ) : null}
       {props.data.age ? (

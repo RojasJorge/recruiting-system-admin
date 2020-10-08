@@ -73,7 +73,7 @@ const Experience = ({switchCurrent, current}) => {
 			.then(resp => {
 				
 				addCareers(filter(resp.data.items, o => o.parent === null));
-				router.push(`${router.router.pathname}?current=${current + 1}`);
+				// router.push(`${router.router.pathname}?current=${current + 1}`);
 			})
 			.catch(err => console.log(err));
 	}

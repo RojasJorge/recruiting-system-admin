@@ -1,11 +1,21 @@
 import { isEmpty } from 'lodash';
 import Moment from 'react-moment';
 import locale from '../../../data/translates/spanish';
+import { Can } from '../../Can';
+import Link from 'next/link';
 
 const Experience = props => {
   if (!isEmpty(props.data.experiences)) {
     return (
       <div className="umana-content" id="experience">
+        <Can I="apply" a="JOBS">
+          <Link href={`/admin/profile/edit?current=7`} passHref>
+            <a className="umana-section-edit">
+              <i className="material-icons">edit</i>
+            </a>
+          </Link>
+        </Can>
+
         <div className="umana-content__item item-lg">
           <h2>Experiencia Laboral</h2>
         </div>
@@ -17,7 +27,8 @@ const Experience = props => {
               <h4>{e.company}</h4>
               {/* <label>Ciudad de Guatemala; Marzo 14, 2016 - Presente - 4 años</label> */}
               <label>
-                {`${e.specializationCompany} - `} <Moment format="D MMM YYYY">{e.dateInit}</Moment> - {e.workingNow ? 'Presente' : <Moment format="D MMM YYYY">{e.dateEnd}</Moment>}
+                {`${e.specializationCompany} - `} <Moment format="D MMM YYYY">{e.dateInit}</Moment>{' '}
+                - {e.workingNow ? 'Presente' : <Moment format="D MMM YYYY">{e.dateEnd}</Moment>}
               </label>
               <p></p>
             </div>

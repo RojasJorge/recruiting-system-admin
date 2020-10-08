@@ -10,10 +10,12 @@ const locale = term => {
     married: 'Casado (a)',
     freelance: 'Independiente',
     practice: 'Prácticas',
+    practicing: 'Prácticas',
     temporary: 'Temporal',
     full: 'Tiempo completo',
-    Full_time: 'Tiempo completo',
+    full_time: 'Tiempo completo',
     part: 'Medio tiempo',
+    part_time: 'Medio tiempo',
     vacationer: 'Vacacionista',
     inLocation: 'En locación',
     remote: 'Remoto',
@@ -35,6 +37,8 @@ const locale = term => {
     indifferent: 'Indiferente',
     vehicle: 'Automóvil',
     motorcycle: 'Motocicleta',
+    car: 'Carro',
+    gt: 'Guatemalteco(a)',
   };
 
   return labels[term] || term;
