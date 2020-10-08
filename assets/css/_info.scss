@@ -11,6 +11,7 @@ info
   box-shadow: $shadow;
   padding: 20px 10px;
   margin-bottom: 20px;
+  position: relative;
   @include bp(large) {
     padding: 30px 20px;
   }
@@ -88,6 +89,19 @@ info
     }
     h2 {
       color: $color-orange;
+    }
+  }
+  .umana-section-edit {
+    z-index: 50;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    i {
+      color: $color-text;
+      font-size: 18px;
+      &:hover {
+        color: $color-orange;
+      }
     }
   }
 }

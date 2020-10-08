@@ -16,6 +16,14 @@ const LookingFor = ({ switchCurrent, current }) => {
     },
   } = useStoreState(state => state.auth.user);
 
+  if (lookingFor.relocate === '') {
+    lookingFor.relocate = false;
+  }
+  if (lookingFor.travel === '') {
+    lookingFor.travel = false;
+  }
+
+  console.log(lookingFor);
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
@@ -65,7 +73,7 @@ const LookingFor = ({ switchCurrent, current }) => {
             <Select size="large" placeholder="Seleccione">
               <Option value="freelance">Independiente</Option>
               <Option value="practicing">Prácticas</Option>
-              <Option value="temporal">Temporal</Option>
+              <Option value="temporary">Temporal</Option>
               <Option value="full_time">Tiempo completo</Option>
               <Option value="part_time">Medio tiempo</Option>
               <Option value="vacationer">Vacacionista</Option>
