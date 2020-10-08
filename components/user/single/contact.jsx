@@ -1,7 +1,16 @@
 import { isEmpty } from 'lodash';
+import { Can } from '../../Can';
+import Link from 'next/link';
 const Contact = props => {
   return (
     <div className="umana-content" id="contact">
+      <Can I="apply" a="JOBS">
+        <Link href={`/admin/profile/edit?current=0`} passHref>
+          <a className="umana-section-edit">
+            <i className="material-icons">edit</i>
+          </a>
+        </Link>
+      </Can>
       <div className="umana-content__item item-lg">
         <h2>Información de contacto</h2>
       </div>

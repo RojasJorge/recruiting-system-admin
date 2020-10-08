@@ -1,8 +1,17 @@
 import { Progress, Tag } from 'antd';
 import { isEmpty } from 'lodash';
+import { Can } from '../../Can';
+import Link from 'next/link';
 const Knowledge = props => {
   return (
     <div className="umana-content">
+      <Can I="apply" a="JOBS">
+        <Link href={`/admin/profile/edit?current=6`} passHref>
+          <a className="umana-section-edit">
+            <i className="material-icons">edit</i>
+          </a>
+        </Link>
+      </Can>
       <div className="umana-content__item item-lg">
         <h2>Otros conocimientos</h2>
       </div>
@@ -16,13 +25,34 @@ const Knowledge = props => {
               <div className="item-lg item-map item-group" key={`${idx}languages`}>
                 <label>{e.language}</label>
                 <div className="item-group--i item-sm" style={{ textAlign: 'center' }}>
-                  <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.comprehension} format={percent => `Comprensión ${percent}%`} />
+                  <Progress
+                    width={150}
+                    strokeWidth={2}
+                    strokeColor="#585858"
+                    type="circle"
+                    percent={e.comprehension}
+                    format={percent => `Comprensión ${percent}%`}
+                  />
                 </div>
                 <div className="item-group--i item-sm" style={{ textAlign: 'center' }}>
-                  <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.write} format={percent => `Lectura ${percent}%`} />
+                  <Progress
+                    width={150}
+                    strokeWidth={2}
+                    strokeColor="#585858"
+                    type="circle"
+                    percent={e.write}
+                    format={percent => `Lectura ${percent}%`}
+                  />
                 </div>
                 <div className="item-group--i item-sm" style={{ textAlign: 'center' }}>
-                  <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.speak} format={percent => `Habla ${percent}%`} />
+                  <Progress
+                    width={150}
+                    strokeWidth={2}
+                    strokeColor="#585858"
+                    type="circle"
+                    percent={e.speak}
+                    format={percent => `Habla ${percent}%`}
+                  />
                 </div>
               </div>
             ))}

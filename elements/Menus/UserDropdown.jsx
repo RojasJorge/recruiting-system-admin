@@ -7,7 +7,9 @@ const UserDropdown = props => {
     <Menu className={` ${props.scope}`}>
       <Menu.Item className={`umana-dropdown--item-user ${props.scope}`}>
         <div className="umana-dpdw-card">
-          {props.scope === 'talento' ? <Avatar icon={<i className="material-icons">person</i>} size={50} /> : null}
+          {props.scope === 'talento' ? (
+            <Avatar icon={<i className="material-icons">person</i>} size={50} />
+          ) : null}
           <div>
             {props.user.name ? (
               <Link href="/admin/profile">
@@ -21,7 +23,7 @@ const UserDropdown = props => {
         </div>
         {props.scope === 'talento' ? (
           <Button size="small" type="orange">
-            <Link href={`/user`} passHref>
+            <Link href={`/admin/profile`} passHref>
               <a>Ver perfil</a>
             </Link>
           </Button>

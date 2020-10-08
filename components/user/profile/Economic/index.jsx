@@ -128,8 +128,7 @@ const Economic = ({ current, switchCurrent }) => {
             <Legal />
           </Item>
           <Item name="allowed" valuePropName="checked">
-            <Checkbox />
-            <p>
+            <Checkbox>
               Autorizo expresamente a las empresas que distribuyen o comercializan con datos
               personales, para que distribuyan / comercialicen estudios que contengan datos
               personales concernientes a mi persona, a efecto de verificar la información
@@ -139,7 +138,7 @@ const Economic = ({ current, switchCurrent }) => {
               Dinero y Otros Activos y 12 y 20 de su Reglamento: 50, 55, 56, 58. Ley de Bancos y
               Grupos Financieros entre otros. Doy fe que la información proporcionada es verdadera y
               queda a disposición de ser verificada por UMANA RH.
-            </p>
+            </Checkbox>
           </Item>
         </div>
 

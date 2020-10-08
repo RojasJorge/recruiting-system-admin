@@ -1,9 +1,18 @@
 import locale from '../../../data/translates/spanish';
+import { Can } from '../../Can';
+import Link from 'next/link';
 const About = props => {
   return (
     <>
       {props.defaultData.about ? (
         <div className="umana-content" id="aboutme">
+          <Can I="apply" a="JOBS">
+            <Link href={`/admin/profile/edit?current=2`} passHref>
+              <a className="umana-section-edit">
+                <i className="material-icons">edit</i>
+              </a>
+            </Link>
+          </Can>
           <div className="umana-content__item item-lg">
             <h2>Acerca de Andrea</h2>
           </div>
@@ -12,8 +21,18 @@ const About = props => {
           </div>
         </div>
       ) : null}
-      {props.data.availability || props.data.relocate || props.data.travel || props.data.workplace ? (
+      {props.data.availability ||
+      props.data.relocate ||
+      props.data.travel ||
+      props.data.workplace ? (
         <div className="umana-content" id="whatsearch">
+          <Can I="apply" a="JOBS">
+            <Link href={`/admin/profile/edit?current=3`} passHref>
+              <a className="umana-section-edit">
+                <i className="material-icons">edit</i>
+              </a>
+            </Link>
+          </Can>
           <div className="umana-content__item item-lg">
             <h2>Qué estas buscando</h2>
           </div>
