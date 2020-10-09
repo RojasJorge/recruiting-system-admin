@@ -24,10 +24,7 @@ const Index = _ => {
 
   return (
     <Layout title={'Mi aplicación'}>
-      <>
-        <PageTitle back="/admin/applications" />
-        {!isEmpty(record) && <Single record={record} />}
-      </>
+      <>{!isEmpty(record) && <Single record={record} />}</>
     </Layout>
   );
 };

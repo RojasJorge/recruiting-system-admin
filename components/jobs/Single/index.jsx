@@ -5,10 +5,11 @@ import { Progress, Skeleton, Tag } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
 import { Can } from '../../../components/Can';
+import router from 'next/router';
 
 const SingleJob = () => {
   const router = useRouter();
@@ -47,6 +48,42 @@ const SingleJob = () => {
     getFromLocal();
   }, []);
 
+  const allSet = e => {
+    notification.info({
+      message: `Confirmación`,
+      description: 'La plaza ha sido publicada con éxito',
+      placement: 'bottomRight',
+    });
+
+    setTimeout(() => {
+      router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+    }, 500);
+  };
+
+  const add = async e => {
+    console.log(e);
+    delete e.id;
+    delete e.company;
+    delete e.created_at;
+    delete e.expiration_date;
+    delete e.updated_at;
+
+    e.title = `${e.title} (copia)`;
+
+    xhr()
+      .post(`/job`, JSON.stringify(e))
+      .then(resp => {
+        allSet(resp.data);
+      })
+      .catch(err => {
+        notification.info({
+          message: `Error`,
+          description: 'Ha ocurrido un error, por favor inténtalo más tarde',
+          placement: 'bottomRight',
+        });
+      });
+  };
+
   if (job) {
     return (
       <div className="umana-layout-cl">
@@ -61,7 +98,11 @@ const SingleJob = () => {
                 urlAction: '/admin/jobs/edit/',
                 urlDinamic: router.query.id,
               }}
-            />
+            >
+              <Button type="link" size="small" onClick={() => add(job)}>
+                <i className="material-icons">content_copy</i> Duplicar plaza
+              </Button>
+            </Sitebar>
           </Can>
           <Can I="apply" a="JOBS">
             <Sitebar
@@ -112,8 +153,12 @@ const SingleJob = () => {
               <div className="umana-content__item item-lg">
                 <label>Ubicación</label>
                 <p>
-                  {`${job.location.address ? job.location.address : ''} ${job.location.zone ? 'zona ' + job.location.zone : ''}.
-                  ${job.location.city ? job.location.city : ''},  ${job.location.country ? job.location.country : ''}`}
+                  {`${job.location.address ? job.location.address : ''} ${
+                    job.location.zone ? 'zona ' + job.location.zone : ''
+                  }.
+                  ${job.location.city ? job.location.city : ''},  ${
+                    job.location.country ? job.location.country : ''
+                  }`}
                 </p>
                 {job.isBranch ? <p>{`La plaza es en una sucursal.`}</p> : null}
               </div>
@@ -122,10 +167,16 @@ const SingleJob = () => {
               <div className="umana-content__item item-lg">
                 <label>Dirección de la sucursal</label>
                 <p>
-                  {`${job.branch.address ? job.branch.address : ''} ${job.branch.zone ? 'zona ' + job.branch.zone : ''}.
-                  ${job.branch.city ? job.branch.city : ''},  ${job.branch.country ? job.branch.country : ''}`}
+                  {`${job.branch.address ? job.branch.address : ''} ${
+                    job.branch.zone ? 'zona ' + job.branch.zone : ''
+                  }.
+                  ${job.branch.city ? job.branch.city : ''},  ${
+                    job.branch.country ? job.branch.country : ''
+                  }`}
                 </p>
-                {job.interviewPlace !== 'office' ? <p>La entrevista se realizará en la sucursal</p> : null}
+                {job.interviewPlace !== 'office' ? (
+                  <p>La entrevista se realizará en la sucursal</p>
+                ) : null}
               </div>
             ) : null}
           </div>
@@ -154,7 +205,9 @@ const SingleJob = () => {
             ) : null}
             {job.academic_level ? (
               <div className="umana-content__item item-lg">
-                <label>{job.academic_level.length > 1 ? 'Niveles académicos' : 'Nivel académico'}</label>
+                <label>
+                  {job.academic_level.length > 1 ? 'Niveles académicos' : 'Nivel académico'}
+                </label>
 
                 {job.academic_level.map((e, idx) => (
                   <div key={idx} style={{ display: 'flex', flexWrap: 'wrap', margin: 10 }}>
@@ -201,11 +254,39 @@ const SingleJob = () => {
                 <br />
                 <label>Idiomas</label>
                 {job.languages.map((e, idx) => (
-                  <div key={idx} style={{ padding: '0 20px 10px', display: 'flex', justifyContent: 'space-between' }}>
+                  <div
+                    key={idx}
+                    style={{
+                      padding: '0 20px 10px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}
+                  >
                     <p>{e.language}</p>
-                    <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.comprehension} format={percent => `Comprensión ${percent}%`} />
-                    <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.write} format={percent => `Escritura ${percent}%`} />
-                    <Progress width={150} strokeWidth={2} strokeColor="#585858" type="circle" percent={e.speak} format={percent => `Hablado ${percent}%`} />
+                    <Progress
+                      width={150}
+                      strokeWidth={2}
+                      strokeColor="#585858"
+                      type="circle"
+                      percent={e.comprehension}
+                      format={percent => `Comprensión ${percent}%`}
+                    />
+                    <Progress
+                      width={150}
+                      strokeWidth={2}
+                      strokeColor="#585858"
+                      type="circle"
+                      percent={e.write}
+                      format={percent => `Escritura ${percent}%`}
+                    />
+                    <Progress
+                      width={150}
+                      strokeWidth={2}
+                      strokeColor="#585858"
+                      type="circle"
+                      percent={e.speak}
+                      format={percent => `Hablado ${percent}%`}
+                    />
                   </div>
                 ))}
               </div>
@@ -247,15 +328,25 @@ const SingleJob = () => {
             <div className="umana-content__item item-md">
               <label>Mínimo</label>
               <h2>
-                {job.salary && job.salary.currency && job.salary.currency.symbol ? job.salary.currency.symbol + ' ' : 'Q. '}{' '}
-                {job.salary && job.salary.base_min && job.salary.commission_min ? parseInt(job.salary.base_min + job.salary.commission_min).toLocaleString('en') + '.00' : 0}
+                {job.salary && job.salary.currency && job.salary.currency.symbol
+                  ? job.salary.currency.symbol + ' '
+                  : 'Q. '}{' '}
+                {job.salary && job.salary.base_min && job.salary.commission_min
+                  ? parseInt(job.salary.base_min + job.salary.commission_min).toLocaleString('en') +
+                    '.00'
+                  : 0}
               </h2>
             </div>
             <div className="umana-content__item item-md">
               <label>Máximo</label>
               <h2>
-                {job.salary && job.salary.currency && job.salary.currency.symbol ? job.salary.currency.symbol + ' ' : 'Q. '}{' '}
-                {job.salary && job.salary.base_max && job.salary.commission_max ? parseInt(job.salary.base_max + job.salary.commission_max).toLocaleString('en') + '.00' : 0}
+                {job.salary && job.salary.currency && job.salary.currency.symbol
+                  ? job.salary.currency.symbol + ' '
+                  : 'Q. '}{' '}
+                {job.salary && job.salary.base_max && job.salary.commission_max
+                  ? parseInt(job.salary.base_max + job.salary.commission_max).toLocaleString('en') +
+                    '.00'
+                  : 0}
               </h2>
             </div>
             {job.benefits ? (

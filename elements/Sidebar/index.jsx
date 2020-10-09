@@ -69,29 +69,30 @@ const Sitebar = props => {
           </div>
         </div>
       ) : null}
-
-      <Menu
-        mode="inline"
-        theme="light"
-        inlineCollapsed={collapsed}
-        className={`theme-${props.theme ? props.theme : 'blue'}`}
-      >
-        {!isEmpty(props.data)
-          ? props.data.map((e, idx) => (
-              <Menu.Item key={idx} icon={<i className="material-icons">{e.icon}</i>}>
-                {e.id ? (
-                  <Link href={`${e.url}[id]`} as={`${e.url}${e.id}`}>
-                    <a>{e.title}</a>
-                  </Link>
-                ) : (
-                  <Link href={e.url} passHref>
-                    <a>{e.title}</a>
-                  </Link>
-                )}
-              </Menu.Item>
-            ))
-          : null}
-      </Menu>
+      {!isEmpty(props.data) ? (
+        <Menu
+          mode="inline"
+          theme="light"
+          inlineCollapsed={collapsed}
+          className={`theme-${props.theme ? props.theme : 'blue'}`}
+        >
+          {!isEmpty(props.data)
+            ? props.data.map((e, idx) => (
+                <Menu.Item key={idx} icon={<i className="material-icons">{e.icon}</i>}>
+                  {e.id ? (
+                    <Link href={`${e.url}[id]`} as={`${e.url}${e.id}`}>
+                      <a>{e.title}</a>
+                    </Link>
+                  ) : (
+                    <Link href={e.url} passHref>
+                      <a>{e.title}</a>
+                    </Link>
+                  )}
+                </Menu.Item>
+              ))
+            : null}
+        </Menu>
+      ) : null}
       <div className="umana-sitebar-childrens">{props.children}</div>
     </div>
   );
