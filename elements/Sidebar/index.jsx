@@ -25,17 +25,25 @@ const Sitebar = props => {
     <div className={`umana-sitebar theme-${props.theme ? props.theme : 'blue'}`}>
       {!isEmpty(props.header) ? (
         <div className="umana-sitebar__header">
-          <div className="header-icon">
-            <i className="material-icons">{props.header.icon}</i>
-          </div>
+          {props.header.icon ? (
+            <div className="header-icon">
+              <i className="material-icons">{props.header.icon}</i>
+            </div>
+          ) : null}
           <div className="header-content">
             <h4>{props.header.title}</h4>
-
+            {props.header.subtitle ? <p>{props.header.subtitle}</p> : null}
             {props.header.urlDinamic ? (
               props.header.urlAction ? (
-                <Link href={`${props.header.urlAction}${props.header.urlParam ? props.header.urlParam : '[id]'}`} as={`${props.header.urlAction}${props.header.urlDinamic}`}>
+                <Link
+                  href={`${props.header.urlAction}${
+                    props.header.urlParam ? props.header.urlParam : '[id]'
+                  }`}
+                  as={`${props.header.urlAction}${props.header.urlDinamic}`}
+                >
                   <a>
-                    {props.header.titleAction} <i className="material-icons">{props.header.action}</i>
+                    {props.header.titleAction}{' '}
+                    <i className="material-icons">{props.header.action}</i>
                   </a>
                 </Link>
               ) : (
@@ -62,7 +70,12 @@ const Sitebar = props => {
         </div>
       ) : null}
 
-      <Menu mode="inline" theme="light" inlineCollapsed={collapsed} className={`theme-${props.theme ? props.theme : 'blue'}`}>
+      <Menu
+        mode="inline"
+        theme="light"
+        inlineCollapsed={collapsed}
+        className={`theme-${props.theme ? props.theme : 'blue'}`}
+      >
         {!isEmpty(props.data)
           ? props.data.map((e, idx) => (
               <Menu.Item key={idx} icon={<i className="material-icons">{e.icon}</i>}>
@@ -79,6 +92,7 @@ const Sitebar = props => {
             ))
           : null}
       </Menu>
+      <div className="umana-sitebar-childrens">{props.children}</div>
     </div>
   );
 };
