@@ -8,7 +8,7 @@ import Rows from './Rows';
 
 const { TabPane } = Tabs;
 
-const AcademicLevels = ({ switchCurrent, current }) => {
+const AcademicLevels = ({ switchCurrent, current, careers }) => {
   /** Global state */
   const {
     profile: {
@@ -20,15 +20,15 @@ const AcademicLevels = ({ switchCurrent, current }) => {
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   // const [levels, addLevels] = useState(academic.studies);
-  const [careers, addCareers] = useState([]);
+  // const [careers, addCareers] = useState([]);
   const [academicLevels, addAcademicLevels] = useState([]);
 
   /** Get collection */
-  const getCareers = p =>
-    xhr()
-      .get(`/career?page=1&offset=1000`)
-      .then(resp => addCareers(resp.data.items))
-      .catch(err => console.log(err));
+  // const getCareers = p =>
+  //   xhr()
+  //     .get(`/career?page=1&offset=1000`)
+  //     .then(resp => addCareers(resp.data.items))
+  //     .catch(err => console.log(err));
 
   const getAcademicLevels = p =>
     xhr()
@@ -37,7 +37,7 @@ const AcademicLevels = ({ switchCurrent, current }) => {
       .catch(err => console.log(err));
 
   useEffect(() => {
-    getCareers();
+    // getCareers();
     getAcademicLevels();
   }, []);
 

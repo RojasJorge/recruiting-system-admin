@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useStoreState } from 'easy-peasy';
 import router from 'next/router';
 import { Steps } from 'antd';
@@ -70,11 +70,23 @@ const UserProfile = _ => {
 
     return s;
   };
+  const [careers, addCareers] = useState([]);
+
+  /** Get collection */
+  const getCareers = p =>
+    xhr()
+      .get(`/career?page=1&offset=1000`)
+      .then(resp => addCareers(resp.data.items))
+      .catch(err => console.log(err));
+
+  useEffect(() => {
+    getCareers();
+  }, []);
 
   const switchStep = _ => {
     switch (current) {
       case 0:
-        return <Personal switchCurrent={switchCurrent} current={current} />;
+        return <Personal switchCurrent={switchCurrent} current={current} careers={careers} />;
         break;
       case 1:
         return <Documents switchCurrent={switchCurrent} current={current} />;
@@ -86,7 +98,7 @@ const UserProfile = _ => {
         return <LookingFor switchCurrent={switchCurrent} current={current} />;
         break;
       case 4:
-        return <AcademicLevels switchCurrent={switchCurrent} current={current} />;
+        return <AcademicLevels switchCurrent={switchCurrent} current={current} careers={careers} />;
         break;
       case 5:
         return <Courses switchCurrent={switchCurrent} current={current} />;
