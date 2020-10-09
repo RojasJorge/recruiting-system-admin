@@ -1,44 +1,103 @@
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import xhr from '../../xhr';
 import { Card, EmptyElemet } from '../../elements';
 import { delay, find, isEmpty } from 'lodash';
 import { Can } from '../Can';
-import { StopOutlined } from '@ant-design/icons';
+import Moment from 'react-moment';
+import moment from 'moment';
 import { Button, Input, notification, Pagination, Select, Table } from 'antd';
 
 const { Option } = Select;
 const { Search } = Input;
 
-const columns = [
-  {
-    title: 'Empresa',
-    dataIndex: 'company',
-    key: 'company',
-    render: (text, record) => <>{record.company.name}</>,
-  },
-  {
-    title: 'Plaza',
-    dataIndex: 'title',
-    key: 'title',
-  },
-  {
-    title: 'Fecha de expiración',
-    dataIndex: 'expiration_date',
-    key: 'expiration_date',
-  },
-  {
-    title: 'Actions',
-    dataIndex: 'id',
-    key: 'id',
-    render: (text, record) => {
-      return <>actions</>;
-    },
-  },
-];
+const buttonStyle = {
+  display: 'flex',
+  alignItem: 'center',
+  color: '#019688',
+  textTransform: 'uppercase',
+};
 
-let visible = false;
 const Jobs = props => {
+  const router = useRouter();
+
+  const allSet = e => {
+    notification.info({
+      message: `Confirmación`,
+      description: 'La plaza ha sido publicada con éxito.',
+      placement: 'bottomRight',
+    });
+
+    setTimeout(() => {
+      router.push(`/admin/jobs/edit/[id]`, `/admin/jobs/edit/${e}`);
+    }, 500);
+  };
+
+  const add = async e => {
+    console.log(e);
+    delete e.id;
+    delete e.company;
+    delete e.created_at;
+    delete e.expiration_date;
+    delete e.updated_at;
+
+    e.title = `${e.title} (copia)`;
+
+    console.log(e);
+    xhr()
+      .post(`/job`, JSON.stringify(e))
+      .then(resp => {
+        allSet(resp.data);
+      })
+      .catch(err => {
+        notification.info({
+          message: `Error`,
+          description: 'Ha ocurrido un error, por favor inténtalo más tarde',
+          placement: 'bottomRight',
+        });
+      });
+  };
+
+  const columns = [
+    {
+      title: 'Empresa',
+      dataIndex: 'company',
+      key: 'company',
+      render: (text, record) => <>{record.company.name}</>,
+    },
+    {
+      title: 'Plaza',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: 'Fecha de expiración',
+      dataIndex: 'expiration_date',
+      key: 'expiration_date',
+      render: (text, record) => (
+        <>
+          <Moment locale="es" format="D MMMM YYYY">
+            {record.expiration_date}
+          </Moment>
+        </>
+      ),
+    },
+    {
+      title: 'Actions',
+      dataIndex: 'id',
+      key: 'id',
+      render: (text, record) => {
+        return (
+          <a onClick={() => add(record)} style={buttonStyle}>
+            <i className="material-icons">content_copy</i> Volver a publicar
+          </a>
+        );
+      },
+    },
+  ];
+
+  // FIlter
   const initFilters = {
     page: 1,
     offset: 10,
@@ -47,10 +106,8 @@ const Jobs = props => {
     country: {},
     city: null,
   };
-
   /** Get countries from store (tools) */
   const countries = useStoreState(state => state.tools.countries);
-
   const list = useStoreState(state => state.jobs.list);
   const total = useStoreState(state => state.jobs.total);
   const fill = useStoreActions(actions => actions.jobs.fill);
@@ -297,18 +354,6 @@ const Jobs = props => {
                   );
                 })}
             </div>
-            <div className="row" style={{ marginLeft: 'auto' }}>
-              <div className="col-md-12">
-                <Pagination
-                  current={filters.page}
-                  total={total}
-                  onChange={paginationChange}
-                  // showSizeChanger
-                  onShowSizeChanger={paginationChange}
-                  // pageSizeOptions={['5', '10', '25', '50']}
-                />
-              </div>
-            </div>
           </div>
         </div>
 
@@ -323,6 +368,18 @@ const Jobs = props => {
             />
           </div>
         </Can>
+        <div className="row" style={{ marginLeft: 'auto', marginTop: 40 }}>
+          <div className="col-md-12">
+            <Pagination
+              current={filters.page}
+              total={total}
+              onChange={paginationChange}
+              // showSizeChanger
+              onShowSizeChanger={paginationChange}
+              // pageSizeOptions={['5', '10', '25', '50']}
+            />
+          </div>
+        </div>
       </div>
     );
   }
