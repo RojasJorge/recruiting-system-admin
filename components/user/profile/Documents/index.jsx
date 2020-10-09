@@ -68,6 +68,7 @@ const Documents = ({switchCurrent, current}) => {
 		},
 	};
 	
+	
 	return (
 		<>
 			<Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal}>
