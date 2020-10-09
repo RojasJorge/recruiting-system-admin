@@ -8,6 +8,11 @@ const Requirements = () => {
     60: '60 años',
     80: 'Max',
   };
+
+  const children = [];
+
+  children.push(<Option key=""></Option>);
+
   return (
     <>
       <Form.Item label="Sexo" name="gender" className="form-item--lg">
@@ -18,7 +23,12 @@ const Requirements = () => {
         </Radio.Group>
       </Form.Item>
       <div className="umana-form--group group-row">
-        <Form.Item name="age" label="Edad" className="form-item--fx" help="Seleccione rango de edad">
+        <Form.Item
+          name="age"
+          label="Edad"
+          className="form-item--fx"
+          help="Seleccione rango de edad"
+        >
           <Slider
             min={1}
             max={80}
@@ -61,13 +71,18 @@ const Requirements = () => {
         help="Agregar Habilidades y/o competencias requeridas la plaza: (Ejemplo: Relaciones
             interpersonales, creatividad, actitud positiva, entre otras)"
       >
-        <Select placeholder="Agrega elementos al dar enter" mode="tags" showSearch={false} />
+        <Select placeholder="Agrega elementos al dar enter" mode="tags" />
       </Form.Item>
 
       <br />
       <h3 style={{ width: '100%' }}>Otros Requerimientos</h3>
       <br />
-      <Form.Item label="Softwares requeridos" className="form-item--lg" name="softwares" help="Agrega aquí uno o varios softwares requeridos.">
+      <Form.Item
+        label="Softwares requeridos"
+        className="form-item--lg"
+        name="softwares"
+        help="Agrega aquí uno o varios softwares requeridos."
+      >
         <Select placeholder="Agrega elementos al dar enter" mode="tags" />
       </Form.Item>
 

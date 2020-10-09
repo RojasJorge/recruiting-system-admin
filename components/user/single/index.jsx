@@ -6,14 +6,24 @@ import Academic from './academic';
 import Knowledge from './knowledge';
 import Economic from './economic';
 
-const SingleProfile = () => {
+const SingleProfile = props => {
   const getLocal = field => {
-    const local = JSON.parse(localStorage.getItem('uUser'));
-    return local.profile.fields[field];
+    if (props.data) {
+      const local = props.data.profile;
+      return local.fields[field];
+    } else {
+      const local = JSON.parse(localStorage.getItem('uUser'));
+      return local.profile.fields[field];
+    }
   };
   const getUser = field => {
-    const local = JSON.parse(localStorage.getItem('uUser'));
-    return local;
+    if (props.data) {
+      const local = props.data;
+      return local;
+    } else {
+      const local = JSON.parse(localStorage.getItem('uUser'));
+      return local;
+    }
   };
 
   return (
