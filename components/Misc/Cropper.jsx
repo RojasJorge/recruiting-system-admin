@@ -52,7 +52,7 @@ export const Demo = React.FC = () => {
 		
 		axios({
 			method: 'post',
-			url: 'http://localhost:30012',
+			url: process.env.NEXT_PUBLIC_APP_FILE_STORAGE,
 			data: formData,
 			headers: {'Content-Type': 'multipart/form-data'}
 		})
