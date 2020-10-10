@@ -105,7 +105,7 @@ export const Demo = React.FC = () => {
 		<div>
 			<div style={{width: "100%"}}>
 				<input
-					accept="image/jpg"
+					// accept="image/jpg"
 					type="file"
 					onChange={onChange}
 					style={{marginBottom: 24}}
