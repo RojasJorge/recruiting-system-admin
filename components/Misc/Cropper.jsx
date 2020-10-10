@@ -52,7 +52,7 @@ export const Demo = React.FC = () => {
 		
 		axios({
 			method: 'post',
-			url: process.env.NEXT_PUBLIC_APP_FILE_STORAGE,
+			url: `${process.env.NEXT_PUBLIC_APP_FILE_STORAGE}/upload`,
 			data: formData,
 			config: {
 				headers: {
@@ -134,6 +134,7 @@ export const Demo = React.FC = () => {
 			<div>
 				<div className="box" style={{width: "50%", float: "right"}}>
 					<h1>Preview</h1>
+					
 					<div
 						className="img-preview"
 						style={{width: "100%", float: "left", height: "300px", overflow: 'hidden'}}
