@@ -6,7 +6,7 @@ module.exports = withImages({
 		return [
 			{
 				// mathching all API routes
-				source: "/admin/:path*",
+				source: "/api/:path*",
 				headers: [
 					{ key: "Access-Control-Allow-Credentials", value: "true" },
 					{ key: "Access-Control-Allow-Origin", value: "*" },
