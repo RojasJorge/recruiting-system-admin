@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import axios from 'axios'
 
 const Index = _ => {
 	
@@ -6,6 +7,10 @@ const Index = _ => {
 		event.preventDefault()
 		event.target.submit()
 	}
+	
+	useEffect(() => {
+		axios.get('https://storage.umana.co/media').then(resp => console.log(resp)).catch(err => console.log(err))
+	}, [])
 	
 	return(
 		<div>

@@ -50,20 +50,41 @@ export const Demo = React.FC = () => {
 		// formData.append("file", data)
 		formData.append('file', file);
 		
-		axios({
-			method: 'post',
-			url: process.env.NEXT_PUBLIC_APP_FILE_STORAGE,
-			data: formData,
-			headers: {'Content-Type': 'multipart/form-data'}
+		// axios({
+		// 	method: 'post',
+		// 	url: process.env.NEXT_PUBLIC_APP_FILE_STORAGE,
+		// 	data: formData,
+		// 	headers: {'Content-Type': 'multipart/form-data'}
+		// })
+		// 	.then(function (response) {
+		// 		//handle success
+		// 		console.log(response);
+		// 	})
+		// 	.catch(function (response) {
+		// 		//handle error
+		// 		console.log(response);
+		// 	});
+		
+		// const data = new FormData(document.getElementById('formulario'));
+		fetch('https://storage.umana.co', {
+			method: 'POST',
+			body: formData
 		})
-			.then(function (response) {
-				//handle success
-				console.log(response);
+			.then(function(response) {
+				if(response.ok) {
+					return response.text()
+				} else {
+					throw "Error en la llamada Ajax";
+				}
+				
 			})
-			.catch(function (response) {
-				//handle error
-				console.log(response);
+			.then(function(texto) {
+				console.log(texto);
+			})
+			.catch(function(err) {
+				console.log(err);
 			});
+		
 	}
 	
 	const dataURLtoBlob = (dataurl) => {
