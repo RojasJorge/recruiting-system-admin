@@ -55,7 +55,7 @@ const Documents = ({switchCurrent, current}) => {
 		multiple: true,
 		action: 'http://localhost:30011/media',
 		onChange(info) {
-			console.log('onFileChange:', info)
+			// console.log('onFileChange:', info)
 			const {status} = info.file;
 			if (status !== 'uploading') {
 				// console.log(info.file, info.fileList);
