@@ -106,10 +106,6 @@ const Applications = ({applications, total, filters}) => {
 				size="small"
 				bordered
 			/>
-			
-			{/*<div style={{marginTop: 30}}>*/}
-			{/*	<Pagination simple/>*/}
-			{/*</div>*/}
 		</>
 	)
 }

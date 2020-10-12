@@ -1,8 +1,8 @@
-import {Select, Button} from 'antd'
+import {Select} from 'antd'
 import styled from 'styled-components'
 import xhr from "../../xhr";
-import {useEffect, useState} from "react";
-import {find, isEmpty} from 'lodash'
+import {useEffect} from "react";
+import {isEmpty} from 'lodash'
 
 const {Option} = Select
 
@@ -30,13 +30,6 @@ const Reset = styled.h3`
 
 const Filters = ({filters, setFilters}) => {
 	
-	// const [filters, setFilters] = useState({
-	// 	companies: [],
-	// 	company: null,
-	// 	page: 1,
-	// 	offset: 10
-	// })
-	
 	const getCompanies = () =>
 		xhr()
 			.get(`/company?page=${filters.page}&offset=${filters.offset}`)
@@ -57,7 +50,6 @@ const Filters = ({filters, setFilters}) => {
 						size="large"
 						placeholder="Empresa"
 						onSelect={e => setFilters({...filters, companyId: e})}
-						// onSelect={e => setFilters({...filters, company: find(filters.companies, o => o.id === e)})}
 					>
 						{
 							!isEmpty(filters.companies) && filters.companies.map(company => (
