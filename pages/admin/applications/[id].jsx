@@ -12,18 +12,19 @@ const Index = _ => {
   /** Local state */
   const [record, updateRecord] = useState({});
 
-  const getRecord = _ =>
-    xhr()
+  const getRecord = async _ =>
+    await xhr()
       .get(`/apply/${router.query.id}`)
-      .then(resp => updateRecord(resp.data ? resp.data[0] : {}))
+      .then(resp => updateRecord(resp.data.items ? resp.data.items[0] : {}))
       .catch(err => console.log(err));
 
   useEffect(() => {
-    getRecord();
-  }, [router]);
+    getRecord()
+  }, [router.query.id]);
 
   return (
     <Layout title={'Mi aplicación'}>
+      {/*<pre>{JSON.stringify(record, false, 2)}</pre>*/}
       <>{!isEmpty(record) && <Single record={record} />}</>
     </Layout>
   );

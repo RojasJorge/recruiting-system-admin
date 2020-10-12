@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types'
-import {Avatar, Pagination, Table} from 'antd'
+import {Avatar, Select, Table} from 'antd'
 import {RightOutlined, UserOutlined} from '@ant-design/icons'
 import moment from 'moment'
 import Link from 'next/link'
+
+const {Option} = Select
 
 const RenderLink = ({record}) => {
 	
@@ -97,14 +99,13 @@ const Applications = ({applications, total, filters}) => {
 				dataSource={applications}
 				columns={columns}
 				rowKey={record => record.apply.id}
-				pagination={false}
+				pagination={{
+					simple: true,
+					total: applications.length
+				}}
 				size="small"
 				bordered
 			/>
-			
-			<div style={{marginTop: 30}}>
-				<Pagination total={total}/>
-			</div>
 		</>
 	)
 }

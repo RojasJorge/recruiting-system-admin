@@ -1,8 +1,10 @@
+import {useState} from 'react'
 import {Button, Divider, Form, Input, InputNumber, message, notification, Select, Upload,} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
 import xhr from '../../../../xhr';
 import router from 'next/router';
 import {useStoreActions, useStoreState} from 'easy-peasy';
+import axios from "axios";
 
 const {Item} = Form;
 const {Option} = Select;
@@ -13,9 +15,11 @@ const Documents = ({switchCurrent, current}) => {
 	const {
 		profile: {
 			id,
-			fields: {personal},
-		},
-	} = useStoreState(state => state.auth.user);
+			fields: {personal}
+		}
+	} = useStoreState(state => state.auth.user)
+	
+	const [files, updateFilles] = useState([])
 	
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 	
@@ -53,20 +57,47 @@ const Documents = ({switchCurrent, current}) => {
 	const props = {
 		name: 'file',
 		multiple: true,
-		action: 'http://localhost:30011/media',
+		// action: 'http://localhost:30011/media',
 		onChange(info) {
-			// console.log('onFileChange:', info)
+			
 			const {status} = info.file;
 			if (status !== 'uploading') {
 				// console.log(info.file, info.fileList);
 			}
+			
 			if (status === 'done') {
+				updateFilles(info.file)
 				message.success(`${info.file.name} file uploaded successfully.`);
 			} else if (status === 'error') {
 				message.error(`${info.file.name} file upload failed.`);
 			}
 		},
 	};
+	
+	const storeFile = async _file => {
+		
+		const formData = new FormData()
+		formData.append('file', _file)
+		
+		axios({
+			method: 'post',
+			url: `${process.env.NEXT_PUBLIC_APP_FILE_STORAGE}/upload`,
+			data: formData,
+			config: {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+					'Access-Control-Allow-Origin': "*"
+				}
+			}
+		})
+			.then(function (response) {
+				console.log('response from file storage', response)
+				updateAvatar(response.data.url)
+			})
+			.catch(function (response) {
+				console.log('Response ERROR from file storage:', response)
+			})
+	}
 	
 	
 	return (
