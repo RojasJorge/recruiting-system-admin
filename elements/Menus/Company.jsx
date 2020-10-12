@@ -44,6 +44,11 @@ const CompanyNav = props => {
           <a>Plazas</a>
         </Link>
       </Menu.Item>
+      <Menu.Item key="applications" onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/applications" passHref>
+          <a>Aplicaciones</a>
+        </Link>
+      </Menu.Item>
       {/*<Menu.Item key="aplicantes" onClick={e => props.close(e, 'close')}>*/}
       {/*  <Link href="/" passHref>*/}
       {/*    <a>Aplicantes</a>*/}
