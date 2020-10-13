@@ -11,7 +11,7 @@ const Names = ({ careers }) => {
           .toLowerCase()
       : str;
   };
-  console.log('names', careers);
+  
   return (
     <>
       <Item

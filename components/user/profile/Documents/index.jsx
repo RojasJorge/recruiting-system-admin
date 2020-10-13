@@ -2,9 +2,9 @@ import {useState} from 'react'
 import {Button, Divider, Form, Input, InputNumber, message, notification, Select, Upload,} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
 import xhr from '../../../../xhr';
-import router from 'next/router';
+import storage from "../../../../storage";
 import {useStoreActions, useStoreState} from 'easy-peasy';
-import axios from "axios";
+import {filter, isEmpty} from 'lodash'
 
 const {Item} = Form;
 const {Option} = Select;
@@ -15,11 +15,12 @@ const Documents = ({switchCurrent, current}) => {
 	const {
 		profile: {
 			id,
-			fields: {personal}
+			fields: {personal, document}
 		}
 	} = useStoreState(state => state.auth.user)
 	
-	const [files, updateFilles] = useState([])
+	const [files, updateFiles] = useState(document)
+	const [deleted, setDeleted] = useState([])
 	
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 	
@@ -32,19 +33,36 @@ const Documents = ({switchCurrent, current}) => {
 				JSON.stringify({
 					fields: {
 						personal: fields,
+						document: files
 					},
 				}),
 			)
 			.then(resp => {
 				updateProfile({type: 'personal', fields: merged});
+				updateProfile({type: 'document', fields: files});
+				
+				if(!isEmpty(deleted)) {
+					deleted.forEach(obj => {
+						deleteFromStorage(obj)
+					})
+				}
+				
+				setDeleted([])
 				
 				/** Send notification success */
 				notify('success', 'Ficha documentos actualizada.', 'Vamos al siguiente paso...');
-				switchCurrent(current + 1);
-				router.push(`${router.router.pathname}?current=${current + 1}`);
+				// switchCurrent(current + 1);
+				// router.push(`${router.router.pathname}?current=${current + 1}`);
 			})
 			.catch(err => console.log('Error:', err));
 	};
+	
+	const deleteFromStorage = async doc => {
+		storage()
+			.delete(`/delete/${doc.response.url.split('/')[2]}`)
+			.then(resp => message.info(`${doc.name} eliminado correctamente`))
+			.catch(err => console.log(err))
+	}
 	
 	/** Notifications */
 	const notify = (type, message, description) => {
@@ -57,51 +75,31 @@ const Documents = ({switchCurrent, current}) => {
 	const props = {
 		name: 'file',
 		multiple: true,
-		// action: 'http://localhost:30011/media',
+		action: 'http://localhost:30012/upload',
+		accept: ['.png, .jpg, .pdf, .docx, .xlsx, .docx, .doc, .odf'],
+		defaultFileList: document,
 		onChange(info) {
 			
 			const {status} = info.file;
-			if (status !== 'uploading') {
-				// console.log(info.file, info.fileList);
-			}
 			
 			if (status === 'done') {
-				updateFilles(info.file)
-				message.success(`${info.file.name} file uploaded successfully.`);
+				
+				updateFiles(info.fileList)
+				
 			} else if (status === 'error') {
-				message.error(`${info.file.name} file upload failed.`);
+				message.error(`${info.file.name} no se ha podido subir.`)
 			}
 		},
+		onRemove(doc) {
+			if (typeof doc.response === 'object' && doc.response.url) setDeleted([...deleted, doc])
+			updateFiles(filter(files, o => o.uid !== doc.uid))
+		}
 	};
-	
-	const storeFile = async _file => {
-		
-		const formData = new FormData()
-		formData.append('file', _file)
-		
-		axios({
-			method: 'post',
-			url: `${process.env.NEXT_PUBLIC_APP_FILE_STORAGE}/upload`,
-			data: formData,
-			config: {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-					'Access-Control-Allow-Origin': "*"
-				}
-			}
-		})
-			.then(function (response) {
-				console.log('response from file storage', response)
-				updateAvatar(response.data.url)
-			})
-			.catch(function (response) {
-				console.log('Response ERROR from file storage:', response)
-			})
-	}
 	
 	
 	return (
 		<>
+			{/*<pre>{JSON.stringify({files, deleted}, false, 2)}</pre>*/}
 			<Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal}>
 				<div className="umana-form--section">
 					<h2>Documentos de identificación</h2>
