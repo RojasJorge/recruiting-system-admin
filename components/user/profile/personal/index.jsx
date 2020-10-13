@@ -6,8 +6,9 @@ import router from 'next/router';
 import Locations from '../../../Location';
 import General from './General';
 import Contact from './Contact';
-import { UploadAvatar } from '../../../../elements';
+// import { UploadAvatar } from '../../../../elements';
 import xhr from '../../../../xhr';
+import AvatarCropper from "../../../Misc/AvatarCropper";
 
 /** Import form sections */
 const FormItem = Form.Item;
@@ -68,8 +69,8 @@ const Personal = ({ switchCurrent, current, careers }) => {
     <>
       <Form name="basic" onFinish={onFinish} initialValues={personal}>
         <div className="umana-form--section">
-          <UploadAvatar type="user" src="" />
-
+          {/*<UploadAvatar type="user" src="" />*/}
+          <AvatarCropper/>
           <h2 style={{ width: '100%', marginTop: 20 }}>Información personal</h2>
           <Names careers={careers} />
           <Form.Item name="location" label="Ubicación actual">

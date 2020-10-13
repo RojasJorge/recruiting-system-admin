@@ -4,8 +4,7 @@ import axios from 'axios'
 import {Button} from 'antd'
 import xhr from "../../xhr";
 import {useStoreState, useStoreActions} from "easy-peasy";
-
-const defaultSrc = "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
+// import AvatarCropper from "./AvatarCropper";
 
 export const Demo = React.FC = () => {
 	
@@ -114,7 +113,6 @@ export const Demo = React.FC = () => {
 	
 	return (
 		<div>
-			<pre>{JSON.stringify(image, false, 2)}</pre>
 			<div>
 				<input
 					// accept="image/jpg"
