@@ -93,7 +93,7 @@ const AvatarCropper = () => {
 					onChange={onChange}
 					onPreview={onPreview}
 					onRemove={onRemove}
-					multiple={false}
+					// multiple={false}
 				>
 					{fileList.length < 1 && 'Seleccionar'}
 				</Upload>
