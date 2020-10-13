@@ -15,7 +15,7 @@ const Documents = ({switchCurrent, current}) => {
 	const {
 		profile: {
 			id,
-			fields: {personal, document}
+			fields: {personal, documents}
 		}
 	} = useStoreState(state => state.auth.user)
 	
@@ -33,13 +33,13 @@ const Documents = ({switchCurrent, current}) => {
 				JSON.stringify({
 					fields: {
 						personal: fields,
-						document: files
+						documents: files
 					},
 				}),
 			)
 			.then(resp => {
 				updateProfile({type: 'personal', fields: merged});
-				updateProfile({type: 'document', fields: files});
+				updateProfile({type: 'documents', fields: files});
 				
 				if(!isEmpty(deleted)) {
 					deleted.forEach(obj => {
@@ -60,7 +60,7 @@ const Documents = ({switchCurrent, current}) => {
 	const deleteFromStorage = async doc => {
 		storage()
 			.delete(`/delete/${doc.response.url.split('/')[2]}`)
-			.then(resp => message.info(`${doc.name} eliminado correctamente`))
+			.then(resp => true)
 			.catch(err => console.log(err))
 	}
 	
@@ -75,9 +75,9 @@ const Documents = ({switchCurrent, current}) => {
 	const props = {
 		name: 'file',
 		multiple: true,
-		action: 'http://localhost:30012/upload',
+		action: process.env.NEXT_PUBLIC_APP_FILE_STORAGE + '/upload',
 		accept: ['.png, .jpg, .pdf, .docx, .xlsx, .docx, .doc, .odf'],
-		defaultFileList: document,
+		defaultFileList: documents,
 		onChange(info) {
 			
 			const {status} = info.file;
