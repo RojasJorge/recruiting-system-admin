@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {SaveTwoTone} from '@ant-design/icons'
 import {Upload} from 'antd'
@@ -27,7 +27,7 @@ const AvatarCropper = () => {
 	
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
 	
-	const [fileList, setFileList] = useState([personal.avatar]);
+	const [fileList, setFileList] = useState(personal.avatar)
 	
 	const onChange = ({fileList: newFileList}) => {
 		setFileList(newFileList);
@@ -59,14 +59,14 @@ const AvatarCropper = () => {
 			.put(`/profile/${id}`, JSON.stringify({
 				fields: {
 					personal: {
-						avatar: fields[0]
+						avatar: fields
 					}
 				}
 			}))
 			.then(resp =>
 				updateProfile({
 					type: 'personal', fields: Object.assign(personal, {
-						avatar: fields[0]
+						avatar: fields
 					})
 				}))
 			.catch(err => console.log(err))
