@@ -1,13 +1,14 @@
 import { Sitebar } from '../../../elements';
 import { useEffect, useState } from 'react';
-import { useStoreActions } from 'easy-peasy';
-import { Progress, Skeleton, Tag } from 'antd';
+import { Progress, Skeleton, Tag, Avatar } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
 import { Button, notification } from 'antd';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
+import Link from 'next/link';
+
 import { Can } from '../../../components/Can';
 import router from 'next/router';
 
@@ -166,9 +167,11 @@ const SingleJob = () => {
               }}
             >
               {appyState ? (
-                <Button type="orange" size="small">
-                  <i className="material-icons">check</i> Ver Aplicaciones
-                </Button>
+                <Link href={`/admin/requests`} passHref>
+                  <Button type="orange" size="small">
+                    <i className="material-icons">check</i> Ver Aplicaciones
+                  </Button>
+                </Link>
               ) : (
                 <Button type="orange" size="small" onClick={applyJob}>
                   <i className="material-icons">send</i>
@@ -428,13 +431,43 @@ const SingleJob = () => {
               </div>
             ) : null}
           </div>
+          {/* company info */}
+          <div className="umana-content" style={{ marginTop: 80 }}>
+            {job && job.company && job.company_state === 'public' ? (
+              <div className="umana-section-contenct">
+                <div className="section-avatar">
+                  <Avatar
+                    icon={<i className="material-icons">location_city</i>}
+                    src={job.company.avatar || ''}
+                    size={120}
+                  />
+                </div>
+                <div className="section-title">
+                  <h1>{job.company.name}</h1>
+                </div>
+                {job.company.location ? (
+                  <>
+                    <h5>Ubicación</h5>
+                    <p>
+                      {`${job.company.location.address}, zona ${job.company.location.zone},`}
+                      <br></br> {`${job.company.location.city}, ${job.company.location.country}`}
+                    </p>
+                  </>
+                ) : null}
+              </div>
+            ) : (
+              <p>Los datos de la empresa son privados.</p>
+            )}
+          </div>
           <Can I="apply" a="JOBS">
             {appyState ? (
-              <Button type="orange" size="small">
-                Ver Aplicaciones
-              </Button>
+              <Link href={`/admin/requests`} passHref>
+                <Button type="orange" size="small" style={{ marginLeft: 'auto' }}>
+                  Ver Aplicaciones
+                </Button>
+              </Link>
             ) : (
-              <Button type="orange" size="small" onClick={applyJob}>
+              <Button type="orange" size="small" onClick={applyJob} style={{ marginLeft: 'auto' }}>
                 Aplicar a la plaza
               </Button>
             )}
