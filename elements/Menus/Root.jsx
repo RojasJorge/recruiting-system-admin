@@ -14,6 +14,11 @@ const RootNav = props => {
       selectedKeys={[current]}
       className={`header-nav umana-menu nav-desktop theme-${props.theme}`}
     >
+      <Menu.Item key="requests" onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/requests" passHref>
+          <a>Solicitudes</a>
+        </Link>
+      </Menu.Item>
       <Menu.Item key="dashboard" onClick={e => props.close(e, 'close')}>
         <Link href="/admin" passHref>
           <a>Dashboard</a>
@@ -32,11 +37,6 @@ const RootNav = props => {
       <Menu.Item key="plazas" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/jobs" passHref>
           <a>Plazas</a>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="applications" onClick={e => props.close(e, 'close')}>
-        <Link href="/admin/applications" passHref>
-          <a>Aplicaciones</a>
         </Link>
       </Menu.Item>
       <Menu.Item key="catalogos" onClick={e => props.close(e, 'close')}>

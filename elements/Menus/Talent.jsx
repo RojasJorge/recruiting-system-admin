@@ -9,6 +9,11 @@ const TalentNav = props => {
 
   return (
     <Menu mode={`${props.direction}`} id="header-nav" selectedKeys={[current]} className={`header-nav umana-menu nav-desktop theme-${props.theme}`}>
+      <Menu.Item key="requests" onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/requests" passHref>
+          <a>Mis solicitudes</a>
+        </Link>
+      </Menu.Item>
       <Menu.Item key="dashboard" onClick={e => props.close(e, 'close')}>
         <Link href="/admin" passHref>
           <a>Dashboard</a>
@@ -22,11 +27,6 @@ const TalentNav = props => {
       <Menu.Item key="jobs" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/jobs" passHref>
           <a>Plazas disponibles</a>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="aplicationjob" onClick={e => props.close(e, 'close')}>
-        <Link href="/admin/aplicationjob" passHref>
-          <a>Mis Aplicaciones</a>
         </Link>
       </Menu.Item>
     </Menu>
