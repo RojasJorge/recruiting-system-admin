@@ -24,11 +24,17 @@ const CompanyNav = props => {
       selectedKeys={[current]}
       className={`header-nav umana-menu nav-desktop theme-${props.theme}`}
     >
+      <Menu.Item key="requests" onClick={e => props.close(e, 'close')}>
+        <Link href="/admin/requests" passHref>
+          <a>Solicitudes</a>
+        </Link>
+      </Menu.Item>
       <Menu.Item key="dashboard" onClick={e => props.close(e, 'close')}>
         <Link href="/admin" passHref>
           <a>Dashboard</a>
         </Link>
       </Menu.Item>
+      
       {/*<Menu.Item key="users" onClick={e => props.close(e, 'close')}>*/}
       {/*  <Link href="/admin/users" passHref>*/}
       {/*    <a>Candidatos</a>*/}
@@ -42,11 +48,6 @@ const CompanyNav = props => {
       <Menu.Item key="jobs" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/jobs" passHref>
           <a>Plazas</a>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="applications" onClick={e => props.close(e, 'close')}>
-        <Link href="/admin/applications" passHref>
-          <a>Aplicaciones</a>
         </Link>
       </Menu.Item>
       {/*<Menu.Item key="aplicantes" onClick={e => props.close(e, 'close')}>*/}

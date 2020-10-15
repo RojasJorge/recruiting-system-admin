@@ -2,48 +2,7 @@ import PropTypes from 'prop-types'
 import {Avatar, Select, Table} from 'antd'
 import {RightOutlined, UserOutlined} from '@ant-design/icons'
 import moment from 'moment'
-import Link from 'next/link'
-
-const {Option} = Select
-
-const RenderLink = ({record}) => {
-	
-	const translateStatus = status => {
-		
-		let params = {
-			string: 'default',
-			color: '#019688'
-		}
-		
-		switch (status) {
-			case 'PENDING':
-				params = {...params, string: 'PENDIENTE'}
-				break
-			case 'APPLICATION_SENT':
-				params = {...params, string: 'APPLICACIÓN ENVIADA'}
-				break
-			default:
-				params = params
-				break
-		}
-		
-		return params
-	}
-	
-	return (
-		<>
-			<Link href={`/admin/applications/${record.apply.id}`} passHref>
-				<a>
-					<span style={{
-						color: translateStatus(record.apply.status).color
-					}}>
-						{translateStatus(record.apply.status).string}
-					</span>
-				</a>
-			</Link>
-		</>
-	)
-}
+import RequestStatus from "./RequestStatus";
 
 const columns = [{
 	title: '',
@@ -83,7 +42,7 @@ const columns = [{
 	title: 'Estado',
 	dataIndex: 'company',
 	key: 'company',
-	render: (text, record) => <RenderLink record={record}/>
+	render: (text, record) => <RequestStatus record={record}/>
 }, {
 	title: '',
 	dataIndex: '',
