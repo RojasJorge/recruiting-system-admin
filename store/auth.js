@@ -58,7 +58,7 @@ export default {
         })
         .then(response => {
           actions.grantAccess(response.data);
-          if (Router.pathname === '/') Router.push('/admin/requests');
+          if (Router.pathname === '/') location.href = '/admin/requests';
           if (Router.pathname === '/signup') Router.push('/admin/welcome');
         })
         .catch(error => {
