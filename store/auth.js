@@ -58,8 +58,13 @@ export default {
         })
         .then(response => {
           actions.grantAccess(response.data);
-          if (Router.pathname === '/') location.href = '/admin/requests';
-          if (Router.pathname === '/signup') Router.push('/admin/welcome');
+          if(response.data.scope[0] === 'company' || response.data.scope[0] === 'umana') {
+            location.href = '/admin/requests'
+          } else {
+            location.href = '/admin/welcome'
+          }
+          // if (Router.pathname === '/') location.href = '/admin/requests';
+          // if (Router.pathname === '/signup') location.href = '/admin/welcome';
         })
         .catch(error => {
           console.log(error);
