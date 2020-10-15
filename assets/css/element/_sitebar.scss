@@ -148,6 +148,27 @@
       }
     }
   }
+  .umana-sitebar-childrens {
+    button.ant-btn {
+      width: 100%;
+      text-align: left !important;
+      background: transparent;
+      color: $color-black !important;
+      justify-content: flex-start;
+      font-weight: 500 !important;
+      border-bottom: 1px solid rgba($color-text, 0.1);
+      i {
+        margin-right: 10px;
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        background: $color-white;
+        color: $color-blue !important;
+        box-shadow: $shadow;
+      }
+    }
+  }
 }
 
 .date {

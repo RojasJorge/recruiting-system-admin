@@ -83,6 +83,60 @@ const SingleJob = () => {
         });
       });
   };
+  const [appyState, setApply] = useState(false);
+
+  const confirmApply = e => {
+    notification.info({
+      message: `Aplicación enviada`,
+      description: 'Has aplicado a esta plaza con éxito.',
+      placement: 'bottomRight',
+    });
+    setApply(true);
+    localStorage.setItem(
+      'jobApplications',
+      JSON.stringify([
+        {
+          jobId: job.id,
+          applicationId: e,
+        },
+      ]),
+    );
+  };
+
+  const catchErrorApply = e => {
+    if (e === 423) {
+      notification.info({
+        message: `Error`,
+        description:
+          'Ya habías aplicado a esta plaza anteriormente, haz click en Ver mis aplicaciones',
+        placement: 'bottomRight',
+      });
+      setApply(true);
+    } else {
+      notification.info({
+        message: `Error`,
+        description: 'Ha ocurrido un error, por favor inténtalo más tarde',
+        placement: 'bottomRight',
+      });
+    }
+  };
+  const applyJob = e => {
+    const user = JSON.parse(localStorage.getItem('uUser'));
+    const data = {
+      uid: user.id,
+      companyId: job.company_id,
+      jobId: job.id,
+    };
+
+    xhr()
+      .post(`/apply`, JSON.stringify(data))
+      .then(resp => {
+        confirmApply(resp);
+      })
+      .catch(err => {
+        catchErrorApply(err.response.status);
+      });
+  };
 
   if (job) {
     return (
@@ -109,11 +163,19 @@ const SingleJob = () => {
               header={{
                 title: job && job.company ? job.company.name : 'Plaza',
                 icon: 'location_city',
-                action: 'check',
-                titleAction: 'Aplicar Plaza',
-                urlAction: '/#',
               }}
-            />
+            >
+              {appyState ? (
+                <Button type="orange" size="small">
+                  <i className="material-icons">check</i> Ver Aplicaciones
+                </Button>
+              ) : (
+                <Button type="orange" size="small" onClick={applyJob}>
+                  <i className="material-icons">send</i>
+                  Aplicar a la plaza
+                </Button>
+              )}
+            </Sitebar>
           </Can>
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
@@ -367,7 +429,15 @@ const SingleJob = () => {
             ) : null}
           </div>
           <Can I="apply" a="JOBS">
-            <Button type="orange">Aplicar a la plaza</Button>
+            {appyState ? (
+              <Button type="orange" size="small">
+                Ver Aplicaciones
+              </Button>
+            ) : (
+              <Button type="orange" size="small" onClick={applyJob}>
+                Aplicar a la plaza
+              </Button>
+            )}
           </Can>
         </div>
       </div>
