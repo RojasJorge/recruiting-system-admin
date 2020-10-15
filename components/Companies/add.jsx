@@ -81,7 +81,7 @@ const FormCompany = props => {
   return (
     <>
       <h2 style={{ width: '100%' }}>Información general</h2>
-      <UploadAvatar type="company" />
+      {/*<UploadAvatar type="company" />*/}
       <Form scrollToFirstError={true} onFinish={onFinish} initialValues={props.data}>
         <Form.Item
           rules={[
