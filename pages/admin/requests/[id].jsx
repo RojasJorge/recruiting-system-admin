@@ -3,7 +3,7 @@ import xhr from '../../../xhr';
 import Layout from '../../../views/Layout';
 import { useRouter } from 'next/router';
 import { PageTitle } from '../../../elements';
-import Single from '../../../components/Applications/Single';
+import Single from '../../../components/Requests/Single';
 import { isEmpty } from 'lodash';
 
 const Index = _ => {

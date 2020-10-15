@@ -74,7 +74,7 @@ const Documents = ({switchCurrent, current}) => {
 	
 	const props = {
 		name: 'file',
-		multiple: true,
+		mode: 'multiple',
 		action: process.env.NEXT_PUBLIC_APP_FILE_STORAGE + '/upload',
 		accept: ['.png, .jpg, .pdf, .docx, .xlsx, .docx, .doc, .odf'],
 		defaultFileList: documents,
@@ -99,7 +99,6 @@ const Documents = ({switchCurrent, current}) => {
 	
 	return (
 		<>
-			{/*<pre>{JSON.stringify({files, deleted}, false, 2)}</pre>*/}
 			<Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal}>
 				<div className="umana-form--section">
 					<h2>Documentos de identificación</h2>
