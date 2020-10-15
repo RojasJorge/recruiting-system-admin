@@ -1,13 +1,14 @@
 import Layout from '../../../views/Layout';
 import {EmptyElemet, PageTitle} from '../../../elements';
 import companyImg from '../../../images/welcome-company.png';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import xhr from "../../../xhr";
 import {isEmpty} from 'lodash'
 import Applications from "../../../components/Applications";
 import Filters from '../../../components/Applications/Filters'
 import {Can} from '../../../components/Can'
 import CandidateRequests from "../../../components/Applications/CandidateRequests";
+import {message} from 'antd'
 
 const dataEmpty = {
 	title: 'Solicitudes de los usuarios',
@@ -36,45 +37,59 @@ const Index = _ => {
 		total: 0
 	})
 	
-	const getApply = _ => {
+	// const prepareUrl =
+	
+	const getApply = (companyId, jobId) => {
 		
-		let applyFilters = `?page=${filters.page}&offset=${filters.offset}`
+		// let applyFilters = `?page=${filters.page}&offset=${filters.offset}`
+		//
+		// if (filters.companyId) {
+		// 	applyFilters += `&companyId=${filters.companyId}`
+		// }
+		//
+		// if (filters.jobId) {
+		// 	applyFilters += `&jobId=${filters.jobId}`
+		// }
 		
-		if (filters.companyId) {
-			applyFilters += `&companyId=${filters.companyId}`
-		}
-		
-		if (filters.jobId) {
-			applyFilters += `&jobId=${filters.jobId}`
+		if(!companyId || !jobId) {
+			message.warning('Debes seleccionar una plaza.')
+			return false
 		}
 		
 		xhr()
-			.get(`/apply${applyFilters}`)
+			.get(`/apply?companyId=${companyId}&jobId=${jobId}`)
 			.then(resp => setApplications({...applications, list: resp.data}))
 			.catch(err => console.log(err))
 		
 		return
 	}
 	
-	useEffect(() => {
-		if(filters.switchCompany || filters.switchJob) {
-			getApply()
-		}
-	}, [
-		filters.page,
-		filters.offset,
-		filters.companyId,
-		filters.jobId,
-		filters.switchCompany,
-		filters.switchJob
-	])
+	// useEffect(() => {
+	// 	if (filters.switchCompany || filters.switchJob) {
+	// 		getApply()
+	// 	}
+	// }, [
+	// 	filters.page,
+	// 	filters.offset,
+	// 	filters.companyId,
+	// 	filters.jobId,
+	// 	filters.switchCompany,
+	// 	filters.switchJob
+	// ])
 	
 	return (
 		<Layout title="Mis aplicaciones">
 			<>
 				<Can I="view" a="REQUESTS_ADMIN_VIEW">
-					<PageTitle title="Mis aplicaciones"/>
-					<Filters filters={filters} setFilters={setFilters} setApplications={setApplications} applications={applications}/>
+					<PageTitle title="Solicitudes"/>
+					<Filters
+						filters={filters}
+						setFilters={setFilters}
+						setApplications={setApplications}
+						applications={applications}
+						getApply={getApply}
+					/>
+					
 					{
 						!isEmpty(applications.list)
 							? applications.list.map(apply => (
@@ -93,7 +108,8 @@ const Index = _ => {
 					}
 				</Can>
 				<Can I="view" a="OWN_REQUESTS">
-				<CandidateRequests/>
+					<PageTitle title="Mis solicitudes"/>
+					<CandidateRequests/>
 				</Can>
 			</>
 		</Layout>

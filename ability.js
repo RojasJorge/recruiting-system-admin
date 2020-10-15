@@ -7,15 +7,15 @@ const ability = scope =>
     switch (role) {
       case 'umana':
         can('read', ['USERS', 'CATALOGS', 'SPECIAL_ALERTS', 'PROFILE']);
-        can('view', ['MAIN_LAYOUT', 'LOGIN', 'COMPANIES', 'JOBS', 'REQUESTS_ADMIN_VIEW']);
-        can('edit', ['USERS', 'JOBS', 'COMPANIES']);
+        can('view', ['MAIN_LAYOUT', 'LOGIN', 'COMPANIES', 'JOBS', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE']);
+        can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST']);
         can('view', ['ALL_MENUS']);
         can('add', ['COMPANIES', 'JOBS']);
         break;
       case 'company':
         can('read', ['USERS', 'SPECIAL_ALERTS']);
-        can('view', ['MAIN_LAYOUT', 'LOGIN', 'REQUESTS_ADMIN_VIEW']);
-        can('edit', ['USERS', 'JOBS', 'COMPANIES']);
+        can('view', ['MAIN_LAYOUT', 'LOGIN', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE']);
+        can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST']);
         can('add', ['COMPANIES', 'JOBS']);
 
         break;

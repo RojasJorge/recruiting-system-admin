@@ -6,7 +6,7 @@ const LoginPage = _ => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem('uToken')) Router.replace('/admin');
+    if (localStorage.getItem('uToken')) Router.replace('/admin/requests');
     setTimeout(() => {
       setLoading(false);
     }, 1000);

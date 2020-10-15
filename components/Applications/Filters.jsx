@@ -1,7 +1,7 @@
 import {Select} from 'antd'
 import styled from 'styled-components'
 import xhr from "../../xhr";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {isEmpty, find} from 'lodash'
 
 const {Option} = Select
@@ -28,13 +28,15 @@ const Reset = styled.h3`
 	cursor: pointer;
 `
 
-const Filters = ({filters, setFilters, setApplications, applications}) => {
+const Filters = ({filters, setFilters, setApplications, applications, getApply}) => {
 	
 	const [COMPANIES, SET_COMPANIES] = useState({
 		companies: [],
 		jobs: [],
-		company: null
 	})
+	
+	const [company, setCompany] = useState()
+	const [job, setJob] = useState()
 	
 	const getCompanies = () =>
 		xhr()
@@ -46,22 +48,22 @@ const Filters = ({filters, setFilters, setApplications, applications}) => {
 	
 	const getJobs = cid =>
 		xhr()
-			.get(`/job?page=${filters.page}&offset=${filters.offset}&company_id=${cid}`)
+			.get(`/job?company_id=${cid}`)
 			.then(resp => {
 				SET_COMPANIES({...COMPANIES, jobs: resp.data.items})
-				setFilters({...filters, jobId: e, switchJob: true})
+				setJob('')
 			})
 			.catch(err => console.log('Error get jobs.', err))
 	
+	
+	const onJobSelect = e => {
+		setJob(e)
+		getApply(company, e)
+	}
+	
 	useEffect(() => {
 		getCompanies()
-	}, [filters.page, filters.offset])
-	
-	const onSelect = e => {
-		setFilters({...filters, companyId: e, switchCompany: true})
-		SET_COMPANIES({...COMPANIES, company: find(COMPANIES.companies, o => o.id === e)})
-		getJobs(e)
-	}
+	}, [])
 	
 	return (
 		<>
@@ -71,8 +73,14 @@ const Filters = ({filters, setFilters, setApplications, applications}) => {
 					<Select
 						size="large"
 						placeholder="Empresa"
-						onSelect={onSelect}
-						value={COMPANIES.company && COMPANIES.company.id}
+						optionFilterProp="children"
+						onSelect={e => {
+							getJobs(e)
+							setCompany(e)
+							setJob()
+						}}
+						value={company}
+						showSearch
 					>
 						{
 							!isEmpty(COMPANIES.companies) && COMPANIES.companies.map(company => (
@@ -86,8 +94,11 @@ const Filters = ({filters, setFilters, setApplications, applications}) => {
 					<Select
 						size="large"
 						placeholder="Plaza"
+						optionFilterProp="children"
 						disabled={isEmpty(COMPANIES.jobs)}
-						onSelect={e => setFilters({...filters, jobId: e})}
+						value={job}
+						onSelect={onJobSelect}
+						showSearch
 					>
 						{
 							!isEmpty(COMPANIES.jobs) && COMPANIES.jobs.map(job => (
@@ -100,13 +111,9 @@ const Filters = ({filters, setFilters, setApplications, applications}) => {
 			<Container>
 				<Col>
 					<Reset onClick={_ => {
-						setFilters({
-							...filters,
-							companyId: null,
-							jobId: null,
-							switchCompany: false,
-							switchJob: false
-						})
+						setCompany(null)
+						setJob(null)
+						SET_COMPANIES({...COMPANIES, jobs: []})
 						
 						setApplications({...applications, list: [], total: 0})
 						

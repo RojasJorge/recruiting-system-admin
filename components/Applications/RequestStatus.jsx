@@ -1,4 +1,10 @@
 import Link from "next/link";
+import styled from 'styled-components'
+
+const Label = styled.span`
+	text-transform: uppercase;
+	
+`
 
 const RequestStatus = ({record}) => {
 	
@@ -11,10 +17,19 @@ const RequestStatus = ({record}) => {
 		
 		switch (status) {
 			case 'PENDING':
-				params = {...params, string: 'PENDIENTE'}
+				params = {...params, string: 'PENDIENTE', color: '#aaa'}
 				break
-			case 'APPLICATION_SENT':
-				params = {...params, string: 'APPLICACIÓN ENVIADA'}
+			case 'RECEIVED':
+				params = {...params, string: 'RECIBIDO', color: '#4269f5'}
+				break
+			case 'IN_REVIEW':
+				params = {...params, string: 'En revisión', color: '#c97f10'}
+				break
+			case 'CANCELLED':
+				params = {...params, string: 'Cancelado', color: '#ff0000'}
+				break
+			case 'SUCCESS':
+				params = {...params, string: 'Finalizado', color: '#21ba0d'}
 				break
 			default:
 				params = params
@@ -28,11 +43,11 @@ const RequestStatus = ({record}) => {
 		<>
 			<Link href={`/admin/requests/${record.apply.id}`} passHref>
 				<a>
-					<span style={{
+					<Label style={{
 						color: translateStatus(record.apply.status).color
 					}}>
 						{translateStatus(record.apply.status).string}
-					</span>
+					</Label>
 				</a>
 			</Link>
 		</>
