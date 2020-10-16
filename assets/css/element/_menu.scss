@@ -358,8 +358,18 @@
     &:active {
       color: $color-blue;
     }
+
     i {
-      color: $color-blue;
+      background-color: $color-blue;
+      border-radius: 50%;
+      color: white;
+      width: 25px;
+      height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+      line-height: 25px;
+      text-align: center;
+      font-size: 15px;
     }
   }
   &.company {
@@ -369,7 +379,16 @@
       color: $color-green;
     }
     i {
-      color: $color-green;
+      background-color: $color-green;
+      border-radius: 50%;
+      color: white;
+      width: 25px;
+      height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+      line-height: 25px;
+      text-align: center;
+      font-size: 15px;
     }
   }
   &.talento {

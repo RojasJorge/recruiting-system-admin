@@ -20,13 +20,20 @@ $hover-orange: #ff8a0d;
 $bg-blue: #f5fcfe;
 $bg-orange: #fffaf6;
 $bg-grey: rgba(205, 205, 210, 0.2);
-$bg-medium: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
+$bg-medium: linear-gradient(
+  to bottom,
+  $bg-blue 0,
+  $bg-blue 400px,
+  $color-white 400px,
+  $color-white 100%
+);
 $bg-green: #eefffc;
 
 $color-primary: #006e8f;
 $color-primary-hover: #3696b5;
 $color-primary--20: rgba(0, 110, 143, 0.2);
 $color-secondary: #019688;
+
 //boxShadow
 $shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
 $shadow-input: -10px 5px 15px rgba(0, 0, 0, 0.08);

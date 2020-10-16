@@ -1,0 +1,225 @@
+.app.theme-umana,
+.profile.theme-umana {
+  background: $bg-blue;
+  .umana-header,
+  .app--header.umana__header.is-login {
+    background: $bg-blue;
+  }
+  .app--contents.umana.is-login {
+    background: $bg-blue;
+  }
+  //titles
+  h2 {
+    color: $color-blue;
+  }
+  // themes
+  .theme-blue,
+  .theme-blue {
+    h2 {
+      color: $color-blue;
+    }
+  }
+  //buttons
+  .ant-btn {
+    &.ant-btn-primary {
+      background: $color-blue !important;
+    }
+    &.ant-btn-link {
+      background: transparent;
+      color: $color-blue;
+    }
+    &.ant-btn.ant-btn-blue.ant-btn-sm,
+    &.ant-btn-blue {
+      background: $color-blue;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+  //Select
+  .ant-select.ant-select-single.ant-select-show-arrow,
+  .ant-select.ant-select-single,
+  .ant-select.ant-select-multiple {
+    color: $color-text;
+    &:hover {
+      border-color: $color-blue !important;
+      color: $color-blue;
+    }
+    .ant-select-selector {
+      &:hover {
+        color: $color-blue;
+        border-color: $color-blue !important;
+      }
+    }
+    &.ant-select-focused,
+    &.ant-select-open {
+      .ant-select-selector {
+        border-color: $color-blue !important;
+        &:hover {
+          border-color: $color-blue !important;
+        }
+      }
+    }
+    .ant-select-selection-item {
+      color: $color-text;
+      &:hover,
+      &:focus {
+        color: $color-blue;
+      }
+    }
+    .ant-select-selection-item {
+      border-color: $color-blue !important;
+    }
+  }
+  .ant-input-affix-wrapper.ant-input-search {
+    box-shadow: none;
+    border-radius: 0;
+    border-color: rgba($color-text, 0.5);
+    color: $color-blue;
+    &:hover,
+    &:focus {
+      border-color: $color-blue;
+    }
+    .ant-input {
+      box-shadow: none !important;
+      color: $color-text;
+      &:hover,
+      &:focus,
+      &:active {
+        color: $color-blue !important;
+      }
+    }
+  }
+  // Card
+  .umana-card,
+  .umana-card.card-theme-blue {
+    border-color: rgba($color-text, 0.5);
+    .umana-card__parent-info {
+      .ant-avatar {
+        background: $color-blue;
+      }
+    }
+    .title h5,
+    .umana-card__title,
+    .date i,
+    .umana-card__link i {
+      color: $color-blue;
+    }
+    .umana-card__link {
+      border-color: $color-blue;
+    }
+    &:hover {
+      border-color: $color-blue;
+      .umana-card__link {
+        background: $color-blue;
+        i {
+          color: $color-white;
+        }
+      }
+    }
+  }
+  // Input
+  .ant-form-item-control-input-content {
+    input.ant-input,
+    textarea.ant-input {
+      background: $color-white;
+      color: $color-text !important;
+      &:hover,
+      &:focus,
+      &:active {
+        border-color: $color-blue !important;
+        color: $color-blue !important;
+      }
+    }
+  }
+  input.ant-input,
+  textarea.ant-input {
+    color: $color-text !important;
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $color-blue !important;
+      color: $color-blue !important;
+    }
+  }
+  // Input date
+  // number
+  .ant-input-number,
+  .ant-picker.ant-picker-large {
+    color: $color-text;
+    .ant-picker-input {
+      color: $color-text;
+      input {
+        color: $color-text;
+      }
+    }
+    &.ant-input-number-focused,
+    &:hover,
+    &:focus,
+    &:active,
+    &.ant-picker-focused {
+      color: $color-blue;
+      border-color: $color-blue !important;
+    }
+  }
+  //Sidebar
+  .ant-steps.ant-steps-dot .ant-steps-item.ant-steps-item-active {
+    .ant-steps-item-container {
+      .ant-steps-item-icon .ant-steps-icon .ant-steps-icon-dot {
+        background: $color-blue !important;
+        color: $color-blue !important;
+      }
+    }
+  }
+  .umana-sitebar {
+    .header-icon {
+      background: $color-blue;
+    }
+    a {
+      color: $color-blue;
+    }
+
+    &.theme-blue {
+      .header-icon {
+        background: $color-blue;
+      }
+      a {
+        color: $color-blue;
+      }
+    }
+  }
+  // MODales
+  .ant-modal-footer {
+    button.ant-btn {
+      background: $color-blue !important;
+      background-color: $color-blue !important;
+    }
+  }
+  .ant-avatar.ant-avatar-circle {
+    background: $color-blue !important;
+  }
+  // menu
+  .ant-menu.ant-menu-light.ant-menu-root {
+    .ant-menu-item {
+      color: $color-text;
+      a {
+        color: $color-text;
+      }
+      &.ant-menu-item-selected,
+      &:hover {
+        color: $color-blue;
+        i {
+          color: $color-blue;
+        }
+        a {
+          color: $color-blue;
+        }
+      }
+    }
+  }
+  .theme-orange {
+    h2 {
+      color: $color-blue;
+    }
+  }
+}

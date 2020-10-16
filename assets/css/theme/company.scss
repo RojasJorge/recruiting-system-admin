@@ -1,0 +1,225 @@
+.app.theme-company,
+.profile.theme-company {
+  background: $bg-green;
+  .umana-header,
+  .app--header.umana__header.is-login {
+    background: $bg-green;
+  }
+  .app--contents.umana.is-login {
+    background: $bg-green;
+  }
+  //titles
+  h2 {
+    color: $color-green;
+  }
+  // themes
+  .theme-orange {
+    h2 {
+      color: $color-green !important;
+    }
+  }
+  .theme-blue,
+  .theme-orange {
+    h2 {
+      color: $color-green;
+    }
+  }
+  //buttons
+  .ant-btn {
+    &.ant-btn-primary {
+      background: $color-green !important;
+    }
+    &.ant-btn-link {
+      background: transparent;
+      color: $color-green;
+    }
+    &.ant-btn.ant-btn-blue.ant-btn-sm,
+    &.ant-btn-orange {
+      background: $color-green;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+  //Select
+  .ant-select.ant-select-single.ant-select-show-arrow,
+  .ant-select.ant-select-single,
+  .ant-select.ant-select-multiple {
+    color: $color-text;
+    &:hover {
+      border-color: $color-green !important;
+      color: $color-green;
+    }
+    .ant-select-selector {
+      &:hover {
+        color: $color-green;
+        border-color: $color-green !important;
+      }
+    }
+    &.ant-select-focused,
+    &.ant-select-open {
+      .ant-select-selector {
+        border-color: $color-green !important;
+        &:hover {
+          border-color: $color-green !important;
+        }
+      }
+    }
+    .ant-select-selection-item {
+      color: $color-text;
+      &:hover,
+      &:focus {
+        color: $color-green;
+      }
+    }
+    .ant-select-selection-item {
+      border-color: $color-green !important;
+    }
+  }
+  .ant-input-affix-wrapper.ant-input-search {
+    box-shadow: none;
+    border-radius: 0;
+    border-color: rgba($color-text, 0.5);
+    color: $color-green;
+    &:hover,
+    &:focus {
+      border-color: $color-green;
+    }
+    .ant-input {
+      box-shadow: none !important;
+      color: $color-text;
+      &:hover,
+      &:focus,
+      &:active {
+        color: $color-green !important;
+      }
+    }
+  }
+  // Card
+  .umana-card,
+  .umana-card.card-theme-green {
+    border-color: rgba($color-text, 0.5);
+    .umana-card__parent-info {
+      .ant-avatar {
+        background: $color-green;
+      }
+    }
+    .title h5,
+    .umana-card__title,
+    .date i,
+    .umana-card__link i {
+      color: $color-green;
+    }
+    .umana-card__link {
+      border-color: $color-green;
+    }
+    &:hover {
+      border-color: $color-green;
+      .umana-card__link {
+        background: $color-green;
+        i {
+          color: $color-white;
+        }
+      }
+    }
+  }
+  // Input
+  .ant-form-item-control-input-content {
+    input.ant-input,
+    textarea.ant-input {
+      background: $color-white;
+      color: $color-text !important;
+      &:hover,
+      &:focus,
+      &:active {
+        border-color: $color-green !important;
+        color: $color-green !important;
+      }
+    }
+  }
+  input.ant-input,
+  textarea.ant-input {
+    color: $color-text !important;
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $color-green !important;
+      color: $color-green !important;
+    }
+  }
+  // Input date
+  // number
+  .ant-input-number,
+  .ant-picker.ant-picker-large {
+    color: $color-text;
+    .ant-picker-input {
+      color: $color-text;
+      input {
+        color: $color-text;
+      }
+    }
+    &.ant-input-number-focused,
+    &:hover,
+    &:focus,
+    &:active,
+    &.ant-picker-focused {
+      color: $color-green;
+      border-color: $color-green !important;
+    }
+  }
+  //Sidebar
+  .ant-steps.ant-steps-dot .ant-steps-item.ant-steps-item-active {
+    .ant-steps-item-container {
+      .ant-steps-item-icon .ant-steps-icon .ant-steps-icon-dot {
+        background: $color-green !important;
+        color: $color-green !important;
+      }
+    }
+  }
+  .umana-sitebar {
+    .header-icon {
+      background: $color-green;
+    }
+    a {
+      color: $color-green;
+    }
+
+    &.theme-orange {
+      .header-icon {
+        background: $color-green;
+      }
+      a {
+        color: $color-green;
+      }
+    }
+  }
+  // MODales
+  .ant-modal-footer {
+    button.ant-btn {
+      background: $color-green !important;
+      background-color: $color-green !important;
+    }
+  }
+  .ant-avatar.ant-avatar-circle {
+    background: $color-green !important;
+  }
+  // menu
+  .ant-menu.ant-menu-light.ant-menu-root {
+    .ant-menu-item {
+      color: $color-text;
+      a {
+        color: $color-text;
+      }
+      &.ant-menu-item-selected,
+      &:hover {
+        color: $color-green;
+        i {
+          color: $color-green;
+        }
+        a {
+          color: $color-green;
+        }
+      }
+    }
+  }
+}
