@@ -44,7 +44,7 @@ const Jobs = props => {
 
     e.title = `${e.title} (copia)`;
 
-    console.log(e);
+    // console.log(e);
     xhr()
       .post(`/job`, JSON.stringify(e))
       .then(resp => {
@@ -139,10 +139,17 @@ const Jobs = props => {
     collectionsActions.get({ type: 'career' });
     collectionsActions.get({ type: 'academic_level' });
   };
-
+  
   useEffect(() => {
     getJobs();
-  }, [filters]);
+  }, [
+    filters.page,
+    filters.offset,
+    filters.jobposition,
+    filters.title,
+    filters.country,
+    filters.city]
+  );
 
   useEffect(() => {
     getOptions();
@@ -383,7 +390,7 @@ const Jobs = props => {
       </div>
     );
   }
-
+ 
   return (
     <div className="umana-list list-empty">
       <EmptyElemet data={props.empty} />

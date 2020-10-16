@@ -27,7 +27,7 @@ const AvatarCropper = () => {
 	
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
 	
-	const [fileList, setFileList] = useState(personal.avatar)
+	const [fileList, setFileList] = useState(personal.avatar || [])
 	
 	const onChange = ({fileList: newFileList}) => {
 		setFileList(newFileList);
