@@ -149,7 +149,8 @@
     }
   }
   .umana-sitebar-childrens {
-    button.ant-btn {
+    button.ant-btn,
+    button.ant-btn.ant-btn-primary {
       width: 100%;
       text-align: left !important;
       background: transparent;
@@ -177,5 +178,47 @@
   align-items: center;
   i {
     margin-right: 5px;
+  }
+}
+
+.umana-sitebar-childrens {
+  .ant-steps {
+    flex-direction: column;
+    .ant-steps-item {
+      .ant-steps-item-container {
+        padding-left: 5px;
+        .ant-steps-item-icon,
+        .ant-steps-item-title,
+        .ant-steps-item-content,
+        .ant-steps-icon,
+        .i {
+          color: $color-text;
+        }
+      }
+      &.ant-steps-item-active {
+        .ant-steps-item-container {
+          padding-left: 5px;
+          .ant-steps-item-icon,
+          .ant-steps-item-title,
+          .ant-steps-item-content,
+          .ant-steps-icon,
+          .i {
+            color: $color-blue;
+          }
+        }
+      }
+      &:hover {
+        .ant-steps-item-container {
+          padding-left: 5px;
+          div.ant-steps-item-icon,
+          div.ant-steps-item-title,
+          div.ant-steps-item-content,
+          .ant-steps-icon,
+          .i {
+            color: $color-blue !important;
+          }
+        }
+      }
+    }
   }
 }

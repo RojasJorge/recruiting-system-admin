@@ -223,4 +223,51 @@
       }
     }
   }
+  //steps
+  .umana-sitebar-childrens .ant-steps {
+    .ant-steps-item {
+      &.ant-steps-item-active {
+        .ant-steps-item-container {
+          .ant-steps-item-icon,
+          .ant-steps-item-title,
+          .ant-steps-item-content,
+          .ant-steps-icon,
+          .i {
+            color: $color-green;
+          }
+        }
+      }
+      &:hover {
+        .ant-steps-item-container {
+          padding-left: 5px;
+          div.ant-steps-item-icon,
+          div.ant-steps-item-title,
+          div.ant-steps-item-content,
+          .ant-steps-icon,
+          .i {
+            color: $color-green !important;
+          }
+        }
+      }
+    }
+  }
+  .umana-sitebar-childrens {
+    button.ant-btn,
+    button.ant-btn.ant-btn-primary {
+      background: transparent !important;
+      color: $color-text !important;
+      // border-bottom: 1px solid rgba($color-text, 0.1);
+      box-shadow: none;
+      i {
+        margin-right: 10px;
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        background: $color-white !important;
+        color: $color-green !important;
+        box-shadow: $shadow-input;
+      }
+    }
+  }
 }

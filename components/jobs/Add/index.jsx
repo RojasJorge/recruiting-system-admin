@@ -68,6 +68,11 @@ const FormJob = props => {
       });
     }
     setTimeout(() => {
+      // if (props.setCurrent) {
+      //   props.setCurrent(2);
+      // } else {
+      //   router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+      // }
       router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
     }, 500);
   };
@@ -132,7 +137,12 @@ const FormJob = props => {
 
   return (
     <div>
-      <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={onFinish} scrollToFirstError={true}>
+      <Form
+        className="umana-form umana-max-witdh"
+        initialValues={props.data}
+        onFinish={onFinish}
+        scrollToFirstError={true}
+      >
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
           <GeneralJob career={data.career} position={positionAlt} />
@@ -183,7 +193,12 @@ const FormJob = props => {
               </Select>
             </Form.Item>
           ) : null}
-          <Form.Item label="Confidencialidad de la empresa" className="form-item--lg" name="company_state" help="Seleccionar si desea que la información de la empresa sea pública">
+          <Form.Item
+            label="Confidencialidad de la empresa"
+            className="form-item--lg"
+            name="company_state"
+            help="Seleccionar si desea que la información de la empresa sea pública"
+          >
             <Radio.Group>
               <Radio.Button value="public">Pública</Radio.Button>
               <Radio.Button value="confidential">Privada</Radio.Button>

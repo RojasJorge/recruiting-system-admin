@@ -78,6 +78,7 @@ const FormCompany = props => {
     }
   };
 
+  // console.log('props', props.data);
   return (
     <>
       <h2 style={{ width: '100%' }}>Información general</h2>
@@ -107,7 +108,11 @@ const FormCompany = props => {
         >
           <TextArea rows={4} />
         </Form.Item>
-        <Form.Item name="typeBusiness" label="Tipo de negocio de la empresa" className="form-item--md">
+        <Form.Item
+          name="typeBusiness"
+          label="Tipo de negocio de la empresa"
+          className="form-item--md"
+        >
           <Input size="large" />
         </Form.Item>
         <Form.Item name="socialreason" label="Razón Social" className="form-item--md">
