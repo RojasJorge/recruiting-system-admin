@@ -7,7 +7,22 @@ import { Can } from '../../Can';
 import Link from 'next/link';
 
 const General = props => {
-  // /edit?current=0
+  
+  const getAvatarFromProps = _ => {
+    
+    let result = null
+    
+    if(props && props.defaultData) {
+      const avatar = props.defaultData.profile.fields.personal.avatar
+      
+      if(!isEmpty(avatar)) {
+        result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url
+      }
+    }
+    
+    return result
+  }
+  
   return (
     <div className="umana-content" style={{ marginTop: 50 }} id="general">
       <Can I="apply" a="JOBS">
@@ -18,7 +33,7 @@ const General = props => {
         </Link>
       </Can>
       <div className="umana-content-title-over">
-        <Avatar icon={<i className="material-icons">person</i>} src={null} size={130} />
+        <Avatar icon={<i className="material-icons">person</i>} src={getAvatarFromProps()} size={130} />
 
         <h2>
           {props.data.name
