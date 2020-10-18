@@ -32,7 +32,7 @@ const Personal = ({switchCurrent, current}) => {
 	const [avatar, updateAvatar] = useState([])
 	
 	/** Avatar info */
-	const [removed, updateRemoved] = useState(null)
+	const [toDelete, updateToDelete] = useState(null)
 	
 	/** Phones */
 	const [phones, setPhones] = useState([]);
@@ -59,25 +59,32 @@ const Personal = ({switchCurrent, current}) => {
 				}),
 			)
 			.then(resp => {
-				updateProfile({type: 'personal', fields});
+				
+				/** Update current profile */
+				updateProfile({type: 'personal', fields})
+				
+				/** Checks if is necessary to delete file from storage */
+				if(toDelete) confirmRemoveAvatarFromStorage(toDelete)
+				
+				/** Switch to the next tab */
+				switchCurrent(current + 1)
+				
+				/** Updates query params on router */
+				router.push(`${router.router.pathname}?current=${current + 1}`)
 				
 				/** Send notification success */
-				notify('success', 'Ficha personal actualizada.', 'Vamos al siguiente paso...');
-				switchCurrent(current + 1);
-				router.push(`${router.router.pathname}?current=${current + 1}`);
+				notify('success', 'Ficha personal actualizada.', 'Vamos al siguiente paso...')
+				
 			})
-			.catch(err => console.log('Error:', err));
+			.catch(err => console.log('Error:', err))
 	};
 	
 	/** Removes the avatar from server if avatar is an empty array */
 	const confirmRemoveAvatarFromStorage = file => {
-		console.log('Remove this from storage:', file)
-		// storage()
-		// 	.delete(`/delete/${file.response.url.split('/')[2]}`)
-		// 	.then(resp => {
-		// 		confirmUpload()
-		// 	})
-		// 	.catch(err => console.log(err))
+		storage()
+			.delete(`/delete/${file.response.url.split('/')[2]}`)
+			.then(resp => updateToDelete(null))
+			.catch(err => console.log(err))
 	}
 	
 	/** Notifications */
@@ -90,7 +97,6 @@ const Personal = ({switchCurrent, current}) => {
 	
 	return (
 		<>
-			<pre>{JSON.stringify(avatar, false, 2)}</pre>
 			<Form name="basic" onFinish={onFinish} initialValues={personal}>
 				<div className="umana-form--section">
 					
@@ -99,7 +105,7 @@ const Personal = ({switchCurrent, current}) => {
 						personal={personal}
 						avatar={avatar}
 						updateAvatar={updateAvatar}
-						confirmRemoveAvatarFromStorage={confirmRemoveAvatarFromStorage}
+						updateToDelete={updateToDelete}
 					/>
 					
 					{/*SIMPLE DIVIDER*/}
