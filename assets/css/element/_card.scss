@@ -33,7 +33,7 @@
   // width: 100%;
   min-height: 200px;
   width: calc(50% - 10px);
-  max-width: 250px;
+  // max-width: 250px;
   margin: 5px;
   @include bp(medium) {
     padding: 40px 20px;
@@ -44,6 +44,10 @@
   @include bp(large) {
     min-height: 400px;
     width: calc(33.33% - 20px);
+  }
+  @include bp(xlarge) {
+    min-height: 400px;
+    width: calc(25% - 20px);
   }
   &:hover {
     box-shadow: $shadow;

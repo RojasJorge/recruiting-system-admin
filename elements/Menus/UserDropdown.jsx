@@ -41,7 +41,13 @@ const UserDropdown = props => {
       <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
         <div className={`ant-dropdown-link ${props.scope}`}>
           <span className="text-max">{props.user.name ? props.user.name : 'Ver Perfil'}</span>
-          <i className="large material-icons">account_circle</i>
+          {props.scope === 'company' ? <i className="large material-icons">business</i> : null}
+          {props.scope === 'talento' ? (
+            <i className="large material-icons">account_circle</i>
+          ) : null}
+          {props.scope === 'umana' || props.scope === 'root' ? (
+            <i className="large material-icons">verified_user</i>
+          ) : null}
         </div>
       </Dropdown>
     );

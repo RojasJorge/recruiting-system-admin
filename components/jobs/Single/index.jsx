@@ -154,7 +154,7 @@ const SingleJob = () => {
                 urlDinamic: router.query.id,
               }}
             >
-              <Button type="link" size="small" onClick={() => add(job)}>
+              <Button type="primary" size="small" onClick={() => add(job)}>
                 <i className="material-icons">content_copy</i> Duplicar plaza
               </Button>
             </Sitebar>

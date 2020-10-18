@@ -2,104 +2,135 @@ import { useEffect, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useRouter } from 'next/router';
 import xhr from '../../xhr';
-import { Avatar } from 'antd';
+import FormCompany from '../../components/Companies/add';
 import { Sitebar } from '../../elements';
-import ability from '../../ability';
 import { Can } from '../../components/Can';
+import SingleData from '../../components/Companies/single/data';
+import CompanyJobs from '../../components/Companies/job';
+import FormJob from '../../components/jobs/Add';
+import { Steps, Button } from 'antd';
+
+const { Step } = Steps;
 
 const Single = _ => {
   const [missing, isMissing] = useState(false);
   const router = useRouter();
   const data = useStoreState(state => state.companies);
-  const fill = useStoreActions(actions => actions.companies.fill);
+  const [company, setCompany] = useState(data.company ? data.company.items[0] : {});
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    xhr()
-      .get(`/company/${router.query.id}`)
-      .then(res => {
-        res.type = false; /** This param (if true) loads a collection, false => single object */
-        fill(res);
-      })
-      .catch(err => isMissing(true));
-  }, []);
+    if (data && !data.company) {
+      xhr()
+        .get(`/company/${router.query.id}`)
+        .then(res => {
+          // res.type = false;
+          setCompany(res.data);
+        })
+        .catch(err => isMissing(true));
+    }
+  }, [data.company]);
 
   const header = {
-    title: data && data.company && data.company.name ? data.company.name : 'Empresa',
-    icon: 'location_city',
-    action: 'edit',
-    titleAction: 'Editar perfil',
-    urlAction: '/admin/companies/edit/',
-    urlDinamic: router.query.id,
+    title: company && company.name ? company.name : 'Empresa',
+    icon: 'business',
+    action: 'replay',
+    titleAction: 'Volver',
+    urlAction: 'back',
   };
   const header1 = {
-    title: data && data.company && data.company.name ? data.company.name : 'Empresa',
+    title: company && company.name ? company.name : 'Empresa',
     icon: 'location_city',
     action: 'back',
   };
 
-  const menuList = [
-    {
-      icon: 'add_circle_outline',
-      title: 'Agregar plaza',
-      url: '/admin/jobs/add/',
-      id: router.query.id,
-    },
-    {
-      icon: 'remove_red_eye',
-      title: 'Ver plazas',
-      url: '/admin/jobs',
-    },
-  ];
+  const initialState = {
+    locationState: 'public',
+    interviewPlace: 'office',
+    gender: 'indifferent',
+    vehicle: 'indifferent',
+    type_license: 'indifferent',
+    age: [18, 60],
+    isBranch: false,
+    company_state: 'public',
+    religion: ['indifferent'],
+  };
 
+  const switchContent = _ => {
+    switch (current) {
+      case 3:
+        return (
+          <>
+            <div className="umana-title">
+              <h2>{`Agregar plaza de ${company ? company.name : 'esta empresa'}`}</h2>
+            </div>
+            <FormJob data={initialState} company={false} setCurrent={setCurrent} />
+          </>
+        );
+        break;
+      case 2:
+        return <CompanyJobs title={company ? company.name : 'la empresa'} id={router.query.id} />;
+        break;
+      case 1:
+        return (
+          <>
+            <div className="umana-title">
+              <h2>{`Editar ${company ? company.name : 'la empresa'}`}</h2>
+            </div>
+            <div className="umana-form--section">
+              <FormCompany data={company} action="edit" id={router.query.id} />
+            </div>
+          </>
+        );
+        break;
+      case 0:
+        return <SingleData company={company} />;
+        break;
+      default:
+        return null;
+        break;
+    }
+  };
+
+  const onChange = o => {
+    setCurrent(o);
+  };
   return (
     <div className="umana-layout-cl">
-      <div className="umana-layout-cl__small ">
+      <div className="umana-layout-cl__small">
         <Can I="edit" a="COMPANIES">
-          <Sitebar header={header} data={menuList} />
+          <Sitebar header={header}>
+            <Steps current={current} onChange={onChange} direction="vertical">
+              <Step
+                key={0}
+                title="Perfil de empresa"
+                icon={<i className="material-icons">business</i>}
+              />
+              <Step key={1} title="Editar empresa" icon={<i className="material-icons">edit</i>} />
+              <Step
+                key={2}
+                title="Ver plazas"
+                icon={<i className="material-icons">remove_red_eye</i>}
+              />
+              <Step
+                key={3}
+                title="Agregar plazas"
+                icon={<i className="material-icons">add_circle_outline</i>}
+              />
+            </Steps>
+            ,
+          </Sitebar>
         </Can>
         <Can I="apply" a="JOBS">
-          <Sitebar header={header1} data={menuList} />
+          <Sitebar header={header1} />
         </Can>
       </div>
-      <div className="umana-layout-cl__flex bg-white">
-        {data && data.company ? (
-          <div className="umana-section-contenct">
-            <div className="section-avatar">
-              <Avatar
-                icon={<i className="material-icons">location_city</i>}
-                src={data.company.avatar}
-                size={120}
-              />
-            </div>
-            <div className="section-title">
-              <h1>
-                {data.company && data.company.name ? data.company.name : 'nombre de la empresa'}
-              </h1>
-            </div>
-            <h5>Acerca de la empresa</h5>
-            <p>
-              {data.company && data.company.description
-                ? data.company.description
-                : 'Descripción de la empresa'}
-            </p>
-            {data.company.location ? (
-              <>
-                <h5>Ubicación</h5>
-                <p>
-                  {`${data.company.location.address}, zona ${data.company.location.zone},`}
-                  <br></br> {`${data.company.location.city}, ${data.company.location.country}`}
-                </p>
-              </>
-            ) : null}
-            <h5>Sitio web</h5>
-            <p>{data.company.website}</p>
-            <h5>Fundación</h5>
-            <p>{data.company.experience}</p>
-            <h5>Números de empleados</h5>
-            <p>{data.company.employees}</p>
-            {/* <pre>{JSON.stringify(data.company, false, 2)}</pre> */}
-          </div>
-        ) : null}
+      <div
+        className={`umana-layout-cl__flex ${
+          current !== 2 && current !== 3 && current !== 1 ? 'bg-white' : 'width-section'
+        }`}
+      >
+        {switchContent()}
       </div>
     </div>
   );

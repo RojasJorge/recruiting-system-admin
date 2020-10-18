@@ -7,12 +7,13 @@ import Login from '../components/user/Login';
 import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
 import { SyncOutlined } from '@ant-design/icons';
-import {Can} from '../components/Can'
+import { Can } from '../components/Can';
 
 const Layout = ({ children, title, className }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
   const [fullScreen, switchFullScreen] = useState(false);
+  const [scopeState, setScope] = useState('guest');
 
   const mloading = useStoreState(state => state.users.loading);
 
@@ -26,7 +27,10 @@ const Layout = ({ children, title, className }) => {
     /** Parse user & token from localStorage */
     let user = JSON.parse(localStorage.getItem('uUser'));
     const token = localStorage.getItem('uToken');
-
+    const _scope = JSON.parse(localStorage.getItem('uScopes'));
+    if (_scope) {
+      setScope(_scope[0]);
+    }
     if (!token) Router.replace('/');
     // console.log('Layout.jsx|user,token', user, token)
 
@@ -41,14 +45,14 @@ const Layout = ({ children, title, className }) => {
   }, []);
 
   return auth.token && auth.user ? (
-    <div className={className}>
+    <div className={`${className} theme-${scopeState}`}>
       <Head>
         <title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
       </Head>
       <MainHeader layout="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
         {/*<Can I="view" a="MAIN_LAYOUT">*/}
-          <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>{children}</div>
+        <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>{children}</div>
         {/*</Can>*/}
       </div>
       <PageLoader active={mloading} />

@@ -4,12 +4,25 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useRouter } from 'next/router';
 import FormCompany from '../../../../components/Companies/add';
 import { PageTitle, Sitebar } from '../../../../elements';
-// import xhr from '../../../../xhr';
+import xhr from '../../../../xhr';
+import isEmpty from 'lodash';
 
 const AddCompany = _ => {
   const [missing, isMissing] = useState(false);
   const router = useRouter();
   const data = useStoreState(state => state.companies);
+
+  const [company, setCompany] = useState({});
+
+  useEffect(() => {
+    xhr()
+      .get(`/company/${router.query.id}`)
+      .then(res => {
+        // res.type = false;
+        setCompany(res.data);
+      })
+      .catch(err => isMissing(true));
+  }, []);
 
   const header = {
     title: data && data.company && data.company.name ? data.company.name : 'Empresa',
@@ -43,7 +56,13 @@ const AddCompany = _ => {
           </div>
           <div className="umana-layout-cl__flex bg-white">
             <FormCompany
-              data={data && data.company ? data.company : {}}
+              data={
+                data && data.company && data.company.items
+                  ? data.company.items[0]
+                  : !isEmpty(company)
+                  ? company
+                  : {}
+              }
               action="edit"
               id={router.query.id}
             />

@@ -80,13 +80,13 @@ textarea.ant-input {
   }
 }
 
-//Select
 .ant-select.ant-select-single,
 .ant-select.ant-select-multiple {
   width: 100%;
   box-shadow: none;
   background: $color-white !important;
   color: $color-primary;
+
   &.ant-select-focused,
   &.ant-select-open {
     .ant-select-selector {
@@ -125,6 +125,23 @@ textarea.ant-input {
       border-color: $color-blue !important;
       background: $color-white;
       box-shadow: -10px 5px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+  }
+}
+
+//Select
+div.ant-select-disabled {
+  background-color: #c6c6c6 !important;
+  opacity: 0.5;
+  box-shadow: none !important;
+  .ant-select-selector {
+    background: transparent !important;
+    border-color: $color-text !important;
+    .ant-select-selection-search {
+      background: transparent !important;
+    }
+    &:hover {
+      border-color: $color-text !important;
     }
   }
 }

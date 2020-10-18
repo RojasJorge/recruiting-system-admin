@@ -1,4 +1,4 @@
-import {thunk, action} from 'easy-peasy'
+import {thunk} from 'easy-peasy'
 import countries from '../assets/misc/locations.json'
 
 export default {
@@ -35,11 +35,18 @@ export default {
 		
 		return payload
 	}),
-	calculate_age(birthday) { // birthday is a date
-		var ageDifMs = Date.now() - birthday.getTime();
-		var ageDate = new Date(ageDifMs); // miliseconds from epoch
+	
+	calculateAge: thunk((actions, payload) => {
+		// console.log('payload:', payload.toString())
+		// birthday is a date
+		const birthday = new Date(payload.toString())
+		const ageDifMs = Date.now() - birthday.getTime();
+		const ageDate = new Date(ageDifMs); // miliseconds from epoch
+		
+		// console.log('Age:', Math.abs(ageDate.getUTCFullYear() - 1970))
+		
 		return Math.abs(ageDate.getUTCFullYear() - 1970);
-	},
+	}),
 	
 	/**
 	 * To binary

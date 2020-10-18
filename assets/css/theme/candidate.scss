@@ -1,0 +1,270 @@
+.app.theme-candidate,
+.profile.theme-candidate {
+  background: $bg-orange;
+  .umana-header,
+  .app--header.umana__header.is-login {
+    background: $bg-orange;
+  }
+  .app--contents.umana.is-login {
+    background: $bg-orange;
+  }
+  //titles
+  h2 {
+    color: $color-orange;
+  }
+  // themes
+  .theme-blue,
+  .theme-orange {
+    h2 {
+      color: $color-orange !important;
+    }
+  }
+  //buttons
+  .ant-btn {
+    &.ant-btn-primary {
+      background: $color-orange !important;
+    }
+    &.ant-btn-link {
+      background: transparent;
+      color: $color-orange;
+    }
+    &.ant-btn.ant-btn-blue.ant-btn-sm,
+    &.ant-btn.ant-btn-orange.ant-btn-sm,
+    &.ant-btn-orange {
+      background: $color-orange;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+  //Select
+  .ant-select.ant-select-single.ant-select-show-arrow,
+  .ant-select.ant-select-single,
+  .ant-select.ant-select-multiple {
+    color: $color-text;
+    &:hover {
+      border-color: $color-orange !important;
+      color: $color-orange;
+    }
+    .ant-select-selector {
+      &:hover {
+        color: $color-orange;
+        border-color: $color-orange !important;
+      }
+    }
+    &.ant-select-focused,
+    &.ant-select-open {
+      .ant-select-selector {
+        border-color: $color-orange !important;
+        &:hover {
+          border-color: $color-orange !important;
+        }
+      }
+    }
+    .ant-select-selection-item {
+      color: $color-text;
+      &:hover,
+      &:focus {
+        color: $color-orange;
+      }
+    }
+    .ant-select-selection-item {
+      border-color: $color-orange !important;
+    }
+  }
+  .ant-input-affix-wrapper.ant-input-search {
+    box-shadow: none;
+    border-radius: 0;
+    border-color: rgba($color-text, 0.5);
+    color: $color-orange;
+    &:hover,
+    &:focus {
+      border-color: $color-orange;
+    }
+    .ant-input {
+      box-shadow: none !important;
+      color: $color-text;
+      &:hover,
+      &:focus,
+      &:active {
+        color: $color-orange !important;
+      }
+    }
+  }
+  // Card
+  .umana-card,
+  .umana-card.card-theme-orange {
+    border-color: rgba($color-text, 0.5);
+    .umana-card__parent-info {
+      .ant-avatar {
+        background: $color-orange;
+      }
+    }
+    .title h5,
+    .umana-card__title,
+    .date i,
+    .umana-card__link i {
+      color: $color-orange;
+    }
+    .umana-card__link {
+      border-color: $color-orange;
+    }
+    &:hover {
+      border-color: $color-orange;
+      .umana-card__link {
+        background: $color-orange;
+        i {
+          color: $color-white;
+        }
+      }
+    }
+  }
+  // Input
+  .ant-form-item-control-input-content {
+    input.ant-input,
+    textarea.ant-input {
+      background: $color-white;
+      color: $color-text !important;
+      &:hover,
+      &:focus,
+      &:active {
+        border-color: $color-orange !important;
+        color: $color-orange !important;
+      }
+    }
+  }
+  input.ant-input,
+  textarea.ant-input {
+    color: $color-text !important;
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $color-orange !important;
+      color: $color-orange !important;
+    }
+  }
+  // Input date
+  // number
+  .ant-input-number,
+  .ant-picker.ant-picker-large {
+    color: $color-text;
+    .ant-picker-input {
+      color: $color-text;
+      input {
+        color: $color-text;
+      }
+    }
+    &.ant-input-number-focused,
+    &:hover,
+    &:focus,
+    &:active,
+    &.ant-picker-focused {
+      color: $color-orange;
+      border-color: $color-orange !important;
+    }
+  }
+  //Sidebar
+  .ant-steps.ant-steps-dot .ant-steps-item.ant-steps-item-active {
+    .ant-steps-item-container {
+      .ant-steps-item-icon .ant-steps-icon .ant-steps-icon-dot {
+        background: $color-orange !important;
+        color: $color-orange !important;
+      }
+    }
+  }
+  .umana-sitebar {
+    .header-icon {
+      background: $color-orange;
+    }
+    a {
+      color: $color-orange;
+    }
+
+    &.theme-orange {
+      .header-icon {
+        background: $color-orange;
+      }
+      a {
+        color: $color-orange;
+      }
+    }
+  }
+  // MODales
+  .ant-modal-footer {
+    button.ant-btn {
+      background: $color-orange !important;
+      background-color: $color-orange !important;
+    }
+  }
+  .ant-avatar.ant-avatar-circle {
+    background: $color-orange !important;
+  }
+  // menu
+  .ant-menu.ant-menu-light.ant-menu-root {
+    .ant-menu-item {
+      color: $color-text;
+      a {
+        color: $color-text;
+      }
+      &.ant-menu-item-selected,
+      &:hover {
+        color: $color-orange;
+        i {
+          color: $color-orange;
+        }
+        a {
+          color: $color-orange;
+        }
+      }
+    }
+  }
+  //steps
+  .umana-sitebar-childrens .ant-steps {
+    .ant-steps-item {
+      &.ant-steps-item-active {
+        .ant-steps-item-container {
+          padding-left: 5px;
+          .ant-steps-item-icon,
+          .ant-steps-item-title,
+          .ant-steps-item-content,
+          .ant-steps-icon,
+          .i {
+            color: $color-orange;
+          }
+        }
+      }
+      &:hover {
+        .ant-steps-item-container {
+          padding-left: 5px;
+          div.ant-steps-item-icon,
+          div.ant-steps-item-title,
+          div.ant-steps-item-content,
+          .ant-steps-icon,
+          .i {
+            color: $color-orange !important;
+          }
+        }
+      }
+    }
+  }
+  //sitebar
+  .umana-sitebar-childrens {
+    button.ant-btn,
+    button.ant-btn.ant-btn-primary {
+      background: transparent !important;
+      color: $color-text !important;
+      // border-bottom: 1px solid rgba($color-text, 0.1);
+      box-shadow: none;
+      i {
+        margin-right: 10px;
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        background: $color-white !important;
+        color: $color-orange !important;
+        box-shadow: $shadow-input;
+      }
+    }
+  }
+}

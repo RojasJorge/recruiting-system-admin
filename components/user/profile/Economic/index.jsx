@@ -14,9 +14,6 @@ const { Item, List } = Form;
 const { Option } = Select;
 
 const Economic = ({ current, switchCurrent }) => {
-  const [checks, updateChecks] = useState({
-    otherIncomes: false,
-  });
 
   /** Global state */
   let {
@@ -25,6 +22,10 @@ const Economic = ({ current, switchCurrent }) => {
       fields: { economic },
     },
   } = useStoreState(state => state.auth.user);
+  
+  const [checks, updateChecks] = useState({
+    otherIncome: economic.otherIncome,
+  });
 
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
@@ -76,7 +77,7 @@ const Economic = ({ current, switchCurrent }) => {
           >
             <Checkbox onChange={e => updateChecks({ ...checks, otherIncomes: e.target.checked })} />
           </Item>
-          {checks.otherIncomes ? (
+          {checks.otherIncome ? (
             <>
               <Item name="otherIncomeValue" label="Escriba monto" className="form-item--sm">
                 <InputNumber size="large" />
