@@ -10,28 +10,27 @@ import xhr from '../../../xhr';
 import Link from 'next/link';
 
 import { Can } from '../../../components/Can';
-import router from 'next/router';
 
-const SingleJob = () => {
+const SingleJob = ({query}) => {
+  
   const router = useRouter();
-  // const data = useStoreState(state => state.jobs);
+  
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
   const [Jobs, setJobs] = useState([]);
 
   const getJob = () =>
     xhr()
-      .get(`/job/${router.query.id}`)
+      .get(`/job/${query.id}`)
       .then(res => {
         res.type = false;
-        console.log('res job', res);
         setJob(res.data);
       })
       .catch(err => isMissing(true));
 
   const getFromLocal = _ => {
     const Jobs = JSON.parse(localStorage.getItem('Jobs'));
-    const job = find(Jobs.list, o => router.query.id === o.id);
+    const job = find(Jobs.list, o => query.id === o.id);
 
     if (Jobs) {
       if (!job) {
@@ -62,7 +61,7 @@ const SingleJob = () => {
   };
 
   const add = async e => {
-    console.log(e);
+    // console.log(e);
     delete e.id;
     delete e.company;
     delete e.created_at;
@@ -151,7 +150,7 @@ const SingleJob = () => {
                 action: 'edit',
                 titleAction: 'Editar Plaza',
                 urlAction: '/admin/jobs/edit/',
-                urlDinamic: router.query.id,
+                urlDinamic: query.id,
               }}
             >
               <Button type="primary" size="small" onClick={() => add(job)}>
@@ -487,7 +486,7 @@ const SingleJob = () => {
               action: 'edit',
               titleAction: 'Editar Plaza',
               urlAction: '/admin/jobs/edit/',
-              urlDinamic: router.query.id,
+              urlDinamic: query.id,
             }}
           />
         </Can>
@@ -504,7 +503,7 @@ const SingleJob = () => {
         </Can>
       </div>
       <div className="umana-layout-cl__flex bg-white">
-        <Skeleton />
+        <Skeleton active />
       </div>
     </div>
   );

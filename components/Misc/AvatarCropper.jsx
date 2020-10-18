@@ -14,14 +14,14 @@ const SaveBtn = styled.span`
 	padding: 5px 10px;
 `
 
-const AvatarCropper = () => {
+const AvatarCropper = ({personal, updateAvatar, confirmRemoveAvatarFromStorage}) => {
 	
 	const {
 		profile: {
 			id,
-			fields: {
-				personal
-			}
+			// fields: {
+			// 	personal
+			// }
 		}
 	} = useStoreState(state => state.auth.user)
 	
@@ -30,8 +30,9 @@ const AvatarCropper = () => {
 	const [fileList, setFileList] = useState(personal.avatar || [])
 	
 	const onChange = ({fileList: newFileList}) => {
-		setFileList(newFileList);
-	};
+		setFileList(newFileList)
+		updateAvatar(newFileList)
+	}
 	
 	const onPreview = async file => {
 		let src = file.url;
@@ -48,38 +49,36 @@ const AvatarCropper = () => {
 		imgWindow.document.write(image.outerHTML);
 	};
 	
-	const confirmUpload = _ => {
-		
-		const fields = fileList.map(o => {
-			o.thumbUrl = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + o.response.url
-			return o
-		})
-		
-		xhr()
-			.put(`/profile/${id}`, JSON.stringify({
-				fields: {
-					personal: {
-						avatar: fields
-					}
-				}
-			}))
-			.then(resp =>
-				updateProfile({
-					type: 'personal', fields: Object.assign(personal, {
-						avatar: fields
-					})
-				}))
-			.catch(err => console.log(err))
-	}
+	// const confirmUpload = _ => {
+	//
+	// 	const fields = fileList.map(o => {
+	// 		o.thumbUrl = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + o.response.url
+	// 		return o
+	// 	})
+	//
+	// 	xhr()
+	// 		.put(`/profile/${id}`, JSON.stringify({
+	// 			fields: {
+	// 				personal: {
+	// 					avatar: fields
+	// 				}
+	// 			}
+	// 		}))
+	// 		.then(resp =>
+	// 			updateProfile({
+	// 				type: 'personal', fields: Object.assign(personal, {
+	// 					avatar: fields
+	// 				})
+	// 			}))
+	// 		.catch(err => console.log(err))
+	// }
 	
-	const onRemove = file => {
-		storage()
-			.delete(`/delete/${file.response.url.split('/')[2]}`)
-			.then(resp => {
-				confirmUpload
-			})
-			.catch(err => console.log(err))
-	}
+	const onRemove = file =>
+		confirmRemoveAvatarFromStorage(file)
+	
+	useEffect(() => {
+		updateAvatar(fileList)
+	})
 	
 	return (
 		<>
@@ -87,7 +86,7 @@ const AvatarCropper = () => {
 			{/*<pre>{JSON.stringify(fileList, false, 2)}</pre>*/}
 			<ImgCrop>
 				<Upload
-					action={process.env.NEXT_PUBLIC_APP_FILE_STORAGE + '/upload'}
+					// action={process.env.NEXT_PUBLIC_APP_FILE_STORAGE + '/upload'}
 					listType="picture-card"
 					fileList={fileList}
 					onChange={onChange}
@@ -99,11 +98,11 @@ const AvatarCropper = () => {
 				</Upload>
 			</ImgCrop>
 			
-			{fileList.length > 0 && <SaveBtn
-				onClick={_ => confirmUpload()}
-			>
-				<SaveTwoTone/> Guardar
-			</SaveBtn>}
+			{/*{fileList.length > 0 && <SaveBtn*/}
+			{/*	onClick={_ => confirmUpload()}*/}
+			{/*>*/}
+			{/*	<SaveTwoTone/> Guardar*/}
+			{/*</SaveBtn>}*/}
 		</>
 	)
 }

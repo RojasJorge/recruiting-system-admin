@@ -2,15 +2,19 @@ import Layout from '../../../../views/Layout';
 import { PageTitle } from '../../../../elements';
 import SingleJob from '../../../../components/jobs/Single';
 
-const Index = _ => {
+const Index = ({query}) => {
   return (
     <Layout title="Plaza">
       <>
         <PageTitle title="Ver Plaza" />
-        <SingleJob />
+        <SingleJob query={query} />
       </>
     </Layout>
   );
 };
 
-export default Index;
+Index.getInitialProps = async (ctx) => {
+  return {query: ctx.query}
+}
+
+export default Index

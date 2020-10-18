@@ -1,6 +1,5 @@
 import {DatePicker, Form, InputNumber, Select} from 'antd';
 import religion from '../../../../data/religion.json';
-
 import moment from 'moment';
 import {useStoreActions} from "easy-peasy";
 
@@ -36,17 +35,19 @@ const gender = [
 	},
 ];
 
-const dateFormat = 'DD/MM/YYYY';
-
-const disabledDate = current => {
-	// return current && current < moment().endOf('day')
-	return current && current > moment().subtract(18, 'years')
-}
-
-const General = ({birthday, setBirthday, calculateAge}) => {
+const General = ({birthday, setBirthday}) => {
 	
 	/** Date handler */
 	const dateHandler = d => setBirthday(d)
+	
+	const disabledDate = current => {
+		return current && current > moment().subtract(18, 'years')
+	}
+	
+	/** Calculate age */
+	// const calculateAge = useStoreActions(actions => actions.tools.calculateAge)
+	
+	const dateFormat = 'DD/MM/YYYY';
 	
 	return (
 		<div className="umana-form--section">
@@ -83,7 +84,7 @@ const General = ({birthday, setBirthday, calculateAge}) => {
 			
 			<Item
 				label="Edad"
-				// name="age"
+				name="age"
 				rules={[{required: true, message: 'El campo Edad es requerido.'}]}
 				className="form-item--sm"
 			>
@@ -91,8 +92,8 @@ const General = ({birthday, setBirthday, calculateAge}) => {
 					style={{width: '100%'}}
 					min={0}
 					size="large"
-					value={calculateAge(birthday) || 0}
-					disabled
+					// value={calculateAge(birthday)}
+					// disabled
 				/>
 			</Item>
 			

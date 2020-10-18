@@ -150,7 +150,7 @@ const Others = ({ switchCurrent, current }) => {
                       }}
                       block
                     >
-                      <i className="material-icons">add</i> Agregar nivel académico
+                      <i className="material-icons">add</i> Agregar idioma
                     </Button>
                   </Item>
                 </>

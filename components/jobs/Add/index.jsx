@@ -37,16 +37,16 @@ const FormJob = props => {
   let positionAlt = true;
 
   /** Fill jobs from localStorage */
-  useEffect(() => {
-    if (isEmpty(JobsList)) {
-      fillJobs({
-        data: {
-          items: JSON.parse(localStorage.getItem('Jobs')),
-          total: JSON.parse(localStorage.getItem('Jobs')).length,
-        },
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isEmpty(JobsList)) {
+  //     fillJobs({
+  //       data: {
+  //         items: JSON.parse(localStorage.getItem('Jobs')),
+  //         total: JSON.parse(localStorage.getItem('Jobs')).length,
+  //       },
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });

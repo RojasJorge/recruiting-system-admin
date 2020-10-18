@@ -4,6 +4,9 @@ import Login from '../components/user/Login';
 import { useEffect, useState } from 'react';
 
 const Index = _ => {
+  
+  
+  
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

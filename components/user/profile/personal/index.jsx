@@ -6,30 +6,33 @@ import router from 'next/router';
 import Locations from '../../../Location';
 import General from './General';
 import Contact from './Contact';
-// import { UploadAvatar } from '../../../../elements';
 import xhr from '../../../../xhr';
 import AvatarCropper from "../../../Misc/AvatarCropper";
+import storage from "../../../../storage";
 
 /** Import form sections */
 const FormItem = Form.Item;
 
-const Personal = ({switchCurrent, current, careers}) => {
+const Personal = ({switchCurrent, current}) => {
 	/** Global state */
 	const {
 		profile: {
 			id,
 			fields: {personal},
 		},
-	} = useStoreState(state => state.auth.user);
-	
-	/** Calculate age */
-	const calculateAge = useStoreActions(actions => actions.tools.calculateAge)
+	} = useStoreState(state => state.auth.user)
 	
 	/** Birthday handler */
 	const [birthday, setBirthday] = useState(personal.birthday);
 	
 	/** Danger status */
 	const [danger, isDanger] = useState(false);
+	
+	/** Avatar info */
+	const [avatar, updateAvatar] = useState([])
+	
+	/** Avatar info */
+	const [removed, updateRemoved] = useState(null)
 	
 	/** Phones */
 	const [phones, setPhones] = useState([]);
@@ -38,7 +41,13 @@ const Personal = ({switchCurrent, current, careers}) => {
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 	
 	const onFinish = fields => {
-		fields = {...fields, birthday, age: calculateAge(birthday)};
+		
+		avatar.map(o => {
+			o.thumbUrl = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + o.response.url
+			return o
+		})
+		
+		fields = {...fields, birthday, avatar}
 		
 		xhr()
 			.put(
@@ -60,6 +69,17 @@ const Personal = ({switchCurrent, current, careers}) => {
 			.catch(err => console.log('Error:', err));
 	};
 	
+	/** Removes the avatar from server if avatar is an empty array */
+	const confirmRemoveAvatarFromStorage = file => {
+		console.log('Remove this from storage:', file)
+		// storage()
+		// 	.delete(`/delete/${file.response.url.split('/')[2]}`)
+		// 	.then(resp => {
+		// 		confirmUpload()
+		// 	})
+		// 	.catch(err => console.log(err))
+	}
+	
 	/** Notifications */
 	const notify = (type, message, description) => {
 		notification[type]({
@@ -70,22 +90,40 @@ const Personal = ({switchCurrent, current, careers}) => {
 	
 	return (
 		<>
-			{/*<pre>{JSON.stringify(personal, false, 2)}</pre>*/}
+			<pre>{JSON.stringify(avatar, false, 2)}</pre>
 			<Form name="basic" onFinish={onFinish} initialValues={personal}>
 				<div className="umana-form--section">
-					{/*<UploadAvatar type="user" src="" />*/}
-					<AvatarCropper/>
+					
+					{/*AVATAR UPLOADER*/}
+					<AvatarCropper
+						personal={personal}
+						avatar={avatar}
+						updateAvatar={updateAvatar}
+						confirmRemoveAvatarFromStorage={confirmRemoveAvatarFromStorage}
+					/>
+					
+					{/*SIMPLE DIVIDER*/}
 					<h2 style={{width: '100%', marginTop: 20}}>Información personal</h2>
-					<Names careers={careers}/>
+					
+					{/*NAMES FRAGMENT*/}
+					<Names/>
+					
+					{/*CUSTOM LOCATIONS FIELD*/}
 					<Form.Item name="location" label="Ubicación actual">
 						<Locations/>
 					</Form.Item>
 				</div>
-				{/*<Salary/>*/}
-				<General birthday={birthday} setBirthday={setBirthday} calculateAge={calculateAge}/>
-				<Contact phones={phones} setPhones={setPhones}/>
 				
+				{/*GENERAL INFO LIKE NATIONALITY, AGE, MARITAL STATUS, ETC...*/}
+				<General
+					birthday={birthday}
+					setBirthday={setBirthday}
+				/>
+				
+				{/*SIMPLE CONTACT INFO*/}
+				<Contact phones={phones} setPhones={setPhones}/>
 				<FormItem>
+					
 					<Button
 						type="orange"
 						htmlType="submit"

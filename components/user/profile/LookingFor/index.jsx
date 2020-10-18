@@ -22,13 +22,10 @@ const LookingFor = ({ switchCurrent, current }) => {
   if (lookingFor.travel === '') {
     lookingFor.travel = false;
   }
-
-  console.log(lookingFor);
+  
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
-    // console.log('lookingFor:', fields)
-    // return true;
     let merged = Object.assign(lookingFor, fields);
 
     xhr()
