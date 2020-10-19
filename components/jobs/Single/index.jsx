@@ -11,28 +11,39 @@ import Link from 'next/link';
 
 import { Can } from '../../../components/Can';
 
-const SingleJob = ({query}) => {
-  
-  // console.log('pages/jobs/single/[id].jsx:', query)
+const SingleJob = () => {
   
   const router = useRouter();
+  
+  const {
+    query: {
+      id
+    }
+  } = router
   
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
   const [Jobs, setJobs] = useState([]);
+  
+  // const [_query, updateQuery] = useState()
 
-  const getJob = () =>
+  const getJob = () => {
+    console.log('QUERY......', id)
     xhr()
-      .get(`/job/${query && query.id}`)
+      .get(`/job/${id}`)
       .then(res => {
         res.type = false;
         setJob(res.data);
       })
       .catch(err => isMissing(true));
+  }
 
   const getFromLocal = _ => {
+  
+    // console.log('Get from local:', query)
+    
     const Jobs = JSON.parse(localStorage.getItem('Jobs'));
-    const job = find(Jobs.list, o => query && query.id === o.id);
+    const job = find(Jobs.list, o => id === o.id);
 
     if (Jobs) {
       if (!job) {
@@ -152,7 +163,7 @@ const SingleJob = ({query}) => {
                 action: 'edit',
                 titleAction: 'Editar Plaza',
                 urlAction: '/admin/jobs/edit/',
-                urlDinamic: query.id,
+                urlDinamic: id,
               }}
             >
               <Button type="primary" size="small" onClick={() => add(job)}>
@@ -488,7 +499,7 @@ const SingleJob = ({query}) => {
               action: 'edit',
               titleAction: 'Editar Plaza',
               urlAction: '/admin/jobs/edit/',
-              urlDinamic: query && query.id,
+              urlDinamic: id,
             }}
           />
         </Can>
