@@ -12,21 +12,19 @@ import { Steps, Button } from 'antd';
 
 const { Step } = Steps;
 
-const Single = ({query}) => {
+const Single = ({ query }) => {
   const [missing, isMissing] = useState(false);
   const router = useRouter();
   const [company, setCompany] = useState({});
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    
-      xhr()
-        .get(`/company/${query.id}`)
-        .then(res => {
-          setCompany(res.data);
-        })
-        .catch(err => isMissing(true));
-      
+    xhr()
+      .get(`/company/${query.id}`)
+      .then(res => {
+        setCompany(res.data);
+      })
+      .catch(err => isMissing(true));
   }, []);
 
   const header = {
