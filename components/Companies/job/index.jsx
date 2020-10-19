@@ -39,6 +39,7 @@ const CompanyJobs = props => {
       title: 'Ubicación',
       dataIndex: 'location',
       key: 'location',
+      responsive: ['md'],
       render: (text, record) => (
         <>
           <p>{`Zona ${record.location.zone}, ${record.location.city}`}</p>
@@ -49,6 +50,7 @@ const CompanyJobs = props => {
       title: 'Fecha de expiración',
       dataIndex: 'expiration_date',
       key: 'expiration_date',
+      responsive: ['md'],
       render: (text, record) => (
         <>
           <Moment locale="es" format="D MMMM YYYY">

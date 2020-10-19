@@ -11,10 +11,9 @@ import Link from 'next/link';
 
 import { Can } from '../../../components/Can';
 
-const SingleJob = ({query}) => {
-  
+const SingleJob = ({ query }) => {
   const router = useRouter();
-  
+
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
   const [Jobs, setJobs] = useState([]);
@@ -320,6 +319,7 @@ const SingleJob = ({query}) => {
                 {job.languages.map((e, idx) => (
                   <div
                     key={idx}
+                    className="umana-languages-inputs"
                     style={{
                       padding: '0 20px 10px',
                       display: 'flex',

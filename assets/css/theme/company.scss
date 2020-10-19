@@ -270,4 +270,92 @@
       }
     }
   }
+  //table
+  .ant-table {
+    .ant-table-container {
+      .ant-table-thead {
+        th.ant-table-cell {
+          color: $color-green;
+        }
+      }
+    }
+  }
+  // Switch
+  .ant-switch {
+    &.switch-large {
+      background: $bg-green;
+      &.ant-switch-checked {
+        border: 1px solid $color-green !important;
+        background: $color-green;
+      }
+
+      &.theme-orange {
+        &.ant-switch-checked {
+          border: 1px solid $color-green !important;
+          background: rgba($color-green, 0.3);
+          .ant-switch-inner {
+            color: $color-green;
+          }
+        }
+      }
+    }
+  }
+  // radio button
+  .ant-radio-group {
+    .ant-radio-button-wrapper {
+      &:hover {
+        color: $color-green;
+      }
+      &.ant-radio-button-wrapper-checked {
+        border-color: $color-green;
+        border-right-color: $color-green;
+        color: $color-green;
+        &:hover {
+          border-color: $color-green;
+          color: $color-green;
+        }
+        &.ant-radio-button-wrapper-disabled {
+          border: 1px solid $color-green !important;
+        }
+      }
+    }
+  }
+
+  .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+    border-right-color: $color-green;
+  }
+  //slider
+  .ant-slider.ant-slider-with-marks {
+    .ant-slider-step {
+      .ant-slider-dot-active {
+        border-color: $color-green;
+        background: $color-green;
+      }
+    }
+    .ant-slider-handle {
+      border-color: $color-green !important;
+      &:hover {
+        border-color: $color-green;
+      }
+    }
+    .ant-slider-track {
+      background-color: $color-green;
+    }
+  }
+  // Checkbox
+  .ant-checkbox-group {
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        &:hover {
+          border-color: $color-green !important;
+        }
+      }
+      &.ant-checkbox-checked {
+        .ant-checkbox-inner {
+          background: $color-green;
+          border-color: $color-green;
+        }
+      }
+    }
+  }
 }

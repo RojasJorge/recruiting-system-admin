@@ -127,6 +127,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 11px;
+    @include bp(xmedium) {
+      font-size: 14px;
+    }
+    i {
+      font-size: 23px;
+      @include bp(xmedium) {
+        font-size: 30px;
+      }
+    }
   }
   &.ant-btn-circle {
     cursor: pointer;
@@ -233,9 +243,12 @@
     height: 30px;
     color: $color-blue;
     margin-bottom: 0;
-    font-size: 14px;
     display: inline-block;
     text-transform: capitalize;
+    font-size: 11px;
+    @include bp(xmedium) {
+      font-size: 14px;
+    }
     i {
       font-size: 22px;
     }
@@ -417,10 +430,13 @@
     text-align: center;
     padding: 10px 20px;
     justify-content: center;
-    font-size: 14px;
     color: $color-text;
     flex-direction: row;
     margin: 10px 0;
+    font-size: 11px;
+    @include bp(xmedium) {
+      font-size: 14px;
+    }
     i {
       font-size: 20px;
       margin-left: 0;
