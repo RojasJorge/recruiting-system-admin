@@ -19,7 +19,7 @@ const Documents = ({switchCurrent, current}) => {
 		}
 	} = useStoreState(state => state.auth.user)
 	
-	const [files, updateFiles] = useState(document)
+	const [files, updateFiles] = useState(documents)
 	const [deleted, setDeleted] = useState([])
 	
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
@@ -51,8 +51,8 @@ const Documents = ({switchCurrent, current}) => {
 				
 				/** Send notification success */
 				notify('success', 'Ficha documentos actualizada.', 'Vamos al siguiente paso...');
-				// switchCurrent(current + 1);
-				// router.push(`${router.router.pathname}?current=${current + 1}`);
+				switchCurrent(current + 1);
+				router.push(`${router.router.pathname}?current=${current + 1}`);
 			})
 			.catch(err => console.log('Error:', err));
 	};

@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 import { Can } from '../../../components/Can';
 
-const SingleJob = () => {
+const SingleJob = _ => {
   
   const router = useRouter();
   

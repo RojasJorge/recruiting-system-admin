@@ -43,9 +43,9 @@ const Economic = ({ current, switchCurrent }) => {
         updateProfile({ type: 'economic', fields });
 
         /** Send notification success */
-        notify('success', 'Experiencia laboral.', 'Actualizado correctamente..');
-        switchCurrent(current + 1);
-        router.push(`${router.router.pathname}?current=${current + 1}`);
+        notify('success', 'Economía/Legal', 'Actualizado correctamente.');
+        switchCurrent(0);
+        router.push(`${router.router.pathname}?current=${0}`);
       })
       .catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'));
   };
@@ -75,7 +75,7 @@ const Economic = ({ current, switchCurrent }) => {
             label="¿Tiene otros ingresos?"
             className="form-item--sm"
           >
-            <Checkbox onChange={e => updateChecks({ ...checks, otherIncomes: e.target.checked })} />
+            <Checkbox onChange={e => updateChecks({ ...checks, otherIncome: e.target.checked })} />
           </Item>
           {checks.otherIncome ? (
             <>
