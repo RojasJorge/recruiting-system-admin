@@ -25,7 +25,7 @@ const SingleJob = () => {
   // const [_query, updateQuery] = useState()
 
   const getJob = () => {
-    console.log('QUERY......', id);
+    // console.log('QUERY......', id)
     xhr()
       .get(`/job/${id}`)
       .then(res => {

@@ -2,20 +2,18 @@ import Layout from '../../../../views/Layout';
 import { PageTitle } from '../../../../elements';
 import SingleJob from '../../../../components/jobs/Single';
 
-const Index = ({query}) => {
-  // console.log('QUERY FROM INITIAL PROPS--------:', query)
+const Index = _ => {
   return (
     <Layout title="Plaza">
       <>
         <PageTitle title="Ver Plaza" />
-        <SingleJob query={query} />
+        <SingleJob />
       </>
     </Layout>
   );
 };
 
 Index.getInitialProps = async (ctx) => {
-  console.log('ctx:', ctx)
   return {query: ctx.query}
 }
 

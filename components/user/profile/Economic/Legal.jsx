@@ -43,28 +43,29 @@ const Legal = ({value = {}, onChange}) => {
 	
 	return (
 		<div className="row" style={{
-			marginTop: 24
+			marginTop: 24,
+			marginBottom: 30
 		}}>
-			<div className="col-md-12">
+			<div className="col-md-3">
 				<Label htmlFor="legalProblem">Problemas legales?</Label>
 				<Checkbox
 					onChange={e => handleChange(e.target.checked, 'legalProblem')}
 					checked={values.legalProblem}
 				/>
 			</div>
-			<div className="col-md-12">
+			<div className="col-md-3">
+				<Label htmlFor="infonetOrOther">Infornet u otros?</Label>
+				<Checkbox
+					onChange={e => handleChange(e.target.checked, 'infonetOrOther')}
+					checked={values.infonetOrOther}
+				/>
+			</div>
+			<div className="col-md-12" style={{marginTop: 20}}>
 				<Label htmlFor="whatProblem">Que tipo de problema?</Label>
 				<Input
 					onChange={e => handleChange(e.target.value, 'whatProblem')}
 					value={values.whatProblem}
 					size="large"
-				/>
-			</div>
-			<div className="col-md-12">
-				<Label htmlFor="infonetOrOther">Infornet u otros?</Label>
-				<Checkbox
-					onChange={e => handleChange(e.target.checked, 'infonetOrOther')}
-					checked={values.infonetOrOther}
 				/>
 			</div>
 		</div>
