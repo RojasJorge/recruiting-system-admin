@@ -20,7 +20,7 @@ const SingleJob = _ => {
       id
     }
   } = router
-  
+	
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
   const [Jobs, setJobs] = useState([]);
@@ -28,7 +28,7 @@ const SingleJob = _ => {
   // const [_query, updateQuery] = useState()
 
   const getJob = () => {
-    console.log('QUERY......', id)
+    // console.log('QUERY......', id)
     xhr()
       .get(`/job/${id}`)
       .then(res => {
@@ -333,6 +333,7 @@ const SingleJob = _ => {
                 {job.languages.map((e, idx) => (
                   <div
                     key={idx}
+                    className="umana-languages-inputs"
                     style={{
                       padding: '0 20px 10px',
                       display: 'flex',
