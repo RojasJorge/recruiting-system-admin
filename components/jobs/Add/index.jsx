@@ -68,12 +68,12 @@ const FormJob = props => {
       });
     }
     setTimeout(() => {
-      // if (props.setCurrent) {
-      //   props.setCurrent(2);
-      // } else {
-      //   router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
-      // }
-      router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+      if (props.setCurrent) {
+        props.setCurrent(2);
+      } else {
+        router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+      }
+      // router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
     }, 500);
   };
 
