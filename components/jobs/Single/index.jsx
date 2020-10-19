@@ -11,30 +11,21 @@ import Link from 'next/link';
 
 import { Can } from '../../../components/Can';
 
-<<<<<<< HEAD
-const SingleJob = ({ query }) => {
+const SingleJob = () => {
   const router = useRouter();
 
-=======
-const SingleJob = () => {
-  
-  const router = useRouter();
-  
   const {
-    query: {
-      id
-    }
-  } = router
-  
->>>>>>> 39633852cb7e5790bc1c9df59612b9a6823e81d2
+    query: { id },
+  } = router;
+
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
   const [Jobs, setJobs] = useState([]);
-  
+
   // const [_query, updateQuery] = useState()
 
   const getJob = () => {
-    console.log('QUERY......', id)
+    console.log('QUERY......', id);
     xhr()
       .get(`/job/${id}`)
       .then(res => {
@@ -42,12 +33,11 @@ const SingleJob = () => {
         setJob(res.data);
       })
       .catch(err => isMissing(true));
-  }
+  };
 
   const getFromLocal = _ => {
-  
     // console.log('Get from local:', query)
-    
+
     const Jobs = JSON.parse(localStorage.getItem('Jobs'));
     const job = find(Jobs.list, o => id === o.id);
 
@@ -174,6 +164,9 @@ const SingleJob = () => {
             >
               <Button type="primary" size="small" onClick={() => add(job)}>
                 <i className="material-icons">content_copy</i> Duplicar plaza
+              </Button>
+              <Button type="primary" size="small" onClick={() => add(job)}>
+                <i className="material-icons">event_busy</i> Expirar plaza
               </Button>
             </Sitebar>
           </Can>

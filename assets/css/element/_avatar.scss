@@ -45,7 +45,10 @@
       i,
       svg {
         font-size: 60px;
-        line-height: 120px;
+        line-height: 100px;
+        @include bp(xmedium) {
+          line-height: 120px;
+        }
       }
       &.company {
         i,
