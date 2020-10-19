@@ -7,12 +7,22 @@ import Login from '../components/user/Login';
 import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
 import { SyncOutlined } from '@ant-design/icons';
-import { Can } from '../components/Can';
+import {isEmpty} from 'lodash'
+// import { Can } from '../components/Can';
 
 const Layout = ({ children, title, className }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
   const [fullScreen, switchFullScreen] = useState(false);
+  
+  /**
+   * System collections
+   * State names (singular) = career, academic_level
+   */
+  const catalogs = useStoreState(state => state.collections)
+  const getCollections = useStoreActions(actions => actions.collections.get)
+  
+  /** Prevent crash with 'guest' as default scope */
   const [scopeState, setScope] = useState('guest');
 
   const mloading = useStoreState(state => state.users.loading);
@@ -22,17 +32,26 @@ const Layout = ({ children, title, className }) => {
 
   /** Get global actions */
   const keepAuth = useStoreActions(actions => actions.auth.grantAccess);
+  
+  /** Get/Set catalogs */
+  useEffect(() => {
+    if(isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) {
+      getCollections({type: 'career'})
+      getCollections({type: 'academic-level'})
+    }
+  }, [])
 
   useEffect(() => {
     /** Parse user & token from localStorage */
     let user = JSON.parse(localStorage.getItem('uUser'));
     const token = localStorage.getItem('uToken');
     const _scope = JSON.parse(localStorage.getItem('uScopes'));
+    
     if (_scope) {
       setScope(_scope[0]);
     }
+    
     if (!token) Router.replace('/');
-    // console.log('Layout.jsx|user,token', user, token)
 
     /** Check if valid */
     if (token && user) {
@@ -51,13 +70,11 @@ const Layout = ({ children, title, className }) => {
       </Head>
       <MainHeader layout="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
-        {/*<Can I="view" a="MAIN_LAYOUT">*/}
         <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>{children}</div>
-        {/*</Can>*/}
       </div>
       <PageLoader active={mloading} />
     </div>
-  ) : loading ? (
+  ) : (loading || isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) ? (
     <div className="app--spinner animated fadeIn">
       <SyncOutlined style={{ fontSize: 60 }} spin />
     </div>

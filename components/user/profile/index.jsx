@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useStoreState} from 'easy-peasy';
 import {Steps} from 'antd';
 import Personal from './personal';
@@ -9,8 +9,8 @@ import AcademicLevels from './AcademicLevels';
 import Experiences from './Experiences';
 import Economic from './Economic';
 import Others from './Others';
-import xhr from '../../../xhr';
 import Courses from './Courses';
+import router from 'next/router'
 import {PageTitle, Sitebar} from '../../../elements';
 
 const {Step} = Steps;
@@ -77,19 +77,11 @@ const UserProfile = ({query}) => {
 		
 		return s;
 	};
-	const [careers, addCareers] = useState([]);
-	
-	/** Get collection */
-	const getCareers = p =>
-		xhr()
-			.get(`/career?page=1&offset=1000`)
-			.then(resp => addCareers(resp.data.items))
-			.catch(err => console.log(err));
 	
 	const switchStep = _ => {
 		switch (current) {
 			case 0:
-				return <Personal switchCurrent={switchCurrent} current={current} careers={careers}/>;
+				return <Personal switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 1:
 				return <Documents switchCurrent={switchCurrent} current={current}/>;
@@ -101,7 +93,7 @@ const UserProfile = ({query}) => {
 				return <LookingFor switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 4:
-				return <AcademicLevels switchCurrent={switchCurrent} current={current} careers={careers}/>;
+				return <AcademicLevels switchCurrent={switchCurrent} current={current}/>;
 				break;
 			case 5:
 				return <Courses switchCurrent={switchCurrent} current={current}/>;
@@ -116,14 +108,10 @@ const UserProfile = ({query}) => {
 				return <Economic switchCurrent={switchCurrent} current={current}/>;
 				break;
 			default:
-				return <Personal switchCurrent={switchCurrent} current={current} careers={careers}/>;
+				return <Personal switchCurrent={switchCurrent} current={current}/>;
 				break;
 		}
 	};
-	
-	useEffect(() => {
-		getCareers();
-	}, []);
 	
 	const header = {
 		title: user.name + ' ' + user.lastname,
@@ -136,7 +124,6 @@ const UserProfile = ({query}) => {
 	return (
 		<>
 			<PageTitle title="Mi Perfil" back="/admin/companies"/>
-			{/*<pre>{JSON.stringify(current, false, 2)}</pre>*/}
 			<div className="umana-layout-cl">
 				<div className="umana-layout-cl__small ">
 					<Sitebar header={header} theme="orange"/>
@@ -152,7 +139,7 @@ const UserProfile = ({query}) => {
 								key={i}
 								title={o.title}
 								status={status(i)}
-								disabled={i > current}
+								// disabled={i > current}
 							/>
 						))}
 					</Steps>

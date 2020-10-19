@@ -1,8 +1,9 @@
 import { Table } from 'antd';
-import { useStoreState } from 'easy-peasy';
+import { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import xhr from '../../../xhr';
 
 const buttonStyle = {
   display: 'flex',
@@ -12,15 +13,37 @@ const buttonStyle = {
 };
 
 const CompanyJobs = props => {
-  const router = useRouter();
-  const data = useStoreState(state => state.jobs);
-  const own = data && data.list ? data.list.filter(o => o.company_id === props.id) : [];
+  const [missing, isMissing] = useState(false);
+  const [jobs, setJobs] = useState([]);
+
+  const getCompanyJobs = () => {
+    xhr()
+      .get(`/job?company_id=${props.id}`)
+      .then(res => {
+        setJobs(res.data.items);
+      })
+      .catch(err => isMissing(true));
+  };
+
+  useEffect(() => {
+    getCompanyJobs();
+  }, []);
 
   const columns = [
     {
       title: 'Plaza',
       dataIndex: 'title',
       key: 'title',
+    },
+    {
+      title: 'Ubicación',
+      dataIndex: 'location',
+      key: 'location',
+      render: (text, record) => (
+        <>
+          <p>{`Zona ${record.location.zone}, ${record.location.city}`}</p>
+        </>
+      ),
     },
     {
       title: 'Fecha de expiración',
@@ -56,10 +79,10 @@ const CompanyJobs = props => {
         <h2>{`Plazas de ${props.title}`}</h2>
       </div>
       <div className="" style={{ padding: 0 }}>
-        {data && data.list ? (
+        {jobs ? (
           <Table
             columns={columns}
-            dataSource={own}
+            dataSource={jobs}
             rowKey={record => record.id}
             pagination={false}
           />

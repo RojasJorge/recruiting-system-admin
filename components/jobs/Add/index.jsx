@@ -37,16 +37,16 @@ const FormJob = props => {
   let positionAlt = true;
 
   /** Fill jobs from localStorage */
-  useEffect(() => {
-    if (isEmpty(JobsList)) {
-      fillJobs({
-        data: {
-          items: JSON.parse(localStorage.getItem('Jobs')),
-          total: JSON.parse(localStorage.getItem('Jobs')).length,
-        },
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isEmpty(JobsList)) {
+  //     fillJobs({
+  //       data: {
+  //         items: JSON.parse(localStorage.getItem('Jobs')),
+  //         total: JSON.parse(localStorage.getItem('Jobs')).length,
+  //       },
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
@@ -68,12 +68,12 @@ const FormJob = props => {
       });
     }
     setTimeout(() => {
-      // if (props.setCurrent) {
-      //   props.setCurrent(2);
-      // } else {
-      //   router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
-      // }
-      router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+      if (props.setCurrent) {
+        props.setCurrent(2);
+      } else {
+        router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+      }
+      // router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
     }, 500);
   };
 

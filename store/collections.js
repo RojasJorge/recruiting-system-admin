@@ -24,7 +24,6 @@ export default {
         actions.switchLoading(false);
       })
       .then(response => {
-        // console.log('Data from catalogs:', response);
         typeof response !== 'undefined' ? localStorage.setItem(payload.type.replace('-', '_'), JSON.stringify(response.data.items)) : null;
         typeof response !== 'undefined' ? actions.fill({ data: response.data, type: payload.type.replace('-', '_') }) : null;
         actions.switchLoading(false);
@@ -32,8 +31,6 @@ export default {
   }),
   // add
   add: thunk(async (actions, payload) => {
-    // console.log('payload type', payload.type);
-    console.log('payload', payload);
 
     actions.switchLoading(true);
 
@@ -61,8 +58,6 @@ export default {
   }),
   // update
   update: thunk(async (actions, payload) => {
-    // console.log('payload type', payload.type);
-    console.log('payload', payload);
 
     actions.switchLoading(true);
 
