@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useStoreActions, useStoreState} from 'easy-peasy';
-import {Button, Form, notification} from 'antd';
+import {Alert, Button, Form, notification} from 'antd';
 import Names from './Names';
 import router from 'next/router';
 import Locations from '../../../Location';
@@ -9,6 +9,7 @@ import Contact from './Contact';
 import xhr from '../../../../xhr';
 import AvatarCropper from "../../../Misc/AvatarCropper";
 import storage from "../../../../storage";
+import {isEmpty} from "lodash";
 
 /** Import form sections */
 const FormItem = Form.Item;
@@ -64,7 +65,7 @@ const Personal = ({switchCurrent, current}) => {
 				updateProfile({type: 'personal', fields})
 				
 				/** Checks if is necessary to delete file from storage */
-				if(toDelete) confirmRemoveAvatarFromStorage(toDelete)
+				if (toDelete) confirmRemoveAvatarFromStorage(toDelete)
 				
 				/** Switch to the next tab */
 				switchCurrent(current + 1)
@@ -92,13 +93,17 @@ const Personal = ({switchCurrent, current}) => {
 		notification[type]({
 			message,
 			description,
-		});
-	};
+		})
+	}
 	
 	return (
 		<>
 			<Form name="basic" onFinish={onFinish} initialValues={personal}>
 				<div className="umana-form--section">
+					
+					<div style={{width: '100%', marginBottom: 30}}>
+						{isEmpty(avatar) && <Alert message="Debes agregar una imagen de perfil" type="error" showIcon/>}
+					</div>
 					
 					{/*AVATAR UPLOADER*/}
 					<AvatarCropper
@@ -134,7 +139,7 @@ const Personal = ({switchCurrent, current}) => {
 						type="orange"
 						htmlType="submit"
 						size="small"
-						danger={danger}
+						disabled={isEmpty(avatar)}
 						style={{width: '100%'}}
 					>
 						Confirmar y continuar
