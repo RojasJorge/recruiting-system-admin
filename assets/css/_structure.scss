@@ -40,8 +40,11 @@ h4 {
 }
 
 h2 {
-  font-size: 32px;
   font-weight: 300;
+  font-size: 28px;
+  @include bp(xmedium) {
+    font-size: 32px;
+  }
 }
 h5 {
   font-size: 18px;
@@ -108,7 +111,13 @@ h5 {
         height: 80px;
       }
       @include bp(xmedium) {
-        background: linear-gradient(to bottom, rgba(245, 252, 254, 1) 0%, rgba(245, 252, 254, 1) 80%, rgba(245, 252, 254, 0.5) 95%, rgba(245, 252, 254, 0) 100%);
+        background: linear-gradient(
+          to bottom,
+          rgba(245, 252, 254, 1) 0%,
+          rgba(245, 252, 254, 1) 80%,
+          rgba(245, 252, 254, 0.5) 95%,
+          rgba(245, 252, 254, 0) 100%
+        );
       }
     }
   }
@@ -194,7 +203,8 @@ h5 {
     justify-content: flex-end;
     align-items: center;
   }
-  & > button.ant-btn.ant-btn-primary.ant-btn-circle.ant-btn-lg.ant-btn-icon-only.ant-btn-background-ghost {
+  &
+    > button.ant-btn.ant-btn-primary.ant-btn-circle.ant-btn-lg.ant-btn-icon-only.ant-btn-background-ghost {
     width: 50px;
     margin: 0;
     margin-left: auto;
@@ -236,7 +246,13 @@ h5 {
   flex-wrap: wrap;
   padding: 30px 0;
   &.bg-color {
-    background: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
+    background: linear-gradient(
+      to bottom,
+      $bg-blue 0,
+      $bg-blue 400px,
+      $color-white 400px,
+      $color-white 100%
+    );
   }
   &.theme-orange {
     .umana-layout--content {
@@ -382,9 +398,20 @@ h5 {
     .ant-avatar.ant-avatar-circle.ant-avatar-icon {
       margin: 0 auto;
       background: $color-green;
+      width: 100px !important;
+      height: 100px !important;
+      line-height: 100px;
+      @include bp(xmedium) {
+        line-height: 120px;
+        width: 120px !important;
+        height: 120px !important;
+      }
       i {
         font-size: 40px;
-        line-height: 120px;
+        line-height: 100px;
+        @include bp(xmedium) {
+          line-height: 120px;
+        }
       }
     }
   }
@@ -406,5 +433,43 @@ h5 {
   }
   .visible-false {
     display: none;
+  }
+}
+
+//table
+.ant-table {
+  width: 100%;
+  overflow-x: auto;
+  .ant-table-cell.ant-table-cell-fix-right.ant-table-cell-fix-right-first,
+  .ant-table-cell.ant-table-cell-fix-right.ant-table-cell-fix-right-first {
+    background: $color-white !important;
+    text-align: center;
+    box-shadow: -3px 0px 5px -4px rgba(0, 0, 0, 0.2);
+    a {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      i {
+        order: 1;
+        margin-left: 10px;
+      }
+    }
+  }
+  .ant-table-container {
+    .ant-table-thead {
+      th.ant-table-cell {
+        color: $color-blue;
+        font-size: 11px;
+        @include bp(xmedium) {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  td.ant-table-cell {
+    font-size: 11px;
+    @include bp(xmedium) {
+      font-size: 13px;
+    }
   }
 }

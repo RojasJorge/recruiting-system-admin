@@ -222,4 +222,82 @@
       color: $color-blue;
     }
   }
+  // Switch
+  .ant-switch {
+    &.switch-large {
+      background: $bg-blue;
+      &.ant-switch-checked {
+        border: 1px solid $color-blue !important;
+        background: $color-blue;
+      }
+
+      &.theme-orange {
+        &.ant-switch-checked {
+          border: 1px solid $color-blue !important;
+          background: rgba($color-blue, 0.3);
+          .ant-switch-inner {
+            color: $color-blue;
+          }
+        }
+      }
+    }
+  }
+  // radio button
+  .ant-radio-group {
+    .ant-radio-button-wrapper {
+      &:hover {
+        color: $color-blue;
+      }
+      &.ant-radio-button-wrapper-checked {
+        border-color: $color-blue;
+        border-right-color: $color-blue;
+        color: $color-blue;
+        &:hover {
+          border-color: $color-blue;
+          color: $color-blue;
+        }
+        &.ant-radio-button-wrapper-disabled {
+          border: 1px solid $color-blue !important;
+        }
+      }
+    }
+  }
+
+  .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+    border-right-color: $color-blue;
+  }
+  //slider
+  .ant-slider.ant-slider-with-marks {
+    .ant-slider-step {
+      .ant-slider-dot-active {
+        border-color: $color-blue;
+        background: $color-blue;
+      }
+    }
+    .ant-slider-handle {
+      border-color: $color-blue !important;
+      &:hover {
+        border-color: $color-blue;
+      }
+    }
+    .ant-slider-track {
+      background-color: $color-blue;
+    }
+  }
+  // Checkbox
+  .ant-checkbox-group {
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        &:hover {
+          border-color: $color-blue !important;
+        }
+      }
+      &.ant-checkbox-checked {
+        .ant-checkbox-inner {
+          background: $color-blue;
+          border-color: $color-blue;
+        }
+      }
+    }
+  }
 }

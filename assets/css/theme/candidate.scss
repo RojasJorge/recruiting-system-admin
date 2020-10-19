@@ -267,4 +267,93 @@
       }
     }
   }
+  // table
+  .ant-table {
+    .ant-table-container {
+      .ant-table-thead {
+        th.ant-table-cell {
+          color: $color-orange;
+        }
+      }
+    }
+  }
+  // Switch
+  .ant-switch {
+    &.switch-large {
+      background: $bg-orange;
+      &.ant-switch-checked {
+        border: 1px solid $color-orange !important;
+        background: $color-orange;
+      }
+
+      &.theme-orange {
+        &.ant-switch-checked {
+          border: 1px solid $color-orange !important;
+          background: rgba($color-orange, 0.3);
+          .ant-switch-inner {
+            color: $color-orange;
+          }
+        }
+      }
+    }
+  }
+  // radio button
+  .ant-radio-group {
+    .ant-radio-button-wrapper {
+      &:hover {
+        color: $color-orange;
+      }
+      &.ant-radio-button-wrapper-checked {
+        border-color: $color-orange;
+        border-right-color: $color-orange;
+        color: $color-orange;
+        &:hover {
+          border-color: $color-orange;
+          color: $color-orange;
+        }
+        &.ant-radio-button-wrapper-disabled {
+          border: 1px solid $color-orange !important;
+        }
+      }
+    }
+  }
+
+  .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+    border-right-color: $color-orange;
+  }
+
+  //slider
+  .ant-slider.ant-slider-with-marks {
+    .ant-slider-step {
+      .ant-slider-dot-active {
+        border-color: $color-orange;
+        background: $color-orange;
+      }
+    }
+    .ant-slider-handle {
+      border-color: $color-orange !important;
+      &:hover {
+        border-color: $color-orange;
+      }
+    }
+    .ant-slider-track {
+      background-color: $color-orange;
+    }
+  }
+  // Checkbox
+  .ant-checkbox-group {
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        &:hover {
+          border-color: $color-orange !important;
+        }
+      }
+      &.ant-checkbox-checked {
+        .ant-checkbox-inner {
+          background: $color-orange;
+          border-color: $color-orange;
+        }
+      }
+    }
+  }
 }

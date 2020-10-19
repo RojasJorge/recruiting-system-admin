@@ -87,6 +87,7 @@ const Jobs = props => {
       title: 'Actions',
       dataIndex: 'id',
       key: 'id',
+      fixed: 'right',
       render: (text, record) => {
         return (
           <a onClick={() => add(record)} style={buttonStyle}>
@@ -139,7 +140,7 @@ const Jobs = props => {
     collectionsActions.get({ type: 'career' });
     collectionsActions.get({ type: 'academic_level' });
   };
-  
+
   useEffect(() => {
     getJobs();
   }, [
@@ -148,8 +149,8 @@ const Jobs = props => {
     filters.jobposition,
     filters.title,
     filters.country,
-    filters.city]
-  );
+    filters.city,
+  ]);
 
   useEffect(() => {
     getOptions();
@@ -390,7 +391,7 @@ const Jobs = props => {
       </div>
     );
   }
- 
+
   return (
     <div className="umana-list list-empty">
       <EmptyElemet data={props.empty} />

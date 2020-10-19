@@ -152,3 +152,42 @@
     margin-left: auto;
   }
 }
+
+.ant-upload-picture-card-wrapper {
+  .ant-upload-list-item-actions {
+    a {
+      display: none !important;
+    }
+    .ant-btn.ant-btn-text.ant-btn-sm.ant-btn-icon-only.ant-upload-list-item-card-actions-btn {
+      background: rgba($color-black, 0.3);
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.ant-modal-wrap.antd-img-crop-modal {
+  .ant-modal-footer {
+    display: flex;
+    .ant-btn {
+      height: 40px;
+      text-transform: uppercase;
+      padding: 5px 20px;
+      font-size: 14px;
+      background: $color-white;
+      color: $color-text;
+      border: 1px dashed $color-text;
+      &:first-child {
+        border: 1px dashed transparent;
+        color: $color-error;
+        background: $color-white;
+        &:hover {
+          background: #f2f2f2;
+        }
+      }
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}

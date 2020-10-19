@@ -31,3 +31,28 @@
 .ant-pagination {
   text-align: right;
 }
+
+.umana-languages-inputs {
+  flex-wrap: wrap;
+  flex-direction: row;
+  p {
+    width: 100%;
+  }
+  .ant-progress.ant-progress-circle {
+    margin: 10px auto;
+    .ant-progress-inner {
+      width: 100px !important;
+      height: 100px !important;
+      @include bp(xmedium) {
+        width: 150px !important;
+        height: 150px !important;
+      }
+    }
+    .ant-progress-text {
+      font-size: 11px;
+      @include bp(xmedium) {
+        font-size: 14px;
+      }
+    }
+  }
+}
