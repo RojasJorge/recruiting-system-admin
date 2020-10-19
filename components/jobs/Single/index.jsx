@@ -13,6 +13,8 @@ import { Can } from '../../../components/Can';
 
 const SingleJob = ({query}) => {
   
+  // console.log('pages/jobs/single/[id].jsx:', query)
+  
   const router = useRouter();
   
   const [job, setJob] = useState({});
@@ -21,7 +23,7 @@ const SingleJob = ({query}) => {
 
   const getJob = () =>
     xhr()
-      .get(`/job/${query.id}`)
+      .get(`/job/${query && query.id}`)
       .then(res => {
         res.type = false;
         setJob(res.data);
@@ -30,7 +32,7 @@ const SingleJob = ({query}) => {
 
   const getFromLocal = _ => {
     const Jobs = JSON.parse(localStorage.getItem('Jobs'));
-    const job = find(Jobs.list, o => query.id === o.id);
+    const job = find(Jobs.list, o => query && query.id === o.id);
 
     if (Jobs) {
       if (!job) {
@@ -486,7 +488,7 @@ const SingleJob = ({query}) => {
               action: 'edit',
               titleAction: 'Editar Plaza',
               urlAction: '/admin/jobs/edit/',
-              urlDinamic: query.id,
+              urlDinamic: query && query.id,
             }}
           />
         </Can>
