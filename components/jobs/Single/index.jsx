@@ -1,15 +1,16 @@
 import { Sitebar } from '../../../elements';
 import { useEffect, useState } from 'react';
-import { Progress, Skeleton, Tag, Avatar } from 'antd';
+import { Progress, Skeleton, Tag, Avatar, Modal, Button, notification } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
-import { Button, notification } from 'antd';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
 import Link from 'next/link';
 
 import { Can } from '../../../components/Can';
+
+const { confirm } = Modal;
 
 const SingleJob = () => {
   const router = useRouter();
@@ -147,6 +148,20 @@ const SingleJob = () => {
       });
   };
 
+  const expire = e => {
+    confirm({
+      title: 'Expirar plaza',
+      content:
+        'una vez que expires no podras regresar esta acción. ¿Estas seguro que deseas expirar esta plaza?',
+      onOk() {
+        console.log('OK');
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
   if (job) {
     return (
       <div className="umana-layout-cl">
@@ -165,7 +180,7 @@ const SingleJob = () => {
               <Button type="primary" size="small" onClick={() => add(job)}>
                 <i className="material-icons">content_copy</i> Duplicar plaza
               </Button>
-              <Button type="primary" size="small" onClick={() => add(job)}>
+              <Button type="primary" size="small" onClick={() => expire(job)}>
                 <i className="material-icons">event_busy</i> Expirar plaza
               </Button>
             </Sitebar>

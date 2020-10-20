@@ -1,6 +1,7 @@
 import locale from '../../../data/translates/spanish';
 import { Can } from '../../Can';
 import Link from 'next/link';
+
 const About = props => {
   return (
     <>
@@ -14,7 +15,7 @@ const About = props => {
             </Link>
           </Can>
           <div className="umana-content__item item-lg">
-            <h2>Acerca de Andrea</h2>
+            <h2>{`Acerca de ${props.defaultData.name}`}</h2>
           </div>
           <div className="umana-content__item item-lg">
             <p>{props.defaultData.about}</p>
