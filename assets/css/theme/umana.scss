@@ -300,4 +300,22 @@
       }
     }
   }
+  // sitebar
+  .umana-sitebar-childrens {
+    .ant-btn.ant-btn-primary.ant-btn-sm {
+      background: transparent !important;
+      color: $color-text;
+      i,
+      span {
+        color: $color-text;
+      }
+      &:hover {
+        background: $color-white !important;
+        i,
+        span {
+          color: $color-blue;
+        }
+      }
+    }
+  }
 }

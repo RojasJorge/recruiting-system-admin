@@ -1,9 +1,10 @@
-import { Table } from 'antd';
+import { Table, notification } from 'antd';
 import { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import moment from 'moment';
 import xhr from '../../../xhr';
+import { useRouter } from 'next/router';
 
 const buttonStyle = {
   display: 'flex',
@@ -13,8 +14,10 @@ const buttonStyle = {
 };
 
 const CompanyJobs = props => {
+  const router = useRouter();
   const [missing, isMissing] = useState(false);
   const [jobs, setJobs] = useState([]);
+  const today = moment();
 
   const getCompanyJobs = () => {
     xhr()
@@ -23,6 +26,43 @@ const CompanyJobs = props => {
         setJobs(res.data.items);
       })
       .catch(err => isMissing(true));
+  };
+
+  const allSet = e => {
+    notification.info({
+      message: `Confirmación`,
+      description: 'La plaza ha sido publicada con éxito.',
+      placement: 'bottomRight',
+    });
+
+    setTimeout(() => {
+      router.push(`/admin/jobs/edit/[id]`, `/admin/jobs/edit/${e}`);
+    }, 500);
+  };
+
+  const add = async e => {
+    console.log(e);
+    delete e.id;
+    delete e.company;
+    delete e.created_at;
+    delete e.expiration_date;
+    delete e.updated_at;
+
+    e.title = `${e.title} (copia)`;
+
+    // console.log(e);
+    xhr()
+      .post(`/job`, JSON.stringify(e))
+      .then(resp => {
+        allSet(resp.data);
+      })
+      .catch(err => {
+        notification.info({
+          message: `Error`,
+          description: 'Ha ocurrido un error, por favor inténtalo más tarde',
+          placement: 'bottomRight',
+        });
+      });
   };
 
   useEffect(() => {
@@ -64,13 +104,21 @@ const CompanyJobs = props => {
       dataIndex: 'id',
       key: 'id',
       render: (text, record) => {
-        return (
-          <Link href={`/admin/jobs/single/[id]`} as={`/admin/jobs/single/${record.id}`}>
-            <a style={buttonStyle}>
-              Ver plaza <i className="material-icons">navigate_next</i>
+        if (record.expiration_date > today.format()) {
+          return (
+            <Link href={`/admin/jobs/single/[id]`} as={`/admin/jobs/single/${record.id}`}>
+              <a style={buttonStyle}>
+                Ver plaza <i className="material-icons">navigate_next</i>
+              </a>
+            </Link>
+          );
+        } else {
+          return (
+            <a style={buttonStyle} onClick={() => add(record)}>
+              duplicar <i className="material-icons">clone</i>
             </a>
-          </Link>
-        );
+          );
+        }
       },
     },
   ];

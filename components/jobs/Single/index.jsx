@@ -1,30 +1,29 @@
 import { Sitebar } from '../../../elements';
 import { useEffect, useState } from 'react';
-import { Progress, Skeleton, Tag, Avatar } from 'antd';
+import { Progress, Skeleton, Tag, Avatar, Modal, Button, notification } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
-import { Button, notification } from 'antd';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
 import Link from 'next/link';
+import moment from 'moment';
 
 import { Can } from '../../../components/Can';
 
-const SingleJob = _ => {
-  
+const { confirm } = Modal;
+
+const SingleJob = () => {
   const router = useRouter();
-  
+
   const {
-    query: {
-      id
-    }
-  } = router
-	
+    query: { id },
+  } = router;
+
   const [job, setJob] = useState({});
   const [missing, isMissing] = useState(false);
   const [Jobs, setJobs] = useState([]);
-  
+
   // const [_query, updateQuery] = useState()
 
   const getJob = () => {
@@ -36,12 +35,11 @@ const SingleJob = _ => {
         setJob(res.data);
       })
       .catch(err => isMissing(true));
-  }
+  };
 
   const getFromLocal = _ => {
-  
     // console.log('Get from local:', query)
-    
+
     const Jobs = JSON.parse(localStorage.getItem('Jobs'));
     const job = find(Jobs.list, o => id === o.id);
 
@@ -151,6 +149,46 @@ const SingleJob = _ => {
       });
   };
 
+  const expire = e => {
+    var startdate = moment();
+    startdate = startdate.subtract(1, 'days');
+    startdate = startdate.format();
+
+    console.log(startdate);
+    const data = {
+      expiration_date: startdate,
+      contact: e.contact,
+    };
+    confirm({
+      title: 'Expirar plaza',
+      content:
+        'Una vez que expires no podras regresar esta acción. ¿Estas seguro que deseas expirar esta plaza?',
+      onOk() {
+        xhr()
+          .put(`/job/${e.id}`, JSON.stringify(data))
+          .then(resp => {
+            notification.info({
+              message: `Esta plaza ha expirado`,
+              description: 'Se expiro la plaza ',
+              placement: 'bottomRight',
+            });
+          })
+          .catch(err => {
+            notification.info({
+              message: `Error`,
+              description: 'No se pudo expirar la plaza',
+              placement: 'bottomRight',
+            });
+          });
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
+  var today = moment();
+
   if (job) {
     return (
       <div className="umana-layout-cl">
@@ -169,6 +207,11 @@ const SingleJob = _ => {
               <Button type="primary" size="small" onClick={() => add(job)}>
                 <i className="material-icons">content_copy</i> Duplicar plaza
               </Button>
+              {job.expiration_date > today.format() ? (
+                <Button type="primary" size="small" onClick={() => expire(job)}>
+                  <i className="material-icons">event_busy</i> Expirar plaza
+                </Button>
+              ) : null}
             </Sitebar>
           </Can>
           <Can I="apply" a="JOBS">
