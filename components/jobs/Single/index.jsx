@@ -7,6 +7,7 @@ import { find } from 'lodash';
 import label from '../../../data/labels';
 import xhr from '../../../xhr';
 import Link from 'next/link';
+import moment from 'moment';
 
 import { Can } from '../../../components/Can';
 
@@ -149,18 +150,44 @@ const SingleJob = () => {
   };
 
   const expire = e => {
+    var startdate = moment();
+    startdate = startdate.subtract(1, 'days');
+    startdate = startdate.format();
+
+    console.log(startdate);
+    const data = {
+      expiration_date: startdate,
+      contact: e.contact,
+    };
     confirm({
       title: 'Expirar plaza',
       content:
-        'una vez que expires no podras regresar esta acción. ¿Estas seguro que deseas expirar esta plaza?',
+        'Una vez que expires no podras regresar esta acción. ¿Estas seguro que deseas expirar esta plaza?',
       onOk() {
-        console.log('OK');
+        xhr()
+          .put(`/job/${e.id}`, JSON.stringify(data))
+          .then(resp => {
+            notification.info({
+              message: `Esta plaza ha expirado`,
+              description: 'Se expiro la plaza ',
+              placement: 'bottomRight',
+            });
+          })
+          .catch(err => {
+            notification.info({
+              message: `Error`,
+              description: 'No se pudo expirar la plaza',
+              placement: 'bottomRight',
+            });
+          });
       },
       onCancel() {
         console.log('Cancel');
       },
     });
   };
+
+  var today = moment();
 
   if (job) {
     return (
@@ -180,9 +207,11 @@ const SingleJob = () => {
               <Button type="primary" size="small" onClick={() => add(job)}>
                 <i className="material-icons">content_copy</i> Duplicar plaza
               </Button>
-              <Button type="primary" size="small" onClick={() => expire(job)}>
-                <i className="material-icons">event_busy</i> Expirar plaza
-              </Button>
+              {job.expiration_date > today.format() ? (
+                <Button type="primary" size="small" onClick={() => expire(job)}>
+                  <i className="material-icons">event_busy</i> Expirar plaza
+                </Button>
+              ) : null}
             </Sitebar>
           </Can>
           <Can I="apply" a="JOBS">
