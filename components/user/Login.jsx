@@ -73,10 +73,14 @@ const Login = _ => {
                 >
                   <Input size="large" />
                 </Item>
-                <Item rules={[{ required: true, message: 'Contraseña es requerida.' }]} name="password" label="Contraseña">
+                <Item
+                  rules={[{ required: true, message: 'Contraseña es requerida.' }]}
+                  name="password"
+                  label="Contraseña"
+                >
                   <Password size="large" style={{ height: 45, lineHeight: '45px' }} />
                 </Item>
-                <Button size="large" htmlType="submit" type="primary" loading={loading}>
+                <Button size="small" htmlType="submit" type="primary" loading={loading}>
                   Iniciar Sesión
                 </Button>
                 <p>
