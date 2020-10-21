@@ -17,7 +17,7 @@ const xhr = () => {
       return response;
     },
     error => {
-      
+      console.log('Error from xhr()', error)
       if (error.response && error.response.status === 401) {
         message.error('La sesión ha expirado');
         localStorage.removeItem('uToken');
@@ -28,7 +28,7 @@ const xhr = () => {
         localStorage.removeItem('Jobs');
 
         setTimeout(() => {
-          window.location.reload();
+          // window.location.reload();
         }, 1000);
       }
       // Do something with response error
