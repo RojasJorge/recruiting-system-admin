@@ -1,5 +1,6 @@
 .app.theme-company,
-.profile.theme-company {
+.profile.theme-company,
+.theme-company {
   background: $bg-green;
   .umana-header,
   .app--header.umana__header.is-login {
@@ -8,9 +9,28 @@
   .app--contents.umana.is-login {
     background: $bg-green;
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: 1px solid $color-green !important;
+    -webkit-text-fill-color: $color-green;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
   //titles
-  h2 {
-    color: $color-green;
+  h2,
+  .ant-steps.ant-steps-horizontal
+    .ant-steps-item.ant-steps-item-process
+    .ant-steps-item-container
+    .ant-steps-item-content
+    .ant-steps-item-title {
+    color: $color-green !important;
   }
   // themes
   .theme-orange {
@@ -358,4 +378,29 @@
       }
     }
   }
+  // password input
+  .ant-input-password {
+    .ant-input.ant-input-lg {
+      border: 1px solid transparent !important;
+      border-color: transparent !important;
+      border-radius: 0;
+      height: 45px;
+      &:hover,
+      &:focus,
+      &:active {
+        border: 1px solid transparent !important;
+        border-color: transparent !important;
+      }
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      border: 1px solid $color-green !important;
+      border-color: $color-green !important;
+    }
+  }
+}
+
+.theme-company {
+  background: transparent;
 }

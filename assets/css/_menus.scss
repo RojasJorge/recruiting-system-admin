@@ -76,6 +76,9 @@
             background: $color-orange;
           }
         }
+        &.ant-menu-item-active {
+          border-bottom: 0 !important;
+        }
         &.menu-role {
           color: $color-orange;
           font-weight: 600;

@@ -76,14 +76,19 @@ const SignupSteps = _ => {
                 <div className="umana-signup-login-title have-subtitle">
                   <h1>Registrase</h1>
                 </div>
-                <div className="umana-signup-login-subtitle">
-                  <Steps className="col-md-12" direction="horizontal" size="large" current={current}>
+                <div className="umana-signup-login-subtitle" style={{ marginBottom: 0 }}>
+                  <Steps
+                    className="col-md-12"
+                    direction="horizontal"
+                    size="large"
+                    current={current}
+                  >
                     <Step key={0} title="¿Qué estás buscando?" status={status.stepOne} />
                     <Step key={1} title="Crear cuenta" status={status.stepTwo} />
                   </Steps>
                 </div>
 
-                <div className="col-md-12">
+                <div className="col-md-12" style={{ padding: 0 }}>
                   {switchStep()}
                   {current < checkList.length - 1 && (
                     <Button type="primary" onClick={() => next()} disabled={role ? false : true}>

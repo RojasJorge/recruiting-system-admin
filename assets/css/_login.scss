@@ -113,3 +113,50 @@
     }
   }
 }
+
+.login--form,
+.signup--form {
+  .ant-row.ant-form-item {
+    margin: 0 10px 10px 0 !important;
+  }
+  .ant-btn.ant-btn-primary.ant-btn-sm {
+    margin-left: auto;
+    width: 100%;
+    margin: 10px 0;
+  }
+  p {
+    width: 100%;
+    .ant-btn.ant-btn-link.ant-btn-sm {
+      font-family: $font-primary;
+      letter-spacing: 0;
+      text-decoration: none;
+    }
+  }
+}
+
+.umana-signup-login-subtitle {
+  margin-bottom: 20px !important;
+  .ant-steps-item-container,
+  .ant-steps-item.ant-steps-item-process {
+    padding-left: 0 !important;
+  }
+  .ant-form.signup--form {
+    .ant-row.ant-form-item.form-item--md,
+    .ant-row.ant-form-item.form-item--lg {
+      margin: 0 10px 10px 0 !important;
+    }
+    .ant-btn.ant-btn-primary.ant-btn-sm {
+      margin-right: 10px;
+    }
+  }
+}
+.ant-form.signup--form,
+.ant-form.login--form {
+  .ant-row.ant-form-item.form-item--md,
+  .ant-row.ant-form-item.form-item--lg {
+    margin: 0 10px 10px 0 !important;
+  }
+  .ant-btn.ant-btn-primary.ant-btn-sm {
+    margin-right: 10px;
+  }
+}
