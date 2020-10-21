@@ -35,7 +35,7 @@ const SignupForm = props => {
     });
 
     setTimeout(() => {
-      login(e);
+      props.next(1);
     }, 500);
   };
 
