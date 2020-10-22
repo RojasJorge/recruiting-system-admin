@@ -125,11 +125,11 @@
   padding-top: 80px;
   width: 100%;
   max-width: 100%;
-  background-position-x: left;
-  background: $color-white;
-  background-image: linear-gradient($bg-orange, $bg-orange);
-  background-size: 30vw 80vh;
-  background-repeat: no-repeat;
+  background-position-x: left !important;
+  background: $color-white !important;
+  background-image: linear-gradient($bg-orange, $bg-orange) !important;
+  background-size: 30vw 80vh !important;
+  background-repeat: no-repeat !important;
   background-position: 0px 0;
   .is-login {
     padding-top: 0;
