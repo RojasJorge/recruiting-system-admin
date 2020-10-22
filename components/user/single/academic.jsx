@@ -25,8 +25,10 @@ const Academic = props => {
                 <h3>{e.establishment}</h3>
                 <h4>{e.academicLevel}</h4>
                 <label>
-                  <Moment format="D MMM YYYY">{e.dateInit}</Moment>,{' '}
-                  {e.currently ? 'presente' : <Moment format="D MMM YYYY">{e.dateEnd}</Moment>}
+                  <Moment locale="es" format="DD MMMM YYYY">
+                    {e.dateInit}
+                  </Moment>
+                  , {e.currently ? 'presente' : <Moment format="D MMM YYYY">{e.dateEnd}</Moment>}
                 </label>
               </div>
             ))}
@@ -54,7 +56,10 @@ const Academic = props => {
                 <h3>{e.establishment}</h3>
                 <h4>{e.titleCourse}</h4>
                 <label>
-                  {`${e.country}, `} <Moment format="YYYY">{e.year}</Moment>
+                  {`${e.country}, `}{' '}
+                  <Moment locale="es" format="YYYY">
+                    {e.year}
+                  </Moment>
                 </label>
               </div>
             ))}

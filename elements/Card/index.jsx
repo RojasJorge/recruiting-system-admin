@@ -4,7 +4,9 @@ import Moment from 'react-moment';
 
 const Card = props => {
   return (
-    <div className={`umana-card card-theme-${props.theme} card-content-align-${props.align} card-${props.size} card-type-${props.type}`}>
+    <div
+      className={`umana-card card-theme-${props.theme} card-content-align-${props.align} card-${props.size} card-type-${props.type}`}
+    >
       <div className="umana-card__options">
         {props.edit ? (
           <Link href={props.edit} passHref>
@@ -30,7 +32,15 @@ const Card = props => {
       </div>
       {props.parentInfo ? (
         <div className="umana-card__parent-info">
-          {props.parentInfo.avatar ? <Avatar size={80} src={props.parentInfo.avatar} /> : <Avatar className="avatar-icon" size={80} icon={<i className="material-icons">location_city</i>} />}
+          {props.parentInfo.avatar ? (
+            <Avatar size={80} src={props.parentInfo.avatar} />
+          ) : (
+            <Avatar
+              className="avatar-icon"
+              size={80}
+              icon={<i className="material-icons">location_city</i>}
+            />
+          )}
           {props.parentInfo.title ? (
             <div className="title">
               <h5>{props.parentInfo.title}</h5>
@@ -41,7 +51,9 @@ const Card = props => {
               <h5>{props.parentInfo.name}</h5>
             </div>
           ) : null}
-          {props.parentInfo.location ? <p>{`${props.parentInfo.location.city}, ${props.parentInfo.location.country}`}</p> : null}
+          {props.parentInfo.location ? (
+            <p>{`${props.parentInfo.location.city}, ${props.parentInfo.location.country}`}</p>
+          ) : null}
           {props.parentInfo.description ? <p>{props.parentInfo.description}</p> : null}
         </div>
       ) : null}
@@ -53,7 +65,9 @@ const Card = props => {
         <div className="date">
           <i className="material-icons">access_time</i>
           <span> {props.date.type}</span>
-          <Moment format="D MMM YYYY">{props.date.date}</Moment>
+          <Moment locale="es" format="D MMM YYYY">
+            {props.date.date}
+          </Moment>
         </div>
       ) : null}
       {props.link ? (

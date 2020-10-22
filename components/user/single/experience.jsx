@@ -27,8 +27,18 @@ const Experience = props => {
               <h4>{e.company}</h4>
               {/* <label>Ciudad de Guatemala; Marzo 14, 2016 - Presente - 4 años</label> */}
               <label>
-                {`${e.specializationCompany} - `} <Moment format="D MMM YYYY">{e.dateInit}</Moment>{' '}
-                - {e.workingNow ? 'Presente' : <Moment format="D MMM YYYY">{e.dateEnd}</Moment>}
+                {`${e.specializationCompany} - `}{' '}
+                <Moment locale="es" format="D MMM YYYY">
+                  {e.dateInit}
+                </Moment>{' '}
+                -{' '}
+                {e.workingNow ? (
+                  'Presente'
+                ) : (
+                  <Moment locale="es" format="D MMM YYYY">
+                    {e.dateEnd}
+                  </Moment>
+                )}
               </label>
               <p></p>
             </div>

@@ -7,22 +7,20 @@ import { Can } from '../../Can';
 import Link from 'next/link';
 
 const General = props => {
-  
   const getAvatarFromProps = _ => {
-    
-    let result = null
-    
-    if(props && props.defaultData) {
-      const avatar = props.defaultData.profile.fields.personal.avatar
-      
-      if(!isEmpty(avatar)) {
-        result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url
+    let result = null;
+
+    if (props && props.defaultData) {
+      const avatar = props.defaultData.profile.fields.personal.avatar;
+
+      if (!isEmpty(avatar)) {
+        result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
       }
     }
-    
-    return result
-  }
-  
+
+    return result;
+  };
+
   return (
     <div className="umana-content" style={{ marginTop: 50 }} id="general">
       <Can I="apply" a="JOBS">
@@ -33,7 +31,11 @@ const General = props => {
         </Link>
       </Can>
       <div className="umana-content-title-over">
-        <Avatar icon={<i className="material-icons">person</i>} src={getAvatarFromProps()} size={130} />
+        <Avatar
+          icon={<i className="material-icons">person</i>}
+          src={getAvatarFromProps()}
+          size={130}
+        />
 
         <h2>
           {props.data.name
@@ -43,10 +45,8 @@ const General = props => {
       </div>
       {!isEmpty(props.data.currentJobTitle) ? (
         <div className="umana-content__item item-lg" style={{ textAlign: 'center' }}>
-          <label>Puestos a los que aplica</label>
-          <p>
-            {/* {props.data.currentJobTitle.map((e, idx) => (idx !== 0 ? `, ${label(e)}` : label(e)))} */}
-          </p>
+          <label>Puesto al que aplica</label>
+          <p>{label(props.data.currentJobTitle)}</p>
         </div>
       ) : null}
       {props.data.location.city && props.data.location.country ? (
@@ -77,7 +77,9 @@ const General = props => {
         <div className="umana-content__item item-sm">
           <label>Fecha de nacimiento</label>
           <p>
-            <Moment format="D MMM YYYY">{props.data.birthday}</Moment>
+            <Moment locale="es" format="DD MMMM YYYY">
+              {props.data.birthday}
+            </Moment>
           </p>
         </div>
       ) : null}
