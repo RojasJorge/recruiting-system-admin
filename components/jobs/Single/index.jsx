@@ -235,6 +235,39 @@ const SingleJob = () => {
               )}
             </Sitebar>
           </Can>
+          <Can I="guest" a="JOBS">
+            <Sitebar
+              header={{
+                title: job && job.company ? job.company.name : 'Plaza',
+                icon: 'location_city',
+              }}
+            >
+              <p>
+                Para aplicar a la plaza debes contar con una cuenta, has click en iniciar sesión o
+                crea una cuenta
+              </p>
+              <Button type="orange" size="small" disabled={true}>
+                <i className="material-icons">send</i>
+                Aplicar a la plaza
+              </Button>
+              <Button type="orange" size="small">
+                <Link href={`/`} passHref>
+                  <a>
+                    <i className="material-icons">person</i>
+                    Iniciar sesión
+                  </a>
+                </Link>
+              </Button>
+              <Button type="orange" size="small">
+                <Link href={`/signup`} passHref>
+                  <a>
+                    <i className="material-icons">person_add</i>
+                    crear cuenta
+                  </a>
+                </Link>
+              </Button>
+            </Sitebar>
+          </Can>
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
           <div className="umana-content">

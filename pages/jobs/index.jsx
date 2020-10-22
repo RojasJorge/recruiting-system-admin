@@ -9,7 +9,11 @@ const Index = _ => {
   };
 
   return (
-    <Guest title="Plazas" containerClass="app public-jobs theme-candidate">
+    <Guest
+      title="Plazas"
+      containerClass="app public-jobs theme-candidate"
+      layoutClass="umana-layout-big"
+    >
       <>
         <PageTitle title="Plazas" />
         <Jobs empty={dataEmpty} />
