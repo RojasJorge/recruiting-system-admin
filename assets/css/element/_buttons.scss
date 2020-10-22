@@ -3,6 +3,7 @@
 .ant-btn {
   padding: 20px 30px;
   font-family: $font-primary;
+  word-break: break-all;
   i {
     margin-right: 10px;
   }
@@ -22,6 +23,7 @@
     padding: 10px;
     &:hover {
       background-color: rgba($color-blue, 0.7);
+      color: $color-white;
     }
     &.ant-btn-lg {
       padding: 10px 30px;
@@ -64,6 +66,13 @@
       }
     }
   }
+  &:hover,
+  &:focus,
+  &::selection {
+    border: 0;
+    color: $color-white;
+    box-shadow: none;
+  }
 }
 
 .ant-btn {
@@ -77,6 +86,7 @@
   cursor: pointer;
   margin-bottom: 20px;
   position: relative;
+  border: 0px;
   & > input {
     opacity: 0;
     position: absolute;
@@ -107,13 +117,20 @@
   }
   &.ant-btn-sm {
     height: auto;
-    width: 200px;
+    width: 250px;
     padding: 10px;
     margin-bottom: 10px;
     color: $color-white;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 12px;
+    &:hover,
+    &:focus,
+    &::selection {
+      border: 0;
+      color: $color-white;
+      box-shadow: none;
+    }
   }
   &.ant-btn-line-white {
     background: transparent;

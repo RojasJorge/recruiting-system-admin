@@ -194,3 +194,20 @@
     }
   }
 }
+
+.ant-avatar.ant-avatar-circle.ant-avatar-icon.table-avatar {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0;
+  i {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin: 0;
+    font-size: 15px;
+    transform: translateY(0) !important;
+  }
+}
