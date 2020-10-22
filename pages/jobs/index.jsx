@@ -9,7 +9,7 @@ const Index = _ => {
   };
 
   return (
-    <Guest title="Plazas">
+    <Guest title="Plazas" containerClass="app public-jobs theme-candidate">
       <>
         <PageTitle title="Plazas" />
         <Jobs empty={dataEmpty} />

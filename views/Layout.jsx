@@ -7,21 +7,21 @@ import Login from '../components/user/Login';
 import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
 import { SyncOutlined } from '@ant-design/icons';
-import {isEmpty} from 'lodash'
+import { isEmpty } from 'lodash';
 // import { Can } from '../components/Can';
 
-const Layout = ({ children, title, className }) => {
+const Layout = ({ children, title, className, containerClass }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
   const [fullScreen, switchFullScreen] = useState(false);
-  
+
   /**
    * System collections
    * State names (singular) = career, academic_level
    */
-  const catalogs = useStoreState(state => state.collections)
-  const getCollections = useStoreActions(actions => actions.collections.get)
-  
+  const catalogs = useStoreState(state => state.collections);
+  const getCollections = useStoreActions(actions => actions.collections.get);
+
   /** Prevent crash with 'guest' as default scope */
   const [scopeState, setScope] = useState('guest');
 
@@ -32,25 +32,25 @@ const Layout = ({ children, title, className }) => {
 
   /** Get global actions */
   const keepAuth = useStoreActions(actions => actions.auth.grantAccess);
-  
+
   /** Get/Set catalogs */
   useEffect(() => {
-    if(isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) {
-      getCollections({type: 'career'})
-      getCollections({type: 'academic-level'})
+    if (isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) {
+      getCollections({ type: 'career' });
+      getCollections({ type: 'academic-level' });
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     /** Parse user & token from localStorage */
     let user = JSON.parse(localStorage.getItem('uUser'));
     const token = localStorage.getItem('uToken');
     const _scope = JSON.parse(localStorage.getItem('uScopes'));
-    
+
     if (_scope) {
       setScope(_scope[0]);
     }
-    
+
     if (!token) Router.replace('/');
 
     /** Check if valid */
@@ -64,7 +64,7 @@ const Layout = ({ children, title, className }) => {
   }, []);
 
   return auth.token && auth.user ? (
-    <div className={`${className} theme-${scopeState}`}>
+    <div className={`${className} theme-${scopeState} ${containerClass}`}>
       <Head>
         <title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
       </Head>
@@ -74,7 +74,7 @@ const Layout = ({ children, title, className }) => {
       </div>
       <PageLoader active={mloading} />
     </div>
-  ) : (loading || isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) ? (
+  ) : loading || isEmpty(catalogs.career) || isEmpty(catalogs.academic_level) ? (
     <div className="app--spinner animated fadeIn">
       <SyncOutlined style={{ fontSize: 60 }} spin />
     </div>

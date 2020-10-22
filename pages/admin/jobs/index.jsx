@@ -15,7 +15,7 @@ const Index = _ => {
   };
 
   return (
-    <Layout title="Plazas">
+    <Layout title="Plazas" containerClass="app public-jobs">
       <>
         <PageTitle title="Plazas" />
         <div className="umana-subtitle">
