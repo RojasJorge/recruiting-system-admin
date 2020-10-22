@@ -417,6 +417,15 @@ h5 {
   }
 }
 
+.umana-title-hero {
+  font-size: 50px;
+  font-weight: 300 !important;
+  color: #585858 !important;
+  span {
+    color: $color-orange !important;
+  }
+}
+
 .umana-subtitle {
   width: 100%;
   display: flex;

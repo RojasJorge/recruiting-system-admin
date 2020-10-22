@@ -1,32 +1,6 @@
-//all signup and login
-
-.umana-signup-login-title {
-  margin-bottom: 50px;
-  &.have-subtitle {
-    margin-bottom: 20px;
-  }
-  * {
-    font-size: 34px;
-    font-family: 'Muli', Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    letter-spacing: 1px;
-  }
-  h1 {
-    margin: 0;
-  }
-}
-.umana-signup-login-subtitle {
-  margin-bottom: 50px;
-  width: 100%;
-  * {
-    font-size: 20px;
-  }
-}
-
 //singup
 
 .umana-signup {
-  @include max-width();
   min-height: calc(100vh - 80px);
   .ant-steps.ant-steps-horizontal {
     padding-right: 0;
@@ -158,5 +132,188 @@
   }
   .ant-btn.ant-btn-primary.ant-btn-sm {
     margin-right: 10px;
+  }
+}
+
+.umana.signup {
+  background: $color-white;
+  background-position-x: left;
+  background-image: linear-gradient($bg-blue, $bg-blue);
+  background-size: 50vw 100vh;
+  background-repeat: no-repeat;
+  background-position: 0px 0;
+  padding-top: 60px;
+  @include bp(xmedium) {
+    padding-top: 80px;
+  }
+  .app--header.umana__header {
+    z-index: 100;
+    background: $color-white;
+    @include bp(xmedium) {
+      background: transparent;
+    }
+  }
+  .umana-signup {
+    background-position: right bottom !important;
+    background-repeat: no-repeat !important;
+    max-width: none;
+    background-size: 100vw !important;
+    .umana-page-title.simple-title {
+      margin-bottom: 10px;
+    }
+    @include bp(xmedium) {
+      background-size: 70vw !important;
+    }
+    @include bp(xlarge) {
+      background-size: 60vw !important;
+    }
+    .umana-signup__content {
+      width: 100%;
+      margin-bottom: 140px;
+      @include bp(medium) {
+        margin-bottom: 80px;
+        width: 60%;
+      }
+      @include bp(large) {
+        margin-bottom: 0px;
+        width: 40%;
+      }
+      .ant-radio-group.ant-radio-group-outline.ant-radio-group-large {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.steps-content {
+  margin-bottom: 10px;
+  @include bp(xmedium) {
+    margin-bottom: 40px;
+  }
+  .ant-steps.ant-steps-horizontal.ant-steps-label-horizontal {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 20px 0;
+    flex-direction: row !important;
+    .ant-steps-item {
+      .ant-steps-item-container {
+        padding: 0;
+        padding-left: 0;
+        *,
+        .ant-steps-item-title {
+          color: $color-blue !important;
+          &:hover {
+            color: $color-blue;
+          }
+        }
+      }
+      &.ant-steps-item-process,
+      &.ant-steps-item-active {
+        padding-left: 0 !important;
+      }
+      &.ant-steps-item-finish,
+      &.ant-steps-item-wait {
+        width: 0;
+        min-width: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0 !important;
+      }
+    }
+  }
+}
+
+/// ======== login =======
+
+.umana.login {
+  background: $color-white;
+  background-position-x: left;
+  background-image: linear-gradient($bg-blue, $bg-blue);
+  background-size: 30vw 70vh;
+  background-repeat: no-repeat;
+  background-position: 0px 0;
+  padding-top: 60px;
+  @include bp(xmedium) {
+    padding-top: 80px;
+  }
+  .app--header.umana__header {
+    z-index: 100;
+    background: $color-white;
+    @include bp(xmedium) {
+      background: transparent;
+    }
+  }
+  .umana-login {
+    background-position: right bottom !important;
+    background-repeat: no-repeat !important;
+    max-width: none;
+    background-size: 100vw !important;
+    .umana-page-title.simple-title {
+      margin-bottom: 10px;
+    }
+    @include bp(xmedium) {
+      background-size: 70vw !important;
+    }
+    @include bp(xlarge) {
+      background-size: 60vw !important;
+    }
+    .umana-login__content {
+      width: 100%;
+      margin-bottom: 140px;
+      @include bp(medium) {
+        margin-bottom: 80px;
+        width: 60%;
+      }
+      @include bp(large) {
+        margin-bottom: 0px;
+        width: 40%;
+      }
+      .ant-radio-group.ant-radio-group-outline.ant-radio-group-large {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .notification {
+    padding-bottom: 20px;
+  }
+}
+
+.steps-content {
+  margin-bottom: 10px;
+  @include bp(xmedium) {
+    margin-bottom: 40px;
+  }
+  .ant-steps.ant-steps-horizontal.ant-steps-label-horizontal {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 20px 0;
+    flex-direction: row !important;
+    .ant-steps-item {
+      .ant-steps-item-container {
+        padding: 0;
+        padding-left: 0;
+        *,
+        .ant-steps-item-title {
+          color: $color-blue !important;
+          &:hover {
+            color: $color-blue;
+          }
+        }
+      }
+      &.ant-steps-item-process,
+      &.ant-steps-item-active {
+        padding-left: 0 !important;
+      }
+      &.ant-steps-item-finish,
+      &.ant-steps-item-wait {
+        width: 0;
+        min-width: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0 !important;
+      }
+    }
   }
 }
