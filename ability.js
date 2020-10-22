@@ -7,7 +7,14 @@ const ability = scope =>
     switch (role) {
       case 'umana':
         can('read', ['USERS', 'CATALOGS', 'SPECIAL_ALERTS', 'PROFILE']);
-        can('view', ['MAIN_LAYOUT', 'LOGIN', 'COMPANIES', 'JOBS', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE']);
+        can('view', [
+          'MAIN_LAYOUT',
+          'LOGIN',
+          'COMPANIES',
+          'JOBS',
+          'REQUESTS_ADMIN_VIEW',
+          'REQUEST_UPDATE',
+        ]);
         can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST']);
         can('view', ['ALL_MENUS']);
         can('add', ['COMPANIES', 'JOBS']);
@@ -25,10 +32,10 @@ const ability = scope =>
         can('view', ['MAIN_LAYOUT', 'LOGIN', 'JOBS', 'COMPANIES', 'OWN_REQUESTS']);
         can('apply', ['JOBS']);
         cannot('view', ['REQUESTS_ADMIN_VIEW']);
-        
+
         break;
       case 'guest':
-        can('apply', ['JOBS']);
+        can('guest', ['JOBS']);
         break;
 
       default:

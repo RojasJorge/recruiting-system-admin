@@ -4,7 +4,7 @@ import SingleJob from '../../../components/jobs/Single';
 
 const Index = _ => {
   return (
-    <Guest title="Plaza">
+    <Guest title="Plaza" containerClass="app public-jobs-singe theme-candidate">
       <>
         <PageTitle title="Ver Plaza" />
         <SingleJob />

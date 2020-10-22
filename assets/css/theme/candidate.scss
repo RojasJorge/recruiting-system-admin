@@ -2,6 +2,12 @@
 .profile.theme-candidate,
 .theme-candidate {
   background: $bg-orange;
+  .umana-header {
+    background: transparent;
+    .ant-menu-item.ant-menu-item-only-child.type-btn a {
+      color: $color-white !important;
+    }
+  }
   .umana-header,
   .app--header.umana__header.is-login {
     background: $bg-orange;
