@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useStoreActions } from 'easy-peasy';
-import { Button, Form, Input } from 'antd';
+import { PageTitle } from '../../elements';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Button, Form, Input, Alert } from 'antd';
 import { delay } from 'lodash';
 import MainHeader from '../structure/Header';
 import imgLogin from '../../images/login.png';
@@ -13,8 +14,17 @@ const { Password } = Input;
 const Login = _ => {
   const [loading, switchLoading] = useState(true);
   const login = useStoreActions(actions => actions.auth.login);
+  const loginState = useStoreState(state => state.auth.error);
   const [token, setToken] = useState(false);
-  const collectionsActions = useStoreActions(actions => actions.collections);
+  const [errorInfo, setError] = useState('');
+
+  const errorResponse = _ => {
+    if (loginState === 401) {
+      setError('El usuario no existe, has click en crear cuenta.');
+    }
+  };
+
+  console.log(loginState);
 
   const onFinish = data => {
     switchLoading(true);
@@ -25,13 +35,17 @@ const Login = _ => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('uToken')) {
-      setToken(true);
-      collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
-      collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
+    if (loginState === 401) {
+      setError('El usuario no existe, has click en crear cuenta.');
+    }
+    if (loginState === 423) {
+      setError('Usuaraio no verificado, revisa tu correo electrónico para verificar tu cuenta.');
+    }
+    if (loginState === 0) {
+      setError('');
     }
     delay(() => switchLoading(false), 1000);
-  }, []);
+  }, [loginState]);
 
   if (token) return null;
 
@@ -40,84 +54,69 @@ const Login = _ => {
       <Head>
         <title>Iniciar Sesión</title>
       </Head>
-      <div className="app animated fadeIn login umana">
+      <div className="app fadeIn umana login">
         <MainHeader />
-        <div className="umana-login">
-          <div className="umana-layout row justify-content-center align-items-center">
-            <div className="col-md-6 umana-login__img">
-              <img src={imgLogin} alt="" />
-            </div>
-            <div className="col-md-6 umana-login__form">
-              <div className="row">
-                <div className="col-md-12 umana-signup-login-title">
-                  <h1>Iniciar Sesión</h1>
-                </div>
+        {/* Content  */}
+        <div className="umana-login" style={{ background: `url(${imgLogin})` }}>
+          <div className="umana-layout">
+            <PageTitle title="Iniciar sesión" />
+            <div className="umana-login__content">
+              <div className="notification">
+                {errorInfo ? <Alert description={errorInfo} type="error" showIcon /> : null}
               </div>
-              <Form
-                className="login--form"
-                // form={form}
-                name="basic"
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                layout="vertical"
-              >
-                <Item
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Correo electrónico es requerido.',
-                    },
-                  ]}
-                  name="email"
-                  label="Correo Electrónico"
+              <div className="steps-content">
+                <Form
+                  className="login--form"
+                  // form={form}
+                  name="basic"
+                  initialValues={{ remember: true }}
+                  onFinish={onFinish}
+                  layout="vertical"
                 >
-                  <Input size="large" />
-                </Item>
-                <Item
-                  rules={[{ required: true, message: 'Contraseña es requerida.' }]}
-                  name="password"
-                  label="Contraseña"
-                >
-                  <Password size="large" style={{ height: 45, lineHeight: '45px' }} />
-                </Item>
-                <Button size="small" htmlType="submit" type="primary" loading={loading}>
-                  Iniciar Sesión
-                </Button>
-                <p>
-                  ¿No tienes cuenta?
-                  <Button
-                    type="link"
-                    size="small"
-                    onClick={e => {
-                      e.preventDefault();
-                      Router.push('/signup');
-                    }}
+                  <Item
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Correo electrónico es requerido.',
+                      },
+                    ]}
+                    name="email"
+                    label="Correo Electrónico"
                   >
-                    Crear cuenta
+                    <Input size="large" />
+                  </Item>
+                  <Item
+                    rules={[{ required: true, message: 'Contraseña es requerida.' }]}
+                    name="password"
+                    label="Contraseña"
+                  >
+                    <Password size="large" style={{ height: 45, lineHeight: '45px' }} />
+                  </Item>
+                  <Button size="small" htmlType="submit" type="primary" loading={loading}>
+                    Iniciar Sesión
                   </Button>
-                </p>
-              </Form>
+                </Form>
+              </div>
+
+              <p>
+                ¿No tienes cuenta?
+                <Button
+                  type="link"
+                  size="small"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.push('/signup');
+                  }}
+                >
+                  Crear cuenta
+                </Button>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </>
   );
-
-  // return (
-  // 	<>
-  // 		<h1>ir al inicio</h1>
-  // 		<Button
-  // 			type="link"
-  // 			onClick={e => {
-  // 				e.preventDefault()
-  // 				Router.push('/admin/catalogs')
-  // 			}}
-  // 		>
-  // 			catalogos
-  // 		</Button>
-  // 	</>
-  // )
 };
 
 export default Login;

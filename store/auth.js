@@ -11,6 +11,7 @@ export default {
   user: null,
   token: null,
   loading: false,
+  error: 0,
   updateToken: action((state, payload) => {
     state.token = payload;
     localStorage.setItem('uToken', payload);
@@ -44,6 +45,11 @@ export default {
     state.user = payload;
     state.token = token;
   }),
+  handlenError: action((state, payload) => {
+    /** Set global user info */
+    console.log('payload', payload);
+    state.error = payload;
+  }),
 
   /**
    * The login action
@@ -58,17 +64,16 @@ export default {
         })
         .then(response => {
           actions.grantAccess(response.data);
-          if(response.data.scope[0] === 'company' || response.data.scope[0] === 'umana') {
-            location.href = '/admin/requests'
+          actions.handlenError(0);
+          if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana') {
+            location.href = '/admin/requests';
           } else {
-            location.href = '/admin/welcome'
+            location.href = '/admin/welcome';
           }
-          // if (Router.pathname === '/') location.href = '/admin/requests';
-          // if (Router.pathname === '/signup') location.href = '/admin/welcome';
         })
         .catch(error => {
           console.log(error);
-          message.error('Ah ocurrido un error, intente de nuevo.');
+          actions.handlenError(error.response.status);
         }),
   ),
   logout: action(state => {
