@@ -151,11 +151,20 @@ div.ant-select-disabled {
 
 // number
 .ant-input-number {
-  width: 100%;
+  width: 100% !important;
   height: 45px;
   line-height: 45px;
   background: $color-white;
   color: $color-primary;
+  border-radius: 0 !important;
+  .ant-input-number-input-wrap {
+    height: 100% !important;
+    width: 100%;
+    .ant-input-number-input {
+      height: 100% !important;
+      width: 100%;
+    }
+  }
   &.ant-input-number-focused,
   &:hover,
   &:focus,
