@@ -3672,11 +3672,7 @@ html {
 .ant-menu-rtl .ant-menu-item-group-title {
   text-align: right;
 }
-.ant-menu-submenu,
-.ant-menu-submenu-inline {
-  -webkit-transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
+
 .ant-menu-submenu-selected {
   color: $color-blue;
 }
@@ -3723,6 +3719,7 @@ html {
 .ant-menu-submenu-active,
 .ant-menu-submenu-title:hover {
   color: $color-blue;
+  border-bottom: 0 !important;
 }
 .ant-menu-horizontal .ant-menu-item,
 .ant-menu-horizontal .ant-menu-submenu {
@@ -4020,7 +4017,7 @@ html {
 .ant-menu-horizontal > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-submenu-selected {
   color: $color-blue;
-  border-bottom: 2px solid $color-blue;
+  border-bottom: 0px ;
 }
 .ant-menu-horizontal > .ant-menu-item > a {
   display: block;

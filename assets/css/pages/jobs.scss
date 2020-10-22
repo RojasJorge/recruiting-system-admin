@@ -10,6 +10,9 @@
       @include bp(xmedium) {
         width: 200px;
       }
+      @include bp(mediumxx) {
+        width: 250px;
+      }
     }
     .umana-layout-cl__flex {
       width: 100%;
@@ -29,7 +32,61 @@
   }
 }
 .ant-pagination {
-  text-align: right;
+  text-align: center;
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 5px;
+    .ant-pagination-item-link {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border-color: $color-white;
+      &:hover {
+        border-color: #cccccc;
+        color: $color-text;
+      }
+    }
+    &.ant-pagination-disabled {
+      .ant-pagination-item-link {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border-color: $color-white;
+        color: #cccccc;
+        background: #f2f2f2;
+        &:hover {
+          border-color: white;
+        }
+      }
+    }
+  }
+  .ant-pagination-item {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-color: $color-white;
+    margin: 0;
+    a {
+      font-size: 18px;
+      line-height: 50px;
+    }
+    &:hover {
+      a {
+        color: $color-orange;
+      }
+    }
+    &.ant-pagination-item-active {
+      border-color: $color-orange;
+      color: $color-white;
+      background: $color-orange;
+      a {
+        color: $color-white;
+      }
+    }
+  }
 }
 
 .umana-languages-inputs {
@@ -54,5 +111,75 @@
         font-size: 14px;
       }
     }
+  }
+}
+
+.umana-layout-big {
+  width: 100%;
+  max-width: 1920px;
+  @include padding-x();
+  margin: 0 auto;
+}
+
+.public-jobs.app {
+  padding-top: 80px;
+  width: 100%;
+  max-width: 100%;
+  background-position-x: left;
+  background: $color-white;
+  background-image: linear-gradient($bg-orange, $bg-orange);
+  background-size: 30vw 80vh;
+  background-repeat: no-repeat;
+  background-position: 0px 0;
+  .is-login {
+    padding-top: 0;
+  }
+
+  .app--header.umana__header.no-login {
+    background: $color-white;
+    background-image: linear-gradient($bg-orange, $bg-orange);
+    background-size: 30vw 80px;
+    background-position-x: left;
+    background-repeat: no-repeat;
+    height: auto;
+    min-height: 60px;
+    @include bp(xmedium) {
+      min-height: 80px;
+    }
+    .umana-header {
+      background: transparent;
+      .ant-menu-item.ant-menu-item-only-child.type-btn a {
+        color: $color-white !important;
+      }
+    }
+  }
+  &.theme-candidate {
+    .container.umana-layout {
+      width: 100%;
+      max-width: 1920px;
+      @include padding-x();
+      margin: 0 auto;
+    }
+    .umana-page-title.simple-title {
+      @include bp(xmedium) {
+        margin-left: 0;
+      }
+      @include bp(mediumxx) {
+        margin-left: 270px;
+      }
+    }
+    .umana-layout-cl__flex.width-section.bg-white {
+      padding-left: 10px;
+      @include bp(mediumxx) {
+        padding-left: 30px;
+      }
+    }
+  }
+  .umana-layout-cl__flex.width-section.bg-white {
+    padding-left: 0;
+  }
+
+  .umana-public-content {
+    padding-bottom: 10%;
   }
 }

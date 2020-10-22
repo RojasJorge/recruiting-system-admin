@@ -318,4 +318,23 @@
       }
     }
   }
+  //pagination
+  .ant-pagination {
+    .ant-pagination-item {
+      border-color: $color-white;
+      &:hover {
+        a {
+          color: $color-blue;
+        }
+      }
+      &.ant-pagination-item-active {
+        border-color: $color-blue;
+        color: $color-white;
+        background: $color-blue;
+        a {
+          color: $color-white;
+        }
+      }
+    }
+  }
 }

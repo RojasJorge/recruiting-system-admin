@@ -110,8 +110,8 @@ const Jobs = props => {
   /** Get countries from store (tools) */
   const countries = useStoreState(state => state.tools.countries);
   const list = useStoreState(state => state.jobs.list);
-  const total = useStoreState(state => state.jobs.total);
   const fill = useStoreActions(actions => actions.jobs.fill);
+  const total = useStoreState(state => state.jobs.total);
 
   /**
    * Job positions
@@ -380,11 +380,12 @@ const Jobs = props => {
           <div className="col-md-12">
             <Pagination
               current={filters.page}
+              // total={separatedJobs.available.length}
               total={total}
+              defaultPageSize={8}
+              pageSize={8}
               onChange={paginationChange}
-              // showSizeChanger
               onShowSizeChanger={paginationChange}
-              // pageSizeOptions={['5', '10', '25', '50']}
             />
           </div>
         </div>

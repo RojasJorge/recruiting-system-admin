@@ -399,6 +399,25 @@
       border-color: $color-green !important;
     }
   }
+  //pagination
+  .ant-pagination {
+    .ant-pagination-item {
+      border-color: $color-white;
+      &:hover {
+        a {
+          color: $color-green;
+        }
+      }
+      &.ant-pagination-item-active {
+        border-color: $color-green;
+        color: $color-white;
+        background: $color-green;
+        a {
+          color: $color-white;
+        }
+      }
+    }
+  }
 }
 
 .theme-company {

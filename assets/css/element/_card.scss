@@ -33,13 +33,17 @@
   // width: 100%;
   min-height: 200px;
   width: calc(50% - 10px);
-  // max-width: 250px;
+  min-width: 230px;
   margin: 5px;
   @include bp(medium) {
     padding: 40px 20px;
     width: calc(50% - 20px);
     margin: 10px;
     min-height: 300px;
+    margin-right: 0;
+  }
+  @include bp(mediumxx) {
+    margin-right: 10px;
   }
   @include bp(large) {
     min-height: 400px;
