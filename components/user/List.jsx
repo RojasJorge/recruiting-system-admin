@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { Table, Pagination } from 'antd';
+import { Table, Pagination, Avatar } from 'antd';
 import { PageTitle } from '../../elements';
 import xhr from '../../xhr';
 
@@ -46,6 +46,20 @@ const UsersList = () => {
           pagination={false}
           columns={[
             {
+              title: '',
+              dataIndex: 'avatar',
+              key: 'avatar',
+              width: 40,
+              render: (text, record) => (
+                <Avatar
+                  className="table-avatar"
+                  icon={<i className="material-icons">person</i>}
+                  src={record.avatar}
+                  size={30}
+                />
+              ),
+            },
+            {
               title: 'Nombre',
               dataIndex: 'name',
               key: 'name',
@@ -88,6 +102,20 @@ const UsersList = () => {
           rowKey={record => record.id}
           pagination={false}
           columns={[
+            {
+              title: '',
+              width: 40,
+              dataIndex: 'avatar',
+              key: 'avatar',
+              render: (text, record) => (
+                <Avatar
+                  className="table-avatar"
+                  icon={<i className="material-icons">business</i>}
+                  src={record.avatar}
+                  size={30}
+                />
+              ),
+            },
             {
               title: 'Nombre',
               dataIndex: 'name',
