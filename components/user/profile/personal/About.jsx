@@ -65,8 +65,8 @@ const About = ({ switchCurrent, current }) => {
         </Item>
       </div>
       <Item>
-        <Button style={{ width: '100%' }} type="orange" size="small" htmlType="submit">
-          Confirmar y continuar
+        <Button style={{ marginLeft: 'auto' }} type="orange" size="small" htmlType="submit">
+          Guardar y continuar
         </Button>
       </Item>
     </Form>

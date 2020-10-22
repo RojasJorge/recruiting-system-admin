@@ -22,7 +22,7 @@ const LookingFor = ({ switchCurrent, current }) => {
   if (lookingFor.travel === '') {
     lookingFor.travel = false;
   }
-  
+
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
@@ -107,8 +107,8 @@ const LookingFor = ({ switchCurrent, current }) => {
         </div>
 
         <Item className="form-item--lg">
-          <Button style={{ width: '100%' }} type="orange" htmlType="submit" size="small">
-            Confirmar y continuar
+          <Button style={{ marginLeft: 'auto' }} type="orange" htmlType="submit" size="small">
+            Guardar y continuar
           </Button>
         </Item>
       </Form>
