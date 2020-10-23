@@ -104,7 +104,7 @@ const Economic = ({ current, switchCurrent }) => {
           {checks.otherIncome ? (
             <>
               <Item name="otherIncomeValue" label="Escriba monto" className="form-item--md">
-                <InputNumber size="large" />
+                <InputNumber min={0} size="large" />
               </Item>
 
               <Item name="sourceIncome" label="Escriba la fuente" className="form-item--md">

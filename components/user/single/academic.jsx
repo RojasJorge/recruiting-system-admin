@@ -45,8 +45,7 @@ const Academic = props => {
             </Link>
           </Can>
 
-          <div className="umana-content__item item-lg" style={{ marginTop: 40 }}>
-            <hr />
+          <div className="umana-content__item item-lg">
             <h2>Otros cursos</h2>
           </div>
 

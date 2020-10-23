@@ -220,6 +220,7 @@ h5 {
     align-self: flex-end;
     background: $color-white;
     border: 2px solid rgba($color-blue, 0.5);
+    background: transparent !important;
     @include bp(xmedium) {
       border: $border;
     }

@@ -2,6 +2,8 @@ import { isEmpty } from 'lodash';
 import locale from '../../../data/translates/spanish';
 import { Can } from '../../Can';
 import Link from 'next/link';
+import { Checkbox } from 'antd';
+
 const Economic = props => {
   // console.log('economic', props.data);
   return (
@@ -168,10 +170,8 @@ const Economic = props => {
         <label>¿Tiene Anotación en Infonet o similar?</label>
         <p>{locale(props.data.legal.infonetOrOther)}</p>
       </div>
-      <hr />
       <div className="umana-content__item item-lg">
-        <input type="checkbox" checked={props.data.allowed} disabled />
-        <p>
+        <Checkbox checked={props.data.allowed} disabled>
           Autorizo expresamente a las empresas que distribuyen o comercializan con datos personales,
           para que distribuyan / comercialicen estudios que contengan datos personales concernientes
           a mi persona, a efecto de verificar la información proporcionada; y autorizo que mis datos
@@ -180,7 +180,7 @@ const Economic = props => {
           21, 22, 28, 46. Ley contra Lavado de Dinero y Otros Activos y 12 y 20 de su Reglamento:
           50, 55, 56 y 58. Ley de Bancos y Grupos Financieros entre otros. Doy fe que la información
           proporcionada es verdadera y queda a disposición de ser verificada por UMANA RH.
-        </p>
+        </Checkbox>
       </div>
     </div>
   );

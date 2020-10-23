@@ -1,5 +1,6 @@
 import { isEmpty } from 'lodash';
 import { Can } from '../../Can';
+import locale from '../../../data/translates/spanish';
 import Link from 'next/link';
 const Contact = props => {
   return (
@@ -22,7 +23,7 @@ const Contact = props => {
         <div className="umana-content__item item-md">
           <label>Teléfono</label>
           {props.data.phones.map((e, idx) => (
-            <p key={idx}>{`${e.type}: ${e.area} ${e.number}`}</p>
+            <p key={idx}>{`${locale(e.type)}: +(${e.area}) ${e.number}`}</p>
           ))}
         </div>
       ) : null}
