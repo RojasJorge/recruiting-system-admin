@@ -79,6 +79,7 @@ const Documents = ({ switchCurrent, current }) => {
     notification[type]({
       message,
       description,
+      placement: 'bottomRight',
     });
   };
 

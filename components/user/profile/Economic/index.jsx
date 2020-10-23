@@ -54,6 +54,7 @@ const Economic = ({ current, switchCurrent }) => {
     notification[type]({
       message,
       description,
+      placement: 'bottomRight',
     });
   };
 
