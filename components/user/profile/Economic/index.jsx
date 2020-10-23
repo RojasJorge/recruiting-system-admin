@@ -14,7 +14,6 @@ const { Item, List } = Form;
 const { Option } = Select;
 
 const Economic = ({ current, switchCurrent }) => {
-
   /** Global state */
   let {
     profile: {
@@ -22,7 +21,7 @@ const Economic = ({ current, switchCurrent }) => {
       fields: { economic },
     },
   } = useStoreState(state => state.auth.user);
-  
+
   const [checks, updateChecks] = useState({
     otherIncome: economic.otherIncome,
   });
@@ -62,32 +61,7 @@ const Economic = ({ current, switchCurrent }) => {
     <>
       <Form onFinish={onFinish} initialValues={economic}>
         <div className="umana-form--section">
-          <h2>Información Económica</h2>
-          <Item name="currentSalary" label="Salario actual" className="form-item--lg">
-            <InputNumber size="large" />
-          </Item>
-          <Item name="desiredSalary" label="Salario deseado" className="form-item--lg">
-            <Salary />
-          </Item>
-          <Item
-            name="otherIncome"
-            valuePropName="checked"
-            label="¿Tiene otros ingresos?"
-            className="form-item--sm"
-          >
-            <Checkbox onChange={e => updateChecks({ ...checks, otherIncome: e.target.checked })} />
-          </Item>
-          {checks.otherIncome ? (
-            <>
-              <Item name="otherIncomeValue" label="Escriba monto" className="form-item--sm">
-                <InputNumber size="large" />
-              </Item>
-
-              <Item name="sourceIncome" label="Escriba la fuente" className="form-item--sm">
-                <Input size="large" />
-              </Item>
-            </>
-          ) : null}
+          <h2 style={{ width: '100%' }}>Información Económica</h2>
           <Item name="typeHousing" label="Tipo de vivienda" className="form-item--md">
             <Select>
               {[
@@ -114,6 +88,30 @@ const Economic = ({ current, switchCurrent }) => {
           <Item name="dependents" label="Dependientes" className="form-item--md">
             <InputNumber min={0} size="large" />
           </Item>
+          <Item name="currentSalary" label="Salario actual" className="form-item--lg">
+            <InputNumber size="large" />
+          </Item>
+          <Item name="desiredSalary" label="Salario deseado" className="form-item--lg">
+            <Salary />
+          </Item>
+
+          <hr />
+          <Item name="otherIncome" valuePropName="checked" className="form-item--lg">
+            <Checkbox onChange={e => updateChecks({ ...checks, otherIncome: e.target.checked })}>
+              ¿Tiene otros ingresos?
+            </Checkbox>
+          </Item>
+          {checks.otherIncome ? (
+            <>
+              <Item name="otherIncomeValue" label="Escriba monto" className="form-item--md">
+                <InputNumber size="large" />
+              </Item>
+
+              <Item name="sourceIncome" label="Escriba la fuente" className="form-item--md">
+                <Input size="large" />
+              </Item>
+            </>
+          ) : null}
         </div>
         <Debts />
         <Vehicle />

@@ -36,7 +36,7 @@ const Salary = ({ value = {}, onChange }) => {
   };
 
   return (
-    <div className="umana-form--group">
+    <div className="umana-form--group" style={{ paddingBottom: 0 }}>
       <div className="form-item--sm">
         <label htmlFor="currency">Moneda</label>
         <Select onChange={e => handleChange(e, 'currency')} value={values.currency} size="large">

@@ -16,16 +16,15 @@ const Debts = () => {
                   key={field.key}
                   style={{
                     marginBottom: 24,
-                    backgroundColor: '#f5f5f5',
-                    padding: 24,
+                    width: '100%',
                   }}
                 >
                   <div className="row align-items-center">
                     <div className="col-md-11">
                       <div className="row">
-                        <div className="col-md-4">
-                          <label htmlFor="whatCompany">Que empresa</label>
+                        <div className="col-md-6">
                           <Item
+                            label="¿En qué empresa?"
                             name={[field.name, 'whatCompany']}
                             fieldKey={[field.fieldKey, 'whatCompany']}
                             rules={[
@@ -38,9 +37,9 @@ const Debts = () => {
                             <Input size="large" />
                           </Item>
                         </div>
-                        <div className="col-md-4">
-                          <label htmlFor="amount">Monto</label>
+                        <div className="col-md-3">
                           <Item
+                            label="Monto"
                             name={[field.name, 'amount']}
                             fieldKey={[field.fieldKey, 'amount']}
                             rules={[
@@ -53,9 +52,9 @@ const Debts = () => {
                             <InputNumber size="large" />
                           </Item>
                         </div>
-                        <div className="col-md-4">
-                          <label htmlFor="monthlyFee">Pago mensual</label>
+                        <div className="col-md-3">
                           <Item
+                            label="Pago mensual"
                             name={[field.name, 'monthlyFee']}
                             fieldKey={[field.fieldKey, 'monthlyFee']}
                             rules={[
@@ -82,6 +81,7 @@ const Debts = () => {
               ))}
 
               <Button
+                style={{ width: '100%' }}
                 type="dashed"
                 icon={<PlusOutlined />}
                 onClick={() => {

@@ -15,16 +15,14 @@ const Vehicle = () => {
                   key={field.key}
                   style={{
                     marginBottom: 24,
-                    backgroundColor: '#f5f5f5',
-                    padding: 24,
                   }}
                 >
                   <div className="row align-items-center">
                     <div className="col-md-11">
                       <div className="row">
-                        <div className="col-md-6">
-                          <label htmlFor="type">Tipo</label>
+                        <div className="col-md-4">
                           <Item
+                            label="Tipo"
                             name={[field.name, 'type']}
                             fieldKey={[field.fieldKey, 'type']}
                             rules={[
@@ -52,9 +50,9 @@ const Vehicle = () => {
                             </Select>
                           </Item>
                         </div>
-                        <div className="col-md-6">
-                          <label htmlFor="brand">Marca</label>
+                        <div className="col-md-4">
                           <Item
+                            label="Marca"
                             name={[field.name, 'brand']}
                             fieldKey={[field.fieldKey, 'brand']}
                             rules={[
@@ -67,9 +65,9 @@ const Vehicle = () => {
                             <Input size="large" />
                           </Item>
                         </div>
-                        <div className="col-md-6">
-                          <label htmlFor="brand">Año</label>
+                        <div className="col-md-4">
                           <Item
+                            label="Año"
                             name={[field.name, 'year']}
                             fieldKey={[field.fieldKey, 'year']}
                             rules={[
@@ -83,8 +81,8 @@ const Vehicle = () => {
                           </Item>
                         </div>
                         <div className="col-md-2">
-                          <label htmlFor="brand">Aún debe?</label>
                           <Item
+                            label="¿Aún debe?"
                             name={[field.name, 'debts']}
                             fieldKey={[field.fieldKey, 'debts']}
                             valuePropName="checked"
@@ -92,9 +90,12 @@ const Vehicle = () => {
                             <Checkbox />
                           </Item>
                         </div>
-                        <div className="col-md-4">
-                          <label htmlFor="brand">Monto</label>
-                          <Item name={[field.name, 'amount']} fieldKey={[field.fieldKey, 'amount']}>
+                        <div className="col-md-10">
+                          <Item
+                            name={[field.name, 'amount']}
+                            fieldKey={[field.fieldKey, 'amount']}
+                            label="Monto"
+                          >
                             <InputNumber min={0} size="large" />
                           </Item>
                         </div>
@@ -112,6 +113,7 @@ const Vehicle = () => {
               ))}
 
               <Button
+                style={{ width: '100%' }}
                 type="dashed"
                 icon={<PlusOutlined />}
                 onClick={() => {
