@@ -35,7 +35,7 @@ const Experience = ({switchCurrent, current}) => {
 	/** Local state */
 	const [careers, addCareers] = useState([]);
 	const [dependents, switchDependents] = useState(false)
-	const [wnow, setWorking] = useState(false)
+	const [wnow, setWorking] = useState(working.experiences && working.experiences.length > 0 ? working.experiences[0].workingNow : false)
 	
 	/** On form success*/
 	const onFinish = fields => {
@@ -100,7 +100,8 @@ const Experience = ({switchCurrent, current}) => {
 		}
 	}
 
-	
+
+
 	return (
 		<>
 			<Form
@@ -183,6 +184,7 @@ const Experience = ({switchCurrent, current}) => {
 																{...field}
 																name={[field.name, 'company']}
 																fieldKey={[field.fieldKey, 'company']}
+																rules={[{required: true, message: "El campo teléfono es requerido"}]}
 															>
 																<Input size="large"/>
 															</Item>
@@ -193,7 +195,7 @@ const Experience = ({switchCurrent, current}) => {
 																{...field}
 																name={[field.name, 'companyPhone']}
 																fieldKey={[field.fieldKey, 'companyPhone']}
-																// rules={[{required: true, message: "El campo teléfono es requerido"}]}
+																rules={[{required: true, message: "El campo teléfono es requerido"}]}
 															>
 																<Input size="large"/>
 															</Item>
@@ -204,7 +206,7 @@ const Experience = ({switchCurrent, current}) => {
 																{...field}
 																name={[field.name, 'specializationCompany']}
 																fieldKey={[field.fieldKey, 'specializationCompany']}
-																// rules={[{required: true, message: "Este campo es requerido"}]}
+															
 															>
 																<Input size="large"/>
 															</Item>
@@ -217,8 +219,8 @@ const Experience = ({switchCurrent, current}) => {
 																name={[field.name, 'workingNow']}
 																fieldKey={[field.fieldKey, 'workingNow']}
 																valuePropName="checked"
-															
 															>
+																
 																<Switch onChange={e => setWorking(e)} checkedChildren="SI" unCheckedChildren="NO"/>
 															</Item>
 														</div>
@@ -228,7 +230,6 @@ const Experience = ({switchCurrent, current}) => {
 																{...field}
 																name={[field.name, 'dateInit']}
 																fieldKey={[field.fieldKey, 'dateInit']}
-																// rules={[{required: true, message: "Especifíque una fecha de inicio"}]}
 															>
 																<DatePicker
 																	size="large"

@@ -7,6 +7,7 @@ import { Button, Form, Input, Alert } from 'antd';
 import { delay } from 'lodash';
 import MainHeader from '../structure/Header';
 import imgLogin from '../../images/login.png';
+import RequestNewPassword from "../Misc/RequestNewPassword";
 
 const { Item } = Form;
 const { Password } = Input;
@@ -24,7 +25,7 @@ const Login = _ => {
     }
   };
 
-  console.log(loginState);
+  // console.log(loginState);
 
   const onFinish = data => {
     switchLoading(true);
@@ -110,6 +111,7 @@ const Login = _ => {
                 >
                   Crear cuenta
                 </Button>
+                <RequestNewPassword linkText="He olvidado mi contraseña" elementType="link"/>
               </p>
             </div>
           </div>

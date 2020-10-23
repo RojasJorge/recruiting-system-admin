@@ -70,7 +70,7 @@ const Layout = ({ children, title, className, containerClass }) => {
       </Head>
       <MainHeader layout="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
-        <div className={fullScreen ? 'container-fluid' : 'container umana-layout'}>{children}</div>
+        <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>{children}</div>
       </div>
       <PageLoader active={mloading} />
     </div>

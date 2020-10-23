@@ -1,7 +1,17 @@
 import { Form, Input, Button, Drawer, Select } from 'antd';
 // const { TreeNode } = TreeSelect;
 
-const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, setEdit, onSubmit }) => {
+const EditModal = ({
+  visible,
+  switchEdit,
+  title,
+  data,
+  clear,
+  treeData,
+  edit,
+  setEdit,
+  onSubmit,
+}) => {
   const onFinish = field => {
     if (edit) {
       onSubmit(field, edit, data.id);
@@ -17,7 +27,15 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
   };
 
   return (
-    <Drawer placement="right" closable={true} onClose={() => onReset()} visible={visible} width={600} title={title} destroyOnClose={true}>
+    <Drawer
+      placement="right"
+      closable={true}
+      onClose={() => onReset()}
+      visible={visible}
+      width={600}
+      title={title}
+      destroyOnClose={true}
+    >
       <div className="umana-drawer">
         <h3>{edit ? 'Editar' : 'Agregar'}</h3>
         {data && data.name ? (
@@ -35,7 +53,11 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
               <Input />
             </Form.Item>
             <Form.Item label="Padre" name="parent">
-              <Select style={{ width: '100%' }} dropdownStyle={{ maxHeight: 400, overflow: 'auto' }} placeholder="Seleccione un padre">
+              <Select
+                style={{ width: '100%' }}
+                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                placeholder="Seleccione un padre"
+              >
                 {treeData
                   ? treeData.map(e => (
                       <Select.Option key={e.id} value={e.id}>
@@ -69,7 +91,17 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
               <Input />
             </Form.Item>
             <Form.Item label="Padre" name="parent">
-              <Select style={{ width: '100%' }} dropdownStyle={{ maxHeight: 400, overflow: 'auto' }} placeholder="Seleccione un padre">
+              <Select
+                style={{ width: '100%' }}
+                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                placeholder="Seleccione un padre"
+                showSearch
+                optionFilterProp="label"
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                  option.props.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
                 {treeData
                   ? treeData.map(e => (
                       <Select.Option key={e.id} value={e.id}>
@@ -80,10 +112,10 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
               </Select>
             </Form.Item>
             <div className="umana-form--footer columns">
-              <Button type="cancel" size="large" onClick={onReset}>
+              <Button type="cancel" size="small" onClick={onReset} style={{ width: '50%' }}>
                 Cancelar
               </Button>
-              <Button type="primary" size="large" htmlType="submit">
+              <Button type="primary" size="small" htmlType="submit" style={{ width: '50%' }}>
                 {edit ? 'Editar' : 'Agregar'}
               </Button>
             </div>

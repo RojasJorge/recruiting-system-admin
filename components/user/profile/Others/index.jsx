@@ -3,6 +3,7 @@ import { Button, Form, Input, InputNumber, Select, notification, Space } from 'a
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import xhr from '../../../../xhr';
 import router from 'next/router';
+import languages from '../../../../data/language.json';
 
 const { Item, List } = Form;
 
@@ -44,6 +45,7 @@ const Others = ({ switchCurrent, current }) => {
     notification[type]({
       message,
       description,
+      placement: 'bottomRight',
     });
   };
 
@@ -77,11 +79,16 @@ const Others = ({ switchCurrent, current }) => {
                         rules={[
                           {
                             required: true,
-                            message: 'Debes agregar un nombre',
+                            message: 'Selecciona un idioma',
                           },
                         ]}
                       >
-                        <Input />
+                        <Select showSearch>
+                          {languages
+                            ? languages.map(l => <Select.Option key={l}>{l}</Select.Option>)
+                            : null}
+                        </Select>
+                        {/* <Input /> */}
                       </Item>
 
                       <Item

@@ -98,8 +98,9 @@ const Experience = ({count, experience, experiences, addExperiences}) => {
 							</Item>
 						</div>
 						<div className="col-md-6">
-							<label htmlFor="company_phone">Teléfono de la empresa:</label>
+					
 							<Item
+								label="Teléfono de la empresa"
 								name="company_phone"
 								rules={[{required: true, message: "El campo teléfono es requerido"}]}
 							>
@@ -109,8 +110,7 @@ const Experience = ({count, experience, experiences, addExperiences}) => {
 										phone: true,
 										phoneRegionCode: "GT"
 									}}
-									// name="company_phone"
-									// onChange={e => console.log(e.target.value)}
+									
 								/>
 							</Item>
 						</div>

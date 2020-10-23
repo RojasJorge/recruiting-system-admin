@@ -17,14 +17,13 @@ const xhr = () => {
       return response;
     },
     error => {
-      console.log('Error from xhr()', error)
       if (error.response && error.response.status === 401) {
         message.error('La sesión ha expirado');
         localStorage.removeItem('uToken');
         localStorage.removeItem('uScopes');
         localStorage.removeItem('uUser');
-        localStorage.removeItem('career');
-        localStorage.removeItem('academic_level');
+        // localStorage.removeItem('career');
+        // localStorage.removeItem('academic_level');
         localStorage.removeItem('Jobs');
 
         setTimeout(() => {

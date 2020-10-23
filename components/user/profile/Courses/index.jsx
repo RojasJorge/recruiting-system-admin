@@ -60,6 +60,7 @@ const Courses = ({ switchCurrent, current }) => {
     notification[type]({
       message,
       description,
+      placement: 'bottomRight',
     });
   };
 

@@ -53,6 +53,7 @@ const LookingFor = ({ switchCurrent, current }) => {
     notification[type]({
       message,
       description,
+      placement: 'bottomRight',
     });
   };
 

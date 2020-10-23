@@ -70,6 +70,9 @@
 }
 
 .ant-pagination.mini.ant-table-pagination {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   .ant-pagination-prev,
   .ant-pagination-next {
     &.ant-pagination-disabled {
@@ -82,17 +85,19 @@
     color: $color-blue;
     border: 1px solid $color-blue;
     background: $color-white;
-    height: auto;
+    height: 35px;
     margin: 0 5px;
     .ant-pagination-item-link {
       font-size: 18px;
       padding: 5px 10px;
       color: $color-blue;
+      margin: 0;
+      border: 0;
     }
   }
   .ant-pagination-item {
-    height: auto;
-    padding: 5px 10px;
+    height: 50px;
+    padding: 0;
     margin: 0 5px;
     font-size: 18px;
     border: 1px solid rgba($color-text, 0.1);
