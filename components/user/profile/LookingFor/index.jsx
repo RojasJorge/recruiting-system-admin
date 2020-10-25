@@ -72,6 +72,13 @@ const LookingFor = ({ switchCurrent, current }) => {
               <Option value="vacationer">Vacacionista</Option>
             </Select>
           </Item>
+          <Item label="Plaza remota / locación" className="form-item--lg" name="workplace" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
+            <Select size="large" placeholder="Seleccione" mode="multiple">
+              <Option value="location">Locación</Option>
+              <Option value="mix-location">Mixta</Option>
+              <Option value="remote">Remoto</Option>
+            </Select>
+          </Item>
 
           <Item className="form-item--md" name="relocate" valuePropName="checked" label="¿Está dispuesto a reubicarse?">
             <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />

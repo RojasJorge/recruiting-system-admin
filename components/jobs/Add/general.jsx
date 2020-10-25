@@ -1,7 +1,7 @@
 import { Form, Input, Select, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
 import xhr from '../../../xhr';
+import { AreaJob } from '../../../elements';
 
 const { TextArea } = Input;
 
@@ -31,7 +31,6 @@ const GeneralJob = ({ career, position }) => {
       >
         <Input size="large" name="title" />
       </Form.Item>
-
       <Form.Item
         className="form-item--md"
         label="Puesto"
@@ -43,45 +42,7 @@ const GeneralJob = ({ career, position }) => {
         ]}
         name="jobposition"
       >
-        <Select
-          showSearch
-          optionFilterProp="title"
-          filterprop="title"
-          filterOption={(input, option) => {
-            if (option.children) {
-              return strForSearch(option.children).includes(strForSearch(input));
-            } else {
-              if (option.options) {
-                return strForSearch(option.label).includes(strForSearch(input));
-              }
-              return false;
-            }
-          }}
-          onChange={e => (e === 'otros' ? setDisabled(false) : setDisabled(true))}
-        >
-          <Select.OptGroup key="otros" label="Otros">
-            <Select.Option key="otro" value="otros">
-              Otro, agregar puesto
-            </Select.Option>
-          </Select.OptGroup>
-          {career
-            ? career
-                .sort((a, b) => (a.name > b.name ? 1 : -1))
-                .map((e, idx) => (
-                  <Select.OptGroup key={idx} label={e.name}>
-                    {e.children
-                      ? e.children
-                          .sort((z, x) => (z.name > x.name ? 1 : -1))
-                          .map((m, index) => (
-                            <Select.Option key={m.id} value={m.id}>
-                              {m.name}
-                            </Select.Option>
-                          ))
-                      : null}
-                  </Select.OptGroup>
-                ))
-            : null}
-        </Select>
+        <AreaJob />
       </Form.Item>
       {!disabled ? (
         <Form.Item label="Agregar nombre de puesto" className="form-item--md" name="positionalt">
@@ -168,11 +129,7 @@ const GeneralJob = ({ career, position }) => {
           <Select.Option value="vacationer">Vacacionista</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item
-        label="Giro de negocio de la empresa"
-        className="form-item--md"
-        name="businessturn"
-      >
+      <Form.Item label="Giro de negocio de la empresa" className="form-item--md" name="businessturn">
         <Input name="businessturn" />
       </Form.Item>
       <Form.Item label="Tipo de horario*" className="form-item--sm" name="schedule_type">
@@ -188,12 +145,7 @@ const GeneralJob = ({ career, position }) => {
           </Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item
-        label="Horario"
-        name="schedule"
-        className="form-item--xf"
-        help="Horario de Lunes a viernes de 8am a 5pm, Lunes a sábado de 9am a 6pm etc."
-      >
+      <Form.Item label="Horario" name="schedule" className="form-item--xf" help="Horario de Lunes a viernes de 8am a 5pm, Lunes a sábado de 9am a 6pm etc.">
         <Input name="schudele" />
       </Form.Item>
       <Form.Item

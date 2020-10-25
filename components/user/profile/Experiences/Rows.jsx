@@ -9,6 +9,7 @@ import styled from "styled-components";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import moment from "moment";
 import router from 'next/router';
+import  { AreaJob } from '../../../../elements';
 
 
 const {Item, List} = Form;
@@ -160,18 +161,7 @@ const Experience = ({switchCurrent, current}) => {
 																fieldKey={[field.fieldKey, 'area']}
 																rules={[{required: true, message: "Especifíque un área."}]}
 															>
-																<Select
-																	style={{width: '100%'}}
-																	size="large"
-																	placeholder="Seleccione">
-																	{
-																		!isEmpty(careers) && careers.map((career, index) => (
-																			<Option key={index} value={career.id}>
-																				{career.name}
-																			</Option>
-																		))
-																	}
-																</Select>
+																<AreaJob />
 															</Item>
 														</div>
 														<div className="col-md-12">

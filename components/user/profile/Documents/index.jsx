@@ -1,15 +1,5 @@
 import { useState } from 'react';
-import {
-  Button,
-  Divider,
-  Form,
-  Input,
-  InputNumber,
-  message,
-  notification,
-  Select,
-  Upload,
-} from 'antd';
+import { Button, Divider, Form, Input, InputNumber, message, notification, Select, Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import xhr from '../../../../xhr';
 import storage from '../../../../storage';
@@ -141,7 +131,7 @@ const Documents = ({ switchCurrent, current }) => {
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />
                 </p>
-                <p className="ant-upload-text">Arrastre o haga click aquí para subir un archivo.</p>
+                <p className="ant-upload-text">Subir DPI(ambos lados) | Pasaporte | Licencia.</p>
               </Dragger>
             </Item>
           </div>
