@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {Button, Checkbox, DatePicker, Form, Input, notification, Select, Space} from 'antd';
+import {Button, Checkbox, DatePicker, Form, Input, notification, Select, Space, Switch} from 'antd';
 import {filter, find, isEmpty} from 'lodash';
 import {useEffect, useState} from 'react';
 import {useStoreActions, useStoreState} from 'easy-peasy';
@@ -91,6 +91,8 @@ const Level = ({switchCurrent, current}) => {
 	}
 	
 	const dateFormat = 'DD/MM/YYYY'
+
+	const [wnow, setWorking] = useState(academic.studies && academic.studies.length > 0 ? academic.studies[0].currently : false)
 	
 	useEffect(() => {
 		initialValues()
@@ -116,7 +118,7 @@ const Level = ({switchCurrent, current}) => {
 										}, {})
 										
 										return (
-											<Space key={field.key} className="umana-form--group two-columns">
+											<Space key={field.key} className="umana-form--group two-columns group-academic">
 												<Item
 													label="Establecimiento"
 													{...field}
@@ -191,6 +193,16 @@ const Level = ({switchCurrent, current}) => {
 														}
 													</Select>
 												</Item>
+												<Item
+												
+													{...field}
+													name={[field.name, 'currently']}
+													fieldKey={[field.fieldKey, 'currently']}
+													valuePropName="checked"
+												>
+												
+													<Switch onChange={e => setWorking(e)} checkedChildren="SI" unCheckedChildren="NO"/>
+												</Item>
 												
 												<Item
 													label="Fecha de inicio"
@@ -203,12 +215,12 @@ const Level = ({switchCurrent, current}) => {
 														format={dateFormat}
 														style={{width: '100%'}}
 														size="large"
-														onChange={(date, dateString) =>
-															onDatePickerChange(date, dateString, 'start_date')
-														}
+														// onChange={(date, dateString) =>
+														// 	onDatePickerChange(date, dateString, 'start_date')
+														// }
 													/>
 												</Item>
-												
+												{!wnow ? 
 												<Item
 													label="Fecha de fin"
 													{...field}
@@ -220,11 +232,17 @@ const Level = ({switchCurrent, current}) => {
 														style={{width: '100%'}}
 														size="large"
 														format={dateFormat}
-														onChange={(date, dateString) =>
-															onDatePickerChange(date, dateString, 'end_date')
-														}
+														// onChange={(date, dateString) =>
+														// 	onDatePickerChange(date, dateString, 'end_date')
+														// }
 													/>
 												</Item>
+											:
+												<Item label="Fecha final">
+													<Input value="Presente" disabled={true} />
+												</Item> 
+												}
+												
 												
 												<Item
 													label="Número de colegiado"
@@ -235,15 +253,7 @@ const Level = ({switchCurrent, current}) => {
 													<Input/>
 												</Item>
 												
-												<Item
-													label="¿Estudia aquí actualmente?"
-													{...field}
-													name={[field.name, 'currently']}
-													fieldKey={[field.fieldKey, 'currently']}
-													valuePropName="checked"
-												>
-													<Checkbox size="large"/>
-												</Item>
+												
 												<a
 													key={field.key + 'add'}
 													className="form-item--delete"

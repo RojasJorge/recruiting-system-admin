@@ -101,7 +101,7 @@ const Requirements = () => {
         </Radio.Group>
       </Form.Item>
 
-      <Form.Item label="Número de Licencia" className="form-item--lg" name="type_license">
+      <Form.Item label="Tipo de Licencia" className="form-item--lg" name="type_license">
         <Radio.Group>
           <Radio.Button value="indifferent">Indiferente</Radio.Button>
           <Radio.Button value="a">A</Radio.Button>

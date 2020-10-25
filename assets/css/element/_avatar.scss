@@ -211,3 +211,16 @@
     transform: translateY(0) !important;
   }
 }
+
+.umana-avatar-upload {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  .ant-upload-picture-card-wrapper {
+    max-width: 125px;
+  }
+  p {
+    color: $color-text;
+    max-width: 230px;
+  }
+}
