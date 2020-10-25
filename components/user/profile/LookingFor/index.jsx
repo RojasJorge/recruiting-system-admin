@@ -62,13 +62,8 @@ const LookingFor = ({ switchCurrent, current }) => {
       <Form onFinish={onFinish} initialValues={lookingFor}>
         <div className="umana-form--section">
           <h2>¿Qué estas buscando?</h2>
-          <Item
-            label="Tipo de plaza"
-            className="form-item--lg"
-            name="availability"
-            rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}
-          >
-            <Select size="large" placeholder="Seleccione">
+          <Item label="Tipo de plaza" className="form-item--lg" name="availability" rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}>
+            <Select size="large" placeholder="Seleccione" mode="multiple">
               <Option value="freelance">Independiente</Option>
               <Option value="practicing">Prácticas</Option>
               <Option value="temporary">Temporal</Option>
@@ -78,32 +73,12 @@ const LookingFor = ({ switchCurrent, current }) => {
             </Select>
           </Item>
 
-          <Item
-            className="form-item--md"
-            name="relocate"
-            valuePropName="checked"
-            label="¿Está dispuesto a reubicarse?"
-          >
-            <Switch
-              checkedChildren="Si"
-              unCheckedChildren="No"
-              size="large"
-              className="switch-large theme-orange"
-            />
+          <Item className="form-item--md" name="relocate" valuePropName="checked" label="¿Está dispuesto a reubicarse?">
+            <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
           </Item>
 
-          <Item
-            className="form-item--md"
-            name="travel"
-            valuePropName="checked"
-            label="¿Disponibilidad para viajar?"
-          >
-            <Switch
-              checkedChildren="Si"
-              unCheckedChildren="No"
-              size="large"
-              className="switch-large theme-orange"
-            />
+          <Item className="form-item--md" name="travel" valuePropName="checked" label="¿Disponibilidad para viajar?">
+            <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
           </Item>
         </div>
 

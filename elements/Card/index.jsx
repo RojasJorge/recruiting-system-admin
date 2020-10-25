@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Avatar } from 'antd';
 import Moment from 'react-moment';
+import { Can } from '../../components/Can';
 
 const Card = props => {
   return (
@@ -32,25 +33,54 @@ const Card = props => {
       </div>
       {props.parentInfo ? (
         <div className="umana-card__parent-info">
-          {props.parentInfo.avatar ? (
-            <Avatar size={80} src={props.parentInfo.avatar} />
-          ) : (
-            <Avatar
-              className="avatar-icon"
-              size={80}
-              icon={<i className="material-icons">location_city</i>}
-            />
-          )}
-          {props.parentInfo.title ? (
-            <div className="title">
-              <h5>{props.parentInfo.title}</h5>
-            </div>
-          ) : null}
-          {props.parentInfo.name ? (
-            <div className="title">
-              <h5>{props.parentInfo.name}</h5>
-            </div>
-          ) : null}
+          <Can I="guest" a="JOBS">
+            <>
+              {props.parentInfo.avatar ? (
+                <Avatar size={80} src={props.parentInfo.avatar} />
+              ) : (
+                <Avatar
+                  className="avatar-icon"
+                  size={80}
+                  icon={<i className="material-icons">location_city</i>}
+                />
+              )}
+
+              {props.parentInfo.title ? (
+                <div className="title-hidden">
+                  <h5 className="hidden-text">Empresa</h5>
+                </div>
+              ) : null}
+              {props.parentInfo.name ? (
+                <div className="title-hidden">
+                  <h5 className="hidden-text">Empresa</h5>
+                </div>
+              ) : null}
+            </>
+          </Can>
+          <Can I="view" a="JOBS">
+            <>
+              {props.parentInfo.avatar ? (
+                <Avatar size={80} src={props.parentInfo.avatar} />
+              ) : (
+                <Avatar
+                  className="avatar-icon"
+                  size={80}
+                  icon={<i className="material-icons">location_city</i>}
+                />
+              )}
+
+              {props.parentInfo.title ? (
+                <div className="title">
+                  <h5>{props.parentInfo.title}</h5>
+                </div>
+              ) : null}
+              {props.parentInfo.name ? (
+                <div className="title">
+                  <h5>{props.parentInfo.name}</h5>
+                </div>
+              ) : null}
+            </>
+          </Can>
           {props.parentInfo.location ? (
             <p>{`${props.parentInfo.location.city}, ${props.parentInfo.location.country}`}</p>
           ) : null}

@@ -67,7 +67,7 @@ const General = ({ birthday, setBirthday }) => {
       </Item>
 
       <Item
-        label="Fecha de nacimiento"
+        label={`* Fecha de nacimiento`}
         rules={[{ required: true, message: 'Debes específicar tu fecha de nacimiento.' }]}
         className="form-item--sm"
       >
@@ -82,6 +82,7 @@ const General = ({ birthday, setBirthday }) => {
           format={dateFormat}
           disabledDate={disabledDate}
         />
+        <p className="note">Debes ser mayor de 18 años</p>
       </Item>
 
       <Item

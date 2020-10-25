@@ -418,6 +418,16 @@
       }
     }
   }
+  .hidden-text {
+    width: 230px;
+    color: $color-green;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:after {
+      background: $color-green;
+    }
+  }
 }
 
 .theme-company {

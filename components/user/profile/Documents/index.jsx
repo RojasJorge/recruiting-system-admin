@@ -121,7 +121,7 @@ const Documents = ({ switchCurrent, current }) => {
             <Input size="large" />
           </Item>
 
-          <Item name="driversLicence" label="Licencia" className="form-item--md">
+          <Item name="driversLicence" label="Número de Licencia" className="form-item--md">
             <InputNumber style={{ width: '100%' }} min={0} size="large" />
           </Item>
 

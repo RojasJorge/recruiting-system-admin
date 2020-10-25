@@ -160,27 +160,19 @@ const GeneralJob = ({ career, position }) => {
         ]}
       >
         <Select showSearch>
-          <Select.Option value="freelance" key="freelance">
-            Freelance
-          </Select.Option>
-          <Select.Option value="practice" key="practice">
-            Prácticas
-          </Select.Option>
-          <Select.Option value="temporal" key="temporal">
-            Temporal
-          </Select.Option>
-          <Select.Option value="full" key="full">
-            Tiempo completo
-          </Select.Option>
-          <Select.Option value="part" key="part">
-            Medio Tiempo
-          </Select.Option>
-          <Select.Option value="vacacionista" key="vacacionista">
-            Vacacionista
-          </Select.Option>
+          <Select.Option value="freelance">Independiente</Select.Option>
+          <Select.Option value="practicing">Prácticas</Select.Option>
+          <Select.Option value="temporary">Temporal</Select.Option>
+          <Select.Option value="full_time">Tiempo completo</Select.Option>
+          <Select.Option value="part_time">Medio tiempo</Select.Option>
+          <Select.Option value="vacationer">Vacacionista</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item label="Giro de negocio de la empresa" className="form-item--md" name="businessturn">
+      <Form.Item
+        label="Giro de negocio de la empresa"
+        className="form-item--md"
+        name="businessturn"
+      >
         <Input name="businessturn" />
       </Form.Item>
       <Form.Item label="Tipo de horario*" className="form-item--sm" name="schedule_type">
@@ -196,7 +188,12 @@ const GeneralJob = ({ career, position }) => {
           </Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item label="Horario" name="schedule" className="form-item--xf" help="Horario de Lunes a viernes de 8am a 5pm, Lunes a sábado de 9am a 6pm etc.">
+      <Form.Item
+        label="Horario"
+        name="schedule"
+        className="form-item--xf"
+        help="Horario de Lunes a viernes de 8am a 5pm, Lunes a sábado de 9am a 6pm etc."
+      >
         <Input name="schudele" />
       </Form.Item>
       <Form.Item

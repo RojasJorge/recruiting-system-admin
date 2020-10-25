@@ -45,7 +45,7 @@ const General = props => {
       </div>
       {!isEmpty(props.data.currentJobTitle) ? (
         <div className="umana-content__item item-lg" style={{ textAlign: 'center' }}>
-          <label>Puesto al que aplica</label>
+          <label>Área al que aplica</label>
           <p>{label(props.data.currentJobTitle)}</p>
         </div>
       ) : null}
