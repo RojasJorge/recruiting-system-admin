@@ -32,7 +32,7 @@ export default {
     delete payload.token;
 
     /** Set localStorage */
-    localStorage.setItem('uUser', JSON.stringify(payload));
+    // localStorage.setItem('uUser', JSON.stringify(payload));
     localStorage.setItem('uScopes', JSON.stringify(payload.scope));
     localStorage.setItem('uToken', token);
 
@@ -42,7 +42,7 @@ export default {
   }),
   handlenError: action((state, payload) => {
     /** Set global user info */
-    console.log('payload', payload);
+    // console.log('payload', payload);
     state.error = payload;
   }),
 

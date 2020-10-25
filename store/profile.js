@@ -1,6 +1,4 @@
-import {
-	action
-} from "easy-peasy";
+import {action} from "easy-peasy";
 
 export default {
 	personal: false,
@@ -12,7 +10,7 @@ export default {
 	
 	verify: action((state, payload) => {
 		
-		if(!payload) return false;
+		if (!payload) return false;
 		
 		const {
 			personal,
@@ -24,7 +22,7 @@ export default {
 		} = payload /** payload = auth.user.profile.fields */
 		
 		/** Validate [personal] object */
-		if(
+		if (
 			personal.currentJobTitle.length > 0 &&
 			personal.birthday.length > 0 &&
 			personal.email.length > 0 &&
@@ -35,25 +33,29 @@ export default {
 			personal.location.city.length > 0 &&
 			personal.location.country.length > 0 &&
 			personal.location.province.length > 0 &&
-			(typeof personal.location.zone === 'number' && personal.location.zone > 0) &&
+			personal.location.zone > 0 &&
 			personal.maritalStatus.length > 0 &&
 			personal.nationality.length > 0 &&
 			personal.phones.length > 0 &&
 			personal.religion.length > 0
 		) {
-			state.personal = !state.personal
+			state.personal = true
+		} else {
+			state.personal = false
 		}
 		
 		/** Validate [academic] object */
-		if(
+		if (
 			academic.courses.length > 0 &&
 			academic.studies.length > 0
 		) {
-			state.academic = !state.academic
+			state.academic = true
+		} else {
+			state.academic = false
 		}
 		
 		/** Validate [academic] object */
-		if(
+		if (
 			economic.currentSalary > 1000 &&
 			// economic.currentSalaryCurrency !== '' &&
 			economic.desiredSalary.baseMax > 0 &&
@@ -61,33 +63,39 @@ export default {
 			economic.desiredSalary.currency.length > 0 &&
 			economic.typeHousing.length > 0
 		) {
-			state.economic = !state.economic
+			state.economic = true
+		} else {
+			state.economic = false
 		}
 		
 		/** Validate [lookingFor] object */
-		if(
+		if (
 			lookingFor.availability.length > 0
 			// lookingFor.workplace.length > 0
 		) {
-			state.lookingFor = !state.lookingFor
+			state.lookingFor = true
+		} else {
+			state.lookingFor = false
 		}
 		
 		/** Validate [others] object */
-		if(
+		if (
 			others.skills.length > 0
 		) {
-			state.others = !state.others
+			state.others = true
+		} else {
+			state.others = false
 		}
 		
 		/** Validate [working] object */
-		if(
+		if (
 			working.experiences.length > 0
-			
-		) {
-			state.working = !state.working
-		}
 		
-		return true;
+		) {
+			state.working = true
+		} else {
+			state.working = false
+		}
 	})
 	
 };

@@ -1,4 +1,4 @@
-import { createStore } from 'easy-peasy';
+import { createStore, persist } from 'easy-peasy';
 
 import auth from './auth';
 import users from './users';
@@ -9,11 +9,11 @@ import companies from './companies';
 import jobs from './jobs';
 
 const store = createStore({
-  auth,
+  auth: persist(auth),
   users,
   profile,
   tools,
-  collections,
+  collections: persist(collections),
   companies,
   jobs,
 });

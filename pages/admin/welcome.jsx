@@ -47,7 +47,6 @@ const Welcome = () => {
 		<Layout title="Bienvenido(a)">
 			<>
 				<PageTitle title="Bienvenido(a)"/>
-				{/*<pre>{JSON.stringify(auth, false, 2)}</pre>*/}
 				{
 					loading
 						? <h1>Verificando perfil...</h1>

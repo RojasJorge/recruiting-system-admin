@@ -7,6 +7,9 @@ import Knowledge from './knowledge';
 import Economic from './economic';
 
 const SingleProfile = props => {
+  
+  
+  
   const getLocal = field => {
     if (props.data) {
       const local = props.data.profile;
