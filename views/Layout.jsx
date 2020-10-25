@@ -17,7 +17,6 @@ const Layout = ({ children, title, className, containerClass }) => {
   
   /** Get profile validator from store */
   const verifyProfileStatus = useStoreActions(actions => actions.profile.verify)
-  const changeTest = useStoreActions(actions => actions.profile.changeTest)
 
   /**
    * System collections
