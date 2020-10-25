@@ -8,12 +8,16 @@ import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
 import { SyncOutlined } from '@ant-design/icons';
 import { isEmpty } from 'lodash';
+import profile from "../store/profile";
 // import { Can } from '../components/Can';
 
 const Layout = ({ children, title, className, containerClass }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
   const [fullScreen, switchFullScreen] = useState(false);
+  
+  /** Get profile validator from store */
+  const verifyProfileStatus = useStoreActions(actions => actions.profile.verify)
 
   /**
    * System collections
@@ -55,13 +59,20 @@ const Layout = ({ children, title, className, containerClass }) => {
 
     /** Check if valid */
     if (token && user) {
-      user.token = token;
-      keepAuth(user);
+      user.token = token
+      keepAuth(user)
     }
 
     /** Reset loader */
     switchLoader(false);
   }, []);
+  
+  useEffect(() => {
+    if(auth.user) {
+      /** Check current profile status */
+      verifyProfileStatus(auth.user.profile.fields || false)
+    }
+  }, [auth])
 
   return auth.token && auth.user ? (
     <div className={`${className} theme-${scopeState} ${containerClass}`}>
@@ -70,7 +81,12 @@ const Layout = ({ children, title, className, containerClass }) => {
       </Head>
       <MainHeader layout="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
-        <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>{children}</div>
+        <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>
+          <div>
+            <pre>{JSON.stringify(profile, false, 2)}</pre>
+          </div>
+          {children}
+        </div>
       </div>
       <PageLoader active={mloading} />
     </div>

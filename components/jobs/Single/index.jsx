@@ -13,19 +13,15 @@ import {Can} from '../../../components/Can';
 
 const {confirm} = Modal
 
-const SingleJob = () => {
+const SingleJob = ({query}) => {
 	const router = useRouter()
-	
-	const {
-		query: {id},
-	} = router
 	
 	const [job, setJob] = useState(null);
 	const [loading, switchLoading] = useState(true)
 	
 	const getJob = () => {
 		xhr()
-			.get(`/job/${id}`)
+			.get(`/job/${query.id}`)
 			.then(res => {
 				res.type = false
 				setJob(res.data)
@@ -34,12 +30,13 @@ const SingleJob = () => {
 	}
 	
 	useEffect(() => {
+		// console.log('Query from single job:', query)
 		getJob()
 		
 		delay(_ => {
 			switchLoading(false)
 		}, 2000)
-	}, [])
+	}, [query.id])
 	
 	const allSet = e => {
 		notification.info({
@@ -49,7 +46,7 @@ const SingleJob = () => {
 		});
 		
 		setTimeout(() => {
-			router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+			router.push(`/admin/jobs/single/[query.id]`, `/admin/jobs/single/${e}`);
 		}, 500);
 	};
 	
@@ -182,7 +179,7 @@ const SingleJob = () => {
 								action: 'edit',
 								titleAction: 'Editar Plaza',
 								urlAction: '/admin/jobs/edit/',
-								urlDinamic: id,
+								urlDinamic: query.id,
 							}}
 						>
 							<Button type="primary" size="small" onClick={() => add(job)}>
@@ -557,7 +554,7 @@ const SingleJob = () => {
 							action: 'edit',
 							titleAction: 'Editar Plaza',
 							urlAction: '/admin/jobs/edit/',
-							urlDinamic: id,
+							urlDinamic: query.id,
 						}}
 					/>
 				</Can>

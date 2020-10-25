@@ -1,11 +1,6 @@
-import { action, thunk } from 'easy-peasy';
-import { message } from 'antd';
-import Router from 'next/router';
-import axios from 'axios';
-
-// const base_url = process.env.NEXT_PUBLIC_APP_ENV === 'develop'
-// 	? process.env.NEXT_PUBLIC_API_URL_DEVELOP
-// 	: process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+import { action, thunk } from 'easy-peasy'
+import Router from 'next/router'
+import axios from 'axios'
 
 export default {
   user: null,
@@ -65,10 +60,11 @@ export default {
         .then(response => {
           actions.grantAccess(response.data);
           actions.handlenError(0);
+          
           if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana') {
-            location.href = '/admin/requests';
+            location.href = '/admin/requests'
           } else {
-            location.href = '/admin/welcome';
+            location.href = '/admin/welcome'
           }
         })
         .catch(error => {
@@ -91,6 +87,7 @@ export default {
    * Update user state
    */
   updateProfile: action((state, payload) => {
+    
     /** Update global state */
     state.user.profile.fields[payload.type] = payload.fields;
 
