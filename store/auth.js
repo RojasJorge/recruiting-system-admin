@@ -1,6 +1,7 @@
 import { action, thunk } from 'easy-peasy'
 import Router from 'next/router'
 import axios from 'axios'
+import store from './index'
 
 export default {
   user: null,
@@ -78,8 +79,11 @@ export default {
     state.scopes = null;
     localStorage.removeItem('uToken');
     localStorage.removeItem('uScopes');
-    localStorage.removeItem('uUser');
+    // localStorage.removeItem('uUser');
     localStorage.setItem('uScopes', JSON.stringify(['guest']));
+    store.persist.clear().then(() => {
+      console.log('Persisted states has been removed')
+    })
     Router.push('/');
   }),
 
