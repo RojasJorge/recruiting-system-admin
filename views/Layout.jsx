@@ -7,8 +7,7 @@ import Login from '../components/user/Login';
 import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
 import { SyncOutlined } from '@ant-design/icons';
-import { isEmpty } from 'lodash';
-import profile from "../store/profile";
+import { isEmpty, delay } from 'lodash';
 // import { Can } from '../components/Can';
 
 const Layout = ({ children, title, className, containerClass }) => {
@@ -34,9 +33,6 @@ const Layout = ({ children, title, className, containerClass }) => {
   /** Get auth global state */
   const auth = useStoreState(state => state.auth);
 
-  /** Get global actions */
-  const keepAuth = useStoreActions(actions => actions.auth.grantAccess);
-
   /** Get/Set catalogs */
   useEffect(() => {
     if (isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) {
@@ -60,7 +56,6 @@ const Layout = ({ children, title, className, containerClass }) => {
     /** Check if valid */
     if (token && user) {
       user.token = token
-      keepAuth(user)
     }
 
     /** Reset loader */
@@ -70,9 +65,11 @@ const Layout = ({ children, title, className, containerClass }) => {
   useEffect(() => {
     if(auth.user) {
       /** Check current profile status */
-      verifyProfileStatus(auth.user.profile.fields || false)
+      delay(_ => {
+        verifyProfileStatus(auth.user.profile.fields)
+      }, 1000)
     }
-  }, [auth])
+  }, [auth.user])
 
   return auth.token && auth.user ? (
     <div className={`${className} theme-${scopeState} ${containerClass}`}>
@@ -82,9 +79,6 @@ const Layout = ({ children, title, className, containerClass }) => {
       <MainHeader layout="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
         <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>
-          <div>
-            <pre>{JSON.stringify(profile, false, 2)}</pre>
-          </div>
           {children}
         </div>
       </div>

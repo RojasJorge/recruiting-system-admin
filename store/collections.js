@@ -5,8 +5,8 @@ import axios from 'axios';
 export default {
   career: [],
   academic_level: [],
-  total: 0,
-  loading: false,
+  // total: 0,
+  // loading: false,
   /**
    * Get all collections.
    */
@@ -24,15 +24,15 @@ export default {
         actions.switchLoading(false);
       })
       .then(response => {
-        typeof response !== 'undefined' ? localStorage.setItem(payload.type.replace('-', '_'), JSON.stringify(response.data.items)) : null;
+        // typeof response !== 'undefined' ? localStorage.setItem(payload.type.replace('-', '_'), JSON.stringify(response.data.items)) : null;
         typeof response !== 'undefined' ? actions.fill({ data: response.data, type: payload.type.replace('-', '_') }) : null;
-        actions.switchLoading(false);
+        // actions.switchLoading(false);
       });
   }),
   // add
   add: thunk(async (actions, payload) => {
 
-    actions.switchLoading(true);
+    // actions.switchLoading(true);
 
     const token = payload.token;
     const type = payload.url;
@@ -48,18 +48,18 @@ export default {
         },
       })
       .catch(error => {
-        console.log(error);
-        actions.switchLoading(false);
+        // console.log(error);
+        // actions.switchLoading(false);
       })
       .then(response => {
-        actions.switchLoading(false);
+        // actions.switchLoading(false);
         return;
       });
   }),
   // update
   update: thunk(async (actions, payload) => {
 
-    actions.switchLoading(true);
+    // actions.switchLoading(true);
 
     const token = payload.token;
     const type = payload.url;
@@ -75,11 +75,11 @@ export default {
         },
       })
       .catch(error => {
-        console.log(error);
-        actions.switchLoading(false);
+        // console.log(error);
+        // actions.switchLoading(false);
       })
       .then(response => {
-        actions.switchLoading(false);
+        // actions.switchLoading(false);
         return;
       });
   }),

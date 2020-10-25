@@ -1,6 +1,7 @@
 import { action, thunk } from 'easy-peasy'
 import Router from 'next/router'
 import axios from 'axios'
+import store from './index'
 
 export default {
   user: null,
@@ -32,7 +33,7 @@ export default {
     delete payload.token;
 
     /** Set localStorage */
-    localStorage.setItem('uUser', JSON.stringify(payload));
+    // localStorage.setItem('uUser', JSON.stringify(payload));
     localStorage.setItem('uScopes', JSON.stringify(payload.scope));
     localStorage.setItem('uToken', token);
 
@@ -42,7 +43,7 @@ export default {
   }),
   handlenError: action((state, payload) => {
     /** Set global user info */
-    console.log('payload', payload);
+    // console.log('payload', payload);
     state.error = payload;
   }),
 
@@ -78,8 +79,11 @@ export default {
     state.scopes = null;
     localStorage.removeItem('uToken');
     localStorage.removeItem('uScopes');
-    localStorage.removeItem('uUser');
+    // localStorage.removeItem('uUser');
     localStorage.setItem('uScopes', JSON.stringify(['guest']));
+    store.persist.clear().then(() => {
+      console.log('Persisted states has been removed')
+    })
     Router.push('/');
   }),
 
