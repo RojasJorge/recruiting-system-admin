@@ -39,6 +39,20 @@ const locale = term => {
     motorcycle: 'Motocicleta',
     car: 'Carro',
     gt: 'Guatemalteco(a)',
+    motorcycle: 'Motocicleta',
+    micro: 'Microauto',
+    sedan: 'Sedan',
+    cuv: 'Cuv',
+    hatchback: 'Compacto',
+    coupe: 'Coupé',
+    cabriolet: 'Convertible',
+    supercar: 'Deportivo',
+    minivan: 'Minivan',
+    suv: 'SUV',
+    pickup: 'Pickup',
+    van: 'Van',
+    truck: 'Camioneta',
+    bus: 'Autobus',
   };
 
   return labels[term] || term;
