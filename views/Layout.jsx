@@ -60,12 +60,12 @@ const Layout = ({ children, title, className, containerClass }) => {
   }, [auth.user]);
 
   return auth.token && auth.user ? (
-    <div className={`${className} theme-${scopeState} ${containerClass}`}>
+    <div className={`${className} theme-${auth.user.scope[0]} ${containerClass}`}>
       <Head>
         <title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
       </Head>
       <MainHeader layoutcontainer="is-login" />
-      <div className={`app--contents umana is-login ${className}`}>
+      <div className={`app--contents umana theme-${auth.user.scope[0]} is-login ${className}`}>
         <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>{children}</div>
       </div>
       <PageLoader active={mloading} />
