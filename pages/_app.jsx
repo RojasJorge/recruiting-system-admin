@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react'
 import {StoreProvider} from 'easy-peasy';
 import {ConfigProvider} from 'antd';
 import {AbilityContext} from '../components/Can';
@@ -11,15 +10,9 @@ import 'cropperjs/dist/cropper.css';
 
 const WebApp = ({Component, pageProps}) => {
 	
-	const [permissions, setPermissions] = useState(['guest'])
-	
-	useEffect(() => {
-		setPermissions(JSON.parse(localStorage.getItem('uScopes')))
-	}, [])
-	
 	return (
 		<StoreProvider store={store}>
-			<AbilityContext.Provider value={ability(permissions)}>
+			<AbilityContext.Provider value={ability()}>
 				<ConfigProvider locale={esEs}>
 					<NextNProgress/>
 					<Component {...pageProps} />
