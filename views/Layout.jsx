@@ -83,12 +83,14 @@ Layout.propTypes = {
   children: PropTypes.element.isRequired,
   title: PropTypes.string,
   className: PropTypes.string,
+  containerClass: PropTypes.string,
 };
 
 Layout.defaultProps = {
   children: <></>,
   title: '',
   className: 'app',
+  containerClass: 'contenido',
 };
 
 export default Layout;
