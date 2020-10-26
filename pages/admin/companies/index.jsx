@@ -7,7 +7,7 @@ import { Can } from '../../../components/Can';
 
 const Index = _ => {
   return (
-    <Layout title="Catalogos">
+    <Layout title="Empresas">
       <>
         <PageTitle title="Empresas" />
         <div className="umana-subtitle">

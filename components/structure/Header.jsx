@@ -1,12 +1,11 @@
-import MainMenu from './MainMenu'
+import MainMenu from './MainMenu';
 
 const MainHeader = props => {
-	
-	return (
-		<div className={`app--header umana__header ${props.layout}`}>
-			<MainMenu/>
-		</div>
-	)
-}
+  return (
+    <div className={`app--header umana__header ${props.layoutcontainer}`}>
+      <MainMenu />
+    </div>
+  );
+};
 
-export default MainHeader
+export default MainHeader;

@@ -15,7 +15,7 @@ const AreaJob = ({ value, onChange }) => {
     setVal(e);
     triggerChange(e);
   };
-  console.log(data);
+
   return (
     <Select
       onChange={e => handlenChange(e)}

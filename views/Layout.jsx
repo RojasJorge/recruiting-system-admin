@@ -14,7 +14,7 @@ const Layout = ({ children, title, className, containerClass }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
   const [fullScreen, switchFullScreen] = useState(false);
-  
+
   /** Get profile validator from store */
   const profile = useStoreState(state => state.profile)
   const verifyProfileStatus = useStoreActions(actions => actions.profile.verify)
@@ -43,25 +43,25 @@ const Layout = ({ children, title, className, containerClass }) => {
   }, []);
 
   useEffect(() => {
-    
-    if(!auth.user && !auth.token) {
-      Router.replace('/')
+    if (!auth.user && !auth.token) {
+      Router.replace('/');
     }
 
     /** Reset loader */
-    switchLoader(false)
-  }, [auth.user, auth.token])
-  
+    switchLoader(false);
+  }, [auth.user, auth.token]);
+
   useEffect(() => {
-    if(auth.user) {
+    if (auth.user) {
+      /** Check current profile status */
       delay(_ => {
-        verifyProfileStatus(auth.user.profile.fields)
-      }, 1000)
+        verifyProfileStatus(auth.user.profile.fields);
+      }, 1000);
     }
   }, [auth.user, profile])
 
   return auth.token && auth.user ? (
-    <div className={`${className} theme-${scopeState} ${containerClass}`}>
+    <div className={`${className} theme-${auth.user.scope[0]} ${containerClass}`}>
       <Head>
         <title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
       </Head>
@@ -89,12 +89,14 @@ Layout.propTypes = {
   children: PropTypes.element.isRequired,
   title: PropTypes.string,
   className: PropTypes.string,
+  containerClass: PropTypes.string,
 };
 
 Layout.defaultProps = {
   children: <div></div>,
   title: '',
   className: 'app',
+  containerClass: 'contenido',
 };
 
 export default Layout;
