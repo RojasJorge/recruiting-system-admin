@@ -34,8 +34,8 @@ export default {
 
     /** Set localStorage */
     // localStorage.setItem('uUser', JSON.stringify(payload));
-    localStorage.setItem('uScopes', JSON.stringify(payload.scope));
-    localStorage.setItem('uToken', token);
+    // localStorage.setItem('uScopes', JSON.stringify(payload.scope));
+    // localStorage.setItem('uToken', token);
 
     /** Set global user info */
     state.user = payload;
@@ -43,7 +43,6 @@ export default {
   }),
   handlenError: action((state, payload) => {
     /** Set global user info */
-    // console.log('payload', payload);
     state.error = payload;
   }),
 
@@ -77,10 +76,10 @@ export default {
     state.user = null;
     state.token = null;
     state.scopes = null;
-    localStorage.removeItem('uToken');
-    localStorage.removeItem('uScopes');
+    // localStorage.removeItem('uToken');
+    // localStorage.removeItem('uScopes');
     // localStorage.removeItem('uUser');
-    localStorage.setItem('uScopes', JSON.stringify(['guest']));
+    // localStorage.setItem('uScopes', JSON.stringify(['guest']));
     store.persist.clear().then(() => {
       console.log('Persisted states has been removed')
     })
@@ -96,15 +95,13 @@ export default {
     state.user.profile.fields[payload.type] = payload.fields;
 
     /** Get uUser from localStorage */
-    let user = JSON.parse(localStorage.getItem('uUser'));
-
+    // let user = JSON.parse(localStorage.getItem('uUser'));
+    //
+    // user.profile.fields[payload.type] = payload.fields;
+    
     /** Attach updated object */
-    if (user) {
-      user.profile.fields[payload.type] = payload.fields;
-
-      /** Update uUser from localStorage */
-      localStorage.removeItem('uUser');
-      localStorage.setItem('uUser', JSON.stringify(user));
-    }
+    // if (user) {
+    //   user.profile.fields[payload.type] = payload.fields;
+    // }
   }),
 };

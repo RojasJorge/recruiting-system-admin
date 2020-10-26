@@ -42,25 +42,14 @@ const Layout = ({ children, title, className, containerClass }) => {
   }, []);
 
   useEffect(() => {
-    /** Parse user & token from localStorage */
-    let user = JSON.parse(localStorage.getItem('uUser'));
-    const token = localStorage.getItem('uToken');
-    const _scope = JSON.parse(localStorage.getItem('uScopes'));
-
-    if (_scope) {
-      setScope(_scope[0]);
-    }
-
-    if (!token) Router.replace('/');
-
-    /** Check if valid */
-    if (token && user) {
-      user.token = token
+    
+    if(!auth.user && !auth.token) {
+      Router.replace('/')
     }
 
     /** Reset loader */
-    switchLoader(false);
-  }, []);
+    switchLoader(false)
+  }, [auth.user, auth.token])
   
   useEffect(() => {
     if(auth.user) {

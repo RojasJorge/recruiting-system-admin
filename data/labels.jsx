@@ -1,13 +1,24 @@
-const label = term => {
-  const academic = JSON.parse(localStorage.getItem('academic_level'));
-  const careers = JSON.parse(localStorage.getItem('career'));
+import {useStoreState} from "easy-peasy";
 
-  const allData = academic.concat(careers);
+const Label = term => {
+  // const academic = JSON.parse(localStorage.getItem('academic_level'));
+  // const careers = JSON.parse(localStorage.getItem('career'));
+  
+  // const career = useStoreState(state => state.collections.career)
+
+  const allData = [].concat([]);
 
   if (allData.find(e => e.id === term)) {
+  
+    console.log(allData.find(e => e.id === term).name)
     return allData.find(e => e.id === term).name;
   }
 
-  return term;
+  return (
+    <div>
+      {term}
+    </div>
+  );
 };
-export default label;
+
+export default Label;

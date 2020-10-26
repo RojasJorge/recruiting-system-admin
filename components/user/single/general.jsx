@@ -1,7 +1,7 @@
 import { Avatar } from 'antd';
 import { isEmpty } from 'lodash';
 import locale from '../../../data/translates/spanish';
-import label from '../../../data/labels';
+// import label from '../../../data/labels';
 import Moment from 'react-moment';
 import { Can } from '../../Can';
 import Link from 'next/link';
@@ -46,7 +46,7 @@ const General = props => {
       {!isEmpty(props.data.currentJobTitle) ? (
         <div className="umana-content__item item-lg" style={{ textAlign: 'center' }}>
           <label>Área al que aplica</label>
-          <p>{label(props.data.currentJobTitle)}</p>
+          {/*<p>{label(props.data.currentJobTitle)}</p>*/}
         </div>
       ) : null}
       {props.data.location.city && props.data.location.country ? (
