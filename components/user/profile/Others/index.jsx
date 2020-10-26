@@ -51,7 +51,11 @@ const Others = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={others}>
+      <Form
+        onFinish={onFinish}
+        initialValues={others}
+        validateTrigger="onBlur"
+      >
         <div className="umana-form--section">
           <h2>Otros conocimientos</h2>
 

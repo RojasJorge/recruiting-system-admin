@@ -73,6 +73,7 @@ const Login = _ => {
                   initialValues={{ remember: true }}
                   onFinish={onFinish}
                   layout="vertical"
+                  validateTrigger="onBlur"
                 >
                   <Item
                     rules={[

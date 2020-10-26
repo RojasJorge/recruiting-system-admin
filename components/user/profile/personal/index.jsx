@@ -96,7 +96,12 @@ const Personal = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form name="basic" onFinish={onFinish} initialValues={personal}>
+      <Form
+        name="basic"
+        onFinish={onFinish}
+        initialValues={personal}
+        validateTrigger="onBlur"
+      >
         <div className="umana-form--section">
           <div style={{ width: '100%', marginBottom: 30 }}>
             {isEmpty(avatar) && (

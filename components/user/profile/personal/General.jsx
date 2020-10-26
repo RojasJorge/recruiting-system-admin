@@ -44,7 +44,7 @@ const General = ({ birthday, setBirthday }) => {
   };
 
   /** Calculate age */
-  // const calculateAge = useStoreActions(actions => actions.tools.calculateAge)
+  const calculateAge = useStoreActions(actions => actions.tools.calculateAge)
 
   const dateFormat = 'DD/MM/YYYY';
 
@@ -87,7 +87,6 @@ const General = ({ birthday, setBirthday }) => {
 
       <Item
         label="Edad"
-        name="age"
         rules={[{ required: true, message: 'El campo Edad es requerido.' }]}
         className="form-item--sm"
       >
@@ -95,8 +94,8 @@ const General = ({ birthday, setBirthday }) => {
           style={{ width: '100%' }}
           min={0}
           size="large"
-          // value={calculateAge(birthday)}
-          // disabled
+          value={calculateAge(birthday)}
+          disabled
         />
       </Item>
 

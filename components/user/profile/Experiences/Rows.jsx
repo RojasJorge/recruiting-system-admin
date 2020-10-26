@@ -109,6 +109,7 @@ const Experience = ({switchCurrent, current}) => {
 				name="experiences"
 				onFinish={onFinish}
 				initialValues={initialValues()}
+				validateTrigger="onBlur"
 			>
 	
 				 <div className="umana-form--section">

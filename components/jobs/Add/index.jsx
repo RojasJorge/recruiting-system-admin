@@ -142,6 +142,7 @@ const FormJob = props => {
         initialValues={props.data}
         onFinish={onFinish}
         scrollToFirstError={true}
+        validateTrigger="onBlur"
       >
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>

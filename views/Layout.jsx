@@ -16,6 +16,7 @@ const Layout = ({ children, title, className, containerClass }) => {
   const [fullScreen, switchFullScreen] = useState(false);
   
   /** Get profile validator from store */
+  const profile = useStoreState(state => state.profile)
   const verifyProfileStatus = useStoreActions(actions => actions.profile.verify)
 
   /**
@@ -57,7 +58,7 @@ const Layout = ({ children, title, className, containerClass }) => {
         verifyProfileStatus(auth.user.profile.fields)
       }, 1000)
     }
-  }, [auth.user])
+  }, [auth.user, profile])
 
   return auth.token && auth.user ? (
     <div className={`${className} theme-${scopeState} ${containerClass}`}>
@@ -67,6 +68,9 @@ const Layout = ({ children, title, className, containerClass }) => {
       <MainHeader layout="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
         <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>
+          <div>
+            <pre>{JSON.stringify(profile, false, 2)}</pre>
+          </div>
           {children}
         </div>
       </div>
@@ -88,7 +92,7 @@ Layout.propTypes = {
 };
 
 Layout.defaultProps = {
-  children: <></>,
+  children: <div></div>,
   title: '',
   className: 'app',
 };

@@ -96,7 +96,11 @@ const Documents = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal}>
+      <Form
+        className="animated fadeInUp"
+        onFinish={onFinish} initialValues={personal}
+        validateTrigger="onBlur"
+      >
         <div className="umana-form--section">
           <h2>Documentos de identificación</h2>
           <Item name="dpi" label="DPI" className="form-item--md">

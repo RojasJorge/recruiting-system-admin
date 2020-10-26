@@ -60,7 +60,11 @@ const Economic = ({ current, switchCurrent }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={economic}>
+      <Form
+        onFinish={onFinish}
+        initialValues={economic}
+        validateTrigger="onBlur"
+      >
         <div className="umana-form--section">
           <h2 style={{ width: '100%' }}>Información Económica</h2>
           <Item name="typeHousing" label="Tipo de vivienda" className="form-item--md">

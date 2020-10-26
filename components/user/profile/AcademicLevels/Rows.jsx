@@ -100,7 +100,11 @@ const Level = ({switchCurrent, current}) => {
 	
 	return (
 		<>
-			<Form initialValues={initialValues()} onFinish={onFinish}>
+			<Form
+				initialValues={initialValues()}
+				onFinish={onFinish}
+				validateTrigger="onBlur"
+			>
 				<div className="umana-form--section">
 					<h2>Niveles académicos</h2>
 					<List name="studies" className="form-item--lg">

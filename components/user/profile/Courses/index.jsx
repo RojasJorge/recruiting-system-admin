@@ -80,7 +80,11 @@ const Courses = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={initialValues()}>
+      <Form
+        onFinish={onFinish}
+        initialValues={initialValues()}
+        validateTrigger="onBlur"
+      >
         <div className="umana-form--section">
           <h2>Otros cursos</h2>
           <List name="courses" className="form-item--lg">

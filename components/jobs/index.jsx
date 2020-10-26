@@ -34,7 +34,7 @@ const Jobs = props => {
   };
 
   const add = async e => {
-    console.log(e);
+    // console.log(e);
     delete e.id;
     delete e.company;
     delete e.created_at;
@@ -144,10 +144,10 @@ const Jobs = props => {
     getJobs();
   }, [filters.page, filters.offset, filters.jobposition, filters.title, filters.country, filters.city]);
 
-  useEffect(() => {
-    getOptions();
-    get();
-  }, []);
+  // useEffect(() => {
+  //   getOptions();
+  //   get();
+  // }, []);
 
   const renderDate = date => {
     const today = new Date();
