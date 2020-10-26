@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Select } from 'antd';
+import { useStoreState } from 'easy-peasy';
 
 const AreaJob = ({ value, onChange }) => {
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('career')));
+  const data = useStoreState(state => state.collections);
   const [val, setVal] = useState('');
 
   const triggerChange = e => {
@@ -14,6 +15,7 @@ const AreaJob = ({ value, onChange }) => {
     setVal(e);
     triggerChange(e);
   };
+  console.log(data);
   return (
     <Select
       onChange={e => handlenChange(e)}
@@ -22,19 +24,23 @@ const AreaJob = ({ value, onChange }) => {
       value={value}
       filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.toLowerCase().indexOf(input.toLowerCase()) >= 0}
     >
-      {data
-        ? data
-            .sort((a, b) => (a.name > b.name ? 1 : -1))
-            .map((e, idx) => {
-              if (e.parent === null || e.parent === '') {
-                return (
-                  <Select.Option key={idx} value={e.id}>
-                    {e.name}
-                  </Select.Option>
-                );
-              }
-            })
-        : null}
+      {data && data.career ? (
+        data.career.map(e =>
+          e.children ? (
+            <Select.OptGroup key={e.id} label={e.name}>
+              {e.children
+                ? e.children.map((c, i) => (
+                    <Select.Option key={c.id + '-' + i} value={c.id}>
+                      {c.name}
+                    </Select.Option>
+                  ))
+                : null}
+            </Select.OptGroup>
+          ) : null,
+        )
+      ) : (
+        <Option>No data</Option>
+      )}
     </Select>
   );
 };

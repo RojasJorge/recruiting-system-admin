@@ -6,7 +6,6 @@ import { Card, EmptyElemet } from '../../elements';
 import { delay, find, isEmpty } from 'lodash';
 import { Can } from '../Can';
 import Moment from 'react-moment';
-import moment from 'moment';
 import { Button, Input, notification, Pagination, Select, Table } from 'antd';
 
 const { Option } = Select;
@@ -143,14 +142,7 @@ const Jobs = props => {
 
   useEffect(() => {
     getJobs();
-  }, [
-    filters.page,
-    filters.offset,
-    filters.jobposition,
-    filters.title,
-    filters.country,
-    filters.city,
-  ]);
+  }, [filters.page, filters.offset, filters.jobposition, filters.title, filters.country, filters.city]);
 
   useEffect(() => {
     getOptions();
@@ -245,13 +237,7 @@ const Jobs = props => {
               <div className="umana-form">
                 <div className="ant-row ant-form-item item-lg">
                   <label htmlFor="areatype">Seleccione Puesto</label>
-                  <Select
-                    size="large"
-                    onSelect={e => setFilters({ ...filters, jobposition: e })}
-                    value={filters.jobposition}
-                    disabled={loading}
-                    showSearch
-                  >
+                  <Select size="large" onSelect={e => setFilters({ ...filters, jobposition: e })} value={filters.jobposition} disabled={loading} showSearch>
                     {!isEmpty(collectionsState.career) ? (
                       collectionsState.career.map(e =>
                         e.children ? (
@@ -295,14 +281,7 @@ const Jobs = props => {
                 </div>
                 <div className="ant-row ant-form-item item-lg">
                   <label>Ciudad</label>
-                  <Select
-                    size="large"
-                    placeholder="Seleccione ciudad"
-                    disabled={isEmpty(filters.country)}
-                    onSelect={e => setFilters({ ...filters, city: e })}
-                    value={filters.city}
-                    showSearch
-                  >
+                  <Select size="large" placeholder="Seleccione ciudad" disabled={isEmpty(filters.country)} onSelect={e => setFilters({ ...filters, city: e })} value={filters.city} showSearch>
                     {!isEmpty(filters.country)
                       ? filters.country.municipalities.map((city, index) => (
                           <Option key={index} value={city}>
@@ -332,13 +311,7 @@ const Jobs = props => {
               <div className="umana-form">
                 <div className="ant-row ant-form-item item-lg">
                   <label htmlFor="areatype">Seleccione Puesto</label>
-                  <Select
-                    size="large"
-                    onSelect={e => setFilters({ ...filters, jobposition: e })}
-                    value={filters.jobposition}
-                    disabled={loading}
-                    showSearch
-                  >
+                  <Select size="large" onSelect={e => setFilters({ ...filters, jobposition: e })} value={filters.jobposition} disabled={loading} showSearch>
                     {!isEmpty(collectionsState.career) ? (
                       collectionsState.career.map(e =>
                         e.children ? (
@@ -382,14 +355,7 @@ const Jobs = props => {
                 </div>
                 <div className="ant-row ant-form-item item-lg">
                   <label>Ciudad</label>
-                  <Select
-                    size="large"
-                    placeholder="Seleccione ciudad"
-                    disabled={isEmpty(filters.country)}
-                    onSelect={e => setFilters({ ...filters, city: e })}
-                    value={filters.city}
-                    showSearch
-                  >
+                  <Select size="large" placeholder="Seleccione ciudad" disabled={isEmpty(filters.country)} onSelect={e => setFilters({ ...filters, city: e })} value={filters.city} showSearch>
                     {!isEmpty(filters.country)
                       ? filters.country.municipalities.map((city, index) => (
                           <Option key={index} value={city}>
@@ -420,11 +386,7 @@ const Jobs = props => {
                 <div className="ant-row ant-form-item item-lg">
                   {/*SEARCH/FILTER COMPONENT*/}
                   <label htmlFor="search">Buscar por nombre (plaza)</label>
-                  <Search
-                    size="small"
-                    disabled={loading}
-                    onSearch={e => setFilters({ ...filters, title: e })}
-                  />
+                  <Search size="small" disabled={loading} onSearch={e => setFilters({ ...filters, title: e })} />
                 </div>
               </div>
             </div>
@@ -436,9 +398,7 @@ const Jobs = props => {
                     <Card
                       key={idx}
                       title={e.title}
-                      link={`${
-                        localStorage.getItem('uToken') ? '/admin/jobs/single/' : '/jobs/single/'
-                      }`}
+                      link={`${localStorage.getItem('uToken') ? '/admin/jobs/single/' : '/jobs/single/'}`}
                       dinamicLink={e.id}
                       description={e.description}
                       theme="green"
@@ -455,12 +415,7 @@ const Jobs = props => {
         <Can I="edit" a="JOBS">
           <div className="umana-section">
             <h2>Plazas expiradas</h2>
-            <Table
-              columns={columns}
-              dataSource={separatedJobs.expired}
-              rowKey={record => record.id}
-              pagination={false}
-            />
+            <Table columns={columns} dataSource={separatedJobs.expired} rowKey={record => record.id} pagination={false} />
           </div>
         </Can>
         <div className="row" style={{ marginLeft: 'auto', marginTop: 40 }}>
