@@ -32,31 +32,29 @@ const MainMenu = _ => {
   }, []);
 
   return user ? (
-    <>
-      <div className="umana-header">
-        <UmanaLogo />
-        <div className="umana-main-nav">
-          {user.scope[0] === 'umana' ? (
-            <>
-              <RootNav user={user} direction="horizontal" theme="root" />
-              <UserDropdown user={user} scope="root" logout={signOut} />
-            </>
-          ) : null}
-          {user.scope[0] === 'company' ? (
-            <>
-              <CompanyNav user={user} direction="horizontal" theme="company" />
-              <UserDropdown user={user} scope="company" logout={signOut} />
-            </>
-          ) : null}
-          {user.scope[0] === 'candidate' ? (
-            <>
-              <TalentNav user={user} direction="horizontal" theme="talento" />
-              <UserDropdown user={user} scope="talento" logout={signOut} />
-            </>
-          ) : null}
-        </div>
+    <div className="umana-header">
+      <UmanaLogo />
+      <div className="umana-main-nav">
+        {user.scope[0] === 'umana' ? (
+          <>
+            <RootNav user={user} direction="horizontal" theme="root" />
+            <UserDropdown user={user} scope="root" logout={signOut} />
+          </>
+        ) : null}
+        {user.scope[0] === 'company' ? (
+          <>
+            <CompanyNav user={user} direction="horizontal" theme="company" />
+            <UserDropdown user={user} scope="company" logout={signOut} />
+          </>
+        ) : null}
+        {user.scope[0] === 'candidate' ? (
+          <>
+            <TalentNav user={user} direction="horizontal" theme="talento" />
+            <UserDropdown user={user} scope="talento" logout={signOut} />
+          </>
+        ) : null}
       </div>
-    </>
+    </div>
   ) : (
     <div className="umana-header">
       <UmanaLogo />

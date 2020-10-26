@@ -14,9 +14,9 @@ const Layout = ({ children, title, className, containerClass }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
   const [fullScreen, switchFullScreen] = useState(false);
-  
+
   /** Get profile validator from store */
-  const verifyProfileStatus = useStoreActions(actions => actions.profile.verify)
+  const verifyProfileStatus = useStoreActions(actions => actions.profile.verify);
 
   /**
    * System collections
@@ -42,34 +42,31 @@ const Layout = ({ children, title, className, containerClass }) => {
   }, []);
 
   useEffect(() => {
-    
-    if(!auth.user && !auth.token) {
-      Router.replace('/')
+    if (!auth.user && !auth.token) {
+      Router.replace('/');
     }
 
     /** Reset loader */
-    switchLoader(false)
-  }, [auth.user, auth.token])
-  
+    switchLoader(false);
+  }, [auth.user, auth.token]);
+
   useEffect(() => {
-    if(auth.user) {
+    if (auth.user) {
       /** Check current profile status */
       delay(_ => {
-        verifyProfileStatus(auth.user.profile.fields)
-      }, 1000)
+        verifyProfileStatus(auth.user.profile.fields);
+      }, 1000);
     }
-  }, [auth.user])
+  }, [auth.user]);
 
   return auth.token && auth.user ? (
     <div className={`${className} theme-${scopeState} ${containerClass}`}>
       <Head>
         <title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
       </Head>
-      <MainHeader layout="is-login" />
+      <MainHeader layoutcontainer="is-login" />
       <div className={`app--contents umana is-login ${className}`}>
-        <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>
-          {children}
-        </div>
+        <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>{children}</div>
       </div>
       <PageLoader active={mloading} />
     </div>
