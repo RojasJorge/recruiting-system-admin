@@ -91,14 +91,16 @@ const CandidateRequests = _ => {
 							render: text => <div>
 								{text.title}
 							</div>
-						}, {
-							title: 'Contacto',
-							dataIndex: 'company',
-							key: 'company',
-							render: text => <div>
-								{text.contact.name} - {text.contact.email}
-							</div>
-						}, {
+						},
+						// 	{
+						// 	title: 'Contacto',
+						// 	dataIndex: 'company',
+						// 	key: 'company',
+						// 	render: text => <div>
+						// 		{text.contact.name} - {text.contact.email}
+						// 	</div>
+						// },
+							{
 							title: 'Estado',
 							dataIndex: 'apply',
 							key: 'apply',
