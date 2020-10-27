@@ -6,7 +6,6 @@ import ability from '../ability';
 import esEs from 'antd/lib/locale-provider/es_ES';
 import NextNProgress from '../components/Progress';
 import '../assets/css/global.scss';
-// import 'cropperjs/dist/cropper.css';
 
 const WebApp = ({Component, pageProps}) => {
 	

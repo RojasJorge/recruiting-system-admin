@@ -38,7 +38,7 @@ const Welcome = () => {
 			}
 		} else {
 			delay(_ => {
-				switchLoading(false)
+				switchLoading(!loading)
 			}, 1000)
 		}
 	}, [profile])
