@@ -1,6 +1,6 @@
 import {Sitebar} from '../../../elements';
 import {useEffect, useState} from 'react';
-import {Avatar, Button, Empty, Modal, notification, Progress, Skeleton, Tag} from 'antd';
+import {Avatar, Button, Empty, Modal, notification, Progress, Skeleton, Tag, Alert} from 'antd';
 import {useRouter} from 'next/router';
 import locale from '../../../data/translates/spanish';
 import label from '../../../data/labels';
@@ -10,22 +10,28 @@ import moment from 'moment';
 import {delay} from 'lodash'
 
 import {Can} from '../../../components/Can';
+import {useStoreActions, useStoreState} from "easy-peasy";
 
 const {confirm} = Modal
 
-const SingleJob = () => {
+const SingleJob = ({query}) => {
 	const router = useRouter()
-	
-	const {
-		query: {id},
-	} = router
 	
 	const [job, setJob] = useState(null);
 	const [loading, switchLoading] = useState(true)
 	
+	/** Get profile status if exists */
+	const profile = useStoreState(state => state.profile)
+	
+	/** Validate profile */
+	const verifyProfileStatus = useStoreActions(actions => actions.profile.verify)
+	
+	/** Check auth */
+	const auth = useStoreState(state => state.auth)
+	
 	const getJob = () => {
 		xhr()
-			.get(`/job/${id}`)
+			.get(`/job/${query.id}`)
 			.then(res => {
 				res.type = false
 				setJob(res.data)
@@ -34,6 +40,7 @@ const SingleJob = () => {
 	}
 	
 	useEffect(() => {
+		// console.log('Query from single job:', query)
 		getJob()
 		
 		delay(_ => {
@@ -49,7 +56,7 @@ const SingleJob = () => {
 		});
 		
 		setTimeout(() => {
-			router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
+			router.push(`/admin/jobs/single/[query.id]`, `/admin/jobs/single/${e}`);
 		}, 500);
 	};
 	
@@ -113,7 +120,7 @@ const SingleJob = () => {
 		}
 	};
 	const applyJob = e => {
-		const user = JSON.parse(localStorage.getItem('uUser'));
+		const user = auth.user.id;
 		const data = {
 			uid: user.id,
 			companyId: job.company_id,
@@ -131,11 +138,11 @@ const SingleJob = () => {
 	};
 	
 	const expire = e => {
-		var startdate = moment();
+		const startdate = moment();
 		startdate = startdate.subtract(1, 'days');
 		startdate = startdate.format();
 		
-		console.log(startdate);
+		// console.log(startdate);
 		const data = {
 			expiration_date: startdate,
 			contact: e.contact,
@@ -163,10 +170,33 @@ const SingleJob = () => {
 					});
 			},
 			onCancel() {
-				console.log('Cancel');
+				// console.log('Cancel');
 			},
 		});
 	};
+	
+	const checkProfile = _ => {
+		if (
+			!profile.personal ||
+			!profile.academic ||
+			!profile.economic ||
+			!profile.lookingFor ||
+			!profile.others ||
+			!profile.working
+		) {
+			return false
+		} else {
+			return true
+		}
+	}
+	
+	useEffect(() => {
+		if (auth.user) {
+			delay(_ => {
+				verifyProfileStatus(auth.user.profile.fields)
+			}, 1000)
+		}
+	}, [auth.user])
 	
 	var today = moment()
 	
@@ -182,7 +212,7 @@ const SingleJob = () => {
 								action: 'edit',
 								titleAction: 'Editar Plaza',
 								urlAction: '/admin/jobs/edit/',
-								urlDinamic: id,
+								urlDinamic: query.id,
 							}}
 						>
 							<Button type="primary" size="small" onClick={() => add(job)}>
@@ -209,10 +239,13 @@ const SingleJob = () => {
 									</Button>
 								</Link>
 							) : (
-								<Button type="orange" size="small" onClick={applyJob}>
-									<i className="material-icons">send</i>
-									Aplicar a la plaza
-								</Button>
+								<>
+									<Button type="orange" size="small" onClick={applyJob} disabled={!checkProfile()}>
+										<i className="material-icons">send</i>
+										Aplicar a la plaza
+									</Button>
+									<Alert type="error" message="Debes completar tu perfil para poder aplicar a una plaza" banner />
+								</>
 							)}
 						</Sitebar>
 					</Can>
@@ -557,7 +590,7 @@ const SingleJob = () => {
 							action: 'edit',
 							titleAction: 'Editar Plaza',
 							urlAction: '/admin/jobs/edit/',
-							urlDinamic: id,
+							urlDinamic: query.id,
 						}}
 					/>
 				</Can>

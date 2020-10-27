@@ -50,27 +50,17 @@ const Legal = ({ value = {}, onChange }) => {
     >
       <div className="col-md-3">
         <Label htmlFor="legalProblem">¿Tiene algún problemas legales?</Label>
-        <Checkbox
-          onChange={e => handleChange(e.target.checked, 'legalProblem')}
-          checked={values.legalProblem}
-        >
+        <Checkbox onChange={e => handleChange(e.target.checked, 'legalProblem')} checked={values.legalProblem}>
           Si
         </Checkbox>
       </div>
       <div className="col-md-9">
         <Label htmlFor="whatProblem">¿Qué tipo de problema?</Label>
-        <Input
-          onChange={e => handleChange(e.target.value, 'whatProblem')}
-          value={values.whatProblem}
-          size="large"
-        />
+        <Input onChange={e => handleChange(e.target.value, 'whatProblem')} value={values.whatProblem} size="large" />
       </div>
       <div className="col-md-3" style={{ marginTop: 30 }}>
-        <Label htmlFor="infonetOrOther">¿Infornet u otros?</Label>
-        <Checkbox
-          onChange={e => handleChange(e.target.checked, 'infonetOrOther')}
-          checked={values.infonetOrOther}
-        >
+        <Label htmlFor="infonetOrOther">Autorizo a Umana a solicitar información personal por Infonet</Label>
+        <Checkbox onChange={e => handleChange(e.target.checked, 'infonetOrOther')} checked={values.infonetOrOther}>
           Si
         </Checkbox>
       </div>

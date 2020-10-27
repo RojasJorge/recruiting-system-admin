@@ -1,11 +1,7 @@
-import { action, thunk } from 'easy-peasy';
-import { message } from 'antd';
-import Router from 'next/router';
-import axios from 'axios';
-
-// const base_url = process.env.NEXT_PUBLIC_APP_ENV === 'develop'
-// 	? process.env.NEXT_PUBLIC_API_URL_DEVELOP
-// 	: process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+import { action, thunk } from 'easy-peasy'
+import Router from 'next/router'
+import axios from 'axios'
+import store from './index'
 
 export default {
   user: null,
@@ -37,9 +33,9 @@ export default {
     delete payload.token;
 
     /** Set localStorage */
-    localStorage.setItem('uUser', JSON.stringify(payload));
-    localStorage.setItem('uScopes', JSON.stringify(payload.scope));
-    localStorage.setItem('uToken', token);
+    // localStorage.setItem('uUser', JSON.stringify(payload));
+    // localStorage.setItem('uScopes', JSON.stringify(payload.scope));
+    // localStorage.setItem('uToken', token);
 
     /** Set global user info */
     state.user = payload;
@@ -47,7 +43,6 @@ export default {
   }),
   handlenError: action((state, payload) => {
     /** Set global user info */
-    console.log('payload', payload);
     state.error = payload;
   }),
 
@@ -65,10 +60,11 @@ export default {
         .then(response => {
           actions.grantAccess(response.data);
           actions.handlenError(0);
+          
           if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana') {
-            location.href = '/admin/requests';
+            location.href = '/admin/requests'
           } else {
-            location.href = '/admin/welcome';
+            location.href = '/admin/welcome'
           }
         })
         .catch(error => {
@@ -80,10 +76,13 @@ export default {
     state.user = null;
     state.token = null;
     state.scopes = null;
-    localStorage.removeItem('uToken');
-    localStorage.removeItem('uScopes');
-    localStorage.removeItem('uUser');
-    localStorage.setItem('uScopes', JSON.stringify(['guest']));
+    // localStorage.removeItem('uToken');
+    // localStorage.removeItem('uScopes');
+    // localStorage.removeItem('uUser');
+    // localStorage.setItem('uScopes', JSON.stringify(['guest']));
+    store.persist.clear().then(() => {
+      console.log('Persisted states has been removed')
+    })
     Router.push('/');
   }),
 
@@ -91,19 +90,18 @@ export default {
    * Update user state
    */
   updateProfile: action((state, payload) => {
+    
     /** Update global state */
     state.user.profile.fields[payload.type] = payload.fields;
 
     /** Get uUser from localStorage */
-    let user = JSON.parse(localStorage.getItem('uUser'));
-
+    // let user = JSON.parse(localStorage.getItem('uUser'));
+    //
+    // user.profile.fields[payload.type] = payload.fields;
+    
     /** Attach updated object */
-    if (user) {
-      user.profile.fields[payload.type] = payload.fields;
-
-      /** Update uUser from localStorage */
-      localStorage.removeItem('uUser');
-      localStorage.setItem('uUser', JSON.stringify(user));
-    }
+    // if (user) {
+    //   user.profile.fields[payload.type] = payload.fields;
+    // }
   }),
 };

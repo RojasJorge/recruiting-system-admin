@@ -35,11 +35,11 @@ const RequestNewPassword = ({linkText, elementType}) => {
 	
 	return (
 		<>
-			<div><Button
+			<Button
 				onClick={_ => switchModal(!visible)}
 				size="small"
 				type="link"
-			>{linkText}</Button></div>
+			>{linkText}</Button>
 			<Modal
 				visible={visible}
 				title="Restablecer contraseña"

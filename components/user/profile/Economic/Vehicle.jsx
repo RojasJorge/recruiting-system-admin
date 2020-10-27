@@ -1,7 +1,10 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Divider, Form, Input, InputNumber, notification, Select } from 'antd';
+import vehicles from '../../../../data/vehicles.json';
+import locale from '../../../../data/translates/spanish';
 const { Item, List } = Form;
 const { Option } = Select;
+
 const Vehicle = () => {
   return (
     <div className="umana-form--section">
@@ -33,18 +36,9 @@ const Vehicle = () => {
                             ]}
                           >
                             <Select size="large">
-                              {[
-                                {
-                                  name: 'motorcycle',
-                                  translation: 'Moto',
-                                },
-                                {
-                                  name: 'car',
-                                  translation: 'Carro',
-                                },
-                              ].map((op, index) => (
-                                <Option key={index} value={op.name}>
-                                  {op.translation}
+                              {vehicles.map((op, index) => (
+                                <Option key={index} value={op}>
+                                  {locale(op)}
                                 </Option>
                               ))}
                             </Select>
@@ -81,21 +75,12 @@ const Vehicle = () => {
                           </Item>
                         </div>
                         <div className="col-md-2">
-                          <Item
-                            label="¿Aún debe?"
-                            name={[field.name, 'debts']}
-                            fieldKey={[field.fieldKey, 'debts']}
-                            valuePropName="checked"
-                          >
+                          <Item label="¿Aún debe?" name={[field.name, 'debts']} fieldKey={[field.fieldKey, 'debts']} valuePropName="checked">
                             <Checkbox />
                           </Item>
                         </div>
                         <div className="col-md-10">
-                          <Item
-                            name={[field.name, 'amount']}
-                            fieldKey={[field.fieldKey, 'amount']}
-                            label="Monto"
-                          >
+                          <Item name={[field.name, 'amount']} fieldKey={[field.fieldKey, 'amount']} label="Monto">
                             <InputNumber min={0} size="large" />
                           </Item>
                         </div>

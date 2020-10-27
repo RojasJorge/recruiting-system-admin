@@ -44,7 +44,7 @@ const General = ({ birthday, setBirthday }) => {
   };
 
   /** Calculate age */
-  // const calculateAge = useStoreActions(actions => actions.tools.calculateAge)
+  const calculateAge = useStoreActions(actions => actions.tools.calculateAge)
 
   const dateFormat = 'DD/MM/YYYY';
 
@@ -67,7 +67,7 @@ const General = ({ birthday, setBirthday }) => {
       </Item>
 
       <Item
-        label="Fecha de nacimiento"
+        label={`* Fecha de nacimiento`}
         rules={[{ required: true, message: 'Debes específicar tu fecha de nacimiento.' }]}
         className="form-item--sm"
       >
@@ -82,11 +82,11 @@ const General = ({ birthday, setBirthday }) => {
           format={dateFormat}
           disabledDate={disabledDate}
         />
+        <p className="note">Debes ser mayor de 18 años</p>
       </Item>
 
       <Item
         label="Edad"
-        name="age"
         rules={[{ required: true, message: 'El campo Edad es requerido.' }]}
         className="form-item--sm"
       >
@@ -94,8 +94,8 @@ const General = ({ birthday, setBirthday }) => {
           style={{ width: '100%' }}
           min={0}
           size="large"
-          // value={calculateAge(birthday)}
-          // disabled
+          value={calculateAge(birthday)}
+          disabled
         />
       </Item>
 

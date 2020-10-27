@@ -1,15 +1,5 @@
 import { useState } from 'react';
-import {
-  Button,
-  Divider,
-  Form,
-  Input,
-  InputNumber,
-  message,
-  notification,
-  Select,
-  Upload,
-} from 'antd';
+import { Button, Divider, Form, Input, InputNumber, message, notification, Select, Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import xhr from '../../../../xhr';
 import storage from '../../../../storage';
@@ -106,7 +96,11 @@ const Documents = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal}>
+      <Form
+        className="animated fadeInUp"
+        onFinish={onFinish} initialValues={personal}
+        validateTrigger="onBlur"
+      >
         <div className="umana-form--section">
           <h2>Documentos de identificación</h2>
           <Item name="dpi" label="DPI" className="form-item--md">
@@ -121,7 +115,7 @@ const Documents = ({ switchCurrent, current }) => {
             <Input size="large" />
           </Item>
 
-          <Item name="driversLicence" label="Licencia" className="form-item--md">
+          <Item name="driversLicence" label="Número de Licencia" className="form-item--md">
             <InputNumber style={{ width: '100%' }} min={0} size="large" />
           </Item>
 
@@ -141,7 +135,7 @@ const Documents = ({ switchCurrent, current }) => {
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />
                 </p>
-                <p className="ant-upload-text">Arrastre o haga click aquí para subir un archivo.</p>
+                <p className="ant-upload-text">Subir DPI(ambos lados) | Pasaporte | Licencia.</p>
               </Dragger>
             </Item>
           </div>

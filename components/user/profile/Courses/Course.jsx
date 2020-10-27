@@ -24,7 +24,7 @@ const Course = ({course, counter, addCourses, courses}) => {
 	
 	return (
 		<>
-			<Form onFinish={onFinish}>
+			<Form onFinish={onFinish} validateTrigger="onBlur">
 				<fieldset>
 					<legend>
 						<Button shape="circle">{counter}</Button> {" "}

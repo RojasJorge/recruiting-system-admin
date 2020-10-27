@@ -45,7 +45,7 @@ const Level = ({level, counter, careers, academicLevels, addLevels, levels}) => 
 	
 	return (
 		<>
-			<Form onFinish={onFinish}>
+			<Form validateTrigger="onBlur" onFinish={onFinish}>
 				<fieldset>
 					<legend>
 						<Button shape="circle">{counter}</Button> {" "}

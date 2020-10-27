@@ -21,9 +21,7 @@ const Economic = props => {
       {props.data.currentSalary ? (
         <div className="umana-content__item item-sm">
           <label>Sueldo actual</label>
-          <h3>{`${props.data.currentSalaryCurrency ? props.data.currentSalaryCurrency : 'GTQ'}. ${
-            props.data.currentSalary
-          }.00`}</h3>
+          <h3>{`${props.data.currentSalaryCurrency ? props.data.currentSalaryCurrency : 'GTQ'}. ${props.data.currentSalary}.00`}</h3>
         </div>
       ) : null}
       {props.data.desiredSalary.baseMin || props.data.desiredSalary.baseMax ? (
@@ -167,19 +165,15 @@ const Economic = props => {
         ) : null}
       </div>
       <div className="umana-content__item item-lg">
-        <label>¿Tiene Anotación en Infonet o similar?</label>
+        <label>Autorizo a Umana a solicitar información personal por Infonet</label>
         <p>{locale(props.data.legal.infonetOrOther)}</p>
       </div>
       <div className="umana-content__item item-lg">
         <Checkbox checked={props.data.allowed} disabled>
-          Autorizo expresamente a las empresas que distribuyen o comercializan con datos personales,
-          para que distribuyan / comercialicen estudios que contengan datos personales concernientes
-          a mi persona, a efecto de verificar la información proporcionada; y autorizo que mis datos
-          personales sean compartidos / distribuidos a empresas que presten servicios de información
-          personal: según los artículos 9 numeral 1 y 64 Ley de Acceso a la Información Pública, 19,
-          21, 22, 28, 46. Ley contra Lavado de Dinero y Otros Activos y 12 y 20 de su Reglamento:
-          50, 55, 56 y 58. Ley de Bancos y Grupos Financieros entre otros. Doy fe que la información
-          proporcionada es verdadera y queda a disposición de ser verificada por UMANA RH.
+          Autorizo expresamente a las empresas que distribuyen o comercializan con datos personales, para que distribuyan / comercialicen estudios que contengan datos personales concernientes a mi
+          persona, a efecto de verificar la información proporcionada; y autorizo que mis datos personales sean compartidos / distribuidos a empresas que presten servicios de información personal:
+          según los artículos 9 numeral 1 y 64 Ley de Acceso a la Información Pública, 19, 21, 22, 28, 46. Ley contra Lavado de Dinero y Otros Activos y 12 y 20 de su Reglamento: 50, 55, 56 y 58. Ley
+          de Bancos y Grupos Financieros entre otros. Doy fe que la información proporcionada es verdadera y queda a disposición de ser verificada por UMANA RH.
         </Checkbox>
       </div>
     </div>

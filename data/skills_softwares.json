@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Softwares",
+    "options": [
+      "La Suite de Google (Gmail, Docs, Hangouts).",
+      "Hootsuit",
+      "Adobe Photoshop",
+      "Zety",
+      "Microsoft Office (Word, Excel, Power Point)",
+      "Wordpress",
+      "Nominaplus",
+      "Canva",
+      "Final Cut Pro",
+      "Jira"
+    ]
+  },
+  {
+    "title": "Habilidades",
+    "options": [
+      "Trabajo en equipo",
+      "Resolución de problemas",
+      "Comunicación eficaz",
+      "Organización",
+      "Análisis y procesamiento de información",
+      "Análisis de datos cuantitativos",
+      "Conocimientos técnicos relacionados con el trabajo",
+      "Manejo de los programas de software",
+      "Edición y redacción de informes.",
+      "Venta y marketing"
+    ]
+  }
+]

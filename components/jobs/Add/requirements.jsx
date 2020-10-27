@@ -1,5 +1,6 @@
 import { Form, Input, InputNumber, Select, Radio, Slider, Checkbox } from 'antd';
 import religiones from '../../../data/religion.json';
+import skills from '../../../data/skills_softwares.json';
 
 const Requirements = () => {
   const marks = {
@@ -23,12 +24,7 @@ const Requirements = () => {
         </Radio.Group>
       </Form.Item>
       <div className="umana-form--group group-row">
-        <Form.Item
-          name="age"
-          label="Edad"
-          className="form-item--fx"
-          help="Seleccione rango de edad"
-        >
+        <Form.Item name="age" label="Edad" className="form-item--fx" help="Seleccione rango de edad">
           <Slider
             min={1}
             max={80}
@@ -58,7 +54,7 @@ const Requirements = () => {
       <Form.Item label="Años de experiencia" className="form-item--lg" name="experience">
         <InputNumber max={100} min={0} />
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         label="Habilidades*"
         className="form-item--lg"
         rules={[
@@ -72,18 +68,39 @@ const Requirements = () => {
             interpersonales, creatividad, actitud positiva, entre otras)"
       >
         <Select placeholder="Agrega elementos al dar enter" mode="tags" />
-      </Form.Item>
+      </Form.Item> */}
 
       <br />
       <h3 style={{ width: '100%' }}>Otros Requerimientos</h3>
       <br />
       <Form.Item
-        label="Softwares requeridos"
+        label="Habilidades, conocimientos, capacidades y Software"
         className="form-item--lg"
-        name="softwares"
-        help="Agrega aquí uno o varios softwares requeridos."
+        name="skills"
+        rules={[
+          {
+            required: true,
+            message: 'Este campo es requerido',
+          },
+        ]}
       >
-        <Select placeholder="Agrega elementos al dar enter" mode="tags" />
+        <Select mode="tags" placeholder="Agrega elementos al dar enter">
+          {skills
+            ? skills
+                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                .map((item, idx) => (
+                  <Select.OptGroup key={idx} label={item.title}>
+                    {item.options
+                      .sort((a, b) => (a.name > b.name ? 1 : -1))
+                      .map((child, id) => (
+                        <Select.Option key={id + child} value={child}>
+                          {child}
+                        </Select.Option>
+                      ))}
+                  </Select.OptGroup>
+                ))
+            : null}
+        </Select>
       </Form.Item>
 
       <Form.Item label="Atribuciones" className="form-item--lg" name="responsibilities">
@@ -101,7 +118,7 @@ const Requirements = () => {
         </Radio.Group>
       </Form.Item>
 
-      <Form.Item label="Número de Licencia" className="form-item--lg" name="type_license">
+      <Form.Item label="Tipo de Licencia" className="form-item--lg" name="type_license">
         <Radio.Group>
           <Radio.Button value="indifferent">Indiferente</Radio.Button>
           <Radio.Button value="a">A</Radio.Button>

@@ -39,7 +39,11 @@ const EditModal = ({
       <div className="umana-drawer">
         <h3>{edit ? 'Editar' : 'Agregar'}</h3>
         {data && data.name ? (
-          <Form onFinish={onFinish} initialValues={data}>
+          <Form
+            onFinish={onFinish}
+            initialValues={data}
+            validateTrigger="onBlur"
+          >
             <Form.Item
               label="Título"
               name="name"

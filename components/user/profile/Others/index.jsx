@@ -4,6 +4,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import xhr from '../../../../xhr';
 import router from 'next/router';
 import languages from '../../../../data/language.json';
+import skills from '../../../../data/skills_softwares.json';
 
 const { Item, List } = Form;
 
@@ -51,17 +52,46 @@ const Others = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={others}>
+      <Form
+        onFinish={onFinish}
+        initialValues={others}
+        validateTrigger="onBlur"
+      >
         <div className="umana-form--section">
           <h2>Otros conocimientos</h2>
 
-          <Item label="Software" name="softwares">
-            <Select mode="tags" />
+          <Item
+            label="Habilidades, conocimientos, capacidades y Software"
+            name="skills"
+            rules={[
+              {
+                required: true,
+                message: 'Este campo es requerido',
+              },
+            ]}
+          >
+            <Select mode="tags" placeholder="Agrega elementos al dar enter">
+              {skills
+                ? skills
+                    .sort((a, b) => (a.name > b.name ? 1 : -1))
+                    .map((item, idx) => (
+                      <Select.OptGroup key={idx} label={item.title}>
+                        {item.options
+                          .sort((a, b) => (a.name > b.name ? 1 : -1))
+                          .map((child, id) => (
+                            <Select.Option key={id + child} value={child}>
+                              {child}
+                            </Select.Option>
+                          ))}
+                      </Select.OptGroup>
+                    ))
+                : null}
+            </Select>
           </Item>
 
-          <Item label="Habilidades" name="skills">
+          {/* <Item label="Habilidades" name="skills">
             <Select mode="tags" />
-          </Item>
+          </Item> */}
         </div>
         <div className="umana-form--section">
           <h2>Idiomas</h2>
@@ -83,11 +113,7 @@ const Others = ({ switchCurrent, current }) => {
                           },
                         ]}
                       >
-                        <Select showSearch>
-                          {languages
-                            ? languages.map(l => <Select.Option key={l}>{l}</Select.Option>)
-                            : null}
-                        </Select>
+                        <Select showSearch>{languages ? languages.map(l => <Select.Option key={l}>{l}</Select.Option>) : null}</Select>
                         {/* <Input /> */}
                       </Item>
 
