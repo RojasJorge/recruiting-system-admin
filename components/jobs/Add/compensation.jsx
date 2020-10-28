@@ -3,6 +3,7 @@ import { useState } from 'react';
 import benefist from '../../../data/benefist.json';
 import monedas from '../../../data/monedas.json';
 import Salary from '../../Salary';
+import TynyEditor from "../../Misc/TinyEditor";
 
 const Compensation = props => {
   const initialState = {
@@ -27,7 +28,8 @@ const Compensation = props => {
         </Checkbox.Group>
       </Form.Item>
       <Form.Item label="Otros Beneficios" className="form-item--lg" name="benefits_other">
-        <Input.TextArea />
+        {/*<Input.TextArea />*/}
+        <TynyEditor/>
       </Form.Item>
       <br />
       <br />
