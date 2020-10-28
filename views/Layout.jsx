@@ -68,9 +68,6 @@ const Layout = ({ children, title, className, containerClass }) => {
 			<MainHeader layout="is-login" />
 			<div className={`app--contents umana is-login ${className}`}>
 				<div className={fullScreen ? 'container-fluid' : 'umana-layout'}>
-					<div>
-						<pre>{JSON.stringify(profile, false, 2)}</pre>
-					</div>
 					{children}
 				</div>
 			</div>
