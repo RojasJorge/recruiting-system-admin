@@ -43,7 +43,11 @@ const Single = ({record}) => {
 			onOk: () => {
 				xhr()
 					.put(`/apply/${record.apply.id}`, JSON.stringify({
-						status: e
+						status: e,
+						company: record.company.name,
+						job: record.job.title,
+						email: record.candidate.email,
+						name: record.candidate.name
 					}))
 					.then(resp => {
 						showNotification('success', 'Exitoso', `El estado de la solicitud ha sido actualizado exitosamente a ${find(STATUS, o => o.id === e).name}`)

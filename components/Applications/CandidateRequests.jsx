@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import EmptyElemet from "../../elements/Empty";
 import {isEmpty} from 'lodash'
 import candidateImg from "../../images/welcome-talento.png";
+import {useRouter} from 'next/router'
 
 const {Option} = Select
 
@@ -25,6 +26,8 @@ const Container = styled.div`
 
 const CandidateRequests = _ => {
 	
+	const router = useRouter()
+	
 	const [requests, setRequests] = useState({
 		list: [],
 		total: 0
@@ -39,8 +42,14 @@ const CandidateRequests = _ => {
 	/** Handle pagination */
 	const onChange = (page, offset) => setFilters({...filters, page, offset})
 	
-	/** Handle job selection */
-	// const onSelect = e => setFilters({...filters, jobId: e})
+	/** Select row events */
+	const onRow = (record) => {
+		return {
+			onClick: _ => {
+				router.push(`/admin/requests/${record.apply.id}`)
+			}
+		}
+	}
 	
 	const getCandidateRequests = _ => {
 		
@@ -65,14 +74,6 @@ const CandidateRequests = _ => {
 	if (!isEmpty(requests.list)) {
 		return (
 			<>
-				{/*FILTER BY JOB*/}
-				{/*<Container>*/}
-				{/*	<h3>Buscar por plaza:</h3>*/}
-				{/*	<Select onSelect={onSelect}>*/}
-				{/*		<Option></Option>*/}
-				{/*	</Select>*/}
-				{/*</Container>*/}
-				
 				{/*TABLE CONTENTS*/}
 				<Container>
 					<Table
@@ -91,16 +92,7 @@ const CandidateRequests = _ => {
 							render: text => <div>
 								{text.title}
 							</div>
-						},
-						// 	{
-						// 	title: 'Contacto',
-						// 	dataIndex: 'company',
-						// 	key: 'company',
-						// 	render: text => <div>
-						// 		{text.contact.name} - {text.contact.email}
-						// 	</div>
-						// },
-							{
+						}, {
 							title: 'Estado',
 							dataIndex: 'apply',
 							key: 'apply',
@@ -110,6 +102,7 @@ const CandidateRequests = _ => {
 						}]}
 						dataSource={requests.list}
 						rowKey={record => record.apply.id}
+						onRow={onRow}
 						pagination={false}
 						size="large"
 						bordered
