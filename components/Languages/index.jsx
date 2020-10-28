@@ -18,7 +18,7 @@ const Languages = props => {
                 <Form.Item {...field} name={[field.name, 'speak']} fieldKey={['speak' + field.fieldKey, 'speak']} label="Hablado">
                   <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
-                <Form.Item {...field} name={[field.name, 'write']} fieldKey={['write' + field.fieldKey, 'write']} label="Escrito">
+                <Form.Item {...field} name={[field.name, 'write']} fieldKey={['write' + field.fieldKey, 'write']} label="Lectura">
                   <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
                 <a

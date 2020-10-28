@@ -81,17 +81,17 @@ const Layout = ({ children, title, className, containerClass }) => {
 };
 
 Layout.propTypes = {
-	children: PropTypes.element.isRequired,
-	title: PropTypes.string,
-	className: PropTypes.string,
-	containerClass: PropTypes.string,
+  children: PropTypes.element.isRequired,
+  title: PropTypes.string,
+  className: PropTypes.string,
+  containerClass: PropTypes.string,
 };
 
 Layout.defaultProps = {
-	children: <div></div>,
-	title: '',
-	className: 'app',
-	containerClass: 'container',
+  children: <div></div>,
+  title: '',
+  className: 'app',
+  containerClass: 'umana-container',
 };
 
 export default Layout;

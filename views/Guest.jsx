@@ -27,7 +27,7 @@ Guest.propTypes = {
 
 Guest.defaultProps = {
   children: <div>Page is empty</div>,
-  pageTitle: 'container',
+  pageTitle: 'container-guestE',
   containerClass: 'portada',
   layoutClass: 'umana-layout',
 };

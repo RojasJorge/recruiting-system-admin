@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { Input, InputNumber, Select, Checkbox } from 'antd';
-import styled from 'styled-components';
 
 const { Option } = Select;
-
-const Label = styled.label`
-  display: block;
-`;
 
 const Legal = ({ value = {}, onChange }) => {
   const initVal =
@@ -49,17 +44,23 @@ const Legal = ({ value = {}, onChange }) => {
       }}
     >
       <div className="col-md-3">
-        <Label htmlFor="legalProblem">¿Tiene algún problemas legales?</Label>
+        <label style={{ width: '100%', display: 'block' }} htmlFor="legalProblem">
+          ¿Tiene algún problemas legales?
+        </label>
         <Checkbox onChange={e => handleChange(e.target.checked, 'legalProblem')} checked={values.legalProblem}>
           Si
         </Checkbox>
       </div>
       <div className="col-md-9">
-        <Label htmlFor="whatProblem">¿Qué tipo de problema?</Label>
+        <label style={{ width: '100%', display: 'block' }} htmlFor="whatProblem">
+          ¿Qué tipo de problema?
+        </label>
         <Input onChange={e => handleChange(e.target.value, 'whatProblem')} value={values.whatProblem} size="large" />
       </div>
       <div className="col-md-3" style={{ marginTop: 30 }}>
-        <Label htmlFor="infonetOrOther">Autorizo a Umana a solicitar información personal por Infonet</Label>
+        <label style={{ width: '100%', display: 'block' }} htmlFor="infonetOrOther">
+          Autorizo a Umana a solicitar información personal por Infonet
+        </label>
         <Checkbox onChange={e => handleChange(e.target.checked, 'infonetOrOther')} checked={values.infonetOrOther}>
           Si
         </Checkbox>

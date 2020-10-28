@@ -7,7 +7,7 @@ import { Button, Form, Input, Alert } from 'antd';
 import { delay } from 'lodash';
 import MainHeader from '../structure/Header';
 import imgLogin from '../../images/login.png';
-import RequestNewPassword from "../Misc/RequestNewPassword";
+import RequestNewPassword from '../Misc/RequestNewPassword';
 
 const { Item } = Form;
 const { Password } = Input;
@@ -62,9 +62,7 @@ const Login = _ => {
           <div className="umana-layout">
             <PageTitle title="Iniciar sesión" />
             <div className="umana-login__content">
-              <div className="notification">
-                {errorInfo ? <Alert description={errorInfo} type="error" showIcon /> : null}
-              </div>
+              <div className="notification">{errorInfo ? <Alert description={errorInfo} type="error" showIcon /> : null}</div>
               <div className="steps-content">
                 <Form
                   className="login--form"
@@ -87,17 +85,14 @@ const Login = _ => {
                   >
                     <Input size="large" />
                   </Item>
-                  <Item
-                    rules={[{ required: true, message: 'Contraseña es requerida.' }]}
-                    name="password"
-                    label="Contraseña"
-                  >
+                  <Item rules={[{ required: true, message: 'Contraseña es requerida.' }]} name="password" label="Contraseña">
                     <Password size="large" style={{ height: 45, lineHeight: '45px' }} />
                   </Item>
                   <Button size="small" htmlType="submit" type="primary" loading={loading}>
                     Iniciar Sesión
                   </Button>
                 </Form>
+                <RequestNewPassword linkText="¿Olvidaste tu contraseña?" elementType="link" />
               </div>
 
               <p>
@@ -112,7 +107,6 @@ const Login = _ => {
                 >
                   Crear cuenta
                 </Button>
-                <RequestNewPassword linkText="He olvidado mi contraseña" elementType="link"/>
               </p>
             </div>
           </div>

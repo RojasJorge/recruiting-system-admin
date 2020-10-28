@@ -16,7 +16,7 @@ const Admin = _ => {
   // };
 
   return (
-    <Layout title="Tablero">
+    <Layout title="Tablero" className="dashboard" containerClass="dashboard-page">
       <>
         <PageTitle title="Dashboard" />
       </>

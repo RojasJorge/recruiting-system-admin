@@ -52,11 +52,7 @@ const Others = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form
-        onFinish={onFinish}
-        initialValues={others}
-        validateTrigger="onBlur"
-      >
+      <Form onFinish={onFinish} initialValues={others} validateTrigger="onBlur">
         <div className="umana-form--section">
           <h2>Otros conocimientos</h2>
 
@@ -148,7 +144,7 @@ const Others = ({ switchCurrent, current }) => {
                       </Item>
 
                       <Item
-                        label="Comprensión"
+                        label="Lectura"
                         {...field}
                         name={[field.name, 'write']}
                         fieldKey={[field.fieldKey, 'write']}

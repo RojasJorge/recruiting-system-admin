@@ -36,7 +36,6 @@
     "react-moment": "^0.9.7",
     "react-progressbar.js": "^0.2.0",
     "sass": "^1.26.10",
-    "styled-components": "^5.2.0",
     "world-countries": "^4.0.0"
   },
   "devDependencies": {

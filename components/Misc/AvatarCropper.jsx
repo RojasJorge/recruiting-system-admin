@@ -1,18 +1,10 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { SaveTwoTone } from '@ant-design/icons';
 import { Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import xhr from '../../xhr';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import storage from '../../storage';
-
-const SaveBtn = styled.span`
-  font-size: 16px;
-  border: 1px solid #c7c7c7;
-  cursor: pointer;
-  padding: 5px 10px;
-`;
 
 const AvatarCropper = ({ personal, updateAvatar, updateToDelete }) => {
   const [fileList, setFileList] = useState(personal.avatar || []);
@@ -46,14 +38,7 @@ const AvatarCropper = ({ personal, updateAvatar, updateToDelete }) => {
   return (
     <div className="umana-avatar-upload">
       <ImgCrop>
-        <Upload
-          action={process.env.NEXT_PUBLIC_APP_FILE_STORAGE + '/upload'}
-          listType="picture-card"
-          fileList={fileList}
-          onChange={onChange}
-          onPreview={onPreview}
-          onRemove={onRemove}
-        >
+        <Upload action={process.env.NEXT_PUBLIC_APP_FILE_STORAGE + '/upload'} listType="picture-card" fileList={fileList} onChange={onChange} onPreview={onPreview} onRemove={onRemove}>
           {fileList.length < 1 && 'Seleccionar'}
         </Upload>
       </ImgCrop>

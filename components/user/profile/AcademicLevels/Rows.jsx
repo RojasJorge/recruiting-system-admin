@@ -203,6 +203,7 @@ const Level = ({switchCurrent, current}) => {
 													name={[field.name, 'currently']}
 													fieldKey={[field.fieldKey, 'currently']}
 													valuePropName="checked"
+													label="¿Estudia aquí actualmente?"
 												>
 												
 													<Switch onChange={e => setWorking(e)} checkedChildren="SI" unCheckedChildren="NO"/>
