@@ -35,13 +35,7 @@
     @include bp(medium) {
       padding: 30px;
     }
-    background: linear-gradient(
-      to bottom,
-      $bg-blue 0,
-      $bg-blue 400px,
-      $color-white 400px,
-      $color-white 100%
-    );
+    background: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
   }
   &.page-content-large {
     margin-bottom: 200px;
@@ -422,4 +416,13 @@
     width: 100%;
     transform: translateY(-100px);
   }
+}
+
+.app--spinner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: cacl(100vh - 80px);
+  background: $bg-blue !important;
 }

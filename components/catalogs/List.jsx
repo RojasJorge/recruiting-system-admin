@@ -2,8 +2,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Button, Spin, Table } from 'antd';
-import { SyncOutlined } from '@ant-design/icons';
-
 import EditModal from './EditModal';
 
 const List = ({ type, title }) => {
@@ -63,19 +61,9 @@ const List = ({ type, title }) => {
   return (
     <>
       <div className="row align-items-center">
-        <div className="col">
-          {data.loading ? <Spin indicator={<SyncOutlined spin />} /> : null}
-        </div>
+        <div className="col">{data.loading ? <Spin tip="Cargando.." size="large" /> : null}</div>
         <div className="umana-element__add">
-          <Button
-            icon={<i className="material-icons">add</i>}
-            shape="circle"
-            type="primary"
-            className="circle-fixed"
-            size="large"
-            onClick={() => switchEdit(!visible)}
-            ghost
-          />
+          <Button icon={<i className="material-icons">add</i>} shape="circle" type="primary" className="circle-fixed" size="large" onClick={() => switchEdit(!visible)} ghost />
         </div>
       </div>
       <div className="umana-container">
@@ -114,16 +102,8 @@ const List = ({ type, title }) => {
               fixed: 'right',
               width: 50,
               render: e => (
-                <Button
-                  id={e.id}
-                  onClick={o => openModale(e.id, e.name, e.parent, true)}
-                  type="link"
-                  style={{ padding: 0, textAlign: 'center' }}
-                >
-                  <i
-                    className="material-icons"
-                    style={{ marginRight: 0, lineHeight: '30px', fontSize: 18 }}
-                  >
+                <Button id={e.id} onClick={o => openModale(e.id, e.name, e.parent, true)} type="link" style={{ padding: 0, textAlign: 'center' }}>
+                  <i className="material-icons" style={{ marginRight: 0, lineHeight: '30px', fontSize: 18 }}>
                     edit
                   </i>
                 </Button>
@@ -132,17 +112,7 @@ const List = ({ type, title }) => {
           ]}
         />
       </div>
-      <EditModal
-        visible={visible}
-        switchEdit={switchEdit}
-        title={title}
-        data={item}
-        clear={setItem}
-        treeData={data[type]}
-        edit={edit}
-        onSubmit={onSubmit}
-        setEdit={setEdit}
-      />
+      <EditModal visible={visible} switchEdit={switchEdit} title={title} data={item} clear={setItem} treeData={data[type]} edit={edit} onSubmit={onSubmit} setEdit={setEdit} />
     </>
   );
 };

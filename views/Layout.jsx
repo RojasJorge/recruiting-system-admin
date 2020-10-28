@@ -6,9 +6,8 @@ import MainHeader from '../components/structure/Header';
 import Login from '../components/user/Login';
 import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
-import { SyncOutlined } from '@ant-design/icons';
 import { isEmpty, delay } from 'lodash';
-// import { Can } from '../components/Can';
+import { Spin } from 'antd';
 
 const Layout = ({ children, title, className, containerClass }) => {
   /** Page loaders */
@@ -61,7 +60,7 @@ const Layout = ({ children, title, className, containerClass }) => {
     if (loading || isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) {
       return (
         <div className="app--spinner animated fadeIn">
-          <SyncOutlined style={{ fontSize: 60 }} spin />
+          <Spin tip="Cargando.." size="large" />
         </div>
       );
     } else {

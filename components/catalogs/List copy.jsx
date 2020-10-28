@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Empty, Spin, Table } from 'antd';
 import { Button } from 'antd';
-import { PlusCircleOutlined, SyncOutlined } from '@ant-design/icons';
 import { isEmpty } from 'lodash';
 // import FileExplorerTheme from 'react-sortable-tree-theme-minimal'
 import PageTitle from '../Misc/PageTitle';
@@ -68,7 +67,7 @@ const ListT = ({ type, title }) => {
       <div className="row align-items-center">
         <div className="col">
           <PageTitle tag="h1" className="title--main title--page">
-            {data.loading ? <Spin indicator={<SyncOutlined spin />} /> : null}
+            {data.loading ? <Spin tip="Cargando.." size="large" /> : null}
           </PageTitle>
         </div>
         <div className="umana-element__add">

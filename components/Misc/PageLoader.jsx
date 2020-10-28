@@ -1,19 +1,19 @@
-import { SyncOutlined } from '@ant-design/icons'
-import PropTypes from 'prop-types'
+import { Spin } from 'antd';
+import PropTypes from 'prop-types';
 
 const PageLoader = ({ active }) =>
   active ? (
-    <div className="app--page-loader">
-      <SyncOutlined spin />
+    <div className="app--spinner animated fadeIn">
+      <Spin tip="Cargando.." size="large" />
     </div>
-  ) : null
+  ) : null;
 
 PageLoader.propTypes = {
-  active: PropTypes.bool
-}
+  active: PropTypes.bool,
+};
 
 PageLoader.defaultProps = {
-  active: false
-}
+  active: false,
+};
 
-export default PageLoader
+export default PageLoader;
