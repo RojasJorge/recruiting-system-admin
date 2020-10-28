@@ -1,8 +1,9 @@
 import {Select} from 'antd'
 import styled from 'styled-components'
 import xhr from "../../xhr";
-import {useCallback, useEffect, useState} from "react";
-import {isEmpty, find} from 'lodash'
+import {useEffect, useState} from "react";
+import {delay, isEmpty} from 'lodash'
+import {useRouter} from 'next/router'
 
 const {Option} = Select
 
@@ -30,19 +31,24 @@ const Reset = styled.h3`
 
 const Filters = ({filters, setFilters, setApplications, applications, getApply}) => {
 	
-	const [COMPANIES, SET_COMPANIES] = useState({
-		companies: [],
-		jobs: [],
-	})
+	const router = useRouter()
 	
-	const [company, setCompany] = useState()
-	const [job, setJob] = useState()
+	const [companies, updateCompanies] = useState([])
+	const [jobs, updateJobs] = useState([])
+	
+	const [company, setCompany] = useState(router.query.c || null)
+	const [job, setJob] = useState(router.query.j || null)
 	
 	const getCompanies = () =>
 		xhr()
 			.get(`/company?page=${filters.page}&offset=${filters.offset}`)
 			.then(resp => {
-				SET_COMPANIES({...COMPANIES, companies: resp.data.items})
+				updateCompanies(resp.data.items)
+				
+				if(router.query.c && router.query.j) {
+					getJobs(router.query.c)
+				}
+				
 			})
 			.catch(err => console.log('Error get companies.', err))
 	
@@ -50,20 +56,43 @@ const Filters = ({filters, setFilters, setApplications, applications, getApply})
 		xhr()
 			.get(`/job?company_id=${cid}`)
 			.then(resp => {
-				SET_COMPANIES({...COMPANIES, jobs: resp.data.items})
-				setJob('')
+				updateJobs(resp.data.items)
+				setJob(null)
 			})
 			.catch(err => console.log('Error get jobs.', err))
 	
 	
 	const onJobSelect = e => {
+		router.push({
+			query: {
+				c: company,
+				j: e
+			}
+		})
+		
 		setJob(e)
 		getApply(company, e)
+	}
+	
+	const onCompanySelect = e => {
+		getJobs(e)
+		setCompany(e)
+		setJob(null)
 	}
 	
 	useEffect(() => {
 		getCompanies()
 	}, [])
+	
+	useEffect(() => {
+		if (router.query.c && router.query.j) {
+			
+			getApply(router.query.c, router.query.j)
+			
+		}
+	}, [])
+	
+	console.log('COMPANIES:', companies, 'JOBS:', jobs)
 	
 	return (
 		<>
@@ -74,16 +103,12 @@ const Filters = ({filters, setFilters, setApplications, applications, getApply})
 						size="large"
 						placeholder="Empresa"
 						optionFilterProp="children"
-						onSelect={e => {
-							getJobs(e)
-							setCompany(e)
-							setJob()
-						}}
+						onSelect={onCompanySelect}
 						value={company}
 						showSearch
 					>
 						{
-							!isEmpty(COMPANIES.companies) && COMPANIES.companies.map(company => (
+							!isEmpty(companies) && companies.map(company => (
 								<Option value={company.id} key={company.id}>{company.name}</Option>
 							))
 						}
@@ -95,13 +120,13 @@ const Filters = ({filters, setFilters, setApplications, applications, getApply})
 						size="large"
 						placeholder="Plaza"
 						optionFilterProp="children"
-						disabled={isEmpty(COMPANIES.jobs)}
-						value={job}
+						disabled={isEmpty(jobs)}
+						value={router.query.j || job}
 						onSelect={onJobSelect}
 						showSearch
 					>
 						{
-							!isEmpty(COMPANIES.jobs) && COMPANIES.jobs.map(job => (
+							!isEmpty(jobs) && jobs.map(job => (
 								<Option key={job.id} value={job.id}>{job.title}</Option>
 							))
 						}
@@ -113,14 +138,17 @@ const Filters = ({filters, setFilters, setApplications, applications, getApply})
 					<Reset onClick={_ => {
 						setCompany(null)
 						setJob(null)
-						SET_COMPANIES({...COMPANIES, jobs: []})
+						// updateCompanies([])
+						updateJobs([])
 						
 						setApplications({...applications, list: [], total: 0})
+						router.push({query: null})
 						
 					}
 					}>Restablecer filtros</Reset>
 				</Col>
 			</Container>
+			{/*<pre>{JSON.stringify(COMPANIES.jobs, false, 2)}</pre>*/}
 		</>
 	)
 }

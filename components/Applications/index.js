@@ -59,7 +59,13 @@ const Applications = ({applications, total, filters}) => {
 	const onRow = (record) => {
 		return {
 			onClick: _ => {
-				router.push(`/admin/requests/${record.apply.id}`)
+				router.push({
+					pathname: `/admin/requests/${record.apply.id}`,
+					query: {
+						c: record.company.id,
+						j: record.job.id
+					}
+				})
 			}
 		}
 	}

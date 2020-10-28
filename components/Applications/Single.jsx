@@ -8,6 +8,7 @@ import {find} from 'lodash'
 import {AbilityContext} from "../Can";
 import {useContext, useState} from "react";
 import xhr from "../../xhr";
+import {useRouter} from 'next/router'
 
 const {Option} = Select
 
@@ -29,6 +30,8 @@ const STATUS = [{
 }]
 
 const Single = ({record}) => {
+	
+	const router = useRouter()
 	
 	const ability = useContext(AbilityContext)
 	
@@ -71,7 +74,15 @@ const Single = ({record}) => {
 		<div className="umana-layout-cl">
 			<div className="umana-layout-cl__small ">
 				<Sitebar theme="orange">
-					<Link href="/admin/requests" passHref>
+					<Link
+					href={{
+						pathname: '/admin/requests',
+						query: {
+							c: router.query.c,
+							j: router.query.j
+						}
+					}}
+					>
 						<a>
 							<i
 								className="material-icons"
