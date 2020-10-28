@@ -1,6 +1,7 @@
 import { Form, Input, InputNumber, Select, Radio, Slider, Checkbox } from 'antd';
 import religiones from '../../../data/religion.json';
 import skills from '../../../data/skills_softwares.json';
+import TynyEditor from "../../Misc/TinyEditor";
 
 const Requirements = () => {
   const marks = {
@@ -104,10 +105,12 @@ const Requirements = () => {
       </Form.Item>
 
       <Form.Item label="Atribuciones" className="form-item--lg" name="responsibilities">
-        <Input.TextArea />
+        {/*<Input.TextArea />*/}
+        <TynyEditor/>
       </Form.Item>
       <Form.Item label="Requerimientos adicionales" className="form-item--lg" name="requirements">
-        <Input.TextArea />
+        {/*<Input.TextArea />*/}
+        <TynyEditor/>
       </Form.Item>
 
       <Form.Item label="Vehículos" className="form-item--lg" name="vehicle">

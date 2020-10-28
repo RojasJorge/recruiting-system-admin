@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
 import {Button, Modal} from 'antd';
-import {useEffect, useState} from "react";
-import axios from 'axios'
-import {useStoreActions} from "easy-peasy";
-import ReactCropper from '../../components/Misc/Cropper'
+import {useState} from "react";
 
 const UploadAvatar = props => {
 	
@@ -54,9 +51,7 @@ const UploadAvatar = props => {
 				<div className="umana-avatarUp__content">
 					<h3>{props.type === 'company' ? 'Logotipo de la empresa' : 'Foto de perfil'}</h3>
 					<p>Sube una fotografía en JPG de no más de 800x800 pixeles.</p>
-					<div className="crop-container">
-						<ReactCropper/>
-					</div>
+				
 				</div>
 			</Modal>
 		</div>

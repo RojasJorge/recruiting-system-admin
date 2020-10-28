@@ -8,7 +8,6 @@ import PageLoader from '../components/Misc/PageLoader';
 import PropTypes from 'prop-types';
 import { SyncOutlined } from '@ant-design/icons';
 import { isEmpty, delay } from 'lodash';
-// import { Can } from '../components/Can';
 
 const Layout = ({ children, title, className, containerClass }) => {
 	/** Page loaders */
@@ -25,9 +24,6 @@ const Layout = ({ children, title, className, containerClass }) => {
 	 */
 	const catalogs = useStoreState(state => state.collections);
 	const getCollections = useStoreActions(actions => actions.collections.get);
-	
-	/** Prevent crash with 'guest' as default scope */
-	const [scopeState, setScope] = useState('guest');
 	
 	const mloading = useStoreState(state => state.users.loading);
 	
@@ -60,19 +56,21 @@ const Layout = ({ children, title, className, containerClass }) => {
 		}
 	}, [auth.user, profile])
 	
-	return auth.token && auth.user ? (
-		<div className={`${className} theme-${auth.user.scope[0]} ${containerClass}`}>
-			<Head>
-				<title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
-			</Head>
-			<MainHeader layout="is-login" />
-			<div className={`app--contents umana is-login ${className}`}>
-				<div className={fullScreen ? 'container-fluid' : 'umana-layout'}>
-					{children}
+	return (auth.token && auth.user && !mloading) ? (
+		<>
+			<div className={`${className} theme-${auth.user.scope[0]} ${containerClass}`}>
+				<Head>
+					<title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
+				</Head>
+				<MainHeader layout="is-login" />
+				<div className={`app--contents umana is-login ${className}`}>
+					<div className={fullScreen ? 'container-fluid' : 'umana-layout'}>
+						{children}
+					</div>
 				</div>
+				<PageLoader active={mloading} />
 			</div>
-			<PageLoader active={mloading} />
-		</div>
+		</>
 	) : loading || isEmpty(catalogs.career) || isEmpty(catalogs.academic_level) ? (
 		<div className="app--spinner animated fadeIn">
 			<SyncOutlined style={{ fontSize: 60 }} spin />
