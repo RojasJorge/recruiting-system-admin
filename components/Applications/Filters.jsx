@@ -92,8 +92,6 @@ const Filters = ({filters, setFilters, setApplications, applications, getApply})
 		}
 	}, [])
 	
-	console.log('COMPANIES:', companies, 'JOBS:', jobs)
-	
 	return (
 		<>
 			<Container>
