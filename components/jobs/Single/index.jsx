@@ -468,7 +468,7 @@ const SingleJob = ({query}) => {
 											strokeColor="#585858"
 											type="circle"
 											percent={e.write}
-											format={percent => `Escritura ${percent}%`}
+											format={percent => `Lectura ${percent}%`}
 										/>
 										<Progress
 											width={150}

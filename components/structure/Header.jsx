@@ -2,7 +2,7 @@ import MainMenu from './MainMenu';
 
 const MainHeader = props => {
   return (
-    <div className={`app--header umana__header ${props.layoutcontainer}`}>
+    <div className={`app--header umana__header ${props.layoutcontainer ? props.layoutcontainer : ''}`}>
       <MainMenu />
     </div>
   );

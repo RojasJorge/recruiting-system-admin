@@ -30,7 +30,7 @@
     "next": "^9.5.3",
     "next-images": "^1.4.1",
     "nextjs-progressbar": "0.0.6",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -44,7 +44,6 @@
     "react-progress-2": "^4.4.3",
     "react-progressbar.js": "^0.2.0",
     "sass": "^1.26.10",
-    "styled-components": "^5.2.0",
     "world-countries": "^4.0.0"
   },
   "devDependencies": {

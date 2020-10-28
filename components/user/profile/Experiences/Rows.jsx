@@ -5,7 +5,7 @@ import {Button, DatePicker, Divider, Form, Input, InputNumber, notification, Sel
 import "cleave.js/dist/addons/cleave-phone.gt";
 import {filter, isEmpty} from "lodash";
 import xhr from "../../../../xhr";
-import styled from "styled-components";
+
 import {useStoreActions, useStoreState} from "easy-peasy";
 import moment from "moment";
 import router from 'next/router';
@@ -16,9 +16,7 @@ const {Item, List} = Form;
 const {Option} = Select;
 const {TextArea} = Input;
 
-const Wrap = styled.fieldset`
-	margin-bottom: 30px;
-`
+
 
 const Experience = ({switchCurrent, current}) => {	
 	/** Global state */
@@ -120,7 +118,7 @@ const Experience = ({switchCurrent, current}) => {
 							<>
 								{
 									fields.map(field => (
-										<Wrap key={field.key}>
+										<fieldset key={field.key}>
 											<div className="row align-items-center">
 												<div className="col-md-12">
 													<div className="row">
@@ -415,7 +413,7 @@ const Experience = ({switchCurrent, current}) => {
 												</div>
 											
 											</div>
-										</Wrap>
+										</fieldset>
 									))
 								}
 								
