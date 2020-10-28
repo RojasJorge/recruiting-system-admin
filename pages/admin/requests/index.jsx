@@ -89,7 +89,6 @@ const Index = _ => {
 						applications={applications}
 						getApply={getApply}
 					/>
-					
 					{
 						!isEmpty(applications.list)
 							? applications.list.map(apply => (
@@ -115,5 +114,7 @@ const Index = _ => {
 		</Layout>
 	)
 }
+
+Index.getInitialProps = async ctx => ctx.query
 
 export default Index

@@ -27,10 +27,18 @@ const UsersList = () => {
         fill(res);
       })
       .catch(console.error);
+  
+  const onRow = (record, index) => {
+    return {
+      onClick: _ => {
+      
+      }
+    }
+  }
 
   useEffect(() => {
-    get(pager.page, pager.limit);
-  }, []);
+    get(pager.page, pager.limit)
+  }, [])
 
   return (
     <div className="row">
@@ -44,6 +52,7 @@ const UsersList = () => {
           dataSource={users.list.filter(e => e.scope == 'candidate')}
           rowKey={record => record.id}
           pagination={false}
+          onRow={onRow}
           columns={[
             {
               title: '',

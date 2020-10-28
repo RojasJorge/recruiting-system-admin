@@ -3,6 +3,7 @@ import {Avatar, Select, Table} from 'antd'
 import {RightOutlined, UserOutlined} from '@ant-design/icons'
 import moment from 'moment'
 import RequestStatus from "./RequestStatus";
+import {useRouter} from "next/router";
 
 const columns = [{
 	title: '',
@@ -52,12 +53,30 @@ const columns = [{
 
 const Applications = ({applications, total, filters}) => {
 	
+	const router = useRouter()
+	
+	/** Select row events */
+	const onRow = (record) => {
+		return {
+			onClick: _ => {
+				router.push({
+					pathname: `/admin/requests/${record.apply.id}`,
+					query: {
+						c: record.company.id,
+						j: record.job.id
+					}
+				})
+			}
+		}
+	}
+	
 	return (
 		<>
 			<Table
 				dataSource={applications}
 				columns={columns}
 				rowKey={record => record.apply.id}
+				onRow={onRow}
 				pagination={{
 					simple: true,
 					total: applications.length

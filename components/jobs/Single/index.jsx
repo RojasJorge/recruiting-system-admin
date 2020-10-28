@@ -17,7 +17,8 @@ const {confirm} = Modal
 const SingleJob = ({query}) => {
 	const router = useRouter()
 	
-	const [job, setJob] = useState(null);
+	const [job, setJob] = useState(null)
+	const [company, setInfoCompany] = useState()
 	const [loading, switchLoading] = useState(true)
 	
 	/** Get profile status if exists */
@@ -40,13 +41,16 @@ const SingleJob = ({query}) => {
 	}
 	
 	useEffect(() => {
-		// console.log('Query from single job:', query)
 		getJob()
-		
 		delay(_ => {
 			switchLoading(false)
 		}, 2000)
+		
 	}, [])
+	
+	useEffect(() => {
+		job && getCompanyInfo()
+	}, [job])
 	
 	const allSet = e => {
 		notification.info({
@@ -119,13 +123,32 @@ const SingleJob = ({query}) => {
 			});
 		}
 	};
-	const applyJob = e => {
-		const user = auth.user.id;
+	
+	const getCompanyInfo = _ =>
+		xhr()
+			.get(`/company/${job.company_id}`)
+			.then(resp => setInfoCompany(resp.data))
+			.catch(err => err)
+	
+	const applyJob = _ => {
+		const user = auth.user;
 		const data = {
 			uid: user.id,
 			companyId: job.company_id,
 			jobId: job.id,
-		};
+			mailing: {
+				job: job.title,
+				company: {
+					name: company.name,
+					contactName: company.contact.name,
+					contactEmail: company.contact.email
+				},
+				candidate: {
+					name: `${user.profile.fields.personal.name} ${user.profile.fields.personal.lastname}`,
+					email: user.profile.fields.personal.email
+				}
+			}
+		}
 		
 		xhr()
 			.post(`/apply`, JSON.stringify(data))
@@ -139,8 +162,8 @@ const SingleJob = ({query}) => {
 	
 	const expire = e => {
 		const startdate = moment();
-		startdate = startdate.subtract(1, 'days');
-		startdate = startdate.format();
+		startdate.subtract(1, 'days');
+		startdate.format();
 		
 		// console.log(startdate);
 		const data = {

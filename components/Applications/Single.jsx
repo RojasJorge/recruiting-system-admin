@@ -8,6 +8,7 @@ import {find} from 'lodash'
 import {AbilityContext} from "../Can";
 import {useContext, useState} from "react";
 import xhr from "../../xhr";
+import {useRouter} from 'next/router'
 
 const {Option} = Select
 
@@ -30,6 +31,8 @@ const STATUS = [{
 
 const Single = ({record}) => {
 	
+	const router = useRouter()
+	
 	const ability = useContext(AbilityContext)
 	
 	const [status, setStatus] = useState(record.apply.status)
@@ -43,7 +46,11 @@ const Single = ({record}) => {
 			onOk: () => {
 				xhr()
 					.put(`/apply/${record.apply.id}`, JSON.stringify({
-						status: e
+						status: e,
+						company: record.company.name,
+						job: record.job.title,
+						email: record.candidate.email,
+						name: record.candidate.name
 					}))
 					.then(resp => {
 						showNotification('success', 'Exitoso', `El estado de la solicitud ha sido actualizado exitosamente a ${find(STATUS, o => o.id === e).name}`)
@@ -67,7 +74,15 @@ const Single = ({record}) => {
 		<div className="umana-layout-cl">
 			<div className="umana-layout-cl__small ">
 				<Sitebar theme="orange">
-					<Link href="/admin/requests" passHref>
+					<Link
+					href={{
+						pathname: '/admin/requests',
+						query: {
+							c: router.query.c,
+							j: router.query.j
+						}
+					}}
+					>
 						<a>
 							<i
 								className="material-icons"
