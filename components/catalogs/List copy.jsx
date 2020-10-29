@@ -67,7 +67,11 @@ const ListT = ({ type, title }) => {
       <div className="row align-items-center">
         <div className="col">
           <PageTitle tag="h1" className="title--main title--page">
-            {data.loading ? <Spin tip="Cargando.." size="large" /> : null}
+            {data.loading ? (
+              <div className="app--spinner animated fadeIn">
+                <Spin tip="Cargando.." size="large" />
+              </div>
+            ) : null}
           </PageTitle>
         </div>
         <div className="umana-element__add">

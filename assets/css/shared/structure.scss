@@ -419,10 +419,15 @@
 }
 
 .app--spinner {
-  width: 100%;
+  width: 100vw !important;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: cacl(100vh - 80px);
+  height: 100vh !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: $bg-blue !important;
 }

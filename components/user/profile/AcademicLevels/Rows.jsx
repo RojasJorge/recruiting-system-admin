@@ -29,7 +29,7 @@ const Level = ({switchCurrent, current}) => {
 	const catalogs = useStoreState(state => state.collections)
 	
 	/** Set parent level */
-	const academicParent = filter(catalogs.academic_level, o => o.parent === null)
+	const academicParent = filter(catalogs.academic_level, o => o.parent === null || o.parent === '')
 	
 	/** Switch level & children as local */
 	const [levels, setLevels] = useState({})

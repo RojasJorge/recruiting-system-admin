@@ -2,7 +2,7 @@ import { isEmpty } from 'lodash';
 import Moment from 'react-moment';
 import { Can } from '../../Can';
 import Link from 'next/link';
-// import label from "../../../data/labels";
+import Label from '../../../data/labels';
 
 const Academic = props => {
   return (
@@ -24,8 +24,7 @@ const Academic = props => {
             {props.data.studies.map((e, idx) => (
               <div className="item-lg item-map" key={`${idx}studie`}>
                 <h3>{e.establishment}</h3>
-                <h4>{e.academicLevel}</h4>
-                
+                <Label term={e.academicLevel} />
                 <label>
                   <Moment locale="es" format="DD MMMM YYYY">
                     {e.dateInit}
