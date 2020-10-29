@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import { Pagination, Select, Table } from 'antd';
 import RequestStatus from './RequestStatus';
 import EmptyElemet from '../../elements/Empty';
-import { isEmpty, delay } from 'lodash';
+import { isEmpty } from 'lodash';
 import candidateImg from '../../images/welcome-talento.png';
 import { useRouter } from 'next/router';
-import PageLoader from "../Misc/PageLoader";
 
 const { Option } = Select;
 
@@ -79,8 +78,6 @@ const CandidateRequests = _ => {
   useEffect(() => {
     getCandidateRequests();
   }, [filters.page, filters.offset, requests.total]);
-  
-  // if(loading && isEmpty(requests.list)) <PageLoader active={loading}/>
 
   if (loading === 'ready' && !isEmpty(requests.list)) {
     return (
