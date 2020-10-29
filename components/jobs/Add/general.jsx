@@ -33,7 +33,7 @@ const GeneralJob = ({ career, position }) => {
         <Input size="large" name="title" />
       </Form.Item>
       <Form.Item
-        className="form-item--md"
+        className="form-item--lg"
         label="Area de puesto"
         rules={[
           {
@@ -46,7 +46,7 @@ const GeneralJob = ({ career, position }) => {
         <AreaJob />
       </Form.Item>
       {!disabled ? (
-        <Form.Item label="Agregar nombre de puesto" className="form-item--md" name="positionalt">
+        <Form.Item label="Agregar nombre de puesto" className="form-item--lg" name="positionalt">
           <>
             <Tooltip title="Agrega el nombre del puesto que no encontraste">
               <a className="help">
@@ -76,6 +76,14 @@ const GeneralJob = ({ career, position }) => {
           <Select.Option value="full_time">Tiempo completo</Select.Option>
           <Select.Option value="part_time">Medio tiempo</Select.Option>
           <Select.Option value="vacationer">Vacacionista</Select.Option>
+        </Select>
+      </Form.Item>
+
+      <Form.Item label="Plaza remota / locación" className="form-item--md" name="workplace" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
+        <Select size="large" placeholder="Seleccione">
+          <Option value="location">Locación</Option>
+          <Option value="mix-location">Mixta</Option>
+          <Option value="remote">Remoto</Option>
         </Select>
       </Form.Item>
 
