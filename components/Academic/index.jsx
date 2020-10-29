@@ -40,7 +40,18 @@ const AcademicLeves = ({ acLevel }) => {
                       : null}
                   </Select>
                 </Form.Item>
-                <Form.Item {...field} name={[field.name, 'children']} fieldKey={['name' + field.fieldKey, 'children']} label="Especialización">
+                <Form.Item
+                  {...field}
+                  name={[field.name, 'children']}
+                  fieldKey={['name' + field.fieldKey, 'children']}
+                  label="Especialización"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Este campo es requerido',
+                    },
+                  ]}
+                >
                   <Speciality level={level} />
                 </Form.Item>
                 <Form.Item {...field} name={[field.name, 'studyNow']} fieldKey={[field.fieldKey, 'studyNow']} label="Se permiten estudiantes">

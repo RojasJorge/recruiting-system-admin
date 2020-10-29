@@ -124,11 +124,11 @@ const Salary = ({ value = {}, onChange }) => {
       </span>
       <span className="form-item--md ant-form-item">
         <label>Salario mínimo:</label>
-        <InputNumber value={values.base_min + values.commission_min} min={0} />
+        <InputNumber value={values.base_min + values.commission_min} min={0} disabled={true} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>Salario máximo:</label>
-        <InputNumber value={values.base_max + values.commission_max} min={0} />
+        <InputNumber value={values.base_max + values.commission_max} min={0} disabled={true} />
       </span>
     </div>
   );

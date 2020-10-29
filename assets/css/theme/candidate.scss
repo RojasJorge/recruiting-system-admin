@@ -12,7 +12,9 @@
   .app--header.umana__header.is-login {
     background: $bg-orange;
   }
-  .app--contents.umana.is-login {
+  .app--contents.umana.is-login,
+  .app--contents.is-login,
+  .umana-content-page {
     background: $bg-orange;
   }
   //titles
@@ -31,11 +33,7 @@
     transition: background-color 5000s ease-in-out 0s;
   }
   h2,
-  .ant-steps.ant-steps-horizontal
-    .ant-steps-item.ant-steps-item-process
-    .ant-steps-item-container
-    .ant-steps-item-content
-    .ant-steps-item-title {
+  .ant-steps.ant-steps-horizontal .ant-steps-item.ant-steps-item-process .ant-steps-item-container .ant-steps-item-content .ant-steps-item-title {
     color: $color-orange !important;
   }
   // themes

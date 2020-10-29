@@ -382,12 +382,10 @@ const Jobs = props => {
           </Can>
           <div className="umana-layout-cl__flex width-section bg-white">
             <div className="umana-form">
-              <div className="umana-form--section simple-form">
-                <div className="ant-row ant-form-item item-lg">
-                  {/*SEARCH/FILTER COMPONENT*/}
-                  <label htmlFor="search">Buscar por nombre (plaza)</label>
-                  <Search size="small" disabled={loading} onSearch={e => setFilters({ ...filters, title: e })} />
-                </div>
+              <div className="ant-row ant-form-item item-lg">
+                {/*SEARCH/FILTER COMPONENT*/}
+                <label htmlFor="search">Buscar por nombre (plaza)</label>
+                <Search size="small" disabled={loading} onSearch={e => setFilters({ ...filters, title: e })} />
               </div>
             </div>
 

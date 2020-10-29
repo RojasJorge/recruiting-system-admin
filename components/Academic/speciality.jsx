@@ -47,7 +47,13 @@ const Speciality = ({ value = {}, onChange, level }) => {
   };
 
   return (
-    <Select showSearch onChange={e => handlenChange(e, 'id')} value={values.name}>
+    <Select
+      showSearch
+      onChange={e => handlenChange(e, 'id')}
+      value={values.name}
+      optionFilterProp="label"
+      filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+    >
       {level && level.children
         ? level.children.map((e, idx) => (
             <Select.Option key={idx} value={e.id}>

@@ -513,7 +513,7 @@ const SingleJob = ({query}) => {
 							<h2>Compensaciones y beneficios</h2>
 						</div>
 						<div className="umana-content__item item-lg">
-							<h3>Saldo promedio</h3>
+							<h3>Salario promedio</h3>
 						</div>
 						
 						<div className="umana-content__item item-md">
@@ -534,10 +534,19 @@ const SingleJob = ({query}) => {
 								{job.salary && job.salary.currency && job.salary.currency.symbol
 									? job.salary.currency.symbol + ' '
 									: 'Q. '}{' '}
-								{job.salary && job.salary.base_max && job.salary.commission_max
-									? parseInt(job.salary.base_max + job.salary.commission_max).toLocaleString('en') +
-									'.00'
+									{job.salary ? 
+										 job.salary.base_min && job.salary.commission_min
+											? parseInt(job.salary.base_min + job.salary.commission_min).toLocaleString('en') +
+											'.00'
+											: parseInt(job.salary.base_max).toLocaleString('en') + '.00'
 									: 0}
+									{job.salary ? 
+										 job.salary.base_max && job.salary.commission_max
+											? parseInt(job.salary.base_max + job.salary.commission_max).toLocaleString('en') +
+											'.00'
+											: parseInt(job.salary.base_max).toLocaleString('en') + '.00'
+									: 0}
+								
 							</h2>
 						</div>
 						{job.benefits ? (
