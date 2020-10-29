@@ -1,9 +1,9 @@
 import Layout from '../../../views/Layout';
 import {EmptyElemet, PageTitle} from '../../../elements';
 import companyImg from '../../../images/welcome-company.png';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import xhr from "../../../xhr";
-import {isEmpty} from 'lodash'
+import {isEmpty, delay} from 'lodash'
 import Applications from "../../../components/Applications";
 import Filters from '../../../components/Applications/Filters'
 import {Can} from '../../../components/Can'
@@ -37,19 +37,7 @@ const Index = _ => {
 		total: 0
 	})
 	
-	// const prepareUrl =
-	
 	const getApply = (companyId, jobId) => {
-		
-		// let applyFilters = `?page=${filters.page}&offset=${filters.offset}`
-		//
-		// if (filters.companyId) {
-		// 	applyFilters += `&companyId=${filters.companyId}`
-		// }
-		//
-		// if (filters.jobId) {
-		// 	applyFilters += `&jobId=${filters.jobId}`
-		// }
 		
 		if(!companyId || !jobId) {
 			message.warning('Debes seleccionar una plaza.')
@@ -64,19 +52,6 @@ const Index = _ => {
 		return
 	}
 	
-	// useEffect(() => {
-	// 	if (filters.switchCompany || filters.switchJob) {
-	// 		getApply()
-	// 	}
-	// }, [
-	// 	filters.page,
-	// 	filters.offset,
-	// 	filters.companyId,
-	// 	filters.jobId,
-	// 	filters.switchCompany,
-	// 	filters.switchJob
-	// ])
-	
 	return (
 		<Layout title="Mis aplicaciones">
 			<>
@@ -90,8 +65,13 @@ const Index = _ => {
 						getApply={getApply}
 					/>
 					{
-						!isEmpty(applications.list)
-							? applications.list.map(apply => (
+						isEmpty(applications.list) && <div className="umana-list list-empty" style={{marginTop: 80}}>
+						<EmptyElemet data={dataEmpty} type="orange"/>
+					</div>
+					}
+					{
+						!isEmpty(applications.list) &&
+							applications.list.map(apply => (
 								<div key={apply.id}>
 									<h2>{apply.name}</h2>
 									<Applications
@@ -101,9 +81,6 @@ const Index = _ => {
 									/>
 								</div>
 							))
-							: <div className="umana-list list-empty" style={{marginTop: 80}}>
-								<EmptyElemet data={dataEmpty} type="orange"/>
-							</div>
 					}
 				</Can>
 				<Can I="view" a="OWN_REQUESTS">
