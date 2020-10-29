@@ -4,6 +4,7 @@ import Locations from '../Location';
 import xhr from '../../xhr';
 import ContactInfo from './add/contact';
 import Router from 'next/router';
+import TynyEditor from "../Misc/TinyEditor";
 import { UploadAvatar } from '../../elements';
 
 const { TextArea } = Input;
@@ -111,7 +112,8 @@ const FormCompany = props => {
           name="description"
           label="Descripción de la empresa"
         >
-          <TextArea rows={4} />
+          {/*<TextArea rows={4} />*/}
+          <TynyEditor/>
         </Form.Item>
         <Form.Item
           name="typeBusiness"

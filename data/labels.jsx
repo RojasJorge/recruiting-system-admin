@@ -1,24 +1,33 @@
-import {useStoreState} from "easy-peasy";
+import { useStoreState } from 'easy-peasy';
 
-const Label = term => {
-  // const academic = JSON.parse(localStorage.getItem('academic_level'));
-  // const careers = JSON.parse(localStorage.getItem('career'));
-  
-  // const career = useStoreState(state => state.collections.career)
+const Label = props => {
+  const collections = useStoreState(state => state.collections);
+  const careers = collections.career;
+  const academic = collections.academic_level;
+  const allData = [];
 
-  const allData = [].concat([]);
+  careers.map(e => {
+    if (e.children) {
+      e.children.map(child => allData.push(child));
+    }
+    allData.push(e);
+  });
+  academic.map(e => {
+    if (e.children) {
+      e.children.map(child => allData.push(child));
+    }
+    allData.push(e);
+  });
 
-  if (allData.find(e => e.id === term)) {
-  
-    console.log(allData.find(e => e.id === term).name)
-    return allData.find(e => e.id === term).name;
+  if (allData) {
+    if (allData.find(e => e.id === props.term)) {
+      return <p>{allData.find(e => e.id === props.term).name}</p>;
+    } else {
+      return <p>{props.term}</p>;
+    }
+  } else {
+    return <p>{props.term}</p>;
   }
-
-  return (
-    <div>
-      {term}
-    </div>
-  );
 };
 
 export default Label;

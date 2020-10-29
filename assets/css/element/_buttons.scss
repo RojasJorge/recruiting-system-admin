@@ -281,6 +281,38 @@
       background: transparent;
     }
   }
+  &.ant-btn-link-reset {
+    background: transparent;
+    padding: 0;
+    height: 30px;
+    color: $color-blue;
+    margin-bottom: 0;
+    display: inline-block;
+    text-transform: capitalize;
+    font-size: 11px;
+    border: 0 !important;
+    width: auto;
+    display: inline-block;
+    text-align: left;
+    max-width: 200px;
+    @include bp(xmedium) {
+      font-size: 14px;
+    }
+    i {
+      font-size: 22px;
+    }
+    &.ant-btn-sm {
+      width: 30px;
+      i {
+        font-size: 16px;
+      }
+    }
+    &:hover {
+      color: $color-blue;
+      opacity: 0.7;
+      background: transparent;
+    }
+  }
   &.ant-btn-lg {
     font-size: 15px;
     width: 100%;

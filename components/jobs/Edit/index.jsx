@@ -5,7 +5,6 @@ import { Progress, Skeleton, Tag } from 'antd';
 import { useRouter } from 'next/router';
 import locale from '../../../data/translates/spanish';
 import { find } from 'lodash';
-// import label from '../../../data/labels';
 import xhr from '../../../xhr';
 
 const EditJob = () => {

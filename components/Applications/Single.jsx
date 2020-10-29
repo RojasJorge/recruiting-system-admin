@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import {Modal, notification, Select, Alert} from 'antd'
+// import {FileSearchOutlined} from '@ant-design/icons'
+import {Alert, Input, Modal, notification, Select} from 'antd'
 import {Sitebar} from '../../elements';
 import Moment from 'react-moment';
 import SingleProfile from '../user/single';
@@ -75,13 +76,13 @@ const Single = ({record}) => {
 			<div className="umana-layout-cl__small ">
 				<Sitebar theme="orange">
 					<Link
-					href={{
-						pathname: '/admin/requests',
-						query: {
-							c: router.query.c,
-							j: router.query.j
-						}
-					}}
+						href={{
+							pathname: '/admin/requests',
+							query: {
+								c: router.query.c,
+								j: router.query.j
+							}
+						}}
 					>
 						<a>
 							<i
@@ -101,25 +102,43 @@ const Single = ({record}) => {
 							{record.job.expiration_date}
 						</Moment>
 					</p>
-					<h3 style={{
-						marginTop: 50
-					}}>Actualizar estado:</h3>
-					<Select
-						value={status}
-						disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST')}
-						onSelect={onStatusSelect}
-					>
-						{
-							STATUS.map(status => (
-								<Option key={status.id} value={status.id}>
-									{status.name}
-								</Option>
-							))
-						}
-					</Select>
+					
+					{
+						ability.can('edit', 'UPDATE_SINGLE_REQUEST')
+							? <>
+								<h3 style={{
+									marginTop: 50
+								}}>Actualizar estado:</h3>
+								<Select
+									value={status}
+									disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST')}
+									onSelect={onStatusSelect}
+								>
+									{
+										STATUS.map(status => (
+											<Option key={status.id} value={status.id}>
+												{status.name}
+											</Option>
+										))
+									}
+								</Select>
+							</>
+							: <div style={{marginTop: 30}}>
+								<h3>Estado actual:</h3>
+								{
+									record
+										? <Input
+											value={find(STATUS, o => o.id === record.apply.status).name}
+											size="large"
+										/>
+										: '...'
+								}
+							</div>
+					}
 				</Sitebar>
 			</div>
 			<div className="umana-layout-cl__flex width-section bg-white">
+				{/*<pre>{JSON.stringify(record.candidate, false, 2)}</pre>*/}
 				<SingleProfile data={record.candidate}/>
 			</div>
 		</div>

@@ -29,7 +29,7 @@ const Level = ({switchCurrent, current}) => {
 	const catalogs = useStoreState(state => state.collections)
 	
 	/** Set parent level */
-	const academicParent = filter(catalogs.academic_level, o => o.parent === null)
+	const academicParent = filter(catalogs.academic_level, o => o.parent === null || o.parent === '')
 	
 	/** Switch level & children as local */
 	const [levels, setLevels] = useState({})
@@ -203,6 +203,7 @@ const Level = ({switchCurrent, current}) => {
 													name={[field.name, 'currently']}
 													fieldKey={[field.fieldKey, 'currently']}
 													valuePropName="checked"
+													label="¿Estudia aquí actualmente?"
 												>
 												
 													<Switch onChange={e => setWorking(e)} checkedChildren="SI" unCheckedChildren="NO"/>

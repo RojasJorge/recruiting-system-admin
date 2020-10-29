@@ -1,7 +1,7 @@
 import { Avatar } from 'antd';
 import { isEmpty } from 'lodash';
 import locale from '../../../data/translates/spanish';
-// import label from '../../../data/labels';
+import Label from '../../../data/labels';
 import Moment from 'react-moment';
 import { Can } from '../../Can';
 import Link from 'next/link';
@@ -31,22 +31,14 @@ const General = props => {
         </Link>
       </Can>
       <div className="umana-content-title-over">
-        <Avatar
-          icon={<i className="material-icons">person</i>}
-          src={getAvatarFromProps()}
-          size={130}
-        />
+        <Avatar icon={<i className="material-icons">person</i>} src={getAvatarFromProps()} size={130} />
 
-        <h2>
-          {props.data.name
-            ? `${props.data.name} ${props.data.lastname}`
-            : `${props.defaultData.name} ${props.defaultData.lastname}`}
-        </h2>
+        <h2>{props.data.name ? `${props.data.name} ${props.data.lastname}` : `${props.defaultData.name} ${props.defaultData.lastname}`}</h2>
       </div>
       {!isEmpty(props.data.currentJobTitle) ? (
         <div className="umana-content__item item-lg" style={{ textAlign: 'center' }}>
           <label>Área al que aplica</label>
-          {/*<p>{label(props.data.currentJobTitle)}</p>*/}
+          <Label term={props.data.currentJobTitle} />
         </div>
       ) : null}
       {props.data.location.city && props.data.location.country ? (
@@ -55,13 +47,7 @@ const General = props => {
           <p>{`${props.data.location.city}, ${props.data.location.country}`}</p>
         </div>
       ) : null}
-      {props.data.nationality ||
-      props.data.birthday ||
-      props.data.age ||
-      props.data.gender ||
-      props.data.religion ||
-      props.data.maritalStatus ||
-      props.data.children ? (
+      {props.data.nationality || props.data.birthday || props.data.age || props.data.gender || props.data.religion || props.data.maritalStatus || props.data.children ? (
         <div className="umana-content__item item-lg">
           <hr />
           <h3>Información General</h3>

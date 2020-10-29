@@ -31,7 +31,6 @@ export default {
   }),
   // add
   add: thunk(async (actions, payload) => {
-
     // actions.switchLoading(true);
 
     const token = payload.token;
@@ -58,7 +57,6 @@ export default {
   }),
   // update
   update: thunk(async (actions, payload) => {
-
     // actions.switchLoading(true);
 
     const token = payload.token;
@@ -87,6 +85,11 @@ export default {
   /**
    * Filter the collection
    */
+
+  // label: action((state, payload) => {
+  //   // console.log('data payload', payload);
+  //   console.log('data store state', payload);
+  // }),
 
   fill: action((state, { data, type }) => {
     // let items = map(data.items, o => {

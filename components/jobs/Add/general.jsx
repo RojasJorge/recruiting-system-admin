@@ -2,6 +2,7 @@ import { Form, Input, Select, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import xhr from '../../../xhr';
 import { AreaJob } from '../../../elements';
+import TynyEditor from "../../Misc/TinyEditor";
 
 const { TextArea } = Input;
 
@@ -158,7 +159,8 @@ const GeneralJob = ({ career, position }) => {
         name="description"
         label="Descripción de la plaza"
       >
-        <TextArea rows={4} />
+        <TynyEditor/>
+        {/*<TextArea rows={4} />*/}
       </Form.Item>
     </>
   );

@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Avatar, Button, Empty, Modal, notification, Progress, Skeleton, Tag, Alert} from 'antd';
 import {useRouter} from 'next/router';
 import locale from '../../../data/translates/spanish';
-import label from '../../../data/labels';
+import Label from '../../../data/labels';
 import xhr from '../../../xhr';
 import Link from 'next/link';
 import moment from 'moment';
@@ -22,8 +22,8 @@ const SingleJob = ({query}) => {
 	const [loading, switchLoading] = useState(true)
 	
 	/** Get profile status if exists */
-	const profile = useStoreState(state => state.profile)
-	
+	const profile = useStoreState(state => state.profile);
+	const collections = useStoreState(state => state.collections);	
 	/** Validate profile */
 	const verifyProfileStatus = useStoreActions(actions => actions.profile.verify)
 	
@@ -326,7 +326,7 @@ const SingleJob = ({query}) => {
 						{job.jobposition ? (
 							<div className="umana-content__item item-md">
 								<label>Puesto</label>
-								<p>{label(job.jobposition)}</p>
+								<Label term={job.jobposition}  />
 							</div>
 						) : null}
 						{job.experience ? (
@@ -403,7 +403,7 @@ const SingleJob = ({query}) => {
 									<div key={idx} style={{display: 'flex', flexWrap: 'wrap', margin: 10}}>
 										<div style={{width: '50%'}}>
 											<label>Nivel</label>
-											<p>{label(e.id)}</p>
+											<Label term={e.id} />
 										</div>
 										<div style={{width: '40%'}}>
 											<label>Especialidad</label>
@@ -468,7 +468,7 @@ const SingleJob = ({query}) => {
 											strokeColor="#585858"
 											type="circle"
 											percent={e.write}
-											format={percent => `Escritura ${percent}%`}
+											format={percent => `Lectura ${percent}%`}
 										/>
 										<Progress
 											width={150}
