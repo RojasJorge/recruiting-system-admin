@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Select, Radio, Slider, Checkbox } from 'antd';
+import { Form, Input, InputNumber, Select, Radio, Slider, Checkbox, Switch } from 'antd';
 import religiones from '../../../data/religion.json';
 import vehicles from '../../../data/vehicles.json';
 import locale from '../../../data/translates/spanish';
@@ -76,6 +76,13 @@ const Requirements = () => {
       <br />
       <h3 style={{ width: '100%' }}>Otros Requerimientos</h3>
       <br />
+      <Form.Item className="form-item--md" name="relocate" valuePropName="checked" label="Requiere disponibilidad para reubicarse">
+        <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
+      </Form.Item>
+
+      <Form.Item className="form-item--md" name="travel" valuePropName="checked" label="Requiere disponibilidad para viajar">
+        <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
+      </Form.Item>
       <Form.Item
         label="Habilidades, conocimientos, capacidades y Software"
         className="form-item--lg"
@@ -134,6 +141,9 @@ const Requirements = () => {
           <Select.Option value="c">C</Select.Option>
           <Select.Option value="m">M</Select.Option>
         </Select>
+      </Form.Item>
+      <Form.Item label="Se requiere que haya tenido personas a cargo ¿Cuántas?" className="form-item--lg" name="dependents">
+        <InputNumber size="large" min={0} />
       </Form.Item>
     </>
   );

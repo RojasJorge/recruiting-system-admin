@@ -497,13 +497,17 @@ const SingleJob = ({query}) => {
 						{job.vehicle ? (
 							<div className="umana-content__item item-md">
 								<label>Vehículos</label>
-								<p>{locale(job.vehicle)}</p>
+								{job.vehicle.map(e => (
+								<p>{locale(e)}</p>
+								))}
 							</div>
 						) : null}
 						{job.type_license ? (
 							<div className="umana-content__item item-md">
 								<label>Tipo de licencia</label>
-								<p>{locale(job.type_license)}</p>
+								{job.type_license.map(e =>
+								<p>{locale(e)}</p>
+									)}
 							</div>
 						) : null}
 					</div>

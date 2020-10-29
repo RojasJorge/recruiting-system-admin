@@ -52,6 +52,9 @@ const AddJob = _ => {
     isBranch: false,
     company_state: 'public',
     religion: ['indifferent'],
+    dependents: 0,
+    relocate: false,
+    travel: false,
   };
   return (
     <Layout title="Agregar Plaza">
