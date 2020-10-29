@@ -6,7 +6,7 @@ import Academic from './academic'
 import Knowledge from './knowledge'
 import Economic from './economic'
 import {useStoreState} from "easy-peasy"
-import {useEffect, useState} from "react";
+import {useEffect, useState} from "react"
 
 const SingleProfile = ({data}) => {
   

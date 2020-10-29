@@ -9,6 +9,7 @@ body,
   padding: 0px;
   background: #ffffff;
   height: 100%;
+  scroll-behavior: smooth;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -57,6 +58,7 @@ h5 {
   position: relative;
   background: #ffffff;
   height: auto;
+  padding-top: 80px;
 
   &--tools {
     margin-top: 24px;
@@ -111,13 +113,7 @@ h5 {
         height: 80px;
       }
       @include bp(xmedium) {
-        background: linear-gradient(
-          to bottom,
-          rgba(245, 252, 254, 1) 0%,
-          rgba(245, 252, 254, 1) 80%,
-          rgba(245, 252, 254, 0.5) 95%,
-          rgba(245, 252, 254, 0) 100%
-        );
+        background: linear-gradient(to bottom, rgba(245, 252, 254, 1) 0%, rgba(245, 252, 254, 1) 80%, rgba(245, 252, 254, 0.5) 95%, rgba(245, 252, 254, 0) 100%);
       }
     }
   }
@@ -125,7 +121,6 @@ h5 {
 
 .umana-container {
   width: 100%;
-  padding: 30px 20px;
   // background: $bg-medium;
 }
 
@@ -203,8 +198,7 @@ h5 {
     justify-content: flex-end;
     align-items: center;
   }
-  &
-    > button.ant-btn.ant-btn-primary.ant-btn-circle.ant-btn-lg.ant-btn-icon-only.ant-btn-background-ghost {
+  & > button.ant-btn.ant-btn-primary.ant-btn-circle.ant-btn-lg.ant-btn-icon-only.ant-btn-background-ghost {
     width: 50px;
     margin: 0;
     margin-left: auto;
@@ -247,13 +241,7 @@ h5 {
   flex-wrap: wrap;
   padding: 30px 0;
   &.bg-color {
-    background: linear-gradient(
-      to bottom,
-      $bg-blue 0,
-      $bg-blue 400px,
-      $color-white 400px,
-      $color-white 100%
-    );
+    background: linear-gradient(to bottom, $bg-blue 0, $bg-blue 400px, $color-white 400px, $color-white 100%);
   }
   &.theme-orange {
     .umana-layout--content {
@@ -487,4 +475,16 @@ h5 {
 .note {
   font-size: 10px;
   color: $color-text;
+}
+
+.app.fadeIn.umana.login {
+  .app--spinner.animated.fadeIn {
+    width: 100% !important;
+    height: 100vh !important;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 }

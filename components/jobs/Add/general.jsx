@@ -2,7 +2,7 @@ import { Form, Input, Select, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import xhr from '../../../xhr';
 import { AreaJob } from '../../../elements';
-import TynyEditor from "../../Misc/TinyEditor";
+import TynyEditor from '../../Misc/TinyEditor';
 
 const { TextArea } = Input;
 
@@ -33,8 +33,8 @@ const GeneralJob = ({ career, position }) => {
         <Input size="large" name="title" />
       </Form.Item>
       <Form.Item
-        className="form-item--md"
-        label="Puesto"
+        className="form-item--lg"
+        label="Area de puesto"
         rules={[
           {
             required: true,
@@ -46,7 +46,7 @@ const GeneralJob = ({ career, position }) => {
         <AreaJob />
       </Form.Item>
       {!disabled ? (
-        <Form.Item label="Agregar nombre de puesto" className="form-item--md" name="positionalt">
+        <Form.Item label="Agregar nombre de puesto" className="form-item--lg" name="positionalt">
           <>
             <Tooltip title="Agrega el nombre del puesto que no encontraste">
               <a className="help">
@@ -57,58 +57,6 @@ const GeneralJob = ({ career, position }) => {
           </>
         </Form.Item>
       ) : null}
-      <Form.Item
-        className="form-item--lg"
-        label="Puestos para matching"
-        rules={[
-          {
-            required: true,
-            message: 'El matching es requerido',
-          },
-        ]}
-        name="postionmatching"
-        // help="Este campo se utilizará para encontrar los mejores candidatos para esta plaza. (Este campo no será visible)"
-      >
-        <Select
-          showSearch
-          mode="tags"
-          optionFilterProp="title"
-          filterprop="title"
-          filterOption={(input, option) => {
-            if (option.children) {
-              return strForSearch(option.children).includes(strForSearch(input));
-            } else {
-              if (option.options) {
-                return strForSearch(option.label).includes(strForSearch(input));
-              }
-              return false;
-            }
-          }}
-        >
-          <Select.OptGroup key="otros" label="Otros">
-            <Select.Option key="otro" value="otros">
-              Otro, agregar puesto
-            </Select.Option>
-          </Select.OptGroup>
-          {career
-            ? career
-                .sort((a, b) => (a.name > b.name ? 1 : -1))
-                .map((e, idx) => (
-                  <Select.OptGroup key={idx} label={e.name}>
-                    {e.children
-                      ? e.children
-                          .sort((z, x) => (z.name > x.name ? 1 : -1))
-                          .map((m, index) => (
-                            <Select.Option key={m.id} value={m.id}>
-                              {m.name}
-                            </Select.Option>
-                          ))
-                      : null}
-                  </Select.OptGroup>
-                ))
-            : null}
-        </Select>
-      </Form.Item>
 
       <Form.Item
         label="Tipo de plaza"
@@ -130,9 +78,15 @@ const GeneralJob = ({ career, position }) => {
           <Select.Option value="vacationer">Vacacionista</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item label="Giro de negocio de la empresa" className="form-item--md" name="businessturn">
-        <Input name="businessturn" />
+
+      <Form.Item label="Plaza remota / locación" className="form-item--md" name="workplace" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
+        <Select size="large" placeholder="Seleccione">
+          <Option value="location">Locación</Option>
+          <Option value="mix-location">Mixta</Option>
+          <Option value="remote">Remoto</Option>
+        </Select>
       </Form.Item>
+
       <Form.Item label="Tipo de horario*" className="form-item--sm" name="schedule_type">
         <Select showSearch>
           <Select.Option value="daytime" key="daytime">
@@ -159,7 +113,7 @@ const GeneralJob = ({ career, position }) => {
         name="description"
         label="Descripción de la plaza"
       >
-        <TynyEditor/>
+        <TynyEditor />
         {/*<TextArea rows={4} />*/}
       </Form.Item>
     </>

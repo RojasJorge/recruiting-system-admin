@@ -20,6 +20,9 @@ const dataEmpty = {
 
 const CandidateRequests = _ => {
   const router = useRouter();
+  
+  /** Loading contents */
+  const [loading, switchLoading] = useState('active')
 
   const [requests, setRequests] = useState({
     list: [],
@@ -51,21 +54,32 @@ const CandidateRequests = _ => {
 
     xhr()
       .get(`/apply/candidate${query}`)
-      .then(resp =>
+      .then(resp => {
         setRequests({
           ...requests,
           list: resp.data.items,
           total: resp.data.total,
-        }),
+        })
+        
+        if(!isEmpty(resp.data.items)) {
+          switchLoading('ready')
+        } else {
+          switchLoading('empty')
+        }
+    
+        },
       )
-      .catch(err => console.log('Error: ', err));
+      .catch(err => {
+        switchLoading('empty')
+        console.log('Error: ', err)
+      });
   };
 
   useEffect(() => {
     getCandidateRequests();
   }, [filters.page, filters.offset, requests.total]);
 
-  if (!isEmpty(requests.list)) {
+  if (loading === 'ready' && !isEmpty(requests.list)) {
     return (
       <>
         {/*TABLE CONTENTS*/}
@@ -115,13 +129,15 @@ const CandidateRequests = _ => {
         <Pagination total={requests.total} current={filters.page} onChange={onChange} disabled={filters.offset > requests.total} />
       </>
     );
-  } else {
+  } else if(loading === 'empty') {
     return (
       <>
         <EmptyElemet data={dataEmpty} />
       </>
     );
   }
+  
+  return <></>
 };
 
 export default CandidateRequests;

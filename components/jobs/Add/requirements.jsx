@@ -1,7 +1,9 @@
-import { Form, Input, InputNumber, Select, Radio, Slider, Checkbox } from 'antd';
+import { Form, Input, InputNumber, Select, Radio, Slider, Checkbox, Switch } from 'antd';
 import religiones from '../../../data/religion.json';
+import vehicles from '../../../data/vehicles.json';
+import locale from '../../../data/translates/spanish';
 import skills from '../../../data/skills_softwares.json';
-import TynyEditor from "../../Misc/TinyEditor";
+import TynyEditor from '../../Misc/TinyEditor';
 
 const Requirements = () => {
   const marks = {
@@ -74,6 +76,13 @@ const Requirements = () => {
       <br />
       <h3 style={{ width: '100%' }}>Otros Requerimientos</h3>
       <br />
+      <Form.Item className="form-item--md" name="relocate" valuePropName="checked" label="Requiere disponibilidad para reubicarse">
+        <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
+      </Form.Item>
+
+      <Form.Item className="form-item--md" name="travel" valuePropName="checked" label="Requiere disponibilidad para viajar">
+        <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
+      </Form.Item>
       <Form.Item
         label="Habilidades, conocimientos, capacidades y Software"
         className="form-item--lg"
@@ -106,28 +115,35 @@ const Requirements = () => {
 
       <Form.Item label="Atribuciones" className="form-item--lg" name="responsibilities">
         {/*<Input.TextArea />*/}
-        <TynyEditor/>
+        <TynyEditor />
       </Form.Item>
       <Form.Item label="Requerimientos adicionales" className="form-item--lg" name="requirements">
         {/*<Input.TextArea />*/}
-        <TynyEditor/>
+        <TynyEditor />
       </Form.Item>
 
       <Form.Item label="Vehículos" className="form-item--lg" name="vehicle">
-        <Radio.Group>
-          <Radio.Button value="indifferent">Indiferente</Radio.Button>
-          <Radio.Button value="vehicle">Vehiculo</Radio.Button>
-          <Radio.Button value="motorcycle">Motocicleta</Radio.Button>
-        </Radio.Group>
+        <Select size="large" mode="multiple">
+          <Select.Option value="indifferent">Indiferente</Select.Option>
+          {vehicles.map((op, index) => (
+            <Select.Option key={index} value={op}>
+              {locale(op)}
+            </Select.Option>
+          ))}
+        </Select>
       </Form.Item>
 
       <Form.Item label="Tipo de Licencia" className="form-item--lg" name="type_license">
-        <Radio.Group>
-          <Radio.Button value="indifferent">Indiferente</Radio.Button>
-          <Radio.Button value="a">A</Radio.Button>
-          <Radio.Button value="b">B</Radio.Button>
-          <Radio.Button value="c">C</Radio.Button>
-        </Radio.Group>
+        <Select size="large" mode="multiple">
+          <Select.Option value="indifferent">Indiferente</Select.Option>
+          <Select.Option value="a">A</Select.Option>
+          <Select.Option value="b">B</Select.Option>
+          <Select.Option value="c">C</Select.Option>
+          <Select.Option value="m">M</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label="Se requiere que haya tenido personas a cargo ¿Cuántas?" className="form-item--lg" name="dependents">
+        <InputNumber size="large" min={0} />
       </Form.Item>
     </>
   );

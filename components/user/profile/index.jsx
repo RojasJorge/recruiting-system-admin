@@ -73,6 +73,10 @@ const UserProfile = ({ query }) => {
   const onChange = o => {
     switchCurrent(o);
     router.push(`${router.pathname}?current=${o}`);
+    window.scroll({
+      top: 80,
+      behavior: 'smooth',
+    });
   };
 
   const status = o => {
@@ -137,12 +141,7 @@ const UserProfile = ({ query }) => {
           <Sitebar header={header} theme="orange">
             <Steps direction="vertical" size="large" current={current} onChange={onChange}>
               {checkList.map((o, i) => (
-                <Step
-                  key={i}
-                  title={o.title}
-                  status={status(i)}
-                  icon={<i className="material-icons">{o.icon}</i>}
-                />
+                <Step key={i} title={o.title} status={status(i)} icon={<i className="material-icons">{o.icon}</i>} />
               ))}
             </Steps>
           </Sitebar>
