@@ -6,11 +6,23 @@ import Academic from './academic'
 import Knowledge from './knowledge'
 import Economic from './economic'
 import {useStoreState} from "easy-peasy"
+import {useEffect, useState} from "react";
 
-const SingleProfile = _ => {
+const SingleProfile = ({data}) => {
   
-  const user = useStoreState(state => state.auth.user)
+  const [user, setUser] = useState(null)
+  const _user = useStoreState(state => state.auth.user)
+  
+  useEffect(() => {
+    if(data) {
+      setUser(data)
+    } else {
+      setUser(_user)
+    }
+  }, [])
 
+  if(!user) return <div>Cargando perfil...</div>
+  
   return (
     <>
       <General data={user.profile.fields.personal} defaultData={user} />
