@@ -40,16 +40,28 @@ const Single = ({ query }) => {
     action: 'back',
   };
 
-  const initialState = {
+  let initialState = {
     locationState: 'public',
     interviewPlace: 'office',
     gender: 'indifferent',
-    vehicle: 'indifferent',
-    type_license: 'indifferent',
+    vehicle: ['indifferent'],
+    type_license: ['indifferent'],
     age: [18, 60],
     isBranch: false,
     company_state: 'public',
     religion: ['indifferent'],
+    dependents: 0,
+    relocate: false,
+    travel: false,
+    salary: {
+      currency: {
+        code: 'GTQ',
+      },
+      base_min: 0,
+      base_max: 0,
+      commission_min: 0,
+      commission_max: 0,
+    },
   };
 
   const switchContent = _ => {
@@ -97,22 +109,10 @@ const Single = ({ query }) => {
         <Can I="edit" a="COMPANIES">
           <Sitebar header={header}>
             <Steps current={current} onChange={onChange} direction="vertical">
-              <Step
-                key={0}
-                title="Perfil de empresa"
-                icon={<i className="material-icons">business</i>}
-              />
+              <Step key={0} title="Perfil de empresa" icon={<i className="material-icons">business</i>} />
               <Step key={1} title="Editar empresa" icon={<i className="material-icons">edit</i>} />
-              <Step
-                key={2}
-                title="Ver plazas"
-                icon={<i className="material-icons">remove_red_eye</i>}
-              />
-              <Step
-                key={3}
-                title="Agregar plazas"
-                icon={<i className="material-icons">add_circle_outline</i>}
-              />
+              <Step key={2} title="Ver plazas" icon={<i className="material-icons">remove_red_eye</i>} />
+              <Step key={3} title="Agregar plazas" icon={<i className="material-icons">add_circle_outline</i>} />
             </Steps>
             ,
           </Sitebar>
@@ -121,13 +121,7 @@ const Single = ({ query }) => {
           <Sitebar header={header1} />
         </Can>
       </div>
-      <div
-        className={`umana-layout-cl__flex ${
-          current !== 2 && current !== 3 && current !== 1 ? 'bg-white' : 'width-section'
-        }`}
-      >
-        {switchContent()}
-      </div>
+      <div className={`umana-layout-cl__flex ${current !== 2 && current !== 3 && current !== 1 ? 'bg-white' : 'width-section'}`}>{switchContent()}</div>
     </div>
   );
 };

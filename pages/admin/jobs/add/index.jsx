@@ -46,8 +46,8 @@ const AddJob = _ => {
     locationState: 'public',
     interviewPlace: 'office',
     gender: 'indifferent',
-    vehicle: 'indifferent',
-    type_license: 'indifferent',
+    vehicle: ['indifferent'],
+    type_license: ['indifferent'],
     age: [18, 60],
     isBranch: false,
     company_state: 'public',
@@ -55,6 +55,15 @@ const AddJob = _ => {
     dependents: 0,
     relocate: false,
     travel: false,
+    salary: {
+      currency: {
+        code: 'GTQ',
+      },
+      base_min: 0,
+      base_max: 0,
+      commission_min: 0,
+      commission_max: 0,
+    },
   };
   return (
     <Layout title="Agregar Plaza">
