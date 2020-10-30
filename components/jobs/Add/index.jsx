@@ -1,4 +1,4 @@
-import { Form, Button, notification, Radio, Select } from 'antd';
+import { Form, Button, notification, Radio, Select, Alert } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -11,7 +11,7 @@ import LocationJob from './locations';
 import xhr from '../../../xhr';
 import router from 'next/router';
 import { isEmpty, find } from 'lodash';
-import Jobs from '../index';
+// import Jobs from '../index';
 
 const FormJob = props => {
   const data = useStoreState(state => state.collections);
@@ -35,18 +35,6 @@ const FormJob = props => {
 
   let isBranch = props.data && props.data.isBranch ? props.data.isBranch : false;
   let positionAlt = true;
-
-  /** Fill jobs from localStorage */
-  // useEffect(() => {
-  //   if (isEmpty(JobsList)) {
-  //     fillJobs({
-  //       data: {
-  //         items: JSON.parse(localStorage.getItem('Jobs')),
-  //         total: JSON.parse(localStorage.getItem('Jobs')).length,
-  //       },
-  //     });
-  //   }
-  // }, []);
 
   useEffect(() => {
     collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
@@ -73,7 +61,6 @@ const FormJob = props => {
       } else {
         router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
       }
-      // router.push(`/admin/jobs/single/[id]`, `/admin/jobs/single/${e}`);
     }, 500);
   };
 
@@ -137,6 +124,18 @@ const FormJob = props => {
 
   return (
     <div>
+      <Alert
+        showIcon
+        message="Nota:"
+        type="info"
+        style={{marginBottom: 30}}
+        description={
+          <>
+            <div>Puedes guardar esta publicación como borrador ó publicarla inmediatamente,
+              pero una vez publicada, <strong>no es posible editarla</strong>.</div>
+          </>
+        }
+      />
       <Form
         className="umana-form umana-max-witdh"
         initialValues={props.data}
