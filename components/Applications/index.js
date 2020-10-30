@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import {Avatar, Select, Table} from 'antd'
+import {Avatar, Table} from 'antd'
 import {RightOutlined, UserOutlined} from '@ant-design/icons'
 import moment from 'moment'
 import RequestStatus from "./RequestStatus";
