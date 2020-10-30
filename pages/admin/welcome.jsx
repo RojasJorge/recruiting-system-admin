@@ -41,7 +41,6 @@ const Welcome = () => {
 		return (
 			<Layout title="Bienvenido(a)">
 				<>
-					<pre>{JSON.stringify(profile, false, 2)}</pre>
 					<PageTitle title="Bienvenido(a)"/>
 					<Can I="edit" a="JOBS">
 						<EmptyElemet
