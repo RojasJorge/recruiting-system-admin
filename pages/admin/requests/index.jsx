@@ -9,6 +9,7 @@ import Filters from '../../../components/Applications/Filters'
 import {Can} from '../../../components/Can'
 import CandidateRequests from "../../../components/Applications/CandidateRequests";
 import {message} from 'antd'
+import MatchTable from "../../../components/Applications/MatchTable";
 
 const dataEmpty = {
 	title: 'Solicitudes de los usuarios',
@@ -37,6 +38,14 @@ const Index = _ => {
 		total: 0
 	})
 	
+	const [coinsidences, updateCoinsidences] = useState([])
+	
+	const getCoinsidences = jobid =>
+		xhr()
+			.get('/match/' + jobid)
+			.then(resp => updateCoinsidences(resp.data))
+			.catch(err => err)
+	
 	const getApply = (companyId, jobId) => {
 		
 		if(!companyId || !jobId) {
@@ -46,7 +55,10 @@ const Index = _ => {
 		
 		xhr()
 			.get(`/apply?companyId=${companyId}&jobId=${jobId}`)
-			.then(resp => setApplications({...applications, list: resp.data}))
+			.then(resp => {
+				setApplications({...applications, list: resp.data})
+				getCoinsidences(jobId)
+			})
 			.catch(err => console.log(err))
 		
 		return
@@ -82,6 +94,8 @@ const Index = _ => {
 								</div>
 							))
 					}
+					{/* MATCHING INFO */}
+					<MatchTable data={coinsidences}/>
 				</Can>
 				<Can I="view" a="OWN_REQUESTS">
 					<PageTitle title="Mis solicitudes"/>
