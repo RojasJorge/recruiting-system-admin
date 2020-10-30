@@ -96,11 +96,7 @@ const Documents = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form
-        className="animated fadeInUp"
-        onFinish={onFinish} initialValues={personal}
-        validateTrigger="onBlur"
-      >
+      <Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal} validateTrigger="onBlur">
         <div className="umana-form--section">
           <h2>Documentos de identificación</h2>
           <Item name="dpi" label="DPI" className="form-item--md">
@@ -135,7 +131,9 @@ const Documents = ({ switchCurrent, current }) => {
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />
                 </p>
-                <p className="ant-upload-text">Subir DPI(ambos lados) | Pasaporte | Licencia.</p>
+                <p className="ant-upload-text">
+                  Subir DPI(ambos lados) | Pasaporte | Licencia, en formato .docx o .pdf o .jpg. <br /> de no más de 2mb.
+                </p>
               </Dragger>
             </Item>
           </div>

@@ -27,18 +27,16 @@ const UsersList = () => {
         fill(res);
       })
       .catch(console.error);
-  
+
   const onRow = (record, index) => {
     return {
-      onClick: _ => {
-      
-      }
-    }
-  }
+      onClick: _ => {},
+    };
+  };
 
   useEffect(() => {
-    get(pager.page, pager.limit)
-  }, [])
+    get(pager.page, pager.limit);
+  }, []);
 
   return (
     <div className="row">
@@ -51,7 +49,7 @@ const UsersList = () => {
           size="small"
           dataSource={users.list.filter(e => e.scope == 'candidate')}
           rowKey={record => record.id}
-          pagination={false}
+          pagination={true}
           onRow={onRow}
           columns={[
             {
@@ -59,14 +57,7 @@ const UsersList = () => {
               dataIndex: 'avatar',
               key: 'avatar',
               width: 40,
-              render: (text, record) => (
-                <Avatar
-                  className="table-avatar"
-                  icon={<i className="material-icons">person</i>}
-                  src={record.avatar}
-                  size={30}
-                />
-              ),
+              render: (text, record) => <Avatar className="table-avatar" icon={<i className="material-icons">person</i>} src={record.avatar} size={30} />,
             },
             {
               title: 'Nombre',
@@ -109,21 +100,14 @@ const UsersList = () => {
           size="small"
           dataSource={users.list.filter(e => e.scope == 'company')}
           rowKey={record => record.id}
-          pagination={false}
+          pagination={true}
           columns={[
             {
               title: '',
               width: 40,
               dataIndex: 'avatar',
               key: 'avatar',
-              render: (text, record) => (
-                <Avatar
-                  className="table-avatar"
-                  icon={<i className="material-icons">business</i>}
-                  src={record.avatar}
-                  size={30}
-                />
-              ),
+              render: (text, record) => <Avatar className="table-avatar" icon={<i className="material-icons">business</i>} src={record.avatar} size={30} />,
             },
             {
               title: 'Nombre',
@@ -159,14 +143,9 @@ const UsersList = () => {
           ]}
         />
       </div>
-      <div className="col-md-12" style={{ marginTop: 20, padding: 0 }}>
-        <Pagination
-          total={users.total}
-          current={pager.page}
-          onChange={onChange}
-          onShowSizeChange={onChange}
-        />
-      </div>
+      {/* <div className="col-md-12" style={{ marginTop: 20, padding: 0 }}>
+        <Pagination total={users.total} current={pager.page} onChange={onChange} onShowSizeChange={onChange} />
+      </div> */}
     </div>
   );
 };

@@ -93,7 +93,7 @@ const SingleJobData = ({ job }) => {
                 </div>
                 <div style={{ width: '40%' }}>
                   <label>Especialidad</label>
-                  <p>{e.children.name}</p>
+                  {e.children && e.children.name ? <p>{e.children.name}</p> : null}
                 </div>
                 {e.logic ? (
                   <div style={{ width: '10%', textAlign: 'center' }}>

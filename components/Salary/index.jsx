@@ -97,8 +97,6 @@ const Salary = ({ value = {}, onChange }) => {
     setValues({ ...values, [type]: objdata });
     triggerChange({ [type]: objdata });
   };
-
-  console.log(values);
   return (
     <div className="umana-form--group" style={{ paddingBottom: 0 }}>
       <span className="form-item--lg ant-form-item">

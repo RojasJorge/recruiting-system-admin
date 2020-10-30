@@ -81,9 +81,9 @@ const GeneralJob = ({ career, position }) => {
 
       <Form.Item label="Plaza remota / locación" className="form-item--md" name="workplace" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
         <Select size="large" placeholder="Seleccione">
-          <Option value="location">Locación</Option>
-          <Option value="mix-location">Mixta</Option>
-          <Option value="remote">Remoto</Option>
+          <Select.Option value="location">Locación</Select.Option>
+          <Select.Option value="mix-location">Mixta</Select.Option>
+          <Select.Option value="remote">Remoto</Select.Option>
         </Select>
       </Form.Item>
 

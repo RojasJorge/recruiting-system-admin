@@ -156,17 +156,26 @@
     button.ant-btn,
     button.ant-btn.ant-btn-primary {
       width: 100%;
+      max-width: 300px;
       text-align: left !important;
       background: transparent;
       color: $color-black !important;
       justify-content: flex-start;
       font-weight: 500 !important;
-      border-bottom: 1px solid rgba($color-text, 0.1);
+      border-bottom: 1px solid rgba($color-text, 0) !important;
+      border: 1px solid rgba($color-text, 0) !important;
+      height: 48px;
+      margin: 0;
+      box-shadow: none;
       i {
-        margin-right: 10px;
+        margin-right: 20px;
       }
-      &:hover,
-      &:focus,
+      &:hover {
+        color: $color-blue !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none;
+      }
       &:active {
         background: $color-white;
         color: $color-blue !important;
@@ -197,6 +206,8 @@
         .ant-steps-icon,
         .i {
           color: $color-text;
+          text-transform: uppercase;
+          font-size: 12px;
         }
       }
       &.ant-steps-item-active {
