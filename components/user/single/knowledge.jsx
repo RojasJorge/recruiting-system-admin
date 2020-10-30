@@ -42,7 +42,7 @@ const Knowledge = props => {
         <>
           <div className="umana-content__item item-lg">
             <hr />
-            <h3>Habilidades</h3>
+            <h3>Habilidades, conocimientos, capacidades y Software</h3>
           </div>
           <div className="umana-content__item item-lg">
             {props.data.skills.map((e, idx) => (

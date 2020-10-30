@@ -488,3 +488,14 @@ h5 {
     left: 0;
   }
 }
+
+.umana-content-custom {
+  padding-top: 10px;
+  margin-bottom: 20px;
+  ul {
+    list-style: circle;
+  }
+  ol {
+    list-style: decimal;
+  }
+}
