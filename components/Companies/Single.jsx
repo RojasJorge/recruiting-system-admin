@@ -46,7 +46,10 @@ const Single = ({ query }) => {
     gender: 'indifferent',
     vehicle: ['indifferent'],
     type_license: ['indifferent'],
-    age: [18, 60],
+    age: {
+      min: 18,
+      max: 60,
+    },
     isBranch: false,
     company_state: 'public',
     religion: ['indifferent'],
