@@ -4,15 +4,9 @@ import vehicles from '../../../data/vehicles.json';
 import locale from '../../../data/translates/spanish';
 import skills from '../../../data/skills_softwares.json';
 import TynyEditor from '../../Misc/TinyEditor';
+import Age from './age';
 
 const Requirements = () => {
-  const marks = {
-    1: 'Min',
-    18: '18 años',
-    60: '60 años',
-    80: 'Max',
-  };
-
   const children = [];
 
   children.push(<Option key=""></Option>);
@@ -28,13 +22,7 @@ const Requirements = () => {
       </Form.Item>
       <div className="umana-form--group group-row">
         <Form.Item name="age" label="Edad" className="form-item--fx" help="Seleccione rango de edad">
-          <Slider
-            min={1}
-            max={80}
-            marks={marks}
-            range
-            // value={[customer.age.min, customer.age.max]}
-          />
+          <Age />
         </Form.Item>
       </div>
       <div className="umana-form--group group-row">

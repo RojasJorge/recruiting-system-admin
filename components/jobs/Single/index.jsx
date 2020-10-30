@@ -247,9 +247,6 @@ const SingleJob = ({ query }) => {
   };
 
   if (job) {
-    if (job.age) {
-      job.age = [job.age.min, job.age.max];
-    }
     return (
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small ">
