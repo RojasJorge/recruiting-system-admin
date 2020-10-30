@@ -119,8 +119,6 @@ const FormJob = props => {
       id = { company_id: company };
     }
     const statusState = { status: statuState };
-    const age = { min: e.age[0], max: e.age[1] };
-    e.age = age;
     const newObj = Object.assign(e, id, statusState);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;

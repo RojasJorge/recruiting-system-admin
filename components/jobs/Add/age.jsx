@@ -27,7 +27,6 @@ const Age = ({ value, onChange }) => {
       onChange({
         ...value,
         ...state,
-        ...changedValue,
       });
     }
   };
@@ -38,8 +37,10 @@ const Age = ({ value, onChange }) => {
   };
 
   const handleSlider = e => {
+    const valMin = e[0];
+    const valMax = e[1];
     setState({ ...state, min: e[0], max: e[1] });
-    triggerChange({ min: e[0], max: e[1] });
+    triggerChange({ min: valMin, max: valMax });
   };
 
   return (
