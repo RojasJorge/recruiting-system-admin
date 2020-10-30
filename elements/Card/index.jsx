@@ -5,9 +5,7 @@ import { Can } from '../../components/Can';
 
 const Card = props => {
   return (
-    <div
-      className={`umana-card card-theme-${props.theme} card-content-align-${props.align} card-${props.size} card-type-${props.type}`}
-    >
+    <div className={`umana-card card-theme-${props.theme} card-content-align-${props.align} card-${props.size} card-type-${props.type}`}>
       <div className="umana-card__options">
         {props.edit ? (
           <Link href={props.edit} passHref>
@@ -35,15 +33,7 @@ const Card = props => {
         <div className="umana-card__parent-info">
           <Can I="guest" a="JOBS">
             <>
-              {props.parentInfo.avatar ? (
-                <Avatar size={80} src={props.parentInfo.avatar} />
-              ) : (
-                <Avatar
-                  className="avatar-icon"
-                  size={80}
-                  icon={<i className="material-icons">location_city</i>}
-                />
-              )}
+              {props.parentInfo.avatar ? <Avatar size={80} src={props.parentInfo.avatar} /> : <Avatar className="avatar-icon" size={80} icon={<i className="material-icons">location_city</i>} />}
 
               {props.parentInfo.title ? (
                 <div className="title-hidden">
@@ -59,15 +49,7 @@ const Card = props => {
           </Can>
           <Can I="view" a="JOBS">
             <>
-              {props.parentInfo.avatar ? (
-                <Avatar size={80} src={props.parentInfo.avatar} />
-              ) : (
-                <Avatar
-                  className="avatar-icon"
-                  size={80}
-                  icon={<i className="material-icons">location_city</i>}
-                />
-              )}
+              {props.parentInfo.avatar ? <Avatar size={80} src={props.parentInfo.avatar} /> : <Avatar className="avatar-icon" size={80} icon={<i className="material-icons">location_city</i>} />}
 
               {props.parentInfo.title ? (
                 <div className="title">
@@ -81,16 +63,14 @@ const Card = props => {
               ) : null}
             </>
           </Can>
-          {props.parentInfo.location ? (
-            <p>{`${props.parentInfo.location.city}, ${props.parentInfo.location.country}`}</p>
-          ) : null}
+          {props.parentInfo.location ? <p>{`${props.parentInfo.location.city}, ${props.parentInfo.location.country}`}</p> : null}
           {props.parentInfo.description ? <p>{props.parentInfo.description}</p> : null}
         </div>
       ) : null}
       <h3 className="umana-card__title">{props.title}</h3>
       {props.subtitle ? <p className="card-subtitle">{props.subtitle}</p> : null}
 
-      {props.description ? <p className="umana-card__description">{props.description}</p> : null}
+      {props.description ? <div className="umana-content-custom" dangerouslySetInnerHTML={{ __html: props.description }}></div> : null}
       {props.date ? (
         <div className="date">
           <i className="material-icons">access_time</i>

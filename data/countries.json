@@ -47,16 +47,7 @@
       {
         "department": "Baja Verapaz",
         "id": "78e151b0-860f-48cc-92e8-fb18baf37fb6",
-        "municipalities": [
-          "Cubulco",
-          "Granados",
-          "Purulhá",
-          "Rabinal",
-          "Salamá",
-          "San Jerónimo",
-          "San Miguel Chicaj",
-          "Santa Cruz El Chol"
-        ]
+        "municipalities": ["Cubulco", "Granados", "Purulhá", "Rabinal", "Salamá", "San Jerónimo", "San Miguel Chicaj", "Santa Cruz El Chol"]
       },
       {
         "department": "Santa Rosa",
@@ -81,19 +72,7 @@
       {
         "department": "Chiquimula",
         "id": "49de8ced-0b57-4b6c-9d23-69c78f09db56",
-        "municipalities": [
-          "Camotán",
-          "Chiquimula",
-          "Concepción Las Minas",
-          "Esquipulas",
-          "Ipala",
-          "Jocotán",
-          "Olopa",
-          "Quezaltepeque",
-          "San Jacinto",
-          "San José La Arada",
-          "San Juan Ermita"
-        ]
+        "municipalities": ["Camotán", "Chiquimula", "Concepción Las Minas", "Esquipulas", "Ipala", "Jocotán", "Olopa", "Quezaltepeque", "San Jacinto", "San José La Arada", "San Juan Ermita"]
       },
       {
         "department": "Izabal",
@@ -181,15 +160,7 @@
       {
         "department": "El Progreso",
         "id": "70bf1222-44f0-44c7-9d50-1621ed647e47",
-        "municipalities": [
-          "El Jícaro",
-          "Guastatoya",
-          "Morazán",
-          "San Agustín Acasaguastlán",
-          "San Antonio La Paz",
-          "San Cristóbal Acasaguastlán",
-          "Sanarate"
-        ]
+        "municipalities": ["El Jícaro", "Guastatoya", "Morazán", "San Agustín Acasaguastlán", "San Antonio La Paz", "San Cristóbal Acasaguastlán", "Sanarate"]
       },
       {
         "department": "San Marcos",
@@ -229,18 +200,7 @@
       {
         "department": "Zacapa",
         "id": "4156ddd9-dd3b-4b12-8571-755094807260",
-        "municipalities": [
-          "Cabañas",
-          "Estanzuela",
-          "Gualán",
-          "Huité",
-          "La Unión",
-          "Río Hondo",
-          "San Diego",
-          "Teculután",
-          "Usumatlán",
-          "Zacapa"
-        ]
+        "municipalities": ["Cabañas", "Estanzuela", "Gualán", "Huité", "La Unión", "Río Hondo", "San Diego", "Teculután", "Usumatlán", "Zacapa"]
       },
       {
         "department": "Quetzaltenango",
@@ -298,14 +258,7 @@
       {
         "department": "Jalapa",
         "id": "82807a14-1f13-4984-8fb3-bd0c12a4f94e",
-        "municipalities": [
-          "San Luis Jilotepeque",
-          "Mataquescuintla",
-          "Monjas",
-          "San Pedro Pinula",
-          "San Carlos Alzatate",
-          "San Manuel Chaparrón"
-        ]
+        "municipalities": ["San Luis Jilotepeque", "Mataquescuintla", "Monjas", "San Pedro Pinula", "San Carlos Alzatate", "San Manuel Chaparrón"]
       },
       {
         "department": "Quiché",
@@ -386,16 +339,7 @@
       {
         "department": "Totonicapán",
         "id": "c45626b3-ae48-4522-930f-1b7cb0d6aa5d",
-        "municipalities": [
-          "Momostenango",
-          "San Andrés Xecul",
-          "San Bartolo",
-          "San Cristóbal Totonicapán",
-          "San Francisco El Alto",
-          "Santa Lucía La Reforma",
-          "Santa María Chiquimula",
-          "Totonicapán"
-        ]
+        "municipalities": ["Momostenango", "San Andrés Xecul", "San Bartolo", "San Cristóbal Totonicapán", "San Francisco El Alto", "Santa Lucía La Reforma", "Santa María Chiquimula", "Totonicapán"]
       },
       {
         "department": "Jutiapa",
@@ -423,17 +367,7 @@
       {
         "department": "Retalhuleu",
         "id": "f8a1ed8d-0a05-4621-ba27-d050a7ff503b",
-        "municipalities": [
-          "Champerico",
-          "El Asintal",
-          "Nuevo San Carlos",
-          "Retalhuleu",
-          "San Andrés Villa Seca",
-          "San Felipe",
-          "San Martín Zapotitlán",
-          "San Sebastián",
-          "Santa Cruz Muluá"
-        ]
+        "municipalities": ["Champerico", "El Asintal", "Nuevo San Carlos", "Retalhuleu", "San Andrés Villa Seca", "San Felipe", "San Martín Zapotitlán", "San Sebastián", "Santa Cruz Muluá"]
       },
       {
         "department": "Sololá",
@@ -458,49 +392,6 @@
           "Santa María Visitación",
           "Santiago Atitlán",
           "Sololá"
-        ]
-      }
-    ]
-  },
-  {
-    "country": "El Salvador",
-    "id": "sld",
-    "departments": [
-      {
-        "department": "Ahuachapán",
-        "id": "0a729dc7-365c-4f20-beb8-e3c3b879ea16-1",
-        "municipalities": [
-          "Ahuachapán",
-          "Apaneca",
-          "Atiquizaya",
-          "Concepción de Ataco",
-          "El Refugio",
-          "Guaymango",
-          "Jujutla",
-          "San Francisco Menéndez",
-          "San Lorenzo",
-          "San Pedro Puxtla",
-          "Tacuba",
-          "Turín"
-        ]
-      },
-      {
-        "department": "Santa Ana",
-        "id": "0a729dc7-365c-4f20-beb8-e3c3b879ea16-2",
-        "municipalities": [
-          "Candelaria de la Frontera",
-          "Chalchuapa",
-          "Coatepeque",
-          "El Congo",
-          "El Porvenir",
-          "Masahuat",
-          "Metapán",
-          "San Antonio Pajonal",
-          "San Sebastián Salitrillo",
-          "Santa Ana",
-          "Santa Rosa Guachipilín",
-          "Santiago de la Frontera",
-          "Texistepeque"
         ]
       }
     ]

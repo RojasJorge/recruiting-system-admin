@@ -166,7 +166,6 @@ const SingleJob = ({ query }) => {
     startdate.subtract(1, 'days');
     startdate.format();
 
-    // console.log(startdate);
     const data = {
       expiration_date: startdate,
       contact: e.contact,
@@ -341,7 +340,7 @@ const SingleJob = ({ query }) => {
             {appyState ? (
               <Link href={`/admin/requests`} passHref>
                 <Button type="orange" size="small" style={{ marginLeft: 'auto' }}>
-                  Ver Aplicaciones
+                  Ver solicitud
                 </Button>
               </Link>
             ) : (

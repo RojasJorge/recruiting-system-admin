@@ -55,6 +55,7 @@ const locale = term => {
     bus: 'Autobus',
     draft: 'Borrador',
     public: 'Pública',
+    expired: 'Expirada',
   };
 
   return labels[term] || term;
