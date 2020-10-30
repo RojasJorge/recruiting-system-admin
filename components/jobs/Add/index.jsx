@@ -14,12 +14,15 @@ import { isEmpty, find } from 'lodash';
 // import Jobs from '../index';
 
 const FormJob = props => {
+  const [form] = Form.useForm();
+
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
   const companies = useStoreState(state => state.companies);
   const fill = useStoreActions(actions => actions.companies.fill);
   const [missing, isMissing] = useState(false);
   const [company, setCompany] = useState('');
+  const [statuState, setStatus] = useState('draft');
   const JobsList = useStoreState(state => state.jobs.list);
   const fillJobs = useStoreActions(actions => actions.jobs.fill);
 
@@ -106,14 +109,19 @@ const FormJob = props => {
       });
   };
 
+  const saveDraft = e => {
+    setStatus('public');
+  };
+
   const onFinish = e => {
     let id = { company_id: router.query.id };
     if (props.company && props.company) {
       id = { company_id: company };
     }
+    const statusState = { status: statuState };
     const age = { min: e.age[0], max: e.age[1] };
     e.age = age;
-    const newObj = Object.assign(e, id);
+    const newObj = Object.assign(e, id, statusState);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
       edit(newObj);
@@ -124,25 +132,7 @@ const FormJob = props => {
 
   return (
     <div>
-      <Alert
-        showIcon
-        message="Nota:"
-        type="info"
-        style={{marginBottom: 30}}
-        description={
-          <>
-            <div>Puedes guardar esta publicación como borrador ó publicarla inmediatamente,
-              pero una vez publicada, <strong>no es posible editarla</strong>.</div>
-          </>
-        }
-      />
-      <Form
-        className="umana-form umana-max-witdh"
-        initialValues={props.data}
-        onFinish={onFinish}
-        scrollToFirstError={true}
-        validateTrigger="onBlur"
-      >
+      <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={onFinish} scrollToFirstError={true} validateTrigger="onBlur" form={form}>
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
           <GeneralJob career={data.career} position={positionAlt} />
@@ -193,12 +183,7 @@ const FormJob = props => {
               </Select>
             </Form.Item>
           ) : null}
-          <Form.Item
-            label="Confidencialidad de la empresa"
-            className="form-item--lg"
-            name="company_state"
-            help="Seleccionar si desea que la información de la empresa sea pública"
-          >
+          <Form.Item label="Confidencialidad de la empresa" className="form-item--lg" name="company_state" help="Seleccionar si desea que la información de la empresa sea pública">
             <Radio.Group>
               <Radio.Button value="public">Pública</Radio.Button>
               <Radio.Button value="confidential">Privada</Radio.Button>
@@ -207,11 +192,16 @@ const FormJob = props => {
         </div>
 
         {/* end group */}
-        <Form.Item className="umana-form--footer">
-          <Button htmlType="submit" type="primary">
-            Guardar
+        <div className="umana-form--footer">
+          {!props.type ? (
+            <Button htmlType="submit" type="dashed" size="small" style={{ margin: 0, paddin: '0 20px', height: 45, marginRight: 10 }}>
+              Guardar como borrador
+            </Button>
+          ) : null}
+          <Button htmlType="submit" onClick={saveDraft} type="primary" size="small" style={{ margin: 0, marginLeft: 10, paddin: '0 20px', height: 45 }}>
+            Publicar
           </Button>
-        </Form.Item>
+        </div>
       </Form>
     </div>
   );

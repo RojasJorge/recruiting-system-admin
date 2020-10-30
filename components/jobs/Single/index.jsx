@@ -1,16 +1,19 @@
 import { Sitebar } from '../../../elements';
 import { useEffect, useState } from 'react';
-import { Button, Empty, Modal, notification, Skeleton, Alert } from 'antd';
+import { Button, Empty, Modal, notification, Skeleton, Alert, Steps, Tag } from 'antd';
 import { useRouter } from 'next/router';
 import xhr from '../../../xhr';
 import Link from 'next/link';
 import moment from 'moment';
 import { delay } from 'lodash';
 import SingleJobData from './data';
-
 import { Can } from '../../../components/Can';
+import locale from '../../../data/translates/spanish';
+
+import FormJob from '../../jobs/Add';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
+const { Step } = Steps;
 const { confirm } = Modal;
 
 const SingleJob = ({ query }) => {
@@ -19,6 +22,7 @@ const SingleJob = ({ query }) => {
   const [job, setJob] = useState(null);
   const [company, setInfoCompany] = useState();
   const [loading, switchLoading] = useState(true);
+  const [current, setCurrent] = useState(0);
 
   /** Get profile status if exists */
   const profile = useStoreState(state => state.profile);
@@ -68,7 +72,7 @@ const SingleJob = ({ query }) => {
     delete e.created_at;
     delete e.expiration_date;
     delete e.updated_at;
-
+    delete e.status;
     e.title = `${e.title} (copia)`;
 
     xhr()
@@ -166,6 +170,7 @@ const SingleJob = ({ query }) => {
     const data = {
       expiration_date: startdate,
       contact: e.contact,
+      status: 'expired',
     };
     confirm({
       title: 'Expirar plaza',
@@ -202,6 +207,10 @@ const SingleJob = ({ query }) => {
     }
   };
 
+  const onChange = o => {
+    setCurrent(o);
+  };
+
   useEffect(() => {
     if (auth.user) {
       delay(_ => {
@@ -212,7 +221,36 @@ const SingleJob = ({ query }) => {
 
   var today = moment();
 
+  const switchContent = _ => {
+    switch (current) {
+      case 0:
+        return (
+          <>
+            <SingleJobData job={job} />
+          </>
+        );
+        break;
+      case 1:
+        return (
+          <>
+            <div className="umana-title">
+              <h2>{`Editar plaza`}</h2>
+            </div>
+            <FormJob data={job} company={false} setCurrent={setCurrent} type="edit" id={query.id} />
+          </>
+        );
+        break;
+
+      default:
+        return null;
+        break;
+    }
+  };
+
   if (job) {
+    if (job.age) {
+      job.age = [job.age.min, job.age.max];
+    }
     return (
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small ">
@@ -221,12 +259,15 @@ const SingleJob = ({ query }) => {
               header={{
                 title: job && job.company ? job.company.name : 'Plaza',
                 icon: 'location_city',
-                action: 'edit',
-                titleAction: 'Editar Plaza',
-                urlAction: '/admin/jobs/edit/',
-                urlDinamic: query.id,
+                action: 'replay',
+                titleAction: 'Volver',
+                urlAction: 'back',
               }}
             >
+              <Steps current={current} onChange={onChange} direction="vertical">
+                <Step key={0} title="Información de la plaza" icon={<i className="material-icons">business</i>} />
+                {job.status === 'draft' ? <Step key={1} title="Editar plaza" icon={<i className="material-icons">edit</i>} /> : null}
+              </Steps>
               <Button type="primary" size="small" onClick={() => add(job)}>
                 <i className="material-icons">content_copy</i> Duplicar plaza
               </Button>
@@ -235,6 +276,8 @@ const SingleJob = ({ query }) => {
                   <i className="material-icons">event_busy</i> Expirar plaza
                 </Button>
               ) : null}
+
+              <Alert description={`Estado de la plaza:  ${locale(job.status)}`} />
             </Sitebar>
           </Can>
           <Can I="apply" a="JOBS">
@@ -293,7 +336,7 @@ const SingleJob = ({ query }) => {
           </Can>
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
-          <SingleJobData job={job} />
+          {switchContent()}
           <Can I="apply" a="JOBS">
             {appyState ? (
               <Link href={`/admin/requests`} passHref>

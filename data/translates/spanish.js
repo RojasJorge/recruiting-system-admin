@@ -53,6 +53,8 @@ const locale = term => {
     van: 'Van',
     truck: 'Camioneta',
     bus: 'Autobus',
+    draft: 'Borrador',
+    public: 'Pública',
   };
 
   return labels[term] || term;

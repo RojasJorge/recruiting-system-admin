@@ -51,7 +51,7 @@ const Knowledge = props => {
           </div>
         </>
       ) : null}
-      {!isEmpty(props.data.softwares) ? (
+      {/* {!isEmpty(props.data.softwares) ? (
         <>
           <div className="umana-content__item item-lg">
             <hr />
@@ -63,7 +63,7 @@ const Knowledge = props => {
             ))}
           </div>
         </>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };
