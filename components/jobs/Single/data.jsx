@@ -1,6 +1,6 @@
 import locale from '../../../data/translates/spanish';
 import Label from '../../../data/labels';
-import { Tag, Progress } from 'antd';
+import { Tag, Progress, Avatar } from 'antd';
 // import { Avatar, Button, Empty, Modal, notification, Progress, Skeleton, Tag, Alert } from 'antd';
 const SingleJobData = ({ job }) => {
   return (
