@@ -75,7 +75,7 @@ const General = ({ birthday, setBirthday }) => {
       </Item>
 
       <Item label="Edad" rules={[{ required: true, message: 'El campo Edad es requerido.' }]} className="form-item--sm">
-        <InputNumber style={{ width: '100%' }} min={0} size="large" value={calculateAge(birthday)} disabled />
+        <InputNumber style={{ width: '100%' }} min={0} size="large" value={calculateAge(birthday) || 0} disabled />
       </Item>
 
       <Item label="Sexo" name="gender" rules={[{ required: true, message: 'El campo Sexo es requerido.' }]} className="form-item--sm">
