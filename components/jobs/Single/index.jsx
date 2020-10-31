@@ -8,12 +8,12 @@ import moment from 'moment';
 import { delay } from 'lodash';
 import SingleJobData from './data';
 import { Can } from '../../../components/Can';
-import locale from '../../../data/translates/spanish';
+
+import SiteBarJob from './sitebar';
 
 import FormJob from '../../jobs/Add';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-const { Step } = Steps;
 const { confirm } = Modal;
 
 const SingleJob = ({ query }) => {
@@ -23,6 +23,7 @@ const SingleJob = ({ query }) => {
   const [company, setInfoCompany] = useState();
   const [loading, switchLoading] = useState(true);
   const [current, setCurrent] = useState(0);
+  const [appyState, setApply] = useState(false);
 
   /** Get profile status if exists */
   const profile = useStoreState(state => state.profile);
@@ -48,7 +49,7 @@ const SingleJob = ({ query }) => {
     delay(_ => {
       switchLoading(false);
     }, 2000);
-  }, []);
+  }, [query.id]);
 
   useEffect(() => {
     job && getCompanyInfo();
@@ -62,7 +63,7 @@ const SingleJob = ({ query }) => {
     });
 
     setTimeout(() => {
-      router.push(`/admin/jobs/single/[query.id]`, `/admin/jobs/single/${e}`);
+      router.push(`/admin/jobs/single/${e}`);
     }, 500);
   };
 
@@ -79,6 +80,7 @@ const SingleJob = ({ query }) => {
       .post(`/job`, JSON.stringify(e))
       .then(resp => {
         allSet(resp.data);
+        setCurrent(0);
       })
       .catch(err => {
         notification.info({
@@ -88,7 +90,6 @@ const SingleJob = ({ query }) => {
         });
       });
   };
-  const [appyState, setApply] = useState(false);
 
   const confirmApply = e => {
     notification.info({
@@ -183,6 +184,7 @@ const SingleJob = ({ query }) => {
               description: 'Se expiro la plaza ',
               placement: 'bottomRight',
             });
+            updateJob();
           })
           .catch(err => {
             notification.info({
@@ -218,8 +220,10 @@ const SingleJob = ({ query }) => {
     }
   }, [auth.user]);
 
-  var today = moment();
-
+  const updateJob = () => {
+    setCurrent(0);
+    getJob();
+  };
   const switchContent = _ => {
     switch (current) {
       case 0:
@@ -235,13 +239,13 @@ const SingleJob = ({ query }) => {
             <div className="umana-title">
               <h2>{`Editar plaza`}</h2>
             </div>
-            <FormJob data={job} company={false} setCurrent={setCurrent} type="edit" id={query.id} />
+            <FormJob data={job} company={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} />
           </>
         );
         break;
 
       default:
-        return null;
+        return <SingleJobData job={job} />;
         break;
     }
   };
@@ -249,87 +253,8 @@ const SingleJob = ({ query }) => {
   if (job) {
     return (
       <div className="umana-layout-cl">
-        <div className="umana-layout-cl__small ">
-          <Can I="edit" a="JOBS">
-            <Sitebar
-              header={{
-                title: job && job.company ? job.company.name : 'Plaza',
-                icon: 'location_city',
-                action: 'replay',
-                titleAction: 'Volver',
-                urlAction: 'back',
-              }}
-            >
-              <Steps current={current} onChange={onChange} direction="vertical">
-                <Step key={0} title="Información de la plaza" icon={<i className="material-icons">business</i>} />
-                {job.status === 'draft' ? <Step key={1} title="Editar plaza" icon={<i className="material-icons">edit</i>} /> : null}
-              </Steps>
-              <Button type="primary" size="small" onClick={() => add(job)}>
-                <i className="material-icons">content_copy</i> Duplicar plaza
-              </Button>
-              {job.expiration_date > today.format() ? (
-                <Button type="primary" size="small" onClick={() => expire(job)}>
-                  <i className="material-icons">event_busy</i> Expirar plaza
-                </Button>
-              ) : null}
-
-              <Alert description={`Estado de la plaza:  ${locale(job.status)}`} />
-            </Sitebar>
-          </Can>
-          <Can I="apply" a="JOBS">
-            <Sitebar
-              header={{
-                title: job && job.company ? job.company.name : 'Plaza',
-                icon: 'location_city',
-              }}
-            >
-              {appyState ? (
-                <Link href={`/admin/requests`} passHref>
-                  <Button type="orange" size="small">
-                    <i className="material-icons">check</i> Ver Aplicaciones
-                  </Button>
-                </Link>
-              ) : (
-                <>
-                  <Button type="orange" size="small" onClick={applyJob} disabled={!checkProfile()}>
-                    <i className="material-icons">send</i>
-                    Aplicar a la plaza
-                  </Button>
-                  <Alert type="error" message="Debes completar tu perfil para poder aplicar a una plaza" banner />
-                </>
-              )}
-            </Sitebar>
-          </Can>
-          <Can I="guest" a="JOBS">
-            <Sitebar
-              header={{
-                title: job && job.company ? job.company.name : 'Plaza',
-                icon: 'location_city',
-              }}
-            >
-              <p>Para aplicar a la plaza debes contar con una cuenta, has click en iniciar sesión o crea una cuenta</p>
-              <Button type="orange" size="small" disabled={true}>
-                <i className="material-icons">send</i>
-                Aplicar a la plaza
-              </Button>
-              <Button type="orange" size="small">
-                <Link href={`/`} passHref>
-                  <a>
-                    <i className="material-icons">person</i>
-                    Iniciar sesión
-                  </a>
-                </Link>
-              </Button>
-              <Button type="orange" size="small">
-                <Link href={`/signup`} passHref>
-                  <a>
-                    <i className="material-icons">person_add</i>
-                    crear cuenta
-                  </a>
-                </Link>
-              </Button>
-            </Sitebar>
-          </Can>
+        <div className="umana-layout-cl__small">
+          <SiteBarJob job={job} current={current} onChange={onChange} applyJob={applyJob} appyState={appyState} add={add} expire={expire} checkProfile={checkProfile} />
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
           {switchContent()}
@@ -358,10 +283,9 @@ const SingleJob = ({ query }) => {
             header={{
               title: job && job.company ? job.company.name : 'Plaza',
               icon: 'location_city',
-              action: 'edit',
-              titleAction: 'Editar Plaza',
-              urlAction: '/admin/jobs/edit/',
-              urlDinamic: query.id,
+              action: 'replay',
+              titleAction: 'Volver',
+              urlAction: 'back',
             }}
           />
         </Can>

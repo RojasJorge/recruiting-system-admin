@@ -9,6 +9,22 @@ import PropTypes from 'prop-types';
 import { isEmpty, delay } from 'lodash';
 import { Spin } from 'antd';
 
+const style = {
+  width: '100%',
+  height: '100vh',
+  minHeight: '100vh',
+  position: 'absolute !important',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
+  background: 'white',
+  zIndex: 99999,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItem: 'center',
+};
+
 const Layout = ({ children, title, className, containerClass }) => {
   /** Page loaders */
   const [loading, switchLoader] = useState(true);
@@ -59,8 +75,8 @@ const Layout = ({ children, title, className, containerClass }) => {
   if (auth.token && auth.user) {
     if (loading || isEmpty(catalogs.career) || isEmpty(catalogs.academic_level)) {
       return (
-        <div className="app--spinner animated fadeIn">
-          <Spin tip="Cargando.." size="large" />
+        <div className="app--spinner" style={style}>
+          <Spin size="large" />
         </div>
       );
     } else {
@@ -73,13 +89,13 @@ const Layout = ({ children, title, className, containerClass }) => {
           <div className={`app--contents umana-content-page is-login ${className}`}>
             <div className={fullScreen ? 'container-fluid' : 'umana-layout'}>{children}</div>
           </div>
+
           <PageLoader active={mloading} />
         </div>
       );
     }
-  } else {
-    return <Login />;
   }
+  return <Login />;
 };
 
 Layout.propTypes = {

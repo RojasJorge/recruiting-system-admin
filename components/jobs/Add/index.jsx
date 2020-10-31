@@ -89,14 +89,13 @@ const FormJob = props => {
         let updated = e;
         updated = { ...updated, id: props.id, company_id: old.company_id };
         let jobs = [...JobsList, updated];
-
         fillJobs({
           data: {
             items: jobs,
             total: jobs.length,
           },
         });
-
+        props.updateJob();
         allSet(props.id);
       })
       .catch(err => {
