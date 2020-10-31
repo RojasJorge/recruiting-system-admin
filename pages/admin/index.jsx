@@ -1,14 +1,17 @@
 import {useEffect, useState} from 'react'
 import Layout from '../../views/Layout'
 import {PageTitle} from '../../elements'
+import {WarningOutlined} from '@ant-design/icons'
 import {Card, Progress} from 'antd'
 import Link from 'next/link'
 import {useStoreActions, useStoreState} from "easy-peasy"
-// import {groupBy} from 'lodash'
+import {delay} from 'lodash'
 
 const Admin = _ => {
 	
 	const [percent, updatePercent] = useState(0)
+	
+	const [loading, switchLoading] = useState(true)
 	
 	/** Get profile status */
 	const profile = useStoreState(state => state.profile)
@@ -22,7 +25,7 @@ const Admin = _ => {
 	const calculateMedia = _ => {
 		
 		const successItems = Object.values(profile).reduce((acc, current) => {
-			if(current) {
+			if (current) {
 				acc.push(current)
 			}
 			
@@ -33,7 +36,11 @@ const Admin = _ => {
 		
 		const media = (100 / totalItems) * successItems.length
 		
-		updatePercent(parseInt(media))
+		updatePercent(parseInt(media, 10))
+		
+		delay(_ => {
+			switchLoading(false)
+		}, 1000)
 	}
 	
 	useEffect(() => {
@@ -41,7 +48,9 @@ const Admin = _ => {
 	}, [profile])
 	
 	useEffect(() => {
-		{auth.user && checkProfileStatus(user.profile.fields)}
+		{
+			auth.user && checkProfileStatus(user.profile.fields)
+		}
 	}, [])
 	
 	return (
@@ -49,19 +58,13 @@ const Admin = _ => {
 			<>
 				<PageTitle title="Tablero"/>
 				
-				{/*<div className="row">*/}
-				{/*	<div className="col">*/}
-				{/*		<pre>{JSON.stringify(profile, false, 2)}</pre>*/}
-				{/*	</div>*/}
-				{/*</div>*/}
-				
 				<div className="row">
 					<div className="col-md-6">
 						
 						<Card
-							title="Perfil"
+							title="Mi perfil"
 						>
-							<div className="row align-items-center justify-content-center">
+							<div className="row justify-content-center">
 								<div className="col">
 									
 									<Progress
@@ -71,18 +74,28 @@ const Admin = _ => {
 									/>
 								
 								</div>
-								<div className="col">
-									<p>Parece que aún no completas tu perfil.</p>
-									<p>Para poder aplicar a las plazas que Umana te ofrece, debes completarlo.</p>
-									<Link
-										passHref
-										href={{
-											pathname: '/admin/profile'
-										}}
-									>
-										<a>Ir a completar mi perfil.</a>
-									</Link>
-								</div>
+								{
+									loading ? <div className="col">
+										...
+										</div>
+										: percent === 100
+										? <div className="col">
+											<p>Ahora puedes aplicar a las plazas disponbles dentro de Umana.</p>
+										</div>
+										: <div className="col">
+											<p><WarningOutlined/> Parece que aún no completas tu perfil.</p>
+											<p>Para poder aplicar a las plazas que Umana te ofrece, debes completarlo.</p>
+											<Link
+												passHref
+												href={{
+													pathname: '/admin/profile'
+												}}
+											>
+												<a>Ir a completar mi perfil.</a>
+											</Link>
+										</div>
+								}
+							
 							</div>
 						</Card>
 					
