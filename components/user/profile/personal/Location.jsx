@@ -109,7 +109,7 @@ const Location = ({ country, selectCountry, location, addLocation }) => {
         </FormItem>
       </div>
       <div className="col">
-        <label htmlFor="zone">Dirección:</label>
+        <label htmlFor="address">Dirección:</label>
         <FormItem name="address" rules={[{ required: true, message: 'El campo Dirección es requerido.' }]}>
           <Input size="large" style={{ width: '100%' }} />
         </FormItem>
