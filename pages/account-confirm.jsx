@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { delay } from 'lodash';
-import {Spin} from 'antd'
+import { Spin } from 'antd';
 
 const AccountConfirm = query => {
   const [loading, switchLoading] = useState(true);

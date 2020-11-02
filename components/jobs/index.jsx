@@ -1,12 +1,13 @@
+import { Button, Input, notification, Pagination, Select, Table, Spin } from 'antd';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import xhr from '../../xhr';
 import { Card, EmptyElemet } from '../../elements';
 import { delay, find, isEmpty } from 'lodash';
-import { Can } from '../Can';
+import { useEffect, useState } from 'react';
+import ExpiredJobs from './Archive/expired';
 import Moment from 'react-moment';
-import { Button, Input, notification, Pagination, Select, Table } from 'antd';
+import { Can } from '../Can';
+import Link from 'next/link';
+import xhr from '../../xhr';
 
 const { Option } = Select;
 const { Search } = Input;
@@ -19,45 +20,6 @@ const buttonStyle = {
 };
 
 const Jobs = props => {
-  const router = useRouter();
-
-  const allSet = e => {
-    notification.info({
-      message: `Confirmación`,
-      description: 'La plaza ha sido publicada con éxito.',
-      placement: 'bottomRight',
-    });
-
-    setTimeout(() => {
-      router.push(`/admin/jobs/edit/[id]`, `/admin/jobs/edit/${e}`);
-    }, 500);
-  };
-
-  const add = async e => {
-    // console.log(e);
-    delete e.id;
-    delete e.company;
-    delete e.created_at;
-    delete e.expiration_date;
-    delete e.updated_at;
-
-    e.title = `${e.title} (copia)`;
-
-    // console.log(e);
-    xhr()
-      .post(`/job`, JSON.stringify(e))
-      .then(resp => {
-        allSet(resp.data);
-      })
-      .catch(err => {
-        notification.info({
-          message: `Error`,
-          description: 'Ha ocurrido un error, por favor inténtalo más tarde',
-          placement: 'bottomRight',
-        });
-      });
-  };
-
   const columns = [
     {
       title: 'Empresa',
@@ -83,15 +45,59 @@ const Jobs = props => {
       ),
     },
     {
-      title: 'Actions',
+      title: '',
       dataIndex: 'id',
       key: 'id',
       fixed: 'right',
+      width: 150,
       render: (text, record) => {
         return (
-          <a onClick={() => add(record)} style={buttonStyle}>
-            <i className="material-icons">content_copy</i> Volver a publicar
-          </a>
+          <Link Link href={`/admin/jobs/single/[id]`} as={`/admin/jobs/single/${record.id}`}>
+            <a style={buttonStyle}>
+              <i className="material-icons">chevron_right</i> Ver plaza
+            </a>
+          </Link>
+        );
+      },
+    },
+  ];
+  const columnsDraft = [
+    {
+      title: 'Empresa',
+      dataIndex: 'company',
+      key: 'company',
+      render: (text, record) => <>{record.company.name}</>,
+    },
+    {
+      title: 'Plaza',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: 'Fecha de expiración',
+      dataIndex: 'expiration_date',
+      key: 'expiration_date',
+      render: (text, record) => (
+        <>
+          <Moment locale="es" format="D MMMM YYYY">
+            {record.expiration_date}
+          </Moment>
+        </>
+      ),
+    },
+    {
+      title: '',
+      dataIndex: 'id',
+      key: 'id',
+      fixed: 'right',
+      width: 150,
+      render: (text, record) => {
+        return (
+          <Link Link href={`/admin/jobs/single/[id]`} as={`/admin/jobs/single/${record.id}`}>
+            <a style={buttonStyle}>
+              <i className="material-icons">chevron_right</i> Ver plaza
+            </a>
+          </Link>
         );
       },
     },
@@ -110,7 +116,6 @@ const Jobs = props => {
   const countries = useStoreState(state => state.tools.countries);
   const list = useStoreState(state => state.jobs.list);
   const fill = useStoreActions(actions => actions.jobs.fill);
-  const total = useStoreState(state => state.jobs.total);
 
   /**
    * Job positions
@@ -122,32 +127,11 @@ const Jobs = props => {
 
   const [filters, setFilters] = useState(initFilters);
   const [loading, switchLoading] = useState(false);
-  const collectionsActions = useStoreActions(actions => actions.collections);
   const collectionsState = useStoreState(state => state.collections);
-
-  const getOptions = async () => {
-    await xhr()
-      .get(`/career`)
-      .then(res => {
-        res.type = false;
-        collectionsActions.fill({ data: res.data, type: 'career' });
-      })
-      .catch(err => console.log(err));
-  };
-
-  const get = () => {
-    collectionsActions.get({ type: 'career' });
-    collectionsActions.get({ type: 'academic_level' });
-  };
 
   useEffect(() => {
     getJobs();
   }, [filters.page, filters.offset, filters.jobposition, filters.title, filters.country, filters.city]);
-
-  // useEffect(() => {
-  //   getOptions();
-  //   get();
-  // }, []);
 
   const renderDate = date => {
     const today = new Date();
@@ -195,7 +179,7 @@ const Jobs = props => {
         fill(res);
 
         const available = res.data.items.reduce((acc, current) => {
-          if (renderDate(current.expiration_date)) {
+          if (current.status === 'public') {
             acc.push(current);
           }
 
@@ -203,14 +187,22 @@ const Jobs = props => {
         }, []);
 
         const expired = res.data.items.reduce((acc, current) => {
-          if (!renderDate(current.expiration_date)) {
+          if (!renderDate(current.expiration_date) || current.status === 'expired') {
             acc.push(current);
           }
 
           return acc;
         }, []);
 
-        setSeparatedJobs({ ...separatedJobs, available, expired });
+        const draft = res.data.items.reduce((acc, current) => {
+          if (current.status === 'draft') {
+            acc.push(current);
+          }
+
+          return acc;
+        }, []);
+
+        setSeparatedJobs({ ...separatedJobs, available, expired, draft });
 
         delay(() => switchLoading(false), 1000, 'Filtered');
       })
@@ -390,7 +382,12 @@ const Jobs = props => {
             </div>
 
             <div className="umana-list">
-              {separatedJobs.available.length > 0 &&
+              {loading ? (
+                <div className="app--spinner animated fadeIn in-section">
+                  <Spin tip="Cargando.." size="large" />
+                </div>
+              ) : (
+                separatedJobs.available.length > 0 &&
                 separatedJobs.available.map((e, idx) => {
                   return (
                     <Card
@@ -405,30 +402,29 @@ const Jobs = props => {
                       align="left"
                     />
                   );
-                })}
+                })
+              )}
             </div>
           </div>
         </div>
 
-        <Can I="edit" a="JOBS">
-          <div className="umana-section">
-            <h2>Plazas expiradas</h2>
-            <Table columns={columns} dataSource={separatedJobs.expired} rowKey={record => record.id} pagination={false} />
-          </div>
-        </Can>
         <div className="row" style={{ marginLeft: 'auto', marginTop: 40 }}>
           <div className="col-md-12">
-            <Pagination
-              current={filters.page}
-              // total={separatedJobs.available.length}
-              total={total}
-              defaultPageSize={8}
-              pageSize={8}
-              onChange={paginationChange}
-              onShowSizeChanger={paginationChange}
-            />
+            <Pagination current={filters.page} total={separatedJobs.available.length} defaultPageSize={8} pageSize={8} onChange={paginationChange} onShowSizeChanger={paginationChange} />
           </div>
         </div>
+
+        <Can I="edit" a="JOBS">
+          {/* <ExpiredJobs /> */}
+          <div className="umana-section">
+            <h2>Plazas expiradas</h2>
+            <Table columns={columns} dataSource={separatedJobs.expired} rowKey={record => record.id} pagination={true} />
+          </div>
+          <div className="umana-section">
+            <h2>Borradores</h2>
+            <Table columns={columnsDraft} dataSource={separatedJobs.draft} rowKey={record => record.id} pagination={true} />
+          </div>
+        </Can>
       </div>
     );
   }

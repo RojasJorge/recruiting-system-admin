@@ -45,7 +45,7 @@ const Legal = ({ value = {}, onChange }) => {
     >
       <div className="col-md-3">
         <label style={{ width: '100%', display: 'block' }} htmlFor="legalProblem">
-          ¿Tiene algún problemas legales?
+          ¿Tiene algún problema legal?
         </label>
         <Checkbox onChange={e => handleChange(e.target.checked, 'legalProblem')} checked={values.legalProblem}>
           Si

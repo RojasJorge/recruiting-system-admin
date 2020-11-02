@@ -58,16 +58,17 @@ const List = ({ type, title }) => {
     switchEdit(true);
   };
 
+  console.log(data);
   return (
     <>
       <div className="row align-items-center">
-        <div className="col">
+        {/* <div className="col">
           {data.loading ? (
             <div className="app--spinner animated fadeIn">
               <Spin tip="Cargando.." size="large" />
             </div>
           ) : null}
-        </div>
+        </div> */}
         <div className="umana-element__add">
           <Button icon={<i className="material-icons">add</i>} shape="circle" type="primary" className="circle-fixed" size="large" onClick={() => switchEdit(!visible)} ghost />
         </div>
