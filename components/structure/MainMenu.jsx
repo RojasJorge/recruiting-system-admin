@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import Link from 'next/link';
 import { RootNav, CompanyNav, TalentNav, PublicNav, UserDropdown } from '../../elements';
-
 import Router from 'next/router';
 import UmanaLogo from '../Misc/UmanaLogo';
-import UmanaMenu from './rootMenu';
-import UserMenu from './talentoMenu';
 
 const MainMenu = _ => {
   const isMain = /\/[a-z]/i;
@@ -27,7 +23,6 @@ const MainMenu = _ => {
   };
 
   useEffect(() => {
-    // console.log('MainMenu.jsx|user', user, token)
     setCurrent(!Router.pathname.match(isMain) ? 'dashboard' : Router.pathname.replace('/', ''));
   }, []);
 

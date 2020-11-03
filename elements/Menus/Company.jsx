@@ -29,15 +29,9 @@ const CompanyNav = props => {
           <a>Solicitudes</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="dashboard" onClick={e => props.close(e, 'close')}>
-        <Link href="/admin" passHref>
-          <a>Dashboard</a>
-        </Link>
-      </Menu.Item>
-      
-      {/*<Menu.Item key="users" onClick={e => props.close(e, 'close')}>*/}
-      {/*  <Link href="/admin/users" passHref>*/}
-      {/*    <a>Candidatos</a>*/}
+      {/*<Menu.Item key="dashboard" onClick={e => props.close(e, 'close')}>*/}
+      {/*  <Link href="/admin" passHref>*/}
+      {/*    <a>Dashboard</a>*/}
       {/*  </Link>*/}
       {/*</Menu.Item>*/}
       <Menu.Item key="companies" onClick={e => props.close(e, 'close')}>
@@ -50,11 +44,6 @@ const CompanyNav = props => {
           <a>Plazas</a>
         </Link>
       </Menu.Item>
-      {/*<Menu.Item key="aplicantes" onClick={e => props.close(e, 'close')}>*/}
-      {/*  <Link href="/" passHref>*/}
-      {/*    <a>Aplicantes</a>*/}
-      {/*  </Link>*/}
-      {/*</Menu.Item>*/}
       <Menu.Item key="applicants" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/applicants" passHref>
           <a>Talentos</a>

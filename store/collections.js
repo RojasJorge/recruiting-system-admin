@@ -74,22 +74,13 @@ export default {
       })
       .catch(error => {
         // console.log(error);
-        // actions.switchLoading(false);
       })
-      .then(response => {
-        // actions.switchLoading(false);
+      .then(async response => {
+        await actions.get({type: 'career'})
+        await actions.get({type: 'academic-level'})
         return;
       });
   }),
-
-  /**
-   * Filter the collection
-   */
-
-  // label: action((state, payload) => {
-  //   // console.log('data payload', payload);
-  //   console.log('data store state', payload);
-  // }),
 
   fill: action((state, { data, type }) => {
     // let items = map(data.items, o => {

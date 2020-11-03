@@ -12,6 +12,7 @@ import Others from './Others';
 import Courses from './Courses';
 import router from 'next/router';
 import { PageTitle, Sitebar } from '../../../elements';
+import Dashboard from "./Dashboard";
 
 const { Step } = Steps;
 
@@ -144,6 +145,7 @@ const UserProfile = ({ query }) => {
                 <Step key={i} title={o.title} status={status(i)} icon={<i className="material-icons">{o.icon}</i>} />
               ))}
             </Steps>
+            <Dashboard show={['TotalPercent']}/>
           </Sitebar>
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">{switchStep()}</div>
