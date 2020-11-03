@@ -19,11 +19,11 @@ const RootNav = props => {
           <a>Solicitudes</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="dashboard" onClick={e => props.close(e, 'close')}>
-        <Link href="/admin" passHref>
-          <a>Dashboard</a>
-        </Link>
-      </Menu.Item>
+      {/*<Menu.Item key="dashboard" onClick={e => props.close(e, 'close')}>*/}
+      {/*  <Link href="/admin" passHref>*/}
+      {/*    <a>Dashboard</a>*/}
+      {/*  </Link>*/}
+      {/*</Menu.Item>*/}
       <Menu.Item key="candidatos" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/users" passHref>
           <a>Usuarios</a>
