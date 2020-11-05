@@ -57,7 +57,7 @@ const Others = ({ switchCurrent, current }) => {
           <h2>Otros conocimientos</h2>
 
           <Item
-            label="Habilidades, conocimientos, capacidades y Software"
+            label="Conocimientos Técnicos y Software"
             name="skills"
             rules={[
               {

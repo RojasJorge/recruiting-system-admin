@@ -72,7 +72,7 @@ const Requirements = () => {
         <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
       </Form.Item>
       <Form.Item
-        label="Habilidades, conocimientos, capacidades y Software"
+        label="Conocimientos Técnicos y Software"
         className="form-item--lg"
         name="skills"
         rules={[

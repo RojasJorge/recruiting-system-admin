@@ -122,7 +122,6 @@
 }
 
 .public-jobs.app {
-  padding-top: 80px;
   width: 100%;
   max-width: 100%;
   background-position-x: left !important;
@@ -131,6 +130,10 @@
   background-size: 30vw 80vh !important;
   background-repeat: no-repeat !important;
   background-position: 0px 0;
+  padding-top: 60px;
+  @include bp(xmedium) {
+    padding-top: 80px;
+  }
   .is-login {
     padding-top: 0;
   }

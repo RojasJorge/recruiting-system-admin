@@ -41,7 +41,7 @@ const General = ({ birthday, setBirthday }) => {
   const dateHandler = d => setBirthday(d);
 
   const disabledDate = current => {
-    return current && current > moment().subtract(18, 'years');
+    return current && current > moment().subtract(16, 'years');
   };
 
   /** Calculate age */
@@ -67,11 +67,11 @@ const General = ({ birthday, setBirthday }) => {
           size="large"
           style={{ width: '100%' }}
           onChange={dateHandler}
-          defaultValue={moment(moment(birthday || moment().subtract(18, 'years')).format('DD/MM/YYYY'), dateFormat)}
+          defaultValue={moment(moment(birthday || moment().subtract(16, 'years')).format('DD/MM/YYYY'), dateFormat)}
           format={dateFormat}
           disabledDate={disabledDate}
         />
-        <p className="note">Debes ser mayor de 18 años</p>
+        <p className="note">Debes ser mayor de 16 años</p>
       </Item>
 
       <Item label="Edad" rules={[{ required: true, message: 'El campo Edad es requerido.' }]} className="form-item--sm">
@@ -101,6 +101,8 @@ const General = ({ birthday, setBirthday }) => {
         <Select size="large" placeholder="Seleccione" style={{ width: '100%' }}>
           <Option value="single">Soltero (a)</Option>
           <Option value="married">Casado (a)</Option>
+          <Option value="widower">Viudo (a)</Option>
+          <Option value="union">Unión de hecho</Option>
         </Select>
       </Item>
 

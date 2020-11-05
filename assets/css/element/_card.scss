@@ -374,4 +374,16 @@
       margin-right: 5px;
     }
   }
+  .umana-card_exerpt {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ' [...]';
+    height: 55px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    * {
+      font-size: 14px;
+    }
+  }
 }

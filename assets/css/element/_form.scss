@@ -319,3 +319,19 @@ label {
     width: 100% !important;
   }
 }
+
+// search
+.ant-input-search.ant-input-search-small {
+  .ant-input-wrapper.ant-input-group {
+    .ant-input-group-addon {
+      width: 50px;
+      .ant-btn.ant-btn-sm.ant-btn-icon-only.ant-input-search-button {
+        width: 50px;
+        margin: 0;
+        height: 45px;
+        background: $color-white;
+        border: $border;
+      }
+    }
+  }
+}
