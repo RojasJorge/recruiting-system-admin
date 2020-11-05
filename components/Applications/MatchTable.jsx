@@ -23,7 +23,6 @@ const MatchTable = ({data}) => {
 	return (
 		<div style={{marginTop: 30}}>
 			<h2>Coinsidencias</h2>
-			{/*<pre>{JSON.stringify(data, false, 2)}</pre>*/}
 			<Table
 				dataSource={data}
 				rowKey={record => record.profile.id}
@@ -56,7 +55,6 @@ const MatchTable = ({data}) => {
 					dataIndex: 'job',
 					key: 'job',
 					render: (text, record) => `${match(record)}%`
-					// render: (text, record) => <pre>{JSON.stringify(match(record), false, 2)}</pre>
 				}, {
 					title: 'Email',
 					dataIndex: 'profile.fields.personal',
