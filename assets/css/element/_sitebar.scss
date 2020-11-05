@@ -195,8 +195,14 @@
 }
 
 .umana-sitebar-childrens {
+  .row {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
   .ant-steps {
     flex-direction: column;
+    padding-right: 0;
     .ant-steps-item {
       .ant-steps-item-container {
         padding-left: 5px;

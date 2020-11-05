@@ -134,6 +134,7 @@ const Documents = ({ switchCurrent, current }) => {
                 <p className="ant-upload-text">
                   Subir DPI(ambos lados) | Pasaporte | Licencia, en formato .docx o .pdf o .jpg. <br /> de no más de 2mb.
                 </p>
+                <p className="ant-upload-note">En caso de ser extranjero, subir permiso de trabajo.</p>
               </Dragger>
             </Item>
           </div>

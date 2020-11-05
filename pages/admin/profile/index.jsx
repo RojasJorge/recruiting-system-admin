@@ -2,6 +2,7 @@ import Layout from '../../../views/Layout';
 import { useStoreState } from 'easy-peasy';
 import { PageTitle, Sitebar } from '../../../elements';
 import SingleProfile from '../../../components/user/single';
+import Dashboard from '../../../components/user/Dashboard';
 
 const Index = _ => {
   const user = useStoreState(state => state.auth.user);
@@ -55,7 +56,9 @@ const Index = _ => {
         <PageTitle title="Mi perfil" />
         <div className="umana-layout-cl">
           <div className="umana-layout-cl__small ">
-            <Sitebar header={header} theme="orange" data={menuList} />
+            <Sitebar header={header} theme="orange" data={menuList}>
+              {/* <Dashboard show={['TotalPercent']} /> */}
+            </Sitebar>
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
             <SingleProfile />

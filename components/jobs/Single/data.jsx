@@ -107,7 +107,7 @@ const SingleJobData = ({ job }) => {
         ) : null}
         {job.skills ? (
           <div className="umana-content__item item-lg">
-            <label>Habilidades, conocimientos, capacidades y Software.</label>
+            <label>Conocimientos Técnicos y Software.</label>
             <div>
               {job.skills.map((e, idx) => (
                 <Tag key={idx}>{e}</Tag>

@@ -106,11 +106,11 @@ const Salary = ({ value = {}, onChange }) => {
         </Select>
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Salario mínimo:</label>
+        <label>Sueldo base mínimo:</label>
         <InputNumber name="base_min" onChange={e => handlenChange(e, 'base_min')} value={values.base_min} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Salario máximo:</label>
+        <label>Sueldo base máximo:</label>
         <InputNumber onChange={e => handlenChange(e, 'base_max')} value={values.base_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
@@ -122,11 +122,11 @@ const Salary = ({ value = {}, onChange }) => {
         <InputNumber onChange={e => handlenChange(e, 'commission_max')} value={values.commission_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Salario mínimo:</label>
+        <label>Rango salarial mínimo:</label>
         <InputNumber value={values.base_min + values.commission_min} min={0} disabled={true} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Salario máximo:</label>
+        <label>Rango salario máximo:</label>
         <InputNumber value={values.base_max + values.commission_max} min={0} disabled={true} />
       </span>
     </div>

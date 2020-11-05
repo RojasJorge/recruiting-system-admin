@@ -70,7 +70,7 @@ const Card = props => {
       <h3 className="umana-card__title">{props.title}</h3>
       {props.subtitle ? <p className="card-subtitle">{props.subtitle}</p> : null}
 
-      {props.description ? <div className="umana-content-custom" dangerouslySetInnerHTML={{ __html: props.description }}></div> : null}
+      {props.description ? <div className="umana-card_exerpt" dangerouslySetInnerHTML={{ __html: props.description }}></div> : null}
       {props.date ? (
         <div className="date">
           <i className="material-icons">access_time</i>
