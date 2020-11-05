@@ -4,12 +4,22 @@ import { PageTitle, Sitebar } from '../../../elements';
 import SingleProfileCandidate from '../../../components/user/single/userProfile';
 import { useEffect, useState } from 'react';
 import xhr from '../../../xhr';
-import { useRouter } from 'next/router';
 
 const Index = query => {
-  const router = useRouter();
-  const [user, setUser] = useState();
-  // const user = useStoreState(state => state.users)
+  const [user, setUser] = useState({});
+
+  const getUser = () => {
+    xhr()
+      .get(`/user/${query.id}`)
+      .then(res => {
+        setUser(res.data);
+      })
+      .catch(console.error);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const header = {
     title: user ? user.name + ' ' + user.lastname : 'perfil',
@@ -65,7 +75,7 @@ const Index = query => {
             <Sitebar header={header} theme="orange" data={menuList}></Sitebar>
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
-            <SingleProfileCandidate query={query} />
+            <SingleProfileCandidate query={query} data={user} />
           </div>
         </div>
       </>

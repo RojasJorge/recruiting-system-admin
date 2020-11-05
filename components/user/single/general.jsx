@@ -11,7 +11,7 @@ const General = props => {
     let result = null;
 
     if (props && props.defaultData) {
-      const avatar = props.defaultData.profile.fields.personal.avatar;
+      const avatar = props.data.avatar;
 
       if (!isEmpty(avatar)) {
         result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
