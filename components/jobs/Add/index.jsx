@@ -119,6 +119,8 @@ const FormJob = props => {
     }
     const statusState = { status: statuState };
     const newObj = Object.assign(e, id, statusState);
+
+    console.log('emp', newObj);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
       edit(newObj);
@@ -126,6 +128,8 @@ const FormJob = props => {
       add(newObj);
     }
   };
+
+  console.log(companies);
 
   return (
     <div>
