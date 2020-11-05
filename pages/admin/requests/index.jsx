@@ -1,9 +1,9 @@
 import Layout from '../../../views/Layout';
 import {EmptyElemet, PageTitle} from '../../../elements';
 import companyImg from '../../../images/welcome-company.png';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import xhr from "../../../xhr";
-import {isEmpty, delay} from 'lodash'
+import {isEmpty} from 'lodash'
 import Applications from "../../../components/Applications";
 import Filters from '../../../components/Applications/Filters'
 import {Can} from '../../../components/Can'
@@ -48,7 +48,7 @@ const Index = _ => {
 	
 	const getApply = (companyId, jobId) => {
 		
-		if(!companyId || !jobId) {
+		if (!companyId || !jobId) {
 			message.warning('Debes seleccionar una plaza.')
 			return false
 		}
@@ -78,24 +78,29 @@ const Index = _ => {
 					/>
 					{
 						isEmpty(applications.list) && <div className="umana-list list-empty" style={{marginTop: 80}}>
-						<EmptyElemet data={dataEmpty} type="orange"/>
-					</div>
+							<EmptyElemet data={dataEmpty} type="orange"/>
+						</div>
 					}
 					{
-						!isEmpty(applications.list) &&
-							applications.list.map(apply => (
-								<div key={apply.id}>
-									<h2>{apply.name}</h2>
-									<Applications
-										key={apply.id}
-										applications={apply.applications}
-										// total={requests.total}
-									/>
-								</div>
-							))
+						!isEmpty(applications.list) && <>
+							
+							{
+								applications.list.map(apply => (
+									<div key={apply.id}>
+										<h2>{apply.name}</h2>
+										<Applications
+											key={apply.id}
+											applications={apply.applications}
+											// total={requests.total}
+										/>
+									</div>
+								))
+							}
+							
+							{/* MATCHING INFO */}
+							<MatchTable data={coinsidences}/>
+						</>
 					}
-					{/* MATCHING INFO */}
-					<MatchTable data={coinsidences}/>
 				</Can>
 				<Can I="view" a="OWN_REQUESTS">
 					<PageTitle title="Mis solicitudes"/>
