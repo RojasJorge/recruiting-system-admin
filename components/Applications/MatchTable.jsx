@@ -1,7 +1,7 @@
 import {Table} from 'antd'
 import PropTypes from 'prop-types'
 import {useStoreActions, useStoreState} from "easy-peasy";
-import {MailOutlined} from '@ant-design/icons'
+import {RightOutlined} from '@ant-design/icons'
 import {find} from 'lodash'
 
 const MatchTable = ({data}) => {
@@ -22,7 +22,7 @@ const MatchTable = ({data}) => {
 	
 	return (
 		<div style={{marginTop: 30}}>
-			<h2>Coinsidencias</h2>
+			<h2>Posibles candidatos</h2>
 			<Table
 				dataSource={data}
 				rowKey={record => record.profile.id}
@@ -67,7 +67,7 @@ const MatchTable = ({data}) => {
 					dataIndex: 'profile.fields.personal',
 					key: 'profile.fields.personal',
 					render: (text, record) => <div>
-						<MailOutlined style={{fontSize: 20}}/>
+						<RightOutlined style={{fontSize: 20}}/>
 					</div>
 				}]}
 			/>
