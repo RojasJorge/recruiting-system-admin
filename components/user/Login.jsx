@@ -92,7 +92,7 @@ const Login = _ => {
                     Iniciar Sesión
                   </Button>
                 </Form>
-                <RequestNewPassword linkText="¿Olvidaste tu contraseña?" elementType="link" />
+                <RequestNewPassword style={{ width: '100%' }} linkText="¿Olvidaste tu contraseña?" elementType="link" />
               </div>
 
               <p>
