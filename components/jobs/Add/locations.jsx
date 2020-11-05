@@ -13,9 +13,9 @@ const LocationJob = props => {
 
   return (
     <>
-      <Form.Item name="location" label="Ubicación de la plaza" rules={[{ validator: checkLocation }]} className="form-item--lg">
+      {/* <Form.Item name="location" label="Ubicación de la plaza" rules={[{ validator: checkLocation }]} className="form-item--lg">
         <Locations />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item name="isBranch" label="Lugar donde será la plaza" className="form-item--lg item-row">
         <Radio.Group onChange={e => setBranch(e.target.value)}>

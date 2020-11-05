@@ -44,6 +44,7 @@
   .ant-radio-group.ant-radio-group-outline.ant-radio-group-large {
     .ant-radio-button-wrapper {
       padding: 30px 20px;
+      height: 100px;
       i {
         font-size: 30px;
         margin-right: 10px;
@@ -101,6 +102,7 @@
   p {
     width: 100%;
     .ant-btn.ant-btn-link.ant-btn-sm {
+      width: auto !important;
       font-family: $font-primary;
       letter-spacing: 0;
       text-decoration: none;

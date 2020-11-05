@@ -156,7 +156,7 @@ const SingleJobData = ({ job }) => {
           <div className="umana-content__item item-md">
             <label>Vehículos</label>
             {job.vehicle.map(e => (
-              <p>{locale(e)}</p>
+              <p key={e}>{locale(e)}</p>
             ))}
           </div>
         ) : null}
@@ -164,7 +164,7 @@ const SingleJobData = ({ job }) => {
           <div className="umana-content__item item-md">
             <label>Tipo de licencia</label>
             {job.type_license.map(e => (
-              <p>{locale(e)}</p>
+              <p key={e}>{locale(e)}</p>
             ))}
           </div>
         ) : null}

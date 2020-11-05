@@ -3,10 +3,13 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Table, Pagination, Avatar } from 'antd';
 import { PageTitle } from '../../elements';
 import xhr from '../../xhr';
+import Link from 'next/link';
 
 const UsersList = () => {
   const users = useStoreState(state => state.users);
   const fill = useStoreActions(actions => actions.users.fill);
+
+  console.log(users);
 
   const [pager, updatePager] = useState({
     page: 1,
@@ -63,6 +66,11 @@ const UsersList = () => {
               title: 'Nombre',
               dataIndex: 'name',
               key: 'name',
+              render: (text, record) => (
+                <Link href={`/admin/profile/[id]`} as={`/admin/profile/${record.id}`}>
+                  <a>{record.name}</a>
+                </Link>
+              ),
             },
             {
               title: 'Apellido',

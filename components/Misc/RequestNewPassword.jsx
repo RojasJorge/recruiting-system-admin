@@ -35,7 +35,7 @@ const RequestNewPassword = ({ linkText, elementType }) => {
 
   return (
     <>
-      <Button onClick={_ => switchModal(!visible)} size="small" type="link" style={{ padding: 0, color: '#a6a6a6' }}>
+      <Button onClick={_ => switchModal(!visible)} size="small" type="link" style={{ padding: 0, color: '#a6a6a6', width: '100%', textAlign: 'left' }}>
         {linkText}
       </Button>
       <Modal
