@@ -10,20 +10,29 @@ import { useEffect, useState } from 'react';
 import xhr from '../../../xhr';
 
 const SingleProfileCandidate = ({ query, data }) => {
+  const [profile, setProfile] = useState(null);
   const [user, setUser] = useState(null);
 
   const getUser = () => {
     xhr()
-      .get(`/profile/${query.id}`)
+      .get(`/user/${query.id}`)
       .then(res => {
-        console.log('user', res);
-        setUser(res);
+        setUser(res.data);
+      })
+      .catch(console.error);
+  };
+  const getProfile = () => {
+    xhr()
+      .get(`/profile?uid=${query.id}`)
+      .then(res => {
+        setProfile(res.data[0]);
       })
       .catch(console.error);
   };
 
   useEffect(() => {
     getUser();
+    getProfile();
   }, []);
 
   useEffect(() => {
@@ -31,18 +40,17 @@ const SingleProfileCandidate = ({ query, data }) => {
       setUser(data);
     }
   }, []);
-  console.log('user.....', user);
 
-  if (!user) return <div>Cargando perfil...</div>;
+  if (!profile) return <div>Cargando perfil...</div>;
   return (
     <>
-      {/* <General data={user.profile.fields.personal} defaultData={user} />
-      <Contact data={user.profile.fields.personal} defaultData={user} />
-      <About data={user.profile.fields.lookingFor} defaultData={user.profile.fields.personal} />
-      <Experience data={user.profile.fields.working} />
-      <Academic data={user.profile.fields.academic} />
-      <Knowledge data={user.profile.fields.others} />
-      <Economic data={user.profile.fields.economic} /> */}
+      <General data={profile.fields.personal} defaultData={user} />
+      <Contact data={profile.fields.personal} defaultData={user} />
+      <About data={profile.fields.lookingFor} defaultData={profile.fields.personal} />
+      <Experience data={profile.fields.working} />
+      <Academic data={profile.fields.academic} />
+      <Knowledge data={profile.fields.others} />
+      <Economic data={profile.fields.economic} />
     </>
   );
 };
