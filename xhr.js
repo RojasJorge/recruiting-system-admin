@@ -1,10 +1,8 @@
-import axios from 'axios';
-import {message} from 'antd';
-import store from "./store";
-import {router} from "next/router";
+import axios from 'axios'
+import {message} from 'antd'
+import store from "./store"
 
 const xhr = () => {
-	
 	const auth = store.getState().auth
 	
 	const axiosinstance = axios.create({
@@ -13,8 +11,8 @@ const xhr = () => {
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: auth.token,
-		},
-	});
+		}
+	})
 	
 	axiosinstance.interceptors.response.use(
 		function (response) {
@@ -23,17 +21,16 @@ const xhr = () => {
 		error => {
 			if (error.response && error.response.status === 401) {
 				store.persist.clear().then(() => {
-					message.error('La sesión ha expirado');
-					console.log('Persisted states has been removed')
-					router.push('/')
+					message.error('La sesión ha expirado')
+					location.href = '/'
 				})
 			}
-			// Do something with response error
+			
 			return Promise.reject(error);
-		},
-	);
+		}
+	)
 	
-	return axiosinstance;
-};
+	return axiosinstance
+}
 
-export default xhr;
+export default xhr

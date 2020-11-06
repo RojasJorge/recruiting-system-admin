@@ -18,14 +18,11 @@ const About = props => {
             <h2>{`Acerca de ${props.defaultData.name}`}</h2>
           </div>
           <div className="umana-content__item item-lg">
-            <p>{props.defaultData.about}</p>
+            <div className="umana-content-custom" dangerouslySetInnerHTML={{ __html: props.defaultData.about }}></div>
           </div>
         </div>
       ) : null}
-      {props.data.availability ||
-      props.data.relocate ||
-      props.data.travel ||
-      props.data.workplace ? (
+      {props.data.availability || props.data.relocate || props.data.travel || props.data.workplace ? (
         <div className="umana-content" id="whatsearch">
           <Can I="apply" a="JOBS">
             <Link href={`/admin/profile/edit?current=3`} passHref>
