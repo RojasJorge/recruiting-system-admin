@@ -151,7 +151,7 @@ const Single = ({query}) => {
 				</Sitebar>
 			</div>
 			<div className="umana-layout-cl__flex width-section bg-white">
-				{!record ? <Skeleton/> : <SingleProfile data={record.candidate}/>}
+				{!record ? <Skeleton active/> : <SingleProfile data={record.candidate}/>}
 			</div>
 		</div>
 	);
