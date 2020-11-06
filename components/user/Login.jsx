@@ -98,6 +98,7 @@ const Login = _ => {
               <p>
                 ¿No tienes cuenta?
                 <Button
+                  style={{ width: 125 }}
                   type="link"
                   size="small"
                   onClick={e => {

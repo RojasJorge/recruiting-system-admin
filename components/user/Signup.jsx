@@ -88,6 +88,7 @@ const SignupSteps = _ => {
               <p>
                 ¿Ya tienes cuenta?
                 <Button
+                  style={{ width: 125 }}
                   type="link"
                   size="small"
                   onClick={e => {
