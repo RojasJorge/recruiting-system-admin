@@ -10,7 +10,7 @@ const Locations = ({ value = {}, onChange }) => {
     country: '',
     province: '',
     city: '',
-    zone: '',
+    zone: 0,
     address: '',
   };
 
@@ -121,7 +121,7 @@ const Locations = ({ value = {}, onChange }) => {
         <label>
           <span className="required">*</span>Zona:
         </label>
-        <InputNumber max={25} min={1} onChange={e => handlenChange(e, 'zone')} value={location.zone} />
+        <InputNumber max={25} min={0} onChange={e => handlenChange(e, 'zone')} value={location.zone} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>
