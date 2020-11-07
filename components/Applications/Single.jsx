@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 // import {FileSearchOutlined} from '@ant-design/icons'
-import {Alert, Input, Modal, notification, Select} from 'antd'
+import {Alert, Input, Modal, notification, Select, Skeleton} from 'antd'
 import {Sitebar} from '../../elements';
 import Moment from 'react-moment';
 import SingleProfile from '../user/single';
 import Link from 'next/link';
 import {find} from 'lodash'
 import {AbilityContext} from "../Can";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import xhr from "../../xhr";
 import {useRouter} from 'next/router'
 
@@ -30,13 +30,26 @@ const STATUS = [{
 	id: 'SUCCESS'
 }]
 
-const Single = ({record}) => {
+const Single = ({query}) => {
 	
 	const router = useRouter()
 	
 	const ability = useContext(AbilityContext)
 	
-	const [status, setStatus] = useState(record.apply.status)
+	const [status, setStatus] = useState('PENDING')
+	
+	/** Local state */
+	const [record, updateRecord] = useState(null)
+	
+	const getRecord = async _ =>
+		await xhr()
+			.get(`/apply/${query.id}`)
+			.then(resp => updateRecord(resp.data.items ? resp.data.items[0] : {}))
+			.catch(err => console.log(err))
+	
+	useEffect(() => {
+		getRecord()
+	}, [query.id])
 	
 	const onStatusSelect = e =>
 		Modal.confirm({
@@ -93,15 +106,23 @@ const Single = ({record}) => {
 							</i>
 						</a>
 					</Link>
-					<h2>{record.company.name}</h2>
-					<p>{record.job.title}</p>
-					<p className="date">
-						<i className="material-icons">access_time</i>
-						<span style={{marginRight: 5}}>Expira</span>{' '}
-						<Moment locale="es" format="D MMMM YYYY">
-							{record.job.expiration_date}
-						</Moment>
-					</p>
+					
+					{
+						!record
+						? <Skeleton paragraph={{rows: 2}} active />
+						: <>
+								<h2>{record.company.name}</h2>
+								<p>{record.job.title}</p>
+								<p className="date">
+									<i className="material-icons">access_time</i>
+									<span style={{marginRight: 5}}>Expira</span>{' '}
+									<Moment locale="es" format="D MMMM YYYY">
+										{record.job.expiration_date}
+									</Moment>
+								</p>
+							</>
+					}
+					
 					
 					{
 						ability.can('edit', 'UPDATE_SINGLE_REQUEST')
@@ -111,7 +132,7 @@ const Single = ({record}) => {
 								}}>Actualizar estado:</h3>
 								<Select
 									value={status}
-									disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST')}
+									disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST') || !record}
 									onSelect={onStatusSelect}
 								>
 									{
@@ -138,8 +159,7 @@ const Single = ({record}) => {
 				</Sitebar>
 			</div>
 			<div className="umana-layout-cl__flex width-section bg-white">
-				{/*<pre>{JSON.stringify(record.candidate, false, 2)}</pre>*/}
-				<SingleProfile data={record.candidate}/>
+				{!record ? <Skeleton active/> : <SingleProfile data={record.candidate}/>}
 			</div>
 		</div>
 	);

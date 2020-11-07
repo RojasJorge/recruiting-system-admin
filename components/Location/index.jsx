@@ -10,7 +10,7 @@ const Locations = ({ value = {}, onChange }) => {
     country: '',
     province: '',
     city: '',
-    zone: '',
+    zone: 0,
     address: '',
   };
 

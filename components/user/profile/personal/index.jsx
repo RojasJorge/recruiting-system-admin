@@ -26,9 +26,6 @@ const Personal = ({ switchCurrent, current }) => {
   /** Birthday handler */
   const [birthday, setBirthday] = useState(personal.birthday);
 
-  /** Danger status */
-  const [danger, isDanger] = useState(false);
-
   /** Avatar info */
   const [avatar, updateAvatar] = useState([]);
 

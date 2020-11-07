@@ -7,8 +7,9 @@ import Knowledge from './knowledge';
 import Economic from './economic';
 import { useStoreState } from 'easy-peasy';
 import { useEffect, useState } from 'react';
+import {Empty} from "antd";
 
-const SingleProfile = ({ data, query }) => {
+const SingleProfile = ({ data }) => {
   const [user, setUser] = useState(null);
   const _user = useStoreState(state => state.auth.user);
 
@@ -20,7 +21,7 @@ const SingleProfile = ({ data, query }) => {
     }
   }, []);
 
-  if (!user) return <div>Cargando perfil...</div>;
+  if (!user) return <Empty/>;
 
   return (
     <>
