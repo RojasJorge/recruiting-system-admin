@@ -184,7 +184,7 @@ const Experience = ({switchCurrent, current}) => {
 																{...field}
 																name={[field.name, 'companyPhone']}
 																fieldKey={[field.fieldKey, 'companyPhone']}
-																rules={[{required: true, message: "El campo teléfono es requerido"}]}
+																// rules={[{required: true, message: "El campo teléfono es requerido"}]}
 															>
 																<Input size="large"/>
 															</Item>
@@ -208,6 +208,7 @@ const Experience = ({switchCurrent, current}) => {
 																name={[field.name, 'workingNow']}
 																fieldKey={[field.fieldKey, 'workingNow']}
 																valuePropName="checked"
+																rules={[{required: true, message: "El campo teléfono es requerido"}]}
 															>
 																
 																<Switch onChange={e => setWorking(e)} checkedChildren="SI" unCheckedChildren="NO"/>
@@ -219,6 +220,7 @@ const Experience = ({switchCurrent, current}) => {
 																{...field}
 																name={[field.name, 'dateInit']}
 																fieldKey={[field.fieldKey, 'dateInit']}
+																rules={[{required: true, message: "El campo teléfono es requerido"}]}
 															>
 																<DatePicker
 																	size="large"

@@ -118,9 +118,7 @@ const Locations = ({ value = {}, onChange }) => {
         </Select>
       </span>
       <span className="form-item--sm ant-form-item">
-        <label>
-          <span className="required">*</span>Zona:
-        </label>
+        <label>Zona:</label>
         <InputNumber max={25} min={1} onChange={e => handlenChange(e, 'zone')} value={location.zone} />
       </span>
       <span className="form-item--md ant-form-item">

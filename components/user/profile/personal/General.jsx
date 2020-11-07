@@ -74,7 +74,7 @@ const General = ({ birthday, setBirthday }) => {
         <p className="note">Debes ser mayor de 16 años</p>
       </Item>
 
-      <Item label="Edad" rules={[{ required: true, message: 'El campo Edad es requerido.' }]} className="form-item--sm">
+      <Item label={`* Edad`} rules={[{ required: true, message: 'El campo Edad es requerido.' }]} className="form-item--sm">
         <InputNumber style={{ width: '100%' }} min={0} size="large" value={calculateAge(birthday) || 0} disabled />
       </Item>
 
@@ -87,7 +87,7 @@ const General = ({ birthday, setBirthday }) => {
           ))}
         </Select>
       </Item>
-      <Item label="Religión" name="religion" rules={[{ required: true, message: 'El campo Religión es requerido.' }]} className="form-item--sm">
+      <Item label="Religión" name="religion" className="form-item--sm">
         <Select name="religion" size="large" placeholder="Seleccione" style={{ width: '100%' }}>
           {religion.map((o, i) => (
             <Option key={i} value={o}>
@@ -97,7 +97,7 @@ const General = ({ birthday, setBirthday }) => {
         </Select>
       </Item>
 
-      <Item className="form-item--sm" label="Estado civíl" name="maritalStatus" rules={[{ required: true, message: 'El campo Estado civil es requerido.' }]}>
+      <Item className="form-item--sm" label="Estado civíl" name="maritalStatus">
         <Select size="large" placeholder="Seleccione" style={{ width: '100%' }}>
           <Option value="single">Soltero (a)</Option>
           <Option value="married">Casado (a)</Option>
@@ -106,7 +106,7 @@ const General = ({ birthday, setBirthday }) => {
         </Select>
       </Item>
 
-      <Item className="form-item--sm" label="Hijos" name="children" rules={[{ required: true, message: 'El campo Hijos es requerido.' }]}>
+      <Item className="form-item--sm" label="Hijos" name="children">
         <InputNumber min={0} max={20} placeholder="0" style={{ width: '100%' }} size="large" />
       </Item>
     </div>

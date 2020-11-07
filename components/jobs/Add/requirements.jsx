@@ -13,7 +13,7 @@ const Requirements = () => {
 
   return (
     <>
-      <Form.Item label="Sexo" name="gender" className="form-item--lg">
+      <Form.Item label="Sexo" name="gender" className="form-item--lg" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
         <Radio.Group>
           <Radio.Button value="indifferent">Indiferente</Radio.Button>
           <Radio.Button value="male">Masculino</Radio.Button>
@@ -21,7 +21,7 @@ const Requirements = () => {
         </Radio.Group>
       </Form.Item>
       <div className="umana-form--group group-row">
-        <Form.Item name="age" label="Edad" className="form-item--fx" help="Seleccione rango de edad">
+        <Form.Item name="age" label="Edad" className="form-item--fx" help="Seleccione rango de edad" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
           <Age />
         </Form.Item>
       </div>
@@ -71,17 +71,7 @@ const Requirements = () => {
       <Form.Item className="form-item--md" name="travel" valuePropName="checked" label="Requiere disponibilidad para viajar">
         <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
       </Form.Item>
-      <Form.Item
-        label="Conocimientos Técnicos y Software"
-        className="form-item--lg"
-        name="skills"
-        rules={[
-          {
-            required: true,
-            message: 'Este campo es requerido',
-          },
-        ]}
-      >
+      <Form.Item label="Conocimientos Técnicos y Software" className="form-item--lg" name="skills">
         <Select mode="tags" placeholder="Agrega elementos al dar enter">
           {skills
             ? skills

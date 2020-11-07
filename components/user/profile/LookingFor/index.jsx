@@ -59,11 +59,7 @@ const LookingFor = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form
-        onFinish={onFinish}
-        initialValues={lookingFor}
-        validateTrigger="onBlur"
-      >
+      <Form onFinish={onFinish} initialValues={lookingFor} validateTrigger="onBlur">
         <div className="umana-form--section">
           <h2>¿Qué estas buscando?</h2>
           <Item label="Tipo de plaza" className="form-item--lg" name="availability" rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}>
@@ -84,11 +80,11 @@ const LookingFor = ({ switchCurrent, current }) => {
             </Select>
           </Item>
 
-          <Item className="form-item--md" name="relocate" valuePropName="checked" label="¿Está dispuesto a reubicarse?">
+          <Item className="form-item--md" name="relocate" valuePropName="checked" label="¿Está dispuesto a reubicarse?" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
             <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
           </Item>
 
-          <Item className="form-item--md" name="travel" valuePropName="checked" label="¿Disponibilidad para viajar?">
+          <Item className="form-item--md" name="travel" valuePropName="checked" label="¿Disponibilidad para viajar?" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
             <Switch checkedChildren="Si" unCheckedChildren="No" size="large" className="switch-large theme-orange" />
           </Item>
         </div>

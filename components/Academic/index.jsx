@@ -54,7 +54,13 @@ const AcademicLeves = ({ acLevel }) => {
                 >
                   <Speciality level={level} />
                 </Form.Item>
-                <Form.Item {...field} name={[field.name, 'studyNow']} fieldKey={[field.fieldKey, 'studyNow']} label="Se permiten estudiantes">
+                <Form.Item
+                  {...field}
+                  name={[field.name, 'studyNow']}
+                  fieldKey={[field.fieldKey, 'studyNow']}
+                  label="Se permiten estudiantes"
+                  rules={[{ required: true, message: 'Este campo es requerido.' }]}
+                >
                   <Radio.Group>
                     <Radio.Button value={true}>Si</Radio.Button>
                     <Radio.Button value={false}>No</Radio.Button>

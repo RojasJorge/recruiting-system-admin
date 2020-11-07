@@ -9,16 +9,28 @@ const Languages = props => {
           <div style={{ width: '100%', marginTop: 20 }}>
             {fields.map(field => (
               <Space key={field.key} style={{ display: 'flex', paddingBottom: 5 }} align="start" className="umana-form--group">
-                <Form.Item {...field} name={[field.name, 'language']} fieldKey={['language' + field.fieldKey, 'language']} label="Idioma">
+                <Form.Item
+                  {...field}
+                  name={[field.name, 'language']}
+                  fieldKey={['language' + field.fieldKey, 'language']}
+                  label="Idioma"
+                  rules={[{ required: true, message: 'Este campo es requerido.' }]}
+                >
                   <Select showSearch>{languages ? languages.map(l => <Select.Option key={l}>{l}</Select.Option>) : null}</Select>
                 </Form.Item>
-                <Form.Item {...field} name={[field.name, 'comprehension']} fieldKey={['comprehension' + field.fieldKey, 'comprehension']} label="Comprensión">
+                <Form.Item
+                  {...field}
+                  name={[field.name, 'comprehension']}
+                  fieldKey={['comprehension' + field.fieldKey, 'comprehension']}
+                  label="Comprensión"
+                  rules={[{ required: true, message: 'Este campo es requerido.' }]}
+                >
                   <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
-                <Form.Item {...field} name={[field.name, 'speak']} fieldKey={['speak' + field.fieldKey, 'speak']} label="Hablado">
+                <Form.Item {...field} name={[field.name, 'speak']} fieldKey={['speak' + field.fieldKey, 'speak']} label="Hablado" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
                   <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
-                <Form.Item {...field} name={[field.name, 'write']} fieldKey={['write' + field.fieldKey, 'write']} label="Lectura">
+                <Form.Item {...field} name={[field.name, 'write']} fieldKey={['write' + field.fieldKey, 'write']} label="Lectura" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
                   <InputNumber formatter={value => `${value}%`} max={100} min={0} />
                 </Form.Item>
                 <a

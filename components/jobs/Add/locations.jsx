@@ -5,7 +5,7 @@ import Locations from '../../Location';
 const LocationJob = props => {
   const [isBranch, setBranch] = useState(props.isBranch);
   const checkLocation = (rule, value) => {
-    if (value.country && value.province && value.city && value.address && value.zone > 0) {
+    if (value.country && value.province && value.city && value.address) {
       return Promise.resolve();
     }
     return Promise.reject('Todos los campos de esta sección son requeridos');
@@ -17,7 +17,7 @@ const LocationJob = props => {
         <Locations />
       </Form.Item> */}
 
-      <Form.Item name="isBranch" label="Lugar donde será la plaza" className="form-item--lg item-row">
+      <Form.Item name="isBranch" label="Lugar donde será la plaza" className="form-item--lg item-row" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
         <Radio.Group onChange={e => setBranch(e.target.value)}>
           <Radio.Button value={false}>Oficina</Radio.Button>
           <Radio.Button value={true}>Sucursal</Radio.Button>
@@ -36,7 +36,7 @@ const LocationJob = props => {
           </Form.Item>
         </>
       ) : null}
-      <Form.Item name="locationState" label="Estado de la ubicación" className="form-item--lg item-row">
+      <Form.Item name="locationState" label="Estado de la ubicación" className="form-item--lg item-row" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
         <Radio.Group>
           <Radio.Button value="public">Pública</Radio.Button>
           <Radio.Button value="private">Privada</Radio.Button>
