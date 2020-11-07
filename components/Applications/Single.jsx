@@ -106,15 +106,23 @@ const Single = ({query}) => {
 							</i>
 						</a>
 					</Link>
-					<h2>{record && record.company.name}</h2>
-					<p>{record && record.job.title}</p>
-					<p className="date">
-						<i className="material-icons">access_time</i>
-						<span style={{marginRight: 5}}>Expira</span>{' '}
-						<Moment locale="es" format="D MMMM YYYY">
-							{record && record.job.expiration_date}
-						</Moment>
-					</p>
+					
+					{
+						!record
+						? <Skeleton paragraph={{rows: 2}} active />
+						: <>
+								<h2>{record.company.name}</h2>
+								<p>{record.job.title}</p>
+								<p className="date">
+									<i className="material-icons">access_time</i>
+									<span style={{marginRight: 5}}>Expira</span>{' '}
+									<Moment locale="es" format="D MMMM YYYY">
+										{record.job.expiration_date}
+									</Moment>
+								</p>
+							</>
+					}
+					
 					
 					{
 						ability.can('edit', 'UPDATE_SINGLE_REQUEST')
