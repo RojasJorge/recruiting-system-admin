@@ -22,7 +22,6 @@ const SingleProfile = ({ data }) => {
   }, []);
 
   if (!user) return <Empty/>;
-  if (!data) return <Empty/>;
 
   return (
     <>
