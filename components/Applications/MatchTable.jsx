@@ -3,8 +3,11 @@ import PropTypes from 'prop-types'
 import {useStoreActions, useStoreState} from "easy-peasy";
 import {RightOutlined} from '@ant-design/icons'
 import {find} from 'lodash'
+import {useRouter} from "next/router";
 
 const MatchTable = ({data}) => {
+	
+	const router = useRouter()
 	
 	const collections = useStoreState(state => state.collections)
 	const match = useStoreActions(actions => actions.jobs.match)
@@ -15,7 +18,7 @@ const MatchTable = ({data}) => {
 	const onRow = (record, index) => {
 		return {
 			onClick: () => {
-				console.log('Record:', record)
+				router.push('/admin/profile/' + record.profile.uid)
 			}
 		}
 	}
