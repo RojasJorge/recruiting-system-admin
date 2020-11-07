@@ -26,9 +26,6 @@ const Personal = ({ switchCurrent, current }) => {
   /** Birthday handler */
   const [birthday, setBirthday] = useState(personal.birthday);
 
-  /** Danger status */
-  const [danger, isDanger] = useState(false);
-
   /** Avatar info */
   const [avatar, updateAvatar] = useState([]);
 
@@ -96,6 +93,7 @@ const Personal = ({ switchCurrent, current }) => {
 
   return (
     <>
+      <pre>{JSON.stringify(personal.location, false, 2)}</pre>
       <Form
         name="basic"
         onFinish={onFinish}
