@@ -132,7 +132,7 @@ const Single = ({query}) => {
 								}}>Actualizar estado:</h3>
 								<Select
 									value={status}
-									disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST')}
+									disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST') || !record}
 									onSelect={onStatusSelect}
 								>
 									{
