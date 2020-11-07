@@ -5,9 +5,9 @@ import Experience from './experience';
 import Academic from './academic';
 import Knowledge from './knowledge';
 import Economic from './economic';
-import { useStoreState } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 import xhr from '../../../xhr';
+import {Skeleton} from "antd";
 
 const SingleProfileCandidate = ({ query, data }) => {
   const [profile, setProfile] = useState(null);
@@ -40,8 +40,8 @@ const SingleProfileCandidate = ({ query, data }) => {
       setUser(data);
     }
   }, []);
-
-  if (!profile) return <div>Cargando perfil...</div>;
+  
+  if (!profile) return <Skeleton active />;
   return (
     <>
       <General data={profile.fields.personal} defaultData={user} />
