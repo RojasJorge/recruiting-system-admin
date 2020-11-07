@@ -7,7 +7,7 @@ import Knowledge from './knowledge';
 import Economic from './economic';
 import { useStoreState } from 'easy-peasy';
 import { useEffect, useState } from 'react';
-import {Skeleton} from "antd";
+import {Empty} from "antd";
 
 const SingleProfile = ({ data }) => {
   const [user, setUser] = useState(null);
@@ -21,8 +21,8 @@ const SingleProfile = ({ data }) => {
     }
   }, []);
 
-  if (!user) return <Skeleton active/>;
-  if (!data) return <Skeleton active/>;
+  if (!user) return <Empty/>;
+  if (!data) return <Empty/>;
 
   return (
     <>
