@@ -93,7 +93,6 @@ const Personal = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <pre>{JSON.stringify(personal.location, false, 2)}</pre>
       <Form
         name="basic"
         onFinish={onFinish}
