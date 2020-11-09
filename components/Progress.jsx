@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 /* eslint-disable react/prefer-stateless-function */
 class NextNProgress extends React.Component {
+	
 	static defaultProps = {
-		color: '#019688',
-		// color: '#197e9a',
+		color: '#197e9a',
 		startPosition: 0.3,
 		stopDelayMs: 200,
 		height: 1,
@@ -29,6 +29,7 @@ class NextNProgress extends React.Component {
 	
 	render() {
 		const { color, height } = this.props;
+		
 		
 		return (
 			<style jsx global>{`

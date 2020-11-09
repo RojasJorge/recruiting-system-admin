@@ -9,7 +9,7 @@ const MainMenu = _ => {
   const [current, setCurrent] = useState('/');
 
   const user = useStoreState(state => state.auth.user);
-  const token = useStoreState(state => state.auth.token);
+  // const token = useStoreState(state => state.auth.token);
   const signOut = useStoreActions(actions => actions.auth.logout);
 
   const handleClick = e => {
