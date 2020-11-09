@@ -213,7 +213,7 @@ const SingleJobData = ({ job }) => {
         {job.benefits_other ? (
           <div className="umana-content__item item-lg">
             <label>Otros beneficios</label>
-            <p>{job.benefits_other}</p>
+            <div className="umana-content-custom" dangerouslySetInnerHTML={{ __html: job.benefits_other }}></div>
           </div>
         ) : null}
       </div>
