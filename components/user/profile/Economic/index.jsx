@@ -58,13 +58,16 @@ const Economic = ({ current, switchCurrent }) => {
     });
   };
 
+  const checkLocation = (rule, value) => {
+    if (value.currency && value.baseMin && value.baseMax) {
+      return Promise.resolve();
+    }
+    return Promise.reject('Todos los campos de esta sección son requeridos');
+  };
+
   return (
     <>
-      <Form
-        onFinish={onFinish}
-        initialValues={economic}
-        validateTrigger="onBlur"
-      >
+      <Form onFinish={onFinish} initialValues={economic} validateTrigger="onBlur">
         <div className="umana-form--section">
           <h2 style={{ width: '100%' }}>Información Económica</h2>
           <Item name="typeHousing" label="Tipo de vivienda" className="form-item--md">
@@ -96,15 +99,13 @@ const Economic = ({ current, switchCurrent }) => {
           <Item name="currentSalary" label="Salario actual" className="form-item--lg">
             <InputNumber size="large" />
           </Item>
-          <Item name="desiredSalary" label="Salario deseado" className="form-item--lg">
+          <Item name="desiredSalary" label="Salario deseado" className="form-item--lg" rules={[{ validator: checkLocation }]}>
             <Salary />
           </Item>
 
           <hr />
           <Item name="otherIncome" valuePropName="checked" className="form-item--lg">
-            <Checkbox onChange={e => updateChecks({ ...checks, otherIncome: e.target.checked })}>
-              ¿Tiene otros ingresos?
-            </Checkbox>
+            <Checkbox onChange={e => updateChecks({ ...checks, otherIncome: e.target.checked })}>¿Tiene otros ingresos?</Checkbox>
           </Item>
           {checks.otherIncome ? (
             <>
@@ -131,17 +132,12 @@ const Economic = ({ current, switchCurrent }) => {
           <Item name="legal">
             <Legal />
           </Item>
-          <Item name="allowed" valuePropName="checked">
+          <Item name="allowed" valuePropName="checked" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
             <Checkbox>
-              Autorizo expresamente a las empresas que distribuyen o comercializan con datos
-              personales, para que distribuyan / comercialicen estudios que contengan datos
-              personales concernientes a mi persona, a efecto de verificar la información
-              proporcionada; y autorizo que mis datos personales sean compartidos / distribuidos a
-              empresas que presten servicios de información personal: según los artículos 9 numeral
-              y 64 Ley de Acceso a la Información Pública, 19, 21, 22, 28, 46. Ley contra Lavado de
-              Dinero y Otros Activos y 12 y 20 de su Reglamento: 50, 55, 56, 58. Ley de Bancos y
-              Grupos Financieros entre otros. Doy fe que la información proporcionada es verdadera y
-              queda a disposición de ser verificada por UMANA RH.
+              Autorizo expresamente a las empresas que distribuyen o comercializan con datos personales, para que distribuyan / comercialicen estudios que contengan datos personales concernientes a mi
+              persona, a efecto de verificar la información proporcionada; y autorizo que mis datos personales sean compartidos / distribuidos a empresas que presten servicios de información personal:
+              según los artículos 9 numeral y 64 Ley de Acceso a la Información Pública, 19, 21, 22, 28, 46. Ley contra Lavado de Dinero y Otros Activos y 12 y 20 de su Reglamento: 50, 55, 56, 58. Ley
+              de Bancos y Grupos Financieros entre otros. Doy fe que la información proporcionada es verdadera y queda a disposición de ser verificada por UMANA RH.
             </Checkbox>
           </Item>
         </div>

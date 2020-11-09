@@ -37,13 +37,16 @@ const Login = _ => {
 
   useEffect(() => {
     if (loginState === 401) {
+      setError('Credenciales invalidas, por favor revise que su correo o contraseña sean correctas.');
+    }
+    if (loginState === 404) {
       setError('El usuario no existe, has click en crear cuenta.');
     }
     if (loginState === 423) {
       setError('Usuaraio no verificado, revisa tu correo electrónico para verificar tu cuenta.');
     }
-    if (loginState === 0) {
-      setError('');
+    if (loginState !== 423 || loginState !== 401 || loginState !== 404) {
+      setError('Ha ocurrido un error, por favor intentelo más tarde.');
     }
     delay(() => switchLoading(false), 1000);
   }, [loginState]);

@@ -59,12 +59,12 @@ const Others = ({ switchCurrent, current }) => {
           <Item
             label="Conocimientos Técnicos y Software"
             name="skills"
-            rules={[
-              {
-                required: true,
-                message: 'Este campo es requerido',
-              },
-            ]}
+            // rules={[
+            //   {
+            //     required: true,
+            //     message: 'Este campo es requerido',
+            //   },
+            // ]}
           >
             <Select mode="tags" placeholder="Agrega elementos al dar enter">
               {skills

@@ -100,29 +100,41 @@ const Salary = ({ value = {}, onChange }) => {
   return (
     <div className="umana-form--group" style={{ paddingBottom: 0 }}>
       <span className="form-item--lg ant-form-item">
-        <label>Moneda:</label>
-        <Select showSearch onChange={e => hajndleCurrency(e, 'currency')} value={values.currency.code}>
+        <label>
+          <span>*</span>Moneda:
+        </label>
+        <Select showSearch onChange={e => hajndleCurrency(e, 'currency')} value={values.currency.code} rules={[{ required: true, message: 'Este campo es requerido.' }]}>
           {monedas ? monedas.map(b => <Select.Option key={b.code} value={b.code}>{`${b.symbol_native} - ${b.name} (${b.code})`}</Select.Option>) : null}
         </Select>
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Sueldo base mínimo:</label>
+        <label>
+          <span>*</span>Sueldo base mínimo:
+        </label>
         <InputNumber name="base_min" onChange={e => handlenChange(e, 'base_min')} value={values.base_min} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Sueldo base máximo:</label>
+        <label>
+          <span>*</span>Sueldo base máximo:
+        </label>
         <InputNumber onChange={e => handlenChange(e, 'base_max')} value={values.base_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Comisión mínimo:</label>
+        <label>
+          <span>*</span>Comisión mínimo:
+        </label>
         <InputNumber onChange={e => handlenChange(e, 'commission_min')} value={values.commission_min} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Comisión máximo:</label>
+        <label>
+          <span>*</span>Comisión máximo:
+        </label>
         <InputNumber onChange={e => handlenChange(e, 'commission_max')} value={values.commission_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>Rango salarial mínimo:</label>
+        <label>
+          <span>*</span>Rango salarial mínimo:
+        </label>
         <InputNumber value={values.base_min + values.commission_min} min={0} disabled={true} />
       </span>
       <span className="form-item--md ant-form-item">

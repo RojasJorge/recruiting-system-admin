@@ -38,29 +38,26 @@ const Salary = ({ value = {}, onChange }) => {
   return (
     <div className="umana-form--group" style={{ paddingBottom: 0 }}>
       <div className="form-item--sm">
-        <label htmlFor="currency">Moneda</label>
+        <label htmlFor="currency">
+          <span className="required">*</span> Moneda
+        </label>
         <Select onChange={e => handleChange(e, 'currency')} value={values.currency} size="large">
           <Option value="GTQ">Quetzal</Option>
           <Option value="USD">Dólar</Option>
         </Select>
       </div>
       <div className="form-item--sm">
-        <label htmlFor="baseMin">Mínimo deseado</label>
-        <InputNumber
-          onChange={e => handleChange(e, 'baseMin')}
-          value={values.baseMin}
-          min={0}
-          size="large"
-        />
+        <label htmlFor="baseMin">
+          {' '}
+          <span className="required">*</span>Mínimo deseado
+        </label>
+        <InputNumber onChange={e => handleChange(e, 'baseMin')} value={values.baseMin} min={0} size="large" />
       </div>
       <div className="form-item--sm">
-        <label htmlFor="baseMax">Máximo deseado</label>
-        <InputNumber
-          onChange={e => handleChange(e, 'baseMax')}
-          value={values.baseMax}
-          min={0}
-          size="large"
-        />
+        <label htmlFor="baseMax">
+          <span className="required">*</span> Máximo deseado
+        </label>
+        <InputNumber onChange={e => handleChange(e, 'baseMax')} value={values.baseMax} min={0} size="large" />
       </div>
     </div>
   );

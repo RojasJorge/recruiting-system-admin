@@ -87,7 +87,17 @@ const GeneralJob = ({ career, position }) => {
         </Select>
       </Form.Item>
 
-      <Form.Item label="Tipo de horario*" className="form-item--sm" name="schedule_type">
+      <Form.Item
+        label="Tipo de horario*"
+        className="form-item--sm"
+        name="schedule_type"
+        rules={[
+          {
+            required: true,
+            message: 'Este campo es requerido',
+          },
+        ]}
+      >
         <Select showSearch>
           <Select.Option value="daytime" key="daytime">
             Diurno
