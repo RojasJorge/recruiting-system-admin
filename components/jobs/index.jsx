@@ -115,6 +115,7 @@ const Jobs = props => {
   /** Get countries from store (tools) */
   const countries = useStoreState(state => state.tools.countries);
   const list = useStoreState(state => state.jobs.list);
+  const auth = useStoreState(state => state.auth);
   const fill = useStoreActions(actions => actions.jobs.fill);
 
   /**
@@ -393,7 +394,7 @@ const Jobs = props => {
                     <Card
                       key={idx}
                       title={e.title}
-                      link={`${localStorage.getItem('uToken') ? '/admin/jobs/single/' : '/jobs/single/'}`}
+                      link={`${auth && auth.token ? '/admin/jobs/single/' : '/jobs/single/'}`}
                       dinamicLink={e.id}
                       description={e.description}
                       theme="green"
