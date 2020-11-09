@@ -1,7 +1,7 @@
-import { action, thunk } from 'easy-peasy'
-import Router from 'next/router'
-import axios from 'axios'
-import store from './index'
+import { action, thunk } from 'easy-peasy';
+import Router from 'next/router';
+import axios from 'axios';
+import store from './index';
 
 export default {
   user: null,
@@ -60,11 +60,11 @@ export default {
         .then(response => {
           actions.grantAccess(response.data);
           actions.handlenError(0);
-          
-          if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana') {
-            location.href = '/admin/requests'
+
+          if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana' || response.data.scope[0] !== 'candidate') {
+            location.href = '/admin/requests';
           } else {
-            location.href = '/admin/welcome'
+            location.href = '/admin/welcome';
           }
         })
         .catch(error => {
@@ -81,8 +81,8 @@ export default {
     // localStorage.removeItem('uUser');
     // localStorage.setItem('uScopes', JSON.stringify(['guest']));
     store.persist.clear().then(() => {
-      console.log('Persisted states has been removed')
-    })
+      console.log('Persisted states has been removed');
+    });
     Router.push('/');
   }),
 
@@ -90,7 +90,6 @@ export default {
    * Update user state
    */
   updateProfile: action((state, payload) => {
-    
     /** Update global state */
     state.user.profile.fields[payload.type] = payload.fields;
 
@@ -98,7 +97,7 @@ export default {
     // let user = JSON.parse(localStorage.getItem('uUser'));
     //
     // user.profile.fields[payload.type] = payload.fields;
-    
+
     /** Attach updated object */
     // if (user) {
     //   user.profile.fields[payload.type] = payload.fields;

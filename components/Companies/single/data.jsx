@@ -3,17 +3,13 @@ const SingleData = props => {
   return (
     <div className="umana-section-contenct">
       <div className="section-avatar">
-        <Avatar
-          icon={<i className="material-icons">location_city</i>}
-          src={props.company.avatar}
-          size={120}
-        />
+        <Avatar icon={<i className="material-icons">location_city</i>} src={props.company.avatar} size={120} />
       </div>
       <div className="section-title">
         <h1>{props.company.name ? props.company.name : 'nombre de la empresa'}</h1>
       </div>
       <h5>Acerca de la empresa</h5>
-      <p>{props.company.description ? props.company.description : 'Descripción de la empresa'}</p>
+      <p>{props.company.description ? <div className="umana-content-custom" dangerouslySetInnerHTML={{ __html: props.company.description }}></div> : 'Descripción de la empresa'}</p>
       {props.company.location ? (
         <>
           <h5>Ubicación</h5>
