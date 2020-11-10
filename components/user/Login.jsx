@@ -21,7 +21,8 @@ const Login = _ => {
 
   const onFinish = data => {
     switchLoading(true);
-    login(data);
+    const pathname = Router.router.pathname.split('/')
+    login({data, pathname});
 
     /** Switch loader delay */
     delay(() => switchLoading(false), 1000);

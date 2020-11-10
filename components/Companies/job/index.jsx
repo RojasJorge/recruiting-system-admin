@@ -41,7 +41,7 @@ const CompanyJobs = props => {
   };
 
   const add = async e => {
-    console.log(e);
+    // console.log(e);
     delete e.id;
     delete e.company;
     delete e.created_at;

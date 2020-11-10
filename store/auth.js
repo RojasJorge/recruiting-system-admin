@@ -22,8 +22,8 @@ export default {
           },
         })
         .catch(error => {
-          localStorage.removeItem('uToken');
-          localStorage.removeItem('uUser');
+          // localStorage.removeItem('uToken');
+          // localStorage.removeItem('uUser');
           this.state ? (this.state.USER.auth.token = '') : null;
         })
         .then(response => actions.updateToken(response.data)),
@@ -50,9 +50,9 @@ export default {
    * The login action
    */
   login: thunk(
-    async (actions, payload) =>
+    async (actions, {data, pathname}) =>
       await axios
-        .post(process.env.NEXT_PUBLIC_API_URL_PRODUCTION + '/login', JSON.stringify(payload), {
+        .post(process.env.NEXT_PUBLIC_API_URL_PRODUCTION + '/login', JSON.stringify(data), {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -60,15 +60,23 @@ export default {
         .then(response => {
           actions.grantAccess(response.data);
           actions.handlenError(0);
-
-          if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana' || response.data.scope[0] !== 'candidate') {
-            location.href = '/admin/requests';
-          } else {
-            location.href = '/admin/welcome';
+  
+          // const pathname = Router.router.pathname.split('/')
+          //
+          console.log('Pathname:', pathname)
+          if(pathname.length <= 2) {
+            if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana' || response.data.scope[0] !== 'candidate') {
+              location.href = '/admin/requests';
+              // Router.push('/admin/requests')
+            } else {
+              location.href = '/admin/welcome';
+              // Router.puth('/admin/welcome')
+            }
           }
+          
         })
         .catch(error => {
-          console.log(error);
+          // console.log(error);
           actions.handlenError(error.response.status);
         }),
   ),
@@ -76,14 +84,12 @@ export default {
     state.user = null;
     state.token = null;
     state.scopes = null;
-    // localStorage.removeItem('uToken');
-    // localStorage.removeItem('uScopes');
-    // localStorage.removeItem('uUser');
-    // localStorage.setItem('uScopes', JSON.stringify(['guest']));
+    
     store.persist.clear().then(() => {
-      console.log('Persisted states has been removed');
-    });
-    Router.push('/');
+      console.log('Persisted states has been removed')
+    })
+    
+    Router.push('/')
   }),
 
   /**
@@ -91,16 +97,6 @@ export default {
    */
   updateProfile: action((state, payload) => {
     /** Update global state */
-    state.user.profile.fields[payload.type] = payload.fields;
-
-    /** Get uUser from localStorage */
-    // let user = JSON.parse(localStorage.getItem('uUser'));
-    //
-    // user.profile.fields[payload.type] = payload.fields;
-
-    /** Attach updated object */
-    // if (user) {
-    //   user.profile.fields[payload.type] = payload.fields;
-    // }
+    state.user.profile.fields[payload.type] = payload.fields
   }),
 };

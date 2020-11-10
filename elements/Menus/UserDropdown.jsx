@@ -12,9 +12,7 @@ const UserDropdown = props => {
           ) : null}
           <div>
             {props.user.name ? (
-              <Link href="/admin/profile">
-                <strong> {`${props.user.name}  ${props.user.lastname}`}</strong>
-              </Link>
+              <strong> {`${props.user.name}  ${props.user.lastname}`}</strong>
             ) : (
               'Perfil'
             )}

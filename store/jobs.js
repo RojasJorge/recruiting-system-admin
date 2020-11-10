@@ -17,7 +17,7 @@ export default {
 		state.total = payload.data.total
 	}),
 	match: thunk((actions, payload) => {
-		const {job, profile: {fields}} = payload
+		const {job, company, profile: {fields}} = payload
 		
 		let matchScore = {
 			workplace: 0,
@@ -57,14 +57,18 @@ export default {
 		 * 3.-
 		 * @type {boolean}
 		 */
-		const country = job.location.country === fields.personal.location.country
-		if (country) matchScore = {...matchScore, country: 10}
+		let country = false
+		let province = false
 		
-		/**
-		 * 4.-
-		 * @type {boolean}
-		 */
-		const province = job.location.province === fields.personal.location.province
+		if(job.isBranch) {
+			country = job.branch.country === fields.personal.location.country
+			province = job.branch.province === fields.personal.location.province
+		} else {
+			country = company.location.country === fields.personal.location.country
+			province = company.location.province === fields.personal.location.province
+		}
+		
+		if (country) matchScore = {...matchScore, country: 10}
 		if (province) matchScore = {...matchScore, province: 10}
 		
 		
@@ -147,6 +151,9 @@ export default {
 		 * @type {*[]}
 		 */
 		const languages = fields.others.languages.reduce((acc, current) => {
+			
+			if(typeof job.languages === 'undefined') return acc
+			
 			const found = job.languages.find(o => o.language === current.language)
 			if (found && current.comprehension >= found.comprehension && current.speak >= found.speak && current.write >= found.write) {
 				acc.push(current)
