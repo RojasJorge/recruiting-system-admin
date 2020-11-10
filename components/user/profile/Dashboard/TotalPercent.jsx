@@ -39,7 +39,7 @@ const TotalPercent = ({config: {legend, type}}) => {
 	
 	return (
 		<>
-			<Card title="Mi perfil" style={{marginTop: 30}}>
+			<Card title="Porcentaje completado" style={{marginTop: 30}}>
 				<Progress
 					strokeLinecap="square"
 					type={type}
