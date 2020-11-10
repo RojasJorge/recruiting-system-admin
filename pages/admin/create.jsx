@@ -9,9 +9,9 @@ const {Password} = Input
 
 const CreateAdmin = _ => {
 	
-	// const onFinish = fields => {
-	// 	console.log('Fields:', fields)
-	// }
+	const onFinish = fields => {
+		console.log('Fields:', fields)
+	}
 	
 	return (
 		<Layout title="Crear administrador">
