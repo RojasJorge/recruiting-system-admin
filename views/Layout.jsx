@@ -69,9 +69,10 @@ const Layout = ({children, title, className, containerClass}) => {
 	useEffect(() => {
 		if (auth.user) {
 			/** Check current profile status */
-			delay(_ => {
-				verifyProfileStatus(auth.user.profile.fields);
-			}, 1000);
+			verifyProfileStatus(auth.user.profile.fields);
+			// delay(_ => {
+			//
+			// }, 1000);
 		}
 	}, [auth.user, profile]);
 	

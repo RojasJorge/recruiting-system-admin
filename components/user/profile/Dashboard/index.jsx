@@ -22,16 +22,20 @@ Dashboard.propTypes = {
 	show: PropTypes.array.isRequired,
 	config: PropTypes.shape({
 		TotalPercent: PropTypes.shape({
-			legend: PropTypes.bool
+			legend: PropTypes.bool,
+			type: PropTypes.string
 		})
 	})
 }
 
-Dashboard.defaultProps = {
-	show: ['TotalPercent', 'ModulePercent'],
-	config: {
-		TotalPercent: {
-			legend: true
+Dashboard.defaultProps = () => {
+	return {
+		show: ['TotalPercent', 'ModulePercent'],
+		config: {
+			TotalPercent: {
+				legend: true,
+				type: 'circle'
+			}
 		}
 	}
 }

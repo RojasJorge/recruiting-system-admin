@@ -1,22 +1,17 @@
 import {Card, Progress} from 'antd';
 import {useEffect, useState} from 'react';
-import {useStoreActions, useStoreState} from 'easy-peasy';
+import {useStoreState} from 'easy-peasy';
 import {WarningOutlined} from '@ant-design/icons'
 import {delay} from 'lodash';
+import PropTypes from 'prop-types'
 
-const TotalPercent = ({config: {legend}}) => {
+const TotalPercent = ({config: {legend, type}}) => {
 	const [percent, updatePercent] = useState(0);
 	
 	const [loading, switchLoading] = useState(true);
 	
 	/** Get profile status */
 	const profile = useStoreState(state => state.profile);
-	
-	/** Check profile status */
-	const checkProfileStatus = useStoreActions(actions => actions.profile.verify);
-	
-	/** Get user from store */
-	const auth = useStoreState(state => state.auth.user);
 	
 	const calculateMedia = _ => {
 		const successItems = Object.values(profile).reduce((acc, current) => {
@@ -39,21 +34,15 @@ const TotalPercent = ({config: {legend}}) => {
 	};
 	
 	useEffect(() => {
-		calculateMedia();
-	}, [profile]);
-	
-	useEffect(() => {
-		{
-			auth.user && checkProfileStatus(user.profile.fields)
-		}
-	}, [])
+		calculateMedia()
+	}, [profile])
 	
 	return (
 		<>
-			<Card title="Mi perfil" style={{marginTop: 30}}>
+			<Card title="Porcentaje completado" style={{marginTop: 30}}>
 				<Progress
 					strokeLinecap="square"
-					type="circle"
+					type={type}
 					percent={percent}
 				/>
 				
@@ -91,6 +80,22 @@ const Legends = ({show, loading, percent}) => {
 		
 		</>
 	)
+}
+
+TotalPercent.propTypes = {
+	config: PropTypes.shape({
+		legend: PropTypes.bool,
+		type: PropTypes.string
+	})
+}
+
+TotalPercent.defaultProps = () => {
+	return {
+		config: {
+			legend: true,
+			type: 'line'
+		}
+	}
 }
 
 export default TotalPercent;
