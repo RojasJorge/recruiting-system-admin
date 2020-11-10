@@ -58,8 +58,8 @@ const Level = ({switchCurrent, current}) => {
 				
 				/** Send notification success */
 				notify('success', 'Niveles académicos.', 'Actualizado correctamente..')
-				switchCurrent(current + 1)
-				router.push(`${router.router.pathname}?current=${current + 1}`)
+				
+				router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
 			})
 			.catch(err => console.log('Error:', err))
 	

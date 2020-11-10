@@ -27,7 +27,8 @@ const SingleJob = ({ query }) => {
 
   /** Get profile status if exists */
   const profile = useStoreState(state => state.profile);
-  const collections = useStoreState(state => state.collections);
+  // const collections = useStoreState(state => state.collections);
+  
   /** Validate profile */
   const verifyProfileStatus = useStoreActions(actions => actions.profile.verify);
 
@@ -254,7 +255,16 @@ const SingleJob = ({ query }) => {
     return (
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small">
-          <SiteBarJob job={job} current={current} onChange={onChange} applyJob={applyJob} appyState={appyState} add={add} expire={expire} checkProfile={checkProfile} />
+          <SiteBarJob
+            job={job}
+            current={current}
+            onChange={onChange}
+            applyJob={applyJob}
+            appyState={appyState}
+            add={add}
+            expire={expire}
+            checkProfile={checkProfile}
+          />
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
           {switchContent()}

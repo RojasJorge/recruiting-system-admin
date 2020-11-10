@@ -63,10 +63,10 @@ const Personal = ({ switchCurrent, current }) => {
         if (toDelete) confirmRemoveAvatarFromStorage(toDelete);
 
         /** Switch to the next tab */
-        switchCurrent(current + 1);
+        // switchCurrent(current + 1);
 
         /** Updates query params on router */
-        router.push(`${router.router.pathname}?current=${current + 1}`);
+        router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
 
         /** Send notification success */
         notify('success', 'Ficha personal actualizada.', 'Vamos al siguiente paso...');

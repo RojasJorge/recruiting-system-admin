@@ -5,7 +5,6 @@ import router from 'next/router';
 import TynyEditor from '../../../Misc/TinyEditor';
 
 const { Item } = Form;
-const { TextArea } = Input;
 
 const About = ({ switchCurrent, current }) => {
   /** Global state */
@@ -36,8 +35,8 @@ const About = ({ switchCurrent, current }) => {
 
         /** Send notification success */
         notify('success', 'Ficha Acerca de actualizada.', 'Vamos al siguiente paso...');
-        switchCurrent(current + 1);
-        router.push(`${router.router.pathname}?current=${current + 1}`);
+  
+        router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
       })
       .catch(err => console.log('Error:', err));
   };

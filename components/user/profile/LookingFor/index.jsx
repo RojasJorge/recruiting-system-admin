@@ -42,8 +42,8 @@ const LookingFor = ({ switchCurrent, current }) => {
 
         /** Send notification success */
         notify('success', 'Ficha Que buscas actualizada.', 'Vamos al siguiente paso...');
-        switchCurrent(current + 1);
-        router.push(`${router.router.pathname}?current=${current + 1}`);
+  
+        router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
       })
       .catch(err => console.log('Error:', err));
   };
