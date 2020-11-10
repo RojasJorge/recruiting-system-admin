@@ -5,6 +5,7 @@ import xhr from '../../../../xhr';
 import storage from '../../../../storage';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { filter, isEmpty } from 'lodash';
+import router from 'next/router'
 
 const { Item } = Form;
 const { Option } = Select;
@@ -51,8 +52,7 @@ const Documents = ({ switchCurrent, current }) => {
 
         /** Send notification success */
         notify('success', 'Ficha documentos actualizada.', 'Vamos al siguiente paso...');
-        switchCurrent(current + 1);
-        router.push(`${router.router.pathname}?current=${current + 1}`);
+        router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
       })
       .catch(err => console.log('Error:', err));
   };

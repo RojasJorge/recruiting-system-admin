@@ -23,12 +23,13 @@ const style = {
 	display: 'flex',
 	justifyContent: 'center',
 	alignItem: 'center',
+	opacity: .5
 };
 
 const Layout = ({children, title, className, containerClass}) => {
 	
 	const [fullScreen, switchFullScreen] = useState(false);
-	const [appStatus, setAppStatus] = useState('loading')
+	const [appStatus, setAppStatus] = useState('ready')
 	
 	/** Get profile validator from store */
 	const profile = useStoreState(state => state.profile);
@@ -62,7 +63,7 @@ const Layout = ({children, title, className, containerClass}) => {
 			getCollections({type: 'academic-level'});
 		}
 		
-	}, [auth]);
+	}, [auth.user]);
 	
 	
 	useEffect(() => {
@@ -77,16 +78,14 @@ const Layout = ({children, title, className, containerClass}) => {
 	
 	return (
 		<>
-			{
-				appStatus === 'loading' && <div className="app--spinner" style={style}>
-					<Spin size="large"/>
-				</div>
-			}
-			
-			{appStatus === 'noauth' && <Login/>}
+			{/*Display if !auth*/}
+			{(appStatus === 'noauth' && !auth.user) && <Login/>}
 			
 			{
-				(appStatus === 'ready' && auth.user) && <div className={`${className} app theme-${auth.user.scope[0]} ${containerClass}`}>
+				/**
+				 * Render contents
+				 */
+				(appStatus === 'ready' && auth.user && auth.token) && <div className={`${className} app theme-${auth.user.scope[0]} ${containerClass}`}>
 					<Head>
 						<title>{title + process.env.NEXT_PUBLIC_APP_TITLE}</title>
 					</Head>
@@ -94,7 +93,6 @@ const Layout = ({children, title, className, containerClass}) => {
 					<div className={`app--contents umana-content-page is-login ${className}`}>
 						<div className={fullScreen ? 'container-fluid' : 'umana-layout'}>{children}</div>
 					</div>
-					<PageLoader active={mloading}/>
 				</div>
 			}
 		</>

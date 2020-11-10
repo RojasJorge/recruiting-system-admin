@@ -1,4 +1,4 @@
-import xhr from '../../xhr'
+// import xhr from '../../xhr'
 import {Form, Input, Button, Alert} from 'antd'
 import Layout from '../../views/Layout'
 import 'cleave.js/dist/addons/cleave-phone.gt'

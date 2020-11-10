@@ -10,10 +10,10 @@ import router from 'next/router';
 import Vehicle from './Vehicle';
 import Debts from './debts';
 
-const { Item, List } = Form;
+const { Item } = Form;
 const { Option } = Select;
 
-const Economic = ({ current, switchCurrent }) => {
+const Economic = _ => {
   /** Global state */
   let {
     profile: {
@@ -43,7 +43,7 @@ const Economic = ({ current, switchCurrent }) => {
 
         /** Send notification success */
         notify('success', 'Economía/Legal', 'Actualizado correctamente.');
-        switchCurrent(0);
+        
         router.push(`${router.router.pathname}?current=${0}`);
       })
       .catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'));

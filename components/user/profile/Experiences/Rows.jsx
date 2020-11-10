@@ -5,12 +5,10 @@ import {Button, DatePicker, Divider, Form, Input, InputNumber, notification, Sel
 import "cleave.js/dist/addons/cleave-phone.gt";
 import {filter, isEmpty} from "lodash";
 import xhr from "../../../../xhr";
-
 import {useStoreActions, useStoreState} from "easy-peasy";
 import moment from "moment";
 import router from 'next/router';
 import  { AreaJob } from '../../../../elements';
-
 
 const {Item, List} = Form;
 const {Option} = Select;
@@ -51,8 +49,8 @@ const Experience = ({switchCurrent, current}) => {
 				
 				/** Send notification success */
 				notify('success', 'Experiencia laboral.', 'Actualizado correctamente..')
-				switchCurrent(current + 1);
-				router.push(`${router.router.pathname}?current=${current + 1}`);
+				
+				router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
 			})
 			.catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'))
 	};
