@@ -108,6 +108,7 @@ const Level = ({switchCurrent, current}) => {
 				initialValues={initialValues()}
 				onFinish={onFinish}
 				validateTrigger="onBlur"
+				scrollToFirstError={true}
 			>
 				<div className="umana-form--section">
 					<h2>Niveles académicos</h2>

@@ -75,7 +75,7 @@ const Courses = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={initialValues()} validateTrigger="onBlur">
+      <Form onFinish={onFinish} initialValues={initialValues()} validateTrigger="onBlur" scrollToFirstError={true}>
         {/*<pre>{JSON.stringify(WorldCountries[0], false, 2)}</pre>*/}
         <div className="umana-form--section">
           <h2>Otros cursos</h2>

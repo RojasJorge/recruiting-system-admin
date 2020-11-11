@@ -54,7 +54,7 @@ const About = ({ switchCurrent, current }) => {
   };
 
   return (
-    <Form onFinish={onFinish} initialValues={personal}>
+    <Form onFinish={onFinish} initialValues={personal} scrollToFirstError={true}>
       <div className="umana-form--section">
         <h2>Acerca de ti</h2>
         <Item name="about" className="form-item--lg" label="Cuentanos acerca de ti y tu experiencia" rules={[{ required: true, message: 'Este campo es requerido.' }]}>

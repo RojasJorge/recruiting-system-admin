@@ -62,7 +62,7 @@ const LookingFor = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={lookingFor} validateTrigger="onBlur">
+      <Form onFinish={onFinish} initialValues={lookingFor} scrollToFirstError={true} validateTrigger="onBlur">
         <div className="umana-form--section">
           <h2>¿Qué estas buscando?</h2>
           <Item label="Tipo de plaza" className="form-item--lg" name="availability" rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}>

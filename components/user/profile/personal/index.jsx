@@ -97,7 +97,7 @@ const Personal = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form name="basic" onFinish={onFinish} initialValues={personal} validateTrigger="onBlur">
+      <Form name="basic" onFinish={onFinish} initialValues={personal} validateTrigger="onBlur" scrollToFirstError={true}>
         <div className="umana-form--section">
           <div style={{ width: '100%', marginBottom: 30 }}>{isEmpty(avatar) && <Alert message="Debes agregar una imagen de perfil" type="error" showIcon />}</div>
 
