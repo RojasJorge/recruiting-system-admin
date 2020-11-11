@@ -231,23 +231,7 @@ const Jobs = props => {
                 <div className="ant-row ant-form-item item-lg">
                   <label htmlFor="areatype">Seleccione Puesto</label>
                   <Select size="large" onSelect={e => setFilters({ ...filters, jobposition: e })} value={filters.jobposition} disabled={loading} showSearch>
-                    {!isEmpty(collectionsState.career) ? (
-                      collectionsState.career.map(e =>
-                        e.children ? (
-                          <Select.OptGroup key={e.id} label={e.name}>
-                            {e.children
-                              ? e.children.map((c, i) => (
-                                  <Select.Option key={c.id + '-' + i} value={c.id}>
-                                    {c.name}
-                                  </Select.Option>
-                                ))
-                              : null}
-                          </Select.OptGroup>
-                        ) : null,
-                      )
-                    ) : (
-                      <Option>No data</Option>
-                    )}
+                    {!isEmpty(collectionsState.career) ? collectionsState.career.map(e => (e.children ? <Select.Option key={e.id}>{e.name}</Select.Option> : null)) : <Option>No data</Option>}
                   </Select>
                 </div>
                 <div className="ant-row ant-form-item item-lg">
@@ -305,23 +289,7 @@ const Jobs = props => {
                 <div className="ant-row ant-form-item item-lg">
                   <label htmlFor="areatype">Seleccione Puesto</label>
                   <Select size="large" onSelect={e => setFilters({ ...filters, jobposition: e })} value={filters.jobposition} disabled={loading} showSearch>
-                    {!isEmpty(collectionsState.career) ? (
-                      collectionsState.career.map(e =>
-                        e.children ? (
-                          <Select.OptGroup key={e.id} label={e.name}>
-                            {e.children
-                              ? e.children.map((c, i) => (
-                                  <Select.Option key={c.id + '-' + i} value={c.id}>
-                                    {c.name}
-                                  </Select.Option>
-                                ))
-                              : null}
-                          </Select.OptGroup>
-                        ) : null,
-                      )
-                    ) : (
-                      <Option>No data</Option>
-                    )}
+                    {!isEmpty(collectionsState.career) ? collectionsState.career.map(e => (e.children ? <Select.Option key={e.id}>{e.name}</Select.Option> : null)) : <Option>No data</Option>}
                   </Select>
                 </div>
                 <div className="ant-row ant-form-item item-lg">
