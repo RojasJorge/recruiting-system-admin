@@ -42,7 +42,7 @@ const Layout = ({children, title, className, containerClass}) => {
 	const catalogs = useStoreState(state => state.collections);
 	const getCollections = useStoreActions(actions => actions.collections.get);
 	
-	const mloading = useStoreState(state => state.users.loading);
+	// const mloading = useStoreState(state => state.users.loading);
 	
 	/** Get auth global state */
 	const auth = useStoreState(state => state.auth);
