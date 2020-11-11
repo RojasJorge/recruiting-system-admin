@@ -39,10 +39,13 @@ const LookingFor = ({ switchCurrent, current }) => {
       )
       .then(resp => {
         updateProfile({ type: 'lookingFor', fields: merged });
-
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
         /** Send notification success */
         notify('success', 'Ficha Que buscas actualizada.', 'Vamos al siguiente paso...');
-  
+
         router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
       })
       .catch(err => console.log('Error:', err));
@@ -59,7 +62,7 @@ const LookingFor = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={lookingFor} validateTrigger="onBlur">
+      <Form onFinish={onFinish} initialValues={lookingFor} scrollToFirstError={true} validateTrigger="onBlur">
         <div className="umana-form--section">
           <h2>¿Qué estas buscando?</h2>
           <Item label="Tipo de plaza" className="form-item--lg" name="availability" rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}>
@@ -75,7 +78,7 @@ const LookingFor = ({ switchCurrent, current }) => {
           <Item label="Plaza remota / locación" className="form-item--lg" name="workplace" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
             <Select size="large" placeholder="Seleccione" mode="multiple">
               <Option value="location">Locación</Option>
-              <Option value="mix-location">Mixta</Option>
+              <Option value="mix_location">Mixta</Option>
               <Option value="remote">Remoto</Option>
             </Select>
           </Item>

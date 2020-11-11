@@ -32,10 +32,13 @@ const Others = ({ switchCurrent, current }) => {
       )
       .then(resp => {
         updateProfile({ type: 'others', fields });
-
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
         /** Send notification success */
         notify('success', 'Ficha Otros actualizada.', '');
-  
+
         router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
       })
       .catch(err => console.log('Error:', err));
@@ -52,7 +55,7 @@ const Others = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={others} validateTrigger="onBlur">
+      <Form onFinish={onFinish} initialValues={others} scrollToFirstError={true} validateTrigger="onBlur">
         <div className="umana-form--section">
           <h2>Otros conocimientos</h2>
 

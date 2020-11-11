@@ -25,6 +25,7 @@ const FormJob = props => {
   const [statuState, setStatus] = useState('draft');
   const JobsList = useStoreState(state => state.jobs.list);
   const fillJobs = useStoreActions(actions => actions.jobs.fill);
+  const auth = useStoreState(state => state.auth.token);
 
   useEffect(() => {
     xhr()
@@ -40,8 +41,8 @@ const FormJob = props => {
   let positionAlt = true;
 
   useEffect(() => {
-    collectionsActions.get({ type: 'career', token: localStorage.getItem('uToken') });
-    collectionsActions.get({ type: 'academic-level', token: localStorage.getItem('uToken') });
+    collectionsActions.get({ type: 'career', token: auth });
+    collectionsActions.get({ type: 'academic-level', token: auth });
   }, []);
 
   const allSet = e => {

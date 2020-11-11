@@ -43,7 +43,7 @@ const Economic = _ => {
 
         /** Send notification success */
         notify('success', 'Economía/Legal', 'Actualizado correctamente.');
-        
+
         router.push(`${router.router.pathname}?current=${0}`);
       })
       .catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'));
@@ -67,7 +67,7 @@ const Economic = _ => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={economic} validateTrigger="onBlur">
+      <Form onFinish={onFinish} initialValues={economic} validateTrigger="onBlur" scrollToFirstError={true}>
         <div className="umana-form--section">
           <h2 style={{ width: '100%' }}>Información Económica</h2>
           <Item name="typeHousing" label="Tipo de vivienda" className="form-item--md">

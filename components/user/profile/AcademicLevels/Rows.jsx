@@ -55,6 +55,10 @@ const Level = ({switchCurrent, current}) => {
 					type: 'academic',
 					fields: Object.assign(academic, {studies: fields.studies})
 				})
+				window.scroll({
+					top: 80,
+					behavior: 'smooth',
+				});
 				
 				/** Send notification success */
 				notify('success', 'Niveles académicos.', 'Actualizado correctamente..')
@@ -104,6 +108,7 @@ const Level = ({switchCurrent, current}) => {
 				initialValues={initialValues()}
 				onFinish={onFinish}
 				validateTrigger="onBlur"
+				scrollToFirstError={true}
 			>
 				<div className="umana-form--section">
 					<h2>Niveles académicos</h2>

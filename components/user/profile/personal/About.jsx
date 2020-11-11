@@ -32,10 +32,13 @@ const About = ({ switchCurrent, current }) => {
       )
       .then(resp => {
         updateProfile({ type: 'personal', fields: merged });
-
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
         /** Send notification success */
         notify('success', 'Ficha Acerca de actualizada.', 'Vamos al siguiente paso...');
-  
+
         router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
       })
       .catch(err => console.log('Error:', err));
@@ -51,7 +54,7 @@ const About = ({ switchCurrent, current }) => {
   };
 
   return (
-    <Form onFinish={onFinish} initialValues={personal}>
+    <Form onFinish={onFinish} initialValues={personal} scrollToFirstError={true}>
       <div className="umana-form--section">
         <h2>Acerca de ti</h2>
         <Item name="about" className="form-item--lg" label="Cuentanos acerca de ti y tu experiencia" rules={[{ required: true, message: 'Este campo es requerido.' }]}>

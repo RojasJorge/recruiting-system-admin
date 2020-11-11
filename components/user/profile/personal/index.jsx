@@ -62,6 +62,10 @@ const Personal = ({ switchCurrent, current }) => {
         /** Checks if is necessary to delete file from storage */
         if (toDelete) confirmRemoveAvatarFromStorage(toDelete);
 
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
         /** Switch to the next tab */
         // switchCurrent(current + 1);
 
@@ -93,26 +97,12 @@ const Personal = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form
-        name="basic"
-        onFinish={onFinish}
-        initialValues={personal}
-        validateTrigger="onBlur"
-      >
+      <Form name="basic" onFinish={onFinish} initialValues={personal} validateTrigger="onBlur" scrollToFirstError={true}>
         <div className="umana-form--section">
-          <div style={{ width: '100%', marginBottom: 30 }}>
-            {isEmpty(avatar) && (
-              <Alert message="Debes agregar una imagen de perfil" type="error" showIcon />
-            )}
-          </div>
+          <div style={{ width: '100%', marginBottom: 30 }}>{isEmpty(avatar) && <Alert message="Debes agregar una imagen de perfil" type="error" showIcon />}</div>
 
           {/*AVATAR UPLOADER*/}
-          <AvatarCropper
-            personal={personal}
-            avatar={avatar}
-            updateAvatar={updateAvatar}
-            updateToDelete={updateToDelete}
-          />
+          <AvatarCropper personal={personal} avatar={avatar} updateAvatar={updateAvatar} updateToDelete={updateToDelete} />
 
           {/*SIMPLE DIVIDER*/}
           <h2 style={{ width: '100%', marginTop: 20 }}>Información personal</h2>
@@ -132,13 +122,7 @@ const Personal = ({ switchCurrent, current }) => {
         {/*SIMPLE CONTACT INFO*/}
         <Contact phones={phones} setPhones={setPhones} />
         <FormItem>
-          <Button
-            type="orange"
-            htmlType="submit"
-            size="small"
-            disabled={isEmpty(avatar)}
-            style={{ marginLeft: 'auto' }}
-          >
+          <Button type="orange" htmlType="submit" size="small" disabled={isEmpty(avatar)} style={{ marginLeft: 'auto' }}>
             Guardar y continuar
           </Button>
         </FormItem>
