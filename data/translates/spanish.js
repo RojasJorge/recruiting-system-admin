@@ -1,4 +1,7 @@
 const locale = term => {
+  if (term === 'mix-location') {
+    return 'Mixta';
+  }
   const labels = {
     yes: 'Si',
     no: 'No',
@@ -56,6 +59,9 @@ const locale = term => {
     draft: 'Borrador',
     public: 'Pública',
     expired: 'Expirada',
+    location: 'Locación',
+    mix_location: 'Mixta',
+    remote: 'Remoto',
   };
 
   return labels[term] || term;
