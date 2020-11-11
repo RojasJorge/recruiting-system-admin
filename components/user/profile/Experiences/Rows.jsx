@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef, createRef } from "react";
 import PropTypes from "prop-types";
 import { PlusOutlined } from "@ant-design/icons";
 import {Button, DatePicker, Divider, Form, Input, InputNumber, notification, Select, Switch} from "antd";
@@ -13,6 +13,24 @@ import  { AreaJob } from '../../../../elements';
 const {Item, List} = Form;
 const {Option} = Select;
 const {TextArea} = Input;
+
+
+const scrollToMyRef = ref => {
+	console.log(ref);
+	if(ref === null && ref.current === null) {
+		window.scroll({
+			top: 80,
+			behavior: 'smooth',
+		});
+
+	}
+	if(ref && ref !== null && ref.current !== null) {
+		ref.current.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+		});
+	} 
+}
 
 
 
@@ -46,7 +64,10 @@ const Experience = ({switchCurrent, current}) => {
 			}))
 			.then(resp => {
 				updateProfile({type: 'working', fields: Object.assign(working, {experiences: fields.experiences})})
-				
+				window.scroll({
+					top: 80,
+					behavior: 'smooth',
+				});
 				/** Send notification success */
 				notify('success', 'Experiencia laboral.', 'Actualizado correctamente..')
 				
@@ -77,6 +98,7 @@ const Experience = ({switchCurrent, current}) => {
 	
 	useEffect(() => {
 		getCareers()
+	
 	}, []);
 	
 	const dateFormat = 'DD/MM/YYYY'
@@ -97,7 +119,10 @@ const Experience = ({switchCurrent, current}) => {
 		}
 	}
 
+	const myRef = useRef(null);
 
+	const scrollTopToELement = () =>  scrollToMyRef(myRef)
+	
 
 	return (
 		<>
@@ -116,13 +141,13 @@ const Experience = ({switchCurrent, current}) => {
 							<>
 								{
 									fields.map(field => (
-										<fieldset key={field.key}>
-											<div className="row align-items-center">
+										<fieldset key={field.key} id={field.key} ref={myRef}>
+											<div className="row align-items-center" style={{marginTop: 20}}>
 												<div className="col-md-12">
 													<div className="row">
 														<div className="col-md-12" style={{display: 'flex'}} >
-																{working && working.experiences.length > 0 ? 
-																		<h3 style={{fontWeight: 'bold'}}>{working.experiences.length} registros</h3>	
+																{field.key > 0 ? 
+																		<h3 style={{fontWeight: 'bold'}}>{field.key} registros</h3>	
 																	:  null	}
 																	<a
 																		style={{textAlign: 'right', marginLeft: 'auto'}}
@@ -424,6 +449,7 @@ const Experience = ({switchCurrent, current}) => {
 										style={{width: '100%'}}
 										onClick={() => {
 											add();
+											scrollTopToELement()
 										}}
 										icon={<PlusOutlined/>}
 									>

@@ -51,6 +51,14 @@ const Legal = ({ value = {}, onChange }) => {
           Si
         </Checkbox>
       </div>
+      <div className="col-md-3">
+        <label style={{ width: '100%', display: 'block' }} htmlFor="legalProblem">
+          ¿Ha pertenecido a algún sindicato?
+        </label>
+        <Checkbox onChange={e => handleChange(e.target.checked, 'sindicate')} checked={values.sindicate}>
+          Si
+        </Checkbox>
+      </div>
       <div className="col-md-9">
         <label style={{ width: '100%', display: 'block' }} htmlFor="whatProblem">
           ¿Qué tipo de problema?

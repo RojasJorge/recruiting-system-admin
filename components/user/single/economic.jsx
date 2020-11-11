@@ -105,6 +105,12 @@ const Economic = props => {
           </div>
         </>
       ) : null}
+      {props.data.sindicate ? (
+        <div className="umana-content__item item-md">
+          <label>¿Cuál?</label>
+          <p>{props.data.whatSindicate}</p>
+        </div>
+      ) : null}
 
       <div className="umana-content__item item-md">
         <label>Tiene tatuajes o pircings</label>

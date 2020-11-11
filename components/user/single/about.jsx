@@ -1,6 +1,7 @@
 import locale from '../../../data/translates/spanish';
 import { Can } from '../../Can';
 import Link from 'next/link';
+import { Tag } from 'antd';
 
 const About = props => {
   return (
@@ -55,7 +56,11 @@ const About = props => {
           {props.data.workplace ? (
             <div className="umana-content__item item-md">
               <label>Preferencia de ubicación</label>
-              <p>{locale(props.data.workplace)}</p>
+              <div>
+                {props.data.workplace.map((e, id) => (
+                  <Tag key={id}>{locale(e)}</Tag>
+                ))}
+              </div>
             </div>
           ) : null}
         </div>

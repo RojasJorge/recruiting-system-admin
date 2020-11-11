@@ -55,6 +55,10 @@ const Level = ({switchCurrent, current}) => {
 					type: 'academic',
 					fields: Object.assign(academic, {studies: fields.studies})
 				})
+				window.scroll({
+					top: 80,
+					behavior: 'smooth',
+				});
 				
 				/** Send notification success */
 				notify('success', 'Niveles académicos.', 'Actualizado correctamente..')

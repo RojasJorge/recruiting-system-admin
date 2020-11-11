@@ -5,7 +5,7 @@ import xhr from '../../../../xhr';
 import storage from '../../../../storage';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { filter, isEmpty } from 'lodash';
-import router from 'next/router'
+import router from 'next/router';
 
 const { Item } = Form;
 const { Option } = Select;
@@ -47,6 +47,10 @@ const Documents = ({ switchCurrent, current }) => {
             deleteFromStorage(obj);
           });
         }
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
 
         setDeleted([]);
 

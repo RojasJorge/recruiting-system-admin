@@ -32,10 +32,13 @@ const Others = ({ switchCurrent, current }) => {
       )
       .then(resp => {
         updateProfile({ type: 'others', fields });
-
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
         /** Send notification success */
         notify('success', 'Ficha Otros actualizada.', '');
-  
+
         router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
       })
       .catch(err => console.log('Error:', err));
