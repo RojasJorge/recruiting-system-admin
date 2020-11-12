@@ -44,6 +44,8 @@ const Personal = ({ switchCurrent, current }) => {
       return o;
     });
 
+    fields.location.zone = !fields.location.zone ? 0 : fields.location.zone;
+
     fields = { ...fields, birthday, avatar };
 
     xhr()
