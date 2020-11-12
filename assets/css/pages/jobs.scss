@@ -190,3 +190,31 @@
 .public-jobs-singe {
   padding-top: 80px;
 }
+
+.fix-botton {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  text-align: center;
+  @include bp(xmedium) {
+    position: static;
+    width: 200px !important;
+    border-radius: 0;
+    height: 40px !important;
+  }
+  i {
+    margin-right: 0;
+    @include bp(xmedium) {
+      margin-right: 10px;
+    }
+  }
+  span {
+    display: none;
+    @include bp(xmedium) {
+      display: inline-block;
+    }
+  }
+}

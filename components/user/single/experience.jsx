@@ -44,11 +44,6 @@ const Experience = props => {
             </div>
           ))}
         </div>
-
-        <div className="umana-content__item item-md">
-          <label>¿Ha pertenecido a algún sindicato?</label>
-          <p>{locale(props.data.sindicate)}</p>
-        </div>
       </div>
     );
   }

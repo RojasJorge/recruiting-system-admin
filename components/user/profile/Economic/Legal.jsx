@@ -43,7 +43,7 @@ const Legal = ({ value = {}, onChange }) => {
         marginBottom: 30,
       }}
     >
-      <div className="col-md-3">
+      <div className="col-md-3" style={{ marginBottom: 20 }}>
         <label style={{ width: '100%', display: 'block' }} htmlFor="legalProblem">
           ¿Tiene algún problema legal?
         </label>
@@ -51,7 +51,15 @@ const Legal = ({ value = {}, onChange }) => {
           Si
         </Checkbox>
       </div>
-      <div className="col-md-3">
+      <br />
+      <div className="col-md-9" style={{ marginBottom: 20 }}>
+        <label style={{ width: '100%', display: 'block' }} htmlFor="whatProblem">
+          ¿Qué tipo de problema?
+        </label>
+        <Input onChange={e => handleChange(e.target.value, 'whatProblem')} value={values.whatProblem} size="large" />
+      </div>
+      <br />
+      <div className="col-md-3" style={{ marginBottom: 20 }}>
         <label style={{ width: '100%', display: 'block' }} htmlFor="legalProblem">
           ¿Ha pertenecido a algún sindicato?
         </label>
@@ -59,13 +67,15 @@ const Legal = ({ value = {}, onChange }) => {
           Si
         </Checkbox>
       </div>
-      <div className="col-md-9">
-        <label style={{ width: '100%', display: 'block' }} htmlFor="whatProblem">
-          ¿Qué tipo de problema?
+      <br />
+      <div className="col-md-9" style={{ marginBottom: 20 }}>
+        <label style={{ width: '100%', display: 'block' }} htmlFor="whatsindicate">
+          ¿Qué sindicato?
         </label>
-        <Input onChange={e => handleChange(e.target.value, 'whatProblem')} value={values.whatProblem} size="large" />
+        <Input onChange={e => handleChange(e.target.value, 'whatsindicate')} value={values.whatsindicate} size="large" />
       </div>
-      <div className="col-md-3" style={{ marginTop: 30 }}>
+      <br />
+      <div className="col-md-9" style={{ marginTop: 30 }}>
         <label style={{ width: '100%', display: 'block' }} htmlFor="infonetOrOther">
           Autorizo a Umana a solicitar información personal por Infonet
         </label>

@@ -19,7 +19,7 @@ const scrollToMyRef = ref => {
 	console.log(ref);
 	if(ref === null && ref.current === null) {
 		window.scroll({
-			top: 80,
+			top: -80,
 			behavior: 'smooth',
 		});
 

@@ -10,8 +10,8 @@ const Health = ({ value = {}, onChange }) => {
       : {
           haveDisease: false,
           disease: '',
-          tattoOrPiercing: false,
-          whatTattoOrPiercing: '',
+          tattooOrPiercing: false,
+          whatTattooOrPiercing: '',
         };
 
   const [values, setValues] = useState(initVal);
@@ -62,18 +62,18 @@ const Health = ({ value = {}, onChange }) => {
 
       <div className="row">
         <div className="col-md-3">
-          <label style={{ width: '100%', display: 'block' }} htmlFor="tattoOrPiercing">
+          <label style={{ width: '100%', display: 'block' }} htmlFor="tattooOrPiercing">
             ¿Tiene Tatuajes o Aretes?
           </label>
-          <Checkbox onChange={e => handleChange(e.target.checked, 'tattoOrPiercing')} checked={values.tattoOrPiercing}>
+          <Checkbox onChange={e => handleChange(e.target.checked, 'tattooOrPiercing')} checked={values.tattooOrPiercing}>
             Si
           </Checkbox>
         </div>
         <div className="col-md-9">
-          <label style={{ width: '100%', display: 'block' }} htmlFor="whatTattoOrPiercing">
+          <label style={{ width: '100%', display: 'block' }} htmlFor="whatTattooOrPiercing">
             Especifíque
           </label>
-          <Input onChange={e => handleChange(e.target.value, 'whatTattoOrPiercing')} value={values.whatTattoOrPiercing} size="large" disabled={!values.tattoOrPiercing} />
+          <Input onChange={e => handleChange(e.target.value, 'whatTattooOrPiercing')} value={values.whatTattooOrPiercing} size="large" disabled={!values.tattooOrPiercing} />
         </div>
       </div>
     </div>

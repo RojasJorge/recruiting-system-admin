@@ -2,7 +2,7 @@ import locale from '../../../data/translates/spanish';
 import Label from '../../../data/labels';
 import { Tag, Progress, Avatar } from 'antd';
 // import { Avatar, Button, Empty, Modal, notification, Progress, Skeleton, Tag, Alert } from 'antd';
-const SingleJobData = ({ job }) => {
+const SingleJobData = ({ job, company }) => {
   return (
     <>
       <div className="umana-content">
@@ -218,29 +218,51 @@ const SingleJobData = ({ job }) => {
         ) : null}
       </div>
       {/* company info */}
-      <div className="umana-content" style={{ marginTop: 80 }}>
-        {job && job.company && job.company_state === 'public' ? (
+      {company ? (
+        <div className="umana-content" style={{ marginTop: 80 }}>
           <div className="umana-section-contenct">
             <div className="section-avatar">
-              <Avatar icon={<i className="material-icons">location_city</i>} src={job.company.avatar || ''} size={120} />
+              <Avatar icon={<i className="material-icons">location_city</i>} src={company.avatar || ''} size={120} />
             </div>
             <div className="section-title">
-              <h1>{job.company.name}</h1>
+              <h1>{company.name}</h1>
             </div>
-            {job.company.location ? (
+            {company.location ? (
               <>
                 <h5>Ubicación</h5>
                 <p>
-                  {`${job.company.location.address}, zona ${job.company.location.zone},`}
-                  <br></br> {`${job.company.location.city}, ${job.company.location.country}`}
+                  {`${company.location.address}, zona ${company.location.zone},`}
+                  <br></br> {`${company.location.city}, ${company.location.country}`}
                 </p>
               </>
             ) : null}
           </div>
-        ) : (
-          <p>Los datos de la empresa son privados.</p>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="umana-content" style={{ marginTop: 80 }}>
+          {job && job.company && job.company_state === 'public' ? (
+            <div className="umana-section-contenct">
+              <div className="section-avatar">
+                <Avatar icon={<i className="material-icons">location_city</i>} src={job.company.avatar || ''} size={120} />
+              </div>
+              <div className="section-title">
+                <h1>{job.company.name}</h1>
+              </div>
+              {job.company.location ? (
+                <>
+                  <h5>Ubicación</h5>
+                  <p>
+                    {`${job.company.location.address}, zona ${job.company.location.zone},`}
+                    <br></br> {`${job.company.location.city}, ${job.company.location.country}`}
+                  </p>
+                </>
+              ) : null}
+            </div>
+          ) : (
+            <p>Los datos de la empresa son privados.</p>
+          )}
+        </div>
+      )}
     </>
   );
 };
