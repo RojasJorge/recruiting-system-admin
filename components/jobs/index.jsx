@@ -129,6 +129,18 @@ const Jobs = props => {
   const [filters, setFilters] = useState(initFilters);
   const [loading, switchLoading] = useState(false);
   const collectionsState = useStoreState(state => state.collections);
+  
+  const getCollections = useStoreActions(actions => actions.collections.get);
+  
+  /** Get/Set catalogs */
+  useEffect(() => {
+    
+    if (isEmpty(collectionsState.career) || isEmpty(collectionsState.academic_level)) {
+      getCollections({type: 'career'});
+      getCollections({type: 'academic-level'});
+    }
+    
+  }, [auth.user]);
 
   useEffect(() => {
     getJobs();
