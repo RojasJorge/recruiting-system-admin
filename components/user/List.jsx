@@ -52,8 +52,9 @@ const UsersList = () => {
           size="small"
           dataSource={users.list.filter(e => e.scope == 'candidate')}
           rowKey={record => record.id}
-          pagination={true}
+          // pagination={true}
           onRow={onRow}
+          pagination={{ pageSize: 10, total: users.list.filter(e => e.scope == 'candidate').length, defaultCurrent: 1 }}
           columns={[
             {
               title: '',
@@ -108,7 +109,7 @@ const UsersList = () => {
           size="small"
           dataSource={users.list.filter(e => e.scope == 'company')}
           rowKey={record => record.id}
-          pagination={true}
+          pagination={{ pageSize: 10, total: users.list.filter(e => e.scope == 'company').length, defaultCurrent: 1 }}
           columns={[
             {
               title: '',

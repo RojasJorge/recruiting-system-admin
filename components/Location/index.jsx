@@ -66,7 +66,11 @@ const Locations = ({ value = {}, onChange }) => {
       setLocation({ ...location, [type]: e });
     }
     if (type === 'zone') {
-      setLocation({ ...location, [type]: e });
+      if (!e || e === null) {
+        setLocation({ ...location, [type]: 0 });
+      } else {
+        setLocation({ ...location, [type]: e });
+      }
     }
     if (type === 'address') {
       setLocation({ ...location, [type]: e });
@@ -119,7 +123,7 @@ const Locations = ({ value = {}, onChange }) => {
       </span>
       <span className="form-item--sm ant-form-item">
         <label>Zona:</label>
-        <InputNumber max={25} min={1} onChange={e => handlenChange(e, 'zone')} value={location.zone} />
+        <InputNumber max={25} min={0} onChange={e => handlenChange(e, 'zone')} value={location.zone} />
       </span>
       <span className="form-item--md ant-form-item">
         <label>
