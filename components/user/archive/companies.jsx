@@ -7,16 +7,24 @@ import { useStoreActions } from 'easy-peasy';
 const ListCompanies = props => {
   const [companies, setcompanies] = useState([]);
   const [total, setTotal] = useState(0);
+  const [pager, updatePager] = useState({
+    page: 1,
+    limit: 10,
+  });
 
   const onRow = (record, index) => {
     return {
       onClick: _ => {},
     };
   };
+  const onChange = async (page, limit) => {
+    await get(page, limit);
+    updatePager({ ...pager, page, limit });
+  };
 
-  const get = () =>
+  const get = (page, limit) =>
     xhr()
-      .get(`/user?scope=${`company`}&page=1&offset=10`)
+      .get(`/user?scope=${`company`}&page=${page}&offset=${limit}`)
       .then(res => {
         res.type = true;
 
@@ -26,7 +34,7 @@ const ListCompanies = props => {
       .catch(console.error);
 
   useEffect(() => {
-    get();
+    get(pager.page, pager.limit);
   }, []);
 
   return (
@@ -39,7 +47,7 @@ const ListCompanies = props => {
         rowKey={record => record.id}
         // pagination={true}
         onRow={onRow}
-        pagination={{ pageSize: 10, total: total, defaultCurrent: 1 }}
+        pagination={{ pageSize: 10, total: total, defaultCurrent: 1, onChange: onChange }}
         columns={[
           {
             title: '',
@@ -52,11 +60,6 @@ const ListCompanies = props => {
             title: 'Nombre',
             dataIndex: 'name',
             key: 'name',
-            render: (text, record) => (
-              <Link href={`/admin/profile/[id]`} as={`/admin/profile/${record.id}`}>
-                <a>{record.name}</a>
-              </Link>
-            ),
           },
           {
             title: 'Apellido',

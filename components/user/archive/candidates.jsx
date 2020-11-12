@@ -7,6 +7,15 @@ import { useStoreActions } from 'easy-peasy';
 const ListCandidate = props => {
   const [candidates, setCandidates] = useState([]);
   const [total, setTotal] = useState(0);
+  const [pager, updatePager] = useState({
+    page: 1,
+    limit: 10,
+  });
+
+  const onChange = async (page, limit) => {
+    await get(page, limit);
+    updatePager({ ...pager, page, limit });
+  };
 
   const onRow = (record, index) => {
     return {
@@ -14,9 +23,9 @@ const ListCandidate = props => {
     };
   };
 
-  const get = () =>
+  const get = (page, limit) =>
     xhr()
-      .get(`/user?scope=${`candidate`}&page=1&offset=10`)
+      .get(`/user?scope=${`candidate`}&page=${page}&offset=${limit}`)
       .then(res => {
         res.type = true;
 
@@ -26,7 +35,7 @@ const ListCandidate = props => {
       .catch(console.error);
 
   useEffect(() => {
-    get();
+    get(pager.page, pager.limit);
   }, []);
 
   return (
@@ -39,7 +48,7 @@ const ListCandidate = props => {
         rowKey={record => record.id}
         // pagination={true}
         onRow={onRow}
-        pagination={{ pageSize: 10, total: total, defaultCurrent: 1 }}
+        pagination={{ pageSize: pager.limit, total: total, defaultCurrent: pager.page, onChange: onChange }}
         columns={[
           {
             title: '',
