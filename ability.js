@@ -20,6 +20,7 @@ const ability = _ =>
           'JOBS',
           'REQUESTS_ADMIN_VIEW',
           'REQUEST_UPDATE',
+          'COMPANY_INFO_BLOCK'
         ])
         
         can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST'])
@@ -28,7 +29,7 @@ const ability = _ =>
         break
       case 'company':
         can('read', ['USERS', 'SPECIAL_ALERTS'])
-        can('view', ['MAIN_LAYOUT', 'LOGIN', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE'])
+        can('view', ['MAIN_LAYOUT', 'LOGIN', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE', 'COMPANY_INFO_BLOCK'])
         can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST'])
         can('add', ['COMPANIES', 'JOBS'])
 
@@ -36,7 +37,7 @@ const ability = _ =>
 
       case 'candidate':
         can('read', ['USERS'])
-        can('view', ['MAIN_LAYOUT', 'LOGIN', 'JOBS', 'COMPANIES', 'OWN_REQUESTS'])
+        can('view', ['MAIN_LAYOUT', 'LOGIN', 'JOBS', 'COMPANIES', 'OWN_REQUESTS', 'COMPANY_INFO_BLOCK'])
         can('apply', ['JOBS'])
         cannot('view', ['REQUESTS_ADMIN_VIEW'])
 
