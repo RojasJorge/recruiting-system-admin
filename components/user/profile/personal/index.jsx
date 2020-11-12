@@ -122,7 +122,8 @@ const Personal = ({ switchCurrent, current }) => {
         {/*SIMPLE CONTACT INFO*/}
         <Contact phones={phones} setPhones={setPhones} />
         <FormItem>
-          <Button type="orange" htmlType="submit" size="small" disabled={isEmpty(avatar)} style={{ marginLeft: 'auto' }}>
+          {/* <Button type="orange" htmlType="submit" size="small" disabled={isEmpty(avatar)} style={{ marginLeft: 'auto' }}> */}
+          <Button type="orange" htmlType="submit" size="small" style={{ marginLeft: 'auto' }}>
             Guardar y continuar
           </Button>
         </FormItem>
