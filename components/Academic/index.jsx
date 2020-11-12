@@ -32,11 +32,13 @@ const AcademicLeves = ({ acLevel }) => {
                 >
                   <Select showSearch onChange={e => handlenSelct(e)}>
                     {acLevel
-                      ? acLevel.map(l => (
-                          <Select.Option key={l.id} value={l.id}>
-                            {l.name}
-                          </Select.Option>
-                        ))
+                      ? acLevel.map(l =>
+                          l.status ? (
+                            <Select.Option key={l.id} value={l.id}>
+                              {l.name}
+                            </Select.Option>
+                          ) : null,
+                        )
                       : null}
                   </Select>
                 </Form.Item>

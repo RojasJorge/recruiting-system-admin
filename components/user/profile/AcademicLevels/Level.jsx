@@ -67,11 +67,13 @@ const Level = ({ level, counter, careers, academicLevels, addLevels, levels }) =
               <Item name="academicLevel" rules={[{ required: true, message: 'Debes escoger un nivel académico' }]}>
                 <Select placeholder="Seleccione" onChange={e => switchChildren(e, 'academicLevels')} value={_level.academic_level} showSearch>
                   {!isEmpty(academicParent) ? (
-                    academicParent.map((o, i) => (
-                      <Option value={o.id} key={i}>
-                        {o.name}
-                      </Option>
-                    ))
+                    academicParent.map((o, i) =>
+                      o.status ? (
+                        <Option value={o.id} key={i}>
+                          {o.name}
+                        </Option>
+                      ) : null,
+                    )
                   ) : (
                     <Option value="0">No hay listado para mostrar</Option>
                   )}
@@ -82,11 +84,13 @@ const Level = ({ level, counter, careers, academicLevels, addLevels, levels }) =
               <Item name="specialization">
                 <Select placeholder="Seleccione" disabled={isEmpty(children)} value={_level.specialization} onChange={switchSpecialization} value={_level.specialization} showSearch>
                   {!isEmpty(children) ? (
-                    children.map((o, i) => (
-                      <Option value={o.id} key={i}>
-                        {o.name}
-                      </Option>
-                    ))
+                    children.map((o, i) =>
+                      o.status ? (
+                        <Option value={o.id} key={i}>
+                          {o.name}
+                        </Option>
+                      ) : null,
+                    )
                   ) : (
                     <Option value="0">No hay listado para mostrar</Option>
                   )}
