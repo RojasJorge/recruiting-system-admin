@@ -16,7 +16,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 const { confirm } = Modal;
 
-const SingleJob = ({ query }) => {
+const SingleJob = ({ query, privateCompany }) => {
   const router = useRouter();
 
   const [job, setJob] = useState(null);
@@ -53,7 +53,7 @@ const SingleJob = ({ query }) => {
   }, [query.id]);
 
   useEffect(() => {
-    (job && auth.user) && getCompanyInfo();
+    job && auth.user && getCompanyInfo();
   }, [job, auth.user]);
 
   const allSet = e => {
@@ -246,7 +246,7 @@ const SingleJob = ({ query }) => {
         break;
 
       default:
-        return <SingleJobData job={job} />;
+        return <SingleJobData job={job} privateCompany={privateCompany ? privateCompany : false} />;
         break;
     }
   };
@@ -255,7 +255,17 @@ const SingleJob = ({ query }) => {
     return (
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small">
-          <SiteBarJob job={job} current={current} onChange={onChange} applyJob={applyJob} appyState={appyState} add={add} expire={expire} checkProfile={checkProfile} />
+          <SiteBarJob
+            job={job}
+            current={current}
+            onChange={onChange}
+            applyJob={applyJob}
+            appyState={appyState}
+            add={add}
+            expire={expire}
+            checkProfile={checkProfile}
+            privateCompany={privateCompany ? privateCompany : false}
+          />
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
           {switchContent()}

@@ -7,7 +7,7 @@ import locale from '../../../data/translates/spanish';
 
 const { Step } = Steps;
 
-const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, checkProfile }) => {
+const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, checkProfile, privateCompany }) => {
   var today = moment();
   return (
     <>
@@ -40,7 +40,7 @@ const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, 
       <Can I="apply" a="JOBS">
         <Sitebar
           header={{
-            title: job && job.company ? job.company.name : 'Plaza',
+            title: !privateCompany && job && job.company ? job.company.name : 'Plaza',
             icon: 'location_city',
           }}
         >
@@ -64,7 +64,7 @@ const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, 
       <Can I="guest" a="JOBS">
         <Sitebar
           header={{
-            title: job && job.company ? job.company.name : 'Plaza',
+            title: !privateCompany && job && job.company ? job.company.name : 'Plaza',
             icon: 'location_city',
           }}
         >
