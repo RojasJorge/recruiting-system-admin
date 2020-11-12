@@ -53,8 +53,8 @@ const SingleJob = ({ query }) => {
   }, [query.id]);
 
   useEffect(() => {
-    job && getCompanyInfo();
-  }, [job]);
+    (job && auth.user) && getCompanyInfo();
+  }, [job, auth.user]);
 
   const allSet = e => {
     notification.info({
