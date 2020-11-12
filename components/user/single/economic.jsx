@@ -171,6 +171,28 @@ const Economic = props => {
         ) : null}
       </div>
       <div className="umana-content__item item-lg">
+        <label>¿Ha tenido alguna demanda, juicio o problema legal?</label>
+        <p>{locale(props.data.legal.legalProblem)}</p>
+        {props.data.legal.legalProblem ? (
+          <>
+            <label>¿Cuál?</label>
+            <p>{props.data.legal.whatProblem}</p>
+          </>
+        ) : null}
+      </div>
+      {props.data && props.data.legal && props.data.legal.sindicate ? (
+        <>
+          <div className="umana-content__item item-md">
+            <label>¿Ha pertenecido a algún sindicato?</label>
+            <p>{locale(props.data.legal.sindicate)}</p>
+          </div>
+          <div className="umana-content__item item-fx">
+            <label>¿Cúal?</label>
+            <p>{locale(props.data.legal.whatsindicate)}</p>
+          </div>
+        </>
+      ) : null}
+      <div className="umana-content__item item-lg">
         <label>Autorizo a Umana a solicitar información personal por Infonet</label>
         <p>{locale(props.data.legal.infonetOrOther)}</p>
       </div>
