@@ -55,13 +55,15 @@ const Speciality = ({ value = {}, onChange, level }) => {
       filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.toLowerCase().indexOf(input.toLowerCase()) >= 0}
     >
       {level && level.children
-        ? level.children.map((e, idx) =>
-            e.status ? (
-              <Select.Option key={idx} value={e.id}>
-                {e.name}
-              </Select.Option>
-            ) : null,
-          )
+        ? level.children
+            .sort((a, b) => (a.order > b.order ? 1 : -1))
+            .map((e, idx) =>
+              e.status ? (
+                <Select.Option key={idx} value={e.id}>
+                  {e.name}
+                </Select.Option>
+              ) : null,
+            )
         : null}
     </Select>
   );

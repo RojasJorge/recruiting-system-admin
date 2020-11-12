@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Button, Table } from 'antd';
@@ -13,6 +13,12 @@ const List = ({ type, title }) => {
 
   /** Global store */
   const auth = useStoreState(state => state.auth);
+
+  const order = () => {
+    if (data && data[type]) {
+      data[type].map(e => (e.children ? e.children.sort((a, b) => (a.order > b.order ? 1 : -1)) : e));
+    }
+  };
 
   /** Update single */
   const update = async (o, id) => {
@@ -53,13 +59,14 @@ const List = ({ type, title }) => {
     }
   };
 
-  const openModale = (id, name, parent, status, type) => {
+  const openModale = (id, name, parent, status, type, order) => {
     setEdit(type);
     const item = {
       id,
       name,
       parent,
       status,
+      order,
     };
     setItem(item);
     switchEdit(true);
@@ -68,6 +75,10 @@ const List = ({ type, title }) => {
   const rowClassName = (record, index) => {
     if (!record.status) return 'row-disabled';
   };
+
+  useEffect(() => {
+    order();
+  }, [data[type]]);
 
   return (
     <>
@@ -105,7 +116,7 @@ const List = ({ type, title }) => {
           }}
           bordered
           size="middle"
-          dataSource={data[type]}
+          dataSource={data[type].sort((a, b) => (a.order > b.order ? 1 : -1))}
           rowKey={record => record.id}
           pagination={true}
           rowClassName={rowClassName}
@@ -120,7 +131,7 @@ const List = ({ type, title }) => {
               fixed: 'right',
               width: 50,
               render: e => (
-                <Button id={e.id} onClick={o => openModale(e.id, e.name, e.parent, e.status, true)} type="link" style={{ padding: 0, textAlign: 'center' }}>
+                <Button id={e.id} onClick={o => openModale(e.id, e.name, e.parent, e.status, true, e.order)} type="link" style={{ padding: 0, textAlign: 'center' }}>
                   <i className="material-icons" style={{ marginRight: 0, lineHeight: '30px', fontSize: 18 }}>
                     edit
                   </i>

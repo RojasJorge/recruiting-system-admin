@@ -25,11 +25,13 @@ const AreaJob = ({ value, onChange }) => {
       filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.toLowerCase().indexOf(input.toLowerCase()) >= 0}
     >
       {data && data.career
-        ? data.career.map((e, i) => (
-            <Select.Option key={e.id + '-' + i} value={e.id}>
-              {e.name}
-            </Select.Option>
-          ))
+        ? data.career
+            .sort((a, b) => (a.order > b.order ? 1 : -1))
+            .map((e, i) => (
+              <Select.Option key={e.id + '-' + i} value={e.id}>
+                {e.name}
+              </Select.Option>
+            ))
         : null}
     </Select>
   );
