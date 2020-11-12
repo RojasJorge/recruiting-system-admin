@@ -267,7 +267,8 @@ const SingleJob = ({ query }) => {
                 </Button>
               </Link>
             ) : (
-              <Button type="orange" size="small" onClick={applyJob} style={{ marginLeft: 'auto' }} disabled={!checkProfile()}>
+              <Button type="orange" size="small" className="fix-botton" onClick={applyJob} style={{ marginLeft: 'auto' }} disabled={!checkProfile()}>
+                <i className="material-icons">send</i>
                 Aplicar a la plaza
               </Button>
             )}
