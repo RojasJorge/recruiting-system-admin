@@ -1,4 +1,4 @@
-import { Alert, Button, Drawer, Form, Input, Select, Switch } from 'antd';
+import { Alert, Button, Drawer, Form, Input, Select, Switch, InputNumber } from 'antd';
 import { useState } from 'react';
 // const { TreeNode } = TreeSelect;
 
@@ -27,7 +27,9 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
     }
   };
 
-  console.log(treeData);
+  const order = { order: 0 };
+
+  console.log(data);
 
   return (
     <Drawer placement="right" closable={true} onClose={() => onReset()} visible={visible} width={600} title={title} destroyOnClose={true}>
@@ -60,6 +62,9 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
                   : null}
               </Select>
             </Form.Item>
+            <Form.Item label="Orden" name="order">
+              <InputNumber min={0} />
+            </Form.Item>
             <Form.Item name="status" valuePropName="checked">
               <Switch checkedChildren="Activo" unCheckedChildren="Inactivo" />
             </Form.Item>
@@ -79,7 +84,7 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
             </div>
           </Form>
         ) : (
-          <Form onFinish={onFinish}>
+          <Form onFinish={onFinish} initialValues={order}>
             <Form.Item
               label="Título"
               name="name"
@@ -111,6 +116,9 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
                     )
                   : null}
               </Select>
+            </Form.Item>
+            <Form.Item label="Orden" name="order">
+              <InputNumber min={0} />
             </Form.Item>
             <div className="umana-form--footer columns">
               {/*<Button type="cancel" size="small" onClick={onReset} style={{ width: '50%' }}>*/}

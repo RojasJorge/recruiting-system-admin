@@ -53,13 +53,14 @@ const List = ({ type, title }) => {
     }
   };
 
-  const openModale = (id, name, parent, status, type) => {
+  const openModale = (id, name, parent, status, type, order) => {
     setEdit(type);
     const item = {
       id,
       name,
       parent,
       status,
+      order,
     };
     setItem(item);
     switchEdit(true);
@@ -105,7 +106,7 @@ const List = ({ type, title }) => {
           }}
           bordered
           size="middle"
-          dataSource={data[type]}
+          dataSource={data[type].sort((a, b) => (a.order > b.order ? 1 : -1))}
           rowKey={record => record.id}
           pagination={true}
           rowClassName={rowClassName}
@@ -120,7 +121,7 @@ const List = ({ type, title }) => {
               fixed: 'right',
               width: 50,
               render: e => (
-                <Button id={e.id} onClick={o => openModale(e.id, e.name, e.parent, e.status, true)} type="link" style={{ padding: 0, textAlign: 'center' }}>
+                <Button id={e.id} onClick={o => openModale(e.id, e.name, e.parent, e.status, true, e.order)} type="link" style={{ padding: 0, textAlign: 'center' }}>
                   <i className="material-icons" style={{ marginRight: 0, lineHeight: '30px', fontSize: 18 }}>
                     edit
                   </i>
