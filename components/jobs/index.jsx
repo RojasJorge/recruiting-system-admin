@@ -129,17 +129,15 @@ const Jobs = props => {
   const [filters, setFilters] = useState(initFilters);
   const [loading, switchLoading] = useState(false);
   const collectionsState = useStoreState(state => state.collections);
-  
+
   const getCollections = useStoreActions(actions => actions.collections.get);
-  
+
   /** Get/Set catalogs */
   useEffect(() => {
-    
     if (isEmpty(collectionsState.career) || isEmpty(collectionsState.academic_level)) {
-      getCollections({type: 'career'});
-      getCollections({type: 'academic-level'});
+      getCollections({ type: 'career' });
+      getCollections({ type: 'academic-level' });
     }
-    
   }, [auth.user]);
 
   useEffect(() => {
@@ -243,7 +241,7 @@ const Jobs = props => {
                 <div className="ant-row ant-form-item item-lg">
                   <label htmlFor="areatype">Seleccione Puesto</label>
                   <Select size="large" onSelect={e => setFilters({ ...filters, jobposition: e })} value={filters.jobposition} disabled={loading} showSearch>
-                    {!isEmpty(collectionsState.career) ? collectionsState.career.map(e => (e.children ? <Select.Option key={e.id}>{e.name}</Select.Option> : null)) : <Option>No data</Option>}
+                    {!isEmpty(collectionsState.career) ? collectionsState.career.map(e => (e.status ? <Select.Option key={e.id}>{e.name}</Select.Option> : null)) : <Option>No data</Option>}
                   </Select>
                 </div>
                 <div className="ant-row ant-form-item item-lg">

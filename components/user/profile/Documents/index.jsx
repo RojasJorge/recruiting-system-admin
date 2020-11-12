@@ -100,57 +100,48 @@ const Documents = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form className="animated fadeInUp" onFinish={onFinish} initialValues={personal} validateTrigger="onBlur" scrollToFirstError={true}>
-        <div className="umana-form--section">
-          <h2>Documentos de identificación</h2>
-          <Item name="dpi" label="DPI" className="form-item--md">
-            <Input style={{ width: '100%' }} min={0} size="large" />
-          </Item>
-
-          <Item name="passport" label="Pasaporte" className="form-item--md">
-            <InputNumber style={{ width: '100%' }} min={0} size="large" />
-          </Item>
-
-          <Item name="nit" label="NIT" className="form-item--md">
-            <Input size="large" />
-          </Item>
-
-          <Item name="driversLicence" label="Número de Licencia" className="form-item--md">
-            <InputNumber style={{ width: '100%' }} min={0} size="large" />
-          </Item>
-
-          <Item name="driversLicenceType" label="Tipo de licencia" className="form-item--md">
-            <Select size="large" mode="multiple">
-              <Option value="a">A</Option>
-              <Option value="b">B</Option>
-              <Option value="c">C</Option>
-              <Option value="motorcicle">Motocicleta</Option>
-            </Select>
-          </Item>
-
-          <Divider orientation="left">Archivos adjuntos:</Divider>
-          <div className="col-md-12">
-            <Item>
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Subir DPI(ambos lados) | Pasaporte | Licencia, en formato .docx o .pdf o .jpg. <br /> de no más de 2mb.
-                </p>
-                <p className="ant-upload-note">En caso de ser extranjero, subir permiso de trabajo.</p>
-              </Dragger>
-            </Item>
-          </div>
-        </div>
-
-        {/*Ends row*/}
-        <Item>
-          <Button size="small" htmlType="submit" type="orange" style={{ marginLeft: 'auto' }}>
-            Guardar y continuar
-          </Button>
+      <div className="umana-form--section">
+        <h2>Documentos de identificación</h2>
+        <Item name="dpi" label="DPI" className="form-item--md">
+          <Input style={{ width: '100%' }} min={0} size="large" />
         </Item>
-      </Form>
+
+        <Item name="passport" label="Pasaporte" className="form-item--md">
+          <InputNumber style={{ width: '100%' }} min={0} size="large" />
+        </Item>
+
+        <Item name="nit" label="NIT" className="form-item--md">
+          <Input size="large" />
+        </Item>
+
+        <Item name="driversLicence" label="Número de Licencia" className="form-item--md">
+          <InputNumber style={{ width: '100%' }} min={0} size="large" />
+        </Item>
+
+        <Item name="driversLicenceType" label="Tipo de licencia" className="form-item--md">
+          <Select size="large" mode="multiple">
+            <Option value="a">A</Option>
+            <Option value="b">B</Option>
+            <Option value="c">C</Option>
+            <Option value="motorcicle">Motocicleta</Option>
+          </Select>
+        </Item>
+
+        <Divider orientation="left">Archivos adjuntos:</Divider>
+        <div className="col-md-12">
+          <Item>
+            <Dragger {...props}>
+              <p className="ant-upload-drag-icon">
+                <InboxOutlined />
+              </p>
+              <p className="ant-upload-text">
+                Subir DPI(ambos lados) | Pasaporte | Licencia, en formato .docx o .pdf o .jpg. <br /> de no más de 2mb.
+              </p>
+              <p className="ant-upload-note">En caso de ser extranjero, subir permiso de trabajo.</p>
+            </Dragger>
+          </Item>
+        </div>
+      </div>
     </>
   );
 };

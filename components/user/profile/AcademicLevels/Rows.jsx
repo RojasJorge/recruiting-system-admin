@@ -156,9 +156,11 @@ const Level = ({switchCurrent, current}) => {
 													>
 														{!isEmpty(academicParent) ? (
 															academicParent.map((o, i) => (
+																o.status ?
 																<Option value={o.id} key={i}>
 																	{o.name}
 																</Option>
+																: null
 															))
 														) : (
 															<Option value="0">No hay listado para mostrar</Option>
@@ -184,17 +186,21 @@ const Level = ({switchCurrent, current}) => {
 															typeof levels[field.key] === 'undefined'
 																? current && Object.keys(current).length > 0 && !isEmpty(current.children) ? (
 																	current.children.map((o, i) => (
+																		o.status ?
 																		<Option value={o.id} key={i}>
 																			{o.name}
 																		</Option>
+																		 : null
 																	))
 																) : (
 																	<Option value="0">No hay listado para mostrar</Option>
 																) : typeof levels[field.key] !== 'undefined' ? (
 																	levels[field.key].children.map((o, i) => (
+																		o.status ?
 																		<Option value={o.id} key={i}>
 																			{o.name}
 																		</Option>
+																		: null
 																	))
 																) : (
 																	<Option value="0">No hay listado para mostrar</Option>

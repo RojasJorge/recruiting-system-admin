@@ -4,12 +4,12 @@ import { Table, Pagination, Avatar } from 'antd';
 import { PageTitle } from '../../elements';
 import xhr from '../../xhr';
 import Link from 'next/link';
+import ListCandidate from './archive/candidates';
+import ListCompanies from './archive/companies';
 
 const UsersList = () => {
   const users = useStoreState(state => state.users);
   const fill = useStoreActions(actions => actions.users.fill);
-
-  console.log(users);
 
   const [pager, updatePager] = useState({
     page: 1,
@@ -42,119 +42,11 @@ const UsersList = () => {
   }, []);
 
   return (
-    <div className="row">
+    <div className="">
       <PageTitle title="Lista de usuarios" />
 
-      <div className="col-md-12" style={{ padding: 0 }}>
-        <h2>Perfiles de candidatos</h2>
-        <Table
-          bordered
-          size="small"
-          dataSource={users.list.filter(e => e.scope == 'candidate')}
-          rowKey={record => record.id}
-          // pagination={true}
-          onRow={onRow}
-          pagination={{ pageSize: 10, total: users.list.filter(e => e.scope == 'candidate').length, defaultCurrent: 1 }}
-          columns={[
-            {
-              title: '',
-              dataIndex: 'avatar',
-              key: 'avatar',
-              width: 40,
-              render: (text, record) => <Avatar className="table-avatar" icon={<i className="material-icons">person</i>} src={record.avatar} size={30} />,
-            },
-            {
-              title: 'Nombre',
-              dataIndex: 'name',
-              key: 'name',
-              render: (text, record) => (
-                <Link href={`/admin/profile/[id]`} as={`/admin/profile/${record.id}`}>
-                  <a>{record.name}</a>
-                </Link>
-              ),
-            },
-            {
-              title: 'Apellido',
-              dataIndex: 'lastname',
-              key: 'lastname',
-            },
-            {
-              title: 'Dirección',
-              dataIndex: 'address',
-              key: 'address',
-            },
-            {
-              title: 'Correo electrónico',
-              dataIndex: 'email',
-              key: 'email',
-            },
-            {
-              title: 'Teléfono',
-              dataIndex: 'phone',
-              key: 'phone',
-            },
-            {
-              title: 'Estado',
-              dataIndex: 'status',
-              key: 'status',
-              render: s => (s ? 'Activo' : 'Inactivo'),
-            },
-          ]}
-        />
-      </div>
-      <div className="col-md-12" style={{ marginTop: 20, padding: 0 }}>
-        <h2>Perfiles de empresa</h2>
-        <Table
-          bordered
-          size="small"
-          dataSource={users.list.filter(e => e.scope == 'company')}
-          rowKey={record => record.id}
-          pagination={{ pageSize: 10, total: users.list.filter(e => e.scope == 'company').length, defaultCurrent: 1 }}
-          columns={[
-            {
-              title: '',
-              width: 40,
-              dataIndex: 'avatar',
-              key: 'avatar',
-              render: (text, record) => <Avatar className="table-avatar" icon={<i className="material-icons">business</i>} src={record.avatar} size={30} />,
-            },
-            {
-              title: 'Nombre',
-              dataIndex: 'name',
-              key: 'name',
-            },
-            {
-              title: 'Apellido',
-              dataIndex: 'lastname',
-              key: 'lastname',
-            },
-            {
-              title: 'Dirección',
-              dataIndex: 'address',
-              key: 'address',
-            },
-            {
-              title: 'Correo electrónico',
-              dataIndex: 'email',
-              key: 'email',
-            },
-            {
-              title: 'Teléfono',
-              dataIndex: 'phone',
-              key: 'phone',
-            },
-            {
-              title: 'Estado',
-              dataIndex: 'status',
-              key: 'status',
-              render: s => (s ? 'Activo' : 'Inactivo'),
-            },
-          ]}
-        />
-      </div>
-      {/* <div className="col-md-12" style={{ marginTop: 20, padding: 0 }}>
-        <Pagination total={users.total} current={pager.page} onChange={onChange} onShowSizeChange={onChange} />
-      </div> */}
+      <ListCandidate />
+      <ListCompanies />
     </div>
   );
 };

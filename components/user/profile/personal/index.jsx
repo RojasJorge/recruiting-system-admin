@@ -6,6 +6,8 @@ import router from 'next/router';
 import Locations from '../../../Location';
 import General from './General';
 import Contact from './Contact';
+import About from './About';
+import Documents from '../Documents';
 import xhr from '../../../../xhr';
 import AvatarCropper from '../../../Misc/AvatarCropper';
 import storage from '../../../../storage';
@@ -123,6 +125,8 @@ const Personal = ({ switchCurrent, current }) => {
 
         {/*SIMPLE CONTACT INFO*/}
         <Contact phones={phones} setPhones={setPhones} />
+        <About />
+        <Documents />
         <FormItem>
           {/* <Button type="orange" htmlType="submit" size="small" disabled={isEmpty(avatar)} style={{ marginLeft: 'auto' }}> */}
           <Button type="orange" htmlType="submit" size="small" style={{ marginLeft: 'auto' }}>

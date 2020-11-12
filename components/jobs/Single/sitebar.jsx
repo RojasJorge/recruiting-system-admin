@@ -34,7 +34,12 @@ const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, 
             </Button>
           ) : null}
 
-          <Alert description={`Estado de la plaza:  ${locale(job.status)}`} />
+          <Alert description={`Estado de la plaza:  ${locale(job.status)}`} type={`${job.status === 'draft' ? 'warning' : 'success'}`} />
+          {job.status === 'draft' ? (
+            <Alert style={{ marginTop: 10 }} type="warning" description={`Esta plaza aún no puede recibir solicitudes, publica esta plaza para poder comenzar a recibir solicitudes.`} />
+          ) : (
+            <Alert style={{ marginTop: 10 }} type="warning" description={`Esta plaza ya no puede ser editada porque ya puede recibir solicitudes. `} />
+          )}
         </Sitebar>
       </Can>
       <Can I="apply" a="JOBS">
