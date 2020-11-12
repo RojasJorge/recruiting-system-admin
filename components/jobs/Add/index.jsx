@@ -1,4 +1,4 @@
-import { Form, Button, notification, Radio, Select, Alert } from 'antd';
+import { Form, Button, notification, Radio, Select, Alert, Modal } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -12,6 +12,8 @@ import xhr from '../../../xhr';
 import router from 'next/router';
 import { isEmpty, find } from 'lodash';
 // import Jobs from '../index';
+
+const { confirm } = Modal;
 
 const FormJob = props => {
   const [form] = Form.useForm();
@@ -126,11 +128,32 @@ const FormJob = props => {
       delete newObj.company_id;
       edit(newObj);
     } else {
-      add(newObj);
+      if (statuState === 'public') {
+        confirm({
+          icon: <i className="material-icons">info</i>,
+          title: 'Publicar plaza',
+          cancelText: 'Cancelar',
+          okText: 'Publicar plaza',
+
+          content: (
+            <div>
+              <p>Una vez publicada la plaza ya no podras editarla.</p>
+              <br />
+              <p>¿Estas seguro de publicar esta plaza?</p>
+            </div>
+          ),
+          onOk() {
+            add(newObj);
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+      } else {
+        add(newObj);
+      }
     }
   };
-
-  console.log(companies);
 
   return (
     <div>

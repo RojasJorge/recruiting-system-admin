@@ -6,31 +6,54 @@
     width: 90% !important;
     max-width: 700px;
     .ant-modal-body {
-      padding: 50px 30px;
+      padding: 20px 10px 10px;
     }
     .ant-modal-confirm-body-wrapper {
       text-align: center;
     }
+    i {
+      color: $color-warning;
+    }
     .ant-modal-confirm-title {
       color: $color-blue;
-      font-size: 34px;
+      font-size: 24px;
       font-weight: normal;
     }
     .ant-modal-confirm-btns {
       width: 100%;
+      border-top: 1px solid rgba($color-text, 0.2);
+      padding-top: 10px;
       .ant-btn {
         width: 100%;
-        max-width: 400px;
-        margin: 10px auto;
+        max-width: 210px;
+        margin: 10px;
         padding: 10px 30px;
-        height: 60px;
+        height: 40px;
         background: $color-blue;
         border: 0;
-        font-size: 18px;
+        font-size: 14px;
         color: $color-white;
+        text-transform: uppercase;
+        &:first-child {
+          background: $color-white;
+          color: $color-text;
+          border: 1px dashed $color-text;
+          &:hover {
+            border-color: $color-error;
+          }
+        }
         &.ant-btn-primary {
-          background: rgba($color-blue, 0.2);
-          color: $color-blue;
+          background: $color-blue;
+          color: $color-white;
+        }
+        &:first-child {
+          background: $color-white;
+          color: $color-text;
+          border: 1px dashed $color-text;
+          &:hover {
+            border-color: $color-error;
+            color: $color-error;
+          }
         }
         &:hover {
           opacity: 0.7;
@@ -56,6 +79,35 @@
           opacity: 0.7;
         }
       }
+    }
+  }
+}
+
+.ant-modal.ant-modal-confirm.ant-modal-confirm-confirm {
+  .ant-modal-confirm-body {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    .ant-modal-confirm-title {
+      margin-left: 20px;
+      width: calc(100% - 50px);
+    }
+    .ant-modal-confirm-content {
+      border-top: 1px solid rgba($color-text, 0.2);
+      padding: 20px 20px 0;
+      width: 100%;
+      display: block;
+    }
+  }
+  .ant-modal-confirm-btns {
+    display: flex;
+    justify-content: flex-end;
+    .ant-btn {
+      width: 200px;
+      height: 50px;
+      padding: 5px 20px;
+      margin: 10px;
     }
   }
 }
