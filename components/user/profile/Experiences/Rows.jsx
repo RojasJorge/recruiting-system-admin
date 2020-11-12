@@ -16,7 +16,6 @@ const {TextArea} = Input;
 
 
 const scrollToMyRef = ref => {
-	console.log(ref);
 	if(ref === null && ref.current === null) {
 		window.scroll({
 			top: -80,
@@ -25,6 +24,7 @@ const scrollToMyRef = ref => {
 
 	}
 	if(ref && ref !== null && ref.current !== null) {
+		const newref = ref.current + ref.current
 		ref.current.scrollIntoView({
 			behavior: 'smooth',
 			block: 'start',
@@ -142,9 +142,11 @@ const Experience = ({switchCurrent, current}) => {
 							<>
 								{
 									fields.map(field => (
-										<fieldset key={field.key} id={field.key} ref={myRef}>
-											<div className="row align-items-center" style={{marginTop: 20}}>
+										<fieldset key={field.key} id={field.key} >
+											<div className="row align-items-center" style={{marginTop: 20}} id={field.key} >
+									
 												<div className="col-md-12">
+											
 													<div className="row">
 														<div className="col-md-12" style={{display: 'flex'}} >
 																{field.key > 0 ? 
@@ -168,6 +170,7 @@ const Experience = ({switchCurrent, current}) => {
 																label="Nombre del puesto"
 																name={[field.name, 'jobTitle']}
 																fieldKey={[field.fieldKey, 'jobTitle']}
+															
 																rules={[{
 																	required: true,
 																	message: 'El campo título es requerido'
@@ -213,7 +216,7 @@ const Experience = ({switchCurrent, current}) => {
 																<Input size="large"/>
 															</Item>
 														</div>
-														<div className="col-md-12">
+														<div className="col-md-12" id={field.key} ref={myRef}>
 															<Item
 																label="¿A qué se dedica la empresa?"
 																{...field}
@@ -224,7 +227,7 @@ const Experience = ({switchCurrent, current}) => {
 																<Input size="large"/>
 															</Item>
 														</div>
-														<div className="col-md-12" style={{display: 'flex', marginTop: 15 }}>
+														<div className={`${field.key}-fied col-md-12`} style={{display: 'flex', marginTop: 15 }} >
 															<label style={{width: '100%', }} htmlFor="workingNow">Actualmente trabajo aquí:</label>
 															<Item
 																style={{marginLeft: 'auto', width: 'auto'}}
@@ -272,6 +275,7 @@ const Experience = ({switchCurrent, current}) => {
 															</Item> }
 													
 														</div>
+														
 														<div className="col-md-12" style={{ marginTop: 15 }}>
 															<fieldset>
 																<h3>Sueldo final</h3>
@@ -315,7 +319,7 @@ const Experience = ({switchCurrent, current}) => {
 														</div>
 															: null}
 														<div className="col-md-12" style={{ marginTop: 15 }} >
-															<h3 orientation="left">Otros</h3>
+															<h3 orientation="left" >Otros</h3>
 															<p>Esta información no se verá en tu perfil, pero la podrán ver futuros reclutadores de
 																plazas en las que
 																apliques.</p>
@@ -341,7 +345,7 @@ const Experience = ({switchCurrent, current}) => {
 																</Item>
 															</div>
 														}
-														<div className="col-md-12" style={{ marginTop: 15}} >
+														<div className="col-md-12" style={{ marginTop: 15}}  >
 															<h3>Referencias Laborales</h3>
 															<p>Indica aquí información de tus jefes inmediatos en este puesto. Esta información no se
 																verá en tu
@@ -434,11 +438,13 @@ const Experience = ({switchCurrent, current}) => {
 																)
 															}}
 														</List>
+													
 														</div>
 													</div>
 												</div>
-											
+													
 											</div>
+								
 										</fieldset>
 									))
 								}
