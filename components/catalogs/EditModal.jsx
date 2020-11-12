@@ -29,8 +29,6 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
 
   const order = { order: 0 };
 
-  console.log(data);
-
   return (
     <Drawer placement="right" closable={true} onClose={() => onReset()} visible={visible} width={600} title={title} destroyOnClose={true}>
       <div className="umana-drawer">

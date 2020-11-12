@@ -155,7 +155,7 @@ const Level = ({switchCurrent, current}) => {
 														showSearch
 													>
 														{!isEmpty(academicParent) ? (
-															academicParent.map((o, i) => (
+															academicParent.sort((a, b) => a.order > b.order ? 1 : -1).map((o, i) => (
 																o.status ?
 																<Option value={o.id} key={i}>
 																	{o.name}
@@ -185,7 +185,7 @@ const Level = ({switchCurrent, current}) => {
 														{
 															typeof levels[field.key] === 'undefined'
 																? current && Object.keys(current).length > 0 && !isEmpty(current.children) ? (
-																	current.children.map((o, i) => (
+																	current.children.sort((a, b) => a.order > b.order ? 1 : -1).map((o, i) => (
 																		o.status ?
 																		<Option value={o.id} key={i}>
 																			{o.name}

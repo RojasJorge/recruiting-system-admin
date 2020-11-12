@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Button, Table } from 'antd';
@@ -13,6 +13,12 @@ const List = ({ type, title }) => {
 
   /** Global store */
   const auth = useStoreState(state => state.auth);
+
+  const order = () => {
+    if (data && data[type]) {
+      data[type].map(e => (e.children ? e.children.sort((a, b) => (a.order > b.order ? 1 : -1)) : e));
+    }
+  };
 
   /** Update single */
   const update = async (o, id) => {
@@ -69,6 +75,10 @@ const List = ({ type, title }) => {
   const rowClassName = (record, index) => {
     if (!record.status) return 'row-disabled';
   };
+
+  useEffect(() => {
+    order();
+  }, [data[type]]);
 
   return (
     <>
