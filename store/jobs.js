@@ -234,7 +234,7 @@ export default {
 		// if (salary) matchScore = {...matchScore, salary: 10}
 		
 		if(salary) {
-			matchScore.salary.result = salary
+			matchScore.salary.result = {job: job.salary.base_min, profile: fields.economic.desiredSalary.maseMin}
 			matchScore.salary.score = 10
 		}
 		

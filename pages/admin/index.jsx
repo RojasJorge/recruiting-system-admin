@@ -7,7 +7,7 @@ const Admin = _ => {
 		<Layout title="Tablero" className="dashboard" containerClass="dashboard-page">
 			<>
 				<PageTitle title="Tablero"/>
-				<Dashboard show={['TotalPercent', 'ModulePercent']}/>
+				{/*<Dashboard show={['TotalPercent', 'ModulePercent']}/>*/}
 			</>
 		</Layout>
 	)
