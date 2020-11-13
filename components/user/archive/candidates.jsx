@@ -2,9 +2,11 @@ import { Table, Avatar } from 'antd';
 import xhr from '../../../xhr';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useStoreActions } from 'easy-peasy';
+
+import { useRouter } from 'next/router';
 
 const ListCandidate = props => {
+  const router = useRouter();
   const [candidates, setCandidates] = useState([]);
   const [total, setTotal] = useState(0);
   const [pager, updatePager] = useState({
@@ -17,9 +19,11 @@ const ListCandidate = props => {
     updatePager({ ...pager, page, limit });
   };
 
-  const onRow = (record, index) => {
+  const onRow = record => {
     return {
-      onClick: _ => {},
+      onClick: _ => {
+        router.push(`/admin/profile/${record.id}`);
+      },
     };
   };
 
@@ -61,11 +65,6 @@ const ListCandidate = props => {
             title: 'Nombre',
             dataIndex: 'name',
             key: 'name',
-            render: (text, record) => (
-              <Link href={`/admin/profile/[id]`} as={`/admin/profile/${record.id}`}>
-                <a>{record.name}</a>
-              </Link>
-            ),
           },
           {
             title: 'Apellido',
