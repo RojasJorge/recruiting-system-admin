@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useStoreState } from 'easy-peasy';
-import { Alert, Input, Modal, notification, Select, Skeleton } from 'antd';
+import { Alert, Input, Modal, notification, Select, Skeleton, Steps } from 'antd';
 import { Sitebar } from '../../elements';
 import Moment from 'react-moment';
 import SingleProfile from '../user/single';
@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import SingleJobData from '../jobs/Single/data';
 
 const { Option } = Select;
+const { Step } = Steps;
 
 const STATUS = [
   {
@@ -96,6 +97,27 @@ const Single = ({ query }) => {
     });
   };
 
+  const [current, setCurrent] = useState(0);
+
+  const switchContent = _ => {
+    switch (current) {
+      case 0:
+        return ability.can('edit', 'UPDATE_SINGLE_REQUEST') ? <SingleProfile data={record.candidate} /> : <SingleJobData job={record.job} company={record.company} />;
+        break;
+      case 1:
+        return <div>score matching</div>;
+        break;
+
+      default:
+        return null;
+        break;
+    }
+  };
+
+  const handleSteps = o => {
+    setCurrent(o);
+  };
+
   return (
     <div className="umana-layout-cl">
       <div className="umana-layout-cl__small ">
@@ -115,7 +137,6 @@ const Single = ({ query }) => {
               </i>
             </a>
           </Link>
-
           {!record ? (
             <Skeleton paragraph={{ rows: 2 }} active />
           ) : (
@@ -134,34 +155,43 @@ const Single = ({ query }) => {
 
           {ability.can('edit', 'UPDATE_SINGLE_REQUEST') ? (
             <>
-              <h3
-                style={{
-                  marginTop: 50,
-                }}
-              >
-                Actualizar estado:
-              </h3>
-              <Select value={status} disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST') || !record} onSelect={onStatusSelect}>
-                {STATUS.map(status => (
-                  <Option key={status.id} value={status.id}>
-                    {status.name}
-                  </Option>
-                ))}
-              </Select>
+              <div style={{ marginBottom: 20 }}>
+                <h3
+                  style={{
+                    marginTop: 50,
+                  }}
+                >
+                  Actualizar estado:
+                </h3>
+                <Select value={status} disabled={!ability.can('edit', 'UPDATE_SINGLE_REQUEST') || !record} onSelect={onStatusSelect}>
+                  {STATUS.map(status => (
+                    <Option key={status.id} value={status.id}>
+                      {status.name}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+              <Steps current={current} onChange={handleSteps} direction="vertical">
+                <Step key={0} title="Perfil del aplicante" icon={<i className="material-icons">person</i>} />
+                <Step key={1} title="Matching score" icon={<i className="material-icons">compare_arrows</i>} />
+              </Steps>
             </>
           ) : (
-            <div style={{ marginTop: 30 }}>
-              <h3>Estado actual:</h3>
-              {record ? <Input value={find(STATUS, o => o.id === record.apply.status).name} size="large" /> : '...'}
-            </div>
+            <>
+              <div style={{ marginTop: 30, marginBottom: 20 }}>
+                <h3>Estado actual:</h3>
+                {record ? <Input value={find(STATUS, o => o.id === record.apply.status).name} size="large" /> : '...'}
+              </div>
+              <Steps current={current} onChange={handleSteps} direction="vertical">
+                <Step key={0} title="Detalle de la plaza" icon={<i className="material-icons">business_center</i>} />
+                <Step key={1} title="Matching score" icon={<i className="material-icons">compare_arrows</i>} />
+              </Steps>
+            </>
           )}
         </Sitebar>
       </div>
-      {auth.user.scope[0] === 'candidate' ? (
-        <div className="umana-layout-cl__flex width-section bg-white">{!record ? <Skeleton active /> : <SingleJobData job={record.job} company={record.company} />}</div>
-      ) : (
-        <div className="umana-layout-cl__flex width-section bg-white">{!record ? <Skeleton active /> : <SingleProfile data={record.candidate} />}</div>
-      )}
+
+      <div className="umana-layout-cl__flex width-section bg-white">{!record ? <Skeleton active /> : switchContent()}</div>
     </div>
   );
 };

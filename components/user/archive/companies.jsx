@@ -45,8 +45,6 @@ const ListCompanies = props => {
         size="small"
         dataSource={companies.items}
         rowKey={record => record.id}
-        // pagination={true}
-        onRow={onRow}
         pagination={{ pageSize: 10, total: total, defaultCurrent: 1, onChange: onChange }}
         columns={[
           {

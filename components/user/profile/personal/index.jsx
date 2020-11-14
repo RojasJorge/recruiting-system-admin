@@ -41,10 +41,12 @@ const Personal = ({ switchCurrent, current }) => {
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
-    avatar.map(o => {
-      o.thumbUrl = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + o.response.url;
-      return o;
-    });
+    !isEmpty(avatar)
+      ? avatar.map(o => {
+          o.thumbUrl = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + o.response.url;
+          return o;
+        })
+      : null;
 
     fields.location.zone = !fields.location.zone ? 0 : fields.location.zone;
 
