@@ -26,6 +26,7 @@ const MatchTable = ({data}) => {
 	return (
 		<div style={{marginTop: 30}}>
 			<h2>Posibles candidatos</h2>
+			{/*<pre>{JSON.stringify(data, false, 2)}</pre>*/}
 			<Table
 				dataSource={data}
 				rowKey={record => record.profile.id}
@@ -57,7 +58,7 @@ const MatchTable = ({data}) => {
 					title: 'Match',
 					dataIndex: 'job',
 					key: 'job',
-					render: (text, record) => `${match(record)}%`
+					render: (text, record) => `${match(record).percent}%`
 				}, {
 					title: 'Email',
 					dataIndex: 'profile.fields.personal',

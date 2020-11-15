@@ -20,18 +20,18 @@ export default {
 		const {job, company, profile: {fields}} = payload
 		
 		let matchScore = {
-			workplace: {result: null, score: 0},
-			availability: {result: null, score: 0},
-			country: {result: null, score: 0},
-			province: {result: null, score: 0},
-			gender: {result: null, score: 0},
-			age: {result: null, score: 0},
-			religion: {result: null, score: 0},
-			experience: {result: null, score: 0},
-			relocate: {result: null, score: 0},
-			travel: {result: null, score: 0},
-			vehicle: {result: null, score: 0},
-			type_licence: {result: null, score: 0},
+			workplace: {result: null, score: 0}, // done
+			availability: {result: null, score: 0}, // done
+			country: {result: null, score: 0}, // done
+			province: {result: null, score: 0}, // done
+			gender: {result: null, score: 0}, // done
+			age: {result: null, score: 0}, // done
+			religion: {result: null, score: 0}, // done
+			experience: {result: null, score: 0}, // done
+			relocate: {result: null, score: 0}, // done
+			travel: {result: null, score: 0}, // done
+			vehicle: {result: null, score: 0}, // done
+			type_licence: {result: null, score: 0}, // done
 			languages: {result: null, score: 0},
 			academic: {result: null, score: 0},
 			salary: {result: null, score: 0},
@@ -56,7 +56,7 @@ export default {
 		const workplace = fields.lookingFor.workplace.indexOf(job.workplace) !== -1
 		// if (workplace) matchScore = {...matchScore, workplace: 7}
 		if(workplace) {
-			matchScore.workplace.result = workplace
+			matchScore.workplace.result = {job: job.workplace, profile: fields.lookingFor.workplace}
 			matchScore.workplace.score = 7
 		}
 		
@@ -76,8 +76,6 @@ export default {
 			province = company.location.province === fields.personal.location.province
 		}
 		
-		// if (country) matchScore = {...matchScore, country: 10}
-		// if (province) matchScore = {...matchScore, province: 10}
 		
 		if(country) {
 			matchScore.country.result = country
@@ -85,7 +83,7 @@ export default {
 		}
 		
 		if(province) {
-			matchScore.province.result = province
+			matchScore.province.result = 'province'
 			matchScore.province.score = 10
 		}
 		
@@ -95,7 +93,6 @@ export default {
 		 * @type {number|string}
 		 */
 		const gender = job.gender = fields.personal.gender
-		// if (gender) matchScore = {...matchScore, gender: 3}
 		
 		if(gender) {
 			matchScore.gender.result = gender
@@ -109,7 +106,6 @@ export default {
 		 */
 		const _age = store.dispatch.tools.calculateAge(fields.personal.birthday)
 		if (_age >= job.age.min && _age <= job.age.max) {
-			// matchScore = {...matchScore, age: 3}
 			matchScore.age.result = {job: job.age, profile: _age}
 			matchScore.age.score = 3
 		}
@@ -121,7 +117,6 @@ export default {
 		 * @type {boolean}
 		 */
 		const religion = job.religion.indexOf(fields.personal.religion) !== -1
-		// if (religion) matchScore = {...matchScore, religion: 3}
 		
 		if(religion) {
 			matchScore.religion.result = religion
@@ -137,10 +132,9 @@ export default {
 		let years = 0
 		if (jobposition) {
 			years = moment(jobposition.dateEnd).diff(jobposition.dateInit, 'years', false)
-			// if (years >= job.experience) matchScore = {...matchScore, experience: 3}
 			
 			if (years >= job.experience) {
-				matchScore.experience.result = years
+				matchScore.experience.result = {job: job.experience, profile: years}
 				matchScore.experience.score = 3
 			}
 		}
@@ -223,6 +217,8 @@ export default {
 		if(languages.length > 0) {
 			matchScore.languages.result = languages
 			matchScore.languages.score = 8
+		} else {
+			matchScore.languages.result = {job: job.languages ? job.languages : [], profile: fields.others.languages}
 		}
 		
 		
@@ -279,8 +275,6 @@ export default {
 			matchScore.skills.score = 10
 		}
 		
-		console.log('Match Score:', matchScore)
-		
 		/** Sum all items from matchScore */
 		const SUM = Object.values(matchScore).reduce((acc, current) => {
 			const sc = current.score
@@ -288,7 +282,7 @@ export default {
 			return parseInt(acc, 10)
 		}, 0)
 		
-		return SUM
+		return {percent: SUM, details: matchScore}
 	}),
 	
 	removeAccents: thunk((actions, payload) => {
