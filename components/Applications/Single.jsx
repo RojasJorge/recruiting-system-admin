@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useStoreState } from 'easy-peasy';
-import { Alert, Input, Modal, notification, Select, Skeleton, Steps } from 'antd';
+import { Alert, Input, Modal, notification, Select, Skeleton, Steps, Empty } from 'antd';
 import { Sitebar } from '../../elements';
 import Moment from 'react-moment';
 import SingleProfile from '../user/single';
@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from 'react';
 import xhr from '../../xhr';
 import { useRouter } from 'next/router';
 import SingleJobData from '../jobs/Single/data';
+import ScoreMatching from "./ScoreMatching";
 
 const { Option } = Select;
 const { Step } = Steps;
@@ -58,8 +59,8 @@ const Single = ({ query }) => {
     getRecord();
   }, [query.id]);
 
-  console.log('record', record);
-  console.log('auth', auth.user.scope);
+  // console.log('record', record);
+  // console.log('auth', auth.user.scope);
 
   const onStatusSelect = e =>
     Modal.confirm({
@@ -105,7 +106,7 @@ const Single = ({ query }) => {
         return ability.can('edit', 'UPDATE_SINGLE_REQUEST') ? <SingleProfile data={record.candidate} /> : <SingleJobData job={record.job} company={record.company} />;
         break;
       case 1:
-        return <div>score matching</div>;
+        return record ? <ScoreMatching data={record}/> : <Empty/>;
         break;
 
       default:

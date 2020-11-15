@@ -9,3 +9,38 @@ tr.row-disabled {
   color: #cccccc;
   background-color: #FEF7F6;
 }
+
+/** Custom tables */
+.table {
+  &--matching {
+    width: 100%;
+
+    tr {
+      border-bottom: 1px solid #c7c7c7;
+
+      th.white {
+        background-color: #c7c7c7;
+      }
+    }
+
+    td, th {
+      padding: 12px;
+
+      &.align-right {
+        text-align: right;
+      }
+
+      &.align-center {
+        text-align: center;
+      }
+
+      p {
+        color: grey;
+      }
+
+      h3 {
+        font-size: 24px;
+      }
+    }
+  }
+}
