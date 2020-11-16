@@ -25,7 +25,7 @@ const Index = _ => {
   if (loading) {
     return (
       <div className="app--spinner animated fadeIn">
-        <Spin tip="Cargando.." size="large" />
+        <Spin size="large" />
       </div>
     );
   } else {

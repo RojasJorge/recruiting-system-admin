@@ -92,7 +92,7 @@ const AccountConfirm = query => {
     <Actions pageTitle="Confirmar cuenta">
       {loading ? (
         <div className="app--spinner animated fadeIn">
-          <Spin tip="Cargando.." size="large" />
+          <Spin size="large" />
         </div>
       ) : (
         renderStatus()
