@@ -12,6 +12,7 @@ import xhr from '../../xhr';
 import { useRouter } from 'next/router';
 import SingleJobData from '../jobs/Single/data';
 import ScoreMatching from './ScoreMatching';
+import {Can} from "../Can";
 
 const { Option } = Select;
 const { Step } = Steps;
@@ -185,7 +186,9 @@ const Single = ({ query }) => {
               </div>
               <Steps current={current} onChange={handleSteps} direction="vertical">
                 <Step key={0} title="Detalle de la plaza" icon={<i className="material-icons">business_center</i>} />
-                <Step key={1} title="Matching score" icon={<i className="material-icons">compare_arrows</i>} />
+                <Can I="view" a="MATCH_SCORE_VIEW">
+                  <Step key={1} title="Matching score" icon={<i className="material-icons">compare_arrows</i>} />
+                </Can>
               </Steps>
             </>
           )}
