@@ -11,12 +11,26 @@ const ScoreMatching = ({data}) => {
 	
 	const catalogs = useStoreState(state => state.collections)
 	
-	const findArea = id => {
-		const found = catalogs.career.concat(catalogs.academic_level).find(o => o.id === id)
+	const findArea = (id, isChildren, parent) => {
 		
-		if (found) return found.name
+		let result
 		
-		return ''
+		if (!isChildren) {
+			const found = catalogs.career.concat(catalogs.academic_level).find(o => o.id === id)
+			if (found) result = found.name
+		}
+		
+		if (isChildren && parent) {
+			let resp = false
+			const p = catalogs.career.concat(catalogs.academic_level).find(o => o.id === parent)
+			if (p) {
+				resp = p.children.find(o => o.id === id)
+			}
+			
+			if (resp) result = resp.name
+		}
+		
+		return result
 	}
 	
 	const renderJobLocation = _ => {
@@ -77,6 +91,19 @@ const ScoreMatching = ({data}) => {
 		}, [])
 		
 		return license
+	}
+	
+	const matchLanguages = _ => {
+		
+		if (score.details.languages.result.profile.length <= 0 && score.details.languages.result.job <= 0) {
+			return true
+		} else if (score.details.languages.result.profile.length <= 0 && score.details.languages.result.job > 0) {
+			return false
+		} else if (score.details.languages.result.profile.length > 0 && score.details.languages.result.job <= 0) {
+			return true
+		}
+		
+		return
 	}
 	
 	return (
@@ -144,7 +171,7 @@ const ScoreMatching = ({data}) => {
 							<h3>{data.candidate.profile.fields.lookingFor.workplace.indexOf(data.job.workplace) !== -1 ? '100%' : 'No aplica'}</h3>
 						</td>
 						<td>{
-							isArray(score.details.workplace.result.profile)
+							score.details.workplace.result && isArray(score.details.workplace.result.profile)
 								? score.details.workplace.result.profile.map((item, key) => (
 									<Tag key={key}>{item}</Tag>
 								))
@@ -278,6 +305,95 @@ const ScoreMatching = ({data}) => {
 									<Tag key={key}>{item}</Tag>
 								))
 								: '-'
+						}</td>
+					</tr>
+					<tr>
+						{/*Languages*/}
+						<td>
+							{
+								isArray(score.details.languages.result.job) && score.details.languages.result.job.length > 0
+									? <ul>
+										{
+											score.details.languages.result.job.map((item, key) => (
+												<li key={key}>
+													<ul style={{marginBottom: 15, backgroundColor: '#f5f5f5', padding: 10}}>
+														<li>Idioma: {item.language}</li>
+														<li>Comprensión: {item.comprehension}</li>
+														<li>Hablado: {item.speak}</li>
+														<li>Escrito: {item.write}</li>
+													</ul>
+												</li>
+											))
+										}
+									</ul>
+									: '-'
+							}
+						</td>
+						<td>
+							<p>Idiomas</p>
+							{/*<h3>{matchLanguages() ? 'Aplica' : 'No aplica'}</h3>*/}
+						</td>
+						<td>
+							{
+								isArray(score.details.languages.result.profile) && score.details.languages.result.profile.length > 0
+									? <ul>
+										{
+											score.details.languages.result.profile.map((item, key) => (
+												<li key={key}>
+													<ul style={{marginBottom: 15, backgroundColor: '#f5f5f5', padding: 10}}>
+														<li>Idioma: {item.language}</li>
+														<li>Comprensión: {item.comprehension}</li>
+														<li>Hablado: {item.speak}</li>
+														<li>Escrito: {item.write}</li>
+													</ul>
+												</li>
+											))
+										}
+									</ul>
+									: '-'
+							}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<ul>{
+								score.details.academic.result.job.map((item, key) => (
+									<li key={key}>{findArea(item.id)} - {item.children.name}</li>
+								))
+							}</ul>
+						</td>
+						<td>
+							<p>Nivel académico</p>
+							{/*<h3>Aplica</h3>*/}
+						</td>
+						<td><ul>{
+							score.details.academic.result.profile.map((item, key) => (
+								<li
+									key={key}>{findArea(item.academicLevel, false, false)} - {findArea(item.specialization, true, item.academicLevel)}</li>
+							))
+						}</ul></td>
+					</tr>
+					<tr>
+						{/*Salary*/}
+						<td>{score.details.salary.result.job}</td>
+						<td>
+							<p>Salario</p>
+						</td>
+						<td>{score.details.salary.result.profile}</td>
+					</tr>
+					<tr>
+						<td>{
+							score.details.skills.result.job.map((item, key) => (
+								<Tag key={key}>{item}</Tag>
+							))
+						}</td>
+						<td>
+							<p>Habilidades</p>
+						</td>
+						<td>{
+							score.details.skills.result.profile.map((item, key) => (
+								<Tag key={key}>{item}</Tag>
+							))
 						}</td>
 					</tr>
 					</tbody>

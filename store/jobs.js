@@ -32,10 +32,10 @@ export default {
 			travel: {result: null, score: 0}, // done
 			vehicle: {result: null, score: 0}, // done
 			type_licence: {result: null, score: 0}, // done
-			languages: {result: null, score: 0},
-			academic: {result: null, score: 0},
-			salary: {result: null, score: 0},
-			skills: {result: null, score: 0}
+			languages: {result: {job: [], profile: []}, score: 0}, // done
+			academic: {result: {job: [], profile: []}, score: 0}, // done
+			salary: {result: {job: 0, profile: 0}, score: 0}, // done
+			skills: {result: {job: [], profile: []}, score: 0}
 		}
 		
 		/**
@@ -133,8 +133,9 @@ export default {
 		if (jobposition) {
 			years = moment(jobposition.dateEnd).diff(jobposition.dateInit, 'years', false)
 			
+			matchScore.experience.result = {job: job.experience, profile: years}
+			
 			if (years >= job.experience) {
-				matchScore.experience.result = {job: job.experience, profile: years}
 				matchScore.experience.score = 3
 			}
 		}
@@ -227,10 +228,10 @@ export default {
 		 * @type {boolean}
 		 */
 		const salary = job.salary.base_min >= fields.economic.desiredSalary.baseMin
-		// if (salary) matchScore = {...matchScore, salary: 10}
+		
+		matchScore.salary.result = {job: job.salary.base_min, profile: fields.economic.desiredSalary.baseMin}
 		
 		if(salary) {
-			matchScore.salary.result = {job: job.salary.base_min, profile: fields.economic.desiredSalary.maseMin}
 			matchScore.salary.score = 10
 		}
 		
@@ -249,10 +250,9 @@ export default {
 			return acc
 		}, [])
 		
-		// if (academic.length > 0) matchScore = {...matchScore, academic: 10}
+		matchScore.academic.result = {job: job.academic_level, profile: fields.academic.studies}
 		
 		if(academic.length > 0) {
-			matchScore.academic.result = academic
 			matchScore.academic.score = 10
 		}
 		
@@ -270,8 +270,9 @@ export default {
 			return acc
 		}, [])
 		
+		matchScore.skills.result = {job: job.skills, profile: fields.others.skills}
+		
 		if (profileSkills.length > 0) {
-			matchScore.skills.result = profileSkills
 			matchScore.skills.score = 10
 		}
 		
