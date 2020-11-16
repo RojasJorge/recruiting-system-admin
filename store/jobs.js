@@ -35,7 +35,7 @@ export default {
 			languages: {result: {job: [], profile: []}, score: 0}, // done
 			academic: {result: {job: [], profile: []}, score: 0}, // done
 			salary: {result: {job: 0, profile: 0}, score: 0}, // done
-			skills: {result: {job: [], profile: []}, score: 0}
+			skills: {result: {job: [], profile: []}, score: 0} // done
 		}
 		
 		/**
