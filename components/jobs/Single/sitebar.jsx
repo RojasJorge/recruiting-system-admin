@@ -4,11 +4,31 @@ import Link from 'next/link';
 import moment from 'moment';
 import { Can } from '../../../components/Can';
 import locale from '../../../data/translates/spanish';
+import {useStoreState} from "easy-peasy";
 
 const { Step } = Steps;
 
-const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, checkProfile, privateCompany }) => {
-  var today = moment();
+const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, privateCompany }) => {
+  
+  const profile = useStoreState(state => state.profile)
+  
+  const today = moment()
+  
+  const checkProfile = _ => {
+   if(
+     profile.academic &&
+     profile.economic &&
+     profile.lookingFor &&
+     profile.others &&
+     profile.personal &&
+     profile.working
+   ) {
+     return true
+   } else {
+     return false
+   }
+  }
+  
   return (
     <>
       <Can I="edit" a="JOBS">
@@ -61,7 +81,7 @@ const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, 
                 <i className="material-icons">send</i>
                 Aplicar a la plaza
               </Button>
-              <Alert type="error" message="Debes completar tu perfil para poder aplicar a una plaza" banner />
+              {!checkProfile() && <Alert type="error" message="Debes completar tu perfil para poder aplicar a una plaza" banner />}
             </>
           )}
         </Sitebar>

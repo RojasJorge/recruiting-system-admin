@@ -367,7 +367,7 @@ const Jobs = props => {
             <div className="umana-list">
               {loading ? (
                 <div className="app--spinner animated fadeIn in-section">
-                  <Spin tip="Cargando.." size="large" />
+                  <Spin size="large" />
                 </div>
               ) : (
                 separatedJobs.available.length > 0 &&

@@ -86,7 +86,7 @@ const List = ({ type, title }) => {
         {/* <div className="col">
 				 {data.loading ? (
 				 <div className="app--spinner animated fadeIn">
-				 <Spin tip="Cargando.." size="large" />
+				 <Spin size="large" />
 				 </div>
 				 ) : null}
 				 </div> */}

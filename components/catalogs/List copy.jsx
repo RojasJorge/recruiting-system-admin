@@ -69,7 +69,7 @@ const ListT = ({ type, title }) => {
           <PageTitle tag="h1" className="title--main title--page">
             {data.loading ? (
               <div className="app--spinner animated fadeIn">
-                <Spin tip="Cargando.." size="large" />
+                <Spin size="large" />
               </div>
             ) : null}
           </PageTitle>
