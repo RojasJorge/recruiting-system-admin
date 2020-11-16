@@ -11,7 +11,7 @@ const { Item } = Form;
 const { Option } = Select;
 const { Dragger } = Upload;
 
-const Documents = ({ switchCurrent, current }) => {
+const Documents = ({ switchCurrent, current, files, updateFiles }) => {
   /** Global state */
   const {
     profile: {
@@ -20,7 +20,7 @@ const Documents = ({ switchCurrent, current }) => {
     },
   } = useStoreState(state => state.auth.user);
 
-  const [files, updateFiles] = useState(documents);
+  // const [files, updateFiles] = useState(documents);
   const [deleted, setDeleted] = useState([]);
 
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);

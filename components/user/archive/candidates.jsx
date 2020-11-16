@@ -50,7 +50,6 @@ const ListCandidate = props => {
         size="small"
         dataSource={candidates.items}
         rowKey={record => record.id}
-        // pagination={true}
         onRow={onRow}
         pagination={{ pageSize: pager.limit, total: total, defaultCurrent: pager.page, onChange: onChange }}
         columns={[
@@ -65,11 +64,7 @@ const ListCandidate = props => {
             title: 'Nombre',
             dataIndex: 'name',
             key: 'name',
-          },
-          {
-            title: 'Apellido',
-            dataIndex: 'lastname',
-            key: 'lastname',
+            render: (text, record) => `${record.name} ${record.lastname}`,
           },
           {
             title: 'Dirección',
@@ -87,10 +82,11 @@ const ListCandidate = props => {
             key: 'phone',
           },
           {
-            title: 'Estado',
+            title: '',
             dataIndex: 'status',
             key: 'status',
-            render: s => (s ? 'Activo' : 'Inactivo'),
+            width: 50,
+            render: s => <i className="material-icons">chevron_right</i>,
           },
         ]}
       />

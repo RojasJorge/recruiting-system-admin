@@ -8,6 +8,7 @@ import Moment from 'react-moment';
 import { Can } from '../Can';
 import Link from 'next/link';
 import xhr from '../../xhr';
+import { useRouter } from 'next/router';
 
 const { Option } = Select;
 const { Search } = Input;
@@ -20,22 +21,25 @@ const buttonStyle = {
 };
 
 const Jobs = props => {
+  const router = useRouter();
   const columns = [
-    {
-      title: 'Empresa',
-      dataIndex: 'company',
-      key: 'company',
-      render: (text, record) => <>{record.company.name}</>,
-    },
     {
       title: 'Plaza',
       dataIndex: 'title',
       key: 'title',
     },
     {
+      title: 'Empresa',
+      dataIndex: 'company',
+      key: 'company',
+      width: 200,
+      render: (text, record) => <>{record.company.name}</>,
+    },
+    {
       title: 'Fecha de expiración',
       dataIndex: 'expiration_date',
       key: 'expiration_date',
+      width: 200,
       render: (text, record) => (
         <>
           <Moment locale="es" format="D MMMM YYYY">
@@ -48,35 +52,30 @@ const Jobs = props => {
       title: '',
       dataIndex: 'id',
       key: 'id',
-      fixed: 'right',
-      width: 150,
+      width: 50,
       render: (text, record) => {
-        return (
-          <Link Link href={`/admin/jobs/single/[id]`} as={`/admin/jobs/single/${record.id}`}>
-            <a style={buttonStyle}>
-              <i className="material-icons">chevron_right</i> Ver plaza
-            </a>
-          </Link>
-        );
+        return <i className="material-icons">chevron_right</i>;
       },
     },
   ];
   const columnsDraft = [
     {
-      title: 'Empresa',
-      dataIndex: 'company',
-      key: 'company',
-      render: (text, record) => <>{record.company.name}</>,
-    },
-    {
       title: 'Plaza',
       dataIndex: 'title',
       key: 'title',
     },
     {
+      title: 'Empresa',
+      dataIndex: 'company',
+      key: 'company',
+      width: 200,
+      render: (text, record) => <>{record.company.name}</>,
+    },
+    {
       title: 'Fecha de expiración',
       dataIndex: 'expiration_date',
       key: 'expiration_date',
+      width: 200,
       render: (text, record) => (
         <>
           <Moment locale="es" format="D MMMM YYYY">
@@ -89,19 +88,24 @@ const Jobs = props => {
       title: '',
       dataIndex: 'id',
       key: 'id',
-      fixed: 'right',
-      width: 150,
+      width: 50,
       render: (text, record) => {
-        return (
-          <Link Link href={`/admin/jobs/single/[id]`} as={`/admin/jobs/single/${record.id}`}>
-            <a style={buttonStyle}>
-              <i className="material-icons">chevron_right</i> Ver plaza
-            </a>
-          </Link>
-        );
+        return <i className="material-icons">chevron_right</i>;
       },
     },
   ];
+
+  const onRow = record => {
+    return {
+      onClick: _ => {
+        router.push(`/admin/jobs/single/${record.id}`);
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
+      },
+    };
+  };
 
   // FIlter
   const initFilters = {
@@ -401,11 +405,11 @@ const Jobs = props => {
           {/* <ExpiredJobs /> */}
           <div className="umana-section">
             <h2>Plazas expiradas</h2>
-            <Table columns={columns} dataSource={separatedJobs.expired} rowKey={record => record.id} pagination={true} />
+            <Table onRow={onRow} columns={columns} dataSource={separatedJobs.expired} rowKey={record => record.id} pagination={true} />
           </div>
           <div className="umana-section">
             <h2>Borradores</h2>
-            <Table columns={columnsDraft} dataSource={separatedJobs.draft} rowKey={record => record.id} pagination={true} />
+            <Table onRow={onRow} columns={columnsDraft} dataSource={separatedJobs.draft} rowKey={record => record.id} pagination={true} />
           </div>
         </Can>
       </div>
@@ -414,7 +418,13 @@ const Jobs = props => {
 
   return (
     <div className="umana-list list-empty">
-      <EmptyElemet data={props.empty} />
+      {loading ? (
+        <div className="app--spinner animated fadeIn in-section">
+          <Spin size="large" />
+        </div>
+      ) : (
+        <EmptyElemet data={props.empty} />
+      )}
     </div>
   );
 };
