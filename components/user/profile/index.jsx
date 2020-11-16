@@ -126,7 +126,7 @@ const UserProfile = ({ query }) => {
 
   return (
     <>
-      <PageTitle title="Mi Perfil" back="/admin/companies" />
+      <PageTitle title="Mi Perfil" back="/admin/profile" />
       <div className="umana-layout-cl">
         <div className="umana-layout-cl__small ">
           <Sitebar header={header} theme="orange">

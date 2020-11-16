@@ -211,6 +211,8 @@
         .ant-steps-item-content,
         .ant-steps-icon,
         .i {
+          display: flex;
+          align-items: center;
           color: $color-text;
           text-transform: uppercase;
           font-size: 12px;

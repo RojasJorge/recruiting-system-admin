@@ -496,6 +496,7 @@
     flex-direction: row;
     margin: 10px 0;
     font-size: 11px;
+    height: 45px;
     @include bp(xmedium) {
       font-size: 14px;
     }
