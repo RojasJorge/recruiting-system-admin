@@ -80,8 +80,26 @@ const SingleJob = ({ query, privateCompany }) => {
     xhr()
       .post(`/job`, JSON.stringify(e))
       .then(resp => {
-        allSet(resp.data);
-        setCurrent(0);
+        confirm({
+          icon: <i className="material-icons">info</i>,
+          title: 'Duplicar plaza',
+          cancelText: 'Cancelar',
+          okText: 'Duplicar plaza',
+
+          content: (
+            <div>
+              <p>Al duplicar la plaza se guardará como borrador para que puedas editarla</p>
+              <p>¿Estas seguro de duplicar esta plaza?</p>
+            </div>
+          ),
+          onOk() {
+            allSet(resp.data);
+            setCurrent(0);
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
       })
       .catch(err => {
         notification.info({
