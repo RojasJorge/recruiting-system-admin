@@ -52,17 +52,13 @@ const ListCompanies = props => {
             dataIndex: 'avatar',
             key: 'avatar',
             width: 40,
-            render: (text, record) => '',
+            render: (text, record) => <Avatar className="table-avatar" icon={<i className="material-icons">business</i>} size={30} />,
           },
           {
             title: 'Nombre',
             dataIndex: 'name',
             key: 'name',
-          },
-          {
-            title: 'Apellido',
-            dataIndex: 'lastname',
-            key: 'lastname',
+            render: (text, record) => `${record.name} ${record.lastname}`,
           },
           {
             title: 'Dirección',
@@ -80,10 +76,11 @@ const ListCompanies = props => {
             key: 'phone',
           },
           {
-            title: 'Estado',
+            title: '',
             dataIndex: 'status',
             key: 'status',
-            render: s => (s ? 'Activo' : 'Inactivo'),
+            width: 50,
+            render: s => <i className="material-icons">chevron_right</i>,
           },
         ]}
       />

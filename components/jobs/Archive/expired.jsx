@@ -13,6 +13,7 @@ const ExpiredJobs = () => {
       .get(`/job?page=1&offset=100&status=draft`)
       .then(res => {
         fill(res);
+        console.log('expirednt....', res.data);
         delay(() => switchLoading(false), 1000, 'Filtered');
       })
       .catch(err => {
@@ -25,7 +26,7 @@ const ExpiredJobs = () => {
     getExpiredJob();
   }, []);
 
-  console.log('expired', fill);
+  // console.log('expired...', fill);
 
   const columns = [
     {

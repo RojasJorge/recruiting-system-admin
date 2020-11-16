@@ -21,7 +21,7 @@ const Personal = ({ switchCurrent, current }) => {
   const {
     profile: {
       id,
-      fields: { personal },
+      fields: { personal, documents },
     },
   } = useStoreState(state => state.auth.user);
 
@@ -39,6 +39,9 @@ const Personal = ({ switchCurrent, current }) => {
 
   /** Personal info */
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
+  /** Documents */
+
+  const [files, updateFiles] = useState(documents);
 
   const onFinish = fields => {
     !isEmpty(avatar)
@@ -58,12 +61,14 @@ const Personal = ({ switchCurrent, current }) => {
         JSON.stringify({
           fields: {
             personal: fields,
+            documents: files,
           },
         }),
       )
       .then(resp => {
         /** Update current profile */
         updateProfile({ type: 'personal', fields });
+        updateProfile({ type: 'documents', fields: files });
 
         /** Checks if is necessary to delete file from storage */
         if (toDelete) confirmRemoveAvatarFromStorage(toDelete);
@@ -128,7 +133,7 @@ const Personal = ({ switchCurrent, current }) => {
         {/*SIMPLE CONTACT INFO*/}
         <Contact phones={phones} setPhones={setPhones} />
         <About />
-        <Documents />
+        <Documents files={files} updateFiles={updateFiles} />
         <FormItem>
           {/* <Button type="orange" htmlType="submit" size="small" disabled={isEmpty(avatar)} style={{ marginLeft: 'auto' }}> */}
           <Button type="orange" htmlType="submit" size="small" style={{ marginLeft: 'auto' }}>
