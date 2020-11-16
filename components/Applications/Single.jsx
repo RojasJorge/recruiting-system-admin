@@ -11,7 +11,7 @@ import { useContext, useEffect, useState } from 'react';
 import xhr from '../../xhr';
 import { useRouter } from 'next/router';
 import SingleJobData from '../jobs/Single/data';
-import ScoreMatching from "./ScoreMatching";
+import ScoreMatching from './ScoreMatching';
 
 const { Option } = Select;
 const { Step } = Steps;
@@ -30,7 +30,7 @@ const STATUS = [
     id: 'IN_REVIEW',
   },
   {
-    name: 'Cancelado',
+    name: 'No aplica',
     id: 'CANCELLED',
   },
   {
@@ -106,7 +106,7 @@ const Single = ({ query }) => {
         return ability.can('edit', 'UPDATE_SINGLE_REQUEST') ? <SingleProfile data={record.candidate} /> : <SingleJobData job={record.job} company={record.company} />;
         break;
       case 1:
-        return record ? <ScoreMatching data={record}/> : <Empty/>;
+        return record ? <ScoreMatching data={record} /> : <Empty />;
         break;
 
       default:
