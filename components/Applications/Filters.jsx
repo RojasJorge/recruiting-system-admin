@@ -3,8 +3,12 @@ import xhr from '../../xhr';
 import { useEffect, useState } from 'react';
 import { delay, isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
+
+const antIcon = <LoadingOutlined style={{ fontSize: 14 }} spin />;
 
 const Filters = ({ filters, setFilters, setApplications, applications, getApply }) => {
   const router = useRouter();
@@ -14,6 +18,7 @@ const Filters = ({ filters, setFilters, setApplications, applications, getApply 
 
   const [company, setCompany] = useState(router.query.c || null);
   const [job, setJob] = useState(router.query.j || null);
+  const [fieldStatus, setFieldStatus] = useState(false);
 
   const getCompanies = () =>
     xhr()
@@ -33,6 +38,7 @@ const Filters = ({ filters, setFilters, setApplications, applications, getApply 
       .then(resp => {
         updateJobs(resp.data.items);
         setJob(null);
+        setFieldStatus(false);
       })
       .catch(err => console.log('Error get jobs.', err));
 
@@ -51,6 +57,7 @@ const Filters = ({ filters, setFilters, setApplications, applications, getApply 
   const onCompanySelect = e => {
     getJobs(e);
     setCompany(e);
+    setFieldStatus(true);
     setJob(null);
   };
 
@@ -79,7 +86,7 @@ const Filters = ({ filters, setFilters, setApplications, applications, getApply 
           </Select>
         </div>
         <div className="ant-form-item form-item--md">
-          <label>Plaza:</label>
+          <label>Plaza: {fieldStatus ? <Spin indicator={antIcon} /> : null}</label>
           <Select size="large" placeholder="Plaza" optionFilterProp="children" disabled={isEmpty(jobs)} value={router.query.j || job} onSelect={onJobSelect} showSearch>
             {!isEmpty(jobs) &&
               jobs.map(job => (

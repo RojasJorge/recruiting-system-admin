@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PageLoader = ({ active }) =>
   active ? (
     <div className="app--spinner animated fadeIn">
-      <Spin tip="Cargando.." size="large" />
+      <Spin size="large" />
     </div>
   ) : null;
 
