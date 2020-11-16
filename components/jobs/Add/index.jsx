@@ -126,7 +126,24 @@ const FormJob = props => {
     console.log('emp', newObj);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
-      edit(newObj);
+      confirm({
+        icon: <i className="material-icons">info</i>,
+        title: 'Publicar plaza',
+        cancelText: 'Cancelar',
+        okText: 'Publicar plaza',
+        content: (
+          <div>
+            <p>Una vez publicada la plaza ya no podras editarla.</p>
+            <p>¿Estas seguro de publicar esta plaza?</p>
+          </div>
+        ),
+        onOk() {
+          edit(newObj);
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
     } else {
       if (statuState === 'public') {
         confirm({
