@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { Table, Pagination, Avatar } from 'antd';
+// import { Table, Pagination, Avatar } from 'antd';
 import { PageTitle } from '../../elements';
 import xhr from '../../xhr';
-import Link from 'next/link';
+// import Link from 'next/link';
 import ListCandidate from './archive/candidates';
 import ListCompanies from './archive/companies';
 
 const UsersList = () => {
-  const users = useStoreState(state => state.users);
+  // const users = useStoreState(state => state.users);
   const fill = useStoreActions(actions => actions.users.fill);
 
   const [pager, updatePager] = useState({
@@ -16,10 +16,10 @@ const UsersList = () => {
     limit: 10,
   });
 
-  const onChange = async (page, limit) => {
-    await get(page, limit);
-    updatePager({ ...pager, page, limit });
-  };
+  // const onChange = async (page, limit) => {
+  //   await get(page, limit);
+  //   updatePager({ ...pager, page, limit });
+  // };
 
   const get = async (page, limit) =>
     xhr()

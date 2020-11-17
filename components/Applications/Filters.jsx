@@ -74,7 +74,7 @@ const Filters = ({ filters, setFilters, setApplications, applications, getApply 
   return (
     <>
       <div className="umana-form">
-        <div className="ant-form-item form-item--md">
+        <div className="ant-form-item form-item--lg">
           <label>Empresa:</label>
           <Select size="large" placeholder="Empresa" optionFilterProp="children" onSelect={onCompanySelect} value={company} showSearch>
             {!isEmpty(companies) &&
@@ -85,7 +85,7 @@ const Filters = ({ filters, setFilters, setApplications, applications, getApply 
               ))}
           </Select>
         </div>
-        <div className="ant-form-item form-item--md">
+        <div className="ant-form-item form-item--lg">
           <label>Plaza: {fieldStatus ? <Spin indicator={antIcon} /> : null}</label>
           <Select size="large" placeholder="Plaza" optionFilterProp="children" disabled={isEmpty(jobs)} value={router.query.j || job} onSelect={onJobSelect} showSearch>
             {!isEmpty(jobs) &&

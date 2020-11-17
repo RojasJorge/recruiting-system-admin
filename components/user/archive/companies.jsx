@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useStoreActions } from 'easy-peasy';
 
 const ListCompanies = props => {
+  const [loading, switchLoader] = useState(true)
   const [companies, setcompanies] = useState([]);
   const [total, setTotal] = useState(0);
   const [pager, updatePager] = useState({
@@ -30,8 +31,12 @@ const ListCompanies = props => {
 
         setcompanies(res.data);
         setTotal(res.data.total);
+        switchLoader(false)
       })
-      .catch(console.error);
+      .catch(err => {
+        console.log(err)
+        switchLoader(false)
+      });
 
   useEffect(() => {
     get(pager.page, pager.limit);
@@ -42,10 +47,18 @@ const ListCompanies = props => {
       <h2>Perfiles de empresas</h2>
       <Table
         bordered
+        loading={loading}
         size="small"
         dataSource={companies.items}
         rowKey={record => record.id}
-        pagination={{ pageSize: 10, total: total, defaultCurrent: 1, onChange: onChange }}
+        pagination={{
+          pageSize: 10,
+          total: total,
+          defaultCurrent: pager.page,
+          onChange: onChange,
+          onShowSizeChange: onChange,
+          showSizeChanger: true
+        }}
         columns={[
           {
             title: '',
