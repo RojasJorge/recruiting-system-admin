@@ -3,7 +3,10 @@ import { orderBy } from 'lodash';
 import axios from 'axios';
 
 export default {
-  company: null,
+  company: {
+    items: [],
+    total: 0
+  },
   list: [],
   total: 0,
   loading: false,
