@@ -11,7 +11,7 @@ const ability = _ =>
 
     switch (scope) {
       case 'umana':
-        can('read', ['USERS', 'CATALOGS', 'SPECIAL_ALERTS', 'PROFILE'])
+        can('read', ['USERS', 'CATALOGS', 'SPECIAL_ALERTS', 'PROFILE', 'REQUESTS_MENU'])
         
         can('view', [
           'MAIN_LAYOUT',
@@ -29,7 +29,7 @@ const ability = _ =>
         can('add', ['COMPANIES', 'JOBS'])
         break
       case 'company':
-        can('read', ['USERS', 'SPECIAL_ALERTS'])
+        can('read', ['USERS', 'SPECIAL_ALERTS', 'REQUESTS_MENU'])
         can('view', ['MAIN_LAYOUT', 'LOGIN', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE', 'COMPANY_INFO_BLOCK', 'MATCH_SCORE_VIEW'])
         can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST'])
         can('add', ['COMPANIES', 'JOBS'])
@@ -37,7 +37,7 @@ const ability = _ =>
         break
 
       case 'candidate':
-        can('read', ['USERS'])
+        can('read', ['USERS', 'REQUESTS_MENU'])
         can('view', ['MAIN_LAYOUT', 'LOGIN', 'JOBS', 'COMPANIES', 'OWN_REQUESTS', 'COMPANY_INFO_BLOCK'])
         can('apply', ['JOBS'])
         cannot('view', ['REQUESTS_ADMIN_VIEW'])
