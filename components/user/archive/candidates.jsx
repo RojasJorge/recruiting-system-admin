@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 
 const ListCandidate = props => {
   const router = useRouter();
+  const [loading, switchLoader] = useState(true)
   const [candidates, setCandidates] = useState([]);
   const [total, setTotal] = useState(0);
   const [pager, updatePager] = useState({
@@ -35,8 +36,12 @@ const ListCandidate = props => {
 
         setCandidates(res.data);
         setTotal(res.data.total);
+        switchLoader(false)
       })
-      .catch(console.error);
+      .catch(err => {
+        switchLoader(false)
+        console.log(err)
+      });
 
   useEffect(() => {
     get(pager.page, pager.limit);
@@ -47,11 +52,19 @@ const ListCandidate = props => {
       <h2>Perfiles de candidatos</h2>
       <Table
         bordered
+        loading={loading}
         size="small"
         dataSource={candidates.items}
         rowKey={record => record.id}
         onRow={onRow}
-        pagination={{ pageSize: pager.limit, total: total, defaultCurrent: pager.page, onChange: onChange }}
+        pagination={{
+          pageSize: pager.limit,
+          total: total,
+          defaultCurrent: pager.page,
+          onChange: onChange,
+          onShowSizeChange: onChange,
+          showSizeChanger: true
+        }}
         columns={[
           {
             title: '',
