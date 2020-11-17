@@ -1,7 +1,7 @@
 import { Table, Avatar } from 'antd';
 import xhr from '../../../xhr';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 import { useRouter } from 'next/router';
 
