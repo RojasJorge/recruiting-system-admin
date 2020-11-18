@@ -32,8 +32,8 @@ const Welcome = () => {
 	}
 	
 	useEffect(() => {
-		checkProfile(auth.user.profile.fields)
-	}, [])
+		(auth.user && auth.user.profile) && checkProfile(auth.user.profile.fields)
+	}, [auth.user])
 	
 	if (redirect()) {
 		router.replace('/admin/requests')

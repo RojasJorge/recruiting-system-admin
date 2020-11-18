@@ -10,7 +10,7 @@ const { Option } = Select;
 
 const antIcon = <LoadingOutlined style={{ fontSize: 14 }} spin />;
 
-const Filters = ({ filters, setFilters, setApplications, applications, getApply }) => {
+const Filters = ({ filters, setApplications, applications, getApply }) => {
   const router = useRouter();
 
   const [companies, updateCompanies] = useState([]);
