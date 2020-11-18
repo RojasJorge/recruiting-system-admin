@@ -38,7 +38,7 @@ const SingleJobData = ({ job, company }) => {
           <label>Descripción de la plaza</label>
           <div className="umana-content-custom" dangerouslySetInnerHTML={{ __html: job.description }}></div>
         </div>
-        {job.location && job.locationState === 'public' ? (
+        {/* {job.location && job.locationState === 'public' ? (
           <div className="umana-content__item item-lg">
             <label>Ubicación</label>
             <p>
@@ -47,7 +47,7 @@ const SingleJobData = ({ job, company }) => {
             </p>
             {job.isBranch ? <p>{`La plaza es en una sucursal.`}</p> : null}
           </div>
-        ) : null}
+        ) : null} */}
         {job.isBranch && job.branch ? (
           <div className="umana-content__item item-lg">
             <label>Dirección de la sucursal</label>

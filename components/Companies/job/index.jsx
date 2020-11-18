@@ -80,11 +80,11 @@ const CompanyJobs = props => {
       dataIndex: 'location',
       key: 'location',
       responsive: ['md'],
-      render: (text, record) => (
-        <>
-          <p>{`Zona ${record.location.zone}, ${record.location.city}`}</p>
-        </>
-      ),
+      // render: (text, record) => (
+      //   <>
+      //     <p>{`Zona ${record.location.zone}, ${record.location.city}`}</p>
+      //   </>
+      // ),
     },
     {
       title: 'Fecha de expiración',
@@ -129,16 +129,7 @@ const CompanyJobs = props => {
         <h2>{`Plazas de ${props.title}`}</h2>
       </div>
       <div className="" style={{ padding: 0 }}>
-        {jobs ? (
-          <Table
-            columns={columns}
-            dataSource={jobs}
-            rowKey={record => record.id}
-            pagination={false}
-          />
-        ) : (
-          'Esta empresa no tiene plazas publicadas'
-        )}
+        {jobs ? <Table columns={columns} dataSource={jobs} rowKey={record => record.id} pagination={false} /> : 'Esta empresa no tiene plazas publicadas'}
       </div>
     </>
   );
