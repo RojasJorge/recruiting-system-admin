@@ -4,7 +4,7 @@ import candidateImg from '../../images/welcome-talento.png';
 import companyImg from '../../images/welcome-company.png';
 import {Can} from '../../components/Can';
 import {useStoreActions, useStoreState} from "easy-peasy";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useRouter} from "next/router";
 import PageLoader from "../../components/Misc/PageLoader";
 
@@ -32,8 +32,8 @@ const Welcome = () => {
 	}
 	
 	useEffect(() => {
-		checkProfile(auth.user.profile.fields)
-	}, [])
+		(auth.user && auth.user.profile) && checkProfile(auth.user.profile.fields)
+	}, [auth.user])
 	
 	if (redirect()) {
 		router.replace('/admin/requests')
