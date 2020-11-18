@@ -1,3 +1,4 @@
+import {SendOutlined} from '@ant-design/icons'
 import { Menu, Button } from 'antd';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -9,13 +10,13 @@ const Sitebar = props => {
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
 
-  const toggleCollapsed = () => {
-    if (collapsed) {
-      setCollapsed(false);
-    } else {
-      setCollapsed(true);
-    }
-  };
+  // const toggleCollapsed = () => {
+  //   if (collapsed) {
+  //     setCollapsed(false);
+  //   } else {
+  //     setCollapsed(true);
+  //   }
+  // };
 
   const onBack = () => {
     router.back();
@@ -83,6 +84,7 @@ const Sitebar = props => {
         </Menu>
       ) : null}
       <div className="umana-sitebar-childrens">{props.children}</div>
+      <Button style={{marginTop: 20}} icon={<SendOutlined />}>Contactar</Button>
     </div>
   );
 };
