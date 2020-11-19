@@ -75,7 +75,7 @@ const Single = ({ query }) => {
             <div className="umana-title">
               <h2>{`Agregar plaza de ${company ? company.name : 'esta empresa'}`}</h2>
             </div>
-            <FormJob data={initialState} company={false} setCurrent={setCurrent} />
+            <FormJob data={initialState} needCompanySelect={false} setCurrent={setCurrent} />
           </>
         );
         break;

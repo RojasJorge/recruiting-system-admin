@@ -77,7 +77,7 @@ const AddJob = _ => {
             <Sitebar header={header} data={menuItem} />
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
-            <FormJob company={true} data={initialState} />
+            <FormJob needCompanySelect={true} data={initialState} />
           </div>
         </div>
       </>

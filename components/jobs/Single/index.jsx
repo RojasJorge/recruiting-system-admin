@@ -79,36 +79,36 @@ const SingleJob = ({ query, privateCompany }) => {
     delete e.status;
     e.title = `${e.title} (copia)`;
 
-    xhr()
-      .post(`/job`, JSON.stringify(e))
-      .then(resp => {
-        confirm({
-          icon: <i className="material-icons">info</i>,
-          title: 'Duplicar plaza',
-          cancelText: 'Cancelar',
-          okText: 'Duplicar plaza',
-          content: (
-            <div>
-              <p>Al duplicar la plaza se guardará como borrador para que puedas editarla</p>
-              <p>¿Estas seguro de duplicar esta plaza?</p>
-            </div>
-          ),
-          onOk() {
+    confirm({
+      icon: <i className="material-icons">info</i>,
+      title: 'Duplicar plaza',
+      cancelText: 'Cancelar',
+      okText: 'Duplicar plaza',
+      content: (
+        <div>
+          <p>Al duplicar la plaza se guardará como borrador para que puedas editarla</p>
+          <p>¿Estas seguro de duplicar esta plaza?</p>
+        </div>
+      ),
+      onOk() {
+        xhr()
+          .post(`/job`, JSON.stringify(e))
+          .then(resp => {
             allSet(resp.data);
             setCurrent(0);
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-      })
-      .catch(err => {
-        notification.info({
-          message: `Error`,
-          description: 'Ha ocurrido un error, por favor inténtalo más tarde',
-          placement: 'bottomRight',
-        });
-      });
+          })
+          .catch(err => {
+            notification.info({
+              message: `Error`,
+              description: 'Ha ocurrido un error, por favor inténtalo más tarde',
+              placement: 'bottomRight',
+            });
+          });
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
   };
 
   const confirmApply = e => {
@@ -311,7 +311,7 @@ const SingleJob = ({ query, privateCompany }) => {
             <div className="umana-title">
               <h2>{`Editar plaza`}</h2>
             </div>
-            <FormJob data={job} company={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} />
+            <FormJob data={job} needCompanySelect={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} />
           </>
         );
         break;

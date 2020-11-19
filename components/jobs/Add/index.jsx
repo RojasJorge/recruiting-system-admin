@@ -24,10 +24,8 @@ const FormJob = props => {
   const companies = useStoreState(state => state.companies);
   const fill = useStoreActions(actions => actions.companies.fill);
   const [missing, isMissing] = useState(false);
-  const [company, setCompany] = useState('');
+  const [companySelect, setCompany] = useState('');
   const [statuState, setStatus] = useState('draft');
-  const JobsList = useStoreState(state => state.jobs.list);
-  const fillJobs = useStoreActions(actions => actions.jobs.fill);
   const auth = useStoreState(state => state.auth.token);
 
   useEffect(() => {
@@ -126,9 +124,13 @@ const FormJob = props => {
     let id = { company_id: router.query.id };
     const statusState = { status: statuState };
     let newObj = e;
-    if (props.company && props.company) {
-      id = { company_id: company };
+    if (props.needCompanySelect) {
+      id = { company_id: companySelect };
     }
+    if (props.type === 'edit') {
+      id = { company_id: props.data.company_id };
+    }
+
     if (!e.isBranch) {
       const objLocation = {
         address: '',
@@ -229,7 +231,7 @@ const FormJob = props => {
         </div>
         <div className="umana-form--section" id="company">
           <h2 style={{ width: '100%', margin: 0 }}>Información de Empresa</h2>
-          {props.company && props.company === true ? (
+          {props.needCompanySelect && props.needCompanySelect === true ? (
             <Form.Item
               label="¿De qué empresa es esta plaza?"
               className="form-item--lg"
