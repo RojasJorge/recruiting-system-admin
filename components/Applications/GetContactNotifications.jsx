@@ -30,7 +30,7 @@ const GetContactNotifications = ({record}) => {
 							<MailOutlined style={{fontSize: 20}}/>
 						</Badge>
 					</Tooltip>
-					: <Tooltip title={`Aún no ha sido invitado`}>
+					: <Tooltip title={`Aún no ha sido invitado vía email`}>
 						<Badge count={0}>
 							<MailOutlined style={{fontSize: 20}}/>
 						</Badge>
