@@ -56,7 +56,6 @@ const Salary = ({ value = {}, onChange }) => {
   const handlenChange = (e, type) => {
     switch (type) {
       case 'base_min':
-        console.log(e + values.commission_min);
         setSalary({
           ...salary,
           salary_min: e + values.commission_min,

@@ -117,13 +117,30 @@ const FormJob = props => {
 
   const onFinish = e => {
     let id = { company_id: router.query.id };
+    const statusState = { status: statuState };
+    let newObj = e;
     if (props.company && props.company) {
       id = { company_id: company };
     }
-    const statusState = { status: statuState };
-    const newObj = Object.assign(e, id, statusState);
+    if (!e.isBranch) {
+      const objLocation = {
+        address: '',
+        zone: 0,
+        country: '',
+        province: '',
+        city: '',
+        latitude: 0,
+        longitude: 0,
+      };
+      const companyLocation =
+        companies && companies.company && companies.company.items && companies.company.items.length > 0 ? companies.company.items.filter(e => e.id === id.company_id)[0].location : objLocation;
+      delete companyLocation.latitude;
+      delete companyLocation.longitude;
+      const addBranch = { branch: companyLocation };
+      newObj = Object.assign(e, id, statusState, addBranch);
+    }
+    newObj = Object.assign(e, id, statusState);
 
-    console.log('emp', newObj);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
       confirm({
