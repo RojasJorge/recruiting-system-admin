@@ -18,7 +18,7 @@ const MatchTable = ({data}) => {
 	const onRow = (record, index) => {
 		return {
 			onClick: () => {
-				router.push('/admin/profile/' + record.profile.uid)
+				router.push(`/admin/profile/${record.profile.uid}?companyId=${record.company.id}&jobId=${record.job.id}&profileId=${record.profile.id}`)
 			}
 		}
 	}
@@ -26,7 +26,6 @@ const MatchTable = ({data}) => {
 	return (
 		<div style={{marginTop: 30}}>
 			<h2>Posibles candidatos</h2>
-			{/*<pre>{JSON.stringify(data, false, 2)}</pre>*/}
 			<Table
 				dataSource={data}
 				rowKey={record => record.profile.id}
