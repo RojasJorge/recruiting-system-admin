@@ -302,6 +302,10 @@ h5 {
     width: 100%;
     @include bp(xmedium) {
       width: 66%;
+      &.big {
+        width: calc(100% - 400px);
+        margin-left: auto;
+      }
     }
     &.bg-white {
       box-shadow: $shadow;

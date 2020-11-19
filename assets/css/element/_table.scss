@@ -1,0 +1,15 @@
+.umana-table-section {
+  position: relative;
+  .umana-spinner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: calc(100% - 80px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba($color-white, 0.5);
+  }
+}
