@@ -25,12 +25,12 @@ const GetContactNotifications = ({record}) => {
 	return (
 		<>
 			{
-				data ? <Tooltip title={`${data.total} ${data.total > 1 ? ' Veces' : 'Vez'} invitado vía email.`}>
+				data && data.total > 1 ? <Tooltip title={`${data.total} ${data.total > 1 ? ' Veces' : ' Vez'} invitado vía email.`}>
 						<Badge count={data.total}>
 							<MailOutlined style={{fontSize: 20}}/>
 						</Badge>
 					</Tooltip>
-					: <Tooltip title={`Aún no ha sido invitado`}>
+					: <Tooltip title={`Aún no ha sido invitado vía email`}>
 						<Badge count={0}>
 							<MailOutlined style={{fontSize: 20}}/>
 						</Badge>
