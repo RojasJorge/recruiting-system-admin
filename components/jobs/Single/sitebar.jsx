@@ -4,31 +4,23 @@ import Link from 'next/link';
 import moment from 'moment';
 import { Can } from '../../../components/Can';
 import locale from '../../../data/translates/spanish';
-import {useStoreState} from "easy-peasy";
+import { useStoreState } from 'easy-peasy';
 
 const { Step } = Steps;
 
-const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, privateCompany }) => {
-  
-  const profile = useStoreState(state => state.profile)
-  
-  const today = moment()
-  
+const SiteBarJob = ({ job, current, onChange, applyJob, appyState, duplicate, publish, expire, privateCompany }) => {
+  const profile = useStoreState(state => state.profile);
+
+  const today = moment();
+
   const checkProfile = _ => {
-   if(
-     profile.academic &&
-     profile.economic &&
-     profile.lookingFor &&
-     profile.others &&
-     profile.personal &&
-     profile.working
-   ) {
-     return true
-   } else {
-     return false
-   }
-  }
-  
+    if (profile.academic && profile.economic && profile.lookingFor && profile.others && profile.personal && profile.working) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       <Can I="edit" a="JOBS">
@@ -43,9 +35,15 @@ const SiteBarJob = ({ job, current, onChange, applyJob, appyState, add, expire, 
         >
           <Steps current={current} onChange={onChange} direction="vertical">
             <Step key={0} title="Información de la plaza" icon={<i className="material-icons">business</i>} />
-            {job.status === 'draft' ? <Step key={1} title="Editar plaza" icon={<i className="material-icons">edit</i>} /> : null}
+            <Step key={1} title="Editar plaza" icon={<i className="material-icons">edit</i>} disabled={job.status === 'draft' ? false : true} />
+            {job.status === 'public' ? <Step key={2} title="Posibles Candidatos" disabled={job.status === 'draft' ? true : false} icon={<i className="material-icons">group</i>} /> : null}
           </Steps>
-          <Button type="primary" size="small" onClick={() => add(job)}>
+          {job.status === 'draft' ? (
+            <Button type="primary" size="small" onClick={() => publish(job)}>
+              <i className="material-icons">publish</i> Publicar plaza
+            </Button>
+          ) : null}
+          <Button type="primary" size="small" onClick={() => duplicate(job)}>
             <i className="material-icons">content_copy</i> Duplicar plaza
           </Button>
           {job.expiration_date > today.format() ? (

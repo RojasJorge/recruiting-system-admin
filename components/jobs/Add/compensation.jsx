@@ -16,7 +16,7 @@ const Compensation = props => {
   const [values, setValues] = useState(initialState);
 
   const checkSalary = (rule, value) => {
-    if (value.currency && value.base_min && value.base_max && value.commission_min && value.commission_max) {
+    if (value.currency && value.base_min && value.base_max) {
       return Promise.resolve();
     }
     return Promise.reject('Todos los campos de esta sección son requeridos');

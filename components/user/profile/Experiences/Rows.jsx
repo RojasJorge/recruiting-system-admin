@@ -49,6 +49,7 @@ const Experience = ({switchCurrent, current}) => {
 	
 	/** Local state */
 	const [careers, addCareers] = useState([]);
+	const [validate, setValidate] = useState([]);
 	const [dependents, switchDependents] = useState(false)
 	const [wnow, setWorking] = useState(working.experiences && working.experiences.length > 0 ? working.experiences[0].workingNow : false)
 	
@@ -122,8 +123,19 @@ const Experience = ({switchCurrent, current}) => {
 	const myRef = useRef(null);
 
 	const scrollTopToELement = () =>  scrollToMyRef(myRef)
-	
 
+	const switchValidate = (e, idx ) => {
+		const newValidate = validate.map((o, i)=> {
+			if(i === idx) {
+				return e
+			}
+			else {
+				return o
+			}
+		})
+		setValidate(newValidate );
+	}
+	
 	return (
 		<>
 			<Form
@@ -235,10 +247,10 @@ const Experience = ({switchCurrent, current}) => {
 																name={[field.name, 'workingNow']}
 																fieldKey={[field.fieldKey, 'workingNow']}
 																valuePropName="checked"
-																rules={[{required: true, message: "El campo teléfono es requerido"}]}
+																rules={[{required: true, message: "Este campo es requerido"}]}
 															>
 																
-																<Switch onChange={e => setWorking(e)} checkedChildren="SI" unCheckedChildren="NO"/>
+																<Switch onChange={e => switchValidate(e, field.key )} checkedChildren="SI" unCheckedChildren="NO"/>
 															</Item>
 														</div>
 														<div className="col-md-6">
@@ -256,13 +268,28 @@ const Experience = ({switchCurrent, current}) => {
 															</Item>
 														</div>
 														<div className="col-md-6">
-														{!wnow ? 
+															
+														{!validate[field.fieldKey] ? 
 															<Item
-															label="Fecha final"
-														
+																label="Fecha final"
 																{...field}
 																name={[field.name, 'dateEnd']}
 																fieldKey={[field.fieldKey, 'dateEnd']}
+																rules={[
+																	{
+																		required: true,
+																		message: 'Por favor confirma contraseña',
+																	},
+																	({getFieldValue}) => ({
+																		validator(rule, value) {
+																			console.log('vallll', value)
+																			// if (!value || getFieldValue('password') === value) {
+																			// 	return Promise.resolve();
+																			// }
+																			return Promise.reject('Las contraseñas no coiciden');
+																		},
+																	}),
+																]}
 																// rules={[{required: true, message: "Especifíque una fecha final."}]}
 															>
 																<DatePicker
@@ -455,8 +482,9 @@ const Experience = ({switchCurrent, current}) => {
 										size="large"
 										style={{width: '100%'}}
 										onClick={() => {
-											add();
+											add({ workingNow: false });
 											scrollTopToELement()
+											setValidate( [...validate, false])
 										}}
 										icon={<PlusOutlined/>}
 									>

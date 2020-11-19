@@ -101,7 +101,7 @@ const Documents = ({ switchCurrent, current, files, updateFiles }) => {
   return (
     <>
       <div className="umana-form--section">
-        <h2>Documentos de identificación</h2>
+        <h2 style={{ width: '100%' }}>Documentos de identificación</h2>
         <Item name="dpi" label="DPI" className="form-item--md">
           <Input style={{ width: '100%' }} min={0} size="large" />
         </Item>

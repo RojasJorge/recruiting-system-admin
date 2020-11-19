@@ -1,29 +1,32 @@
-import { Table, notification } from 'antd';
+import { Table, notification, Spin } from 'antd';
 import { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import Link from 'next/link';
 import moment from 'moment';
+import { delay, isEmpty } from 'lodash';
 import xhr from '../../../xhr';
 import { useRouter } from 'next/router';
-
-const buttonStyle = {
-  display: 'flex',
-  alignItem: 'center',
-  color: '#019688',
-  textTransform: 'uppercase',
-};
+import locale from '../../../data/translates/spanish';
 
 const CompanyJobs = props => {
   const router = useRouter();
+  const today = moment();
+  const [loading, switchLoading] = useState(true);
   const [missing, isMissing] = useState(false);
   const [jobs, setJobs] = useState([]);
-  const today = moment();
+  const [total, setTotal] = useState(0);
+  const [pager, updatePager] = useState({
+    page: 1,
+    limit: 10,
+  });
 
-  const getCompanyJobs = () => {
+  const getCompanyJobs = (page, limit) => {
     xhr()
-      .get(`/job?company_id=${props.id}`)
+      .get(`/job?page=${page}&offset=${limit}&company_id=${props.id}`)
       .then(res => {
         setJobs(res.data.items);
+        setTotal(res.data.total);
+        delay(() => switchLoading(false), 1000, 'Filtered');
       })
       .catch(err => isMissing(true));
   };
@@ -40,8 +43,13 @@ const CompanyJobs = props => {
     }, 500);
   };
 
+  const onChange = async (page, limit) => {
+    await getCompanyJobs(page, limit);
+    switchLoading(true);
+    updatePager({ ...pager, page, limit });
+  };
+
   const add = async e => {
-    // console.log(e);
     delete e.id;
     delete e.company;
     delete e.created_at;
@@ -50,7 +58,6 @@ const CompanyJobs = props => {
 
     e.title = `${e.title} (copia)`;
 
-    // console.log(e);
     xhr()
       .post(`/job`, JSON.stringify(e))
       .then(resp => {
@@ -66,8 +73,16 @@ const CompanyJobs = props => {
   };
 
   useEffect(() => {
-    getCompanyJobs();
+    getCompanyJobs(pager.page, pager.limit);
   }, []);
+
+  const onRow = record => {
+    return {
+      onClick: _ => {
+        router.push(`/admin/jobs/single/${record.id}`);
+      },
+    };
+  };
 
   const columns = [
     {
@@ -75,17 +90,17 @@ const CompanyJobs = props => {
       dataIndex: 'title',
       key: 'title',
     },
-    {
-      title: 'Ubicación',
-      dataIndex: 'location',
-      key: 'location',
-      responsive: ['md'],
-      // render: (text, record) => (
-      //   <>
-      //     <p>{`Zona ${record.location.zone}, ${record.location.city}`}</p>
-      //   </>
-      // ),
-    },
+    // {
+    //   title: 'Ubicación',
+    //   dataIndex: 'branch',
+    //   key: 'branch',
+    //   responsive: ['md'],
+    //   render: (text, record) => (
+    //     <>
+    //       <p>{`Zona ${record.branch.zone}, ${record.branch.city}`}</p>
+    //     </>
+    //   ),
+    // },
     {
       title: 'Fecha de expiración',
       dataIndex: 'expiration_date',
@@ -100,26 +115,22 @@ const CompanyJobs = props => {
       ),
     },
     {
-      title: 'Actions',
+      title: 'Estado',
+      dataIndex: 'status',
+      key: 'status',
+      responsive: ['md'],
+      render: (text, record) => (
+        <>
+          <p>{locale(record.status)}</p>
+        </>
+      ),
+    },
+    {
+      title: '',
       dataIndex: 'id',
       key: 'id',
-      render: (text, record) => {
-        if (record.expiration_date > today.format()) {
-          return (
-            <Link href={`/admin/jobs/single/[id]`} as={`/admin/jobs/single/${record.id}`}>
-              <a style={buttonStyle}>
-                Ver plaza <i className="material-icons">navigate_next</i>
-              </a>
-            </Link>
-          );
-        } else {
-          return (
-            <a style={buttonStyle} onClick={() => add(record)}>
-              duplicar <i className="material-icons">clone</i>
-            </a>
-          );
-        }
-      },
+      width: 50,
+      render: (text, record) => <i className="material-icons">navigate_next</i>,
     },
   ];
 
@@ -128,8 +139,31 @@ const CompanyJobs = props => {
       <div className="umana-title">
         <h2>{`Plazas de ${props.title}`}</h2>
       </div>
-      <div className="" style={{ padding: 0 }}>
-        {jobs ? <Table columns={columns} dataSource={jobs} rowKey={record => record.id} pagination={false} /> : 'Esta empresa no tiene plazas publicadas'}
+      <div className="umana-table-section" style={{ padding: 0 }}>
+        {loading ? (
+          <div className="umana-spinner">
+            <Spin size="large" />
+          </div>
+        ) : null}
+        {jobs ? (
+          <Table
+            onRow={onRow}
+            columns={columns}
+            dataSource={jobs.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
+            rowKey={record => record.id}
+            pagination={false}
+            pagination={{
+              pageSize: pager.limit,
+              total: total,
+              defaultCurrent: pager.page,
+              onChange: onChange,
+              onShowSizeChange: onChange,
+              showSizeChanger: true,
+            }}
+          />
+        ) : (
+          'Esta empresa no tiene plazas publicadas'
+        )}
       </div>
     </>
   );

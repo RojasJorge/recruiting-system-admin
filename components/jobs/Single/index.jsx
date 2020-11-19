@@ -8,6 +8,7 @@ import moment from 'moment';
 import { delay } from 'lodash';
 import SingleJobData from './data';
 import { Can } from '../../../components/Can';
+import MatchTable from '../../../components/Applications/MatchTable';
 
 import SiteBarJob from './sitebar';
 
@@ -24,6 +25,7 @@ const SingleJob = ({ query, privateCompany }) => {
   const [loading, switchLoading] = useState(true);
   const [current, setCurrent] = useState(0);
   const [appyState, setApply] = useState(false);
+  const [coinsidences, updateCoinsidences] = useState([]);
 
   /** Get profile status if exists */
   const profile = useStoreState(state => state.profile);
@@ -68,7 +70,7 @@ const SingleJob = ({ query, privateCompany }) => {
     }, 500);
   };
 
-  const add = async e => {
+  const duplicateJob = async e => {
     delete e.id;
     delete e.company;
     delete e.created_at;
@@ -85,7 +87,6 @@ const SingleJob = ({ query, privateCompany }) => {
           title: 'Duplicar plaza',
           cancelText: 'Cancelar',
           okText: 'Duplicar plaza',
-
           content: (
             <div>
               <p>Al duplicar la plaza se guardará como borrador para que puedas editarla</p>
@@ -192,7 +193,9 @@ const SingleJob = ({ query, privateCompany }) => {
       status: 'expired',
     };
     confirm({
+      icon: <i className="material-icons">info</i>,
       title: 'Expirar plaza',
+      okText: 'Expirar plaza',
       content: 'Una vez que expires no podras regresar esta acción. ¿Estas seguro que deseas expirar esta plaza?',
       onOk() {
         xhr()
@@ -209,6 +212,51 @@ const SingleJob = ({ query, privateCompany }) => {
             notification.info({
               message: `Error`,
               description: 'No se pudo expirar la plaza',
+              placement: 'bottomRight',
+            });
+          });
+      },
+      onCancel() {
+        // console.log('Cancel');
+      },
+    });
+  };
+
+  const publish = e => {
+    const startdate = moment();
+    startdate.format();
+
+    const data = {
+      created_at: startdate,
+      contact: e.contact,
+      status: 'public',
+    };
+    confirm({
+      icon: <i className="material-icons">info</i>,
+      title: 'Publicar plaza',
+      cancelText: 'Cancelar',
+      okText: 'Publicar plaza',
+      content: (
+        <div>
+          <p>Una vez publicada la plaza ya no podras editarla.</p>
+          <p>¿Estas seguro de publicar esta plaza?</p>
+        </div>
+      ),
+      onOk() {
+        xhr()
+          .put(`/job/${e.id}`, JSON.stringify(data))
+          .then(resp => {
+            notification.info({
+              message: `Plaza publica`,
+              description: 'La plaza se ha publicada correctamente ',
+              placement: 'bottomRight',
+            });
+            updateJob();
+          })
+          .catch(err => {
+            notification.info({
+              message: `Error`,
+              description: 'No se pudo publicar la plaza',
               placement: 'bottomRight',
             });
           });
@@ -240,8 +288,13 @@ const SingleJob = ({ query, privateCompany }) => {
   }, [auth.user]);
 
   const updateJob = () => {
+    onChange(0);
     setCurrent(0);
     getJob();
+    window.scroll({
+      top: 80,
+      behavior: 'smooth',
+    });
   };
   const switchContent = _ => {
     switch (current) {
@@ -262,12 +315,42 @@ const SingleJob = ({ query, privateCompany }) => {
           </>
         );
         break;
+      case 2:
+        return (
+          <>
+            {job && job.status === 'public' ? (
+              <>
+                <MatchTable data={coinsidences} />
+                {coinsidences.length === 0 ? 'No se han encontrado coincidencia' : null}
+              </>
+            ) : (
+              <SingleJobData job={job} />
+            )}
+          </>
+        );
+        break;
 
       default:
         return <SingleJobData job={job} privateCompany={privateCompany ? privateCompany : false} />;
         break;
     }
   };
+
+  const getCoinsidences = jobid => {
+    if (job && job.status === 'public') {
+      xhr()
+        .get(`/match/${query.id}`)
+        .then(resp => updateCoinsidences(resp.data))
+        .catch(err => err);
+    } else {
+      setCurrent(0);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    getCoinsidences();
+  }, []);
 
   if (job) {
     return (
@@ -279,7 +362,8 @@ const SingleJob = ({ query, privateCompany }) => {
             onChange={onChange}
             applyJob={applyJob}
             appyState={appyState}
-            add={add}
+            duplicate={duplicateJob}
+            publish={publish}
             expire={expire}
             checkProfile={checkProfile}
             privateCompany={privateCompany ? privateCompany : false}

@@ -17,6 +17,7 @@ const locale = term => {
     temporary: 'Temporal',
     full: 'Tiempo completo',
     full_time: 'Tiempo completo',
+    Full_time: 'Tiempo completo',
     part: 'Medio tiempo',
     part_time: 'Medio tiempo',
     vacationer: 'Vacacionista',

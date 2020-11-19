@@ -56,7 +56,6 @@ const Salary = ({ value = {}, onChange }) => {
   const handlenChange = (e, type) => {
     switch (type) {
       case 'base_min':
-        console.log(e + values.commission_min);
         setSalary({
           ...salary,
           salary_min: e + values.commission_min,
@@ -120,15 +119,11 @@ const Salary = ({ value = {}, onChange }) => {
         <InputNumber onChange={e => handlenChange(e, 'base_max')} value={values.base_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>
-          <span>*</span>Comisión mínimo:
-        </label>
+        <label>Comisión mínimo:</label>
         <InputNumber onChange={e => handlenChange(e, 'commission_min')} value={values.commission_min} min={0} />
       </span>
       <span className="form-item--md ant-form-item">
-        <label>
-          <span>*</span>Comisión máximo:
-        </label>
+        <label>Comisión máximo:</label>
         <InputNumber onChange={e => handlenChange(e, 'commission_max')} value={values.commission_max} min={0} />
       </span>
       <span className="form-item--md ant-form-item">

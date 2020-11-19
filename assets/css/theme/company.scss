@@ -426,6 +426,19 @@
       background: $color-green;
     }
   }
+  .umana-empty-layout {
+    @include element(content) {
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: $color-green;
+      }
+      .ant-btn.ant-btn-sm {
+        background: $color-green;
+      }
+    }
+  }
 }
 
 .theme-company {

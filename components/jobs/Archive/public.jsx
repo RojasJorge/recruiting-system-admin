@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import xhr from '../../../xhr';
 import { useStoreState } from 'easy-peasy';
 import Label from '../../../data/labels';
+import { filter } from 'domutils';
 
 const PublicJobs = ({ filters, empty }) => {
   const router = useRouter();
@@ -70,7 +71,9 @@ const PublicJobs = ({ filters, empty }) => {
 
   return (
     <>
-      {emptyResult ? <Alert style={{ marginBottom: 20 }} message={`No hay resultados de la busqueda "${filters.title || filters.country || filters.city}"`} type="error" /> : null}
+      {(emptyResult && filters.title) || filter.city || !isEmpty(filters.country) ? (
+        <Alert style={{ marginBottom: 20 }} message={`No hay resultados de la busqueda "${filters.title || filters.country || filters.city}"`} type="error" />
+      ) : null}
       <div className="umana-list">
         {loading ? (
           <div className="app--spinner animated fadeIn in-section">

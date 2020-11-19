@@ -10,6 +10,7 @@ import Requirements from './requirements';
 import LocationJob from './locations';
 import xhr from '../../../xhr';
 import router from 'next/router';
+import moment from 'moment';
 import { isEmpty, find } from 'lodash';
 // import Jobs from '../index';
 
@@ -85,19 +86,22 @@ const FormJob = props => {
       });
   };
   const edit = async e => {
+    let newObj = e;
+    if (statuState === 'public') {
+      const startdate = moment();
+      startdate.format();
+
+      const data = {
+        created_at: startdate,
+        contact: e.contact,
+        status: statuState,
+      };
+      newObj = Object.assign(e, data);
+    }
+
     xhr()
-      .put(`/job/${props.id}`, JSON.stringify(e))
+      .put(`/job/${props.id}`, JSON.stringify(newObj))
       .then(resp => {
-        let old = find(JobsList, { id: props.id });
-        let updated = e;
-        updated = { ...updated, id: props.id, company_id: old.company_id };
-        let jobs = [...JobsList, updated];
-        fillJobs({
-          data: {
-            items: jobs,
-            total: jobs.length,
-          },
-        });
         props.updateJob();
         allSet(props.id);
       })
@@ -111,30 +115,49 @@ const FormJob = props => {
       });
   };
 
-  const saveDraft = e => {
+  const publish = e => {
     setStatus('public');
+  };
+  const saveChange = e => {
+    setStatus('draft');
   };
 
   const onFinish = e => {
     let id = { company_id: router.query.id };
+    const statusState = { status: statuState };
+    let newObj = e;
     if (props.company && props.company) {
       id = { company_id: company };
     }
-    const statusState = { status: statuState };
-    const newObj = Object.assign(e, id, statusState);
+    if (!e.isBranch) {
+      const objLocation = {
+        address: '',
+        zone: 0,
+        country: '',
+        province: '',
+        city: '',
+        latitude: 0,
+        longitude: 0,
+      };
+      const companyLocation =
+        companies && companies.company && companies.company.items && companies.company.items.length > 0 ? companies.company.items.filter(e => e.id === id.company_id)[0].location : objLocation;
+      delete companyLocation.latitude;
+      delete companyLocation.longitude;
+      const addBranch = { branch: companyLocation };
+      newObj = Object.assign(e, id, statusState, addBranch);
+    }
+    newObj = Object.assign(e, id, statusState);
 
-    console.log('emp', newObj);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
       confirm({
         icon: <i className="material-icons">info</i>,
-        title: 'Publicar plaza',
+        title: 'Editar plaza',
         cancelText: 'Cancelar',
-        okText: 'Publicar plaza',
+        okText: 'Guardar',
         content: (
           <div>
-            <p>Una vez publicada la plaza ya no podras editarla.</p>
-            <p>¿Estas seguro de publicar esta plaza?</p>
+            <p>Los cambios se guardarán pero la plaza aun no sera visible, ni resivirá solicitudas hasta que la publiques. </p>
           </div>
         ),
         onOk() {
@@ -160,7 +183,11 @@ const FormJob = props => {
             </div>
           ),
           onOk() {
-            add(newObj);
+            if (props.type && props.type === 'edit') {
+              edit(newObj);
+            } else {
+              add(newObj);
+            }
           },
           onCancel() {
             console.log('Cancel');
@@ -235,12 +262,17 @@ const FormJob = props => {
 
         {/* end group */}
         <div className="umana-form--footer">
+          {props.type === 'edit' ? (
+            <Button htmlType="submit" onClick={saveChange} type="dashed" size="small" style={{ margin: 0, paddin: '0 20px', height: 45, marginRight: 10 }}>
+              Guardar cambios
+            </Button>
+          ) : null}
           {!props.type ? (
             <Button htmlType="submit" type="dashed" size="small" style={{ margin: 0, paddin: '0 20px', height: 45, marginRight: 10 }}>
               Guardar como borrador
             </Button>
           ) : null}
-          <Button htmlType="submit" onClick={saveDraft} type="primary" size="small" style={{ margin: 0, marginLeft: 10, paddin: '0 20px', height: 45 }}>
+          <Button htmlType="submit" onClick={publish} type="primary" size="small" style={{ margin: 0, marginLeft: 10, paddin: '0 20px', height: 45 }}>
             Publicar
           </Button>
         </div>

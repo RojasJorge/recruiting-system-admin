@@ -110,7 +110,7 @@ const Personal = ({ switchCurrent, current }) => {
     <>
       <Form name="basic" onFinish={onFinish} initialValues={personal} validateTrigger="onBlur" scrollToFirstError={true}>
         <div className="umana-form--section">
-          <div style={{ width: '100%', marginBottom: 30 }}>{isEmpty(avatar) && <Alert message="Debes agregar una imagen de perfil" type="error" showIcon />}</div>
+          {/* <div style={{ width: '100%', marginBottom: 30 }}>{isEmpty(avatar) && <Alert message="Debes agregar una imagen de perfil" type="error" showIcon />}</div> */}
 
           {/*AVATAR UPLOADER*/}
           <AvatarCropper personal={personal} avatar={avatar} updateAvatar={updateAvatar} updateToDelete={updateToDelete} />

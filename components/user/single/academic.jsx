@@ -24,7 +24,9 @@ const Academic = props => {
             {props.data.studies.map((e, idx) => (
               <div className="item-lg item-map" key={`${idx}studie`}>
                 <h3>{e.establishment}</h3>
-                <Label term={e.academicLevel} />
+                <div style={{ display: 'flex' }}>
+                  <Label term={e.academicLevel} /> <span style={{ margin: '0 10px' }}>-</span> <Label term={e.specialization} />
+                </div>
                 <label>
                   <Moment locale="es" format="DD MMMM YYYY">
                     {e.dateInit}

@@ -159,7 +159,7 @@
     button.ant-btn,
     button.ant-btn.ant-btn-primary {
       width: 100%;
-      max-width: 300px;
+      max-width: 350px;
       text-align: left !important;
       background: transparent;
       color: $color-black !important;
@@ -242,6 +242,18 @@
           .ant-steps-icon,
           .i {
             color: $color-blue !important;
+          }
+        }
+      }
+      &.ant-steps-item-disabled {
+        opacity: 0.3;
+        background: rgba($color-text, 0.1);
+        *,
+        .ant-steps-item-content,
+        .ant-steps-item-title {
+          color: $color-black !important;
+          &:hover {
+            color: $color-black !important;
           }
         }
       }

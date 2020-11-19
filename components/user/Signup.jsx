@@ -56,7 +56,7 @@ const SignupSteps = _ => {
     },
     {
       title: 'Llena tu información',
-      content: <SignupForm scope={role} next={next} />,
+      content: <SignupForm scope={role} next={next} setCurrent={switchCurrent} />,
     },
     {
       title: '¡Ya casi terminamos!',
@@ -64,6 +64,7 @@ const SignupSteps = _ => {
     },
   ];
 
+  console.log('curren', current);
   return (
     <>
       <Head>
@@ -77,12 +78,12 @@ const SignupSteps = _ => {
             <PageTitle title="Crear cuenta" />
             <div className="umana-signup__content">
               <div className="steps-content">
-                <Steps current={current}>
+                <Steps current={parseInt(current)}>
                   {steps.map(item => (
                     <Step key={item.title} title={item.title} />
                   ))}
                 </Steps>
-                {steps[current].content}
+                {steps[parseInt(current)].content}
               </div>
 
               <p>
