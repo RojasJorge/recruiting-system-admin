@@ -4,6 +4,7 @@ import {useStoreActions, useStoreState} from "easy-peasy";
 import {RightOutlined} from '@ant-design/icons'
 import {find} from 'lodash'
 import {useRouter} from "next/router";
+import GetContactNotifications from "./GetContactNotifications";
 
 const MatchTable = ({data}) => {
 	
@@ -33,6 +34,11 @@ const MatchTable = ({data}) => {
 				onRow={onRow}
 				bordered
 				columns={[{
+					title: '',
+					dataIndex: 'company',
+					key: 'company',
+					render: (text, record) => <GetContactNotifications record={record} />
+				}, {
 					title: 'Nombre',
 					dataIndex: 'profile.fields.personal',
 					key: 'profile.fields.personal',
