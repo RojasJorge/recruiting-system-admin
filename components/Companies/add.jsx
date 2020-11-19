@@ -4,7 +4,7 @@ import Locations from '../Location';
 import xhr from '../../xhr';
 import ContactInfo from './add/contact';
 import Router from 'next/router';
-import TynyEditor from "../Misc/TinyEditor";
+import TynyEditor from '../Misc/TinyEditor';
 import { UploadAvatar } from '../../elements';
 
 const { TextArea } = Input;
@@ -29,16 +29,12 @@ const FormCompany = props => {
       });
       setTimeout(() => {
         // Router.replace(`/admin/companies/${data}`);
-        Router.push(`/admin/companies/[id]`, `/admin/companies/${props.id}`);
+        Router.push(`/admin/companies/${props.id}`);
       }, 500);
     } else {
       openNotification('bottomRight');
       setTimeout(() => {
-        // Router.replace(`/admin/companies/${data}`);
-        Router.replace({
-          pathname: '/admin/companies/',
-          query: { id: data },
-        });
+        Router.replace(`/admin/companies/${data}`);
       }, 500);
     }
   };
@@ -84,12 +80,7 @@ const FormCompany = props => {
     <>
       <h2 style={{ width: '100%' }}>Información general</h2>
       {/*<UploadAvatar type="company" />*/}
-      <Form
-        scrollToFirstError={true}
-        onFinish={onFinish}
-        initialValues={props.data}
-        validateTrigger="onBlur"
-      >
+      <Form scrollToFirstError={true} onFinish={onFinish} initialValues={props.data} validateTrigger="onBlur">
         <Form.Item
           rules={[
             {
@@ -113,13 +104,9 @@ const FormCompany = props => {
           label="Descripción de la empresa"
         >
           {/*<TextArea rows={4} />*/}
-          <TynyEditor/>
+          <TynyEditor />
         </Form.Item>
-        <Form.Item
-          name="typeBusiness"
-          label="Tipo de negocio de la empresa"
-          className="form-item--md"
-        >
+        <Form.Item name="typeBusiness" label="Tipo de negocio de la empresa" className="form-item--md">
           <Input size="large" />
         </Form.Item>
         <Form.Item name="socialreason" label="Razón Social" className="form-item--md">

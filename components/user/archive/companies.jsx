@@ -1,4 +1,4 @@
-import { Table, Avatar } from 'antd';
+import { Table, Avatar, Spin } from 'antd';
 import xhr from '../../../xhr';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -45,58 +45,66 @@ const ListCompanies = props => {
   return (
     <div>
       <h2>Perfiles de empresas</h2>
-      <Table
-        bordered
-        loading={loading}
-        size="small"
-        dataSource={companies.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
-        rowKey={record => record.id}
-        pagination={{
-          pageSize: 10,
-          total: total,
-          defaultCurrent: pager.page,
-          onChange: onChange,
-          onShowSizeChange: onChange,
-          showSizeChanger: true,
-        }}
-        columns={[
-          {
-            title: '',
-            dataIndex: 'avatar',
-            key: 'avatar',
-            width: 40,
-            render: (text, record) => <Avatar className="table-avatar" icon={<i className="material-icons">business</i>} size={30} />,
-          },
-          {
-            title: 'Nombre',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text, record) => `${record.name} ${record.lastname}`,
-          },
-          {
-            title: 'Dirección',
-            dataIndex: 'address',
-            key: 'address',
-          },
-          {
-            title: 'Correo electrónico',
-            dataIndex: 'email',
-            key: 'email',
-          },
-          {
-            title: 'Teléfono',
-            dataIndex: 'phone',
-            key: 'phone',
-          },
-          {
-            title: '',
-            dataIndex: 'status',
-            key: 'status',
-            width: 50,
-            render: s => <i className="material-icons">chevron_right</i>,
-          },
-        ]}
-      />
+      <div className="umana-table-section">
+        {loading ? (
+          <div className="umana-spinner">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <Table
+            bordered
+            loading={loading}
+            size="small"
+            dataSource={companies.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
+            rowKey={record => record.id}
+            pagination={{
+              pageSize: 10,
+              total: total,
+              defaultCurrent: pager.page,
+              onChange: onChange,
+              onShowSizeChange: onChange,
+              showSizeChanger: true,
+            }}
+            columns={[
+              {
+                title: '',
+                dataIndex: 'avatar',
+                key: 'avatar',
+                width: 40,
+                render: (text, record) => <Avatar className="table-avatar" icon={<i className="material-icons">business</i>} size={30} />,
+              },
+              {
+                title: 'Nombre',
+                dataIndex: 'name',
+                key: 'name',
+                render: (text, record) => `${record.name} ${record.lastname}`,
+              },
+              {
+                title: 'Dirección',
+                dataIndex: 'address',
+                key: 'address',
+              },
+              {
+                title: 'Correo electrónico',
+                dataIndex: 'email',
+                key: 'email',
+              },
+              {
+                title: 'Teléfono',
+                dataIndex: 'phone',
+                key: 'phone',
+              },
+              {
+                title: '',
+                dataIndex: 'status',
+                key: 'status',
+                width: 50,
+                render: s => <i className="material-icons">chevron_right</i>,
+              },
+            ]}
+          />
+        )}
+      </div>
     </div>
   );
 };
