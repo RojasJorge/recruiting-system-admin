@@ -27,7 +27,7 @@ export default {
 			gender: {result: null, score: 0}, // done
 			age: {result: null, score: 0}, // done
 			religion: {result: null, score: 0}, // done
-			experience: {result: null, score: 0}, // done
+			experience: {result: {job: [], profile: []}, score: 0}, // done
 			relocate: {result: null, score: 0}, // done
 			travel: {result: null, score: 0}, // done
 			vehicle: {result: null, score: 0}, // done
