@@ -38,7 +38,13 @@ const About = props => {
           {props.data.availability ? (
             <div className="umana-content__item item-md">
               <label>Tipo de plaza</label>
-              <p>{locale(props.data.availability)}</p>
+              <p>
+                {props.data.availability.map((e, id) => (
+                  <span key={id}>
+                    {id > 0 ? ', ' : null} {locale(e)}
+                  </span>
+                ))}
+              </p>
             </div>
           ) : null}
           {props.data.relocate ? (

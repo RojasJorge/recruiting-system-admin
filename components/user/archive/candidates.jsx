@@ -1,13 +1,14 @@
 import { Table, Avatar } from 'antd';
 import xhr from '../../../xhr';
 import { useEffect, useState } from 'react';
-// import Link from 'next/link';
+import Moment from 'react-moment';
+import moment from 'moment';
 
 import { useRouter } from 'next/router';
 
 const ListCandidate = props => {
   const router = useRouter();
-  const [loading, switchLoader] = useState(true)
+  const [loading, switchLoader] = useState(true);
   const [candidates, setCandidates] = useState([]);
   const [total, setTotal] = useState(0);
   const [pager, updatePager] = useState({
@@ -36,11 +37,11 @@ const ListCandidate = props => {
 
         setCandidates(res.data);
         setTotal(res.data.total);
-        switchLoader(false)
+        switchLoader(false);
       })
       .catch(err => {
-        switchLoader(false)
-        console.log(err)
+        switchLoader(false);
+        console.log(err);
       });
 
   useEffect(() => {
@@ -54,7 +55,7 @@ const ListCandidate = props => {
         bordered
         loading={loading}
         size="small"
-        dataSource={candidates.items}
+        dataSource={candidates.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
         rowKey={record => record.id}
         onRow={onRow}
         pagination={{
@@ -63,7 +64,7 @@ const ListCandidate = props => {
           defaultCurrent: pager.page,
           onChange: onChange,
           onShowSizeChange: onChange,
-          showSizeChanger: true
+          showSizeChanger: true,
         }}
         columns={[
           {

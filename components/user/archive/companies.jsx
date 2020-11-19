@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useStoreActions } from 'easy-peasy';
 
 const ListCompanies = props => {
-  const [loading, switchLoader] = useState(true)
+  const [loading, switchLoader] = useState(true);
   const [companies, setcompanies] = useState([]);
   const [total, setTotal] = useState(0);
   const [pager, updatePager] = useState({
@@ -31,11 +31,11 @@ const ListCompanies = props => {
 
         setcompanies(res.data);
         setTotal(res.data.total);
-        switchLoader(false)
+        switchLoader(false);
       })
       .catch(err => {
-        console.log(err)
-        switchLoader(false)
+        console.log(err);
+        switchLoader(false);
       });
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const ListCompanies = props => {
         bordered
         loading={loading}
         size="small"
-        dataSource={companies.items}
+        dataSource={companies.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
         rowKey={record => record.id}
         pagination={{
           pageSize: 10,
@@ -57,7 +57,7 @@ const ListCompanies = props => {
           defaultCurrent: pager.page,
           onChange: onChange,
           onShowSizeChange: onChange,
-          showSizeChanger: true
+          showSizeChanger: true,
         }}
         columns={[
           {
