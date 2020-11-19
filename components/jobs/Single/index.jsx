@@ -311,7 +311,7 @@ const SingleJob = ({ query, privateCompany }) => {
             <div className="umana-title">
               <h2>{`Editar plaza`}</h2>
             </div>
-            <FormJob data={job} company={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} />
+            <FormJob data={job} needCompanySelect={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} />
           </>
         );
         break;
