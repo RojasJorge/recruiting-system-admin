@@ -21,16 +21,17 @@ const ability = _ =>
           'REQUESTS_ADMIN_VIEW',
           'REQUEST_UPDATE',
           'COMPANY_INFO_BLOCK',
-          'MATCH_SCORE_VIEW'
+          'MATCH_SCORE_VIEW',
+          'ALL_MENUS',
+          'CONTACT_CANDIDATE_BTN'
         ])
         
         can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST'])
-        can('view', ['ALL_MENUS'])
         can('add', ['COMPANIES', 'JOBS'])
         break
       case 'company':
         can('read', ['USERS', 'SPECIAL_ALERTS', 'REQUESTS_MENU'])
-        can('view', ['MAIN_LAYOUT', 'LOGIN', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE', 'COMPANY_INFO_BLOCK', 'MATCH_SCORE_VIEW'])
+        can('view', ['MAIN_LAYOUT', 'LOGIN', 'REQUESTS_ADMIN_VIEW', 'REQUEST_UPDATE', 'COMPANY_INFO_BLOCK', 'MATCH_SCORE_VIEW', 'CONTACT_CANDIDATE_BTN'])
         can('edit', ['USERS', 'JOBS', 'COMPANIES', 'UPDATE_SINGLE_REQUEST'])
         can('add', ['COMPANIES', 'JOBS'])
 
