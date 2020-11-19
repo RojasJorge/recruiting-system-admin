@@ -430,6 +430,19 @@
       background: $color-orange;
     }
   }
+  .umana-empty-layout {
+    @include element(content) {
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: $color-orange;
+      }
+      .ant-btn.ant-btn-sm {
+        background: $color-orange;
+      }
+    }
+  }
 }
 
 .theme-candidate {
