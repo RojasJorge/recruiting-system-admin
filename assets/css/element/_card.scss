@@ -14,9 +14,9 @@
     align-items: center;
     flex-direction: column;
     padding: 0;
+    height: calc(100vh - 400px);
     .umana-layout-cl {
       padding: 0;
-      margin-top: -50px;
     }
   }
 }
