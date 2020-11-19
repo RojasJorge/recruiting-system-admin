@@ -154,6 +154,8 @@
     }
   }
   .umana-sitebar-childrens {
+    position: sticky;
+    top: 100px;
     button.ant-btn,
     button.ant-btn.ant-btn-primary {
       width: 100%;

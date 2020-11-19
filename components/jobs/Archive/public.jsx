@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Pagination, Spin, Alert } from 'antd';
 import { delay, isEmpty } from 'lodash';
-import { Card } from '../../../elements';
+import { Card, EmptyElemet } from '../../../elements';
 import { useRouter } from 'next/router';
 import xhr from '../../../xhr';
 import { useStoreState } from 'easy-peasy';
 import Label from '../../../data/labels';
 
-const PublicJobs = ({ filters }) => {
+const PublicJobs = ({ filters, empty }) => {
   const router = useRouter();
   const [loading, switchLoading] = useState(true);
   const [emptyResult, setEmptyResult] = useState(false);
@@ -92,7 +92,9 @@ const PublicJobs = ({ filters }) => {
               />
             );
           })
-        ) : null}
+        ) : (
+          <EmptyElemet data={empty} />
+        )}
       </div>
       <Pagination current={pager.page} total={total} pageSize={pager.limit} total={total} defaultCurrent={pager.page} onChange={onChange} />
     </>
