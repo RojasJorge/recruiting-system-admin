@@ -117,7 +117,6 @@ const Single = ({ query }) => {
               <Step key={2} title="Ver plazas" icon={<i className="material-icons">remove_red_eye</i>} />
               <Step key={3} title="Agregar plazas" icon={<i className="material-icons">add_circle_outline</i>} />
             </Steps>
-            ,
           </Sitebar>
         </Can>
         <Can I="apply" a="JOBS">
