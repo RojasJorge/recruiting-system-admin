@@ -68,6 +68,8 @@ export default {
 						} else {
 							location.href = '/admin/welcome';
 						}
+					} else {
+						location.reload()
 					}
 					
 				})
@@ -84,7 +86,8 @@ export default {
 			console.log('Persisted states has been removed')
 		})
 		
-		Router.push('/')
+		// Router.push('/')
+		location.href = '/'
 	}),
 	
 	/**
