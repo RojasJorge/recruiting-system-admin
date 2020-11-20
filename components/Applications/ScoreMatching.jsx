@@ -429,10 +429,6 @@ const ScoreMatching = ({data}) => {
 					</tr>
 					</tbody>
 				</table>
-				<h3>Job:</h3>
-				<pre>{JSON.stringify(score, false, 2)}</pre>
-				<h3>Profile:</h3>
-				<pre>{JSON.stringify(data.candidate.profile.fields, false, 2)}</pre>
 			</div>
 		</>
 	)
