@@ -33,7 +33,7 @@ export default {
     }
 
     /** Validate [academic] object */
-    if (academic.courses.length > 0 && academic.studies.length > 0) {
+    if (academic.studies.length > 0) {
       state.academic = true;
     } else {
       state.academic = false;
