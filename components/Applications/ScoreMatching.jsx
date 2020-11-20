@@ -159,13 +159,15 @@ const ScoreMatching = ({data}) => {
 						<td>{`${score.details.age.result.job.min} - ${score.details.age.result.job.max}`}</td>
 						<td className="align-center">
 							<p>Edad</p>
-							<h3>{(score.details.age.result.profile >= score.details.age.result.job.min || score.details.age.result.profile <= score.details.age.result.job.max) ? '100%' : 'No aplica'}</h3>
+							<h3>{(score.details.age.result.profile >= score.details.age.result.job.min || score.details.age.result.profile <= score.details.age.result.job.max) ? 'Aplica' : 'No aplica'}</h3>
 						</td>
 						<td className="align-right">{score.details.age.result.profile}</td>
 					</tr>
 					<tr>
 						{/*Workplace*/}
-						<td>{score.details.workplace.result.job}</td>
+						<td>
+							<Tag>{score.details.workplace.result.job}</Tag>
+						</td>
 						<td>
 							<p>Tipo de trabajo</p>
 							<h3>{data.candidate.profile.fields.lookingFor.workplace.indexOf(data.job.workplace) !== -1 ? '100%' : 'No aplica'}</h3>
@@ -180,7 +182,9 @@ const ScoreMatching = ({data}) => {
 					</tr>
 					<tr>
 						{/*Availability*/}
-						<td>{data.job.availability}</td>
+						<td>
+							<Tag>{data.job.availability}</Tag>
+						</td>
 						<td>
 							<p>Disponibilidad</p>
 							<h3>{
@@ -212,12 +216,16 @@ const ScoreMatching = ({data}) => {
 					</tr>
 					<tr>
 						{/*Gender*/}
-						<td>{data.job.gender}</td>
+						<td>
+							<Tag>{data.job.gender}</Tag>
+						</td>
 						<td>
 							<p>Género</p>
 							<h3>{data.job.gender === data.candidate.profile.fields.personal.gender ? 'Aplica' : 'No aplica'}</h3>
 						</td>
-						<td>{data.candidate.profile.fields.personal.gender}</td>
+						<td>
+							<Tag>{data.candidate.profile.fields.personal.gender}</Tag>
+						</td>
 					</tr>
 					<tr>
 						<td>{
@@ -398,10 +406,10 @@ const ScoreMatching = ({data}) => {
 					</tr>
 					</tbody>
 				</table>
-				{/*<h3>Job:</h3>*/}
-				{/*<pre>{JSON.stringify(score, false, 2)}</pre>*/}
-				{/*<h3>Profile:</h3>*/}
-				{/*<pre>{JSON.stringify(data.candidate.profile.fields, false, 2)}</pre>*/}
+				<h3>Job:</h3>
+				<pre>{JSON.stringify(score, false, 2)}</pre>
+				<h3>Profile:</h3>
+				<pre>{JSON.stringify(data.candidate.profile.fields, false, 2)}</pre>
 			</div>
 		</>
 	)
