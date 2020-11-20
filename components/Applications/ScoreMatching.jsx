@@ -342,7 +342,7 @@ const ScoreMatching = ({data}) => {
 						{/*Languages*/}
 						<td>
 							{
-								isArray(score.details.languages.result.job) && score.details.languages.result.job.length > 0
+								score.details.languages.result && isArray(score.details.languages.result.job) && score.details.languages.result.job.length > 0
 									? <ul>
 										{
 											score.details.languages.result.job.map((item, key) => (
