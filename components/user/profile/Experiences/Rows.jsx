@@ -259,7 +259,7 @@ const Experience = ({switchCurrent, current}) => {
 																{...field}
 																name={[field.name, 'dateInit']}
 																fieldKey={[field.fieldKey, 'dateInit']}
-																rules={[{required: true, message: "El campo teléfono es requerido"}]}
+																rules={[{required: true, message: "Fecha de inicio es requerida."}]}
 															>
 																<DatePicker
 																	size="large"
@@ -278,17 +278,13 @@ const Experience = ({switchCurrent, current}) => {
 																rules={[
 																	{
 																		required: true,
-																		message: 'Por favor confirma contraseña',
+																		message: 'Fecha final es requerida',
 																	},
-																	({getFieldValue}) => ({
-																		validator(rule, value) {
-																			console.log('vallll', value)
-																			// if (!value || getFieldValue('password') === value) {
-																			// 	return Promise.resolve();
-																			// }
-																			return Promise.reject('Las contraseñas no coiciden');
-																		},
-																	}),
+																	// ({getFieldValue}) => ({
+																	// 	validator(rule, value) {
+																	// 		return Promise.reject('Las contraseñas no coiciden');
+																	// 	},
+																	// }),
 																]}
 																// rules={[{required: true, message: "Especifíque una fecha final."}]}
 															>
