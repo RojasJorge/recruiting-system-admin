@@ -13,3 +13,77 @@
     background: rgba($color-white, 0.5);
   }
 }
+
+.table--matching {
+  thead {
+    position: relative;
+    border-right: 30px solid #f2f2f2;
+    border-left: 30px solid #f2f2f2;
+    tr {
+      border-bottom: 0;
+    }
+    th {
+      background: #f2f2f2 !important;
+      font-weight: 400;
+    }
+  }
+
+  tbody {
+    border-right: 30px solid $color-white;
+    border-left: 30px solid $color-white;
+    td {
+      p {
+        margin-bottom: 0;
+      }
+      h3.success {
+        color: $color-green;
+      }
+      .ant-tag {
+        font-size: 13px;
+      }
+      &:nth-child(2) {
+        text-align: center;
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}
+.content-matching {
+  padding: 0;
+}
+
+.theme-umana {
+  .table--matching {
+    h3.success,
+    h2.success,
+    h1.success {
+      color: $color-blue;
+    }
+  }
+}
+
+.theme-company {
+  .table--matching {
+    h3.success,
+    h2.success,
+    h1.success {
+      color: $color-green;
+    }
+  }
+}
+.theme-candidate {
+  .table--matching {
+    h3.success,
+    h2.success,
+    h1.success {
+      color: $color-green;
+    }
+  }
+}
+
+.nosuccess,
+.noSuccess {
+  color: $color-text;
+}
