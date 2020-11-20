@@ -3,6 +3,7 @@ import {useStoreActions, useStoreState} from "easy-peasy";
 import {useState} from "react";
 import {Progress, Tag} from "antd";
 import {isArray} from 'lodash'
+import locale from '../../data/translates/spanish'
 
 const ScoreMatching = ({data}) => {
 	
@@ -52,8 +53,8 @@ const ScoreMatching = ({data}) => {
 		
 		if (data.job.isBranch) {
 			result = (data.job.branch.country === data.candidate.profile.fields.personal.location.country && data.job.branch.province === data.candidate.profile.fields.personal.location.province)
-				? 'Aplica'
-				: 'No aplica'
+				? <h3 className="success">Aplica</h3>
+				: <h3 className="nosuccess">No aplica</h3>
 		} else {
 			result = (data.company.location.country === data.candidate.profile.fields.personal.location.country && data.company.location.province === data.candidate.profile.fields.personal.location.province)
 				? 'Aplica'
@@ -108,23 +109,26 @@ const ScoreMatching = ({data}) => {
 	
 	return (
 		<>
-			<div className="umana-content">
+		<div style={{textAlign: 'center'}}>
+			<Progress
+				style={{margin: '0 auto 30px'}}
+				width={200}
+				strokeWidth={2}
+				strokeColor="#585858"
+				type="circle"
+				percent={score.percent}
+				format={percent => 	<div>
+					<h2 style={percent > 65? {color: 'green', marginBottom: 0} : {color: 'red', marginBottom: 0}}>{`${percent}%`}</h2>
+					Matching score 
+					</div>
+			
+				}
+			/>
+		
+		</div>
+			<div className="umana-content content-matching ">
 				<table className="table--matching">
 					<thead>
-					<tr>
-						<th colSpan={3} className="align-center">
-							<Progress
-								style={{marginBottom: 30}}
-								width={150}
-								strokeWidth={2}
-								strokeColor="#585858"
-								type="circle"
-								percent={score.percent}
-								format={percent => `Matching score ${percent}%`
-								}
-							/>
-						</th>
-					</tr>
 					<tr>
 						<th className="white">Requerimientos dela empresa</th>
 						<th className="white"></th>
@@ -137,7 +141,9 @@ const ScoreMatching = ({data}) => {
 						<td>{findArea(data.job.jobposition)}</td>
 						<td className="align-center">
 							<p>Área</p>
-							<h3>{data.candidate.profile.fields.personal.currentJobTitle === data.job.jobposition ? '100%' : 'No aplica'}</h3>
+							{data.candidate.profile.fields.personal.currentJobTitle === data.job.jobposition ? 
+									<h3 className="success">100%</h3> : 
+									<h3 className="noSuccess">No Aplica</h3>}
 						</td>
 						<td className="align-right">{findArea(data.candidate.profile.fields.personal.currentJobTitle)}</td>
 					</tr>
@@ -148,7 +154,11 @@ const ScoreMatching = ({data}) => {
 						</td>
 						<td className="align-center">
 							<p>Años de experiencia requeridos</p>
-							<h3>{score.details.experience.result.profile > score.details.experience.result.job ? 'Sobrecalificado' : 'Poca experiencia'}</h3>
+							{score.details.experience.result.profile > score.details.experience.result.job ? 
+								<h3 className="success">Sobrecalificado</h3>
+								: 
+								<h3 className="noSuccess">Poca experiencia</h3>
+							}
 						</td>
 						<td className="align-right">
 							{score.details.experience.result.profile}
@@ -159,23 +169,29 @@ const ScoreMatching = ({data}) => {
 						<td>{`${score.details.age.result.job.min} - ${score.details.age.result.job.max}`}</td>
 						<td className="align-center">
 							<p>Edad</p>
-							<h3>{(score.details.age.result.profile >= score.details.age.result.job.min || score.details.age.result.profile <= score.details.age.result.job.max) ? 'Aplica' : 'No aplica'}</h3>
+							{(score.details.age.result.profile >= score.details.age.result.job.min || score.details.age.result.profile <= score.details.age.result.job.max) ? 
+									<h3 className="success">Aplica</h3> 
+								: 
+								<h3 className="nosuccess">No Aplica</h3>}
 						</td>
 						<td className="align-right">{score.details.age.result.profile}</td>
 					</tr>
 					<tr>
 						{/*Workplace*/}
 						<td>
-							<Tag>{score.details.workplace.result.job}</Tag>
+							<Tag>{locale(score.details.workplace.result.job)}</Tag>
 						</td>
 						<td>
-							<p>Tipo de trabajo</p>
-							<h3>{data.candidate.profile.fields.lookingFor.workplace.indexOf(data.job.workplace) !== -1 ? '100%' : 'No aplica'}</h3>
+							<p>Lugar de trabajo</p>
+							{data.candidate.profile.fields.lookingFor.workplace.indexOf(data.job.workplace) !== -1 ? 
+								<h3 className="success">100%</h3>
+								: 
+								<h3 className="nosuccess">No aplica</h3>}
 						</td>
 						<td>{
 							score.details.workplace.result && isArray(score.details.workplace.result.profile)
 								? score.details.workplace.result.profile.map((item, key) => (
-									<Tag key={key}>{item}</Tag>
+									<Tag key={key}>{locale(item)}</Tag>
 								))
 								: null
 						}</td>
@@ -183,21 +199,21 @@ const ScoreMatching = ({data}) => {
 					<tr>
 						{/*Availability*/}
 						<td>
-							<Tag>{data.job.availability}</Tag>
+							<Tag>{locale(data.job.availability)}</Tag>
 						</td>
 						<td>
 							<p>Disponibilidad</p>
-							<h3>{
+							{
 								data.candidate.profile.fields.lookingFor.availability.indexOf(data.job.availability) !== -1
-									? 'Aplica'
-									: 'No aplica'
-							}</h3>
+									? <h3 className="success">Aplica</h3>
+									: <h3 className="nosuccess">No aplica</h3>
+							}
 						</td>
 						<td>{
 							isArray(data.candidate.profile.fields.lookingFor.availability)
 								?
 								data.candidate.profile.fields.lookingFor.availability.map((item, key) => (
-									<Tag key={key}>{item}</Tag>
+									<Tag key={key}>{locale(item)}</Tag>
 								))
 								: '-'
 						}</td>
@@ -207,24 +223,25 @@ const ScoreMatching = ({data}) => {
 						<td>{renderJobLocation()}</td>
 						<td>
 							<p>Ubicación</p>
-							<h3>{
-								
+							{
 								compareLocations()
-							}</h3>
+							}
 						</td>
 						<td>{`${data.candidate.profile.fields.personal.location.address}, ${data.candidate.profile.fields.personal.location.province} - ${data.candidate.profile.fields.personal.location.city}`}</td>
 					</tr>
 					<tr>
 						{/*Gender*/}
 						<td>
-							<Tag>{data.job.gender}</Tag>
+							<Tag>{locale(data.job.gender)}</Tag>
 						</td>
 						<td>
 							<p>Género</p>
-							<h3>{data.job.gender === data.candidate.profile.fields.personal.gender ? 'Aplica' : 'No aplica'}</h3>
+							{data.job.gender === data.candidate.profile.fields.personal.gender ? 
+								<h3 className="success">Aplica</h3> : 
+								<h3 className="nosuccess">No aplica</h3>}
 						</td>
 						<td>
-							<Tag>{data.candidate.profile.fields.personal.gender}</Tag>
+							<Tag>{locale(data.candidate.profile.fields.personal.gender)}</Tag>
 						</td>
 					</tr>
 					<tr>
@@ -237,13 +254,13 @@ const ScoreMatching = ({data}) => {
 						}</td>
 						<td>
 							<p>Religión</p>
-							<h3>{
+							{
 								isArray(data.job.religion)
 									? data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1
-									? 'Aplica'
-									: 'No aplica'
+									? 	<h3 className="success">Aplica</h3>
+									: 	<h3 className="noSuccess">No Aplica</h3>
 									: '-'
-							}</h3>
+							}
 						</td>
 						<td>
 							<Tag>{data.candidate.profile.fields.personal.religion}</Tag>
@@ -254,9 +271,12 @@ const ScoreMatching = ({data}) => {
 						<td>{data.job.relocate ? 'Si' : 'No'}</td>
 						<td>
 							<p>Reubicación</p>
-							<h3>
-								{data.job.relocate && data.candidate.profile.fields.lookingFor.relocate ? 'Aplica' : data.candidate.profile.fields.lookingFor.relocate ? 'Aplica' : 'No aplica'}
-							</h3>
+						
+								{data.job.relocate && data.candidate.profile.fields.lookingFor.relocate ? 
+								<h3 className="success">Aplica</h3> : 
+								data.candidate.profile.fields.lookingFor.relocate ? 
+								<h3 className="success">Aplica</h3> : <h3 className="noSuccess">No Aplica</h3>}
+							
 						</td>
 						<td>{data.candidate.profile.fields.lookingFor.relocate ? 'Si' : 'No'}</td>
 					</tr>
@@ -265,9 +285,12 @@ const ScoreMatching = ({data}) => {
 						<td>{data.job.travel ? 'Si' : 'No'}</td>
 						<td>
 							<p>Viajes</p>
-							<h3>
-								{data.job.travel && data.candidate.profile.fields.lookingFor.travel ? 'Aplica' : data.candidate.profile.fields.lookingFor.travel ? 'Aplica' : 'No aplica'}
-							</h3>
+								{data.job.travel && data.candidate.profile.fields.lookingFor.travel ? 
+									<h3 className="success">Aplica</h3> : 
+									data.candidate.profile.fields.lookingFor.travel ? 
+									<h3 className="success">Aplica</h3> : 
+									<h3 className="noSuccess">No Aplica</h3>}
+							
 						</td>
 						<td>{data.candidate.profile.fields.lookingFor.relocate ? 'Si' : 'No'}</td>
 					</tr>
@@ -282,9 +305,9 @@ const ScoreMatching = ({data}) => {
 						}</td>
 						<td>
 							<p>Vehículo</p>
-							<h3>{
-								checkVehicles().length > 0 ? 'Aplica' : 'No aplica'
-							}</h3>
+							{
+								checkVehicles().length > 0 ? <h3 className="success">Aplica</h3> : <h3 className="nosuccess">No aplica</h3>
+							}
 						</td>
 						<td>{
 							isArray(data.candidate.profile.fields.economic.vehicles)
@@ -305,7 +328,7 @@ const ScoreMatching = ({data}) => {
 						}</td>
 						<td>
 							<p>Tipos de licencia</p>
-							<h3>{checkLicence().length > 0 ? 'Aplica' : 'No aplica'}</h3>
+							{checkLicence().length > 0 ? <h3 className="success">Aplica</h3> : <h3 className="success">No aplica</h3>}
 						</td>
 						<td>{
 							isArray(data.candidate.profile.fields.personal.driversLicenceType)

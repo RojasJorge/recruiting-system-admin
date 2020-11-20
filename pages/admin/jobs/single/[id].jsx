@@ -4,7 +4,7 @@ import SingleJob from '../../../../components/jobs/Single';
 
 const Index = query => {
   return (
-    <Layout title="Plaza">
+    <Layout title="Plaza" className="single-jobs">
       <>
         <PageTitle title="Ver Plaza" />
         <SingleJob query={query} />
@@ -13,6 +13,6 @@ const Index = query => {
   );
 };
 
-Index.getInitialProps = async ctx => ctx.query
+Index.getInitialProps = async ctx => ctx.query;
 
-export default Index
+export default Index;

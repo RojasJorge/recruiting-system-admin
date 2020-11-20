@@ -1,7 +1,7 @@
 // Header
 .umana-header {
   @include max-width();
-  overflow-x: hidden;
+  overflow: hidden;
   width: 100%;
   box-shadow: $shadow;
   display: flex;

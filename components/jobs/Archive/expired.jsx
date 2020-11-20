@@ -128,7 +128,7 @@ const ExpiredJobs = ({ title, type, filters }) => {
           columns={columns}
           bordered
           size="small"
-          dataSource={jobs.items}
+          dataSource={jobs.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
           rowKey={record => record.id}
           onRow={onRow}
           pagination={{ pageSize: pager.limit, total: total, defaultCurrent: pager.page, onChange: onChange }}

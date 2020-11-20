@@ -80,21 +80,23 @@ const PublicJobs = ({ filters, empty }) => {
             <Spin size="large" />
           </div>
         ) : jobs && jobs.length > 0 ? (
-          jobs.map((e, idx) => {
-            return (
-              <Card
-                key={idx}
-                title={e.title}
-                link={`${auth && auth.token ? '/admin/jobs/single/' : '/jobs/single/'}`}
-                dinamicLink={e.id}
-                description={e.description}
-                theme="green"
-                parentInfo={e.company}
-                date={{ date: e.expiration_date, type: 'Expira' }}
-                align="left"
-              />
-            );
-          })
+          jobs
+            .sort((a, b) => (b.created_at > a.created_at ? 1 : -1))
+            .map((e, idx) => {
+              return (
+                <Card
+                  key={idx}
+                  title={e.title}
+                  link={`${auth && auth.token ? '/admin/jobs/single/' : '/jobs/single/'}`}
+                  dinamicLink={e.id}
+                  description={e.description}
+                  theme="green"
+                  parentInfo={e.company}
+                  date={{ date: e.expiration_date, type: 'Expira' }}
+                  align="left"
+                />
+              );
+            })
         ) : (
           <EmptyElemet data={empty} />
         )}

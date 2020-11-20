@@ -300,6 +300,13 @@ h5 {
     padding: 30px 20px;
     width: 100%;
     @include bp(xmedium) {
+      width: calc(100% - 320px);
+      &.big {
+        width: calc(100% - 400px);
+        margin-left: auto;
+      }
+    }
+    @include bp(large) {
       width: calc(100% - 370px);
       &.big {
         width: calc(100% - 400px);
@@ -320,6 +327,10 @@ h5 {
   @include element(small) {
     width: 100%;
     @include bp(xmedium) {
+      width: 300px;
+      margin-right: 20px;
+    }
+    @include bp(large) {
       width: 350px;
       margin-right: 20px;
     }
