@@ -170,6 +170,7 @@ const Level = ({switchCurrent, current}) => {
 												
 												<Item
 													label="Especialización"
+													rules={[{required: true, message: 'Debes escoger una especialidad'}]}
 													{...field}
 													name={[field.name, 'specialization']}
 													fieldKey={[field.fieldKey, 'specialization']}

@@ -159,7 +159,7 @@ const FormJob = props => {
         okText: 'Guardar',
         content: (
           <div>
-            <p>Los cambios se guardarán pero la plaza aun no sera visible, ni resivirá solicitudas hasta que la publiques. </p>
+            <p>Los cambios se guardarán pero la plaza aún no será visible ni recibirá solicitudes hasta que la publiques.</p>
           </div>
         ),
         onOk() {

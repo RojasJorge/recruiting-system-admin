@@ -128,7 +128,7 @@ const Others = ({ switchCurrent, current }) => {
                           },
                         ]}
                       >
-                        <InputNumber min={0} />
+                        <InputNumber min={0} max={100} formatter={value => `${value}%`} />
                       </Item>
 
                       <Item
@@ -143,7 +143,7 @@ const Others = ({ switchCurrent, current }) => {
                           },
                         ]}
                       >
-                        <InputNumber min={0} />
+                        <InputNumber min={0} max={100} formatter={value => `${value}%`} />
                       </Item>
 
                       <Item
@@ -158,7 +158,7 @@ const Others = ({ switchCurrent, current }) => {
                           },
                         ]}
                       >
-                        <InputNumber min={0} />
+                        <InputNumber min={0} max={100} formatter={value => `${value}%`} />
                       </Item>
 
                       <a
