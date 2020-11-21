@@ -4,7 +4,7 @@ import { InputNumber, Slider } from 'antd';
 
 const Age = ({ value, onChange }) => {
   let initialState = {
-    min: 18,
+    min: 16,
     max: 60,
   };
 
@@ -17,7 +17,8 @@ const Age = ({ value, onChange }) => {
   const [state, setState] = useState(initialState);
 
   const marks = {
-    18: 'Min 18 años',
+    16: 'min 16 años',
+    18: '',
     60: '60 años',
     70: 'Max',
   };
@@ -50,7 +51,7 @@ const Age = ({ value, onChange }) => {
         <InputNumber min={18} max={70} value={state.min} onChange={e => handlenChange(e, 'min')} />
       </span> */}
       <span className="form-item--fx ant-form-item">
-        <Slider min={17} max={70} marks={marks} value={[state.min, state.max]} range onChange={handleSlider} style={{ marginTop: 'auto' }} />
+        <Slider min={16} max={70} marks={marks} value={[state.min, state.max]} range onChange={handleSlider} style={{ marginTop: 'auto' }} />
       </span>
       {/* <span className="form-item--sm ant-form-item" style={{ width: 50 }}>
         <label>Máxima:</label>
