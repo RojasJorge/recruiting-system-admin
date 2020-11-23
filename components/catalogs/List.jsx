@@ -40,9 +40,10 @@ const List = ({ type, title }) => {
 
   const addItem = o => {
     const url = type.replace('_', '-');
+    const token = auth.token;
     collectionsActions.add({ url, o, token });
     setTimeout(() => {
-      // collectionsActions.get({ type: type, token: auth.token });
+      collectionsActions.get({ type: type, token: auth.token });
       switchEdit(false);
       setEdit(false);
       setItem({});
@@ -79,6 +80,8 @@ const List = ({ type, title }) => {
   useEffect(() => {
     order();
   }, [data[type]]);
+
+  console.log(data);
 
   return (
     <>
