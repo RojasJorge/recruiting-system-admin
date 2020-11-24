@@ -35,7 +35,7 @@ const About = props => {
           <div className="umana-content__item item-lg">
             <h2>Qué estas buscando</h2>
           </div>
-          {props.data.availability ? (
+          {props.data && props.data.availability ? (
             <div className="umana-content__item item-md">
               <label>Tipo de plaza</label>
               <p>

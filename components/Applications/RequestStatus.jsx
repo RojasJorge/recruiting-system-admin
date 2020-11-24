@@ -9,13 +9,13 @@ const RequestStatus = ({ record }) => {
 
     switch (status) {
       case 'PENDING':
-        params = { ...params, string: 'PENDIENTE', color: '#aaa' };
+        params = { ...params, string: 'Pendiente', color: '#aaa' };
         break;
       case 'RECEIVED':
-        params = { ...params, string: 'RECIBIDO', color: '#4269f5' };
+        params = { ...params, string: 'En revisión', color: '#4269f5' };
         break;
       case 'IN_REVIEW':
-        params = { ...params, string: 'En revisión', color: '#c97f10' };
+        params = { ...params, string: 'Entrevista', color: '#c97f10' };
         break;
       case 'CANCELLED':
         params = { ...params, string: 'Cancelado', color: '#ff0000' };

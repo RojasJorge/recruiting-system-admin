@@ -27,11 +27,13 @@ const AreaJob = ({ value, onChange }) => {
       {data && data.career
         ? data.career
             .sort((a, b) => (a.order > b.order ? 1 : -1))
-            .map((e, i) => (
-              <Select.Option key={e.id + '-' + i} value={e.id}>
-                {e.name}
-              </Select.Option>
-            ))
+            .map((e, i) =>
+              e.status ? (
+                <Select.Option key={e.id + '-' + i} value={e.id}>
+                  {e.name}
+                </Select.Option>
+              ) : null,
+            )
         : null}
     </Select>
   );
