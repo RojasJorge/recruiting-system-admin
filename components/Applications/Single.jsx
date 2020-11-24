@@ -12,7 +12,7 @@ import xhr from '../../xhr';
 import { useRouter } from 'next/router';
 import SingleJobData from '../jobs/Single/data';
 import ScoreMatching from './ScoreMatching';
-import {Can} from "../Can";
+import { Can } from '../Can';
 
 const { Option } = Select;
 const { Step } = Steps;
@@ -23,11 +23,11 @@ const STATUS = [
     id: 'PENDING',
   },
   {
-    name: 'Recibido',
+    name: 'En revisión',
     id: 'RECEIVED',
   },
   {
-    name: 'En revisión',
+    name: 'Entrevista',
     id: 'IN_REVIEW',
   },
   {
