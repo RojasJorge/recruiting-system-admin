@@ -26,7 +26,7 @@ const GetContactNotifications = ({record}) => {
 		<>
 			{
 				data && data.total > 0 ? <Tooltip title={`${data.total} ${data.total > 1 ? ' Veces' : ' Vez'} invitado vía email.`}>
-						<Badge count={data.total}>
+						<Badge count={data.total} style={{ backgroundColor: '#52c41a' }}>
 							<MailOutlined style={{fontSize: 20}}/>
 						</Badge>
 					</Tooltip>
