@@ -590,3 +590,12 @@ h5 {
     }
   }
 }
+
+.ant-badge {
+  .anticon.anticon-check-circle {
+    border-radius: 50% !important;
+    svg {
+      fill: $color-white !important;
+    }
+  }
+}

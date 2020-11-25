@@ -72,7 +72,7 @@ const AccountConfirm = query => {
           </h3>
           <p>
             Te haz dado de alta en nuestra plataforma, ahora puedes{' '}
-            <Link href="/">
+            <Link href="/?newaccount=true">
               <a>Iniciar Sesión</a>
             </Link>{' '}
             en UMANA
