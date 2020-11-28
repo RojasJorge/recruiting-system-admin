@@ -1,5 +1,5 @@
-import {SendOutlined} from '@ant-design/icons'
-import {Button, Menu, notification} from 'antd';
+import {SendOutlined, MailOutlined} from '@ant-design/icons'
+import {Button, Menu, notification, Modal} from 'antd';
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
@@ -51,6 +51,21 @@ const Sitebar = props => {
 			})
 		}
 	}, [])
+	
+	const onUserInviteConfirm = _ =>
+		Modal.info({
+			content: '¿Confirma que desea invitar al candidato a aplicar a esta plaza?',
+			okText: 'Si, contactar',
+			cancelText: 'Cancelar',
+			icon: false,
+			onOk: () => onCompanyInvite(),
+			okButtonProps: {
+				type: "dashed",
+				size: "large",
+				block: true,
+				icon: <MailOutlined style={{fontSize: 16}}/>
+			}
+		})
 	
 	return (
 		<div className={`umana-sitebar theme-${props.theme ? props.theme : 'blue'}`}>
@@ -121,7 +136,7 @@ const Sitebar = props => {
 					<Button
 						style={{marginTop: 20}}
 						icon={<SendOutlined/>}
-						onClick={_ => onCompanyInvite()}
+						onClick={_ => onUserInviteConfirm()}
 					>Contactar al candidato
 					</Button>
 				</>}
