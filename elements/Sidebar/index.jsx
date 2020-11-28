@@ -54,7 +54,7 @@ const Sitebar = props => {
 	
 	const onUserInviteConfirm = _ =>
 		Modal.info({
-			content: '¿Confirma que desea invitar al candidato a aplicar a esta plaza?',
+			content: <h3>¿Confirma que desea contactar al usuario vía correo electrónico?</h3>,
 			okText: 'Si, contactar',
 			cancelText: 'Cancelar',
 			maskClosable: true,
