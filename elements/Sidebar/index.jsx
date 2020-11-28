@@ -57,6 +57,7 @@ const Sitebar = props => {
 			content: '¿Confirma que desea invitar al candidato a aplicar a esta plaza?',
 			okText: 'Si, contactar',
 			cancelText: 'Cancelar',
+			maskClosable: true,
 			icon: false,
 			onOk: () => onCompanyInvite(),
 			okButtonProps: {
