@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu } from 'antd';
 import Proptypes from 'prop-types';
-import router from 'next/router'
+import router from 'next/router';
 
 const CompanyNav = props => {
   const [current, setCurrent] = useState('/');
@@ -44,11 +44,11 @@ const CompanyNav = props => {
           <a>Plazas</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="applicants" onClick={e => props.close(e, 'close')}>
+      {/* <Menu.Item key="applicants" onClick={e => props.close(e, 'close')}>
         <Link href="/admin/applicants" passHref>
           <a>Talentos</a>
         </Link>
-      </Menu.Item>
+      </Menu.Item> */}
     </Menu>
   );
 };

@@ -76,7 +76,7 @@ const Index = query => {
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
             <SingleProfileCandidate query={query} data={user} />
-          </div>
+          </div>x
         </div>
       </>
     </Layout>
