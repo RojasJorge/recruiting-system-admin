@@ -1,4 +1,5 @@
 import { Table, Avatar, Spin } from 'antd';
+import {isEmpty} from 'lodash'
 import xhr from '../../../xhr';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -46,16 +47,16 @@ const ListCompanies = props => {
     <div>
       <h2>Perfiles de empresas</h2>
       <div className="umana-table-section">
-        {loading ? (
-          <div className="umana-spinner">
-            <Spin size="large" />
-          </div>
-        ) : (
+        {/*{loading ? (*/}
+        {/*  <div className="umana-spinner">*/}
+        {/*    <Spin size="large" />*/}
+        {/*  </div>*/}
+        {/*) : (*/}
           <Table
             bordered
             loading={loading}
             size="small"
-            dataSource={companies.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
+            dataSource={!isEmpty(companies.items) ? companies.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1)) : []}
             rowKey={record => record.id}
             pagination={{
               pageSize: 10,
@@ -103,7 +104,7 @@ const ListCompanies = props => {
               },
             ]}
           />
-        )}
+        {/*)}*/}
       </div>
     </div>
   );

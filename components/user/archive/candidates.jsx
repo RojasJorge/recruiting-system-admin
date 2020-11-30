@@ -1,8 +1,9 @@
 import { Table, Avatar, Spin } from 'antd';
+import {isEmpty} from 'lodash'
 import xhr from '../../../xhr';
 import { useEffect, useState } from 'react';
-import Moment from 'react-moment';
-import moment from 'moment';
+// import Moment from 'react-moment';
+// import moment from 'moment';
 
 import { useRouter } from 'next/router';
 
@@ -52,16 +53,16 @@ const ListCandidate = props => {
     <div>
       <h2>Perfiles de candidatos</h2>
       <div className="umana-table-section">
-        {loading ? (
-          <div className="umana-spinner">
-            <Spin size="large" />
-          </div>
-        ) : (
+        {/*{loading ? (*/}
+        {/*  <div className="umana-spinner">*/}
+        {/*    <Spin size="large" />*/}
+        {/*  </div>*/}
+        {/*) : (*/}
           <Table
             bordered
             loading={loading}
             size="small"
-            dataSource={candidates.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1))}
+            dataSource={!isEmpty(candidates.items) ? candidates.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1)) : []}
             rowKey={record => record.id}
             onRow={onRow}
             pagination={{
@@ -110,7 +111,7 @@ const ListCandidate = props => {
               },
             ]}
           />
-        )}
+        // )}
       </div>
     </div>
   );
