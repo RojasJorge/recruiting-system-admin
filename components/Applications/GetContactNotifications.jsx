@@ -1,6 +1,6 @@
 import xhr from '../../xhr';
 import { useEffect, useState } from 'react';
-import { MailOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { MailOutlined, CheckCircleOutlined, SendOutlined } from '@ant-design/icons';
 import { Badge, Tooltip } from 'antd';
 
 const GetContactNotifications = ({ record }) => {
@@ -31,9 +31,7 @@ const GetContactNotifications = ({ record }) => {
         </Tooltip>
       ) : (
         <Tooltip title={`Aún no ha sido invitado vía email`}>
-          <Badge count={0}>
-            <MailOutlined style={{ fontSize: 20 }} />
-          </Badge>
+          <SendOutlined style={{fontSize: 20}}/>
         </Tooltip>
       )}
     </>
