@@ -14,6 +14,7 @@ tr.row-disabled {
 .table {
   &--matching {
     width: 100%;
+    table-layout: fixed;
 
     tr {
       border-bottom: 1px solid #c7c7c7;
