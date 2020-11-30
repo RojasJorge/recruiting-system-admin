@@ -109,6 +109,21 @@ const ScoreMatching = ({data}) => {
 	
 	return (
 		<>
+			<div style={{display: 'flex', maxWidth: 1200, backgroundColor: '#ffffff'}}>
+				<div className="col" style={{width: '60%', borderRight: '1px solid grey'}}>
+					<h3>Data:</h3>
+					<pre>{JSON.stringify(data, false, 2)}</pre>
+				</div>
+				<div className="col">
+					<h3>Score:</h3>
+					<pre>{JSON.stringify(score, false, 2)}</pre>
+				</div>
+			</div>
+		</>
+	)
+	
+	return (
+		<>
 		<div style={{textAlign: 'center'}}>
 			<Progress
 				style={{margin: '0 auto 30px'}}
