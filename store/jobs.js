@@ -24,16 +24,16 @@ export default {
     } = payload;
 
     let matchScore = {
-      workplace: { result: null, score: 0 }, // done
-      availability: { result: null, score: 0 }, // done
-      country: { result: null, score: 0 }, // done
-      province: { result: null, score: 0 }, // done
-      gender: { result: null, score: 0 }, // done
-      age: { result: null, score: 0 }, // done
-      religion: { result: null, score: 0 }, // done
+      workplace: { result: {job: '', profile: []}, score: 0 }, // done
+      availability: { result: false, score: 0 }, // done
+      country: { result: false, score: 0 }, // done
+      province: { result: false, score: 0 }, // done
+      gender: { result: false, score: 0 }, // done
+      age: { result: false, score: 0 }, // done
+      religion: { result: false, score: 0 }, // done
       experience: { result: { job: 0, profile: 0 }, score: 0 }, // done
-      relocate: { result: null, score: 0 }, // done
-      travel: { result: null, score: 0 }, // done
+      relocate: { result: {job: false, profile: false}, score: 0 }, // done
+      travel: { result: {job: false, profile: false}, score: 0 }, // done
       vehicle: { result: null, score: 0 }, // done
       type_licence: { result: null, score: 0 }, // done
       languages: { result: { job: [], profile: [] }, score: 0 }, // done
@@ -74,10 +74,11 @@ export default {
     if (job.isBranch) {
       country = job.branch.country === fields.personal.location.country;
       province = job.branch.province === fields.personal.location.province;
-    } else {
-      country = company.location.country === fields.personal.location.country;
-      province = company.location.province === fields.personal.location.province;
     }
+    // else {
+    //   country = company.location.country === fields.personal.location.country;
+    //   province = company.location.province === fields.personal.location.province;
+    // }
 
     if (country) {
       matchScore.country.result = country;
@@ -85,7 +86,7 @@ export default {
     }
 
     if (province) {
-      matchScore.province.result = 'province';
+      matchScore.province.result = province;
       matchScore.province.score = 10;
     }
 
@@ -93,7 +94,7 @@ export default {
      * 5.-
      * @type {number|string}
      */
-    const gender = (job.gender = fields.personal.gender);
+    const gender = (job.gender === fields.personal.gender || job.gender === 'indifferent');
 
     if (gender) {
       matchScore.gender.result = gender;
@@ -114,10 +115,10 @@ export default {
      * 7.-
      * @type {boolean}
      */
-    const religion = job.religion.indexOf(fields.personal.religion) !== -1;
+    const religion = (job.religion.indexOf(fields.personal.religion) !== -1);
 
-    if (religion) {
-      matchScore.religion.result = religion;
+    if (religion || job.religion.find(o => o === 'indifferent')) {
+      matchScore.religion.result = true;
       matchScore.religion.score = 3;
     }
 
@@ -187,7 +188,7 @@ export default {
     // if (licence_type.length > 0) matchScore = {...matchScore, type_licence: 3}
 
     if (licence_type.length > 0) {
-      matchScore.type_licence.result = licence_type;
+      matchScore.type_licence.result = {job: job.type_licence, profile: fields.personal.driversLicenceType};
       matchScore.type_licence.score = 3;
     }
 
