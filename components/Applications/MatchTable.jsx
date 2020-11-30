@@ -34,7 +34,7 @@ const MatchTable = ({data}) => {
 				onRow={onRow}
 				bordered
 				columns={[{
-					title: '',
+					title: 'Contacto',
 					dataIndex: 'company',
 					key: 'company',
 					render: (text, record) => <GetContactNotifications record={record} />
