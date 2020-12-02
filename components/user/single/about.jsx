@@ -9,7 +9,7 @@ const About = props => {
       {props.defaultData.about ? (
         <div className="umana-content" id="aboutme">
           <Can I="apply" a="JOBS">
-            <Link href={`/admin/profile/edit?current=2`} passHref>
+            <Link href={`/admin/profile/edit?current=0`} passHref>
               <a className="umana-section-edit">
                 <i className="material-icons">edit</i>
               </a>
@@ -26,7 +26,7 @@ const About = props => {
       {props.data.availability || props.data.relocate || props.data.travel || props.data.workplace ? (
         <div className="umana-content" id="whatsearch">
           <Can I="apply" a="JOBS">
-            <Link href={`/admin/profile/edit?current=3`} passHref>
+            <Link href={`/admin/profile/edit?current=1`} passHref>
               <a className="umana-section-edit">
                 <i className="material-icons">edit</i>
               </a>

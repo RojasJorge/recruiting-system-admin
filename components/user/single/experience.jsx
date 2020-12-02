@@ -9,7 +9,7 @@ const Experience = props => {
     return (
       <div className="umana-content" id="experience">
         <Can I="apply" a="JOBS">
-          <Link href={`/admin/profile/edit?current=7`} passHref>
+          <Link href={`/admin/profile/edit?current=5`} passHref>
             <a className="umana-section-edit">
               <i className="material-icons">edit</i>
             </a>
