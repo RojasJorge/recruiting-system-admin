@@ -23,9 +23,9 @@ export default {
       personal.location.country.length > 0 &&
       personal.location.province.length > 0 &&
       personal.birthday.length > 0 &&
-      personal.gender.length > 0 &&
-      personal.email.length > 0 &&
-      personal.about.length > 0
+      // personal.gender.length > 0 &&
+      personal.email.length > 0 
+      // personal.about.length > 0
     ) {
       state.personal = true;
     } else {
@@ -33,11 +33,11 @@ export default {
     }
 
     /** Validate [academic] object */
-    if (academic.studies.length > 0) {
-      state.academic = true;
-    } else {
-      state.academic = false;
-    }
+    // if (academic.studies.length > 0) {
+    //   state.academic = true;
+    // } else {
+    //   state.academic = false;
+    // }
 
     /** Validate [academic] object */
     if (
