@@ -93,8 +93,6 @@ const FormCompany = props => {
   };
 
   /** avatar */
-
-  console.log('props', props.data);
   return (
     <>
       <h2 style={{ width: '100%' }}>Información general</h2>

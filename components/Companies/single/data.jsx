@@ -1,10 +1,11 @@
 import { Avatar } from 'antd';
+
 const SingleData = props => {
   const getAvatarFromProps = _ => {
     let result = null;
 
     if (props && props.data) {
-      const avatar = props.data.avatar;
+      const avatar = props.company.avatar;
 
       if (!isEmpty(avatar)) {
         result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
@@ -13,6 +14,7 @@ const SingleData = props => {
 
     return result;
   };
+
   return (
     <div className="umana-section-contenct">
       <div className="section-avatar">
