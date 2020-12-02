@@ -106,7 +106,6 @@ const Level = ({switchCurrent, current}) => {
 	const [validate, setValidate] = useState([]);
 	const getAllvalidations = () => {
 		let setVal = [];
-		console.log(academic);
 		if(academic.studies && academic.studies.length > 0) {
 			setVal = academic.studies.map(e => e.currently )
 		}
