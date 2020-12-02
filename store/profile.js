@@ -5,8 +5,8 @@ export default {
   academic: false,
   economic: false,
   lookingFor: false,
-  others: false,
-  working: false,
+  others: true,
+  working: true,
 
   verify: action((state, payload) => {
     if (!payload) return false;
