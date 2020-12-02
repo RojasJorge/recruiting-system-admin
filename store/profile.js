@@ -2,7 +2,7 @@ import { action } from 'easy-peasy';
 
 export default {
   personal: false,
-  academic: false,
+  academic: true,
   economic: false,
   lookingFor: false,
   others: true,
@@ -24,7 +24,7 @@ export default {
       personal.location.province.length > 0 &&
       personal.birthday.length > 0 &&
       // personal.gender.length > 0 &&
-      personal.email.length > 0 
+      personal.email.length > 0
       // personal.about.length > 0
     ) {
       state.personal = true;
