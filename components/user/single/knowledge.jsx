@@ -6,7 +6,7 @@ const Knowledge = props => {
   return (
     <div className="umana-content">
       <Can I="apply" a="JOBS">
-        <Link href={`/admin/profile/edit?current=6`} passHref>
+        <Link href={`/admin/profile/edit?current=4`} passHref>
           <a className="umana-section-edit">
             <i className="material-icons">edit</i>
           </a>

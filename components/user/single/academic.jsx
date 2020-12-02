@@ -10,7 +10,7 @@ const Academic = props => {
       {!isEmpty(props.data.studies) ? (
         <div className="umana-content" id="academiclevel">
           <Can I="apply" a="JOBS">
-            <Link href={`/admin/profile/edit?current=4`} passHref>
+            <Link href={`/admin/profile/edit?current=2`} passHref>
               <a className="umana-section-edit">
                 <i className="material-icons">edit</i>
               </a>
@@ -41,7 +41,7 @@ const Academic = props => {
       {!isEmpty(props.data.courses) ? (
         <div className="umana-content" id="courses">
           <Can I="apply" a="JOBS">
-            <Link href={`/admin/profile/edit?current=5`} passHref>
+            <Link href={`/admin/profile/edit?current=3`} passHref>
               <a className="umana-section-edit">
                 <i className="material-icons">edit</i>
               </a>

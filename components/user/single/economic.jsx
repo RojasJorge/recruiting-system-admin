@@ -9,7 +9,7 @@ const Economic = props => {
   return (
     <div className="umana-content" id="economic">
       <Can I="apply" a="JOBS">
-        <Link href={`/admin/profile/edit?current=8`} passHref>
+        <Link href={`/admin/profile/edit?current=6`} passHref>
           <a className="umana-section-edit">
             <i className="material-icons">edit</i>
           </a>
