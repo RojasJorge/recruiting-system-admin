@@ -4,6 +4,7 @@ import xhr from '../../../../xhr';
 import moment from 'moment';
 import router from 'next/router';
 import WorldCountries from 'world-countries';
+import {isArray} from 'lodash'
 
 const { Item, List } = Form;
 const { Option } = Select;
@@ -60,7 +61,7 @@ const Courses = ({ switchCurrent, current }) => {
   };
 
   const initialValues = _ => {
-    if (academic && academic.courses.length > 0) {
+    if (academic && isArray(academic.courses) && academic.courses.length > 0) {
       academic.courses.map((row, index) => {
         row.year = moment(row.year);
         return row;
@@ -76,7 +77,7 @@ const Courses = ({ switchCurrent, current }) => {
   return (
     <>
       <Form onFinish={onFinish} initialValues={initialValues()} validateTrigger="onBlur" scrollToFirstError={true}>
-        {/*<pre>{JSON.stringify(WorldCountries[0], false, 2)}</pre>*/}
+        {/*<pre>{JSON.stringify(initialValues(), false, 2)}</pre>*/}
         <div className="umana-form--section">
           <h2>Otros cursos</h2>
           <List name="courses" className="form-item--lg">
