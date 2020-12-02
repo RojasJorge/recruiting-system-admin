@@ -115,7 +115,7 @@ const ExpiredJobs = ({ title, type, filters }) => {
 
   return (
     <div className="umana-section">
-      {emptyResult && filters && filters.title ? <Alert style={{ marginBottom: 20 }} message={`No hay resultados de la busqueda "${filters.title}"`} type="error" /> : null}
+      {emptyResult && filters && filters.title ? <Alert style={{ marginBottom: 20 }} message={`No hay resultados de la busqueda.`} type="error" /> : null}
 
       <h2>{title}</h2>
       <div className="umana-table-section">
