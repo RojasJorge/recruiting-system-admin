@@ -53,10 +53,18 @@ const FormJob = props => {
         description: 'La plaza ha sido actualizado con éxito',
         placement: 'bottomRight',
       });
-    } else {
+    }
+    if (statuState === 'public') {
       notification.info({
         message: `Confirmación`,
         description: 'La plaza ha sido publicada con éxito',
+        placement: 'bottomRight',
+      });
+    }
+    if (statuState === 'draft' && props.type && props.type !== 'edit') {
+      notification.info({
+        message: `Confirmación`,
+        description: 'La plaza ha guardado como borrador con éxito',
         placement: 'bottomRight',
       });
     }

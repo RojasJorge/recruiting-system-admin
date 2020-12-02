@@ -6,10 +6,16 @@ import ContactInfo from './add/contact';
 import Router from 'next/router';
 import TynyEditor from '../Misc/TinyEditor';
 import { UploadAvatar } from '../../elements';
+import AvatarCropper from '../Misc/AvatarCropper';
+import { useState } from 'react';
+import { isEmpty } from 'lodash';
 
 const { TextArea } = Input;
 
 const FormCompany = props => {
+  const [avatar, updateAvatar] = useState([]);
+  const [toDelete, updateToDelete] = useState(null);
+
   const openNotification = placement => {
     notification.info({
       message: `Confirmación`,
@@ -68,18 +74,34 @@ const FormCompany = props => {
       });
   };
   const onFinish = e => {
+    !isEmpty(avatar)
+      ? avatar.map(o => {
+          o.thumbUrl = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + o.response.url;
+          return o;
+        })
+      : null;
+
+    const newAvatar = { avatar: avatar };
+
+    const newObj = Object.assign(e, newAvatar);
+    console.log('avatar', newObj);
     if (props.action === 'edit') {
-      update(e);
+      update(newObj);
     } else {
-      add(e);
+      add(newObj);
     }
   };
 
-  // console.log('props', props.data);
+  /** avatar */
+
+  console.log('props', props.data);
   return (
     <>
       <h2 style={{ width: '100%' }}>Información general</h2>
-      {/*<UploadAvatar type="company" />*/}
+
+      {/*AVATAR UPLOADER*/}
+      <AvatarCropper personal={props.data} avatar={avatar} updateAvatar={updateAvatar} updateToDelete={updateToDelete} />
+
       <Form scrollToFirstError={true} onFinish={onFinish} initialValues={props.data} validateTrigger="onBlur">
         <Form.Item
           rules={[

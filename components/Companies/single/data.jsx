@@ -1,9 +1,22 @@
 import { Avatar } from 'antd';
 const SingleData = props => {
+  const getAvatarFromProps = _ => {
+    let result = null;
+
+    if (props && props.data) {
+      const avatar = props.data.avatar;
+
+      if (!isEmpty(avatar)) {
+        result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
+      }
+    }
+
+    return result;
+  };
   return (
     <div className="umana-section-contenct">
       <div className="section-avatar">
-        <Avatar icon={<i className="material-icons">location_city</i>} src={props.company.avatar} size={120} />
+        <Avatar icon={<i className="material-icons">location_city</i>} src={getAvatarFromProps()} size={120} />
       </div>
       <div className="section-title">
         <h1>{props.company.name ? props.company.name : 'nombre de la empresa'}</h1>
