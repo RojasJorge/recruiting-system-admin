@@ -43,6 +43,7 @@ const ExpiredJobs = ({ title, type, filters }) => {
       .then(res => {
         if (isEmpty(res.data.items)) {
           setEmptyResult(true);
+          setJobs([])
           delay(() => switchLoading(false), 1000, 'Filtered');
           return false;
         }
