@@ -54,6 +54,7 @@ const ExpiredJobs = ({ title, type, filters }) => {
       .catch(err => {
         console.log(err);
         delay(() => switchLoading(false), 1000, 'Filtered');
+        setJobs([])
       });
   };
 
