@@ -1,16 +1,19 @@
 import { Avatar } from 'antd';
+import { isEmpty } from 'lodash';
 
 const SingleData = props => {
   const getAvatarFromProps = _ => {
     let result = null;
 
-    if (props && props.data) {
+    if (props && props.company) {
       const avatar = props.company.avatar;
 
       if (!isEmpty(avatar)) {
         result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
       }
     }
+
+    // console.log('avatar', result);
 
     return result;
   };
