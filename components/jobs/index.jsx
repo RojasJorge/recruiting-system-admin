@@ -2,7 +2,7 @@ import { Button, Input, notification, Select, Spin, Steps } from 'antd';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { EmptyElemet, Sitebar } from '../../elements';
 import { delay, find, isEmpty } from 'lodash';
-import { useEffect, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import ExpiredJobs from './Archive/expired';
 import PublicJobs from './Archive/public';
 import { Can } from '../Can';
@@ -15,6 +15,9 @@ const { Search } = Input;
 const { Step } = Steps;
 
 const Jobs = props => {
+  
+  const searchRef = useRef()
+  
   const [current, setCurrent] = useState(0);
 
   // FIlter
@@ -154,6 +157,10 @@ const Jobs = props => {
   const onChange = o => {
     setCurrent(o);
   };
+  
+  const clearSearch = _ => {
+  
+  }
 
   return (
     <div className="umana-jobs">
@@ -290,7 +297,25 @@ const Jobs = props => {
             <div className="ant-row ant-form-item item-lg">
               {/*SEARCH/FILTER COMPONENT*/}
               <label htmlFor="search">Buscar por nombre (plaza)</label>
-              <Search size="small" disabled={loading} onSearch={e => setFilters({ ...filters, title: e })} />
+              <Search
+                size="small"
+                disabled={loading}
+                ref={searchRef}
+                onSearch={e => setFilters({ ...filters, title: e })}
+              />
+              <p
+                style={{
+                display: 'block',
+                marginTop: 10,
+                color: '#006e8f',
+                textDecoration: 'underline',
+                cursor: 'pointer'
+              }}
+              onClick={_ => {
+                setFilters({...filters, title: null})
+                searchRef.current.state.value = null
+              }}
+              >Restablecer búsqueda</p>
             </div>
           </div>
           <div style={{ padding: '20px 10px' }}>{switchContent()}</div>
