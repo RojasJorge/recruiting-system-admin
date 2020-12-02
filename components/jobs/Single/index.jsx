@@ -337,20 +337,15 @@ const SingleJob = ({ query, privateCompany }) => {
   };
 
   const getCoinsidences = jobid => {
-    if (job && job.status === 'public') {
-      xhr()
-        .get(`/match/${query.id}`)
-        .then(resp => updateCoinsidences(resp.data))
-        .catch(err => err);
-    } else {
-      setCurrent(0);
-      return false;
-    }
+    xhr()
+      .get(`/match/${query.id}`)
+      .then(resp => updateCoinsidences(resp.data))
+      .catch(err => err);
   };
 
   useEffect(() => {
     getCoinsidences();
-  }, []);
+  }, [query.id]);
 
   if (job) {
     return (
