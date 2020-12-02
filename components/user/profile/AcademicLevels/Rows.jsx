@@ -96,12 +96,39 @@ const Level = ({switchCurrent, current}) => {
 	
 	const dateFormat = 'DD/MM/YYYY'
 
-	const [wnow, setWorking] = useState(academic.studies && academic.studies.length > 0 ? academic.studies[0].currently : false)
 	
 	useEffect(() => {
 		initialValues()
-	})
+	},[])
 	
+
+	/** validation */
+	const [validate, setValidate] = useState([]);
+	const getAllvalidations = () => {
+		let setVal = [];
+		console.log(academic);
+		if(academic.studies && academic.studies.length > 0) {
+			setVal = academic.studies.map(e => e.currently )
+		}
+		setValidate(setVal);
+	}
+
+	const switchValidate = (e, idx ) => {
+		const newValidate = validate.map((o, i)=> {
+			if(i === idx) {
+				return e
+			}
+			else {
+				return o
+			}
+		})
+		setValidate(newValidate);
+	}
+
+	useEffect(() => {
+		getAllvalidations()
+	}, [academic]);
+
 	return (
 		<>
 			<Form
@@ -218,7 +245,7 @@ const Level = ({switchCurrent, current}) => {
 													label="¿Estudia aquí actualmente?"
 												>
 												
-													<Switch onChange={e => setWorking(e)} checkedChildren="SI" unCheckedChildren="NO"/>
+													<Switch onChange={e => switchValidate(e, field.key)} checkedChildren="SI" unCheckedChildren="NO"/>
 												</Item>
 												
 												<Item
@@ -237,7 +264,7 @@ const Level = ({switchCurrent, current}) => {
 														// }
 													/>
 												</Item>
-												{!wnow ? 
+												{!validate[field.fieldKey] ? 
 												<Item
 													label="Fecha de fin"
 													{...field}
@@ -249,9 +276,7 @@ const Level = ({switchCurrent, current}) => {
 														style={{width: '100%'}}
 														size="large"
 														format={dateFormat}
-														// onChange={(date, dateString) =>
-														// 	onDatePickerChange(date, dateString, 'end_date')
-														// }
+												
 													/>
 												</Item>
 											:
@@ -289,7 +314,8 @@ const Level = ({switchCurrent, current}) => {
 											type="dashed"
 											size="large"
 											onClick={() => {
-												add()
+												add({currently : false});
+												setValidate( [...validate, false])
 											}}
 											block
 										>
