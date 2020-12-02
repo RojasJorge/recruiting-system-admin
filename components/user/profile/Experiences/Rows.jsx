@@ -46,8 +46,7 @@ const Experience = ({switchCurrent, current}) => {
 	} = useStoreState(state => state.auth.user)
 	
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
-	
-	/** Local state */
+		/** Local state */
 	const [careers, addCareers] = useState([]);
 	const [validate, setValidate] = useState([]);
 	const [dependents, switchDependents] = useState(false)
@@ -96,11 +95,22 @@ const Experience = ({switchCurrent, current}) => {
 			})
 			.catch(err => console.log(err));
 	}
+
+	const getAllvalidations = () => {
+		let setVal = [];
+		if(working.experiences && working.experiences.length > 0) {
+			setVal = working.experiences.map(e => e.workingNow )
+		}
+		setValidate(setVal);
+	}
+	useEffect(() => {
+		getAllvalidations()
+	}, [working]);
 	
 	useEffect(() => {
 		getCareers()
-	
 	}, []);
+
 	
 	const dateFormat = 'DD/MM/YYYY'
 
@@ -135,6 +145,8 @@ const Experience = ({switchCurrent, current}) => {
 		})
 		setValidate(newValidate );
 	}
+
+	console.log(validate)
 	
 	return (
 		<>
@@ -280,11 +292,7 @@ const Experience = ({switchCurrent, current}) => {
 																		required: true,
 																		message: 'Fecha final es requerida',
 																	},
-																	// ({getFieldValue}) => ({
-																	// 	validator(rule, value) {
-																	// 		return Promise.reject('Las contraseñas no coiciden');
-																	// 	},
-																	// }),
+														
 																]}
 																// rules={[{required: true, message: "Especifíque una fecha final."}]}
 															>
