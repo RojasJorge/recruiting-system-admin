@@ -4,7 +4,7 @@ import xhr from '../../../../xhr';
 import moment from 'moment';
 import router from 'next/router';
 import WorldCountries from 'world-countries';
-import {isArray} from 'lodash'
+import {delay, isArray} from 'lodash'
 
 const { Item, List } = Form;
 const { Option } = Select;
@@ -38,15 +38,20 @@ const Courses = ({ switchCurrent, current }) => {
           fields: Object.assign(academic, { courses: fields.courses }),
         });
 
-        window.scroll({
-          top: 80,
-          behavior: 'smooth',
-        });
+        // window.scroll({
+        //   top: 80,
+        //   behavior: 'smooth',
+        // });
 
         /** Send notification success */
         notify('success', 'Niveles académicos.', 'Actualizado correctamente..');
 
-        router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+        // router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+  
+        delay(_ => {
+          location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`
+        }, 1000)
+        
       })
       .catch(err => console.log('Error:', err));
   };

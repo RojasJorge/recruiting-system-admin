@@ -9,6 +9,7 @@ import xhr from '../../../../xhr';
 import router from 'next/router';
 import Vehicle from './Vehicle';
 import Debts from './debts';
+import {delay} from "lodash";
 
 const { Item } = Form;
 const { Option } = Select;
@@ -44,7 +45,12 @@ const Economic = _ => {
         /** Send notification success */
         notify('success', 'Economía/Legal', 'Actualizado correctamente.');
 
-        router.push(`${router.router.pathname}?current=${0}`);
+        // router.push(`${router.router.pathname}?current=${0}`);
+  
+        delay(_ => {
+          location.href = `${router.router.pathname}?current=0`
+        }, 1000)
+        
       })
       .catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'));
   };

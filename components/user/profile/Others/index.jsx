@@ -5,6 +5,7 @@ import xhr from '../../../../xhr';
 import router from 'next/router';
 import languages from '../../../../data/language.json';
 import skills from '../../../../data/skills_softwares.json';
+import {delay} from "lodash";
 
 const { Item, List } = Form;
 
@@ -32,14 +33,19 @@ const Others = ({ switchCurrent, current }) => {
       )
       .then(resp => {
         updateProfile({ type: 'others', fields });
-        window.scroll({
-          top: 80,
-          behavior: 'smooth',
-        });
+        // window.scroll({
+        //   top: 80,
+        //   behavior: 'smooth',
+        // });
         /** Send notification success */
         notify('success', 'Ficha Otros actualizada.', '');
 
-        router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+        // router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+  
+        delay(_ => {
+          location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`
+        }, 1000)
+        
       })
       .catch(err => console.log('Error:', err));
   };

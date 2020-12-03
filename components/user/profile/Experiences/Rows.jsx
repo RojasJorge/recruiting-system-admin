@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { PlusOutlined } from "@ant-design/icons";
 import {Button, DatePicker, Divider, Form, Input, InputNumber, notification, Select, Switch} from "antd";
 import "cleave.js/dist/addons/cleave-phone.gt";
-import {filter, isEmpty} from "lodash";
+import {delay, filter, isEmpty} from "lodash";
 import xhr from "../../../../xhr";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import moment from "moment";
@@ -64,14 +64,19 @@ const Experience = ({switchCurrent, current}) => {
 			}))
 			.then(resp => {
 				updateProfile({type: 'working', fields: Object.assign(working, {experiences: fields.experiences})})
-				window.scroll({
-					top: 80,
-					behavior: 'smooth',
-				});
+				// window.scroll({
+				// 	top: 80,
+				// 	behavior: 'smooth',
+				// });
 				/** Send notification success */
 				notify('success', 'Experiencia laboral.', 'Actualizado correctamente..')
 				
-				router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+				// router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+				
+				delay(_ => {
+					location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`
+				}, 1000)
+				
 			})
 			.catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'))
 	};
