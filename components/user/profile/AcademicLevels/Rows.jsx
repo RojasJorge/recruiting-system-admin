@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import {Button, Checkbox, DatePicker, Form, Input, notification, Select, Space, Switch} from 'antd';
-import {filter, find, isEmpty} from 'lodash';
+import {delay, filter, find, isEmpty} from 'lodash';
 import {useEffect, useState} from 'react';
 import {useStoreActions, useStoreState} from 'easy-peasy';
 import xhr from '../../../../xhr';
@@ -10,7 +10,7 @@ import router from 'next/router';
 const {Item, List} = Form;
 const {Option} = Select;
 
-const Level = ({switchCurrent, current}) => {
+const Level = _ => {
 	
 	/** Global state */
 	let {
@@ -55,15 +55,22 @@ const Level = ({switchCurrent, current}) => {
 					type: 'academic',
 					fields: Object.assign(academic, {studies: fields.studies})
 				})
-				window.scroll({
-					top: 80,
-					behavior: 'smooth',
-				});
+				
 				
 				/** Send notification success */
 				notify('success', 'Niveles académicos.', 'Actualizado correctamente..')
 				
-				router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+				// router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+				
+				delay(_ => {
+					location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`
+				}, 1000)
+				
+				// window.scroll({
+				// 	top: 80,
+				// 	behavior: 'smooth',
+				// });
+				
 			})
 			.catch(err => console.log('Error:', err))
 	

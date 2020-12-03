@@ -1,6 +1,7 @@
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Button, Form, notification, Select, Switch } from 'antd';
-import { DoubleRightOutlined } from '@ant-design/icons';
+import {delay} from 'lodash'
+// import { DoubleRightOutlined } from '@ant-design/icons';
 import xhr from '../../../../xhr';
 import router from 'next/router';
 
@@ -39,14 +40,21 @@ const LookingFor = ({ switchCurrent, current }) => {
       )
       .then(resp => {
         updateProfile({ type: 'lookingFor', fields: merged });
-        window.scroll({
-          top: 80,
-          behavior: 'smooth',
-        });
+        
         /** Send notification success */
         notify('success', 'Ficha Que buscas actualizada.', 'Vamos al siguiente paso...');
 
-        router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+        delay(_ => {
+          location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`
+        }, 1000)
+        // router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
+  
+  
+        // window.scroll({
+        //   top: 80,
+        //   behavior: 'smooth',
+        // });
+        
       })
       .catch(err => console.log('Error:', err));
   };
