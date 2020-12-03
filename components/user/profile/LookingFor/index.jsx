@@ -1,9 +1,10 @@
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Button, Form, notification, Select, Switch } from 'antd';
 import {delay} from 'lodash'
-// import { DoubleRightOutlined } from '@ant-design/icons';
 import xhr from '../../../../xhr';
 import router from 'next/router';
+import FormOverlay from "../../../Misc/FormOverlay";
+import {useState} from "react";
 
 const { Item } = Form;
 const { Option } = Select;
@@ -25,8 +26,13 @@ const LookingFor = ({ switchCurrent, current }) => {
   }
 
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
+  
+  const [status, switchStatus] = useState('')
 
   const onFinish = fields => {
+    
+    switchStatus('loading')
+    
     let merged = Object.assign(lookingFor, fields);
 
     xhr()
@@ -43,6 +49,8 @@ const LookingFor = ({ switchCurrent, current }) => {
         
         /** Send notification success */
         notify('success', 'Ficha Que buscas actualizada.', 'Vamos al siguiente paso...');
+        
+        switchStatus('ready')
 
         delay(_ => {
           location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`
@@ -56,7 +64,10 @@ const LookingFor = ({ switchCurrent, current }) => {
         // });
         
       })
-      .catch(err => console.log('Error:', err));
+      .catch(err => {
+        switchStatus('ready')
+        console.log('Error:', err)
+      });
   };
 
   /** Notifications */
@@ -70,7 +81,19 @@ const LookingFor = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={lookingFor} scrollToFirstError={true} validateTrigger="onBlur">
+      <Form
+        onFinish={onFinish}
+        initialValues={lookingFor}
+        scrollToFirstError={true}
+        validateTrigger="onBlur"
+      >
+        
+        {/*
+         | USE THIS TO DISABLE FORM WHILE REQUEST
+         | --------------------------------------
+         */}
+        <FormOverlay active={status === 'loading'}/>
+        
         <div className="umana-form--section">
           <h2>¿Qué estas buscando?</h2>
           <Item label="Tipo de plaza" className="form-item--lg" name="availability" rules={[{ required: true, message: 'Tipo de plaza es requerido.' }]}>

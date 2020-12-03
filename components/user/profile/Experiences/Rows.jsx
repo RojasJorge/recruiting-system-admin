@@ -1,14 +1,15 @@
-import {useEffect, useState, useRef, createRef } from "react";
+import {useEffect, useRef, useState} from "react";
 import PropTypes from "prop-types";
-import { PlusOutlined } from "@ant-design/icons";
-import {Button, DatePicker, Divider, Form, Input, InputNumber, notification, Select, Switch} from "antd";
+import {PlusOutlined} from "@ant-design/icons";
+import {Button, DatePicker, Form, Input, InputNumber, notification, Select, Switch} from "antd";
 import "cleave.js/dist/addons/cleave-phone.gt";
-import {delay, filter, isEmpty} from "lodash";
+import {delay, filter} from "lodash";
 import xhr from "../../../../xhr";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import moment from "moment";
 import router from 'next/router';
-import  { AreaJob } from '../../../../elements';
+import {AreaJob} from '../../../../elements';
+import FormOverlay from "../../../Misc/FormOverlay";
 
 const {Item, List} = Form;
 const {Option} = Select;
@@ -16,25 +17,24 @@ const {TextArea} = Input;
 
 
 const scrollToMyRef = ref => {
-	if(ref === null && ref.current === null) {
+	if (ref === null && ref.current === null) {
 		window.scroll({
 			top: -80,
 			behavior: 'smooth',
 		});
-
+		
 	}
-	if(ref && ref !== null && ref.current !== null) {
+	if (ref && ref !== null && ref.current !== null) {
 		const newref = ref.current + ref.current
 		ref.current.scrollIntoView({
 			behavior: 'smooth',
 			block: 'start',
 		});
-	} 
+	}
 }
 
 
-
-const Experience = ({switchCurrent, current}) => {	
+const Experience = ({switchCurrent, current}) => {
 	/** Global state */
 	let {
 		profile: {
@@ -46,7 +46,8 @@ const Experience = ({switchCurrent, current}) => {
 	} = useStoreState(state => state.auth.user)
 	
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
-		/** Local state */
+	const [status, switchStatus] = useState('')
+	/** Local state */
 	const [careers, addCareers] = useState([]);
 	const [validate, setValidate] = useState([]);
 	const [dependents, switchDependents] = useState(false)
@@ -54,6 +55,7 @@ const Experience = ({switchCurrent, current}) => {
 	
 	/** On form success*/
 	const onFinish = fields => {
+		switchStatus('loading')
 		xhr()
 			.put(`/profile/${id}`, JSON.stringify({
 				fields: {
@@ -71,6 +73,7 @@ const Experience = ({switchCurrent, current}) => {
 				/** Send notification success */
 				notify('success', 'Experiencia laboral.', 'Actualizado correctamente..')
 				
+				switchStatus('ready')
 				// router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
 				
 				delay(_ => {
@@ -78,7 +81,10 @@ const Experience = ({switchCurrent, current}) => {
 				}, 1000)
 				
 			})
-			.catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'))
+			.catch(err => {
+				switchStatus('ready')
+				notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde')
+			})
 	};
 	
 	/** Notifications */
@@ -100,11 +106,11 @@ const Experience = ({switchCurrent, current}) => {
 			})
 			.catch(err => console.log(err));
 	}
-
+	
 	const getAllvalidations = () => {
 		let setVal = [];
-		if(working.experiences && working.experiences.length > 0) {
-			setVal = working.experiences.map(e => e.workingNow )
+		if (working.experiences && working.experiences.length > 0) {
+			setVal = working.experiences.map(e => e.workingNow)
 		}
 		setValidate(setVal);
 	}
@@ -115,11 +121,11 @@ const Experience = ({switchCurrent, current}) => {
 	useEffect(() => {
 		getCareers()
 	}, []);
-
+	
 	
 	const dateFormat = 'DD/MM/YYYY'
-
-
+	
+	
 	const initialValues = _ => {
 		if (working && working.experiences.length > 0) {
 			working.experiences.map((row, index) => {
@@ -134,23 +140,22 @@ const Experience = ({switchCurrent, current}) => {
 			}
 		}
 	}
-
+	
 	const myRef = useRef(null);
-
-	const scrollTopToELement = () =>  scrollToMyRef(myRef)
-
-	const switchValidate = (e, idx ) => {
-		const newValidate = validate.map((o, i)=> {
-			if(i === idx) {
+	
+	const scrollTopToELement = () => scrollToMyRef(myRef)
+	
+	const switchValidate = (e, idx) => {
+		const newValidate = validate.map((o, i) => {
+			if (i === idx) {
 				return e
-			}
-			else {
+			} else {
 				return o
 			}
 		})
-		setValidate(newValidate );
+		setValidate(newValidate);
 	}
-
+	
 	console.log(validate)
 	
 	return (
@@ -162,217 +167,225 @@ const Experience = ({switchCurrent, current}) => {
 				validateTrigger="onBlur"
 				scrollToFirstError={true}
 			>
-	
-				 <div className="umana-form--section">
-          <h2>Experiencia laboral</h2>
-				<List name="experiences">
-					{(fields, {add, remove}) => {
-						return (
-							<>
-								{
-									fields.map(field => (
-										<fieldset key={field.key} id={field.key} >
-											<div className="row align-items-center" style={{marginTop: 20}} id={field.key} >
-									
-												<div className="col-md-12">
-											
-													<div className="row">
-														<div className="col-md-12" style={{display: 'flex'}} >
-																{field.key > 0 ? 
-																		<h3 style={{fontWeight: 'bold'}}>{field.key} registros</h3>	
-																	:  null	}
-																	<a
-																		style={{textAlign: 'right', marginLeft: 'auto'}}
-																		key={field.key + 'add'}
-																		className="form-item--delete"
-																		onClick={() => {
-																			remove(field.name);
-																		}}
-																	>
-																		<i className="material-icons">cancel</i>
-																	</a>
-																	
-														
-														</div>
-														<div className="col-md-12">
-															<Item
-																label="Nombre del puesto"
-																name={[field.name, 'jobTitle']}
-																fieldKey={[field.fieldKey, 'jobTitle']}
-															
-																rules={[{
-																	required: true,
-																	message: 'El campo título es requerido'
-																}]}
-															>
-																<Input/>
-															</Item>
-														</div>
-														<div className="col-md-12">
-															<Item
-																label="Área"
-																{...field}
-																name={[field.name, 'area']}
-																fieldKey={[field.fieldKey, 'area']}
-																rules={[{required: true, message: "Especifíque un área."}]}
-															>
-																<AreaJob />
-															</Item>
-														</div>
-														<div className="col-md-12">
-															<br />
-															<h3>Información de la empresa</h3>
-														</div>
-														<div className="col-md-6">
-															<Item
-																label="Empresa"
-																{...field}
-																name={[field.name, 'company']}
-																fieldKey={[field.fieldKey, 'company']}
-																rules={[{required: true, message: "El campo teléfono es requerido"}]}
-															>
-																<Input size="large"/>
-															</Item>
-														</div>
-														<div className="col-md-6">
-															<Item
-																label="Teléfono de la empresa"
-																{...field}
-																name={[field.name, 'companyPhone']}
-																fieldKey={[field.fieldKey, 'companyPhone']}
-																// rules={[{required: true, message: "El campo teléfono es requerido"}]}
-															>
-																<Input size="large"/>
-															</Item>
-														</div>
-														<div className="col-md-12" id={field.key} ref={myRef}>
-															<Item
-																label="¿A qué se dedica la empresa?"
-																{...field}
-																name={[field.name, 'specializationCompany']}
-																fieldKey={[field.fieldKey, 'specializationCompany']}
-															
-															>
-																<Input size="large"/>
-															</Item>
-														</div>
-														<div className={`${field.key}-fied col-md-12`} style={{display: 'flex', marginTop: 15 }} >
-															<label style={{width: '100%', }} htmlFor="workingNow">Actualmente trabajo aquí:</label>
-															<Item
-																style={{marginLeft: 'auto', width: 'auto'}}
-																{...field}
-																name={[field.name, 'workingNow']}
-																fieldKey={[field.fieldKey, 'workingNow']}
-																valuePropName="checked"
-																rules={[{required: true, message: "Este campo es requerido"}]}
-															>
-																
-																<Switch onChange={e => switchValidate(e, field.key )} checkedChildren="SI" unCheckedChildren="NO"/>
-															</Item>
-														</div>
-														<div className="col-md-6">
-															<Item
-																label="Fecha de inicio"
-																{...field}
-																name={[field.name, 'dateInit']}
-																fieldKey={[field.fieldKey, 'dateInit']}
-																rules={[{required: true, message: "Fecha de inicio es requerida."}]}
-															>
-																<DatePicker
-																	size="large"
-																	format={dateFormat}
-																	style={{width: '100%'}}/>
-															</Item>
-														</div>
-														<div className="col-md-6">
-															
-														{!validate[field.fieldKey] ? 
-															<Item
-																label="Fecha final"
-																{...field}
-																name={[field.name, 'dateEnd']}
-																fieldKey={[field.fieldKey, 'dateEnd']}
-																rules={[
-																	{
-																		required: true,
-																		message: 'Fecha final es requerida',
-																	},
-														
-																]}
-																// rules={[{required: true, message: "Especifíque una fecha final."}]}
-															>
-																<DatePicker
-																	format={dateFormat}
-																	size="large" style={{width: '100%'}}
-																/>
-															</Item>
-															: <Item label="Fecha final">
-																<Input value="Presente" disabled={true} />
-															</Item> }
+				
+				{/*
+				 | USE THIS TO DISABLE FORM WHILE REQUEST
+				 | --------------------------------------
+				 */}
+				<FormOverlay active={status === 'loading'}/>
+				
+				<div className="umana-form--section">
+					<h2>Experiencia laboral</h2>
+					<List name="experiences">
+						{(fields, {add, remove}) => {
+							return (
+								<>
+									{
+										fields.map(field => (
+											<fieldset key={field.key} id={field.key}>
+												<div className="row align-items-center" style={{marginTop: 20}} id={field.key}>
 													
-														</div>
+													<div className="col-md-12">
 														
-														<div className="col-md-12" style={{ marginTop: 15 }}>
-															<fieldset>
-																<h3>Sueldo final</h3>
-																<div className="row">
-																	<div className="col-md-4">
-																		<label htmlFor="currency">Moneda:</label>
-																		<Item
-																			{...field}
-																			name={[field.name, 'currency']}
-																			fieldKey={[field.fieldKey, 'currency']}
-																		>
-																			<Select size="large" placeholder="Seleccione">
-																				<Option value="GTQ">Quetzal</Option>
-																				<Option value="USD">Dólar</Option>
-																			</Select>
-																		</Item>
+														<div className="row">
+															<div className="col-md-12" style={{display: 'flex'}}>
+																{field.key > 0 ?
+																	<h3 style={{fontWeight: 'bold'}}>{field.key} registros</h3>
+																	: null}
+																<a
+																	style={{textAlign: 'right', marginLeft: 'auto'}}
+																	key={field.key + 'add'}
+																	className="form-item--delete"
+																	onClick={() => {
+																		remove(field.name);
+																	}}
+																>
+																	<i className="material-icons">cancel</i>
+																</a>
+															
+															
+															</div>
+															<div className="col-md-12">
+																<Item
+																	label="Nombre del puesto"
+																	name={[field.name, 'jobTitle']}
+																	fieldKey={[field.fieldKey, 'jobTitle']}
+																	
+																	rules={[{
+																		required: true,
+																		message: 'El campo título es requerido'
+																	}]}
+																>
+																	<Input/>
+																</Item>
+															</div>
+															<div className="col-md-12">
+																<Item
+																	label="Área"
+																	{...field}
+																	name={[field.name, 'area']}
+																	fieldKey={[field.fieldKey, 'area']}
+																	rules={[{required: true, message: "Especifíque un área."}]}
+																>
+																	<AreaJob/>
+																</Item>
+															</div>
+															<div className="col-md-12">
+																<br/>
+																<h3>Información de la empresa</h3>
+															</div>
+															<div className="col-md-6">
+																<Item
+																	label="Empresa"
+																	{...field}
+																	name={[field.name, 'company']}
+																	fieldKey={[field.fieldKey, 'company']}
+																	rules={[{required: true, message: "El campo teléfono es requerido"}]}
+																>
+																	<Input size="large"/>
+																</Item>
+															</div>
+															<div className="col-md-6">
+																<Item
+																	label="Teléfono de la empresa"
+																	{...field}
+																	name={[field.name, 'companyPhone']}
+																	fieldKey={[field.fieldKey, 'companyPhone']}
+																	// rules={[{required: true, message: "El campo teléfono es requerido"}]}
+																>
+																	<Input size="large"/>
+																</Item>
+															</div>
+															<div className="col-md-12" id={field.key} ref={myRef}>
+																<Item
+																	label="¿A qué se dedica la empresa?"
+																	{...field}
+																	name={[field.name, 'specializationCompany']}
+																	fieldKey={[field.fieldKey, 'specializationCompany']}
+																
+																>
+																	<Input size="large"/>
+																</Item>
+															</div>
+															<div className={`${field.key}-fied col-md-12`} style={{display: 'flex', marginTop: 15}}>
+																<label style={{width: '100%',}} htmlFor="workingNow">Actualmente trabajo aquí:</label>
+																<Item
+																	style={{marginLeft: 'auto', width: 'auto'}}
+																	{...field}
+																	name={[field.name, 'workingNow']}
+																	fieldKey={[field.fieldKey, 'workingNow']}
+																	valuePropName="checked"
+																	rules={[{required: true, message: "Este campo es requerido"}]}
+																>
+																	
+																	<Switch onChange={e => switchValidate(e, field.key)} checkedChildren="SI"
+																	        unCheckedChildren="NO"/>
+																</Item>
+															</div>
+															<div className="col-md-6">
+																<Item
+																	label="Fecha de inicio"
+																	{...field}
+																	name={[field.name, 'dateInit']}
+																	fieldKey={[field.fieldKey, 'dateInit']}
+																	rules={[{required: true, message: "Fecha de inicio es requerida."}]}
+																>
+																	<DatePicker
+																		size="large"
+																		format={dateFormat}
+																		style={{width: '100%'}}/>
+																</Item>
+															</div>
+															<div className="col-md-6">
+																
+																{!validate[field.fieldKey] ?
+																	<Item
+																		label="Fecha final"
+																		{...field}
+																		name={[field.name, 'dateEnd']}
+																		fieldKey={[field.fieldKey, 'dateEnd']}
+																		rules={[
+																			{
+																				required: true,
+																				message: 'Fecha final es requerida',
+																			},
+																		
+																		]}
+																		// rules={[{required: true, message: "Especifíque una fecha final."}]}
+																	>
+																		<DatePicker
+																			format={dateFormat}
+																			size="large" style={{width: '100%'}}
+																		/>
+																	</Item>
+																	: <Item label="Fecha final">
+																		<Input value="Presente" disabled={true}/>
+																	</Item>}
+															
+															</div>
+															
+															<div className="col-md-12" style={{marginTop: 15}}>
+																<fieldset>
+																	<h3>Sueldo final</h3>
+																	<div className="row">
+																		<div className="col-md-4">
+																			<label htmlFor="currency">Moneda:</label>
+																			<Item
+																				{...field}
+																				name={[field.name, 'currency']}
+																				fieldKey={[field.fieldKey, 'currency']}
+																			>
+																				<Select size="large" placeholder="Seleccione">
+																					<Option value="GTQ">Quetzal</Option>
+																					<Option value="USD">Dólar</Option>
+																				</Select>
+																			</Item>
+																		</div>
+																		<div className="col-md-8">
+																			<label htmlFor="amount">Monto:</label>
+																			<Item
+																				{...field}
+																				name={[field.name, 'amount']}
+																				fieldKey={[field.fieldKey, 'amount']}
+																			>
+																				<InputNumber style={{width: '100%'}} min={0} size="large"/>
+																			</Item>
+																		</div>
 																	</div>
-																	<div className="col-md-8">
-																		<label htmlFor="amount">Monto:</label>
-																		<Item
-																			{...field}
-																			name={[field.name, 'amount']}
-																			fieldKey={[field.fieldKey, 'amount']}
-																		>
-																			<InputNumber style={{width: '100%'}} min={0} size="large"/>
-																		</Item>
-																	</div>
+																</fieldset>
+															</div>
+															{!wnow ?
+																<div className="col-md-12">
+																	<Item
+																		label="¿Cuál fue el motivo de retiro?"
+																		{...field}
+																		name={[field.name, 'whyResignation']}
+																		fieldKey={[field.fieldKey, 'whyResignation']}
+																	>
+																		<TextArea autoSize={{minRows: 4, maxRows: 30}}/>
+																	</Item>
 																</div>
-															</fieldset>
-														</div>
-														{!wnow ? 
-														<div className="col-md-12">
-															<Item
-																label="¿Cuál fue el motivo de retiro?"
-																{...field}
-																name={[field.name, 'whyResignation']}
-																fieldKey={[field.fieldKey, 'whyResignation']}
-															>
-																<TextArea autoSize={{minRows: 4, maxRows: 30}}/>
-															</Item>
-														</div>
-															: null}
-														<div className="col-md-12" style={{ marginTop: 15 }} >
-															<h3 orientation="left" >Otros</h3>
-															<p>Esta información no se verá en tu perfil, pero la podrán ver futuros reclutadores de
-																plazas en las que
-																apliques.</p>
-														</div>
-														<div className="col-md-12" style={{display: 'flex' }}>
-															<label htmlFor="dependents" style={{width: '100%' }}>¿Tuvo personas a cargo?</label>
-															<Item
-																style={{marginLeft: 'auto', width: 'auto'}}
-																{...field}
-																name={[field.name, 'dependents']}
-																fieldKey={[field.fieldKey, 'dependents']}
-																valuePropName="checked"
-															>
-																<Switch onChange={e => switchDependents(e)} checkedChildren="SI" unCheckedChildren="NO"/>
-															</Item>
-														</div>
-														{	dependents && <div className="col-md-12">
+																: null}
+															<div className="col-md-12" style={{marginTop: 15}}>
+																<h3 orientation="left">Otros</h3>
+																<p>Esta información no se verá en tu perfil, pero la podrán ver futuros reclutadores de
+																	plazas en las que
+																	apliques.</p>
+															</div>
+															<div className="col-md-12" style={{display: 'flex'}}>
+																<label htmlFor="dependents" style={{width: '100%'}}>¿Tuvo personas a cargo?</label>
+																<Item
+																	style={{marginLeft: 'auto', width: 'auto'}}
+																	{...field}
+																	name={[field.name, 'dependents']}
+																	fieldKey={[field.fieldKey, 'dependents']}
+																	valuePropName="checked"
+																>
+																	<Switch onChange={e => switchDependents(e)} checkedChildren="SI"
+																	        unCheckedChildren="NO"/>
+																</Item>
+															</div>
+															{dependents && <div className="col-md-12">
 																<Item
 																	name={[field.name, 'totalDependents']}
 																	fieldKey={[field.fieldKey, 'totalDependents']}
@@ -380,132 +393,133 @@ const Experience = ({switchCurrent, current}) => {
 																	<InputNumber min={0}/>
 																</Item>
 															</div>
-														}
-														<div className="col-md-12" style={{ marginTop: 15}}  >
-															<h3>Referencias Laborales</h3>
-															<p>Indica aquí información de tus jefes inmediatos en este puesto. Esta información no se
-																verá en tu
-																perfil, pero la podrán ver futuros reclutadores de plazas en las que apliques.</p>
-														</div>														
-														<div className="col-md-12" style={{	border: '1px solid #f1f1f1'}}>
-														<List name={[field.name, 'immediateBoss']} >
-															{(bosses, {add: addBoss, remove: removeBoss}) => {
-																return (
-																	<>
-																		{
-																			bosses.map(boss => (
-																				<fieldset key={boss.key} style={{
-																					padding: '10px 5px 20px',
-																					borderBottom: '1px solid #f1f1f1'
-																				}}>
-																					<div className="row align-items-center">
-																						<div className="col-md-11">
-																							<div className="row">
-																								<div className="col-md-12">
-																									<Item
-																										label="Nombre"
-																										name={[boss.name, 'name']}
-																										fieldKey={[boss.fieldKey, 'name']}
-																										rules={[{
-																											required: true,
-																											message: 'El nombre del jefe es requerido'
-																										}]}
-																									>
-																										<Input/>
-																									</Item>
+															}
+															<div className="col-md-12" style={{marginTop: 15}}>
+																<h3>Referencias Laborales</h3>
+																<p>Indica aquí información de tus jefes inmediatos en este puesto. Esta información no
+																	se
+																	verá en tu
+																	perfil, pero la podrán ver futuros reclutadores de plazas en las que apliques.</p>
+															</div>
+															<div className="col-md-12" style={{border: '1px solid #f1f1f1'}}>
+																<List name={[field.name, 'immediateBoss']}>
+																	{(bosses, {add: addBoss, remove: removeBoss}) => {
+																		return (
+																			<>
+																				{
+																					bosses.map(boss => (
+																						<fieldset key={boss.key} style={{
+																							padding: '10px 5px 20px',
+																							borderBottom: '1px solid #f1f1f1'
+																						}}>
+																							<div className="row align-items-center">
+																								<div className="col-md-11">
+																									<div className="row">
+																										<div className="col-md-12">
+																											<Item
+																												label="Nombre"
+																												name={[boss.name, 'name']}
+																												fieldKey={[boss.fieldKey, 'name']}
+																												rules={[{
+																													required: true,
+																													message: 'El nombre del jefe es requerido'
+																												}]}
+																											>
+																												<Input/>
+																											</Item>
+																										</div>
+																										<div className="col-md-6">
+																											<Item
+																												label="Puesto"
+																												name={[boss.name, 'titleJob']}
+																												fieldKey={[boss.fieldKey, 'titleJob']}
+																												rules={[{
+																													required: true,
+																													message: 'Puesto'
+																												}]}
+																											>
+																												<Input/>
+																											</Item>
+																										</div>
+																										<div className="col-md-6">
+																											<Item
+																												label="Número de teléfono"
+																												name={[boss.name, 'phone']}
+																												fieldKey={[boss.fieldKey, 'phone']}
+																												rules={[{
+																													required: true,
+																													message: 'El número de teléfono es requrerido'
+																												}]}
+																											>
+																												<Input/>
+																											</Item>
+																										</div>
+																									</div>
 																								</div>
-																								<div className="col-md-6">
-																									<Item
-																										label="Puesto"
-																										name={[boss.name, 'titleJob']}
-																										fieldKey={[boss.fieldKey, 'titleJob']}
-																										rules={[{
-																											required: true,
-																											message: 'Puesto'
-																										}]}
+																								<div className="col">
+																									<a
+																										key={field.key + 'add'}
+																										className="form-item--delete"
+																										onClick={() => {
+																											removeBoss(boss.name);
+																										}}
 																									>
-																										<Input/>
-																									</Item>
-																								</div>
-																								<div className="col-md-6">
-																									<Item
-																										label="Número de teléfono"
-																										name={[boss.name, 'phone']}
-																										fieldKey={[boss.fieldKey, 'phone']}
-																										rules={[{
-																											required: true,
-																											message: 'El número de teléfono es requrerido'
-																										}]}
-																									>
-																										<Input/>
-																									</Item>
+																										<i className="material-icons">cancel</i>
+																									</a>
 																								</div>
 																							</div>
-																						</div>
-																						<div className="col">
-																						<a
-																								key={field.key + 'add'}
-																								className="form-item--delete"
-																								onClick={() => {
-																									removeBoss(boss.name);
-																								}}
-																							>
-																								<i className="material-icons">cancel</i>
-																							</a>
-																						</div>
-																					</div>
-																				</fieldset>
-																			))
-																		}
-																			<div className="col-md-6" style={{margin: '0 auto'}}>
-																		<Button
-																				style={{ width: '100%' }}
-																				type="dashed"
-																				size="large"
-																				onClick={() => {
-																					addBoss();
-																				}}
-																				block
-																			>
-																				<i className="material-icons">add</i> Agregar jefe inmediato
-                    								</Button>
-																			</div>
-																	</>
-																)
-															}}
-														</List>
-													
+																						</fieldset>
+																					))
+																				}
+																				<div className="col-md-6" style={{margin: '0 auto'}}>
+																					<Button
+																						style={{width: '100%'}}
+																						type="dashed"
+																						size="large"
+																						onClick={() => {
+																							addBoss();
+																						}}
+																						block
+																					>
+																						<i className="material-icons">add</i> Agregar jefe inmediato
+																					</Button>
+																				</div>
+																			</>
+																		)
+																	}}
+																</List>
+															
+															</div>
 														</div>
 													</div>
+												
 												</div>
-													
-											</div>
-								
-										</fieldset>
-									))
-								}
-								
-								<Item>
-									<Button
-										type="dashed"
-										size="large"
-										style={{width: '100%'}}
-										onClick={() => {
-											add({ workingNow: false });
-											scrollTopToELement()
-											setValidate( [...validate, false])
-										}}
-										icon={<PlusOutlined/>}
-									>
-										Agregar experiencia laboral
-									</Button>
+											
+											</fieldset>
+										))
+									}
 									
-								</Item>
-							
-							</>
-						)
-					}}
-				</List>
+									<Item>
+										<Button
+											type="dashed"
+											size="large"
+											style={{width: '100%'}}
+											onClick={() => {
+												add({workingNow: false});
+												scrollTopToELement()
+												setValidate([...validate, false])
+											}}
+											icon={<PlusOutlined/>}
+										>
+											Agregar experiencia laboral
+										</Button>
+									
+									</Item>
+								
+								</>
+							)
+						}}
+					</List>
 				</div>
 				<Item>
 					<Button

@@ -6,6 +6,7 @@ import {useStoreActions, useStoreState} from 'easy-peasy';
 import xhr from '../../../../xhr';
 import moment from 'moment';
 import router from 'next/router';
+import FormOverlay from "../../../Misc/FormOverlay";
 
 const {Item, List} = Form;
 const {Option} = Select;
@@ -21,6 +22,8 @@ const Level = _ => {
 			},
 		},
 	} = useStoreState(state => state.auth.user)
+	
+	const [status, switchStatus] = useState('')
 	
 	/** Update current object action */
 	const updateProfile = useStoreActions(actions => actions.auth.updateProfile)
@@ -38,7 +41,8 @@ const Level = _ => {
 		setLevels({...levels, [k]: find(catalogs.academic_level, o => o.id === e)})
 	}
 	
-	const onFinish = fields =>
+	const onFinish = fields => {
+		switchStatus('loading')
 		xhr()
 			.put(
 				`/profile/${id}`,
@@ -60,6 +64,8 @@ const Level = _ => {
 				/** Send notification success */
 				notify('success', 'Niveles académicos.', 'Actualizado correctamente..')
 				
+				switchStatus('ready')
+				
 				// router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
 				
 				delay(_ => {
@@ -72,7 +78,11 @@ const Level = _ => {
 				// });
 				
 			})
-			.catch(err => console.log('Error:', err))
+			.catch(err => {
+				switchStatus('ready')
+				console.log('Error:', err)
+			})
+	}
 	
 	/** Notifications */
 	const notify = (type, message, description) => {
@@ -143,6 +153,13 @@ const Level = _ => {
 				validateTrigger="onBlur"
 				scrollToFirstError={true}
 			>
+				
+				{/*
+				 | USE THIS TO DISABLE FORM WHILE REQUEST
+				 | --------------------------------------
+				 */}
+				<FormOverlay active={status === 'loading'}/>
+				
 				<div className="umana-form--section">
 					<h2>Niveles académicos</h2>
 					<List name="studies" className="form-item--lg">
