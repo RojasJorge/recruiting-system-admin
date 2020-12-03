@@ -22,9 +22,9 @@ export default {
       personal.location.city.length > 0 &&
       personal.location.country.length > 0 &&
       personal.location.province.length > 0 &&
-      personal.birthday.length > 0 &&
+      personal.birthday.length > 0
       // personal.gender.length > 0 &&
-      personal.email.length > 0
+      // personal.email.length > 0
       // personal.about.length > 0
     ) {
       state.personal = true;
@@ -45,7 +45,7 @@ export default {
       // economic.currentSalaryCurrency !== '' &&
       economic.desiredSalary.baseMax > 0 &&
       economic.desiredSalary.baseMin > 0 &&
-      economic.desiredSalary.currency.length > 0 &&
+      // economic.desiredSalary.currency.length > 0 &&
       economic.typeHousing.length > 0
     ) {
       state.economic = true;
