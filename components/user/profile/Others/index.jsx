@@ -6,6 +6,8 @@ import router from 'next/router';
 import languages from '../../../../data/language.json';
 import skills from '../../../../data/skills_softwares.json';
 import {delay} from "lodash";
+import FormOverlay from "../../../Misc/FormOverlay";
+import {useState} from "react";
 
 const { Item, List } = Form;
 
@@ -17,11 +19,14 @@ const Others = ({ switchCurrent, current }) => {
       fields: { others },
     },
   } = useStoreState(state => state.auth.user);
+  
+  const [status, switchStatus] = useState('')
 
   /** Personal info */
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
+    switchStatus('loading')
     xhr()
       .put(
         `/profile/${id}`,
@@ -39,6 +44,8 @@ const Others = ({ switchCurrent, current }) => {
         // });
         /** Send notification success */
         notify('success', 'Ficha Otros actualizada.', '');
+        
+        switchStatus('ready')
 
         // router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
   
@@ -47,7 +54,10 @@ const Others = ({ switchCurrent, current }) => {
         }, 1000)
         
       })
-      .catch(err => console.log('Error:', err));
+      .catch(err => {
+        switchStatus('ready')
+        console.log('Error:', err)
+      });
   };
 
   /** Notifications */
@@ -61,7 +71,19 @@ const Others = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={others} scrollToFirstError={true} validateTrigger="onBlur">
+      <Form
+        onFinish={onFinish}
+        initialValues={others}
+        scrollToFirstError={true}
+        validateTrigger="onBlur"
+      >
+  
+        {/*
+         | USE THIS TO DISABLE FORM WHILE REQUEST
+         | --------------------------------------
+         */}
+        <FormOverlay active={status === 'loading'}/>
+        
         <div className="umana-form--section">
           <h2>Otros conocimientos</h2>
 

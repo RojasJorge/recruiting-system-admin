@@ -10,6 +10,7 @@ import router from 'next/router';
 import Vehicle from './Vehicle';
 import Debts from './debts';
 import {delay} from "lodash";
+import FormOverlay from "../../../Misc/FormOverlay";
 
 const { Item } = Form;
 const { Option } = Select;
@@ -26,10 +27,13 @@ const Economic = _ => {
   const [checks, updateChecks] = useState({
     otherIncome: economic.otherIncome,
   });
+  
+  const [status, switchStatus] = useState('')
 
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
+    switchStatus('loading')
     xhr()
       .put(
         `/profile/${id}`,
@@ -45,6 +49,7 @@ const Economic = _ => {
         /** Send notification success */
         notify('success', 'Economía/Legal', 'Actualizado correctamente.');
 
+        switchStatus('ready')
         // router.push(`${router.router.pathname}?current=${0}`);
   
         delay(_ => {
@@ -52,7 +57,10 @@ const Economic = _ => {
         }, 1000)
         
       })
-      .catch(err => notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde'));
+      .catch(err => {
+        switchStatus('ready')
+        notify('error', 'Error', 'Ha ocurrido un error, intenta de nuevo más tarde')
+      });
   };
 
   /** Notifications */
@@ -73,7 +81,19 @@ const Economic = _ => {
 
   return (
     <>
-      <Form onFinish={onFinish} initialValues={economic} validateTrigger="onBlur" scrollToFirstError={true}>
+      <Form
+        onFinish={onFinish}
+        initialValues={economic}
+        validateTrigger="onBlur"
+        scrollToFirstError={true}
+      >
+        
+        {/*
+         | USE THIS TO DISABLE FORM WHILE REQUEST
+         | --------------------------------------
+         */}
+        <FormOverlay active={status === 'loading'}/>
+        
         <div className="umana-form--section">
           <h2 style={{ width: '100%' }}>Información Económica</h2>
           <Item name="typeHousing" label="Tipo de vivienda" className="form-item--md">

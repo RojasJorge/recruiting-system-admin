@@ -12,11 +12,12 @@ import xhr from '../../../../xhr';
 import AvatarCropper from '../../../Misc/AvatarCropper';
 import storage from '../../../../storage';
 import {delay, isEmpty} from 'lodash';
+import FormOverlay from "../../../Misc/FormOverlay";
 
 /** Import form sections */
 const FormItem = Form.Item;
 
-const Personal = ({switchCurrent, current}) => {
+const Personal = _ => {
 	/** Global state */
 	const {
 		profile: {
@@ -24,6 +25,8 @@ const Personal = ({switchCurrent, current}) => {
 			fields: {personal, documents},
 		},
 	} = useStoreState(state => state.auth.user);
+	
+	const [status, switchStatus] = useState('')
 	
 	/** Birthday handler */
 	const [birthday, setBirthday] = useState(personal.birthday);
@@ -44,6 +47,9 @@ const Personal = ({switchCurrent, current}) => {
 	const [files, updateFiles] = useState(documents);
 	
 	const onFinish = fields => {
+		
+		switchStatus('loading')
+		
 		!isEmpty(avatar)
 			? avatar.map(o => {
 				o.thumbUrl = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + o.response.url;
@@ -76,6 +82,8 @@ const Personal = ({switchCurrent, current}) => {
 				/** Send notification success */
 				notify('success', 'Ficha personal actualizada.', 'Vamos al siguiente paso...');
 				
+				switchStatus('ready')
+				
 				/** Switch to the next tab */
 				// switchCurrent(current + 1);
 				
@@ -91,7 +99,10 @@ const Personal = ({switchCurrent, current}) => {
 				// });
 				
 			})
-			.catch(err => console.log('Error:', err));
+			.catch(err => {
+				switchStatus('ready')
+				console.log('Error:', err)
+			});
 	};
 	
 	/** Removes the avatar from server if avatar is an empty array */
@@ -113,8 +124,20 @@ const Personal = ({switchCurrent, current}) => {
 	
 	return (
 		<>
-			<Form name="basic" onFinish={onFinish} initialValues={personal} validateTrigger="onBlur"
-			      scrollToFirstError={true}>
+			<Form
+				name="basic"
+				onFinish={onFinish}
+				initialValues={personal}
+				validateTrigger="onBlur"
+				scrollToFirstError={true}
+			>
+				
+				{/*
+				 | USE THIS TO DISABLE FORM WHILE REQUEST
+				 | --------------------------------------
+				 */}
+				<FormOverlay active={status === 'loading'}/>
+				
 				<div className="umana-form--section">
 					{/* <div style={{ width: '100%', marginBottom: 30 }}>{isEmpty(avatar) && <Alert message="Debes agregar una imagen de perfil" type="error" showIcon />}</div> */}
 					
