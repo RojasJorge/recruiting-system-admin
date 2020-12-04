@@ -131,6 +131,9 @@ const FormJob = props => {
   const onFinish = e => {
     let id = { company_id: router.query.id };
     const statusState = { status: statuState };
+    if (e.dependents === null) {
+      e.dependents = 0;
+    }
     let newObj = e;
     if (props.needCompanySelect) {
       id = { company_id: companySelect };
@@ -158,6 +161,7 @@ const FormJob = props => {
     }
     newObj = Object.assign(e, id, statusState);
 
+    console.log(e);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
       confirm({
