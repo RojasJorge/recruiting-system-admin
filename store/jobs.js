@@ -29,7 +29,7 @@ export default {
       country: { result: false, score: 0 }, // done
       province: { result: false, score: 0 }, // done
       gender: { result: false, score: 0 }, // done
-      age: { result: false, score: 0 }, // done
+      age: { result: {job: 0, profile: 0}, score: 0 }, // done
       religion: { result: false, score: 0 }, // done
       experience: { result: { job: 0, profile: 0 }, score: 0 }, // done
       relocate: { result: {job: false, profile: false}, score: 0 }, // done
