@@ -13,7 +13,7 @@ const Card = props => {
       result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
     }
 
-    // console.log('avatar', result);
+    // console.log('avatar', avatar);
 
     return result;
   };
