@@ -60,7 +60,7 @@ const Companies = () => {
       {status === 'ready' && !isEmpty(data.company.items) && (
         <div className="umana-list">
           {data.company.items.map((e, idx) => (
-            <Card key={idx} title={e.name} link={`/admin/companies/`} dinamicLink={e.id} description={e.description} />
+            <Card key={idx} title={e.name} link={`/admin/companies/`} avatar={e.avatar} dinamicLink={e.id} description={e.description} align="left" type="company" />
           ))}
         </div>
       )}

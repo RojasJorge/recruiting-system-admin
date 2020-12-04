@@ -2,8 +2,22 @@ import Link from 'next/link';
 import { Avatar } from 'antd';
 import Moment from 'react-moment';
 import { Can } from '../../components/Can';
+import { isEmpty } from 'lodash';
+import PropTypes from 'prop-types';
 
 const Card = props => {
+  const getAvatarFromProps = avatar => {
+    let result = null;
+
+    if (!isEmpty(avatar)) {
+      result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
+    }
+
+    // console.log('avatar', result);
+
+    return result;
+  };
+
   return (
     <div className={`umana-card card-theme-${props.theme} card-content-align-${props.align} card-${props.size} card-type-${props.type}`}>
       <div className="umana-card__options">
@@ -33,8 +47,7 @@ const Card = props => {
         <div className="umana-card__parent-info">
           <Can I="guest" a="JOBS">
             <>
-              {props.parentInfo.avatar ? <Avatar size={80} src={props.parentInfo.avatar} /> : <Avatar className="avatar-icon" size={80} icon={<i className="material-icons">location_city</i>} />}
-
+              <Avatar size={80} icon={<i className="material-icons">location_city</i>} />
               {props.parentInfo.title ? (
                 <div className="title-hidden">
                   <h5 className="hidden-text">Empresa</h5>
@@ -49,7 +62,11 @@ const Card = props => {
           </Can>
           <Can I="view" a="JOBS">
             <>
-              {props.parentInfo.avatar ? <Avatar size={80} src={props.parentInfo.avatar} /> : <Avatar className="avatar-icon" size={80} icon={<i className="material-icons">location_city</i>} />}
+              {props.parentInfo.avatar ? (
+                <Avatar size={80} src={getAvatarFromProps(props.parentInfo.avatar)} icon={<i className="material-icons">location_city</i>} />
+              ) : (
+                <Avatar className="avatar-icon" size={80} icon={<i className="material-icons">location_city</i>} />
+              )}
 
               {props.parentInfo.title ? (
                 <div className="title">
@@ -66,6 +83,13 @@ const Card = props => {
           {props.parentInfo.location ? <p>{`${props.parentInfo.location.city}, ${props.parentInfo.location.country}`}</p> : null}
           {props.parentInfo.description ? <p>{props.parentInfo.description}</p> : null}
         </div>
+      ) : null}
+      {!props.parentInfo && props.type === 'company' ? (
+        props.avatar ? (
+          <Avatar size={80} src={getAvatarFromProps(props.avatar)} icon={<i className="material-icons">location_city</i>} />
+        ) : (
+          <Avatar size={80} icon={<i className="material-icons">location_city</i>} />
+        )
       ) : null}
       <h3 className="umana-card__title">{props.title}</h3>
       {props.subtitle ? <p className="card-subtitle">{props.subtitle}</p> : null}
@@ -97,6 +121,14 @@ const Card = props => {
       ) : null}
     </div>
   );
+};
+
+Card.propTypes = {
+  type: PropTypes.string,
+};
+
+Card.defaultProps = {
+  type: 'default',
 };
 
 export default Card;
