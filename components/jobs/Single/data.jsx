@@ -2,8 +2,25 @@ import locale from '../../../data/translates/spanish';
 import Label from '../../../data/labels';
 import { Avatar, Progress, Tag } from 'antd';
 import { Can } from '../../Can';
-// import { Avatar, Button, Empty, Modal, notification, Progress, Skeleton, Tag, Alert } from 'antd';
+import { isEmpty } from 'lodash';
+
 const SingleJobData = ({ job, company }) => {
+  const getAvatarFromProps = _ => {
+    let result = null;
+
+    if (job && job.company) {
+      const avatar = job.company.avatar;
+
+      if (!isEmpty(avatar)) {
+        result = process.env.NEXT_PUBLIC_APP_FILE_STORAGE + avatar[0].response.url;
+      }
+    }
+
+    // console.log('avatar', result);
+
+    return result;
+  };
+
   return (
     <>
       <div className="umana-content">
@@ -247,7 +264,7 @@ const SingleJobData = ({ job, company }) => {
             {job && job.company && job.company_state === 'public' ? (
               <div className="umana-section-contenct">
                 <div className="section-avatar">
-                  <Avatar icon={<i className="material-icons">location_city</i>} src={job.company.avatar || ''} size={120} />
+                  <Avatar icon={<i className="material-icons">location_city</i>} src={getAvatarFromProps()} size={120} />
                 </div>
                 <div className="section-title">
                   <h1>{job.company.name}</h1>
