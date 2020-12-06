@@ -34,6 +34,10 @@ const gender = [
     title: 'Femenino',
     slug: 'female',
   },
+  {
+    title: 'Indiferente',
+    slug: 'indifferent',
+  },
 ];
 
 const General = ({ birthday, setBirthday }) => {
