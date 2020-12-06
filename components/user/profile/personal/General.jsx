@@ -78,7 +78,7 @@ const General = ({ birthday, setBirthday }) => {
         <InputNumber style={{ width: '100%' }} min={0} size="large" value={calculateAge(birthday) || 0} disabled />
       </Item>
 
-      <Item label="Sexo" name="gender" rules={[{ required: true, message: 'El campo Sexo es requerido.' }]} className="form-item--sm">
+      <Item label="Género" name="gender" rules={[{ required: true, message: 'El campo Sexo es requerido.' }]} className="form-item--sm">
         <Select name="gender" size="large" placeholder="Seleccione" style={{ width: '100%' }}>
           {gender.map((o, i) => (
             <Option key={i} value={o.slug}>
