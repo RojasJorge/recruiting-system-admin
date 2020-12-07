@@ -4,7 +4,7 @@ import SingleJob from '../../../components/jobs/Single';
 
 const Index = query => {
   return (
-    <Guest title="Plaza" containerClass="app public-jobs-singe theme-candidate">
+    <Guest pageTitle="Plaza" containerClass="app public-jobs-singe theme-candidate">
       <>
         <PageTitle title="Ver Plaza" />
         <SingleJob query={query} privateCompany={true} />
