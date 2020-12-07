@@ -53,14 +53,16 @@ const General = ({ birthday, setBirthday }) => {
 
   const dateFormat = 'DD/MM/YYYY';
 
+  console.log(WorldCountries);
+
   return (
     <div className="umana-form--section">
       <h2 style={{ width: '100%' }}>Información general</h2>
       <Item name="nationality" label="Nacionalidad" className="form-item--sm" rules={[{ required: true, message: 'El campo Nacionalidad es requerido.' }]}>
         <Select name="nationality" size="large" style={{ width: '100%' }} showSearch>
           {WorldCountries.map((country, key) => (
-            <Option key={key} value={country.name.official}>
-              {country.flag} {country.name.official}
+            <Option key={key} value={country.translations.spa.official}>
+              {country.flag} {country.translations.spa.official}
             </Option>
           ))}
         </Select>
