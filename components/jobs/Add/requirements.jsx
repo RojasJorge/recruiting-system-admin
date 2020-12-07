@@ -13,7 +13,7 @@ const Requirements = () => {
 
   return (
     <>
-      <Form.Item label="Sexo" name="gender" className="form-item--lg" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
+      <Form.Item label="Género" name="gender" className="form-item--lg" rules={[{ required: true, message: 'Este campo es requerido.' }]}>
         <Radio.Group>
           <Radio.Button value="indifferent">Indiferente</Radio.Button>
           <Radio.Button value="male">Masculino</Radio.Button>
