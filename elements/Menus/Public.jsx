@@ -19,37 +19,28 @@ const PublicNav = props => {
 
   return (
     <Menu mode={`${props.direction}`} id="header-nav" onClick={handleClick} selectedKeys={[current]} className={`header-nav umana-menu nav-desktop`}>
+      <Menu.Item key="umana.co" onClick={e => props.close(e, 'close')}>
+        <a href="https://umana.co">Inicio</a>
+      </Menu.Item>
       <Menu.Item key="jobs" onClick={e => props.close(e, 'close')}>
         <Link href="/jobs" passHref>
-          <a>Plazas</a>
+          <a>Encuentra trabajo</a>
         </Link>
       </Menu.Item>
-      {router.pathname === '/jobs' ? (
-        <>
-          <Menu.Item key="login" onClick={e => props.close(e, 'close')}>
-            <Link href="/" passHref>
-              <a>Iniciar Sesión</a>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="registro/null" className="type-btn" onClick={e => props.close(e, 'close')}>
-            <Link href="/signup" passHref>
-              <a>Registrarse</a>
-            </Link>
-          </Menu.Item>
-        </>
-      ) : router.pathname === '/signup' ? (
-        <Menu.Item key="login" className="type-btn" onClick={e => props.close(e, 'close')}>
-          <Link href="/" passHref>
-            <a>Iniciar Sesión</a>
-          </Link>
-        </Menu.Item>
-      ) : (
-        <Menu.Item key="registro/null" className="type-btn" onClick={e => props.close(e, 'close')}>
-          <Link href="/signup" passHref>
-            <a>Registrarse</a>
-          </Link>
-        </Menu.Item>
-      )}
+      <Menu.Item key="empresas" onClick={e => props.close(e, 'close')}>
+        <a href="https://umana.co/empresas">Empresas</a>
+      </Menu.Item>
+
+      <Menu.Item key="login" onClick={e => props.close(e, 'close')}>
+        <Link href="/" passHref>
+          <a>Iniciar Sesión</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="registro/null" className="type-btn" onClick={e => props.close(e, 'close')}>
+        <Link href="/signup" passHref>
+          <a>Registrarse</a>
+        </Link>
+      </Menu.Item>
     </Menu>
   );
 };
