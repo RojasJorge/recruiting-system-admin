@@ -83,7 +83,7 @@ const SingleJobData = ({ job, company }) => {
         </div>
         {job.gender ? (
           <div className="umana-content__item item-sm">
-            <label>Sexo</label>
+            <label>Género</label>
             <p>{locale(job.gender)}</p>
           </div>
         ) : null}

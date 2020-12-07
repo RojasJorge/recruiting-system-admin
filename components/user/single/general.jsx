@@ -77,7 +77,7 @@ const General = props => {
       ) : null}
       {props.data.gender ? (
         <div className="umana-content__item item-sm">
-          <label>Sexo</label>
+          <label>Género</label>
           <p>{locale(props.data.gender)}</p>
         </div>
       ) : null}
