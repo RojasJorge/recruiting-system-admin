@@ -91,7 +91,7 @@ const ScoreMatching = ({data}) => {
 		
 		let license = []
 		
-		if (data.job.type_licence.find(o => o === 'indifferent')) {
+		if (data.job.type_license.find(o => o === 'indifferent')) {
 			return true
 		}
 		
