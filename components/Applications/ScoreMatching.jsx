@@ -66,7 +66,12 @@ const ScoreMatching = ({data}) => {
 	
 	const checkVehicles = _ => {
 		
-		if (data.job.vehicle[0] === 'indifferent') return []
+		let result = false
+		
+		if (data.job.vehicle.find(o => o === 'indifferent')) {
+			result = true
+		}
+		
 		let vehicle = []
 		
 		vehicle = data.candidate.profile.fields.economic.vehicles.reduce((acc, current) => {
@@ -77,7 +82,11 @@ const ScoreMatching = ({data}) => {
 			return acc
 		}, [])
 		
-		return vehicle
+		if(vehicle.length > 0) {
+			result = true
+		}
+		
+		return result
 	}
 	
 	const checkLicence = _ => {
@@ -258,8 +267,8 @@ const ScoreMatching = ({data}) => {
 						<td>
 							<p>Religión</p>
 							{
-								isArray(data.job.religion && data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1)
-									? data.job.religion === 'indifferent'
+								isArray(data.job.religion)
+									? (data.job.religion === 'indifferent' || data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1)
 									? <h3 className="success">Aplica</h3>
 									: <h3 className="noSuccess">No Aplica</h3>
 									: '-'
@@ -309,8 +318,9 @@ const ScoreMatching = ({data}) => {
 						<td>
 							<p>Vehículo</p>
 							{
-								checkVehicles().length > 0 ? <h3 className="success">Aplica</h3> :
-									<h3 className="nosuccess">No aplica</h3>
+								checkVehicles
+									? <h3 className="success">Aplica</h3>
+									: <h3 className="nosuccess">No aplica</h3>
 							}
 						</td>
 						<td>{
