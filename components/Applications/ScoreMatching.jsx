@@ -109,23 +109,26 @@ const ScoreMatching = ({data}) => {
 	
 	return (
 		<>
-		<div style={{textAlign: 'center'}}>
-			<Progress
-				style={{margin: '0 auto 30px'}}
-				width={200}
-				strokeWidth={2}
-				strokeColor="#585858"
-				type="circle"
-				percent={score.percent}
-				format={percent => 	<div>
-					<h2 style={percent > 65? {color: 'green', marginBottom: 0} : {color: 'red', marginBottom: 0}}>{`${percent}%`}</h2>
-					Matching score 
+			<div style={{textAlign: 'center'}}>
+				<Progress
+					style={{margin: '0 auto 30px'}}
+					width={200}
+					strokeWidth={2}
+					strokeColor="#585858"
+					type="circle"
+					percent={score.percent}
+					format={percent => <div>
+						<h2 style={percent > 65 ? {color: 'green', marginBottom: 0} : {
+							color: 'red',
+							marginBottom: 0
+						}}>{`${percent}%`}</h2>
+						Matching score
 					</div>
+					
+					}
+				/>
 			
-				}
-			/>
-		
-		</div>
+			</div>
 			<div className="umana-content content-matching ">
 				<table className="table--matching">
 					<thead>
@@ -141,9 +144,9 @@ const ScoreMatching = ({data}) => {
 						<td>{findArea(data.job.jobposition)}</td>
 						<td className="align-center">
 							<p>Área</p>
-							{data.candidate.profile.fields.personal.currentJobTitle === data.job.jobposition ? 
-									<h3 className="success">100%</h3> : 
-									<h3 className="noSuccess">No Aplica</h3>}
+							{data.candidate.profile.fields.personal.currentJobTitle === data.job.jobposition ?
+								<h3 className="success">100%</h3> :
+								<h3 className="noSuccess">No Aplica</h3>}
 						</td>
 						<td className="align-right">{findArea(data.candidate.profile.fields.personal.currentJobTitle)}</td>
 					</tr>
@@ -154,9 +157,9 @@ const ScoreMatching = ({data}) => {
 						</td>
 						<td className="align-center">
 							<p>Años de experiencia requeridos</p>
-							{score.details.experience.result.profile > score.details.experience.result.job ? 
+							{score.details.experience.result.profile > score.details.experience.result.job ?
 								<h3 className="success">Sobrecalificado</h3>
-								: 
+								:
 								<h3 className="noSuccess">Poca experiencia</h3>
 							}
 						</td>
@@ -169,9 +172,9 @@ const ScoreMatching = ({data}) => {
 						<td>{`${score.details.age.result.job.min} - ${score.details.age.result.job.max}`}</td>
 						<td className="align-center">
 							<p>Edad</p>
-							{(score.details.age.result.profile >= score.details.age.result.job.min || score.details.age.result.profile <= score.details.age.result.job.max) ? 
-									<h3 className="success">Aplica</h3> 
-								: 
+							{(score.details.age.result.profile >= score.details.age.result.job.min || score.details.age.result.profile <= score.details.age.result.job.max) ?
+								<h3 className="success">Aplica</h3>
+								:
 								<h3 className="nosuccess">No Aplica</h3>}
 						</td>
 						<td className="align-right">{score.details.age.result.profile}</td>
@@ -183,9 +186,9 @@ const ScoreMatching = ({data}) => {
 						</td>
 						<td>
 							<p>Lugar de trabajo</p>
-							{data.candidate.profile.fields.lookingFor.workplace.indexOf(data.job.workplace) !== -1 ? 
+							{data.candidate.profile.fields.lookingFor.workplace.indexOf(data.job.workplace) !== -1 ?
 								<h3 className="success">100%</h3>
-								: 
+								:
 								<h3 className="nosuccess">No aplica</h3>}
 						</td>
 						<td>{
@@ -236,8 +239,8 @@ const ScoreMatching = ({data}) => {
 						</td>
 						<td>
 							<p>Género</p>
-							{data.job.gender === data.candidate.profile.fields.personal.gender ? 
-								<h3 className="success">Aplica</h3> : 
+							{data.job.gender === data.candidate.profile.fields.personal.gender ?
+								<h3 className="success">Aplica</h3> :
 								<h3 className="nosuccess">No aplica</h3>}
 						</td>
 						<td>
@@ -255,10 +258,10 @@ const ScoreMatching = ({data}) => {
 						<td>
 							<p>Religión</p>
 							{
-								isArray(data.job.religion)
-									? data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1
-									? 	<h3 className="success">Aplica</h3>
-									: 	<h3 className="noSuccess">No Aplica</h3>
+								isArray(data.job.religion && data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1)
+									? data.job.religion === 'indifferent'
+									? <h3 className="success">Aplica</h3>
+									: <h3 className="noSuccess">No Aplica</h3>
 									: '-'
 							}
 						</td>
@@ -271,12 +274,12 @@ const ScoreMatching = ({data}) => {
 						<td>{data.job.relocate ? 'Si' : 'No'}</td>
 						<td>
 							<p>Reubicación</p>
-						
-								{data.job.relocate && data.candidate.profile.fields.lookingFor.relocate ? 
-								<h3 className="success">Aplica</h3> : 
-								data.candidate.profile.fields.lookingFor.relocate ? 
-								<h3 className="success">Aplica</h3> : <h3 className="noSuccess">No Aplica</h3>}
 							
+							{data.job.relocate && data.candidate.profile.fields.lookingFor.relocate ?
+								<h3 className="success">Aplica</h3> :
+								data.candidate.profile.fields.lookingFor.relocate ?
+									<h3 className="success">Aplica</h3> : <h3 className="noSuccess">No Aplica</h3>}
+						
 						</td>
 						<td>{data.candidate.profile.fields.lookingFor.relocate ? 'Si' : 'No'}</td>
 					</tr>
@@ -285,12 +288,12 @@ const ScoreMatching = ({data}) => {
 						<td>{data.job.travel ? 'Si' : 'No'}</td>
 						<td>
 							<p>Viajes</p>
-								{data.job.travel && data.candidate.profile.fields.lookingFor.travel ? 
-									<h3 className="success">Aplica</h3> : 
-									data.candidate.profile.fields.lookingFor.travel ? 
-									<h3 className="success">Aplica</h3> : 
+							{data.job.travel && data.candidate.profile.fields.lookingFor.travel ?
+								<h3 className="success">Aplica</h3> :
+								data.candidate.profile.fields.lookingFor.travel ?
+									<h3 className="success">Aplica</h3> :
 									<h3 className="noSuccess">No Aplica</h3>}
-							
+						
 						</td>
 						<td>{data.candidate.profile.fields.lookingFor.relocate ? 'Si' : 'No'}</td>
 					</tr>
@@ -306,7 +309,8 @@ const ScoreMatching = ({data}) => {
 						<td>
 							<p>Vehículo</p>
 							{
-								checkVehicles().length > 0 ? <h3 className="success">Aplica</h3> : <h3 className="nosuccess">No aplica</h3>
+								checkVehicles().length > 0 ? <h3 className="success">Aplica</h3> :
+									<h3 className="nosuccess">No aplica</h3>
 							}
 						</td>
 						<td>{
@@ -397,12 +401,14 @@ const ScoreMatching = ({data}) => {
 							<p>Nivel académico</p>
 							{/*<h3>Aplica</h3>*/}
 						</td>
-						<td><ul>{
-							score.details.academic.result.profile.map((item, key) => (
-								<li
-									key={key}>{findArea(item.academicLevel, false, false)} - {findArea(item.specialization, true, item.academicLevel)}</li>
-							))
-						}</ul></td>
+						<td>
+							<ul>{
+								score.details.academic.result.profile.map((item, key) => (
+									<li
+										key={key}>{findArea(item.academicLevel, false, false)} - {findArea(item.specialization, true, item.academicLevel)}</li>
+								))
+							}</ul>
+						</td>
 					</tr>
 					<tr>
 						{/*Salary*/}
@@ -431,17 +437,17 @@ const ScoreMatching = ({data}) => {
 				</table>
 			</div>
 			
-				{/*<div style={{display: 'flex', maxWidth: 1200, backgroundColor: '#ffffff'}}>*/}
-				{/*	<div className="col" style={{width: '60%', borderRight: '1px solid grey'}}>*/}
-				{/*		<h3>Data:</h3>*/}
-				{/*		<pre>{JSON.stringify(data, false, 2)}</pre>*/}
-				{/*	</div>*/}
-				{/*	<div className="col">*/}
-				{/*		<h3>Score:</h3>*/}
-				{/*		<pre>{JSON.stringify(score, false, 2)}</pre>*/}
-				{/*	</div>*/}
-				{/*</div>*/}
-			
+			{/*<div style={{display: 'flex', maxWidth: 1200, backgroundColor: '#ffffff'}}>*/}
+			{/*	<div className="col" style={{width: '60%', borderRight: '1px solid grey'}}>*/}
+			{/*		<h3>Data:</h3>*/}
+			{/*		<pre>{JSON.stringify(data, false, 2)}</pre>*/}
+			{/*	</div>*/}
+			{/*	<div className="col">*/}
+			{/*		<h3>Score:</h3>*/}
+			{/*		<pre>{JSON.stringify(score, false, 2)}</pre>*/}
+			{/*	</div>*/}
+			{/*</div>*/}
+		
 		</>
 	)
 }
