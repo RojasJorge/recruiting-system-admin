@@ -269,7 +269,7 @@ const ScoreMatching = ({data}) => {
 						</td>
 						<td>
 							<p>Género</p>
-							{data.job.gender === data.candidate.profile.fields.personal.gender ?
+							{(data.job.gender === data.candidate.profile.fields.personal.gender || data.job.gender === 'indifferent') ?
 								<h3 className="success">Aplica</h3> :
 								<h3 className="nosuccess">No aplica</h3>}
 						</td>
