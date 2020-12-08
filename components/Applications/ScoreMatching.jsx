@@ -258,8 +258,8 @@ const ScoreMatching = ({data}) => {
 						<td>
 							<p>Religión</p>
 							{
-								isArray(data.job.religion && data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1)
-									? data.job.religion === 'indifferent'
+								isArray(data.job.religion)
+									? (data.job.religion === 'indifferent' || data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1)
 									? <h3 className="success">Aplica</h3>
 									: <h3 className="noSuccess">No Aplica</h3>
 									: '-'
