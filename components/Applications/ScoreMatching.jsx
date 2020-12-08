@@ -66,10 +66,8 @@ const ScoreMatching = ({data}) => {
 	
 	const checkVehicles = _ => {
 		
-		let result = false
-		
 		if (data.job.vehicle.find(o => o === 'indifferent')) {
-			result = true
+			return true
 		}
 		
 		let vehicle = []
@@ -83,15 +81,20 @@ const ScoreMatching = ({data}) => {
 		}, [])
 		
 		if (vehicle.length > 0) {
-			result = true
+			return true
 		}
 		
-		return result
+		return false
 	}
 	
 	const checkLicence = _ => {
 		
-		let license
+		let license = []
+		
+		if (data.job.type_licence.find(o => o === 'indifferent')) {
+			return true
+		}
+		
 		license = data.candidate.profile.fields.personal.driversLicenceType.reduce((acc, current) => {
 			if (data.job.type_license.indexOf(current)) {
 				acc.push(current)
@@ -100,7 +103,11 @@ const ScoreMatching = ({data}) => {
 			return acc
 		}, [])
 		
-		return license
+		if (license.length > 0) {
+			return true
+		}
+		
+		return false
 	}
 	
 	const matchLanguages = _ => {
@@ -354,7 +361,11 @@ const ScoreMatching = ({data}) => {
 						}</td>
 						<td>
 							<p>Tipos de licencia</p>
-							{checkLicence().length > 0 ? <h3 className="success">Aplica</h3> : <h3 className="success">No aplica</h3>}
+							{
+								checkLicence()
+								? <h3 className="success">Aplica</h3>
+									: <h3 className="success">No aplica</h3>
+							}
 						</td>
 						<td>{
 							isArray(data.candidate.profile.fields.personal.driversLicenceType)
