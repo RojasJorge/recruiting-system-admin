@@ -116,6 +116,20 @@ const ScoreMatching = ({data}) => {
 		return
 	}
 	
+	const validateReligion = _ => {
+		let result = false
+		
+		if(data.job.religion.find(o => o === 'indifferent')) {
+			result = true
+		}
+		
+		if(data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1) {
+			result = true
+		}
+		
+		return result
+	}
+	
 	return (
 		<>
 			<div style={{textAlign: 'center'}}>
@@ -266,12 +280,7 @@ const ScoreMatching = ({data}) => {
 						}</td>
 						<td>
 							<p>Religión</p>
-							{
-								(data.job.religion === 'indifferent' || data.job.religion.indexOf(data.candidate.profile.fields.personal.religion) !== -1)
-									? <h3 className="success">Aplica</h3>
-									: <h3 className="noSuccess">No Aplica</h3>
-								
-							}
+							{validateReligion()}
 						</td>
 						<td>
 							<Tag>{data.candidate.profile.fields.personal.religion}</Tag>
