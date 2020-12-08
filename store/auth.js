@@ -65,7 +65,7 @@ export default {
 					if (pathname.length <= 2) {
 						if (response.data.scope[0] === 'company' || response.data.scope[0] === 'umana' || response.data.scope[0] !== 'candidate') {
 							// location.href = '/admin/requests';
-							Router.replace('/admin/requests')
+							// Router.replace('/admin/requests')
 							
 							// Safari
 							// document.location.assign(location.origin())

@@ -63,7 +63,7 @@ const Index = _ => {
   };
 
   return (
-    <Layout title="Mis aplicaciones">
+    <Layout title="Solicitudes">
       <>
         <Can I="view" a="REQUESTS_ADMIN_VIEW">
           <PageTitle title="Solicitudes" />
