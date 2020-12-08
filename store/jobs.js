@@ -136,6 +136,8 @@ export default {
       if (years >= job.experience) {
         matchScore.experience.score = 3;
       }
+    } else {
+      matchScore.experience.result = {job: job.experience, profile: 0}
     }
 
     /**
