@@ -363,7 +363,7 @@ const ScoreMatching = ({data}) => {
 							<p>Tipos de licencia</p>
 							{
 								checkLicence()
-								? <h3 className="success">Aplica</h3>
+									? <h3 className="success">Aplica</h3>
 									: <h3 className="success">No aplica</h3>
 							}
 						</td>
