@@ -30,7 +30,7 @@ const FormJob = props => {
 
   useEffect(() => {
     xhr()
-      .get(`/company?page=${1}&offset=${1000}`)
+      .get(`/company?page=1&offset=1000`)
       .then(res => {
         res.type = false; /** This param (if true) loads a collection, false => single object */
       })
