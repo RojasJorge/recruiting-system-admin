@@ -46,6 +46,8 @@ const FormJob = props => {
     collectionsActions.get({ type: 'academic-level', token: auth });
   }, []);
 
+  console.log(props.needCompanySelect);
+
   const allSet = e => {
     if (props.type && props.type === 'edit') {
       notification.info({
@@ -142,7 +144,7 @@ const FormJob = props => {
       id = { company_id: props.data.company_id };
     }
 
-    if (!e.isBranch && !props.needCompanySelect) {
+    if (!e.isBranch) {
       const objLocation = {
         address: '',
         zone: 0,
@@ -153,7 +155,7 @@ const FormJob = props => {
         longitude: 0,
       };
       const companyLocation =
-        companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.length >= 1
+        props.needCompanySelect && companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.length >= 1
           ? companies.company.items.filter(e => e.id === id.company_id)[0].location
           : objLocation;
 
