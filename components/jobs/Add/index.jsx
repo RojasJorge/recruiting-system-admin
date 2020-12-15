@@ -142,7 +142,7 @@ const FormJob = props => {
       id = { company_id: props.data.company_id };
     }
 
-    if (!e.isBranch) {
+    if (!e.isBranch && !props.needCompanySelect) {
       const objLocation = {
         address: '',
         zone: 0,
@@ -153,7 +153,10 @@ const FormJob = props => {
         longitude: 0,
       };
       const companyLocation =
-        companies && companies.company && companies.company.items && companies.company.items.length > 0 ? companies.company.items.filter(e => e.id === id.company_id)[0].location : objLocation;
+        companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.length >= 1
+          ? companies.company.items.filter(e => e.id === id.company_id)[0].location
+          : objLocation;
+
       delete companyLocation.latitude;
       delete companyLocation.longitude;
       const addBranch = { branch: companyLocation };
