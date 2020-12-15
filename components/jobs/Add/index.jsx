@@ -33,7 +33,6 @@ const FormJob = props => {
       .get(`/company`)
       .then(res => {
         res.type = false; /** This param (if true) loads a collection, false => single object */
-        fill(res);
       })
       .catch(err => isMissing(true));
   }, []);
@@ -46,7 +45,7 @@ const FormJob = props => {
     collectionsActions.get({ type: 'academic-level', token: auth });
   }, []);
 
-  console.log(props.needCompanySelect);
+  console.log('sss', companies);
 
   const allSet = e => {
     if (props.type && props.type === 'edit') {
@@ -148,14 +147,14 @@ const FormJob = props => {
       const objLocation = {
         address: '',
         zone: 0,
-        country: '',
-        province: '',
-        city: '',
+        country: 'Guatemala',
+        province: 'Guatemala',
+        city: 'Ciudad',
         latitude: 0,
         longitude: 0,
       };
       const companyLocation =
-        props.needCompanySelect && companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.length >= 1
+        companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.filter(e => e.id === id.company_id)
           ? companies.company.items.filter(e => e.id === id.company_id)[0].location
           : objLocation;
 
