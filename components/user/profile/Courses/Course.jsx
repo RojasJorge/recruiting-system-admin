@@ -57,7 +57,7 @@ const Course = ({ course, counter, addCourses, courses }) => {
             <div className="col-md-6">
               <label htmlFor="year">Año:</label>
               <Item name="year" rules={[{ required: true, message: 'Año es requerido' }]}>
-                <DatePicker picker="year" value={_course.year.toString()} style={{ width: '100%' }} size="large" onChange={onDatePickerChange} />
+                <DatePicker allowClear={false} picker="year" value={_course.year.toString()} style={{ width: '100%' }} size="large" onChange={onDatePickerChange} />
               </Item>
             </div>
           </div>

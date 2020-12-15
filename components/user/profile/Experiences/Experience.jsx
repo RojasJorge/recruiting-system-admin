@@ -99,13 +99,13 @@ const Experience = ({ count, experience, experiences, addExperiences }) => {
             <div className="col-md-4">
               <label htmlFor="start_date">Fecha de inicio:</label>
               <Item name="start_date" rules={[{ required: true, message: 'Especifíque una fecha de inicio' }]}>
-                <DatePicker size="large" style={{ width: '100%' }} />
+                <DatePicker allowClear={false} size="large" style={{ width: '100%' }} />
               </Item>
             </div>
             <div className="col-md-4">
               <label htmlFor="end_date">Fecha final:</label>
               <Item name="end_date" rules={[{ required: true, message: 'Especifíque una fecha final.' }]}>
-                <DatePicker size="large" style={{ width: '100%' }} />
+                <DatePicker allowClear={false} size="large" style={{ width: '100%' }} />
               </Item>
             </div>
             <div className="col-md-4">

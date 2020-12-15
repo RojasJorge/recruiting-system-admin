@@ -70,6 +70,7 @@ const General = ({ birthday, setBirthday }) => {
 
       <Item label={`* Fecha de nacimiento`} rules={[{ required: true, message: 'Debes específicar tu fecha de nacimiento.' }]} className="form-item--sm">
         <DatePicker
+          allowClear={false}
           size="large"
           style={{ width: '100%' }}
           onChange={dateHandler}

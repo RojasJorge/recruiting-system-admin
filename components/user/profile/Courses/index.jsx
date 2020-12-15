@@ -4,9 +4,9 @@ import xhr from '../../../../xhr';
 import moment from 'moment';
 import router from 'next/router';
 import WorldCountries from 'world-countries';
-import {delay, isArray} from 'lodash'
-import FormOverlay from "../../../Misc/FormOverlay";
-import {useState} from "react";
+import { delay, isArray } from 'lodash';
+import FormOverlay from '../../../Misc/FormOverlay';
+import { useState } from 'react';
 
 const { Item, List } = Form;
 const { Option } = Select;
@@ -19,13 +19,13 @@ const Courses = ({ switchCurrent, current }) => {
       fields: { academic },
     },
   } = useStoreState(state => state.auth.user);
-  
-  const [status, switchStatus] = useState('')
+
+  const [status, switchStatus] = useState('');
 
   const updateProfile = useStoreActions(actions => actions.auth.updateProfile);
 
   const onFinish = fields => {
-    switchStatus('loading')
+    switchStatus('loading');
     xhr()
       .put(
         `/profile/${id}`,
@@ -47,22 +47,21 @@ const Courses = ({ switchCurrent, current }) => {
         //   top: 80,
         //   behavior: 'smooth',
         // });
-        
+
         /** Send notification success */
         notify('success', 'Niveles académicos.', 'Actualizado correctamente..');
-        
-        switchStatus('ready')
+
+        switchStatus('ready');
 
         // router.push(`${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`);
-  
+
         delay(_ => {
-          location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`
-        }, 1000)
-        
+          location.href = `${router.router.pathname}?current=${parseInt(router.router.query.current, 10) + 1}`;
+        }, 1000);
       })
       .catch(err => {
-        switchStatus('ready')
-        console.log('Error:', err)
+        switchStatus('ready');
+        console.log('Error:', err);
       });
   };
 
@@ -91,19 +90,13 @@ const Courses = ({ switchCurrent, current }) => {
 
   return (
     <>
-      <Form
-        onFinish={onFinish}
-        initialValues={initialValues()}
-        validateTrigger="onBlur"
-        scrollToFirstError={true}
-      >
-  
+      <Form onFinish={onFinish} initialValues={initialValues()} validateTrigger="onBlur" scrollToFirstError={true}>
         {/*
          | USE THIS TO DISABLE FORM WHILE REQUEST
          | --------------------------------------
          */}
-        <FormOverlay active={status === 'loading'}/>
-        
+        <FormOverlay active={status === 'loading'} />
+
         <div className="umana-form--section">
           <h2>Otros cursos</h2>
           <List name="courses" className="form-item--lg">
@@ -150,7 +143,7 @@ const Courses = ({ switchCurrent, current }) => {
                       </Item>
 
                       <Item label="Año" {...field} name={[field.name, 'year']} fieldkey={[field.fieldKey, 'year']} rules={[{ required: true, message: 'Año es requerido' }]}>
-                        <DatePicker picker="year" style={{ width: '100%' }} size="large" />
+                        <DatePicker allowClear={false} picker="year" style={{ width: '100%' }} size="large" />
                       </Item>
 
                       <a

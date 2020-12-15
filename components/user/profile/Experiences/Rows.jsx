@@ -291,6 +291,7 @@ const Experience = ({switchCurrent, current}) => {
 																	rules={[{required: true, message: "Fecha de inicio es requerida."}]}
 																>
 																	<DatePicker
+																	allowClear={false}
 																		size="large"
 																		format={dateFormat}
 																		style={{width: '100%'}}/>
@@ -314,6 +315,7 @@ const Experience = ({switchCurrent, current}) => {
 																		// rules={[{required: true, message: "Especifíque una fecha final."}]}
 																	>
 																		<DatePicker
+																		allowClear={false}
 																			format={dateFormat}
 																			size="large" style={{width: '100%'}}
 																		/>
