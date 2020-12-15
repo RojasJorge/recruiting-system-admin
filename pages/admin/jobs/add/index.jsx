@@ -1,8 +1,9 @@
 import Layout from '../../../../views/Layout';
 import FormJob from '../../../../components/jobs/Add';
 import { PageTitle, Sitebar } from '../../../../elements';
+import Index from "../single/[id]";
 
-const AddJob = _ => {
+const AddJob = query => {
   const header = {
     title: 'Agregar plaza',
     icon: 'location_city',
@@ -77,12 +78,14 @@ const AddJob = _ => {
             <Sitebar header={header} data={menuItem} />
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
-            <FormJob needCompanySelect={true} data={initialState} />
+            <FormJob needCompanySelect={true} data={initialState} cquery={query} />
           </div>
         </div>
       </>
     </Layout>
   );
 };
+
+Index.AddJob = async ctx => ctx.query;
 
 export default AddJob;
