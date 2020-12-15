@@ -113,7 +113,7 @@ const SignupForm = props => {
         {props.scope !== 'candidate' ? (
           <>
             <Form.Item label="Fecha de nacimiento" name="birthday" className="form-item--md">
-              <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" size="large" name="birthday" />
+              <DatePicker allowClear={false} style={{ width: '100%' }} format="DD/MM/YYYY" size="large" name="birthday" />
             </Form.Item>
             <Form.Item label="Teléfono" name="phone" className="form-item--md">
               <Cleave

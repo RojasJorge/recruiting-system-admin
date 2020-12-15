@@ -282,6 +282,7 @@ const Level = _ => {
 														format={dateFormat}
 														style={{width: '100%'}}
 														size="large"
+														allowClear={false}
 														// onChange={(date, dateString) =>
 														// 	onDatePickerChange(date, dateString, 'start_date')
 														// }
@@ -299,6 +300,7 @@ const Level = _ => {
 														style={{width: '100%'}}
 														size="large"
 														format={dateFormat}
+														allowClear={false}
 												
 													/>
 												</Item>
