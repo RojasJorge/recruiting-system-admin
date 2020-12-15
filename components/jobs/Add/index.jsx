@@ -142,7 +142,7 @@ const FormJob = props => {
       id = { company_id: props.data.company_id };
     }
 
-    if (!e.isBranch) {
+    if (!e.isBranch && !props.needCompanySelect) {
       const objLocation = {
         address: '',
         zone: 0,
