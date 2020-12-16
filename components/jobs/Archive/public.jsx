@@ -13,8 +13,8 @@ const PublicJobs = ({ filters, empty }) => {
   const [loading, switchLoading] = useState(true);
   const [emptyResult, setEmptyResult] = useState(false);
   const [jobs, setJobs] = useState([]);
-  const [total, setTotal] = useState(0);
   const auth = useStoreState(state => state.auth);
+  const [total, setTotal] = useState(0);
   const [pager, updatePager] = useState({
     page: 1,
     limit: 8,
@@ -45,7 +45,7 @@ const PublicJobs = ({ filters, empty }) => {
       .then(res => {
         if (isEmpty(res.data.items)) {
           setEmptyResult(true);
-          setJobs([])
+          setJobs([]);
           delay(() => switchLoading(false), 1000, 'Filtered');
           return false;
         }

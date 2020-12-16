@@ -52,7 +52,7 @@ const SingleJob = ({ query, privateCompany }) => {
     delay(_ => {
       switchLoading(false);
     }, 2000);
-  }, [query.id]);
+  }, [query.id, job]);
 
   useEffect(() => {
     job && auth.user && getCompanyInfo();
@@ -311,7 +311,7 @@ const SingleJob = ({ query, privateCompany }) => {
             <div className="umana-title">
               <h2>{`Editar plaza`}</h2>
             </div>
-            <FormJob data={job} needCompanySelect={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} />
+            <FormJob data={job} needCompanySelect={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} companyData={{}} />
           </>
         );
         break;

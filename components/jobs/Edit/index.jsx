@@ -91,7 +91,7 @@ const EditJob = () => {
           <Sitebar header={header} data={menuItem} />
         </div>
         <div className="umana-layout-cl__flex width-section bg-white">
-          <FormJob data={job} type="edit" id={router.query.id} />
+          <FormJob data={job} type="edit" id={router.query.id} companyData={{}} />
         </div>
       </div>
     );
