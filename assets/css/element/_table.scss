@@ -87,3 +87,24 @@
 .noSuccess {
   color: $color-text;
 }
+
+.umana-table_exerpt {
+  display: flex;
+  overflow: hidden;
+  p,
+  div {
+    margin-bottom: 0;
+  }
+}
+
+.ant-table-cell {
+  .ant-avatar.ant-avatar-circle.ant-avatar-icon {
+    font-size: 18px;
+    i {
+      font-size: 18px;
+      text-align: center;
+      margin-right: 0 !important;
+      line-height: 16px;
+    }
+  }
+}
