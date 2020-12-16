@@ -22,30 +22,22 @@ const FormJob = props => {
   const data = useStoreState(state => state.collections);
   const collectionsActions = useStoreActions(actions => actions.collections);
   const companies = useStoreState(state => state.companies);
-  const fill = useStoreActions(actions => actions.companies.fill);
   const [missing, isMissing] = useState(false);
   const [companySelect, setCompany] = useState('');
   const [statuState, setStatus] = useState('draft');
   const auth = useStoreState(state => state.auth.token);
 
+  let isBranch = props.data && props.data.isBranch ? props.data.isBranch : false;
+  let positionAlt = true;
+
   useEffect(() => {
     xhr()
-      .get(`/company?page=1&offset=1000`)
+      .get(`/company`)
       .then(res => {
         res.type = false; /** This param (if true) loads a collection, false => single object */
       })
       .catch(err => isMissing(true));
   }, []);
-
-  let isBranch = props.data && props.data.isBranch ? props.data.isBranch : false;
-  let positionAlt = true;
-
-  useEffect(() => {
-    collectionsActions.get({ type: 'career', token: auth });
-    collectionsActions.get({ type: 'academic-level', token: auth });
-  }, []);
-
-  console.log('sss', companies);
 
   const allSet = e => {
     if (props.type && props.type === 'edit') {
@@ -125,6 +117,9 @@ const FormJob = props => {
   const publish = e => {
     setStatus('public');
   };
+  const draft = e => {
+    setStatus('draft');
+  };
   const saveChange = e => {
     setStatus('draft');
   };
@@ -142,7 +137,6 @@ const FormJob = props => {
     if (props.type === 'edit') {
       id = { company_id: props.data.company_id };
     }
-
     if (!e.isBranch) {
       const objLocation = {
         address: '',
@@ -153,19 +147,24 @@ const FormJob = props => {
         latitude: 0,
         longitude: 0,
       };
-      const companyLocation =
-        companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.filter(e => e.id === id.company_id)
-          ? companies.company.items.filter(e => e.id === id.company_id)[0].location
-          : objLocation;
-
+      let companyLocation = {};
+      if (!isEmpty(props.companyData)) {
+        companyLocation = props.companyData.location;
+      } else {
+        companyLocation =
+          companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.filter(e => e.id === id.company_id)
+            ? companies.company.items.filter(e => e.id === id.company_id)[0].location
+            : objLocation;
+      }
       delete companyLocation.latitude;
       delete companyLocation.longitude;
       const addBranch = { branch: companyLocation };
       newObj = Object.assign(e, id, statusState, addBranch);
     }
+
     newObj = Object.assign(e, id, statusState);
 
-    console.log(e);
+    console.log(newObj);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
       confirm({
@@ -286,7 +285,7 @@ const FormJob = props => {
             </Button>
           ) : null}
           {!props.type ? (
-            <Button htmlType="submit" type="dashed" size="small" style={{ margin: 0, paddin: '0 20px', height: 45, marginRight: 10 }}>
+            <Button htmlType="submit" onClick={draft} type="dashed" size="small" style={{ margin: 0, paddin: '0 20px', height: 45, marginRight: 10 }}>
               Guardar como borrador
             </Button>
           ) : null}
@@ -301,10 +300,12 @@ const FormJob = props => {
 
 FormJob.propTypes = {
   data: PropTypes.object,
+  companyData: PropTypes.object,
 };
 
 FormJob.defaultProps = {
   data: {},
+  companyData: {},
 };
 
 export default FormJob;

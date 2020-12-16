@@ -1,7 +1,7 @@
 import Layout from '../../../../views/Layout';
 import FormJob from '../../../../components/jobs/Add';
 import { PageTitle, Sitebar } from '../../../../elements';
-import Index from "../single/[id]";
+import Index from '../single/[id]';
 
 const AddJob = query => {
   const header = {
@@ -78,7 +78,7 @@ const AddJob = query => {
             <Sitebar header={header} data={menuItem} />
           </div>
           <div className="umana-layout-cl__flex width-section bg-white">
-            <FormJob needCompanySelect={true} data={initialState} cquery={query} />
+            <FormJob needCompanySelect={true} data={initialState} cquery={query} companyData={{}} />
           </div>
         </div>
       </>
