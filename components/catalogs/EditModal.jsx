@@ -61,7 +61,7 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
               </Select>
             </Form.Item>
             <Form.Item label="Orden" name="order">
-              <InputNumber min={0} />
+              <InputNumber min={-5} />
             </Form.Item>
             <Form.Item name="status" valuePropName="checked">
               <Switch checkedChildren="Activo" unCheckedChildren="Inactivo" />
@@ -116,7 +116,7 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
               </Select>
             </Form.Item>
             <Form.Item label="Orden" name="order">
-              <InputNumber min={0} />
+              <InputNumber min={-5} />
             </Form.Item>
             <div className="umana-form--footer columns">
               {/*<Button type="cancel" size="small" onClick={onReset} style={{ width: '50%' }}>*/}

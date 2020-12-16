@@ -119,7 +119,7 @@ const List = ({ type, title }) => {
           }}
           bordered
           size="middle"
-          dataSource={data[type].sort((a, b) => (a.order > b.order ? 1 : -1))}
+          dataSource={data[type].sort((a, b) => (a.title > b.title ? 1 : -1)).sort((a, b) => (a.order > b.order ? 1 : -1))}
           rowKey={record => record.id}
           pagination={true}
           rowClassName={rowClassName}
