@@ -79,12 +79,14 @@ const Companies = () => {
       title: '',
       dataIndex: 'id',
       key: 'id',
+      width: 30,
       render: (text, record) => <Avatar size={25} src={getAvatarFromProps(record.avatar)} icon={<i className="material-icons">location_city</i>} />,
     },
     {
       title: 'Empresa',
       dataIndex: 'name',
       key: 'name',
+      width: 350,
     },
     {
       title: 'Descripción',

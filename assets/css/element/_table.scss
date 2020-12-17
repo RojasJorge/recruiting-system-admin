@@ -91,9 +91,23 @@
 .umana-table_exerpt {
   display: flex;
   overflow: hidden;
+  height: 38px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  overflow: hidden;
   p,
-  div {
+  div,
+  * {
+    width: 100%;
+    font-size: 12px !important;
     margin-bottom: 0;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    display: none;
   }
 }
 
