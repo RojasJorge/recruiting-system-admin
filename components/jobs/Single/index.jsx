@@ -296,6 +296,7 @@ const SingleJob = ({ query, privateCompany }) => {
       behavior: 'smooth',
     });
   };
+
   const switchContent = _ => {
     switch (current) {
       case 0:
@@ -311,7 +312,7 @@ const SingleJob = ({ query, privateCompany }) => {
             <div className="umana-title">
               <h2>{`Editar plaza`}</h2>
             </div>
-            <FormJob data={job} needCompanySelect={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} companyData={{}} />
+            <FormJob data={job} needCompanySelect={false} setCurrent={setCurrent} type="edit" id={query.id} updateJob={updateJob} companyData={job.company} />
           </>
         );
         break;

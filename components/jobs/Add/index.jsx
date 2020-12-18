@@ -1,4 +1,4 @@
-import { Form, Button, notification, Radio, Select, Alert, Modal } from 'antd';
+import { Form, Button, notification, Radio, Select, Alert, Modal, Input } from 'antd';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -12,32 +12,28 @@ import xhr from '../../../xhr';
 import router from 'next/router';
 import moment from 'moment';
 import { isEmpty, find } from 'lodash';
+import { SearchApi } from '../../../elements';
 // import Jobs from '../index';
 
 const { confirm } = Modal;
 
 const FormJob = props => {
   const [form] = Form.useForm();
-
   const data = useStoreState(state => state.collections);
-  const collectionsActions = useStoreActions(actions => actions.collections);
   const companies = useStoreState(state => state.companies);
-  const [missing, isMissing] = useState(false);
   const [companySelect, setCompany] = useState('');
   const [statuState, setStatus] = useState('draft');
   const auth = useStoreState(state => state.auth.token);
+  const [validation, setValidation] = useState(false);
+
+  const [companyInfo, setCompanyInfo] = useState({
+    value: '',
+    id: '',
+    location: {},
+  });
 
   let isBranch = props.data && props.data.isBranch ? props.data.isBranch : false;
   let positionAlt = true;
-
-  useEffect(() => {
-    xhr()
-      .get(`/company`)
-      .then(res => {
-        res.type = false; /** This param (if true) loads a collection, false => single object */
-      })
-      .catch(err => isMissing(true));
-  }, []);
 
   const allSet = e => {
     if (props.type && props.type === 'edit') {
@@ -124,47 +120,29 @@ const FormJob = props => {
     setStatus('draft');
   };
 
+  const onSelectOption = obj => {
+    setValidation(false);
+    setCompanyInfo(obj);
+    setCompany(obj.id);
+  };
+
+  const onClear = () => {
+    setCompanyInfo({
+      value: '',
+      id: '',
+      location: {},
+    });
+    setCompany('');
+  };
+
   const onFinish = e => {
-    let id = { company_id: router.query.id };
     const statusState = { status: statuState };
     if (e.dependents === null) {
       e.dependents = 0;
     }
     let newObj = e;
-    if (props.needCompanySelect) {
-      id = { company_id: companySelect };
-    }
-    if (props.type === 'edit') {
-      id = { company_id: props.data.company_id };
-    }
-    if (!e.isBranch) {
-      const objLocation = {
-        address: '',
-        zone: 0,
-        country: 'Guatemala',
-        province: 'Guatemala',
-        city: 'Ciudad',
-        latitude: 0,
-        longitude: 0,
-      };
-      let companyLocation = {};
-      if (!isEmpty(props.companyData)) {
-        companyLocation = props.companyData.location;
-      } else {
-        companyLocation =
-          companies && companies.company && companies.company.items && companies.company.items.length > 0 && companies.company.items.filter(e => e.id === id.company_id)
-            ? companies.company.items.filter(e => e.id === id.company_id)[0].location
-            : objLocation;
-      }
-      delete companyLocation.latitude;
-      delete companyLocation.longitude;
-      const addBranch = { branch: companyLocation };
-      newObj = Object.assign(e, id, statusState, addBranch);
-    }
+    newObj = Object.assign(e, statusState);
 
-    newObj = Object.assign(e, id, statusState);
-
-    console.log(newObj);
     if (props.type && props.type === 'edit') {
       delete newObj.company_id;
       confirm({
@@ -216,9 +194,75 @@ const FormJob = props => {
     }
   };
 
+  const companyValidatio = e => {
+    // si necesita un select
+    if (props.needCompanySelect) {
+      // validar que se selecciono una empresa
+      if (!isEmpty(companySelect)) {
+        let company = { company_id: companySelect };
+        delete companyInfo.location.latitude;
+        delete companyInfo.location.longitude;
+        //enviar ubicacion de la empresa
+        if (!e.isBranch) {
+          company = { company_id: companySelect, branch: companyInfo.location };
+        }
+        const newObj = Object.assign(e, company);
+        console.log(newObj);
+        onFinish(newObj);
+      } else {
+        setValidation(true);
+        window.scroll({
+          top: 80,
+          behavior: 'smooth',
+        });
+      }
+    } else {
+      // si no requeiere select
+      if (props.type !== 'edit') {
+        let company = { company_id: router.query.id };
+        // enviar ubicacion de la empresa
+        if (!e.isBranch) {
+          delete props.companyData.location.latitude;
+          delete props.companyData.location.longitude;
+          company = { company_id: router.query.id, branch: props.companyData.location };
+        }
+        const newObj = Object.assign(e, company);
+        onFinish(newObj);
+      } else {
+        console.log(props.type, e);
+        let company = { company_id: props.data.company_id };
+        // enviar ubicacion de la empresa
+        if (!e.isBranch) {
+          delete props.companyData.location.latitude;
+          delete props.companyData.location.longitude;
+          company = { branch: props.companyData.location };
+        }
+        const newObj = Object.assign(e, company);
+        onFinish(newObj);
+      }
+    }
+  };
+
   return (
     <div>
-      <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={onFinish} scrollToFirstError={true} validateTrigger="onBlur" form={form}>
+      <div className="umana-form--section" style={{ marginBottom: 0, paddingBottom: 0 }} id="company">
+        <h2 style={{ width: '100%', margin: 0 }}>Información de Empresa</h2>
+
+        {props.needCompanySelect && props.needCompanySelect === true ? (
+          <div className={`form-item--lg validation-${validation}`} style={{ width: '100%', padding: 10 }}>
+            <SearchApi validation={validation} onSelectOption={onSelectOption} onClear={onClear} />
+          </div>
+        ) : null}
+      </div>
+      <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={companyValidatio} scrollToFirstError={true} validateTrigger="onBlur" form={form}>
+        <div className="umana-form--section" style={{ marginTop: 0, paddingTop: 0 }}>
+          <Form.Item label="Confidencialidad de la empresa" className="form-item--lg" name="company_state" help="Seleccionar si desea que la información de la empresa sea pública">
+            <Radio.Group>
+              <Radio.Button value="public">Pública</Radio.Button>
+              <Radio.Button value="confidential">Privada</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+        </div>
         <div className="umana-form--section" id="maininfo">
           <h2 style={{ width: '100%' }}>Información general</h2>
           <GeneralJob career={data.career} position={positionAlt} />
@@ -243,38 +287,6 @@ const FormJob = props => {
         <div className="umana-form--section" id="compensation">
           <h2 style={{ width: '100%', margin: 0 }}>Compensaciones</h2>
           <Compensation />
-        </div>
-        <div className="umana-form--section" id="company">
-          <h2 style={{ width: '100%', margin: 0 }}>Información de Empresa</h2>
-          {props.needCompanySelect && props.needCompanySelect === true ? (
-            <Form.Item
-              label="¿De qué empresa es esta plaza?"
-              className="form-item--lg"
-              name="company_id"
-              rules={[
-                {
-                  required: true,
-                  message: 'La empresa es requerida',
-                },
-              ]}
-            >
-              <Select name="company_id" onChange={e => setCompany(e)}>
-                {companies.company && companies.company.items
-                  ? companies.company.items.map((e, idx) => (
-                      <Select.Option key={idx} value={e.id}>
-                        {e.name}
-                      </Select.Option>
-                    ))
-                  : null}
-              </Select>
-            </Form.Item>
-          ) : null}
-          <Form.Item label="Confidencialidad de la empresa" className="form-item--lg" name="company_state" help="Seleccionar si desea que la información de la empresa sea pública">
-            <Radio.Group>
-              <Radio.Button value="public">Pública</Radio.Button>
-              <Radio.Button value="confidential">Privada</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
         </div>
 
         {/* end group */}

@@ -31,7 +31,7 @@ const Companies = () => {
   const [total, setTotal] = useState(0);
   const [pager, updatePager] = useState({
     page: 1,
-    limit: ability.can('view', 'ALL_MENUS') ? 15 : 8,
+    limit: ability.can('view', 'ALL_MENUS') ? 10 : 8,
   });
   const router = useRouter();
 

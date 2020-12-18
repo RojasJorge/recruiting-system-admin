@@ -322,6 +322,17 @@ h5 {
       background: transparent;
       box-shadow: none;
     }
+    .umana-searchfilter {
+      margin-bottom: 10px;
+      &.validation-true {
+        &::after {
+          content: 'Este campo es requerido';
+          width: 100%;
+          display: block;
+          color: $color-error;
+        }
+      }
+    }
   }
 
   @include element(small) {
@@ -596,6 +607,28 @@ h5 {
     border-radius: 50% !important;
     svg {
       fill: $color-white !important;
+    }
+  }
+}
+
+.ant-select.ant-select-auto-complete.ant-select-single.ant-select-customize-input.ant-select-show-search {
+  .ant-select-selection-search {
+    width: 100% !important;
+  }
+  .ant-input-group-addon {
+    padding: 0 !important;
+    .ant-btn.ant-btn-lg.ant-btn-icon-only.ant-input-search-button {
+      margin-bottom: 0;
+      height: 44px;
+      background: $color-white;
+      border: 1px solid #cccccc !important;
+      text-align: center;
+      .anticon.anticon-search {
+        width: 100%;
+      }
+      &:hover {
+        background: #f2f2f2;
+      }
     }
   }
 }
