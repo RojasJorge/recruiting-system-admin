@@ -44,6 +44,7 @@ const AddJob = query => {
     },
   ];
   let initialState = {
+    company_id: '',
     locationState: 'public',
     interviewPlace: 'office',
     gender: 'indifferent',
