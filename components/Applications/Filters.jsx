@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import { LoadingOutlined } from '@ant-design/icons';
+import { SearchApi } from '../../elements';
 
 const { Option } = Select;
 
@@ -15,6 +16,7 @@ const Filters = ({ filters, setApplications, applications, getApply }) => {
   const [companies, updateCompanies] = useState([]);
   const [jobs, updateJobs] = useState([]);
   const [hasJobs, setHaveJobs] = useState('');
+  const [validation, setValidation] = useState(false);
 
   const [company, setCompany] = useState(router.query.c || null);
   const [job, setJob] = useState(router.query.j || null);
@@ -62,8 +64,8 @@ const Filters = ({ filters, setApplications, applications, getApply }) => {
   };
 
   const onCompanySelect = e => {
-    getJobs(e);
-    setCompany(e);
+    getJobs(e.id);
+    setCompany(e.id);
     setFieldStatus(true);
     setJob(null);
   };
@@ -87,15 +89,16 @@ const Filters = ({ filters, setApplications, applications, getApply }) => {
     <>
       <div className="umana-form">
         <div className="ant-form-item form-item--lg">
-          <label>Empresa:</label>
-          <Select size="large" placeholder="Empresa" optionFilterProp="children" onSelect={onCompanySelect} value={company} showSearch>
+          {/* <label>Empresa:</label> */}
+          {/* <Select size="large" placeholder="Empresa" optionFilterProp="children" onSelect={onCompanySelect} value={company} showSearch>
             {!isEmpty(companies) &&
               companies.map(company => (
                 <Option value={company.id} key={company.id}>
                   {company.name}
                 </Option>
               ))}
-          </Select>
+          </Select> */}
+          <SearchApi setValidation={setValidation} validation={validation} onSelectOption={onCompanySelect} />
         </div>
         <div className="ant-form-item form-item--lg">
           <label>
@@ -117,7 +120,7 @@ const Filters = ({ filters, setApplications, applications, getApply }) => {
             onClick={_ => {
               setCompany(null);
               setJob(null);
-              // updateCompanies([])
+              //updateCompanies([])
               updateJobs([]);
 
               setApplications({ ...applications, list: [], total: 0 });
