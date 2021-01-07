@@ -29,6 +29,7 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
 
   const order = { order: 0 };
 
+  console.log('dataaaaa', data);
   return (
     <Drawer placement="right" closable={true} onClose={() => onReset()} visible={visible} width={600} title={title} destroyOnClose={true}>
       <div className="umana-drawer">
@@ -51,7 +52,7 @@ const EditModal = ({ visible, switchEdit, title, data, clear, treeData, edit, se
               <Select style={{ width: '100%' }} dropdownStyle={{ maxHeight: 400, overflow: 'auto' }} placeholder="Seleccione un padre" size="large">
                 {treeData
                   ? treeData.map(e =>
-                      e.status ? (
+                      e.status && e.id !== data.id ? (
                         <Select.Option key={e.id} value={e.id}>
                           {e.name}
                         </Select.Option>
