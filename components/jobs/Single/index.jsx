@@ -178,7 +178,7 @@ const SingleJob = ({ query, privateCompany }) => {
         confirmApply(resp);
       })
       .catch(err => {
-        catchErrorApply(err.response.status);
+        catchErrorApply(err.response);
       });
   };
 

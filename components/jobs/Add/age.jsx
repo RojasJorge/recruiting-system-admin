@@ -4,7 +4,7 @@ import { InputNumber, Slider } from 'antd';
 
 const Age = ({ value, onChange }) => {
   let initialState = {
-    min: 16,
+    min: 18,
     max: 60,
   };
 
