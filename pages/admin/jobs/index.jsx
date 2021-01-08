@@ -4,14 +4,20 @@ import { PageTitle } from '../../../elements';
 import { Button } from 'antd';
 import { Can } from '../../../components/Can';
 import Link from 'next/link';
+import { AbilityContext } from '../../../components/Can';
+import { useContext } from 'react';
 
 const Index = _ => {
+  const ability = useContext(AbilityContext);
   const dataEmpty = {
     title: 'No tienes ninguna plaza publicada',
-    content:
-      'Selecciona una empresa y publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.',
+    content: 'Selecciona una empresa y publica una plaza para poder ver candidatos que se ajusten al perfil que necesitas.',
     buttonTitle: 'Agregar plaza',
     url: '/admin/jobs/add',
+  };
+  const dataEmptyCandidate = {
+    title: 'No hay plazas disponibles',
+    content: '',
   };
 
   return (
@@ -30,7 +36,7 @@ const Index = _ => {
             </Button>
           </Can>
         </div>
-        <Jobs empty={dataEmpty} />
+        {ability.can('apply', 'JOBS') ? <Jobs empty={dataEmptyCandidate} /> : <Jobs empty={dataEmpty} />}
       </>
     </Layout>
   );

@@ -96,7 +96,7 @@ const SingleJobData = ({ job, company }) => {
         {job.religion ? (
           <div className="umana-content__item item-sm">
             <label>Religión</label>
-            <p> {job.religion.map(e => locale(e))} </p>
+            <p> {job.religion.map((e, idx) => (idx > 0 ? `, ${locale(e)}` : locale(e)))} </p>
           </div>
         ) : null}
         {job.academic_level ? (
