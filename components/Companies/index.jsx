@@ -1,6 +1,6 @@
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useEffect, useState, useContext } from 'react';
-import { Card, EmptyElemet } from '../../elements';
+import { Card, EmptyElemet, SkeletonList, SkeletonCard } from '../../elements';
 import { Spin, Pagination, Table, Avatar } from 'antd';
 import xhr from '../../xhr';
 import { Can } from '../Can';
@@ -118,7 +118,7 @@ const Companies = () => {
   return (
     <div className="umana-list">
       {/*SIMPLE LOADING*/}
-      {status === 'loading' && <Spin size="large" />}
+      {status === 'loading' ? ability.can('view', 'ALL_MENUS') ? <SkeletonList /> : <SkeletonCard /> : null}
 
       {/*SHOW CONTENTS*/}
       {status === 'ready' &&

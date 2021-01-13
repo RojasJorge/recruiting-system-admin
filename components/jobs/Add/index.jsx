@@ -60,6 +60,13 @@ const FormJob = props => {
         placement: 'bottomRight',
       });
     }
+    if (statuState === 'draft' && !props.type && props.type !== 'edit') {
+      notification.info({
+        message: `Confirmación`,
+        description: 'La plaza ha guardado como borrador con éxito',
+        placement: 'bottomRight',
+      });
+    }
     setTimeout(() => {
       if (props.setCurrent) {
         props.setCurrent(2);
@@ -117,15 +124,17 @@ const FormJob = props => {
 
   const publish = e => {
     setStatus('public');
-    setLoader(false);
+    console.log(statuState);
   };
   const draft = e => {
     setLoader(false);
     setStatus('draft');
+    console.log(statuState);
   };
   const saveChange = e => {
     setLoader(false);
     setStatus('draft');
+    console.log(statuState);
   };
 
   const onSelectOption = obj => {
