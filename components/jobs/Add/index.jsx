@@ -3,6 +3,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Languages from '../../Languages';
+import PageLoader from '../../Misc/PageLoader';
 import Compensation from './compensation';
 import AcademicLevels from '../../Academic';
 import GeneralJob from './general';
@@ -25,6 +26,7 @@ const FormJob = props => {
   const [statuState, setStatus] = useState('draft');
   const auth = useStoreState(state => state.auth.token);
   const [validation, setValidation] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const [companyInfo, setCompanyInfo] = useState({
     value: '',
@@ -36,6 +38,7 @@ const FormJob = props => {
   let positionAlt = true;
 
   const allSet = e => {
+    setLoader(false);
     if (props.type && props.type === 'edit') {
       notification.info({
         message: `Confirmación`,
@@ -73,6 +76,7 @@ const FormJob = props => {
         allSet(resp.data);
       })
       .catch(err => {
+        setLoader(false);
         notification.info({
           message: `Error`,
           description: 'Ha ocurrido un error, por favor inténtalo más tarde',
@@ -101,6 +105,7 @@ const FormJob = props => {
         allSet(props.id);
       })
       .catch(err => {
+        setLoader(false);
         console.log('Error:', err);
         notification.info({
           message: `Error`,
@@ -112,11 +117,14 @@ const FormJob = props => {
 
   const publish = e => {
     setStatus('public');
+    setLoader(false);
   };
   const draft = e => {
+    setLoader(false);
     setStatus('draft');
   };
   const saveChange = e => {
+    setLoader(false);
     setStatus('draft');
   };
 
@@ -159,6 +167,7 @@ const FormJob = props => {
           edit(newObj);
         },
         onCancel() {
+          setLoader(false);
           console.log('Cancel');
         },
       });
@@ -185,6 +194,7 @@ const FormJob = props => {
             }
           },
           onCancel() {
+            setLoader(false);
             console.log('Cancel');
           },
         });
@@ -195,6 +205,7 @@ const FormJob = props => {
   };
 
   const companyValidatio = e => {
+    setLoader(true);
     // si necesita un select
     if (props.needCompanySelect) {
       // validar que se selecciono una empresa
@@ -254,6 +265,7 @@ const FormJob = props => {
           </div>
         ) : null}
       </div>
+      {loader ? <PageLoader active={loader} /> : null}
       <Form className="umana-form umana-max-witdh" initialValues={props.data} onFinish={companyValidatio} scrollToFirstError={true} validateTrigger="onBlur" form={form}>
         <div className="umana-form--section" style={{ marginTop: 0, paddingTop: 0 }}>
           <Form.Item label="Confidencialidad de la empresa" className="form-item--lg" name="company_state" help="Seleccionar si desea que la información de la empresa sea pública">
