@@ -20,7 +20,7 @@ const { confirm } = Modal;
 const SingleJob = ({ query, privateCompany }) => {
   const router = useRouter();
 
-  const [job, setJob] = useState(null);
+  const [job, setJob] = useState();
   const [company, setInfoCompany] = useState();
   const [loading, switchLoading] = useState(true);
   const [current, setCurrent] = useState(0);
@@ -52,7 +52,7 @@ const SingleJob = ({ query, privateCompany }) => {
     delay(_ => {
       switchLoading(false);
     }, 2000);
-  }, [query.id, job]);
+  }, [query.id]);
 
   useEffect(() => {
     job && auth.user && getCompanyInfo();
@@ -282,10 +282,10 @@ const SingleJob = ({ query, privateCompany }) => {
   useEffect(() => {
     if (auth.user) {
       delay(_ => {
-        verifyProfileStatus(auth.user.profile.fields);
-      }, 1000);
+        verifyProfileStatus(auth.user.profile.fields)
+      }, 1000)
     }
-  }, [auth.user]);
+  }, [auth.user])
 
   const updateJob = () => {
     onChange(0);
@@ -337,7 +337,7 @@ const SingleJob = ({ query, privateCompany }) => {
     }
   };
 
-  const getCoinsidences = jobid => {
+  const getCoinsidences = _ => {
     if (job && job.status === 'public') {
       xhr()
         .get(`/match/${query.id}`)
@@ -350,8 +350,8 @@ const SingleJob = ({ query, privateCompany }) => {
   };
 
   useEffect(() => {
-    getCoinsidences();
-  }, [query.id]);
+    getCoinsidences()
+  }, [query.id, job])
 
   if (job) {
     return (
