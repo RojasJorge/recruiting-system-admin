@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Pagination, Spin, Alert } from 'antd';
 import { delay, isEmpty } from 'lodash';
-import { Card, EmptyElemet } from '../../../elements';
+import { Card, EmptyElemet, SkeletonCard } from '../../../elements';
 import { useRouter } from 'next/router';
 import xhr from '../../../xhr';
 import { useStoreState } from 'easy-peasy';
@@ -77,9 +77,7 @@ const PublicJobs = ({ filters, empty }) => {
       ) : null}
       <div className="umana-list">
         {loading ? (
-          <div className="app--spinner animated fadeIn in-section">
-            <Spin size="large" />
-          </div>
+          <SkeletonCard />
         ) : jobs && jobs.length > 0 ? (
           jobs
             .sort((a, b) => (b.created_at > a.created_at ? 1 : -1))

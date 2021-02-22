@@ -15,3 +15,5 @@ export { default as EmptyElemet } from './Empty';
 export { default as Filter } from './Filter';
 export { default as AreaJob } from './AreaJob';
 export { default as SearchApi } from './Search';
+export { default as SkeletonList } from './Skeleton';
+export { default as SkeletonCard } from './Skeleton/cards';

@@ -81,11 +81,7 @@ const ListCandidate = props => {
               key: 'name',
               render: (text, record) => `${record.name} ${record.lastname}`,
             },
-            {
-              title: 'Dirección',
-              dataIndex: 'address',
-              key: 'address',
-            },
+
             {
               title: 'Correo electrónico',
               dataIndex: 'email',
