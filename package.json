@@ -16,7 +16,7 @@
     "@casl/ability": "^4.1.6",
     "@casl/react": "^2.1.1",
     "@tinymce/tinymce-react": "^3.8.1",
-    "antd": "^4.8.2",
+    "antd": "^4.12.3",
     "antd-img-crop": "^3.13.2",
     "axios": "^0.19.1",
     "bootstrap": "^4.4.1",
