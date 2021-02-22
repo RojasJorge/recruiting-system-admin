@@ -6,6 +6,7 @@ import { Table, Spin, Alert } from 'antd';
 
 import Moment from 'react-moment';
 import { useRouter } from 'next/router';
+import { SkeletonList } from '../../../elements';
 
 const ExpiredJobs = ({ title, type, filters }) => {
   const router = useRouter();
@@ -43,7 +44,7 @@ const ExpiredJobs = ({ title, type, filters }) => {
       .then(res => {
         if (isEmpty(res.data.items)) {
           setEmptyResult(true);
-          setJobs([])
+          setJobs([]);
           delay(() => switchLoading(false), 1000, 'Filtered');
           return false;
         }
@@ -55,7 +56,7 @@ const ExpiredJobs = ({ title, type, filters }) => {
       .catch(err => {
         console.log(err);
         delay(() => switchLoading(false), 1000, 'Filtered');
-        setJobs([])
+        setJobs([]);
       });
   };
 
@@ -122,19 +123,18 @@ const ExpiredJobs = ({ title, type, filters }) => {
       <h2>{title}</h2>
       <div className="umana-table-section">
         {loading ? (
-          <div className="umana-spinner">
-            <Spin size="large" />
-          </div>
-        ) : null}
-        <Table
-          columns={columns}
-          bordered
-          size="small"
-          dataSource={jobs.items ? jobs.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1)) : null}
-          rowKey={record => record.id}
-          onRow={onRow}
-          pagination={{ pageSize: pager.limit, total: total, defaultCurrent: pager.page, onChange: onChange }}
-        />
+          <SkeletonList />
+        ) : (
+          <Table
+            columns={columns}
+            bordered
+            size="small"
+            dataSource={jobs.items ? jobs.items.sort((a, b) => (b.created_at > a.created_at ? 1 : -1)) : null}
+            rowKey={record => record.id}
+            onRow={onRow}
+            pagination={{ pageSize: pager.limit, total: total, defaultCurrent: pager.page, onChange: onChange }}
+          />
+        )}
       </div>
     </div>
   );

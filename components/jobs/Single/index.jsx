@@ -49,7 +49,7 @@ const SingleJob = ({ query, privateCompany }) => {
 
   useEffect(() => {
     getJob();
-    delay(_ => {
+    setTimeout(() => {
       switchLoading(false);
     }, 2000);
   }, [query.id]);
@@ -178,7 +178,7 @@ const SingleJob = ({ query, privateCompany }) => {
         confirmApply(resp);
       })
       .catch(err => {
-        catchErrorApply(err.response.status);
+        catchErrorApply(err.response);
       });
   };
 
@@ -416,7 +416,7 @@ const SingleJob = ({ query, privateCompany }) => {
           />
         </Can>
       </div>
-      <div className="umana-layout-cl__flex bg-white">{loading ? <Skeleton active /> : <Empty />}</div>
+      <div className="umana-layout-cl__flex bg-white">{loading ? <Skeleton active /> : null}</div>
     </div>
   );
 };
